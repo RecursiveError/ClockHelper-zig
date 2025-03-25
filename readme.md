@@ -6,7 +6,7 @@ ClockHelper is a utility to facilitate clock management on STM32 microcontroller
 
 To use it, it's very simple:
 
-Choose a controller from the list:
+Choose a controller from the [list](src/ClockTrees/):
 ```zig
 
 const ClockHelper = @import("ClockHelper");

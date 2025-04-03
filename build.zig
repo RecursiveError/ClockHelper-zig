@@ -4,6 +4,12 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+    _ = b.createModule(.{
+        .root_source_file = b.path("src/ClockNode.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
+
     const ClockHelper = b.addModule("ClockHelper", .{
         .root_source_file = b.path("src/main.zig"),
         .target = target,

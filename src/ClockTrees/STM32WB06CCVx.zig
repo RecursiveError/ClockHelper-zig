@@ -1,42 +1,37 @@
 const std = @import("std");
+const clock = @import("../ClockNode.zig");
+const ClockNode = clock.ClockNode;
+const ClockNodeTypes = clock.ClockNodesTypes;
+const ClockState = clock.ClockState;
+const ClockError = clock.ClockError;
 
-pub const HSEOSCConf = enum(comptime_int) {
+pub const HSEOSCConf = enum(u32) {
     _,
-    pub fn get(num: HSEOSCConf) comptime_int {
-        const val: comptime_int = @intFromEnum(num);
-        if (val < 4000000) {
-            @compileError("min value for HSEOSC is 4000000\n");
-        } else if (val > 32000000) {
-            @compileError("min value for HSEOSC is 32000000\n");
-        }
-        return val;
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
     }
 
-    pub fn max() comptime_int {
+    pub fn max() f32 {
         return 32000000;
     }
 
-    pub fn min() comptime_int {
+    pub fn min() f32 {
         return 4000000;
     }
 };
-pub const LSEOSCConf = enum(comptime_int) {
+pub const LSEOSCConf = enum(u32) {
     _,
-    pub fn get(num: LSEOSCConf) comptime_int {
-        const val: comptime_int = @intFromEnum(num);
-        if (val < 1000) {
-            @compileError("min value for LSEOSC is 1000\n");
-        } else if (val > 1000000) {
-            @compileError("min value for LSEOSC is 1000000\n");
-        }
-        return val;
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
     }
 
-    pub fn max() comptime_int {
+    pub fn max() f32 {
         return 1000000;
     }
 
-    pub fn min() comptime_int {
+    pub fn min() f32 {
         return 1000;
     }
 };
@@ -69,14 +64,13 @@ pub const BLEMultConf = enum {
     Clk32MHzOutput,
 };
 pub const SYSCLK32PrescalerConf = enum {
-    const this = @This();
     DIV1,
     DIV2,
     DIV4,
     DIV8,
     DIV16,
     DIV32,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
             .DIV2 => 2,
@@ -88,7 +82,6 @@ pub const SYSCLK32PrescalerConf = enum {
     }
 };
 pub const SYSCLK64PrescalerConf = enum {
-    const this = @This();
     DIV1,
     DIV2,
     DIV4,
@@ -96,7 +89,7 @@ pub const SYSCLK64PrescalerConf = enum {
     DIV16,
     DIV32,
     DIV64,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
             .DIV2 => 2,
@@ -134,14 +127,13 @@ pub const MCOMultConf = enum {
     CLK16RTCDevisor,
 };
 pub const MCODivConf = enum {
-    const this = @This();
     DIV1,
     DIV2,
     DIV4,
     DIV8,
     DIV16,
     DIV32,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
             .DIV2 => 2,
@@ -172,424 +164,349 @@ pub const Config = struct {
     MCODiv: MCODivConf = .DIV1,
 };
 
-pub fn Clock(comptime conf: Config) type {
-    const ClockStruct = struct {
-        const this = @This();
+pub const ClockTree = struct {
+    const this = @This();
 
-        const HSIRCType = struct {
-            pub fn get(_: *const HSIRCType) comptime_int {
-                return 64000000;
-            }
-        };
-        const PLL64RCType = struct {
-            pub fn get(_: *const PLL64RCType) comptime_int {
-                return 64000000;
-            }
-        };
-        const HSEOSCType = struct {
-            value: HSEOSCConf,
-            pub fn get(comptime self: HSEOSCType) comptime_int {
-                return self.value.get();
-            }
-        };
-        const LSEOSCType = struct {
-            value: LSEOSCConf,
-            pub fn get(comptime self: LSEOSCType) comptime_int {
-                return self.value.get();
-            }
-        };
-        const LSIRCType = struct {
-            pub fn get(_: *const LSIRCType) comptime_int {
-                return 32000;
-            }
-        };
-        const RC64MPLLType = struct {
-            value: RC64MPLLConf,
-            pub fn get(comptime self: RC64MPLLType) comptime_int {
-                return switch (self.value) {
-                    .HSIRC => HSIRC.get(),
-                    .PLL64RC => PLL64RC.get(),
-                };
-            }
-        };
-        const SysClkSourceType = struct {
-            value: SysClkSourceConf,
-            pub fn get(comptime self: SysClkSourceType) comptime_int {
-                return switch (self.value) {
-                    .HSEOSC => HSEOSC.get(),
-                    .RC64MPLL => RC64MPLL.get(),
-                };
-            }
-        };
-        const SysCLKOutputType = struct {
-            pub fn get(_: *const SysCLKOutputType) comptime_int {
-                const from_input = SysClkSource.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from SysClkSource on SysCLKOutput | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 64000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from SysClkSource on SysCLKOutput | recive {d} max 64000000\n", .{from_input}));
-                }
-                return from_input;
-            }
-        };
-        const TimerOutputType = struct {
-            pub fn get(_: *const TimerOutputType) comptime_int {
-                const from_input = SysCLKOutput.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from SysCLKOutput on TimerOutput | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 64000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from SysCLKOutput on TimerOutput | recive {d} max 64000000\n", .{from_input}));
-                }
-                return from_input;
-            }
-        };
-        const CLK16MHzDiv2Type = struct {
-            pub fn get(_: *const CLK16MHzDiv2Type) comptime_int {
-                if (!@hasDecl(this, "SysCLKOutput")) {
-                    @compileError("No Input SysCLKOutput for CLK16MHzDiv2\n");
-                }
-                const from_input = this.SysCLKOutput.get();
-                const div = 2;
-                return (from_input / div);
-            }
-        };
+    HSIRC: ClockNode,
+    PLL64RC: ClockNode,
+    HSEOSC: ClockNode,
+    LSEOSC: ClockNode,
+    LSIRC: ClockNode,
+    RC64MPLL: ClockNode,
+    SysClkSource: ClockNode,
+    SysCLKOutput: ClockNode,
+    TimerOutput: ClockNode,
+    CLK16MHzDiv2: ClockNode,
+    CLK16MHzDiv4: ClockNode,
+    CLK16MHzSource: ClockNode,
+    Clk16MHzOutput: ClockNode,
+    ClkSMPSDiv4: ClockNode,
+    ClkSMPSDiv2: ClockNode,
+    ClkSMPS: ClockNode,
+    ClkSMPSOutput: ClockNode,
+    LSCOMult: ClockNode,
+    LSCOOutput: ClockNode,
+    CLK32MHzDiv1: ClockNode,
+    CLK32MHzDiv2: ClockNode,
+    CLK32MHzSource: ClockNode,
+    Clk32MHzOutput: ClockNode,
+    BLEMult: ClockNode,
+    BLEOutput: ClockNode,
+    SYSCLK32Prescaler: ClockNode,
+    SYSCLK64Prescaler: ClockNode,
+    CLKSYSMult: ClockNode,
+    CLKSYSOutput: ClockNode,
+    CLKI2S3Mult: ClockNode,
+    CLKI2S3Output: ClockNode,
+    CLKI2S2Output: ClockNode,
+    CLKI2S2Mult: ClockNode,
+    CLK16RTCDevisor: ClockNode,
+    RTCClkSource: ClockNode,
+    RTCOutput: ClockNode,
+    MCOMult: ClockNode,
+    MCODiv: ClockNode,
+    MCOPin: ClockNode,
 
-        const CLK16MHzDiv4Type = struct {
-            pub fn get(_: *const CLK16MHzDiv4Type) comptime_int {
-                if (!@hasDecl(this, "SysCLKOutput")) {
-                    @compileError("No Input SysCLKOutput for CLK16MHzDiv4\n");
-                }
-                const from_input = this.SysCLKOutput.get();
-                const div = 4;
-                return (from_input / div);
-            }
+    pub fn init_comptime(comptime config: Config) this {
+        const HSIRC: ClockNode = .{
+            .name = "HSIRC",
+            .Nodetype = .{ .source = .{ .value = 64000000 } },
         };
+        const PLL64RC: ClockNode = .{
+            .name = "PLL64RC",
+            .Nodetype = .{ .source = .{ .value = 64000000 } },
+        };
+        const HSEOSC: ClockNode = .{
+            .name = "HSEOSC",
+            .Nodetype = .{ .source = .{
+                .value = config.HSEOSC.get(),
+                .limit = .{ .max = 32000000, .min = 4000000 },
+            } },
+        };
+        const LSEOSC: ClockNode = .{
+            .name = "LSEOSC",
+            .Nodetype = .{ .source = .{
+                .value = config.LSEOSC.get(),
+                .limit = .{ .max = 1000000, .min = 1000 },
+            } },
+        };
+        const LSIRC: ClockNode = .{
+            .name = "LSIRC",
+            .Nodetype = .{ .source = .{ .value = 32000 } },
+        };
+        const RC64MPLL: ClockNode = .{
+            .name = "RC64MPLL",
 
-        const CLK16MHzSourceType = struct {
-            value: CLK16MHzSourceConf,
-            pub fn get(comptime self: CLK16MHzSourceType) comptime_int {
-                return switch (self.value) {
-                    .CLK16MHzDiv2 => CLK16MHzDiv2.get(),
-                    .CLK16MHzDiv4 => CLK16MHzDiv4.get(),
-                };
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.RC64MPLL) },
+            .parents = &[_]*const ClockNode{
+                &HSIRC,
+                &PLL64RC,
+            },
         };
-        const Clk16MHzOutputType = struct {
-            pub fn get(_: *const Clk16MHzOutputType) comptime_int {
-                return CLK16MHzSource.get();
-            }
-        };
-        const ClkSMPSDiv4Type = struct {
-            pub fn get(_: *const ClkSMPSDiv4Type) comptime_int {
-                if (!@hasDecl(this, "Clk16MHzOutput")) {
-                    @compileError("No Input Clk16MHzOutput for ClkSMPSDiv4\n");
-                }
-                const from_input = this.Clk16MHzOutput.get();
-                const div = 4;
-                return (from_input / div);
-            }
-        };
+        const SysClkSource: ClockNode = .{
+            .name = "SysClkSource",
 
-        const ClkSMPSDiv2Type = struct {
-            pub fn get(_: *const ClkSMPSDiv2Type) comptime_int {
-                if (!@hasDecl(this, "Clk16MHzOutput")) {
-                    @compileError("No Input Clk16MHzOutput for ClkSMPSDiv2\n");
-                }
-                const from_input = this.Clk16MHzOutput.get();
-                const div = 2;
-                return (from_input / div);
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.SysClkSource) },
+            .parents = &[_]*const ClockNode{
+                &HSEOSC,
+                &RC64MPLL,
+            },
         };
+        const SysCLKOutput: ClockNode = .{
+            .name = "SysCLKOutput",
+            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&SysClkSource},
+        };
+        const TimerOutput: ClockNode = .{
+            .name = "TimerOutput",
+            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const CLK16MHzDiv2: ClockNode = .{
+            .name = "CLK16MHzDiv2",
+            .Nodetype = .{ .div = .{ .value = 2 } },
+            .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const CLK16MHzDiv4: ClockNode = .{
+            .name = "CLK16MHzDiv4",
+            .Nodetype = .{ .div = .{ .value = 4 } },
+            .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const CLK16MHzSource: ClockNode = .{
+            .name = "CLK16MHzSource",
 
-        const ClkSMPSType = struct {
-            value: ClkSMPSConf,
-            pub fn get(comptime self: ClkSMPSType) comptime_int {
-                return switch (self.value) {
-                    .ClkSMPSDiv4 => ClkSMPSDiv4.get(),
-                    .ClkSMPSDiv2 => ClkSMPSDiv2.get(),
-                };
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.CLK16MHzSource) },
+            .parents = &[_]*const ClockNode{
+                &CLK16MHzDiv2,
+                &CLK16MHzDiv4,
+            },
         };
-        const ClkSMPSOutputType = struct {
-            pub fn get(_: *const ClkSMPSOutputType) comptime_int {
-                const from_input = ClkSMPS.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from ClkSMPS on ClkSMPSOutput | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 64000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from ClkSMPS on ClkSMPSOutput | recive {d} max 64000000\n", .{from_input}));
-                }
-                return from_input;
-            }
+        const Clk16MHzOutput: ClockNode = .{
+            .name = "Clk16MHzOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&CLK16MHzSource},
         };
-        const LSCOMultType = struct {
-            value: LSCOMultConf,
-            pub fn get(comptime self: LSCOMultType) comptime_int {
-                return switch (self.value) {
-                    .LSIRC => LSIRC.get(),
-                    .LSEOSC => LSEOSC.get(),
-                };
-            }
+        const ClkSMPSDiv4: ClockNode = .{
+            .name = "ClkSMPSDiv4",
+            .Nodetype = .{ .div = .{ .value = 4 } },
+            .parents = &[_]*const ClockNode{&Clk16MHzOutput},
         };
-        const LSCOOutputType = struct {
-            pub fn get(_: *const LSCOOutputType) comptime_int {
-                return LSCOMult.get();
-            }
+        const ClkSMPSDiv2: ClockNode = .{
+            .name = "ClkSMPSDiv2",
+            .Nodetype = .{ .div = .{ .value = 2 } },
+            .parents = &[_]*const ClockNode{&Clk16MHzOutput},
         };
-        const CLK32MHzDiv1Type = struct {
-            pub fn get(_: *const CLK32MHzDiv1Type) comptime_int {
-                if (!@hasDecl(this, "SysCLKOutput")) {
-                    @compileError("No Input SysCLKOutput for CLK32MHzDiv1\n");
-                }
-                const from_input = this.SysCLKOutput.get();
-                const div = 1;
-                return (from_input / div);
-            }
-        };
+        const ClkSMPS: ClockNode = .{
+            .name = "ClkSMPS",
 
-        const CLK32MHzDiv2Type = struct {
-            pub fn get(_: *const CLK32MHzDiv2Type) comptime_int {
-                if (!@hasDecl(this, "SysCLKOutput")) {
-                    @compileError("No Input SysCLKOutput for CLK32MHzDiv2\n");
-                }
-                const from_input = this.SysCLKOutput.get();
-                const div = 2;
-                return (from_input / div);
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.ClkSMPS) },
+            .parents = &[_]*const ClockNode{
+                &ClkSMPSDiv4,
+                &ClkSMPSDiv2,
+            },
         };
+        const ClkSMPSOutput: ClockNode = .{
+            .name = "ClkSMPSOutput",
+            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&ClkSMPS},
+        };
+        const LSCOMult: ClockNode = .{
+            .name = "LSCOMult",
 
-        const CLK32MHzSourceType = struct {
-            value: CLK32MHzSourceConf,
-            pub fn get(comptime self: CLK32MHzSourceType) comptime_int {
-                return switch (self.value) {
-                    .CLK32MHzDiv1 => CLK32MHzDiv1.get(),
-                    .CLK32MHzDiv2 => CLK32MHzDiv2.get(),
-                };
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.LSCOMult) },
+            .parents = &[_]*const ClockNode{
+                &LSIRC,
+                &LSEOSC,
+            },
         };
-        const Clk32MHzOutputType = struct {
-            pub fn get(_: *const Clk32MHzOutputType) comptime_int {
-                return CLK32MHzSource.get();
-            }
+        const LSCOOutput: ClockNode = .{
+            .name = "LSCOOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&LSCOMult},
         };
-        const BLEMultType = struct {
-            value: BLEMultConf,
-            pub fn get(comptime self: BLEMultType) comptime_int {
-                return switch (self.value) {
-                    .Clk16MHzOutput => Clk16MHzOutput.get(),
-                    .Clk32MHzOutput => Clk32MHzOutput.get(),
-                };
-            }
+        const CLK32MHzDiv1: ClockNode = .{
+            .name = "CLK32MHzDiv1",
+            .Nodetype = .{ .div = .{ .value = 1 } },
+            .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
-        const BLEOutputType = struct {
-            pub fn get(_: *const BLEOutputType) comptime_int {
-                const from_input = BLEMult.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from BLEMult on BLEOutput | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 64000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from BLEMult on BLEOutput | recive {d} max 64000000\n", .{from_input}));
-                }
-                return from_input;
-            }
+        const CLK32MHzDiv2: ClockNode = .{
+            .name = "CLK32MHzDiv2",
+            .Nodetype = .{ .div = .{ .value = 2 } },
+            .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
-        const SYSCLK32PrescalerType = struct {
-            value: SYSCLK32PrescalerConf,
+        const CLK32MHzSource: ClockNode = .{
+            .name = "CLK32MHzSource",
 
-            pub fn get(self: *const SYSCLK32PrescalerType) comptime_int {
-                if (!@hasDecl(this, "SysCLKOutput")) {
-                    @compileError("No Input SysCLKOutput for SYSCLK32Prescaler\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.SysCLKOutput.get());
-                const div: comptime_float = self.value.get();
-                return @intFromFloat((from_input / div));
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.CLK32MHzSource) },
+            .parents = &[_]*const ClockNode{
+                &CLK32MHzDiv1,
+                &CLK32MHzDiv2,
+            },
         };
+        const Clk32MHzOutput: ClockNode = .{
+            .name = "Clk32MHzOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&CLK32MHzSource},
+        };
+        const BLEMult: ClockNode = .{
+            .name = "BLEMult",
 
-        const SYSCLK64PrescalerType = struct {
-            value: SYSCLK64PrescalerConf,
+            .Nodetype = .{ .multi = @intFromEnum(config.BLEMult) },
+            .parents = &[_]*const ClockNode{
+                &Clk16MHzOutput,
+                &Clk32MHzOutput,
+            },
+        };
+        const BLEOutput: ClockNode = .{
+            .name = "BLEOutput",
+            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&BLEMult},
+        };
+        const SYSCLK32Prescaler: ClockNode = .{
+            .name = "SYSCLK32Prescaler",
+            .Nodetype = .{ .div = .{ .value = config.SYSCLK32Prescaler.get() } },
+            .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const SYSCLK64Prescaler: ClockNode = .{
+            .name = "SYSCLK64Prescaler",
+            .Nodetype = .{ .div = .{ .value = config.SYSCLK64Prescaler.get() } },
+            .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const CLKSYSMult: ClockNode = .{
+            .name = "CLKSYSMult",
 
-            pub fn get(self: *const SYSCLK64PrescalerType) comptime_int {
-                if (!@hasDecl(this, "SysCLKOutput")) {
-                    @compileError("No Input SysCLKOutput for SYSCLK64Prescaler\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.SysCLKOutput.get());
-                const div: comptime_float = self.value.get();
-                return @intFromFloat((from_input / div));
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.CLKSYSMult) },
+            .parents = &[_]*const ClockNode{
+                &SYSCLK32Prescaler,
+                &SYSCLK64Prescaler,
+            },
         };
+        const CLKSYSOutput: ClockNode = .{
+            .name = "CLKSYSOutput",
+            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&CLKSYSMult},
+        };
+        const CLKI2S3Mult: ClockNode = .{
+            .name = "CLKI2S3Mult",
 
-        const CLKSYSMultType = struct {
-            value: CLKSYSMultConf,
-            pub fn get(comptime self: CLKSYSMultType) comptime_int {
-                return switch (self.value) {
-                    .SYSCLK32Prescaler => SYSCLK32Prescaler.get(),
-                    .SYSCLK64Prescaler => SYSCLK64Prescaler.get(),
-                };
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.CLKI2S3Mult) },
+            .parents = &[_]*const ClockNode{
+                &Clk32MHzOutput,
+                &Clk16MHzOutput,
+            },
         };
-        const CLKSYSOutputType = struct {
-            pub fn get(_: *const CLKSYSOutputType) comptime_int {
-                const from_input = CLKSYSMult.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from CLKSYSMult on CLKSYSOutput | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 64000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from CLKSYSMult on CLKSYSOutput | recive {d} max 64000000\n", .{from_input}));
-                }
-                return from_input;
-            }
+        const CLKI2S3Output: ClockNode = .{
+            .name = "CLKI2S3Output",
+            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&CLKI2S3Mult},
         };
-        const CLKI2S3MultType = struct {
-            value: CLKI2S3MultConf,
-            pub fn get(comptime self: CLKI2S3MultType) comptime_int {
-                return switch (self.value) {
-                    .Clk32MHzOutput => Clk32MHzOutput.get(),
-                    .Clk16MHzOutput => Clk16MHzOutput.get(),
-                };
-            }
-        };
-        const CLKI2S3OutputType = struct {
-            pub fn get(_: *const CLKI2S3OutputType) comptime_int {
-                const from_input = CLKI2S3Mult.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from CLKI2S3Mult on CLKI2S3Output | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 64000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from CLKI2S3Mult on CLKI2S3Output | recive {d} max 64000000\n", .{from_input}));
-                }
-                return from_input;
-            }
-        };
-        const CLKI2S2OutputType = struct {
-            pub fn get(_: *const CLKI2S2OutputType) comptime_int {
-                const from_input = CLKI2S2Mult.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from CLKI2S2Mult on CLKI2S2Output | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 64000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from CLKI2S2Mult on CLKI2S2Output | recive {d} max 64000000\n", .{from_input}));
-                }
-                return from_input;
-            }
-        };
-        const CLKI2S2MultType = struct {
-            value: CLKI2S2MultConf,
-            pub fn get(comptime self: CLKI2S2MultType) comptime_int {
-                return switch (self.value) {
-                    .Clk32MHzOutput => Clk32MHzOutput.get(),
-                    .Clk16MHzOutput => Clk16MHzOutput.get(),
-                };
-            }
-        };
-        const CLK16RTCDevisorType = struct {
-            pub fn get(_: *const CLK16RTCDevisorType) comptime_int {
-                if (!@hasDecl(this, "Clk16MHzOutput")) {
-                    @compileError("No Input Clk16MHzOutput for CLK16RTCDevisor\n");
-                }
-                const from_input = this.Clk16MHzOutput.get();
-                const div = 512;
-                return (from_input / div);
-            }
-        };
+        const CLKI2S2Mult: ClockNode = .{
+            .name = "CLKI2S2Mult",
 
-        const RTCClkSourceType = struct {
-            value: RTCClkSourceConf,
-            pub fn get(comptime self: RTCClkSourceType) comptime_int {
-                return switch (self.value) {
-                    .CLK16RTCDevisor => CLK16RTCDevisor.get(),
-                    .LSEOSC => LSEOSC.get(),
-                    .LSIRC => LSIRC.get(),
-                };
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.CLKI2S2Mult) },
+            .parents = &[_]*const ClockNode{
+                &Clk32MHzOutput,
+                &Clk16MHzOutput,
+            },
         };
-        const RTCOutputType = struct {
-            pub fn get(_: *const RTCOutputType) comptime_int {
-                const from_input = RTCClkSource.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from RTCClkSource on RTCOutput | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 1000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from RTCClkSource on RTCOutput | recive {d} max 1000000\n", .{from_input}));
-                }
-                return from_input;
-            }
+        const CLKI2S2Output: ClockNode = .{
+            .name = "CLKI2S2Output",
+            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&CLKI2S2Mult},
         };
-        const MCOMultType = struct {
-            value: MCOMultConf,
-            pub fn get(comptime self: MCOMultType) comptime_int {
-                return switch (self.value) {
-                    .Clk16MHzOutput => Clk16MHzOutput.get(),
-                    .ClkSMPSOutput => ClkSMPSOutput.get(),
-                    .CLKSYSOutput => CLKSYSOutput.get(),
-                    .HSEOSC => HSEOSC.get(),
-                    .HSIRC => HSIRC.get(),
-                    .CLK16RTCDevisor => CLK16RTCDevisor.get(),
-                };
-            }
+        const CLK16RTCDevisor: ClockNode = .{
+            .name = "CLK16RTCDevisor",
+            .Nodetype = .{ .div = .{ .value = 512 } },
+            .parents = &[_]*const ClockNode{&Clk16MHzOutput},
         };
-        const MCODivType = struct {
-            value: MCODivConf,
+        const RTCClkSource: ClockNode = .{
+            .name = "RTCClkSource",
 
-            pub fn get(self: *const MCODivType) comptime_int {
-                if (!@hasDecl(this, "MCOMult")) {
-                    @compileError("No Input MCOMult for MCODiv\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.MCOMult.get());
-                const div: comptime_float = self.value.get();
-                return @intFromFloat((from_input / div));
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.RTCClkSource) },
+            .parents = &[_]*const ClockNode{
+                &CLK16RTCDevisor,
+                &LSEOSC,
+                &LSIRC,
+            },
         };
-
-        const MCOPinType = struct {
-            pub fn get(_: *const MCOPinType) comptime_int {
-                return MCODiv.get();
-            }
+        const RTCOutput: ClockNode = .{
+            .name = "RTCOutput",
+            .Nodetype = .{ .output = .{ .max = 1000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&RTCClkSource},
         };
-        const HSIRC = HSIRCType{};
-        const PLL64RC = PLL64RCType{};
-        const HSEOSC = HSEOSCType{ .value = conf.HSEOSC };
-        const LSEOSC = LSEOSCType{ .value = conf.LSEOSC };
-        const LSIRC = LSIRCType{};
-        const RC64MPLL = RC64MPLLType{ .value = conf.RC64MPLL };
-        const SysClkSource = SysClkSourceType{ .value = conf.SysClkSource };
-        pub const SysCLKOutput = SysCLKOutputType{};
-        pub const TimerOutput = TimerOutputType{};
-        const CLK16MHzDiv2 = CLK16MHzDiv2Type{};
-        const CLK16MHzDiv4 = CLK16MHzDiv4Type{};
-        const CLK16MHzSource = CLK16MHzSourceType{ .value = conf.CLK16MHzSource };
-        pub const Clk16MHzOutput = Clk16MHzOutputType{};
-        const ClkSMPSDiv4 = ClkSMPSDiv4Type{};
-        const ClkSMPSDiv2 = ClkSMPSDiv2Type{};
-        const ClkSMPS = ClkSMPSType{ .value = conf.ClkSMPS };
-        pub const ClkSMPSOutput = ClkSMPSOutputType{};
-        const LSCOMult = LSCOMultType{ .value = conf.LSCOMult };
-        pub const LSCOOutput = LSCOOutputType{};
-        const CLK32MHzDiv1 = CLK32MHzDiv1Type{};
-        const CLK32MHzDiv2 = CLK32MHzDiv2Type{};
-        const CLK32MHzSource = CLK32MHzSourceType{ .value = conf.CLK32MHzSource };
-        pub const Clk32MHzOutput = Clk32MHzOutputType{};
-        const BLEMult = BLEMultType{ .value = conf.BLEMult };
-        pub const BLEOutput = BLEOutputType{};
-        const SYSCLK32Prescaler = SYSCLK32PrescalerType{ .value = conf.SYSCLK32Prescaler };
-        const SYSCLK64Prescaler = SYSCLK64PrescalerType{ .value = conf.SYSCLK64Prescaler };
-        const CLKSYSMult = CLKSYSMultType{ .value = conf.CLKSYSMult };
-        pub const CLKSYSOutput = CLKSYSOutputType{};
-        const CLKI2S3Mult = CLKI2S3MultType{ .value = conf.CLKI2S3Mult };
-        pub const CLKI2S3Output = CLKI2S3OutputType{};
-        pub const CLKI2S2Output = CLKI2S2OutputType{};
-        const CLKI2S2Mult = CLKI2S2MultType{ .value = conf.CLKI2S2Mult };
-        const CLK16RTCDevisor = CLK16RTCDevisorType{};
-        const RTCClkSource = RTCClkSourceType{ .value = conf.RTCClkSource };
-        pub const RTCOutput = RTCOutputType{};
-        const MCOMult = MCOMultType{ .value = conf.MCOMult };
-        const MCODiv = MCODivType{ .value = conf.MCODiv };
-        pub const MCOPin = MCOPinType{};
+        const MCOMult: ClockNode = .{
+            .name = "MCOMult",
 
-        pub fn validate() void {
-            _ = TimerOutput.get();
-            _ = ClkSMPSOutput.get();
-            _ = LSCOOutput.get();
-            _ = BLEOutput.get();
-            _ = CLKSYSOutput.get();
-            _ = CLKI2S3Output.get();
-            _ = CLKI2S2Output.get();
-        }
-    };
+            .Nodetype = .{ .multi = @intFromEnum(config.MCOMult) },
+            .parents = &[_]*const ClockNode{
+                &Clk16MHzOutput,
+                &ClkSMPSOutput,
+                &CLKSYSOutput,
+                &HSEOSC,
+                &HSIRC,
+                &CLK16RTCDevisor,
+            },
+        };
+        const MCODiv: ClockNode = .{
+            .name = "MCODiv",
+            .Nodetype = .{ .div = .{ .value = config.MCODiv.get() } },
+            .parents = &[_]*const ClockNode{&MCOMult},
+        };
+        const MCOPin: ClockNode = .{
+            .name = "MCOPin",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&MCODiv},
+        };
+        return .{
+            .HSIRC = HSIRC,
+            .PLL64RC = PLL64RC,
+            .HSEOSC = HSEOSC,
+            .LSEOSC = LSEOSC,
+            .LSIRC = LSIRC,
+            .RC64MPLL = RC64MPLL,
+            .SysClkSource = SysClkSource,
+            .SysCLKOutput = SysCLKOutput,
+            .TimerOutput = TimerOutput,
+            .CLK16MHzDiv2 = CLK16MHzDiv2,
+            .CLK16MHzDiv4 = CLK16MHzDiv4,
+            .CLK16MHzSource = CLK16MHzSource,
+            .Clk16MHzOutput = Clk16MHzOutput,
+            .ClkSMPSDiv4 = ClkSMPSDiv4,
+            .ClkSMPSDiv2 = ClkSMPSDiv2,
+            .ClkSMPS = ClkSMPS,
+            .ClkSMPSOutput = ClkSMPSOutput,
+            .LSCOMult = LSCOMult,
+            .LSCOOutput = LSCOOutput,
+            .CLK32MHzDiv1 = CLK32MHzDiv1,
+            .CLK32MHzDiv2 = CLK32MHzDiv2,
+            .CLK32MHzSource = CLK32MHzSource,
+            .Clk32MHzOutput = Clk32MHzOutput,
+            .BLEMult = BLEMult,
+            .BLEOutput = BLEOutput,
+            .SYSCLK32Prescaler = SYSCLK32Prescaler,
+            .SYSCLK64Prescaler = SYSCLK64Prescaler,
+            .CLKSYSMult = CLKSYSMult,
+            .CLKSYSOutput = CLKSYSOutput,
+            .CLKI2S3Mult = CLKI2S3Mult,
+            .CLKI2S3Output = CLKI2S3Output,
+            .CLKI2S2Output = CLKI2S2Output,
+            .CLKI2S2Mult = CLKI2S2Mult,
+            .CLK16RTCDevisor = CLK16RTCDevisor,
+            .RTCClkSource = RTCClkSource,
+            .RTCOutput = RTCOutput,
+            .MCOMult = MCOMult,
+            .MCODiv = MCODiv,
+            .MCOPin = MCOPin,
+        };
+    }
 
-    return ClockStruct;
-}
+    pub fn validate(comptime self: *const this) void {
+        _ = self.TimerOutput.get_comptime();
+        _ = self.ClkSMPSOutput.get_comptime();
+        _ = self.LSCOOutput.get_comptime();
+        _ = self.BLEOutput.get_comptime();
+        _ = self.CLKSYSOutput.get_comptime();
+        _ = self.CLKI2S3Output.get_comptime();
+        _ = self.CLKI2S2Output.get_comptime();
+    }
+};

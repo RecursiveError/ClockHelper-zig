@@ -1,22 +1,22 @@
 const std = @import("std");
+const clock = @import("../ClockNode.zig");
+const ClockNode = clock.ClockNode;
+const ClockNodeTypes = clock.ClockNodesTypes;
+const ClockState = clock.ClockState;
+const ClockError = clock.ClockError;
 
-pub const LSEOSCConf = enum(comptime_int) {
+pub const LSEOSCConf = enum(u32) {
     _,
-    pub fn get(num: LSEOSCConf) comptime_int {
-        const val: comptime_int = @intFromEnum(num);
-        if (val < 0) {
-            @compileError("min value for LSEOSC is 0\n");
-        } else if (val > 1000000) {
-            @compileError("min value for LSEOSC is 1000000\n");
-        }
-        return val;
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
     }
 
-    pub fn max() comptime_int {
+    pub fn max() f32 {
         return 1000000;
     }
 
-    pub fn min() comptime_int {
+    pub fn min() f32 {
         return 0;
     }
 };
@@ -24,23 +24,18 @@ pub const CECMultConf = enum {
     HSICECDiv,
     LSEOSC,
 };
-pub const HSEOSCConf = enum(comptime_int) {
+pub const HSEOSCConf = enum(u32) {
     _,
-    pub fn get(num: HSEOSCConf) comptime_int {
-        const val: comptime_int = @intFromEnum(num);
-        if (val < 4000000) {
-            @compileError("min value for HSEOSC is 4000000\n");
-        } else if (val > 32000000) {
-            @compileError("min value for HSEOSC is 32000000\n");
-        }
-        return val;
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
     }
 
-    pub fn max() comptime_int {
+    pub fn max() f32 {
         return 32000000;
     }
 
-    pub fn min() comptime_int {
+    pub fn min() f32 {
         return 4000000;
     }
 };
@@ -60,10 +55,9 @@ pub const RTCClkSourceConf = enum {
     LSIRC,
 };
 pub const MCOMultDivisorConf = enum {
-    const this = @This();
     DIV1,
     DIV2,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
             .DIV2 => 2,
@@ -81,7 +75,6 @@ pub const MCOMultConf = enum {
     SysCLKOutput,
 };
 pub const MCODividerConf = enum {
-    const this = @This();
     DIV1,
     DIV2,
     DIV4,
@@ -90,7 +83,7 @@ pub const MCODividerConf = enum {
     DIV32,
     DIV64,
     DIV128,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
             .DIV2 => 2,
@@ -104,7 +97,6 @@ pub const MCODividerConf = enum {
     }
 };
 pub const AHBPrescalerConf = enum {
-    const this = @This();
     DIV1,
     DIV2,
     DIV4,
@@ -114,7 +106,7 @@ pub const AHBPrescalerConf = enum {
     DIV128,
     DIV256,
     DIV512,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
             .DIV2 => 2,
@@ -129,10 +121,9 @@ pub const AHBPrescalerConf = enum {
     }
 };
 pub const TimSysPrescConf = enum {
-    const this = @This();
     DIV1,
     DIV8,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
             .DIV8 => 8,
@@ -140,13 +131,12 @@ pub const TimSysPrescConf = enum {
     }
 };
 pub const APB1PrescalerConf = enum {
-    const this = @This();
     DIV1,
     DIV2,
     DIV4,
     DIV8,
     DIV16,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
             .DIV2 => 2,
@@ -178,7 +168,6 @@ pub const PLLSourceConf = enum {
     HSEOSC,
 };
 pub const PLLDivConf = enum {
-    const this = @This();
     DIV1,
     DIV2,
     DIV3,
@@ -195,7 +184,7 @@ pub const PLLDivConf = enum {
     DIV14,
     DIV15,
     DIV16,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
             .DIV2 => 2,
@@ -217,7 +206,6 @@ pub const PLLDivConf = enum {
     }
 };
 pub const PLLMULConf = enum {
-    const this = @This();
     MUL2,
     MUL3,
     MUL4,
@@ -233,7 +221,7 @@ pub const PLLMULConf = enum {
     MUL14,
     MUL15,
     MUL16,
-    pub fn get(comptime self: this) comptime_float {
+    pub fn get(self: @This()) f32 {
         return switch (self) {
             .MUL2 => 2,
             .MUL3 => 3,
@@ -274,434 +262,385 @@ pub const Config = struct {
     PLLMUL: PLLMULConf = .MUL2,
 };
 
-pub fn Clock(comptime conf: Config) type {
-    const ClockStruct = struct {
-        const this = @This();
+pub const ClockTree = struct {
+    const this = @This();
 
-        const HSIRCType = struct {
-            pub fn get(_: *const HSIRCType) comptime_int {
-                return 8000000;
-            }
-        };
-        const FLITFCLKoutputType = struct {
-            pub fn get(_: *const FLITFCLKoutputType) comptime_int {
-                return HSIRC.get();
-            }
-        };
-        const HSICECDivType = struct {
-            pub fn get(_: *const HSICECDivType) comptime_int {
-                if (!@hasDecl(this, "HSIRC")) {
-                    @compileError("No Input HSIRC for HSICECDiv\n");
-                }
-                const from_input = this.HSIRC.get();
-                const div = 244;
-                return (from_input / div);
-            }
-        };
+    HSIRC: ClockNode,
+    FLITFCLKoutput: ClockNode,
+    HSICECDiv: ClockNode,
+    HSIRC48: ClockNode,
+    HSIRC14: ClockNode,
+    ADCoutput: ClockNode,
+    LSIRC: ClockNode,
+    LSEOSC: ClockNode,
+    CECMult: ClockNode,
+    CECOutput: ClockNode,
+    HSEOSC: ClockNode,
+    USBMult: ClockNode,
+    USBoutput: ClockNode,
+    SysClkSource: ClockNode,
+    SysCLKOutput: ClockNode,
+    I2SOutput: ClockNode,
+    HSERTCDevisor: ClockNode,
+    RTCClkSource: ClockNode,
+    RTCOutput: ClockNode,
+    IWDGOutput: ClockNode,
+    MCOMultDivisor: ClockNode,
+    MCOMult: ClockNode,
+    MCODivider: ClockNode,
+    MCOoutput: ClockNode,
+    AHBPrescaler: ClockNode,
+    AHBOutput: ClockNode,
+    HCLKOutput: ClockNode,
+    FCLKCortexOutput: ClockNode,
+    TimSysPresc: ClockNode,
+    TimSysOutput: ClockNode,
+    APB1Prescaler: ClockNode,
+    APB1Output: ClockNode,
+    TimPrescalerAPB1: ClockNode,
+    TimPrescOut1: ClockNode,
+    I2C1Mult: ClockNode,
+    I2C1Output: ClockNode,
+    USART1Mult: ClockNode,
+    USART1Output: ClockNode,
+    USART2Mult: ClockNode,
+    USART2Output: ClockNode,
+    PLLSource: ClockNode,
+    PLLDiv: ClockNode,
+    VCO2output: ClockNode,
+    PLLMUL: ClockNode,
 
-        const HSIRC48Type = struct {
-            pub fn get(_: *const HSIRC48Type) comptime_int {
-                return 48000000;
-            }
+    pub fn init_comptime(comptime config: Config) this {
+        const HSIRC: ClockNode = .{
+            .name = "HSIRC",
+            .Nodetype = .{ .source = .{ .value = 8000000 } },
         };
-        const HSIRC14Type = struct {
-            pub fn get(_: *const HSIRC14Type) comptime_int {
-                return 14000000;
-            }
+        const FLITFCLKoutput: ClockNode = .{
+            .name = "FLITFCLKoutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&HSIRC},
         };
-        const ADCoutputType = struct {
-            pub fn get(_: *const ADCoutputType) comptime_int {
-                return HSIRC14.get();
-            }
+        const HSICECDiv: ClockNode = .{
+            .name = "HSICECDiv",
+            .Nodetype = .{ .div = .{ .value = 244 } },
+            .parents = &[_]*const ClockNode{&HSIRC},
         };
-        const LSIRCType = struct {
-            pub fn get(_: *const LSIRCType) comptime_int {
-                return 40000;
-            }
+        const HSIRC48: ClockNode = .{
+            .name = "HSIRC48",
+            .Nodetype = .{ .source = .{ .value = 48000000 } },
         };
-        const LSEOSCType = struct {
-            value: LSEOSCConf,
-            pub fn get(comptime self: LSEOSCType) comptime_int {
-                return self.value.get();
-            }
+        const HSIRC14: ClockNode = .{
+            .name = "HSIRC14",
+            .Nodetype = .{ .source = .{ .value = 14000000 } },
         };
-        const CECMultType = struct {
-            value: CECMultConf,
-            pub fn get(comptime self: CECMultType) comptime_int {
-                return switch (self.value) {
-                    .HSICECDiv => HSICECDiv.get(),
-                    .LSEOSC => LSEOSC.get(),
-                };
-            }
+        const ADCoutput: ClockNode = .{
+            .name = "ADCoutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&HSIRC14},
         };
-        const CECOutputType = struct {
-            pub fn get(_: *const CECOutputType) comptime_int {
-                return CECMult.get();
-            }
+        const LSIRC: ClockNode = .{
+            .name = "LSIRC",
+            .Nodetype = .{ .source = .{ .value = 40000 } },
         };
-        const HSEOSCType = struct {
-            value: HSEOSCConf,
-            pub fn get(comptime self: HSEOSCType) comptime_int {
-                return self.value.get();
-            }
+        const LSEOSC: ClockNode = .{
+            .name = "LSEOSC",
+            .Nodetype = .{ .source = .{
+                .value = config.LSEOSC.get(),
+                .limit = .{ .max = 1000000, .min = 0 },
+            } },
         };
-        const USBMultType = struct {
-            value: USBMultConf,
-            pub fn get(comptime self: USBMultType) comptime_int {
-                return switch (self.value) {
-                    .PLLMUL => PLLMUL.get(),
-                    .HSIRC48 => HSIRC48.get(),
-                };
-            }
-        };
-        const USBoutputType = struct {
-            pub fn get(_: *const USBoutputType) comptime_int {
-                const from_input = USBMult.get();
-                if (from_input < 47880000) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from USBMult on USBoutput | recive {d} min 47880000\n", .{from_input}));
-                } else if (from_input > 48120000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from USBMult on USBoutput | recive {d} max 48120000\n", .{from_input}));
-                }
-                return from_input;
-            }
-        };
-        const SysClkSourceType = struct {
-            value: SysClkSourceConf,
-            pub fn get(comptime self: SysClkSourceType) comptime_int {
-                return switch (self.value) {
-                    .HSIRC => HSIRC.get(),
-                    .HSIRC48 => HSIRC48.get(),
-                    .HSEOSC => HSEOSC.get(),
-                    .PLLMUL => PLLMUL.get(),
-                };
-            }
-        };
-        const SysCLKOutputType = struct {
-            pub fn get(_: *const SysCLKOutputType) comptime_int {
-                return SysClkSource.get();
-            }
-        };
-        const I2SOutputType = struct {
-            pub fn get(_: *const I2SOutputType) comptime_int {
-                return SysCLKOutput.get();
-            }
-        };
-        const HSERTCDevisorType = struct {
-            pub fn get(_: *const HSERTCDevisorType) comptime_int {
-                if (!@hasDecl(this, "HSEOSC")) {
-                    @compileError("No Input HSEOSC for HSERTCDevisor\n");
-                }
-                const from_input = this.HSEOSC.get();
-                const div = 32;
-                return (from_input / div);
-            }
-        };
+        const CECMult: ClockNode = .{
+            .name = "CECMult",
 
-        const RTCClkSourceType = struct {
-            value: RTCClkSourceConf,
-            pub fn get(comptime self: RTCClkSourceType) comptime_int {
-                return switch (self.value) {
-                    .HSERTCDevisor => HSERTCDevisor.get(),
-                    .LSEOSC => LSEOSC.get(),
-                    .LSIRC => LSIRC.get(),
-                };
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.CECMult) },
+            .parents = &[_]*const ClockNode{
+                &HSICECDiv,
+                &LSEOSC,
+            },
         };
-        const RTCOutputType = struct {
-            pub fn get(_: *const RTCOutputType) comptime_int {
-                return RTCClkSource.get();
-            }
+        const CECOutput: ClockNode = .{
+            .name = "CECOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&CECMult},
         };
-        const IWDGOutputType = struct {
-            pub fn get(_: *const IWDGOutputType) comptime_int {
-                return LSIRC.get();
-            }
+        const HSEOSC: ClockNode = .{
+            .name = "HSEOSC",
+            .Nodetype = .{ .source = .{
+                .value = config.HSEOSC.get(),
+                .limit = .{ .max = 32000000, .min = 4000000 },
+            } },
         };
-        const MCOMultDivisorType = struct {
-            value: MCOMultDivisorConf,
+        const PLLSource: ClockNode = .{
+            .name = "PLLSource",
 
-            pub fn get(self: *const MCOMultDivisorType) comptime_int {
-                if (!@hasDecl(this, "PLLMUL")) {
-                    @compileError("No Input PLLMUL for MCOMultDivisor\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.PLLMUL.get());
-                const div: comptime_float = self.value.get();
-                return @intFromFloat((from_input / div));
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.PLLSource) },
+            .parents = &[_]*const ClockNode{
+                &HSIRC,
+                &HSIRC48,
+                &HSEOSC,
+            },
         };
+        const PLLDiv: ClockNode = .{
+            .name = "PLLDiv",
+            .Nodetype = .{ .div = .{ .value = config.PLLDiv.get() } },
+            .parents = &[_]*const ClockNode{&PLLSource},
+        };
+        const VCO2output: ClockNode = .{
+            .name = "VCO2output",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&PLLDiv},
+        };
+        const PLLMUL: ClockNode = .{
+            .name = "PLLMUL",
+            .Nodetype = .{ .mul = .{ .value = config.PLLMUL.get() } },
+            .parents = &[_]*const ClockNode{&VCO2output},
+        };
+        const USBMult: ClockNode = .{
+            .name = "USBMult",
 
-        const MCOMultType = struct {
-            value: MCOMultConf,
-            pub fn get(comptime self: MCOMultType) comptime_int {
-                return switch (self.value) {
-                    .MCOMultDivisor => MCOMultDivisor.get(),
-                    .HSIRC => HSIRC.get(),
-                    .HSIRC48 => HSIRC48.get(),
-                    .HSIRC14 => HSIRC14.get(),
-                    .HSEOSC => HSEOSC.get(),
-                    .LSIRC => LSIRC.get(),
-                    .LSEOSC => LSEOSC.get(),
-                    .SysCLKOutput => SysCLKOutput.get(),
-                };
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.USBMult) },
+            .parents = &[_]*const ClockNode{
+                &PLLMUL,
+                &HSIRC48,
+            },
         };
-        const MCODividerType = struct {
-            value: MCODividerConf,
+        const USBoutput: ClockNode = .{
+            .name = "USBoutput",
+            .Nodetype = .{ .output = .{ .max = 48120000, .min = 47880000 } },
+            .parents = &[_]*const ClockNode{&USBMult},
+        };
+        const SysClkSource: ClockNode = .{
+            .name = "SysClkSource",
 
-            pub fn get(self: *const MCODividerType) comptime_int {
-                if (!@hasDecl(this, "MCOMult")) {
-                    @compileError("No Input MCOMult for MCODivider\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.MCOMult.get());
-                const div: comptime_float = self.value.get();
-                return @intFromFloat((from_input / div));
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.SysClkSource) },
+            .parents = &[_]*const ClockNode{
+                &HSIRC,
+                &HSIRC48,
+                &HSEOSC,
+                &PLLMUL,
+            },
         };
+        const SysCLKOutput: ClockNode = .{
+            .name = "SysCLKOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&SysClkSource},
+        };
+        const I2SOutput: ClockNode = .{
+            .name = "I2SOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const HSERTCDevisor: ClockNode = .{
+            .name = "HSERTCDevisor",
+            .Nodetype = .{ .div = .{ .value = 32 } },
+            .parents = &[_]*const ClockNode{&HSEOSC},
+        };
+        const RTCClkSource: ClockNode = .{
+            .name = "RTCClkSource",
 
-        const MCOoutputType = struct {
-            pub fn get(_: *const MCOoutputType) comptime_int {
-                return MCODivider.get();
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.RTCClkSource) },
+            .parents = &[_]*const ClockNode{
+                &HSERTCDevisor,
+                &LSEOSC,
+                &LSIRC,
+            },
         };
-        const AHBPrescalerType = struct {
-            value: AHBPrescalerConf,
+        const RTCOutput: ClockNode = .{
+            .name = "RTCOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&RTCClkSource},
+        };
+        const IWDGOutput: ClockNode = .{
+            .name = "IWDGOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&LSIRC},
+        };
+        const MCOMultDivisor: ClockNode = .{
+            .name = "MCOMultDivisor",
+            .Nodetype = .{ .div = .{ .value = config.MCOMultDivisor.get() } },
+            .parents = &[_]*const ClockNode{&PLLMUL},
+        };
+        const MCOMult: ClockNode = .{
+            .name = "MCOMult",
 
-            pub fn get(self: *const AHBPrescalerType) comptime_int {
-                if (!@hasDecl(this, "SysCLKOutput")) {
-                    @compileError("No Input SysCLKOutput for AHBPrescaler\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.SysCLKOutput.get());
-                const div: comptime_float = self.value.get();
-                return @intFromFloat((from_input / div));
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.MCOMult) },
+            .parents = &[_]*const ClockNode{
+                &MCOMultDivisor,
+                &HSIRC,
+                &HSIRC48,
+                &HSIRC14,
+                &HSEOSC,
+                &LSIRC,
+                &LSEOSC,
+                &SysCLKOutput,
+            },
         };
+        const MCODivider: ClockNode = .{
+            .name = "MCODivider",
+            .Nodetype = .{ .div = .{ .value = config.MCODivider.get() } },
+            .parents = &[_]*const ClockNode{&MCOMult},
+        };
+        const MCOoutput: ClockNode = .{
+            .name = "MCOoutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&MCODivider},
+        };
+        const AHBPrescaler: ClockNode = .{
+            .name = "AHBPrescaler",
+            .Nodetype = .{ .div = .{ .value = config.AHBPrescaler.get() } },
+            .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const AHBOutput: ClockNode = .{
+            .name = "AHBOutput",
+            .Nodetype = .{ .output = .{ .max = 48000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&AHBPrescaler},
+        };
+        const HCLKOutput: ClockNode = .{
+            .name = "HCLKOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&AHBOutput},
+        };
+        const FCLKCortexOutput: ClockNode = .{
+            .name = "FCLKCortexOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&AHBOutput},
+        };
+        const TimSysPresc: ClockNode = .{
+            .name = "TimSysPresc",
+            .Nodetype = .{ .div = .{ .value = config.TimSysPresc.get() } },
+            .parents = &[_]*const ClockNode{&AHBOutput},
+        };
+        const TimSysOutput: ClockNode = .{
+            .name = "TimSysOutput",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&TimSysPresc},
+        };
+        const APB1Prescaler: ClockNode = .{
+            .name = "APB1Prescaler",
+            .Nodetype = .{ .div = .{ .value = config.APB1Prescaler.get() } },
+            .parents = &[_]*const ClockNode{&AHBOutput},
+        };
+        const APB1Output: ClockNode = .{
+            .name = "APB1Output",
+            .Nodetype = .{ .output = .{ .max = 48000000, .min = 0 } },
+            .parents = &[_]*const ClockNode{&APB1Prescaler},
+        };
+        const TimPrescalerAPB1: ClockNode = .{
+            .name = "TimPrescalerAPB1",
+            .Nodetype = .{ .mul = .{ .value = 2 } },
+            .parents = &[_]*const ClockNode{&APB1Prescaler},
+        };
+        const TimPrescOut1: ClockNode = .{
+            .name = "TimPrescOut1",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&TimPrescalerAPB1},
+        };
+        const I2C1Mult: ClockNode = .{
+            .name = "I2C1Mult",
 
-        const AHBOutputType = struct {
-            pub fn get(_: *const AHBOutputType) comptime_int {
-                const from_input = AHBPrescaler.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from AHBPrescaler on AHBOutput | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 48000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from AHBPrescaler on AHBOutput | recive {d} max 48000000\n", .{from_input}));
-                }
-                return from_input;
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.I2C1Mult) },
+            .parents = &[_]*const ClockNode{
+                &HSIRC,
+                &SysCLKOutput,
+            },
         };
-        const HCLKOutputType = struct {
-            pub fn get(_: *const HCLKOutputType) comptime_int {
-                return AHBOutput.get();
-            }
+        const I2C1Output: ClockNode = .{
+            .name = "I2C1Output",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&I2C1Mult},
         };
-        const FCLKCortexOutputType = struct {
-            pub fn get(_: *const FCLKCortexOutputType) comptime_int {
-                return AHBOutput.get();
-            }
-        };
-        const TimSysPrescType = struct {
-            value: TimSysPrescConf,
+        const USART1Mult: ClockNode = .{
+            .name = "USART1Mult",
 
-            pub fn get(self: *const TimSysPrescType) comptime_int {
-                if (!@hasDecl(this, "AHBOutput")) {
-                    @compileError("No Input AHBOutput for TimSysPresc\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.AHBOutput.get());
-                const div: comptime_float = self.value.get();
-                return @intFromFloat((from_input / div));
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.USART1Mult) },
+            .parents = &[_]*const ClockNode{
+                &SysCLKOutput,
+                &HSIRC,
+                &LSEOSC,
+                &APB1Prescaler,
+            },
         };
+        const USART1Output: ClockNode = .{
+            .name = "USART1Output",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&USART1Mult},
+        };
+        const USART2Mult: ClockNode = .{
+            .name = "USART2Mult",
 
-        const TimSysOutputType = struct {
-            pub fn get(_: *const TimSysOutputType) comptime_int {
-                return TimSysPresc.get();
-            }
+            .Nodetype = .{ .multi = @intFromEnum(config.USART2Mult) },
+            .parents = &[_]*const ClockNode{
+                &SysCLKOutput,
+                &HSIRC,
+                &LSEOSC,
+                &APB1Prescaler,
+            },
         };
-        const APB1PrescalerType = struct {
-            value: APB1PrescalerConf,
+        const USART2Output: ClockNode = .{
+            .name = "USART2Output",
+            .Nodetype = .{ .output = null },
+            .parents = &[_]*const ClockNode{&USART2Mult},
+        };
+        return .{
+            .HSIRC = HSIRC,
+            .FLITFCLKoutput = FLITFCLKoutput,
+            .HSICECDiv = HSICECDiv,
+            .HSIRC48 = HSIRC48,
+            .HSIRC14 = HSIRC14,
+            .ADCoutput = ADCoutput,
+            .LSIRC = LSIRC,
+            .LSEOSC = LSEOSC,
+            .CECMult = CECMult,
+            .CECOutput = CECOutput,
+            .HSEOSC = HSEOSC,
+            .USBMult = USBMult,
+            .USBoutput = USBoutput,
+            .SysClkSource = SysClkSource,
+            .SysCLKOutput = SysCLKOutput,
+            .I2SOutput = I2SOutput,
+            .HSERTCDevisor = HSERTCDevisor,
+            .RTCClkSource = RTCClkSource,
+            .RTCOutput = RTCOutput,
+            .IWDGOutput = IWDGOutput,
+            .MCOMultDivisor = MCOMultDivisor,
+            .MCOMult = MCOMult,
+            .MCODivider = MCODivider,
+            .MCOoutput = MCOoutput,
+            .AHBPrescaler = AHBPrescaler,
+            .AHBOutput = AHBOutput,
+            .HCLKOutput = HCLKOutput,
+            .FCLKCortexOutput = FCLKCortexOutput,
+            .TimSysPresc = TimSysPresc,
+            .TimSysOutput = TimSysOutput,
+            .APB1Prescaler = APB1Prescaler,
+            .APB1Output = APB1Output,
+            .TimPrescalerAPB1 = TimPrescalerAPB1,
+            .TimPrescOut1 = TimPrescOut1,
+            .I2C1Mult = I2C1Mult,
+            .I2C1Output = I2C1Output,
+            .USART1Mult = USART1Mult,
+            .USART1Output = USART1Output,
+            .USART2Mult = USART2Mult,
+            .USART2Output = USART2Output,
+            .PLLSource = PLLSource,
+            .PLLDiv = PLLDiv,
+            .VCO2output = VCO2output,
+            .PLLMUL = PLLMUL,
+        };
+    }
 
-            pub fn get(self: *const APB1PrescalerType) comptime_int {
-                if (!@hasDecl(this, "AHBOutput")) {
-                    @compileError("No Input AHBOutput for APB1Prescaler\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.AHBOutput.get());
-                const div: comptime_float = self.value.get();
-                return @intFromFloat((from_input / div));
-            }
-        };
-
-        const APB1OutputType = struct {
-            pub fn get(_: *const APB1OutputType) comptime_int {
-                const from_input = APB1Prescaler.get();
-                if (from_input < 0) {
-                    @compileError(std.fmt.comptimePrint("Underflow clock from APB1Prescaler on APB1Output | recive {d} min 0\n", .{from_input}));
-                } else if (from_input > 48000000) {
-                    @compileError(std.fmt.comptimePrint("OverFlow clock from APB1Prescaler on APB1Output | recive {d} max 48000000\n", .{from_input}));
-                }
-                return from_input;
-            }
-        };
-        const TimPrescalerAPB1Type = struct {
-            pub fn get(_: *const TimPrescalerAPB1Type) comptime_int {
-                if (!@hasDecl(this, "APB1Prescaler")) {
-                    @compileError("No Input APB1Prescaler for TimPrescalerAPB1\n");
-                }
-                const from_input = this.APB1Prescaler.get();
-                const multi = 2;
-                return (from_input * multi);
-            }
-        };
-
-        const TimPrescOut1Type = struct {
-            pub fn get(_: *const TimPrescOut1Type) comptime_int {
-                return TimPrescalerAPB1.get();
-            }
-        };
-        const I2C1MultType = struct {
-            value: I2C1MultConf,
-            pub fn get(comptime self: I2C1MultType) comptime_int {
-                return switch (self.value) {
-                    .HSIRC => HSIRC.get(),
-                    .SysCLKOutput => SysCLKOutput.get(),
-                };
-            }
-        };
-        const I2C1OutputType = struct {
-            pub fn get(_: *const I2C1OutputType) comptime_int {
-                return I2C1Mult.get();
-            }
-        };
-        const USART1MultType = struct {
-            value: USART1MultConf,
-            pub fn get(comptime self: USART1MultType) comptime_int {
-                return switch (self.value) {
-                    .SysCLKOutput => SysCLKOutput.get(),
-                    .HSIRC => HSIRC.get(),
-                    .LSEOSC => LSEOSC.get(),
-                    .APB1Prescaler => APB1Prescaler.get(),
-                };
-            }
-        };
-        const USART1OutputType = struct {
-            pub fn get(_: *const USART1OutputType) comptime_int {
-                return USART1Mult.get();
-            }
-        };
-        const USART2MultType = struct {
-            value: USART2MultConf,
-            pub fn get(comptime self: USART2MultType) comptime_int {
-                return switch (self.value) {
-                    .SysCLKOutput => SysCLKOutput.get(),
-                    .HSIRC => HSIRC.get(),
-                    .LSEOSC => LSEOSC.get(),
-                    .APB1Prescaler => APB1Prescaler.get(),
-                };
-            }
-        };
-        const USART2OutputType = struct {
-            pub fn get(_: *const USART2OutputType) comptime_int {
-                return USART2Mult.get();
-            }
-        };
-        const PLLSourceType = struct {
-            value: PLLSourceConf,
-            pub fn get(comptime self: PLLSourceType) comptime_int {
-                return switch (self.value) {
-                    .HSIRC => HSIRC.get(),
-                    .HSIRC48 => HSIRC48.get(),
-                    .HSEOSC => HSEOSC.get(),
-                };
-            }
-        };
-        const PLLDivType = struct {
-            value: PLLDivConf,
-
-            pub fn get(self: *const PLLDivType) comptime_int {
-                if (!@hasDecl(this, "PLLSource")) {
-                    @compileError("No Input PLLSource for PLLDiv\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.PLLSource.get());
-                const div: comptime_float = self.value.get();
-                return @intFromFloat((from_input / div));
-            }
-        };
-
-        const VCO2outputType = struct {
-            pub fn get(_: *const VCO2outputType) comptime_int {
-                return PLLDiv.get();
-            }
-        };
-        const PLLMULType = struct {
-            value: PLLMULConf,
-
-            pub fn get(self: *const PLLMULType) comptime_int {
-                if (!@hasDecl(this, "VCO2output")) {
-                    @compileError("No Input VCO2output for PLLMUL\n");
-                }
-                const from_input: comptime_float = @floatFromInt(this.VCO2output.get());
-                const multi: comptime_float = self.value.get();
-                return @intFromFloat((from_input * multi));
-            }
-        };
-
-        const HSIRC = HSIRCType{};
-        pub const FLITFCLKoutput = FLITFCLKoutputType{};
-        const HSICECDiv = HSICECDivType{};
-        const HSIRC48 = HSIRC48Type{};
-        const HSIRC14 = HSIRC14Type{};
-        pub const ADCoutput = ADCoutputType{};
-        const LSIRC = LSIRCType{};
-        const LSEOSC = LSEOSCType{ .value = conf.LSEOSC };
-        const CECMult = CECMultType{ .value = conf.CECMult };
-        pub const CECOutput = CECOutputType{};
-        const HSEOSC = HSEOSCType{ .value = conf.HSEOSC };
-        const USBMult = USBMultType{ .value = conf.USBMult };
-        pub const USBoutput = USBoutputType{};
-        const SysClkSource = SysClkSourceType{ .value = conf.SysClkSource };
-        pub const SysCLKOutput = SysCLKOutputType{};
-        pub const I2SOutput = I2SOutputType{};
-        const HSERTCDevisor = HSERTCDevisorType{};
-        const RTCClkSource = RTCClkSourceType{ .value = conf.RTCClkSource };
-        pub const RTCOutput = RTCOutputType{};
-        pub const IWDGOutput = IWDGOutputType{};
-        const MCOMultDivisor = MCOMultDivisorType{ .value = conf.MCOMultDivisor };
-        const MCOMult = MCOMultType{ .value = conf.MCOMult };
-        const MCODivider = MCODividerType{ .value = conf.MCODivider };
-        pub const MCOoutput = MCOoutputType{};
-        const AHBPrescaler = AHBPrescalerType{ .value = conf.AHBPrescaler };
-        pub const AHBOutput = AHBOutputType{};
-        pub const HCLKOutput = HCLKOutputType{};
-        pub const FCLKCortexOutput = FCLKCortexOutputType{};
-        const TimSysPresc = TimSysPrescType{ .value = conf.TimSysPresc };
-        pub const TimSysOutput = TimSysOutputType{};
-        const APB1Prescaler = APB1PrescalerType{ .value = conf.APB1Prescaler };
-        pub const APB1Output = APB1OutputType{};
-        const TimPrescalerAPB1 = TimPrescalerAPB1Type{};
-        pub const TimPrescOut1 = TimPrescOut1Type{};
-        const I2C1Mult = I2C1MultType{ .value = conf.I2C1Mult };
-        pub const I2C1Output = I2C1OutputType{};
-        const USART1Mult = USART1MultType{ .value = conf.USART1Mult };
-        pub const USART1Output = USART1OutputType{};
-        const USART2Mult = USART2MultType{ .value = conf.USART2Mult };
-        pub const USART2Output = USART2OutputType{};
-        const PLLSource = PLLSourceType{ .value = conf.PLLSource };
-        const PLLDiv = PLLDivType{ .value = conf.PLLDiv };
-        pub const VCO2output = VCO2outputType{};
-        const PLLMUL = PLLMULType{ .value = conf.PLLMUL };
-
-        pub fn validate() void {
-            _ = CECOutput.get();
-            _ = USBoutput.get();
-            _ = I2SOutput.get();
-            _ = AHBOutput.get();
-            _ = HCLKOutput.get();
-            _ = FCLKCortexOutput.get();
-            _ = TimSysOutput.get();
-            _ = APB1Output.get();
-            _ = TimPrescOut1.get();
-            _ = I2C1Output.get();
-            _ = USART1Output.get();
-            _ = USART2Output.get();
-        }
-    };
-
-    return ClockStruct;
-}
+    pub fn validate(comptime self: *const this) void {
+        _ = self.CECOutput.get_comptime();
+        _ = self.USBoutput.get_comptime();
+        _ = self.I2SOutput.get_comptime();
+        _ = self.AHBOutput.get_comptime();
+        _ = self.HCLKOutput.get_comptime();
+        _ = self.FCLKCortexOutput.get_comptime();
+        _ = self.TimSysOutput.get_comptime();
+        _ = self.APB1Output.get_comptime();
+        _ = self.TimPrescOut1.get_comptime();
+        _ = self.I2C1Output.get_comptime();
+        _ = self.USART1Output.get_comptime();
+        _ = self.USART2Output.get_comptime();
+    }
+};

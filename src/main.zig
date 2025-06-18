@@ -1,4 +1,3 @@
-const std = @import("std");
 pub const STM32F733ZETx = @import("ClockTrees/STM32F733ZETx.zig");
 
 pub const STM32L4Q5RGTx = @import("ClockTrees/STM32L4Q5RGTx.zig");
@@ -32,8 +31,6 @@ pub const STM32L4S5VITx = @import("ClockTrees/STM32L4S5VITx.zig");
 pub const STM32C071K8TxN = @import("ClockTrees/STM32C071K8TxN.zig");
 
 pub const STM32L443RCTx = @import("ClockTrees/STM32L443RCTx.zig");
-
-pub const STM32WB55VCYx = @import("ClockTrees/STM32WB55VCYx.zig");
 
 pub const @"STM32F103T(8-B)Ux" = @import("ClockTrees/STM32F103T(8-B)Ux.zig");
 
@@ -92,8 +89,6 @@ pub const STM32L462REIx = @import("ClockTrees/STM32L462REIx.zig");
 pub const STM32WB15CCYx = @import("ClockTrees/STM32WB15CCYx.zig");
 
 pub const @"STM32L053R(6-8)Hx" = @import("ClockTrees/STM32L053R(6-8)Hx.zig");
-
-pub const STM32WB55VYYx = @import("ClockTrees/STM32WB55VYYx.zig");
 
 pub const STM32MP153FADx = @import("ClockTrees/STM32MP153FADx.zig");
 
@@ -965,8 +960,6 @@ pub const STM32C011D6Yx = @import("ClockTrees/STM32C011D6Yx.zig");
 
 pub const STM32H750XBHx = @import("ClockTrees/STM32H750XBHx.zig");
 
-pub const STM32WB55CEUx = @import("ClockTrees/STM32WB55CEUx.zig");
-
 pub const STM32F378CCTx = @import("ClockTrees/STM32F378CCTx.zig");
 
 pub const @"STM32F410C(8-B)Tx" = @import("ClockTrees/STM32F410C(8-B)Tx.zig");
@@ -1000,8 +993,6 @@ pub const @"STM32F105V(8-B-C)Tx" = @import("ClockTrees/STM32F105V(8-B-C)Tx.zig")
 pub const STM32WBA55HEFx = @import("ClockTrees/STM32WBA55HEFx.zig");
 
 pub const @"STM32L431R(B-C)Ix" = @import("ClockTrees/STM32L431R(B-C)Ix.zig");
-
-pub const STM32WB55VCQx = @import("ClockTrees/STM32WB55VCQx.zig");
 
 pub const STM32L476ZGTxP = @import("ClockTrees/STM32L476ZGTxP.zig");
 
@@ -1396,8 +1387,6 @@ pub const STM32F070CBTx = @import("ClockTrees/STM32F070CBTx.zig");
 pub const @"STM32L433R(B-C)Ix" = @import("ClockTrees/STM32L433R(B-C)Ix.zig");
 
 pub const STM32L152QCHx = @import("ClockTrees/STM32L152QCHx.zig");
-
-pub const STM32WB55RGVx = @import("ClockTrees/STM32WB55RGVx.zig");
 
 pub const STM32MP153CADx = @import("ClockTrees/STM32MP153CADx.zig");
 
@@ -1818,8 +1807,6 @@ pub const STM32L071C8Tx = @import("ClockTrees/STM32L071C8Tx.zig");
 pub const STM32L041G6UxS = @import("ClockTrees/STM32L041G6UxS.zig");
 
 pub const STM32C071GBUxN = @import("ClockTrees/STM32C071GBUxN.zig");
-
-pub const STM32WB50CGUx = @import("ClockTrees/STM32WB50CGUx.zig");
 
 pub const STM32F205RGEx = @import("ClockTrees/STM32F205RGEx.zig");
 
@@ -2315,8 +2302,6 @@ pub const STM32L496VGYx = @import("ClockTrees/STM32L496VGYx.zig");
 
 pub const STM32G070CBTx = @import("ClockTrees/STM32G070CBTx.zig");
 
-pub const STM32WB55VEQx = @import("ClockTrees/STM32WB55VEQx.zig");
-
 pub const STM32G071RBIx = @import("ClockTrees/STM32G071RBIx.zig");
 
 pub const STM32WLE5C8Ux = @import("ClockTrees/STM32WLE5C8Ux.zig");
@@ -2377,8 +2362,6 @@ pub const STM32L072CZEx = @import("ClockTrees/STM32L072CZEx.zig");
 
 pub const STM32U375VGIx = @import("ClockTrees/STM32U375VGIx.zig");
 
-pub const @"STM32WB35C(C-E)UxA" = @import("ClockTrees/STM32WB35C(C-E)UxA.zig");
-
 pub const STM32F405ZGTx = @import("ClockTrees/STM32F405ZGTx.zig");
 
 pub const STM32F756NGHx = @import("ClockTrees/STM32F756NGHx.zig");
@@ -2398,8 +2381,6 @@ pub const STM32WLE4CCUx = @import("ClockTrees/STM32WLE4CCUx.zig");
 pub const @"STM32H7A3R(G-I)Tx" = @import("ClockTrees/STM32H7A3R(G-I)Tx.zig");
 
 pub const STM32U599ZITxQ = @import("ClockTrees/STM32U599ZITxQ.zig");
-
-pub const STM32WB55REVx = @import("ClockTrees/STM32WB55REVx.zig");
 
 pub const STM32L4P5VGYxP = @import("ClockTrees/STM32L4P5VGYxP.zig");
 
@@ -2737,8 +2718,6 @@ pub const STM32F051C4Tx = @import("ClockTrees/STM32F051C4Tx.zig");
 
 pub const @"STM32L451V(C-E)Tx" = @import("ClockTrees/STM32L451V(C-E)Tx.zig");
 
-pub const STM32WB55CGUx = @import("ClockTrees/STM32WB55CGUx.zig");
-
 pub const STM32MP151AAAx = @import("ClockTrees/STM32MP151AAAx.zig");
 
 pub const @"STM32F107V(B-C)Tx" = @import("ClockTrees/STM32F107V(B-C)Tx.zig");
@@ -3019,8 +2998,6 @@ pub const STM32L162RCTx = @import("ClockTrees/STM32L162RCTx.zig");
 
 pub const STM32G081KBTx = @import("ClockTrees/STM32G081KBTx.zig");
 
-pub const STM32WB5MMGHx = @import("ClockTrees/STM32WB5MMGHx.zig");
-
 pub const STM32N645L0HxQ = @import("ClockTrees/STM32N645L0HxQ.zig");
 
 pub const STM32H573AIIxQ = @import("ClockTrees/STM32H573AIIxQ.zig");
@@ -3259,8 +3236,6 @@ pub const STM32U595ZJTx = @import("ClockTrees/STM32U595ZJTx.zig");
 
 pub const STM32MP135CAFx = @import("ClockTrees/STM32MP135CAFx.zig");
 
-pub const STM32WB55CCUx = @import("ClockTrees/STM32WB55CCUx.zig");
-
 pub const @"STM32F071V(8-B)Hx" = @import("ClockTrees/STM32F071V(8-B)Hx.zig");
 
 pub const @"STM32G474Q(B-C-E)Tx" = @import("ClockTrees/STM32G474Q(B-C-E)Tx.zig");
@@ -3309,8 +3284,6 @@ pub const STM32U083MCTx = @import("ClockTrees/STM32U083MCTx.zig");
 
 pub const STM32H7R3V8Tx = @import("ClockTrees/STM32H7R3V8Tx.zig");
 
-pub const STM32WB55VGYx = @import("ClockTrees/STM32WB55VGYx.zig");
-
 pub const @"STM32G0B1K(B-C-E)Ux" = @import("ClockTrees/STM32G0B1K(B-C-E)Ux.zig");
 
 pub const @"STM32L4R9Z(G-I)Jx" = @import("ClockTrees/STM32L4R9Z(G-I)Jx.zig");
@@ -3320,8 +3293,6 @@ pub const STM32U535VCIx = @import("ClockTrees/STM32U535VCIx.zig");
 pub const STM32N645A0HxQ = @import("ClockTrees/STM32N645A0HxQ.zig");
 
 pub const STM32U595ZIYxQ = @import("ClockTrees/STM32U595ZIYxQ.zig");
-
-pub const STM32WB55VGQx = @import("ClockTrees/STM32WB55VGQx.zig");
 
 pub const STM32U083RCIx = @import("ClockTrees/STM32U083RCIx.zig");
 
@@ -3467,8 +3438,6 @@ pub const STM32MP235FALx = @import("ClockTrees/STM32MP235FALx.zig");
 
 pub const @"STM32F407Z(E-G)Tx" = @import("ClockTrees/STM32F407Z(E-G)Tx.zig");
 
-pub const STM32WB55VEYx = @import("ClockTrees/STM32WB55VEYx.zig");
-
 pub const STM32H7R3L8Hx = @import("ClockTrees/STM32H7R3L8Hx.zig");
 
 pub const @"STM32F746B(E-G)Tx" = @import("ClockTrees/STM32F746B(E-G)Tx.zig");
@@ -3524,8 +3493,6 @@ pub const @"STM32G0C1C(C-E)Ux" = @import("ClockTrees/STM32G0C1C(C-E)Ux.zig");
 pub const @"STM32F217I(E-G)Tx" = @import("ClockTrees/STM32F217I(E-G)Tx.zig");
 
 pub const @"STM32F100V(8-B)Tx" = @import("ClockTrees/STM32F100V(8-B)Tx.zig");
-
-pub const STM32WB55RCVx = @import("ClockTrees/STM32WB55RCVx.zig");
 
 pub const @"STM32H742V(G-I)Hx" = @import("ClockTrees/STM32H742V(G-I)Hx.zig");
 
@@ -3749,8 +3716,6 @@ pub const STM32MP157DAAx = @import("ClockTrees/STM32MP157DAAx.zig");
 
 pub const STM32WLE4J8Ix = @import("ClockTrees/STM32WLE4J8Ix.zig");
 
-pub const STM32WB30CEUxA = @import("ClockTrees/STM32WB30CEUxA.zig");
-
 pub const STM32MP257FAKx = @import("ClockTrees/STM32MP257FAKx.zig");
 
 pub const STM32WL55CCUx = @import("ClockTrees/STM32WL55CCUx.zig");
@@ -3835,6 +3800,7 @@ pub const STM32F038E6Yx = @import("ClockTrees/STM32F038E6Yx.zig");
 
 pub const STM32U073RCIx = @import("ClockTrees/STM32U073RCIx.zig");
 
+const std = @import("std");
 pub fn print_clock_configs(comptime clock: anytype) *const [10000:0]u8 {
     comptime {
         var comp_buffer: [10000:0]u8 = undefined;

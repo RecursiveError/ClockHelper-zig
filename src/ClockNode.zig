@@ -43,6 +43,16 @@ pub const ClockNodesTypes = union(enum) {
     div: DIV,
     output: ?Limit,
     frac: Limit,
+
+    pub fn num_val(self: *const ClockNodesTypes) f32 {
+        return switch (self.*) {
+            ClockNodesTypes.source => |val| val.value,
+            ClockNodesTypes.multi => |val| @floatFromInt(val),
+            ClockNodesTypes.mulfrac => |val| val.value,
+            ClockNodesTypes.div => |val| val.value,
+            else => 0,
+        };
+    }
 };
 
 pub const ClockError = struct {

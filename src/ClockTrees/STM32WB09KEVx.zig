@@ -68,40 +68,40 @@ pub const BLEMultConf = enum {
     Clk32MHzOutput,
 };
 pub const SYSCLK32PrescalerConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
-    DIV32,
+    RCC_DIRECT_HSE_DIV1,
+    RCC_DIRECT_HSE_DIV2,
+    RCC_DIRECT_HSE_DIV4,
+    RCC_DIRECT_HSE_DIV8,
+    RCC_DIRECT_HSE_DIV16,
+    RCC_DIRECT_HSE_DIV32,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
-            .DIV32 => 32,
+            .RCC_DIRECT_HSE_DIV1 => 1,
+            .RCC_DIRECT_HSE_DIV2 => 2,
+            .RCC_DIRECT_HSE_DIV4 => 4,
+            .RCC_DIRECT_HSE_DIV8 => 8,
+            .RCC_DIRECT_HSE_DIV16 => 16,
+            .RCC_DIRECT_HSE_DIV32 => 32,
         };
     }
 };
 pub const SYSCLK64PrescalerConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
-    DIV32,
-    DIV64,
+    RCC_RC64MPLL_DIV1,
+    RCC_RC64MPLL_DIV2,
+    RCC_RC64MPLL_DIV4,
+    RCC_RC64MPLL_DIV8,
+    RCC_RC64MPLL_DIV16,
+    RCC_RC64MPLL_DIV32,
+    RCC_RC64MPLL_DIV64,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
-            .DIV32 => 32,
-            .DIV64 => 64,
+            .RCC_RC64MPLL_DIV1 => 1,
+            .RCC_RC64MPLL_DIV2 => 2,
+            .RCC_RC64MPLL_DIV4 => 4,
+            .RCC_RC64MPLL_DIV8 => 8,
+            .RCC_RC64MPLL_DIV16 => 16,
+            .RCC_RC64MPLL_DIV32 => 32,
+            .RCC_RC64MPLL_DIV64 => 64,
         };
     }
 };
@@ -132,20 +132,96 @@ pub const MCOMultConf = enum {
     CLK16RTCDevisor,
 };
 pub const MCODivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
-    DIV32,
+    RCC_MCODIV_1,
+    RCC_MCODIV_2,
+    RCC_MCODIV_4,
+    RCC_MCODIV_8,
+    RCC_MCODIV_16,
+    RCC_MCODIV_32,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
-            .DIV32 => 32,
+            .RCC_MCODIV_1 => 1,
+            .RCC_MCODIV_2 => 2,
+            .RCC_MCODIV_4 => 4,
+            .RCC_MCODIV_8 => 8,
+            .RCC_MCODIV_16 => 16,
+            .RCC_MCODIV_32 => 32,
+        };
+    }
+};
+pub const HSE_TimoutConf = enum(u32) {
+    _,
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
+    }
+
+    pub fn max() f32 {
+        return 4294967295;
+    }
+
+    pub fn min() f32 {
+        return 1;
+    }
+};
+pub const LSE_TimoutConf = enum(u32) {
+    _,
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
+    }
+
+    pub fn max() f32 {
+        return 4294967295;
+    }
+
+    pub fn min() f32 {
+        return 1;
+    }
+};
+pub const HSICalibrationValueConf = enum(u32) {
+    _,
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
+    }
+
+    pub fn max() f32 {
+        return 31;
+    }
+
+    pub fn min() f32 {
+        return 0;
+    }
+};
+pub const HSE_current_controlConf = enum {
+    null,
+    pub fn get(self: @This()) f32 {
+        return switch (self) {
+            .null => 0,
+        };
+    }
+};
+pub const HSE_Capacitor_TuningConf = enum(u32) {
+    _,
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
+    }
+
+    pub fn max() f32 {
+        return 63;
+    }
+
+    pub fn min() f32 {
+        return 0;
+    }
+};
+pub const LSE_Drive_CapabilityConf = enum {
+    null,
+    pub fn get(self: @This()) f32 {
+        return switch (self) {
+            .null => 0,
         };
     }
 };
@@ -160,14 +236,20 @@ pub const Config = struct {
     LSCOMult: LSCOMultConf = .LSIRC,
     CLK32MHzSource: CLK32MHzSourceConf = .CLK32MHzDiv2,
     BLEMult: BLEMultConf = .Clk32MHzOutput,
-    SYSCLK32Prescaler: SYSCLK32PrescalerConf = .DIV1,
-    SYSCLK64Prescaler: SYSCLK64PrescalerConf = .DIV1,
+    SYSCLK32Prescaler: SYSCLK32PrescalerConf = .RCC_DIRECT_HSE_DIV1,
+    SYSCLK64Prescaler: SYSCLK64PrescalerConf = .RCC_RC64MPLL_DIV1,
     CLKSYSMult: CLKSYSMultConf = .SYSCLK64Prescaler,
     CLKI2S3Mult: CLKI2S3MultConf = .RC64MPLL,
     CLKI2S2Mult: CLKI2S2MultConf = .Clk32MHzOutput,
     RTCClkSource: RTCClkSourceConf = .LSIRC,
     MCOMult: MCOMultConf = .CLKSYSOutput,
-    MCODiv: MCODivConf = .DIV1,
+    MCODiv: MCODivConf = .RCC_MCODIV_1,
+    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
+    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
+    HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
+    HSE_current_control: HSE_current_controlConf = .null,
+    HSE_Capacitor_Tuning: HSE_Capacitor_TuningConf = @enumFromInt(32),
+    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
 };
 
 pub const ClockTree = struct {
@@ -214,253 +296,340 @@ pub const ClockTree = struct {
     MCOMult: ClockNode,
     MCODiv: ClockNode,
     MCOPin: ClockNode,
+    HSE_Timout: ClockNodeTypes,
+    LSE_Timout: ClockNodeTypes,
+    HSICalibrationValue: ClockNodeTypes,
+    HSE_current_control: ClockNodeTypes,
+    HSE_Capacitor_Tuning: ClockNodeTypes,
+    LSE_Drive_Capability: ClockNodeTypes,
 
     pub fn init_comptime(comptime config: Config) this {
+        const HSIRCval = ClockNodeTypes{
+            .source = .{ .value = 64000000 },
+        };
         const HSIRC: ClockNode = .{
             .name = "HSIRC",
-            .Nodetype = .{ .source = .{ .value = 64000000 } },
+            .Nodetype = HSIRCval,
+        };
+        const PLL64RCval = ClockNodeTypes{
+            .source = .{ .value = 64000000 },
         };
         const PLL64RC: ClockNode = .{
             .name = "PLL64RC",
-            .Nodetype = .{ .source = .{ .value = 64000000 } },
+            .Nodetype = PLL64RCval,
+        };
+        const HSEOSCval = ClockNodeTypes{
+            .source = .{
+                .value = config.HSEOSC.get(),
+                .limit = .{ .max = 32000000, .min = 4000000 },
+            },
         };
         const HSEOSC: ClockNode = .{
             .name = "HSEOSC",
-            .Nodetype = .{ .source = .{
-                .value = config.HSEOSC.get(),
-                .limit = .{ .max = 32000000, .min = 4000000 },
-            } },
+            .Nodetype = HSEOSCval,
+        };
+        const LSEOSCval = ClockNodeTypes{
+            .source = .{
+                .value = config.LSEOSC.get(),
+                .limit = .{ .max = 1000000, .min = 1000 },
+            },
         };
         const LSEOSC: ClockNode = .{
             .name = "LSEOSC",
-            .Nodetype = .{ .source = .{
-                .value = config.LSEOSC.get(),
-                .limit = .{ .max = 1000000, .min = 1000 },
-            } },
+            .Nodetype = LSEOSCval,
+        };
+        const LSIRCval = ClockNodeTypes{
+            .source = .{ .value = 32000 },
         };
         const LSIRC: ClockNode = .{
             .name = "LSIRC",
-            .Nodetype = .{ .source = .{ .value = 32000 } },
+            .Nodetype = LSIRCval,
         };
+        const RC64MPLLval = ClockNodeTypes{ .multi = @intFromEnum(config.RC64MPLL) };
         const RC64MPLL: ClockNode = .{
             .name = "RC64MPLL",
+            .Nodetype = RC64MPLLval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.RC64MPLL) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &PLL64RC,
             },
         };
+        const SysClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.SysClkSource) };
         const SysClkSource: ClockNode = .{
             .name = "SysClkSource",
+            .Nodetype = SysClkSourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.SysClkSource) },
             .parents = &[_]*const ClockNode{
                 &HSEOSC,
                 &RC64MPLL,
             },
         };
+        const SysCLKOutputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
+        };
         const SysCLKOutput: ClockNode = .{
             .name = "SysCLKOutput",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = SysCLKOutputval,
             .parents = &[_]*const ClockNode{&SysClkSource},
+        };
+        const TimerOutputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
         };
         const TimerOutput: ClockNode = .{
             .name = "TimerOutput",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = TimerOutputval,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const CLK16MHzDiv2val = ClockNodeTypes{
+            .div = .{ .value = 2 },
         };
         const CLK16MHzDiv2: ClockNode = .{
             .name = "CLK16MHzDiv2",
-            .Nodetype = .{ .div = .{ .value = 2 } },
+            .Nodetype = CLK16MHzDiv2val,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const CLK16MHzDiv4val = ClockNodeTypes{
+            .div = .{ .value = 4 },
         };
         const CLK16MHzDiv4: ClockNode = .{
             .name = "CLK16MHzDiv4",
-            .Nodetype = .{ .div = .{ .value = 4 } },
+            .Nodetype = CLK16MHzDiv4val,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
+        const CLK16MHzSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.CLK16MHzSource) };
         const CLK16MHzSource: ClockNode = .{
             .name = "CLK16MHzSource",
+            .Nodetype = CLK16MHzSourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CLK16MHzSource) },
             .parents = &[_]*const ClockNode{
                 &CLK16MHzDiv2,
                 &CLK16MHzDiv4,
             },
         };
+        const Clk16MHzOutputval = ClockNodeTypes{ .output = null };
         const Clk16MHzOutput: ClockNode = .{
             .name = "Clk16MHzOutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = Clk16MHzOutputval,
             .parents = &[_]*const ClockNode{&CLK16MHzSource},
+        };
+        const ClkSMPSDiv4val = ClockNodeTypes{
+            .div = .{ .value = 4 },
         };
         const ClkSMPSDiv4: ClockNode = .{
             .name = "ClkSMPSDiv4",
-            .Nodetype = .{ .div = .{ .value = 4 } },
+            .Nodetype = ClkSMPSDiv4val,
             .parents = &[_]*const ClockNode{&Clk16MHzOutput},
+        };
+        const ClkSMPSDiv2val = ClockNodeTypes{
+            .div = .{ .value = 2 },
         };
         const ClkSMPSDiv2: ClockNode = .{
             .name = "ClkSMPSDiv2",
-            .Nodetype = .{ .div = .{ .value = 2 } },
+            .Nodetype = ClkSMPSDiv2val,
             .parents = &[_]*const ClockNode{&Clk16MHzOutput},
         };
+        const ClkSMPSval = ClockNodeTypes{ .multi = @intFromEnum(config.ClkSMPS) };
         const ClkSMPS: ClockNode = .{
             .name = "ClkSMPS",
+            .Nodetype = ClkSMPSval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.ClkSMPS) },
             .parents = &[_]*const ClockNode{
                 &ClkSMPSDiv4,
                 &ClkSMPSDiv2,
             },
         };
+        const ClkSMPSOutputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
+        };
         const ClkSMPSOutput: ClockNode = .{
             .name = "ClkSMPSOutput",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = ClkSMPSOutputval,
             .parents = &[_]*const ClockNode{&ClkSMPS},
         };
+        const LPUARTMultval = ClockNodeTypes{ .multi = @intFromEnum(config.LPUARTMult) };
         const LPUARTMult: ClockNode = .{
             .name = "LPUARTMult",
+            .Nodetype = LPUARTMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.LPUARTMult) },
             .parents = &[_]*const ClockNode{
                 &LSEOSC,
                 &Clk16MHzOutput,
             },
         };
+        const ClkLPUARTOutputval = ClockNodeTypes{
+            .output = .{ .max = 32000000, .min = 0 },
+        };
         const ClkLPUARTOutput: ClockNode = .{
             .name = "ClkLPUARTOutput",
-            .Nodetype = .{ .output = .{ .max = 32000000, .min = 0 } },
+            .Nodetype = ClkLPUARTOutputval,
             .parents = &[_]*const ClockNode{&LPUARTMult},
         };
+        const LSCOMultval = ClockNodeTypes{ .multi = @intFromEnum(config.LSCOMult) };
         const LSCOMult: ClockNode = .{
             .name = "LSCOMult",
+            .Nodetype = LSCOMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.LSCOMult) },
             .parents = &[_]*const ClockNode{
                 &LSIRC,
                 &LSEOSC,
             },
         };
+        const LSCOOutputval = ClockNodeTypes{ .output = null };
         const LSCOOutput: ClockNode = .{
             .name = "LSCOOutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = LSCOOutputval,
             .parents = &[_]*const ClockNode{&LSCOMult},
+        };
+        const CLK32MHzDiv1val = ClockNodeTypes{
+            .div = .{ .value = 1 },
         };
         const CLK32MHzDiv1: ClockNode = .{
             .name = "CLK32MHzDiv1",
-            .Nodetype = .{ .div = .{ .value = 1 } },
+            .Nodetype = CLK32MHzDiv1val,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const CLK32MHzDiv2val = ClockNodeTypes{
+            .div = .{ .value = 2 },
         };
         const CLK32MHzDiv2: ClockNode = .{
             .name = "CLK32MHzDiv2",
-            .Nodetype = .{ .div = .{ .value = 2 } },
+            .Nodetype = CLK32MHzDiv2val,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
+        const CLK32MHzSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.CLK32MHzSource) };
         const CLK32MHzSource: ClockNode = .{
             .name = "CLK32MHzSource",
+            .Nodetype = CLK32MHzSourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CLK32MHzSource) },
             .parents = &[_]*const ClockNode{
                 &CLK32MHzDiv1,
                 &CLK32MHzDiv2,
             },
         };
+        const Clk32MHzOutputval = ClockNodeTypes{ .output = null };
         const Clk32MHzOutput: ClockNode = .{
             .name = "Clk32MHzOutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = Clk32MHzOutputval,
             .parents = &[_]*const ClockNode{&CLK32MHzSource},
         };
+        const BLEMultval = ClockNodeTypes{ .multi = @intFromEnum(config.BLEMult) };
         const BLEMult: ClockNode = .{
             .name = "BLEMult",
+            .Nodetype = BLEMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.BLEMult) },
             .parents = &[_]*const ClockNode{
                 &Clk16MHzOutput,
                 &Clk32MHzOutput,
             },
         };
+        const BLEOutputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
+        };
         const BLEOutput: ClockNode = .{
             .name = "BLEOutput",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = BLEOutputval,
             .parents = &[_]*const ClockNode{&BLEMult},
         };
+        const SYSCLK32Prescalerval = ClockNodeTypes{ .div = .{ .value = config.SYSCLK32Prescaler.get() } };
         const SYSCLK32Prescaler: ClockNode = .{
             .name = "SYSCLK32Prescaler",
-            .Nodetype = .{ .div = .{ .value = config.SYSCLK32Prescaler.get() } },
+            .Nodetype = SYSCLK32Prescalerval,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
+        const SYSCLK64Prescalerval = ClockNodeTypes{ .div = .{ .value = config.SYSCLK64Prescaler.get() } };
         const SYSCLK64Prescaler: ClockNode = .{
             .name = "SYSCLK64Prescaler",
-            .Nodetype = .{ .div = .{ .value = config.SYSCLK64Prescaler.get() } },
+            .Nodetype = SYSCLK64Prescalerval,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
+        const CLKSYSMultval = ClockNodeTypes{ .multi = @intFromEnum(config.CLKSYSMult) };
         const CLKSYSMult: ClockNode = .{
             .name = "CLKSYSMult",
+            .Nodetype = CLKSYSMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CLKSYSMult) },
             .parents = &[_]*const ClockNode{
                 &SYSCLK32Prescaler,
                 &SYSCLK64Prescaler,
             },
         };
+        const CLKSYSOutputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
+        };
         const CLKSYSOutput: ClockNode = .{
             .name = "CLKSYSOutput",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = CLKSYSOutputval,
             .parents = &[_]*const ClockNode{&CLKSYSMult},
         };
+        const CLKI2S3Multval = ClockNodeTypes{ .multi = @intFromEnum(config.CLKI2S3Mult) };
         const CLKI2S3Mult: ClockNode = .{
             .name = "CLKI2S3Mult",
+            .Nodetype = CLKI2S3Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CLKI2S3Mult) },
             .parents = &[_]*const ClockNode{
                 &Clk32MHzOutput,
                 &Clk16MHzOutput,
                 &RC64MPLL,
             },
         };
+        const CLKI2S3Outputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
+        };
         const CLKI2S3Output: ClockNode = .{
             .name = "CLKI2S3Output",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = CLKI2S3Outputval,
             .parents = &[_]*const ClockNode{&CLKI2S3Mult},
         };
+        const CLKI2S2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.CLKI2S2Mult) };
         const CLKI2S2Mult: ClockNode = .{
             .name = "CLKI2S2Mult",
+            .Nodetype = CLKI2S2Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CLKI2S2Mult) },
             .parents = &[_]*const ClockNode{
                 &Clk32MHzOutput,
                 &Clk16MHzOutput,
             },
         };
+        const CLKI2S2Outputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
+        };
         const CLKI2S2Output: ClockNode = .{
             .name = "CLKI2S2Output",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = CLKI2S2Outputval,
             .parents = &[_]*const ClockNode{&CLKI2S2Mult},
+        };
+        const CLK16RTCDevisorval = ClockNodeTypes{
+            .div = .{ .value = 512 },
         };
         const CLK16RTCDevisor: ClockNode = .{
             .name = "CLK16RTCDevisor",
-            .Nodetype = .{ .div = .{ .value = 512 } },
+            .Nodetype = CLK16RTCDevisorval,
             .parents = &[_]*const ClockNode{&Clk16MHzOutput},
         };
+        const RTCClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.RTCClkSource) };
         const RTCClkSource: ClockNode = .{
             .name = "RTCClkSource",
+            .Nodetype = RTCClkSourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.RTCClkSource) },
             .parents = &[_]*const ClockNode{
                 &CLK16RTCDevisor,
                 &LSEOSC,
                 &LSIRC,
             },
         };
+        const RTCOutputval = ClockNodeTypes{
+            .output = .{ .max = 1000000, .min = 0 },
+        };
         const RTCOutput: ClockNode = .{
             .name = "RTCOutput",
-            .Nodetype = .{ .output = .{ .max = 1000000, .min = 0 } },
+            .Nodetype = RTCOutputval,
             .parents = &[_]*const ClockNode{&RTCClkSource},
         };
+        const MCOMultval = ClockNodeTypes{ .multi = @intFromEnum(config.MCOMult) };
         const MCOMult: ClockNode = .{
             .name = "MCOMult",
+            .Nodetype = MCOMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.MCOMult) },
             .parents = &[_]*const ClockNode{
                 &Clk16MHzOutput,
                 &ClkSMPSOutput,
@@ -470,15 +639,47 @@ pub const ClockTree = struct {
                 &CLK16RTCDevisor,
             },
         };
+        const MCODivval = ClockNodeTypes{ .div = .{ .value = config.MCODiv.get() } };
         const MCODiv: ClockNode = .{
             .name = "MCODiv",
-            .Nodetype = .{ .div = .{ .value = config.MCODiv.get() } },
+            .Nodetype = MCODivval,
             .parents = &[_]*const ClockNode{&MCOMult},
         };
+        const MCOPinval = ClockNodeTypes{ .output = null };
         const MCOPin: ClockNode = .{
             .name = "MCOPin",
-            .Nodetype = .{ .output = null },
+            .Nodetype = MCOPinval,
             .parents = &[_]*const ClockNode{&MCODiv},
+        };
+        const HSE_Timoutval = ClockNodeTypes{
+            .source = .{
+                .value = config.HSE_Timout.get(),
+                .limit = .{ .max = 4294967295, .min = 1 },
+            },
+        };
+        const LSE_Timoutval = ClockNodeTypes{
+            .source = .{
+                .value = config.LSE_Timout.get(),
+                .limit = .{ .max = 4294967295, .min = 1 },
+            },
+        };
+        const HSICalibrationValueval = ClockNodeTypes{
+            .source = .{
+                .value = config.HSICalibrationValue.get(),
+                .limit = .{ .max = 31, .min = 0 },
+            },
+        };
+        const HSE_current_controlval = ClockNodeTypes{
+            .source = .{ .value = config.HSE_current_control.get() },
+        };
+        const HSE_Capacitor_Tuningval = ClockNodeTypes{
+            .source = .{
+                .value = config.HSE_Capacitor_Tuning.get(),
+                .limit = .{ .max = 63, .min = 0 },
+            },
+        };
+        const LSE_Drive_Capabilityval = ClockNodeTypes{
+            .source = .{ .value = config.LSE_Drive_Capability.get() },
         };
         return .{
             .HSIRC = HSIRC,
@@ -522,6 +723,12 @@ pub const ClockTree = struct {
             .MCOMult = MCOMult,
             .MCODiv = MCODiv,
             .MCOPin = MCOPin,
+            .HSE_Timout = HSE_Timoutval,
+            .LSE_Timout = LSE_Timoutval,
+            .HSICalibrationValue = HSICalibrationValueval,
+            .HSE_current_control = HSE_current_controlval,
+            .HSE_Capacitor_Tuning = HSE_Capacitor_Tuningval,
+            .LSE_Drive_Capability = LSE_Drive_Capabilityval,
         };
     }
 

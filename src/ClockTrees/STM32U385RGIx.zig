@@ -36,12 +36,12 @@ pub const LSIRCConf = enum(u32) {
     }
 };
 pub const LSIDIVConf = enum {
-    DIV1,
-    DIV128,
+    RCC_LSI_DIV1,
+    RCC_LSI_DIV128,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV128 => 128,
+            .RCC_LSI_DIV1 => 1,
+            .RCC_LSI_DIV128 => 128,
         };
     }
 };
@@ -61,50 +61,50 @@ pub const LSEOSCConf = enum(u32) {
     }
 };
 pub const MSIKSourceConf = enum {
-    CLOCK_96,
-    CLOCK_24,
+    RCC_MSI_RC0,
+    RCC_MSI_RC1,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .CLOCK_96 => 96,
-            .CLOCK_24 => 24,
+            .RCC_MSI_RC0 => 96,
+            .RCC_MSI_RC1 => 24,
         };
     }
 };
 pub const MSISSourceConf = enum {
-    CLOCK_96,
-    CLOCK_24,
+    RCC_MSI_RC0,
+    RCC_MSI_RC1,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .CLOCK_96 => 96,
-            .CLOCK_24 => 24,
+            .RCC_MSI_RC0 => 96,
+            .RCC_MSI_RC1 => 24,
         };
     }
 };
 pub const MSIKDIVConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
+    RCC_MSI_DIV1,
+    RCC_MSI_DIV2,
+    RCC_MSI_DIV4,
+    RCC_MSI_DIV8,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
+            .RCC_MSI_DIV1 => 1,
+            .RCC_MSI_DIV2 => 2,
+            .RCC_MSI_DIV4 => 4,
+            .RCC_MSI_DIV8 => 8,
         };
     }
 };
 pub const MSISDIVConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
+    RCC_MSI_DIV1,
+    RCC_MSI_DIV2,
+    RCC_MSI_DIV4,
+    RCC_MSI_DIV8,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
+            .RCC_MSI_DIV1 => 1,
+            .RCC_MSI_DIV2 => 2,
+            .RCC_MSI_DIV4 => 4,
+            .RCC_MSI_DIV8 => 8,
         };
     }
 };
@@ -148,28 +148,28 @@ pub const ADCMultConf = enum {
     MSIKDIV,
 };
 pub const ADCDivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
-    DIV32,
-    DIV64,
-    DIV128,
-    DIV256,
-    DIV512,
+    RCC_ADCDACCLK_DIV1,
+    RCC_ADCDACCLK_DIV2,
+    RCC_ADCDACCLK_DIV4,
+    RCC_ADCDACCLK_DIV8,
+    RCC_ADCDACCLK_DIV16,
+    RCC_ADCDACCLK_DIV32,
+    RCC_ADCDACCLK_DIV64,
+    RCC_ADCDACCLK_DIV128,
+    RCC_ADCDACCLK_DIV256,
+    RCC_ADCDACCLK_DIV512,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
-            .DIV32 => 32,
-            .DIV64 => 64,
-            .DIV128 => 128,
-            .DIV256 => 256,
-            .DIV512 => 512,
+            .RCC_ADCDACCLK_DIV1 => 1,
+            .RCC_ADCDACCLK_DIV2 => 2,
+            .RCC_ADCDACCLK_DIV4 => 4,
+            .RCC_ADCDACCLK_DIV8 => 8,
+            .RCC_ADCDACCLK_DIV16 => 16,
+            .RCC_ADCDACCLK_DIV32 => 32,
+            .RCC_ADCDACCLK_DIV64 => 64,
+            .RCC_ADCDACCLK_DIV128 => 128,
+            .RCC_ADCDACCLK_DIV256 => 256,
+            .RCC_ADCDACCLK_DIV512 => 512,
         };
     }
 };
@@ -206,12 +206,12 @@ pub const ICLKMultConf = enum {
     HSI48RC,
 };
 pub const USBDivConf = enum {
-    DIV1,
-    DIV2,
+    RCC_USB1CLKSOURCE_ICLK,
+    RCC_USB1CLKSOURCE_ICLK_DIV2,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
+            .RCC_USB1CLKSOURCE_ICLK => 1,
+            .RCC_USB1CLKSOURCE_ICLK_DIV2 => 2,
         };
     }
 };
@@ -275,24 +275,24 @@ pub const MCOMultConf = enum {
     MSIKDIV,
 };
 pub const MCODivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
-    DIV32,
-    DIV64,
-    DIV128,
+    RCC_MCODIV_1,
+    RCC_MCODIV_2,
+    RCC_MCODIV_4,
+    RCC_MCODIV_8,
+    RCC_MCODIV_16,
+    RCC_MCODIV_32,
+    RCC_MCODIV_64,
+    RCC_MCODIV_128,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
-            .DIV32 => 32,
-            .DIV64 => 64,
-            .DIV128 => 128,
+            .RCC_MCODIV_1 => 1,
+            .RCC_MCODIV_2 => 2,
+            .RCC_MCODIV_4 => 4,
+            .RCC_MCODIV_8 => 8,
+            .RCC_MCODIV_16 => 16,
+            .RCC_MCODIV_32 => 32,
+            .RCC_MCODIV_64 => 64,
+            .RCC_MCODIV_128 => 128,
         };
     }
 };
@@ -307,24 +307,24 @@ pub const MCO2MultConf = enum {
     MSIKDIV,
 };
 pub const MCO2DivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
-    DIV32,
-    DIV64,
-    DIV128,
+    RCC_MCO2DIV_1,
+    RCC_MCO2DIV_2,
+    RCC_MCO2DIV_4,
+    RCC_MCO2DIV_8,
+    RCC_MCO2DIV_16,
+    RCC_MCO2DIV_32,
+    RCC_MCO2DIV_64,
+    RCC_MCO2DIV_128,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
-            .DIV32 => 32,
-            .DIV64 => 64,
-            .DIV128 => 128,
+            .RCC_MCO2DIV_1 => 1,
+            .RCC_MCO2DIV_2 => 2,
+            .RCC_MCO2DIV_4 => 4,
+            .RCC_MCO2DIV_8 => 8,
+            .RCC_MCO2DIV_16 => 16,
+            .RCC_MCO2DIV_32 => 32,
+            .RCC_MCO2DIV_64 => 64,
+            .RCC_MCO2DIV_128 => 128,
         };
     }
 };
@@ -333,34 +333,34 @@ pub const LSCOMultConf = enum {
     LSEOSC,
 };
 pub const AHBPrescalerConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
-    DIV64,
-    DIV128,
-    DIV256,
-    DIV512,
+    RCC_SYSCLK_DIV1,
+    RCC_SYSCLK_DIV2,
+    RCC_SYSCLK_DIV4,
+    RCC_SYSCLK_DIV8,
+    RCC_SYSCLK_DIV16,
+    RCC_SYSCLK_DIV64,
+    RCC_SYSCLK_DIV128,
+    RCC_SYSCLK_DIV256,
+    RCC_SYSCLK_DIV512,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
-            .DIV64 => 64,
-            .DIV128 => 128,
-            .DIV256 => 256,
-            .DIV512 => 512,
+            .RCC_SYSCLK_DIV1 => 1,
+            .RCC_SYSCLK_DIV2 => 2,
+            .RCC_SYSCLK_DIV4 => 4,
+            .RCC_SYSCLK_DIV8 => 8,
+            .RCC_SYSCLK_DIV16 => 16,
+            .RCC_SYSCLK_DIV64 => 64,
+            .RCC_SYSCLK_DIV128 => 128,
+            .RCC_SYSCLK_DIV256 => 256,
+            .RCC_SYSCLK_DIV512 => 512,
         };
     }
 };
 pub const CortexPrescalerConf = enum {
-    DIV8,
+    @"8",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV8 => 8,
+            .@"8" => 8,
         };
     }
 };
@@ -370,62 +370,143 @@ pub const CortexCLockSelectionConf = enum {
     LSIDIV,
 };
 pub const APB1PrescalerConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
+    RCC_HCLK_DIV1,
+    RCC_HCLK_DIV2,
+    RCC_HCLK_DIV4,
+    RCC_HCLK_DIV8,
+    RCC_HCLK_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
+            .RCC_HCLK_DIV1 => 1,
+            .RCC_HCLK_DIV2 => 2,
+            .RCC_HCLK_DIV4 => 4,
+            .RCC_HCLK_DIV8 => 8,
+            .RCC_HCLK_DIV16 => 16,
         };
     }
 };
 pub const APB2PrescalerConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
+    RCC_HCLK_DIV1,
+    RCC_HCLK_DIV2,
+    RCC_HCLK_DIV4,
+    RCC_HCLK_DIV8,
+    RCC_HCLK_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
+            .RCC_HCLK_DIV1 => 1,
+            .RCC_HCLK_DIV2 => 2,
+            .RCC_HCLK_DIV4 => 4,
+            .RCC_HCLK_DIV8 => 8,
+            .RCC_HCLK_DIV16 => 16,
         };
     }
 };
 pub const APB3PrescalerConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
+    RCC_HCLK_DIV1,
+    RCC_HCLK_DIV2,
+    RCC_HCLK_DIV4,
+    RCC_HCLK_DIV8,
+    RCC_HCLK_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
+            .RCC_HCLK_DIV1 => 1,
+            .RCC_HCLK_DIV2 => 2,
+            .RCC_HCLK_DIV4 => 4,
+            .RCC_HCLK_DIV8 => 8,
+            .RCC_HCLK_DIV16 => 16,
+        };
+    }
+};
+pub const HSE_TimoutConf = enum(u32) {
+    _,
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
+    }
+
+    pub fn max() f32 {
+        return 4294967295;
+    }
+
+    pub fn min() f32 {
+        return 1;
+    }
+};
+pub const LSE_TimoutConf = enum(u32) {
+    _,
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
+    }
+
+    pub fn max() f32 {
+        return 4294967295;
+    }
+
+    pub fn min() f32 {
+        return 1;
+    }
+};
+pub const HSICalibrationValueConf = enum(u32) {
+    _,
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
+    }
+
+    pub fn max() f32 {
+        return 127;
+    }
+
+    pub fn min() f32 {
+        return 0;
+    }
+};
+pub const MSIAutoCalibrationConf = enum {
+    DISABLED,
+    PLLMODE_MSIK,
+    PLLMODE_MSIS,
+    pub fn get(self: @This()) f32 {
+        return switch (self) {
+            .DISABLED => 0,
+            .PLLMODE_MSIK => 1,
+            .PLLMODE_MSIS => 2,
+        };
+    }
+};
+pub const MSIAutoCalibrationArgConf = enum {
+    null,
+    pub fn get(self: @This()) f32 {
+        return switch (self) {
+            .null => 0,
+        };
+    }
+};
+pub const MSIPLLFASTConf = enum {
+    false,
+    pub fn get(self: @This()) f32 {
+        return switch (self) {
+            .false => 0,
+        };
+    }
+};
+pub const LSE_Drive_CapabilityConf = enum {
+    null,
+    pub fn get(self: @This()) f32 {
+        return switch (self) {
+            .null => 0,
         };
     }
 };
 pub const Config = struct {
     HSEOSC: HSEOSCConf = @enumFromInt(16000000),
     LSIRC: LSIRCConf = @enumFromInt(32000),
-    LSIDIV: LSIDIVConf = .DIV1,
+    LSIDIV: LSIDIVConf = .RCC_LSI_DIV1,
     LSEOSC: LSEOSCConf = @enumFromInt(32768),
-    MSIKSource: MSIKSourceConf = .CLOCK_96,
-    MSISSource: MSISSourceConf = .CLOCK_96,
-    MSIKDIV: MSIKDIVConf = .DIV1,
-    MSISDIV: MSISDIVConf = .DIV8,
+    MSIKSource: MSIKSourceConf = .RCC_MSI_RC0,
+    MSISSource: MSISSourceConf = .RCC_MSI_RC0,
+    MSIKDIV: MSIKDIVConf = .RCC_MSI_DIV1,
+    MSISDIV: MSISDIVConf = .RCC_MSI_DIV8,
     SysClkSource: SysClkSourceConf = .MSISOutput,
     SPI1Mult: SPI1MultConf = .APB2Prescaler,
     SPI3Mult: SPI3MultConf = .APB1Prescaler,
@@ -435,14 +516,14 @@ pub const Config = struct {
     USART3Mult: USART3MultConf = .APB1Prescaler,
     UART4Mult: UART4MultConf = .APB1Prescaler,
     ADCMult: ADCMultConf = .AHBOutput,
-    ADCDiv: ADCDivConf = .DIV1,
+    ADCDiv: ADCDivConf = .RCC_ADCDACCLK_DIV1,
     UART5Mult: UART5MultConf = .APB1Prescaler,
     LPUART1Mult: LPUART1MultConf = .APB3Output,
     LPTIM1Mult: LPTIM1MultConf = .MSIKDIV,
     LPTIM2Mult: LPTIM2MultConf = .APB1Prescaler,
     DACMult: DACMultConf = .LSIDIV,
     ICLKMult: ICLKMultConf = .SysCLKOutput,
-    USBDiv: USBDivConf = .DIV1,
+    USBDiv: USBDivConf = .RCC_USB1CLKSOURCE_ICLK,
     FDCANMult: FDCANMultConf = .SysCLKOutput,
     I2C1Mult: I2C1MultConf = .APB1Prescaler,
     I3C1Mult: I3C1MultConf = .APB1Prescaler,
@@ -455,16 +536,23 @@ pub const Config = struct {
     LPTIM3Mult: LPTIM3MultConf = .MSIKDIV,
     RNGMult: RNGMultConf = .HSI48RC,
     MCOMult: MCOMultConf = .SysCLKOutput,
-    MCODiv: MCODivConf = .DIV1,
+    MCODiv: MCODivConf = .RCC_MCODIV_1,
     MCO2Mult: MCO2MultConf = .SysCLKOutput,
-    MCO2Div: MCO2DivConf = .DIV1,
+    MCO2Div: MCO2DivConf = .RCC_MCO2DIV_1,
     LSCOMult: LSCOMultConf = .LSIDIV,
-    AHBPrescaler: AHBPrescalerConf = .DIV1,
-    CortexPrescaler: CortexPrescalerConf = .DIV8,
+    AHBPrescaler: AHBPrescalerConf = .RCC_SYSCLK_DIV1,
+    CortexPrescaler: CortexPrescalerConf = .@"8",
     CortexCLockSelection: CortexCLockSelectionConf = .CortexPrescaler,
-    APB1Prescaler: APB1PrescalerConf = .DIV1,
-    APB2Prescaler: APB2PrescalerConf = .DIV1,
-    APB3Prescaler: APB3PrescalerConf = .DIV1,
+    APB1Prescaler: APB1PrescalerConf = .RCC_HCLK_DIV1,
+    APB2Prescaler: APB2PrescalerConf = .RCC_HCLK_DIV1,
+    APB3Prescaler: APB3PrescalerConf = .RCC_HCLK_DIV1,
+    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
+    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
+    HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
+    MSIAutoCalibration: MSIAutoCalibrationConf = .DISABLED,
+    MSIAutoCalibrationArg: MSIAutoCalibrationArgConf = .null,
+    MSIPLLFAST: MSIPLLFASTConf = .false,
+    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
 };
 
 pub const ClockTree = struct {
@@ -565,266 +653,344 @@ pub const ClockTree = struct {
     APB3Output: ClockNode,
     TimPrescalerAPB2: ClockNode,
     TimPrescOut2: ClockNode,
+    HSE_Timout: ClockNodeTypes,
+    LSE_Timout: ClockNodeTypes,
+    HSICalibrationValue: ClockNodeTypes,
+    MSIAutoCalibration: ClockNodeTypes,
+    MSIAutoCalibrationArg: ClockNodeTypes,
+    MSIPLLFAST: ClockNodeTypes,
+    LSE_Drive_Capability: ClockNodeTypes,
 
     pub fn init_comptime(comptime config: Config) this {
+        const HSIRCval = ClockNodeTypes{
+            .source = .{ .value = 16000000 },
+        };
         const HSIRC: ClockNode = .{
             .name = "HSIRC",
-            .Nodetype = .{ .source = .{ .value = 16000000 } },
+            .Nodetype = HSIRCval,
+        };
+        const HSI48RCval = ClockNodeTypes{
+            .source = .{ .value = 48000000 },
         };
         const HSI48RC: ClockNode = .{
             .name = "HSI48RC",
-            .Nodetype = .{ .source = .{ .value = 48000000 } },
+            .Nodetype = HSI48RCval,
         };
+        const CRSCLKoutputval = ClockNodeTypes{ .output = null };
         const CRSCLKoutput: ClockNode = .{
             .name = "CRSCLKoutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = CRSCLKoutputval,
             .parents = &[_]*const ClockNode{&HSI48RC},
+        };
+        const HSEOSCval = ClockNodeTypes{
+            .source = .{
+                .value = config.HSEOSC.get(),
+                .limit = .{ .max = 50000000, .min = 4000000 },
+            },
         };
         const HSEOSC: ClockNode = .{
             .name = "HSEOSC",
-            .Nodetype = .{ .source = .{
-                .value = config.HSEOSC.get(),
-                .limit = .{ .max = 50000000, .min = 4000000 },
-            } },
+            .Nodetype = HSEOSCval,
+        };
+        const LSIRCval = ClockNodeTypes{
+            .source = .{
+                .value = config.LSIRC.get(),
+                .limit = .{ .max = 32600, .min = 31400 },
+            },
         };
         const LSIRC: ClockNode = .{
             .name = "LSIRC",
-            .Nodetype = .{ .source = .{
-                .value = config.LSIRC.get(),
-                .limit = .{ .max = 32600, .min = 31400 },
-            } },
+            .Nodetype = LSIRCval,
         };
+        const LSIDIVval = ClockNodeTypes{ .div = .{ .value = config.LSIDIV.get() } };
         const LSIDIV: ClockNode = .{
             .name = "LSIDIV",
-            .Nodetype = .{ .div = .{ .value = config.LSIDIV.get() } },
+            .Nodetype = LSIDIVval,
             .parents = &[_]*const ClockNode{&LSIRC},
+        };
+        const LSEOSCval = ClockNodeTypes{
+            .source = .{
+                .value = config.LSEOSC.get(),
+                .limit = .{ .max = 40000, .min = 5000 },
+            },
         };
         const LSEOSC: ClockNode = .{
             .name = "LSEOSC",
-            .Nodetype = .{ .source = .{
-                .value = config.LSEOSC.get(),
-                .limit = .{ .max = 40000, .min = 5000 },
-            } },
+            .Nodetype = LSEOSCval,
+        };
+        const MSIKSourceval = ClockNodeTypes{
+            .source = .{ .value = config.MSIKSource.get() },
         };
         const MSIKSource: ClockNode = .{
             .name = "MSIKSource",
-            .Nodetype = .{ .source = .{ .value = config.MSIKSource.get() } },
+            .Nodetype = MSIKSourceval,
+        };
+        const MSISSourceval = ClockNodeTypes{
+            .source = .{ .value = config.MSISSource.get() },
         };
         const MSISSource: ClockNode = .{
             .name = "MSISSource",
-            .Nodetype = .{ .source = .{ .value = config.MSISSource.get() } },
+            .Nodetype = MSISSourceval,
         };
+        const MSIKDIVval = ClockNodeTypes{ .div = .{ .value = config.MSIKDIV.get() } };
         const MSIKDIV: ClockNode = .{
             .name = "MSIKDIV",
-            .Nodetype = .{ .div = .{ .value = config.MSIKDIV.get() } },
+            .Nodetype = MSIKDIVval,
             .parents = &[_]*const ClockNode{&MSIKSource},
         };
+        const MSISDIVval = ClockNodeTypes{ .div = .{ .value = config.MSISDIV.get() } };
         const MSISDIV: ClockNode = .{
             .name = "MSISDIV",
-            .Nodetype = .{ .div = .{ .value = config.MSISDIV.get() } },
+            .Nodetype = MSISDIVval,
             .parents = &[_]*const ClockNode{&MSISSource},
+        };
+        const MSISOutputval = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
         };
         const MSISOutput: ClockNode = .{
             .name = "MSISOutput",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = MSISOutputval,
             .parents = &[_]*const ClockNode{&MSISDIV},
+        };
+        const SAI1_EXTval = ClockNodeTypes{
+            .source = .{ .value = 48000 },
         };
         const SAI1_EXT: ClockNode = .{
             .name = "SAI1_EXT",
-            .Nodetype = .{ .source = .{ .value = 48000 } },
+            .Nodetype = SAI1_EXTval,
         };
+        const SysClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.SysClkSource) };
         const SysClkSource: ClockNode = .{
             .name = "SysClkSource",
+            .Nodetype = SysClkSourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.SysClkSource) },
             .parents = &[_]*const ClockNode{
                 &MSISOutput,
                 &HSIRC,
                 &HSEOSC,
             },
         };
+        const SysCLKOutputval = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
+        };
         const SysCLKOutput: ClockNode = .{
             .name = "SysCLKOutput",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = SysCLKOutputval,
             .parents = &[_]*const ClockNode{&SysClkSource},
         };
+        const AHBPrescalerval = ClockNodeTypes{ .div = .{ .value = config.AHBPrescaler.get() } };
         const AHBPrescaler: ClockNode = .{
             .name = "AHBPrescaler",
-            .Nodetype = .{ .div = .{ .value = config.AHBPrescaler.get() } },
+            .Nodetype = AHBPrescalerval,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const AHBOutputval = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
         };
         const AHBOutput: ClockNode = .{
             .name = "AHBOutput",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = AHBOutputval,
             .parents = &[_]*const ClockNode{&AHBPrescaler},
         };
+        const APB2Prescalerval = ClockNodeTypes{ .div = .{ .value = config.APB2Prescaler.get() } };
         const APB2Prescaler: ClockNode = .{
             .name = "APB2Prescaler",
-            .Nodetype = .{ .div = .{ .value = config.APB2Prescaler.get() } },
+            .Nodetype = APB2Prescalerval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
+        const SPI1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.SPI1Mult) };
         const SPI1Mult: ClockNode = .{
             .name = "SPI1Mult",
+            .Nodetype = SPI1Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.SPI1Mult) },
             .parents = &[_]*const ClockNode{
                 &APB2Prescaler,
                 &MSIKDIV,
             },
         };
+        const SPI1outputval = ClockNodeTypes{ .output = null };
         const SPI1output: ClockNode = .{
             .name = "SPI1output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = SPI1outputval,
             .parents = &[_]*const ClockNode{&SPI1Mult},
         };
+        const APB1Prescalerval = ClockNodeTypes{ .div = .{ .value = config.APB1Prescaler.get() } };
         const APB1Prescaler: ClockNode = .{
             .name = "APB1Prescaler",
-            .Nodetype = .{ .div = .{ .value = config.APB1Prescaler.get() } },
+            .Nodetype = APB1Prescalerval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
+        const SPI3Multval = ClockNodeTypes{ .multi = @intFromEnum(config.SPI3Mult) };
         const SPI3Mult: ClockNode = .{
             .name = "SPI3Mult",
+            .Nodetype = SPI3Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.SPI3Mult) },
             .parents = &[_]*const ClockNode{
                 &APB1Prescaler,
                 &MSIKDIV,
             },
         };
+        const SPI3outputval = ClockNodeTypes{ .output = null };
         const SPI3output: ClockNode = .{
             .name = "SPI3output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = SPI3outputval,
             .parents = &[_]*const ClockNode{&SPI3Mult},
         };
+        const SPI2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.SPI2Mult) };
         const SPI2Mult: ClockNode = .{
             .name = "SPI2Mult",
+            .Nodetype = SPI2Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.SPI2Mult) },
             .parents = &[_]*const ClockNode{
                 &APB1Prescaler,
                 &MSIKDIV,
             },
         };
+        const SPI2outputval = ClockNodeTypes{ .output = null };
         const SPI2output: ClockNode = .{
             .name = "SPI2output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = SPI2outputval,
             .parents = &[_]*const ClockNode{&SPI2Mult},
+        };
+        const HSERTCDevisorval = ClockNodeTypes{
+            .div = .{ .value = 32 },
         };
         const HSERTCDevisor: ClockNode = .{
             .name = "HSERTCDevisor",
-            .Nodetype = .{ .div = .{ .value = 32 } },
+            .Nodetype = HSERTCDevisorval,
             .parents = &[_]*const ClockNode{&HSEOSC},
         };
+        const RTCClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.RTCClkSource) };
         const RTCClkSource: ClockNode = .{
             .name = "RTCClkSource",
+            .Nodetype = RTCClkSourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.RTCClkSource) },
             .parents = &[_]*const ClockNode{
                 &HSERTCDevisor,
                 &LSEOSC,
                 &LSIDIV,
             },
         };
+        const RTCOutputval = ClockNodeTypes{
+            .output = .{ .max = 1562500, .min = 0 },
+        };
         const RTCOutput: ClockNode = .{
             .name = "RTCOutput",
-            .Nodetype = .{ .output = .{ .max = 1562500, .min = 0 } },
+            .Nodetype = RTCOutputval,
             .parents = &[_]*const ClockNode{&RTCClkSource},
         };
+        const IWDGOutputval = ClockNodeTypes{ .output = null };
         const IWDGOutput: ClockNode = .{
             .name = "IWDGOutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = IWDGOutputval,
             .parents = &[_]*const ClockNode{&LSIDIV},
         };
+        const USART1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.USART1Mult) };
         const USART1Mult: ClockNode = .{
             .name = "USART1Mult",
+            .Nodetype = USART1Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.USART1Mult) },
             .parents = &[_]*const ClockNode{
                 &APB2Prescaler,
                 &HSIRC,
             },
         };
+        const USART1outputval = ClockNodeTypes{ .output = null };
         const USART1output: ClockNode = .{
             .name = "USART1output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = USART1outputval,
             .parents = &[_]*const ClockNode{&USART1Mult},
         };
+        const USART3Multval = ClockNodeTypes{ .multi = @intFromEnum(config.USART3Mult) };
         const USART3Mult: ClockNode = .{
             .name = "USART3Mult",
+            .Nodetype = USART3Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.USART3Mult) },
             .parents = &[_]*const ClockNode{
                 &APB1Prescaler,
                 &HSIRC,
             },
         };
+        const USART3outputval = ClockNodeTypes{ .output = null };
         const USART3output: ClockNode = .{
             .name = "USART3output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = USART3outputval,
             .parents = &[_]*const ClockNode{&USART3Mult},
         };
+        const UART4Multval = ClockNodeTypes{ .multi = @intFromEnum(config.UART4Mult) };
         const UART4Mult: ClockNode = .{
             .name = "UART4Mult",
+            .Nodetype = UART4Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.UART4Mult) },
             .parents = &[_]*const ClockNode{
                 &APB1Prescaler,
                 &HSIRC,
             },
         };
+        const UART4outputval = ClockNodeTypes{ .output = null };
         const UART4output: ClockNode = .{
             .name = "UART4output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = UART4outputval,
             .parents = &[_]*const ClockNode{&UART4Mult},
         };
+        const ADCMultval = ClockNodeTypes{ .multi = @intFromEnum(config.ADCMult) };
         const ADCMult: ClockNode = .{
             .name = "ADCMult",
+            .Nodetype = ADCMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.ADCMult) },
             .parents = &[_]*const ClockNode{
                 &AHBOutput,
                 &HSEOSC,
                 &MSIKDIV,
             },
         };
+        const ADCDivval = ClockNodeTypes{ .div = .{ .value = config.ADCDiv.get() } };
         const ADCDiv: ClockNode = .{
             .name = "ADCDiv",
-            .Nodetype = .{ .div = .{ .value = config.ADCDiv.get() } },
+            .Nodetype = ADCDivval,
             .parents = &[_]*const ClockNode{&ADCMult},
         };
+        const ADCoutputval = ClockNodeTypes{ .output = null };
         const ADCoutput: ClockNode = .{
             .name = "ADCoutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = ADCoutputval,
             .parents = &[_]*const ClockNode{&ADCDiv},
         };
+        const UART5Multval = ClockNodeTypes{ .multi = @intFromEnum(config.UART5Mult) };
         const UART5Mult: ClockNode = .{
             .name = "UART5Mult",
+            .Nodetype = UART5Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.UART5Mult) },
             .parents = &[_]*const ClockNode{
                 &APB1Prescaler,
                 &HSIRC,
             },
         };
+        const UART5outputval = ClockNodeTypes{ .output = null };
         const UART5output: ClockNode = .{
             .name = "UART5output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = UART5outputval,
             .parents = &[_]*const ClockNode{&UART5Mult},
         };
+        const APB3Prescalerval = ClockNodeTypes{ .div = .{ .value = config.APB3Prescaler.get() } };
         const APB3Prescaler: ClockNode = .{
             .name = "APB3Prescaler",
-            .Nodetype = .{ .div = .{ .value = config.APB3Prescaler.get() } },
+            .Nodetype = APB3Prescalerval,
             .parents = &[_]*const ClockNode{&AHBOutput},
+        };
+        const APB3Outputval = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
         };
         const APB3Output: ClockNode = .{
             .name = "APB3Output",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = APB3Outputval,
             .parents = &[_]*const ClockNode{&APB3Prescaler},
         };
+        const LPUART1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.LPUART1Mult) };
         const LPUART1Mult: ClockNode = .{
             .name = "LPUART1Mult",
+            .Nodetype = LPUART1Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.LPUART1Mult) },
             .parents = &[_]*const ClockNode{
                 &APB3Output,
                 &HSIRC,
@@ -832,15 +998,17 @@ pub const ClockTree = struct {
                 &MSIKDIV,
             },
         };
+        const LPUART1outputval = ClockNodeTypes{ .output = null };
         const LPUART1output: ClockNode = .{
             .name = "LPUART1output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = LPUART1outputval,
             .parents = &[_]*const ClockNode{&LPUART1Mult},
         };
+        const LPTIM1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.LPTIM1Mult) };
         const LPTIM1Mult: ClockNode = .{
             .name = "LPTIM1Mult",
+            .Nodetype = LPTIM1Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.LPTIM1Mult) },
             .parents = &[_]*const ClockNode{
                 &MSIKDIV,
                 &LSIDIV,
@@ -848,15 +1016,19 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const LPTIM1outputval = ClockNodeTypes{
+            .output = .{ .max = 48000000, .min = 0 },
+        };
         const LPTIM1output: ClockNode = .{
             .name = "LPTIM1output",
-            .Nodetype = .{ .output = .{ .max = 48000000, .min = 0 } },
+            .Nodetype = LPTIM1outputval,
             .parents = &[_]*const ClockNode{&LPTIM1Mult},
         };
+        const LPTIM2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.LPTIM2Mult) };
         const LPTIM2Mult: ClockNode = .{
             .name = "LPTIM2Mult",
+            .Nodetype = LPTIM2Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.LPTIM2Mult) },
             .parents = &[_]*const ClockNode{
                 &APB1Prescaler,
                 &LSIDIV,
@@ -864,29 +1036,33 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const LPTIM2outputval = ClockNodeTypes{ .output = null };
         const LPTIM2output: ClockNode = .{
             .name = "LPTIM2output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = LPTIM2outputval,
             .parents = &[_]*const ClockNode{&LPTIM2Mult},
         };
+        const DACMultval = ClockNodeTypes{ .multi = @intFromEnum(config.DACMult) };
         const DACMult: ClockNode = .{
             .name = "DACMult",
+            .Nodetype = DACMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.DACMult) },
             .parents = &[_]*const ClockNode{
                 &LSEOSC,
                 &LSIDIV,
             },
         };
+        const DACoutputval = ClockNodeTypes{ .output = null };
         const DACoutput: ClockNode = .{
             .name = "DACoutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = DACoutputval,
             .parents = &[_]*const ClockNode{&DACMult},
         };
+        const ICLKMultval = ClockNodeTypes{ .multi = @intFromEnum(config.ICLKMult) };
         const ICLKMult: ClockNode = .{
             .name = "ICLKMult",
+            .Nodetype = ICLKMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.ICLKMult) },
             .parents = &[_]*const ClockNode{
                 &SysCLKOutput,
                 &MSIKDIV,
@@ -894,124 +1070,144 @@ pub const ClockTree = struct {
                 &HSI48RC,
             },
         };
+        const SDMMC1Outputval = ClockNodeTypes{
+            .output = .{ .max = 55000000, .min = 0 },
+        };
         const SDMMC1Output: ClockNode = .{
             .name = "SDMMC1Output",
-            .Nodetype = .{ .output = .{ .max = 55000000, .min = 0 } },
+            .Nodetype = SDMMC1Outputval,
             .parents = &[_]*const ClockNode{&ICLKMult},
         };
+        const USBDivval = ClockNodeTypes{ .div = .{ .value = config.USBDiv.get() } };
         const USBDiv: ClockNode = .{
             .name = "USBDiv",
-            .Nodetype = .{ .div = .{ .value = config.USBDiv.get() } },
+            .Nodetype = USBDivval,
             .parents = &[_]*const ClockNode{&ICLKMult},
         };
+        const USBoutputval = ClockNodeTypes{ .output = null };
         const USBoutput: ClockNode = .{
             .name = "USBoutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = USBoutputval,
             .parents = &[_]*const ClockNode{&USBDiv},
         };
+        const FDCANMultval = ClockNodeTypes{ .multi = @intFromEnum(config.FDCANMult) };
         const FDCANMult: ClockNode = .{
             .name = "FDCANMult",
+            .Nodetype = FDCANMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.FDCANMult) },
             .parents = &[_]*const ClockNode{
                 &SysCLKOutput,
                 &MSIKDIV,
             },
         };
+        const FDCANOutputval = ClockNodeTypes{ .output = null };
         const FDCANOutput: ClockNode = .{
             .name = "FDCANOutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = FDCANOutputval,
             .parents = &[_]*const ClockNode{&FDCANMult},
         };
+        const I2C1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.I2C1Mult) };
         const I2C1Mult: ClockNode = .{
             .name = "I2C1Mult",
+            .Nodetype = I2C1Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.I2C1Mult) },
             .parents = &[_]*const ClockNode{
                 &APB1Prescaler,
                 &MSIKDIV,
             },
         };
+        const I2C1outputval = ClockNodeTypes{ .output = null };
         const I2C1output: ClockNode = .{
             .name = "I2C1output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = I2C1outputval,
             .parents = &[_]*const ClockNode{&I2C1Mult},
         };
+        const I3C1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.I3C1Mult) };
         const I3C1Mult: ClockNode = .{
             .name = "I3C1Mult",
+            .Nodetype = I3C1Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.I3C1Mult) },
             .parents = &[_]*const ClockNode{
                 &APB1Prescaler,
                 &MSIKDIV,
             },
         };
+        const I3C1outputval = ClockNodeTypes{ .output = null };
         const I3C1output: ClockNode = .{
             .name = "I3C1output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = I3C1outputval,
             .parents = &[_]*const ClockNode{&I3C1Mult},
         };
+        const I3C2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.I3C2Mult) };
         const I3C2Mult: ClockNode = .{
             .name = "I3C2Mult",
+            .Nodetype = I3C2Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.I3C2Mult) },
             .parents = &[_]*const ClockNode{
                 &APB3Output,
                 &MSIKDIV,
             },
         };
+        const I3C2outputval = ClockNodeTypes{ .output = null };
         const I3C2output: ClockNode = .{
             .name = "I3C2output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = I3C2outputval,
             .parents = &[_]*const ClockNode{&I3C2Mult},
         };
+        const I2C2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.I2C2Mult) };
         const I2C2Mult: ClockNode = .{
             .name = "I2C2Mult",
+            .Nodetype = I2C2Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.I2C2Mult) },
             .parents = &[_]*const ClockNode{
                 &APB1Prescaler,
                 &MSIKDIV,
             },
         };
+        const I2C2outputval = ClockNodeTypes{ .output = null };
         const I2C2output: ClockNode = .{
             .name = "I2C2output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = I2C2outputval,
             .parents = &[_]*const ClockNode{&I2C2Mult},
         };
+        const I2C3Multval = ClockNodeTypes{ .multi = @intFromEnum(config.I2C3Mult) };
         const I2C3Mult: ClockNode = .{
             .name = "I2C3Mult",
+            .Nodetype = I2C3Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.I2C3Mult) },
             .parents = &[_]*const ClockNode{
                 &APB3Output,
                 &MSIKDIV,
             },
         };
+        const I2C3outputval = ClockNodeTypes{ .output = null };
         const I2C3output: ClockNode = .{
             .name = "I2C3output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = I2C3outputval,
             .parents = &[_]*const ClockNode{&I2C3Mult},
         };
+        const SAI1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.SAI1Mult) };
         const SAI1Mult: ClockNode = .{
             .name = "SAI1Mult",
+            .Nodetype = SAI1Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.SAI1Mult) },
             .parents = &[_]*const ClockNode{
                 &MSIKDIV,
                 &SAI1_EXT,
                 &HSEOSC,
             },
         };
+        const SAI1outputval = ClockNodeTypes{ .output = null };
         const SAI1output: ClockNode = .{
             .name = "SAI1output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = SAI1outputval,
             .parents = &[_]*const ClockNode{&SAI1Mult},
         };
+        const ADF1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.ADF1Mult) };
         const ADF1Mult: ClockNode = .{
             .name = "ADF1Mult",
+            .Nodetype = ADF1Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.ADF1Mult) },
             .parents = &[_]*const ClockNode{
                 &AHBOutput,
                 &SAI1_EXT,
@@ -1019,29 +1215,33 @@ pub const ClockTree = struct {
                 &SAI1output,
             },
         };
+        const ADF1outputval = ClockNodeTypes{ .output = null };
         const ADF1output: ClockNode = .{
             .name = "ADF1output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = ADF1outputval,
             .parents = &[_]*const ClockNode{&ADF1Mult},
         };
+        const OCTOSPIMMultval = ClockNodeTypes{ .multi = @intFromEnum(config.OCTOSPIMMult) };
         const OCTOSPIMMult: ClockNode = .{
             .name = "OCTOSPIMMult",
+            .Nodetype = OCTOSPIMMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.OCTOSPIMMult) },
             .parents = &[_]*const ClockNode{
                 &SysCLKOutput,
                 &MSIKDIV,
             },
         };
+        const OCTOSPIMoutputval = ClockNodeTypes{ .output = null };
         const OCTOSPIMoutput: ClockNode = .{
             .name = "OCTOSPIMoutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = OCTOSPIMoutputval,
             .parents = &[_]*const ClockNode{&OCTOSPIMMult},
         };
+        const LPTIM3Multval = ClockNodeTypes{ .multi = @intFromEnum(config.LPTIM3Mult) };
         const LPTIM3Mult: ClockNode = .{
             .name = "LPTIM3Mult",
+            .Nodetype = LPTIM3Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.LPTIM3Mult) },
             .parents = &[_]*const ClockNode{
                 &MSIKDIV,
                 &LSIDIV,
@@ -1049,29 +1249,35 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const LPTIM3outputval = ClockNodeTypes{ .output = null };
         const LPTIM3output: ClockNode = .{
             .name = "LPTIM3output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = LPTIM3outputval,
             .parents = &[_]*const ClockNode{&LPTIM3Mult},
         };
+        const RNGMultval = ClockNodeTypes{ .multi = @intFromEnum(config.RNGMult) };
         const RNGMult: ClockNode = .{
             .name = "RNGMult",
+            .Nodetype = RNGMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.RNGMult) },
             .parents = &[_]*const ClockNode{
                 &HSI48RC,
                 &MSIKDIV,
             },
+        };
+        const RNGoutputval = ClockNodeTypes{
+            .output = .{ .max = 48000000, .min = 0 },
         };
         const RNGoutput: ClockNode = .{
             .name = "RNGoutput",
-            .Nodetype = .{ .output = .{ .max = 48000000, .min = 0 } },
+            .Nodetype = RNGoutputval,
             .parents = &[_]*const ClockNode{&RNGMult},
         };
+        const MCOMultval = ClockNodeTypes{ .multi = @intFromEnum(config.MCOMult) };
         const MCOMult: ClockNode = .{
             .name = "MCOMult",
+            .Nodetype = MCOMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.MCOMult) },
             .parents = &[_]*const ClockNode{
                 &LSEOSC,
                 &LSIDIV,
@@ -1083,20 +1289,23 @@ pub const ClockTree = struct {
                 &MSIKDIV,
             },
         };
+        const MCODivval = ClockNodeTypes{ .div = .{ .value = config.MCODiv.get() } };
         const MCODiv: ClockNode = .{
             .name = "MCODiv",
-            .Nodetype = .{ .div = .{ .value = config.MCODiv.get() } },
+            .Nodetype = MCODivval,
             .parents = &[_]*const ClockNode{&MCOMult},
         };
+        const MCOPinval = ClockNodeTypes{ .output = null };
         const MCOPin: ClockNode = .{
             .name = "MCOPin",
-            .Nodetype = .{ .output = null },
+            .Nodetype = MCOPinval,
             .parents = &[_]*const ClockNode{&MCODiv},
         };
+        const MCO2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.MCO2Mult) };
         const MCO2Mult: ClockNode = .{
             .name = "MCO2Mult",
+            .Nodetype = MCO2Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.MCO2Mult) },
             .parents = &[_]*const ClockNode{
                 &LSEOSC,
                 &LSIDIV,
@@ -1108,89 +1317,168 @@ pub const ClockTree = struct {
                 &MSIKDIV,
             },
         };
+        const MCO2Divval = ClockNodeTypes{ .div = .{ .value = config.MCO2Div.get() } };
         const MCO2Div: ClockNode = .{
             .name = "MCO2Div",
-            .Nodetype = .{ .div = .{ .value = config.MCO2Div.get() } },
+            .Nodetype = MCO2Divval,
             .parents = &[_]*const ClockNode{&MCO2Mult},
         };
+        const MCO2Pinval = ClockNodeTypes{ .output = null };
         const MCO2Pin: ClockNode = .{
             .name = "MCO2Pin",
-            .Nodetype = .{ .output = null },
+            .Nodetype = MCO2Pinval,
             .parents = &[_]*const ClockNode{&MCO2Div},
         };
+        const LSCOMultval = ClockNodeTypes{ .multi = @intFromEnum(config.LSCOMult) };
         const LSCOMult: ClockNode = .{
             .name = "LSCOMult",
+            .Nodetype = LSCOMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.LSCOMult) },
             .parents = &[_]*const ClockNode{
                 &LSIDIV,
                 &LSEOSC,
             },
         };
+        const LSCOOutputval = ClockNodeTypes{ .output = null };
         const LSCOOutput: ClockNode = .{
             .name = "LSCOOutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = LSCOOutputval,
             .parents = &[_]*const ClockNode{&LSCOMult},
+        };
+        const HCLKOutputval = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
         };
         const HCLKOutput: ClockNode = .{
             .name = "HCLKOutput",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = HCLKOutputval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
+        const CortexPrescalerval = ClockNodeTypes{ .div = .{ .value = config.CortexPrescaler.get() } };
         const CortexPrescaler: ClockNode = .{
             .name = "CortexPrescaler",
-            .Nodetype = .{ .div = .{ .value = config.CortexPrescaler.get() } },
+            .Nodetype = CortexPrescalerval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
+        const CortexCLockSelectionval = ClockNodeTypes{ .multi = @intFromEnum(config.CortexCLockSelection) };
         const CortexCLockSelection: ClockNode = .{
             .name = "CortexCLockSelection",
+            .Nodetype = CortexCLockSelectionval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CortexCLockSelection) },
             .parents = &[_]*const ClockNode{
                 &CortexPrescaler,
                 &LSEOSC,
                 &LSIDIV,
             },
         };
+        const CortexSysOutputval = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
+        };
         const CortexSysOutput: ClockNode = .{
             .name = "CortexSysOutput",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = CortexSysOutputval,
             .parents = &[_]*const ClockNode{&CortexCLockSelection},
+        };
+        const FCLKCortexOutputval = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
         };
         const FCLKCortexOutput: ClockNode = .{
             .name = "FCLKCortexOutput",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = FCLKCortexOutputval,
             .parents = &[_]*const ClockNode{&AHBOutput},
+        };
+        const APB1Outputval = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
         };
         const APB1Output: ClockNode = .{
             .name = "APB1Output",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = APB1Outputval,
             .parents = &[_]*const ClockNode{&APB1Prescaler},
+        };
+        const TimPrescalerAPB1val = blk: {
+            if (APB1Prescalerval.num_val() == 1) {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 1 },
+                };
+            } else {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 2 },
+                };
+            }
         };
         const TimPrescalerAPB1: ClockNode = .{
             .name = "TimPrescalerAPB1",
-            .Nodetype = .{ .mul = .{ .value = 2 } },
+            .Nodetype = TimPrescalerAPB1val,
             .parents = &[_]*const ClockNode{&APB1Prescaler},
+        };
+        const TimPrescOut1val = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
         };
         const TimPrescOut1: ClockNode = .{
             .name = "TimPrescOut1",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = TimPrescOut1val,
             .parents = &[_]*const ClockNode{&TimPrescalerAPB1},
+        };
+        const APB2Outputval = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
         };
         const APB2Output: ClockNode = .{
             .name = "APB2Output",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = APB2Outputval,
             .parents = &[_]*const ClockNode{&APB2Prescaler},
+        };
+        const TimPrescalerAPB2val = blk: {
+            if (APB2Prescalerval.num_val() == 1) {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 1 },
+                };
+            } else {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 2 },
+                };
+            }
         };
         const TimPrescalerAPB2: ClockNode = .{
             .name = "TimPrescalerAPB2",
-            .Nodetype = .{ .mul = .{ .value = 2 } },
+            .Nodetype = TimPrescalerAPB2val,
             .parents = &[_]*const ClockNode{&APB2Prescaler},
+        };
+        const TimPrescOut2val = ClockNodeTypes{
+            .output = .{ .max = 96000000, .min = 0 },
         };
         const TimPrescOut2: ClockNode = .{
             .name = "TimPrescOut2",
-            .Nodetype = .{ .output = .{ .max = 96000000, .min = 0 } },
+            .Nodetype = TimPrescOut2val,
             .parents = &[_]*const ClockNode{&TimPrescalerAPB2},
+        };
+        const HSE_Timoutval = ClockNodeTypes{
+            .source = .{
+                .value = config.HSE_Timout.get(),
+                .limit = .{ .max = 4294967295, .min = 1 },
+            },
+        };
+        const LSE_Timoutval = ClockNodeTypes{
+            .source = .{
+                .value = config.LSE_Timout.get(),
+                .limit = .{ .max = 4294967295, .min = 1 },
+            },
+        };
+        const HSICalibrationValueval = ClockNodeTypes{
+            .source = .{
+                .value = config.HSICalibrationValue.get(),
+                .limit = .{ .max = 127, .min = 0 },
+            },
+        };
+        const MSIAutoCalibrationval = ClockNodeTypes{
+            .source = .{ .value = config.MSIAutoCalibration.get() },
+        };
+        const MSIAutoCalibrationArgval = ClockNodeTypes{
+            .source = .{ .value = config.MSIAutoCalibrationArg.get() },
+        };
+        const MSIPLLFASTval = ClockNodeTypes{
+            .source = .{ .value = config.MSIPLLFAST.get() },
+        };
+        const LSE_Drive_Capabilityval = ClockNodeTypes{
+            .source = .{ .value = config.LSE_Drive_Capability.get() },
         };
         return .{
             .HSIRC = HSIRC,
@@ -1288,6 +1576,13 @@ pub const ClockTree = struct {
             .APB3Output = APB3Output,
             .TimPrescalerAPB2 = TimPrescalerAPB2,
             .TimPrescOut2 = TimPrescOut2,
+            .HSE_Timout = HSE_Timoutval,
+            .LSE_Timout = LSE_Timoutval,
+            .HSICalibrationValue = HSICalibrationValueval,
+            .MSIAutoCalibration = MSIAutoCalibrationval,
+            .MSIAutoCalibrationArg = MSIAutoCalibrationArgval,
+            .MSIPLLFAST = MSIPLLFASTval,
+            .LSE_Drive_Capability = LSE_Drive_Capabilityval,
         };
     }
 

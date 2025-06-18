@@ -21,10 +21,10 @@ pub const HSEOSCConf = enum(u32) {
     }
 };
 pub const HSEDIV2Conf = enum {
-    DIV2,
+    @"2",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV2 => 2,
+            .@"2" => 2,
         };
     }
 };
@@ -59,12 +59,12 @@ pub const LSEOSCConf = enum(u32) {
     }
 };
 pub const MSIRCConf = enum {
-    CLOCK_16,
-    CLOCK_4,
+    RCC_MSI_16MHZ,
+    RCC_MSI_4MHZ,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .CLOCK_16 => 16,
-            .CLOCK_4 => 4,
+            .RCC_MSI_16MHZ => 16,
+            .RCC_MSI_4MHZ => 4,
         };
     }
 };
@@ -83,16 +83,16 @@ pub const XBAR0Conf = enum {
     LSEOSC,
 };
 pub const XBAR0PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -126,16 +126,16 @@ pub const XBAR1Conf = enum {
     LSEOSC,
 };
 pub const XBAR1PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -169,16 +169,16 @@ pub const XBAR2Conf = enum {
     LSEOSC,
 };
 pub const XBAR2PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -212,16 +212,16 @@ pub const XBAR3Conf = enum {
     LSEOSC,
 };
 pub const XBAR3PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -255,16 +255,16 @@ pub const XBAR4Conf = enum {
     LSEOSC,
 };
 pub const XBAR4PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -298,16 +298,16 @@ pub const XBAR5Conf = enum {
     LSEOSC,
 };
 pub const XBAR5PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -341,16 +341,16 @@ pub const XBAR6Conf = enum {
     LSEOSC,
 };
 pub const XBAR6PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -379,16 +379,16 @@ pub const XBAR7Conf = enum {
     LSEOSC,
 };
 pub const XBAR7PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -418,16 +418,16 @@ pub const XBAR8Conf = enum {
     MSIRC,
 };
 pub const XBAR8PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -457,16 +457,16 @@ pub const XBAR9Conf = enum {
     MSIRC,
 };
 pub const XBAR9PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -497,16 +497,16 @@ pub const XBAR10Conf = enum {
     I2S_CKIN,
 };
 pub const XBAR10PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -534,16 +534,16 @@ pub const XBAR11Conf = enum {
     HSIRC,
 };
 pub const XBAR11PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -572,16 +572,16 @@ pub const XBAR12Conf = enum {
     MSIRC,
 };
 pub const XBAR12PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -610,16 +610,16 @@ pub const XBAR13Conf = enum {
     MSIRC,
 };
 pub const XBAR13PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -648,16 +648,16 @@ pub const XBAR14Conf = enum {
     MSIRC,
 };
 pub const XBAR14PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -686,16 +686,16 @@ pub const XBAR15Conf = enum {
     MSIRC,
 };
 pub const XBAR15PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -726,16 +726,16 @@ pub const XBAR16Conf = enum {
     I2S_CKIN,
 };
 pub const XBAR16PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -766,16 +766,16 @@ pub const XBAR17Conf = enum {
     I2S_CKIN,
 };
 pub const XBAR17PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -806,16 +806,16 @@ pub const XBAR18Conf = enum {
     I2S_CKIN,
 };
 pub const XBAR18PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -845,16 +845,16 @@ pub const XBAR19Conf = enum {
     MSIRC,
 };
 pub const XBAR19PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -884,16 +884,16 @@ pub const XBAR20Conf = enum {
     MSIRC,
 };
 pub const XBAR20PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -923,16 +923,16 @@ pub const XBAR21Conf = enum {
     MSIRC,
 };
 pub const XBAR21PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -962,16 +962,16 @@ pub const XBAR22Conf = enum {
     MSIRC,
 };
 pub const XBAR22PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1003,16 +1003,16 @@ pub const XBAR23Conf = enum {
     I2S_CKIN,
 };
 pub const XBAR23PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1044,16 +1044,16 @@ pub const XBAR24Conf = enum {
     I2S_CKIN,
 };
 pub const XBAR24PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1085,16 +1085,16 @@ pub const XBAR25Conf = enum {
     I2S_CKIN,
 };
 pub const XBAR25PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1122,16 +1122,16 @@ pub const XBAR26Conf = enum {
     HSEOSC,
 };
 pub const XBAR26PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1158,16 +1158,16 @@ pub const XBAR27Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR27PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1195,16 +1195,16 @@ pub const XBAR28Conf = enum {
     HSEOSC,
 };
 pub const XBAR28PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1231,16 +1231,16 @@ pub const XBAR29Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR29PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1268,16 +1268,16 @@ pub const XBAR30Conf = enum {
     HSEOSC,
 };
 pub const XBAR30PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1305,16 +1305,16 @@ pub const XBAR31Conf = enum {
     HSEOSC,
 };
 pub const XBAR31PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1342,16 +1342,16 @@ pub const XBAR32Conf = enum {
     HSEOSC,
 };
 pub const XBAR32PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1380,16 +1380,16 @@ pub const XBAR33Conf = enum {
     HSEOSC,
 };
 pub const XBAR33PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1417,16 +1417,16 @@ pub const XBAR34Conf = enum {
     HSEOSC,
 };
 pub const XBAR34PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1455,16 +1455,16 @@ pub const XBAR35Conf = enum {
     HSEOSC,
 };
 pub const XBAR35PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1493,16 +1493,16 @@ pub const XBAR36Conf = enum {
     MSIRC,
 };
 pub const XBAR36PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1533,16 +1533,16 @@ pub const XBAR37Conf = enum {
     I2S_CKIN,
 };
 pub const XBAR37PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1571,16 +1571,16 @@ pub const XBAR38Conf = enum {
     MSIRC,
 };
 pub const XBAR38PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1610,16 +1610,16 @@ pub const XBAR39Conf = enum {
     MSIRC,
 };
 pub const XBAR39PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1648,16 +1648,16 @@ pub const XBAR40Conf = enum {
     LSEOSC,
 };
 pub const XBAR40PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1686,16 +1686,16 @@ pub const XBAR41Conf = enum {
     LSEOSC,
 };
 pub const XBAR41PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1725,16 +1725,16 @@ pub const XBAR42Conf = enum {
     MSIRC,
 };
 pub const XBAR42PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1761,16 +1761,16 @@ pub const XBAR43Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR43PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1797,16 +1797,16 @@ pub const XBAR44Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR44PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1833,16 +1833,16 @@ pub const XBAR45Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR45PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1872,16 +1872,16 @@ pub const XBAR46Conf = enum {
     MSIRC,
 };
 pub const XBAR46PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1908,16 +1908,16 @@ pub const XBAR47Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR47PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1944,16 +1944,16 @@ pub const XBAR48Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR48PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -1980,16 +1980,16 @@ pub const XBAR49Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR49PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2016,16 +2016,16 @@ pub const XBAR50Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR50PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2053,16 +2053,16 @@ pub const XBAR51Conf = enum {
     HSIRC,
 };
 pub const XBAR51PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2090,16 +2090,16 @@ pub const XBAR52Conf = enum {
     HSIRC,
 };
 pub const XBAR52PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2127,16 +2127,16 @@ pub const XBAR53Conf = enum {
     HSIRC,
 };
 pub const XBAR53PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2163,16 +2163,16 @@ pub const XBAR54Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR54PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2199,16 +2199,16 @@ pub const XBAR55Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR55PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2238,16 +2238,16 @@ pub const XBAR56Conf = enum {
     MSIRC,
 };
 pub const XBAR56PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2275,16 +2275,16 @@ pub const XBAR57Conf = enum {
     HSEOSC,
 };
 pub const XBAR57PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2312,16 +2312,16 @@ pub const XBAR58Conf = enum {
     HSEOSC,
 };
 pub const XBAR58PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2348,16 +2348,16 @@ pub const XBAR59Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR59PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2384,16 +2384,16 @@ pub const XBAR60Conf = enum {
     FOUTPOSTDIV8,
 };
 pub const XBAR60PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2427,16 +2427,16 @@ pub const XBAR61Conf = enum {
     LSEOSC,
 };
 pub const XBAR61PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2470,16 +2470,16 @@ pub const XBAR62Conf = enum {
     LSEOSC,
 };
 pub const XBAR62PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2509,16 +2509,16 @@ pub const XBAR63Conf = enum {
     MSIRC,
 };
 pub const XBAR63PredivConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV1024,
+    @"1",
+    @"2",
+    @"4",
+    @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV1024 => 1024,
+            .@"1" => 1,
+            .@"2" => 2,
+            .@"4" => 4,
+            .@"1024" => 1024,
         };
     }
 };
@@ -2770,92 +2770,92 @@ pub const SysClkSourceConf = enum {
     HSIRC,
 };
 pub const MCUDIVConf = enum {
-    DIV1,
-    DIV2,
+    RCC_MCU_DIV1,
+    RCC_MCU_DIV2,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
+            .RCC_MCU_DIV1 => 1,
+            .RCC_MCU_DIV2 => 2,
         };
     }
 };
 pub const APB3DIVConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
+    RCC_APB3_DIV1,
+    RCC_APB3_DIV2,
+    RCC_APB3_DIV4,
+    RCC_APB3_DIV8,
+    RCC_APB3_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
+            .RCC_APB3_DIV1 => 1,
+            .RCC_APB3_DIV2 => 2,
+            .RCC_APB3_DIV4 => 4,
+            .RCC_APB3_DIV8 => 8,
+            .RCC_APB3_DIV16 => 16,
         };
     }
 };
 pub const APB4DIVConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
+    RCC_APB4_DIV1,
+    RCC_APB4_DIV2,
+    RCC_APB4_DIV4,
+    RCC_APB4_DIV8,
+    RCC_APB4_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
+            .RCC_APB4_DIV1 => 1,
+            .RCC_APB4_DIV2 => 2,
+            .RCC_APB4_DIV4 => 4,
+            .RCC_APB4_DIV8 => 8,
+            .RCC_APB4_DIV16 => 16,
         };
     }
 };
 pub const APBDBGDIVConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
+    RCC_APBDBG_DIV1,
+    RCC_APBDBG_DIV2,
+    RCC_APBDBG_DIV4,
+    RCC_APBDBG_DIV8,
+    RCC_APBDBG_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
+            .RCC_APBDBG_DIV1 => 1,
+            .RCC_APBDBG_DIV2 => 2,
+            .RCC_APBDBG_DIV4 => 4,
+            .RCC_APBDBG_DIV8 => 8,
+            .RCC_APBDBG_DIV16 => 16,
         };
     }
 };
 pub const APB1DIVConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
+    RCC_APB1_DIV1,
+    RCC_APB1_DIV2,
+    RCC_APB1_DIV4,
+    RCC_APB1_DIV8,
+    RCC_APB1_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
+            .RCC_APB1_DIV1 => 1,
+            .RCC_APB1_DIV2 => 2,
+            .RCC_APB1_DIV4 => 4,
+            .RCC_APB1_DIV8 => 8,
+            .RCC_APB1_DIV16 => 16,
         };
     }
 };
 pub const APB2DIVConf = enum {
-    DIV1,
-    DIV2,
-    DIV4,
-    DIV8,
-    DIV16,
+    RCC_APB2_DIV1,
+    RCC_APB2_DIV2,
+    RCC_APB2_DIV4,
+    RCC_APB2_DIV8,
+    RCC_APB2_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .DIV1 => 1,
-            .DIV2 => 2,
-            .DIV4 => 4,
-            .DIV8 => 8,
-            .DIV16 => 16,
+            .RCC_APB2_DIV1 => 1,
+            .RCC_APB2_DIV2 => 2,
+            .RCC_APB2_DIV4 => 4,
+            .RCC_APB2_DIV8 => 8,
+            .RCC_APB2_DIV16 => 16,
         };
     }
 };
@@ -3005,11 +3005,11 @@ pub const FBDIV2Conf = enum(u32) {
     }
 
     pub fn max() f32 {
-        return 500;
+        return 12297829382473034410;
     }
 
     pub fn min() f32 {
-        return 20;
+        return 12297829382473034410;
     }
 };
 pub const PLL2FRACVConf = enum(u32) {
@@ -3065,11 +3065,11 @@ pub const FBDIV3Conf = enum(u32) {
     }
 
     pub fn max() f32 {
-        return 500;
+        return 12297829382473034410;
     }
 
     pub fn min() f32 {
-        return 20;
+        return 12297829382473034410;
     }
 };
 pub const PLL3FRACVConf = enum(u32) {
@@ -3125,11 +3125,11 @@ pub const FBDIV4Conf = enum(u32) {
     }
 
     pub fn max() f32 {
-        return 500;
+        return 12297829382473034410;
     }
 
     pub fn min() f32 {
-        return 20;
+        return 12297829382473034410;
     }
 };
 pub const PLL4FRACVConf = enum(u32) {
@@ -3205,11 +3205,11 @@ pub const FBDIV5Conf = enum(u32) {
     }
 
     pub fn max() f32 {
-        return 500;
+        return 12297829382473034410;
     }
 
     pub fn min() f32 {
-        return 20;
+        return 12297829382473034410;
     }
 };
 pub const PLL5FRACVConf = enum(u32) {
@@ -3285,11 +3285,11 @@ pub const FBDIV6Conf = enum(u32) {
     }
 
     pub fn max() f32 {
-        return 500;
+        return 12297829382473034410;
     }
 
     pub fn min() f32 {
-        return 20;
+        return 12297829382473034410;
     }
 };
 pub const PLL6FRACVConf = enum(u32) {
@@ -3365,11 +3365,11 @@ pub const FBDIV7Conf = enum(u32) {
     }
 
     pub fn max() f32 {
-        return 500;
+        return 12297829382473034410;
     }
 
     pub fn min() f32 {
-        return 20;
+        return 12297829382473034410;
     }
 };
 pub const PLL7FRACVConf = enum(u32) {
@@ -3445,11 +3445,11 @@ pub const FBDIV8Conf = enum(u32) {
     }
 
     pub fn max() f32 {
-        return 500;
+        return 12297829382473034410;
     }
 
     pub fn min() f32 {
-        return 20;
+        return 12297829382473034410;
     }
 };
 pub const PLL8FRACVConf = enum(u32) {
@@ -3517,203 +3517,261 @@ pub const RTCClkSourceConf = enum {
     LSEOSC,
     LSIRC,
 };
+pub const HSE_TimoutConf = enum(u32) {
+    _,
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
+    }
+
+    pub fn max() f32 {
+        return 4294967295;
+    }
+
+    pub fn min() f32 {
+        return 1;
+    }
+};
+pub const LSE_TimoutConf = enum(u32) {
+    _,
+    pub fn get(num: @This()) f32 {
+        const val: u32 = @intFromEnum(num);
+        return @as(f32, @floatFromInt(val));
+    }
+
+    pub fn max() f32 {
+        return 4294967295;
+    }
+
+    pub fn min() f32 {
+        return 1;
+    }
+};
+pub const RCC_TIM_G1_PRescaler_SelectionConf = enum {
+    RCC_TIMG1PRES_ACTIVATED,
+    RCC_TIMG1PRES_DEACTIVATED,
+    pub fn get(self: @This()) f32 {
+        return switch (self) {
+            .RCC_TIMG1PRES_ACTIVATED => 0,
+            .RCC_TIMG1PRES_DEACTIVATED => 1,
+        };
+    }
+};
+pub const RCC_TIM_G2_PRescaler_SelectionConf = enum {
+    RCC_TIMG2PRES_ACTIVATED,
+    RCC_TIMG2PRES_DEACTIVATED,
+    pub fn get(self: @This()) f32 {
+        return switch (self) {
+            .RCC_TIMG2PRES_ACTIVATED => 0,
+            .RCC_TIMG2PRES_DEACTIVATED => 1,
+        };
+    }
+};
+pub const LSE_Drive_CapabilityConf = enum {
+    null,
+    pub fn get(self: @This()) f32 {
+        return switch (self) {
+            .null => 0,
+        };
+    }
+};
 pub const Config = struct {
     HSEOSC: HSEOSCConf = @enumFromInt(40000000),
-    HSEDIV2: HSEDIV2Conf = .DIV2,
+    HSEDIV2: HSEDIV2Conf = .@"2",
     SPDIF: SPDIFConf = @enumFromInt(12288000),
     LSEOSC: LSEOSCConf = @enumFromInt(32768),
-    MSIRC: MSIRCConf = .CLOCK_16,
+    MSIRC: MSIRCConf = .RCC_MSI_16MHZ,
     XBAR0: XBAR0Conf = .HSIRC,
-    XBAR0Prediv: XBAR0PredivConf = .DIV1,
+    XBAR0Prediv: XBAR0PredivConf = .@"1",
     XBAR0Findiv: XBAR0FindivConf = @enumFromInt(1),
     XBAR1: XBAR1Conf = .HSIRC,
-    XBAR1Prediv: XBAR1PredivConf = .DIV1,
+    XBAR1Prediv: XBAR1PredivConf = .@"1",
     XBAR1Findiv: XBAR1FindivConf = @enumFromInt(1),
     XBAR2: XBAR2Conf = .HSIRC,
-    XBAR2Prediv: XBAR2PredivConf = .DIV1,
+    XBAR2Prediv: XBAR2PredivConf = .@"1",
     XBAR2Findiv: XBAR2FindivConf = @enumFromInt(1),
     XBAR3: XBAR3Conf = .HSIRC,
-    XBAR3Prediv: XBAR3PredivConf = .DIV1,
+    XBAR3Prediv: XBAR3PredivConf = .@"1",
     XBAR3Findiv: XBAR3FindivConf = @enumFromInt(1),
     XBAR4: XBAR4Conf = .HSIRC,
-    XBAR4Prediv: XBAR4PredivConf = .DIV1,
+    XBAR4Prediv: XBAR4PredivConf = .@"1",
     XBAR4Findiv: XBAR4FindivConf = @enumFromInt(1),
     XBAR5: XBAR5Conf = .HSIRC,
-    XBAR5Prediv: XBAR5PredivConf = .DIV1,
+    XBAR5Prediv: XBAR5PredivConf = .@"1",
     XBAR5Findiv: XBAR5FindivConf = @enumFromInt(1),
     XBAR6: XBAR6Conf = .HSIRC,
-    XBAR6Prediv: XBAR6PredivConf = .DIV1,
+    XBAR6Prediv: XBAR6PredivConf = .@"1",
     XBAR6Findiv: XBAR6FindivConf = @enumFromInt(1),
     XBAR7: XBAR7Conf = .LSIRC,
-    XBAR7Prediv: XBAR7PredivConf = .DIV1,
+    XBAR7Prediv: XBAR7PredivConf = .@"1",
     XBAR7Findiv: XBAR7FindivConf = @enumFromInt(1),
     XBAR8: XBAR8Conf = .HSIRC,
-    XBAR8Prediv: XBAR8PredivConf = .DIV1,
+    XBAR8Prediv: XBAR8PredivConf = .@"1",
     XBAR8Findiv: XBAR8FindivConf = @enumFromInt(1),
     XBAR9: XBAR9Conf = .HSIRC,
-    XBAR9Prediv: XBAR9PredivConf = .DIV1,
+    XBAR9Prediv: XBAR9PredivConf = .@"1",
     XBAR9Findiv: XBAR9FindivConf = @enumFromInt(1),
     XBAR10: XBAR10Conf = .HSIRC,
-    XBAR10Prediv: XBAR10PredivConf = .DIV1,
+    XBAR10Prediv: XBAR10PredivConf = .@"1",
     XBAR10Findiv: XBAR10FindivConf = @enumFromInt(1),
     XBAR11: XBAR11Conf = .HSIRC,
-    XBAR11Prediv: XBAR11PredivConf = .DIV1,
+    XBAR11Prediv: XBAR11PredivConf = .@"1",
     XBAR11Findiv: XBAR11FindivConf = @enumFromInt(1),
     XBAR12: XBAR12Conf = .HSIRC,
-    XBAR12Prediv: XBAR12PredivConf = .DIV1,
+    XBAR12Prediv: XBAR12PredivConf = .@"1",
     XBAR12Findiv: XBAR12FindivConf = @enumFromInt(1),
     XBAR13: XBAR13Conf = .HSIRC,
-    XBAR13Prediv: XBAR13PredivConf = .DIV1,
+    XBAR13Prediv: XBAR13PredivConf = .@"1",
     XBAR13Findiv: XBAR13FindivConf = @enumFromInt(1),
     XBAR14: XBAR14Conf = .HSIRC,
-    XBAR14Prediv: XBAR14PredivConf = .DIV1,
+    XBAR14Prediv: XBAR14PredivConf = .@"1",
     XBAR14Findiv: XBAR14FindivConf = @enumFromInt(1),
     XBAR15: XBAR15Conf = .HSIRC,
-    XBAR15Prediv: XBAR15PredivConf = .DIV1,
+    XBAR15Prediv: XBAR15PredivConf = .@"1",
     XBAR15Findiv: XBAR15FindivConf = @enumFromInt(1),
     XBAR16: XBAR16Conf = .HSIRC,
-    XBAR16Prediv: XBAR16PredivConf = .DIV1,
+    XBAR16Prediv: XBAR16PredivConf = .@"1",
     XBAR16Findiv: XBAR16FindivConf = @enumFromInt(1),
     XBAR17: XBAR17Conf = .HSIRC,
-    XBAR17Prediv: XBAR17PredivConf = .DIV1,
+    XBAR17Prediv: XBAR17PredivConf = .@"1",
     XBAR17Findiv: XBAR17FindivConf = @enumFromInt(1),
     XBAR18: XBAR18Conf = .HSIRC,
-    XBAR18Prediv: XBAR18PredivConf = .DIV1,
+    XBAR18Prediv: XBAR18PredivConf = .@"1",
     XBAR18Findiv: XBAR18FindivConf = @enumFromInt(1),
     XBAR19: XBAR19Conf = .HSIRC,
-    XBAR19Prediv: XBAR19PredivConf = .DIV1,
+    XBAR19Prediv: XBAR19PredivConf = .@"1",
     XBAR19Findiv: XBAR19FindivConf = @enumFromInt(1),
     XBAR20: XBAR20Conf = .HSIRC,
-    XBAR20Prediv: XBAR20PredivConf = .DIV1,
+    XBAR20Prediv: XBAR20PredivConf = .@"1",
     XBAR20Findiv: XBAR20FindivConf = @enumFromInt(1),
     XBAR21: XBAR21Conf = .HSIRC,
-    XBAR21Prediv: XBAR21PredivConf = .DIV1,
+    XBAR21Prediv: XBAR21PredivConf = .@"1",
     XBAR21Findiv: XBAR21FindivConf = @enumFromInt(1),
     XBAR22: XBAR22Conf = .HSIRC,
-    XBAR22Prediv: XBAR22PredivConf = .DIV1,
+    XBAR22Prediv: XBAR22PredivConf = .@"1",
     XBAR22Findiv: XBAR22FindivConf = @enumFromInt(1),
     XBAR23: XBAR23Conf = .HSIRC,
-    XBAR23Prediv: XBAR23PredivConf = .DIV1,
+    XBAR23Prediv: XBAR23PredivConf = .@"1",
     XBAR23Findiv: XBAR23FindivConf = @enumFromInt(1),
     XBAR24: XBAR24Conf = .HSIRC,
-    XBAR24Prediv: XBAR24PredivConf = .DIV1,
+    XBAR24Prediv: XBAR24PredivConf = .@"1",
     XBAR24Findiv: XBAR24FindivConf = @enumFromInt(1),
     XBAR25: XBAR25Conf = .HSIRC,
-    XBAR25Prediv: XBAR25PredivConf = .DIV1,
+    XBAR25Prediv: XBAR25PredivConf = .@"1",
     XBAR25Findiv: XBAR25FindivConf = @enumFromInt(1),
     XBAR26: XBAR26Conf = .HSEOSC,
-    XBAR26Prediv: XBAR26PredivConf = .DIV1,
+    XBAR26Prediv: XBAR26PredivConf = .@"1",
     XBAR26Findiv: XBAR26FindivConf = @enumFromInt(1),
     XBAR27: XBAR27Conf = .FOUTPOSTDIV8,
-    XBAR27Prediv: XBAR27PredivConf = .DIV1,
+    XBAR27Prediv: XBAR27PredivConf = .@"1",
     XBAR27Findiv: XBAR27FindivConf = @enumFromInt(1),
     XBAR28: XBAR28Conf = .HSEOSC,
-    XBAR28Prediv: XBAR28PredivConf = .DIV1,
+    XBAR28Prediv: XBAR28PredivConf = .@"1",
     XBAR28Findiv: XBAR28FindivConf = @enumFromInt(1),
     XBAR29: XBAR29Conf = .FOUTPOSTDIV8,
-    XBAR29Prediv: XBAR29PredivConf = .DIV1,
+    XBAR29Prediv: XBAR29PredivConf = .@"1",
     XBAR29Findiv: XBAR29FindivConf = @enumFromInt(1),
     XBAR30: XBAR30Conf = .HSEOSC,
-    XBAR30Prediv: XBAR30PredivConf = .DIV1,
+    XBAR30Prediv: XBAR30PredivConf = .@"1",
     XBAR30Findiv: XBAR30FindivConf = @enumFromInt(1),
     XBAR31: XBAR31Conf = .HSEOSC,
-    XBAR31Prediv: XBAR31PredivConf = .DIV1,
+    XBAR31Prediv: XBAR31PredivConf = .@"1",
     XBAR31Findiv: XBAR31FindivConf = @enumFromInt(1),
     XBAR32: XBAR32Conf = .HSEOSC,
-    XBAR32Prediv: XBAR32PredivConf = .DIV1,
+    XBAR32Prediv: XBAR32PredivConf = .@"1",
     XBAR32Findiv: XBAR32FindivConf = @enumFromInt(1),
     XBAR33: XBAR33Conf = .HSIRC,
-    XBAR33Prediv: XBAR33PredivConf = .DIV1,
+    XBAR33Prediv: XBAR33PredivConf = .@"1",
     XBAR33Findiv: XBAR33FindivConf = @enumFromInt(1),
     XBAR34: XBAR34Conf = .HSEOSC,
-    XBAR34Prediv: XBAR34PredivConf = .DIV1,
+    XBAR34Prediv: XBAR34PredivConf = .@"1",
     XBAR34Findiv: XBAR34FindivConf = @enumFromInt(1),
     XBAR35: XBAR35Conf = .HSIRC,
-    XBAR35Prediv: XBAR35PredivConf = .DIV1,
+    XBAR35Prediv: XBAR35PredivConf = .@"1",
     XBAR35Findiv: XBAR35FindivConf = @enumFromInt(1),
     XBAR36: XBAR36Conf = .MSIRC,
-    XBAR36Prediv: XBAR36PredivConf = .DIV1,
+    XBAR36Prediv: XBAR36PredivConf = .@"1",
     XBAR36Findiv: XBAR36FindivConf = @enumFromInt(1),
     XBAR37: XBAR37Conf = .HSIRC,
-    XBAR37Prediv: XBAR37PredivConf = .DIV1,
+    XBAR37Prediv: XBAR37PredivConf = .@"1",
     XBAR37Findiv: XBAR37FindivConf = @enumFromInt(1),
     XBAR38: XBAR38Conf = .HSIRC,
-    XBAR38Prediv: XBAR38PredivConf = .DIV1,
+    XBAR38Prediv: XBAR38PredivConf = .@"1",
     XBAR38Findiv: XBAR38FindivConf = @enumFromInt(1),
     XBAR39: XBAR39Conf = .HSIRC,
-    XBAR39Prediv: XBAR39PredivConf = .DIV1,
+    XBAR39Prediv: XBAR39PredivConf = .@"1",
     XBAR39Findiv: XBAR39FindivConf = @enumFromInt(1),
     XBAR40: XBAR40Conf = .LSIRC,
-    XBAR40Prediv: XBAR40PredivConf = .DIV1,
+    XBAR40Prediv: XBAR40PredivConf = .@"1",
     XBAR40Findiv: XBAR40FindivConf = @enumFromInt(1),
     XBAR41: XBAR41Conf = .LSIRC,
-    XBAR41Prediv: XBAR41PredivConf = .DIV1,
+    XBAR41Prediv: XBAR41PredivConf = .@"1",
     XBAR41Findiv: XBAR41FindivConf = @enumFromInt(1),
     XBAR42: XBAR42Conf = .HSIRC,
-    XBAR42Prediv: XBAR42PredivConf = .DIV1,
+    XBAR42Prediv: XBAR42PredivConf = .@"1",
     XBAR42Findiv: XBAR42FindivConf = @enumFromInt(1),
     XBAR43: XBAR43Conf = .FOUTPOSTDIV8,
-    XBAR43Prediv: XBAR43PredivConf = .DIV1,
+    XBAR43Prediv: XBAR43PredivConf = .@"1",
     XBAR43Findiv: XBAR43FindivConf = @enumFromInt(1),
     XBAR44: XBAR44Conf = .FOUTPOSTDIV8,
-    XBAR44Prediv: XBAR44PredivConf = .DIV1,
+    XBAR44Prediv: XBAR44PredivConf = .@"1",
     XBAR44Findiv: XBAR44FindivConf = @enumFromInt(1),
     XBAR45: XBAR45Conf = .FOUTPOSTDIV8,
-    XBAR45Prediv: XBAR45PredivConf = .DIV1,
+    XBAR45Prediv: XBAR45PredivConf = .@"1",
     XBAR45Findiv: XBAR45FindivConf = @enumFromInt(1),
     XBAR46: XBAR46Conf = .HSIRC,
-    XBAR46Prediv: XBAR46PredivConf = .DIV1,
+    XBAR46Prediv: XBAR46PredivConf = .@"1",
     XBAR46Findiv: XBAR46FindivConf = @enumFromInt(1),
     XBAR47: XBAR47Conf = .FOUTPOSTDIV8,
-    XBAR47Prediv: XBAR47PredivConf = .DIV1,
+    XBAR47Prediv: XBAR47PredivConf = .@"1",
     XBAR47Findiv: XBAR47FindivConf = @enumFromInt(1),
     XBAR48: XBAR48Conf = .FOUTPOSTDIV8,
-    XBAR48Prediv: XBAR48PredivConf = .DIV1,
+    XBAR48Prediv: XBAR48PredivConf = .@"1",
     XBAR48Findiv: XBAR48FindivConf = @enumFromInt(1),
     XBAR49: XBAR49Conf = .FOUTPOSTDIV8,
-    XBAR49Prediv: XBAR49PredivConf = .DIV1,
+    XBAR49Prediv: XBAR49PredivConf = .@"1",
     XBAR49Findiv: XBAR49FindivConf = @enumFromInt(1),
     XBAR50: XBAR50Conf = .FOUTPOSTDIV8,
-    XBAR50Prediv: XBAR50PredivConf = .DIV1,
+    XBAR50Prediv: XBAR50PredivConf = .@"1",
     XBAR50Findiv: XBAR50FindivConf = @enumFromInt(1),
     XBAR51: XBAR51Conf = .HSIRC,
-    XBAR51Prediv: XBAR51PredivConf = .DIV1,
+    XBAR51Prediv: XBAR51PredivConf = .@"1",
     XBAR51Findiv: XBAR51FindivConf = @enumFromInt(1),
     XBAR52: XBAR52Conf = .HSIRC,
-    XBAR52Prediv: XBAR52PredivConf = .DIV1,
+    XBAR52Prediv: XBAR52PredivConf = .@"1",
     XBAR52Findiv: XBAR52FindivConf = @enumFromInt(1),
     XBAR53: XBAR53Conf = .HSIRC,
-    XBAR53Prediv: XBAR53PredivConf = .DIV1,
+    XBAR53Prediv: XBAR53PredivConf = .@"1",
     XBAR53Findiv: XBAR53FindivConf = @enumFromInt(1),
     XBAR54: XBAR54Conf = .FOUTPOSTDIV8,
-    XBAR54Prediv: XBAR54PredivConf = .DIV1,
+    XBAR54Prediv: XBAR54PredivConf = .@"1",
     XBAR54Findiv: XBAR54FindivConf = @enumFromInt(1),
     XBAR55: XBAR55Conf = .FOUTPOSTDIV8,
-    XBAR55Prediv: XBAR55PredivConf = .DIV1,
+    XBAR55Prediv: XBAR55PredivConf = .@"1",
     XBAR55Findiv: XBAR55FindivConf = @enumFromInt(1),
     XBAR56: XBAR56Conf = .HSIRC,
-    XBAR56Prediv: XBAR56PredivConf = .DIV1,
+    XBAR56Prediv: XBAR56PredivConf = .@"1",
     XBAR56Findiv: XBAR56FindivConf = @enumFromInt(1),
     XBAR57: XBAR57Conf = .HSEOSC,
-    XBAR57Prediv: XBAR57PredivConf = .DIV1,
+    XBAR57Prediv: XBAR57PredivConf = .@"1",
     XBAR57Findiv: XBAR57FindivConf = @enumFromInt(1),
     XBAR58: XBAR58Conf = .HSEOSC,
-    XBAR58Prediv: XBAR58PredivConf = .DIV1,
+    XBAR58Prediv: XBAR58PredivConf = .@"1",
     XBAR58Findiv: XBAR58FindivConf = @enumFromInt(1),
     XBAR59: XBAR59Conf = .FOUTPOSTDIV8,
-    XBAR59Prediv: XBAR59PredivConf = .DIV1,
+    XBAR59Prediv: XBAR59PredivConf = .@"1",
     XBAR59Findiv: XBAR59FindivConf = @enumFromInt(1),
     XBAR60: XBAR60Conf = .FOUTPOSTDIV8,
-    XBAR60Prediv: XBAR60PredivConf = .DIV1,
+    XBAR60Prediv: XBAR60PredivConf = .@"1",
     XBAR60Findiv: XBAR60FindivConf = @enumFromInt(1),
     XBAR61: XBAR61Conf = .HSIRC,
-    XBAR61Prediv: XBAR61PredivConf = .DIV1,
+    XBAR61Prediv: XBAR61PredivConf = .@"1",
     XBAR61Findiv: XBAR61FindivConf = @enumFromInt(1),
     XBAR62: XBAR62Conf = .HSIRC,
-    XBAR62Prediv: XBAR62PredivConf = .DIV1,
+    XBAR62Prediv: XBAR62PredivConf = .@"1",
     XBAR62Findiv: XBAR62FindivConf = @enumFromInt(1),
     XBAR63: XBAR63Conf = .HSIRC,
-    XBAR63Prediv: XBAR63PredivConf = .DIV1,
+    XBAR63Prediv: XBAR63PredivConf = .@"1",
     XBAR63Findiv: XBAR63FindivConf = @enumFromInt(1),
     CKINTSEL0: CKINTSEL0Conf = .MSIRC,
     CKEXTSEL0: CKEXTSEL0Conf = .PLL1Div42,
@@ -3731,12 +3789,12 @@ pub const Config = struct {
     USB2PHY2: USB2PHY2Conf = .XBAR58Output,
     USB3PCIPHY: USB3PCIPHYConf = .XBAR34Output,
     SysClkSource: SysClkSourceConf = .XBAR0Output,
-    MCUDIV: MCUDIVConf = .DIV1,
-    APB3DIV: APB3DIVConf = .DIV1,
-    APB4DIV: APB4DIVConf = .DIV1,
-    APBDBGDIV: APBDBGDIVConf = .DIV1,
-    APB1DIV: APB1DIVConf = .DIV1,
-    APB2DIV: APB2DIVConf = .DIV1,
+    MCUDIV: MCUDIVConf = .RCC_MCU_DIV1,
+    APB3DIV: APB3DIVConf = .RCC_APB3_DIV1,
+    APB4DIV: APB4DIVConf = .RCC_APB4_DIV1,
+    APBDBGDIV: APBDBGDIVConf = .RCC_APBDBG_DIV1,
+    APB1DIV: APB1DIVConf = .RCC_APB1_DIV1,
+    APB2DIV: APB2DIVConf = .RCC_APB2_DIV1,
     ADC12Mult: ADC12MultConf = .XBAR46Output,
     ADC3Mult: ADC3MultConf = .XBAR47Output,
     LVDSMult: LVDSMultConf = .XBAR32Output,
@@ -3751,44 +3809,49 @@ pub const Config = struct {
     FBDIV1: FBDIV1Conf = @enumFromInt(25),
     POSTDIV1_1: POSTDIV1_1Conf = @enumFromInt(1),
     POSTDIV2_1: POSTDIV2_1Conf = @enumFromInt(1),
-    FBDIV2: FBDIV2Conf = @enumFromInt(25),
+    FBDIV2: FBDIV2Conf = @enumFromInt(12297829382473034410),
     PLL2FRACV: PLL2FRACVConf = @enumFromInt(0),
     POSTDIV1_2: POSTDIV1_2Conf = @enumFromInt(1),
     POSTDIV2_2: POSTDIV2_2Conf = @enumFromInt(1),
-    FBDIV3: FBDIV3Conf = @enumFromInt(25),
+    FBDIV3: FBDIV3Conf = @enumFromInt(12297829382473034410),
     PLL3FRACV: PLL3FRACVConf = @enumFromInt(0),
     POSTDIV1_3: POSTDIV1_3Conf = @enumFromInt(1),
     POSTDIV2_3: POSTDIV2_3Conf = @enumFromInt(1),
-    FBDIV4: FBDIV4Conf = @enumFromInt(25),
+    FBDIV4: FBDIV4Conf = @enumFromInt(12297829382473034410),
     PLL4FRACV: PLL4FRACVConf = @enumFromInt(0),
     POSTDIV1_4: POSTDIV1_4Conf = @enumFromInt(1),
     POSTDIV2_4: POSTDIV2_4Conf = @enumFromInt(1),
     PLL5Source: PLL5SourceConf = .HSIRC,
     FREFDIV5: FREFDIV5Conf = @enumFromInt(1),
-    FBDIV5: FBDIV5Conf = @enumFromInt(25),
+    FBDIV5: FBDIV5Conf = @enumFromInt(12297829382473034410),
     PLL5FRACV: PLL5FRACVConf = @enumFromInt(0),
     POSTDIV1_5: POSTDIV1_5Conf = @enumFromInt(1),
     POSTDIV2_5: POSTDIV2_5Conf = @enumFromInt(1),
     PLL6Source: PLL6SourceConf = .HSIRC,
     FREFDIV6: FREFDIV6Conf = @enumFromInt(1),
-    FBDIV6: FBDIV6Conf = @enumFromInt(25),
+    FBDIV6: FBDIV6Conf = @enumFromInt(12297829382473034410),
     PLL6FRACV: PLL6FRACVConf = @enumFromInt(0),
     POSTDIV1_6: POSTDIV1_6Conf = @enumFromInt(1),
     POSTDIV2_6: POSTDIV2_6Conf = @enumFromInt(1),
     PLL7Source: PLL7SourceConf = .HSIRC,
     FREFDIV7: FREFDIV7Conf = @enumFromInt(1),
-    FBDIV7: FBDIV7Conf = @enumFromInt(25),
+    FBDIV7: FBDIV7Conf = @enumFromInt(12297829382473034410),
     PLL7FRACV: PLL7FRACVConf = @enumFromInt(0),
     POSTDIV1_7: POSTDIV1_7Conf = @enumFromInt(1),
     POSTDIV2_7: POSTDIV2_7Conf = @enumFromInt(1),
     PLL8Source: PLL8SourceConf = .HSIRC,
     FREFDIV8: FREFDIV8Conf = @enumFromInt(1),
-    FBDIV8: FBDIV8Conf = @enumFromInt(25),
+    FBDIV8: FBDIV8Conf = @enumFromInt(12297829382473034410),
     PLL8FRACV: PLL8FRACVConf = @enumFromInt(0),
     POSTDIV1_8: POSTDIV1_8Conf = @enumFromInt(1),
     POSTDIV2_8: POSTDIV2_8Conf = @enumFromInt(1),
     HSERTCDevisor: HSERTCDevisorConf = @enumFromInt(1),
     RTCClkSource: RTCClkSourceConf = .LSIRC,
+    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
+    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
+    RCC_TIM_G1_PRescaler_Selection: RCC_TIM_G1_PRescaler_SelectionConf = .RCC_TIMG1PRES_DEACTIVATED,
+    RCC_TIM_G2_PRescaler_Selection: RCC_TIM_G2_PRescaler_SelectionConf = .RCC_TIMG2PRES_DEACTIVATED,
+    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
 };
 
 pub const ClockTree = struct {
@@ -4171,264 +4234,447 @@ pub const ClockTree = struct {
     RTCClkSource: ClockNode,
     RTCOutput: ClockNode,
     IWDGOutput: ClockNode,
+    HSE_Timout: ClockNodeTypes,
+    LSE_Timout: ClockNodeTypes,
+    RCC_TIM_G1_PRescaler_Selection: ClockNodeTypes,
+    RCC_TIM_G2_PRescaler_Selection: ClockNodeTypes,
+    LSE_Drive_Capability: ClockNodeTypes,
 
     pub fn init_comptime(comptime config: Config) this {
+        const HSIRCval = ClockNodeTypes{
+            .source = .{ .value = 64000000 },
+        };
         const HSIRC: ClockNode = .{
             .name = "HSIRC",
-            .Nodetype = .{ .source = .{ .value = 64000000 } },
+            .Nodetype = HSIRCval,
+        };
+        const HSEOSCval = ClockNodeTypes{
+            .source = .{
+                .value = config.HSEOSC.get(),
+                .limit = .{ .max = 48000000, .min = 16000000 },
+            },
         };
         const HSEOSC: ClockNode = .{
             .name = "HSEOSC",
-            .Nodetype = .{ .source = .{
-                .value = config.HSEOSC.get(),
-                .limit = .{ .max = 48000000, .min = 16000000 },
-            } },
+            .Nodetype = HSEOSCval,
         };
+        const HSEDIV2val = ClockNodeTypes{ .div = .{ .value = config.HSEDIV2.get() } };
         const HSEDIV2: ClockNode = .{
             .name = "HSEDIV2",
-            .Nodetype = .{ .div = .{ .value = config.HSEDIV2.get() } },
+            .Nodetype = HSEDIV2val,
             .parents = &[_]*const ClockNode{&HSEOSC},
+        };
+        const SPDIFval = ClockNodeTypes{
+            .source = .{
+                .value = config.SPDIF.get(),
+                .limit = .{ .max = 12288000, .min = 3072000 },
+            },
         };
         const SPDIF: ClockNode = .{
             .name = "SPDIF",
-            .Nodetype = .{ .source = .{
-                .value = config.SPDIF.get(),
-                .limit = .{ .max = 12288000, .min = 3072000 },
-            } },
+            .Nodetype = SPDIFval,
+        };
+        const LSIRCval = ClockNodeTypes{
+            .source = .{ .value = 32000 },
         };
         const LSIRC: ClockNode = .{
             .name = "LSIRC",
-            .Nodetype = .{ .source = .{ .value = 32000 } },
+            .Nodetype = LSIRCval,
+        };
+        const LSEOSCval = ClockNodeTypes{
+            .source = .{
+                .value = config.LSEOSC.get(),
+                .limit = .{ .max = 1000000, .min = 0 },
+            },
         };
         const LSEOSC: ClockNode = .{
             .name = "LSEOSC",
-            .Nodetype = .{ .source = .{
-                .value = config.LSEOSC.get(),
-                .limit = .{ .max = 1000000, .min = 0 },
-            } },
+            .Nodetype = LSEOSCval,
+        };
+        const MSIRCval = ClockNodeTypes{
+            .source = .{ .value = config.MSIRC.get() },
         };
         const MSIRC: ClockNode = .{
             .name = "MSIRC",
-            .Nodetype = .{ .source = .{ .value = config.MSIRC.get() } },
+            .Nodetype = MSIRCval,
+        };
+        const I2S_CKINval = ClockNodeTypes{
+            .source = .{ .value = 12288000 },
         };
         const I2S_CKIN: ClockNode = .{
             .name = "I2S_CKIN",
-            .Nodetype = .{ .source = .{ .value = 12288000 } },
+            .Nodetype = I2S_CKINval,
         };
+        const PLL4Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL4Source) };
         const PLL4Source: ClockNode = .{
             .name = "PLL4Source",
+            .Nodetype = PLL4Sourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.PLL4Source) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &MSIRC,
                 &HSEOSC,
+            },
+        };
+        const FREFDIV4val = ClockNodeTypes{
+            .div = .{
+                .value = config.FREFDIV4.get(),
+                .limit = .{ .max = 63, .min = 1 },
             },
         };
         const FREFDIV4: ClockNode = .{
             .name = "FREFDIV4",
-            .Nodetype = .{ .div = .{ .value = config.FREFDIV4.get(), .limit = .{ .max = 63, .min = 1 } } },
+            .Nodetype = FREFDIV4val,
             .parents = &[_]*const ClockNode{&PLL4Source},
+        };
+        const PLL4FRACVval = ClockNodeTypes{
+            .source = .{
+                .value = config.PLL4FRACV.get(),
+                .limit = .{ .max = 16777215, .min = 0 },
+            },
         };
         const PLL4FRACV: ClockNode = .{
             .name = "PLL4FRACV",
-            .Nodetype = .{ .source = .{
-                .value = config.PLL4FRACV.get(),
-                .limit = .{ .max = 16777215, .min = 0 },
-            } },
+            .Nodetype = PLL4FRACVval,
+        };
+        const FBDIV4val = ClockNodeTypes{
+            .mulfrac = .{
+                .value = config.FBDIV4.get(),
+                .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
+            },
         };
         const FBDIV4: ClockNode = .{
             .name = "FBDIV4",
-            .Nodetype = .{ .mulfrac = .{ .value = config.FBDIV4.get(), .limit = .{ .max = 500, .min = 20 } } },
+            .Nodetype = FBDIV4val,
             .parents = &[_]*const ClockNode{ &FREFDIV4, &PLL4FRACV },
+        };
+        const POSTDIV1_4val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV1_4.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV1_4: ClockNode = .{
             .name = "POSTDIV1_4",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV1_4.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV1_4val,
             .parents = &[_]*const ClockNode{&FBDIV4},
+        };
+        const POSTDIV2_4val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV2_4.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV2_4: ClockNode = .{
             .name = "POSTDIV2_4",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV2_4.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV2_4val,
             .parents = &[_]*const ClockNode{&POSTDIV1_4},
+        };
+        const FOUTPOSTDIV4val = ClockNodeTypes{
+            .output = .{ .max = 3200000000, .min = 16000000 },
         };
         const FOUTPOSTDIV4: ClockNode = .{
             .name = "FOUTPOSTDIV4",
-            .Nodetype = .{ .output = .{ .max = 3200000000, .min = 16000000 } },
+            .Nodetype = FOUTPOSTDIV4val,
             .parents = &[_]*const ClockNode{&POSTDIV2_4},
         };
+        const PLL5Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL5Source) };
         const PLL5Source: ClockNode = .{
             .name = "PLL5Source",
+            .Nodetype = PLL5Sourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.PLL5Source) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &MSIRC,
                 &HSEOSC,
+            },
+        };
+        const FREFDIV5val = ClockNodeTypes{
+            .div = .{
+                .value = config.FREFDIV5.get(),
+                .limit = .{ .max = 63, .min = 1 },
             },
         };
         const FREFDIV5: ClockNode = .{
             .name = "FREFDIV5",
-            .Nodetype = .{ .div = .{ .value = config.FREFDIV5.get(), .limit = .{ .max = 63, .min = 1 } } },
+            .Nodetype = FREFDIV5val,
             .parents = &[_]*const ClockNode{&PLL5Source},
+        };
+        const PLL5FRACVval = ClockNodeTypes{
+            .source = .{
+                .value = config.PLL5FRACV.get(),
+                .limit = .{ .max = 16777215, .min = 0 },
+            },
         };
         const PLL5FRACV: ClockNode = .{
             .name = "PLL5FRACV",
-            .Nodetype = .{ .source = .{
-                .value = config.PLL5FRACV.get(),
-                .limit = .{ .max = 16777215, .min = 0 },
-            } },
+            .Nodetype = PLL5FRACVval,
+        };
+        const FBDIV5val = ClockNodeTypes{
+            .mulfrac = .{
+                .value = config.FBDIV5.get(),
+                .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
+            },
         };
         const FBDIV5: ClockNode = .{
             .name = "FBDIV5",
-            .Nodetype = .{ .mulfrac = .{ .value = config.FBDIV5.get(), .limit = .{ .max = 500, .min = 20 } } },
+            .Nodetype = FBDIV5val,
             .parents = &[_]*const ClockNode{ &FREFDIV5, &PLL5FRACV },
+        };
+        const POSTDIV1_5val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV1_5.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV1_5: ClockNode = .{
             .name = "POSTDIV1_5",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV1_5.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV1_5val,
             .parents = &[_]*const ClockNode{&FBDIV5},
+        };
+        const POSTDIV2_5val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV2_5.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV2_5: ClockNode = .{
             .name = "POSTDIV2_5",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV2_5.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV2_5val,
             .parents = &[_]*const ClockNode{&POSTDIV1_5},
+        };
+        const FOUTPOSTDIV5val = ClockNodeTypes{
+            .output = .{ .max = 3200000000, .min = 16000000 },
         };
         const FOUTPOSTDIV5: ClockNode = .{
             .name = "FOUTPOSTDIV5",
-            .Nodetype = .{ .output = .{ .max = 3200000000, .min = 16000000 } },
+            .Nodetype = FOUTPOSTDIV5val,
             .parents = &[_]*const ClockNode{&POSTDIV2_5},
         };
+        const PLL6Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL6Source) };
         const PLL6Source: ClockNode = .{
             .name = "PLL6Source",
+            .Nodetype = PLL6Sourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.PLL6Source) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &MSIRC,
                 &HSEOSC,
+            },
+        };
+        const FREFDIV6val = ClockNodeTypes{
+            .div = .{
+                .value = config.FREFDIV6.get(),
+                .limit = .{ .max = 63, .min = 1 },
             },
         };
         const FREFDIV6: ClockNode = .{
             .name = "FREFDIV6",
-            .Nodetype = .{ .div = .{ .value = config.FREFDIV6.get(), .limit = .{ .max = 63, .min = 1 } } },
+            .Nodetype = FREFDIV6val,
             .parents = &[_]*const ClockNode{&PLL6Source},
+        };
+        const PLL6FRACVval = ClockNodeTypes{
+            .source = .{
+                .value = config.PLL6FRACV.get(),
+                .limit = .{ .max = 16777215, .min = 0 },
+            },
         };
         const PLL6FRACV: ClockNode = .{
             .name = "PLL6FRACV",
-            .Nodetype = .{ .source = .{
-                .value = config.PLL6FRACV.get(),
-                .limit = .{ .max = 16777215, .min = 0 },
-            } },
+            .Nodetype = PLL6FRACVval,
+        };
+        const FBDIV6val = ClockNodeTypes{
+            .mulfrac = .{
+                .value = config.FBDIV6.get(),
+                .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
+            },
         };
         const FBDIV6: ClockNode = .{
             .name = "FBDIV6",
-            .Nodetype = .{ .mulfrac = .{ .value = config.FBDIV6.get(), .limit = .{ .max = 500, .min = 20 } } },
+            .Nodetype = FBDIV6val,
             .parents = &[_]*const ClockNode{ &FREFDIV6, &PLL6FRACV },
+        };
+        const POSTDIV1_6val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV1_6.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV1_6: ClockNode = .{
             .name = "POSTDIV1_6",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV1_6.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV1_6val,
             .parents = &[_]*const ClockNode{&FBDIV6},
+        };
+        const POSTDIV2_6val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV2_6.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV2_6: ClockNode = .{
             .name = "POSTDIV2_6",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV2_6.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV2_6val,
             .parents = &[_]*const ClockNode{&POSTDIV1_6},
+        };
+        const FOUTPOSTDIV6val = ClockNodeTypes{
+            .output = .{ .max = 3200000000, .min = 16000000 },
         };
         const FOUTPOSTDIV6: ClockNode = .{
             .name = "FOUTPOSTDIV6",
-            .Nodetype = .{ .output = .{ .max = 3200000000, .min = 16000000 } },
+            .Nodetype = FOUTPOSTDIV6val,
             .parents = &[_]*const ClockNode{&POSTDIV2_6},
         };
+        const PLL7Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL7Source) };
         const PLL7Source: ClockNode = .{
             .name = "PLL7Source",
+            .Nodetype = PLL7Sourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.PLL7Source) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &MSIRC,
                 &HSEOSC,
+            },
+        };
+        const FREFDIV7val = ClockNodeTypes{
+            .div = .{
+                .value = config.FREFDIV7.get(),
+                .limit = .{ .max = 63, .min = 1 },
             },
         };
         const FREFDIV7: ClockNode = .{
             .name = "FREFDIV7",
-            .Nodetype = .{ .div = .{ .value = config.FREFDIV7.get(), .limit = .{ .max = 63, .min = 1 } } },
+            .Nodetype = FREFDIV7val,
             .parents = &[_]*const ClockNode{&PLL7Source},
+        };
+        const PLL7FRACVval = ClockNodeTypes{
+            .source = .{
+                .value = config.PLL7FRACV.get(),
+                .limit = .{ .max = 16777215, .min = 0 },
+            },
         };
         const PLL7FRACV: ClockNode = .{
             .name = "PLL7FRACV",
-            .Nodetype = .{ .source = .{
-                .value = config.PLL7FRACV.get(),
-                .limit = .{ .max = 16777215, .min = 0 },
-            } },
+            .Nodetype = PLL7FRACVval,
+        };
+        const FBDIV7val = ClockNodeTypes{
+            .mulfrac = .{
+                .value = config.FBDIV7.get(),
+                .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
+            },
         };
         const FBDIV7: ClockNode = .{
             .name = "FBDIV7",
-            .Nodetype = .{ .mulfrac = .{ .value = config.FBDIV7.get(), .limit = .{ .max = 500, .min = 20 } } },
+            .Nodetype = FBDIV7val,
             .parents = &[_]*const ClockNode{ &FREFDIV7, &PLL7FRACV },
+        };
+        const POSTDIV1_7val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV1_7.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV1_7: ClockNode = .{
             .name = "POSTDIV1_7",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV1_7.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV1_7val,
             .parents = &[_]*const ClockNode{&FBDIV7},
+        };
+        const POSTDIV2_7val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV2_7.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV2_7: ClockNode = .{
             .name = "POSTDIV2_7",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV2_7.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV2_7val,
             .parents = &[_]*const ClockNode{&POSTDIV1_7},
+        };
+        const FOUTPOSTDIV7val = ClockNodeTypes{
+            .output = .{ .max = 3200000000, .min = 16000000 },
         };
         const FOUTPOSTDIV7: ClockNode = .{
             .name = "FOUTPOSTDIV7",
-            .Nodetype = .{ .output = .{ .max = 3200000000, .min = 16000000 } },
+            .Nodetype = FOUTPOSTDIV7val,
             .parents = &[_]*const ClockNode{&POSTDIV2_7},
         };
+        const PLL8Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL8Source) };
         const PLL8Source: ClockNode = .{
             .name = "PLL8Source",
+            .Nodetype = PLL8Sourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.PLL8Source) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &MSIRC,
                 &HSEOSC,
+            },
+        };
+        const FREFDIV8val = ClockNodeTypes{
+            .div = .{
+                .value = config.FREFDIV8.get(),
+                .limit = .{ .max = 63, .min = 1 },
             },
         };
         const FREFDIV8: ClockNode = .{
             .name = "FREFDIV8",
-            .Nodetype = .{ .div = .{ .value = config.FREFDIV8.get(), .limit = .{ .max = 63, .min = 1 } } },
+            .Nodetype = FREFDIV8val,
             .parents = &[_]*const ClockNode{&PLL8Source},
+        };
+        const PLL8FRACVval = ClockNodeTypes{
+            .source = .{
+                .value = config.PLL8FRACV.get(),
+                .limit = .{ .max = 16777215, .min = 0 },
+            },
         };
         const PLL8FRACV: ClockNode = .{
             .name = "PLL8FRACV",
-            .Nodetype = .{ .source = .{
-                .value = config.PLL8FRACV.get(),
-                .limit = .{ .max = 16777215, .min = 0 },
-            } },
+            .Nodetype = PLL8FRACVval,
+        };
+        const FBDIV8val = ClockNodeTypes{
+            .mulfrac = .{
+                .value = config.FBDIV8.get(),
+                .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
+            },
         };
         const FBDIV8: ClockNode = .{
             .name = "FBDIV8",
-            .Nodetype = .{ .mulfrac = .{ .value = config.FBDIV8.get(), .limit = .{ .max = 500, .min = 20 } } },
+            .Nodetype = FBDIV8val,
             .parents = &[_]*const ClockNode{ &FREFDIV8, &PLL8FRACV },
+        };
+        const POSTDIV1_8val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV1_8.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV1_8: ClockNode = .{
             .name = "POSTDIV1_8",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV1_8.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV1_8val,
             .parents = &[_]*const ClockNode{&FBDIV8},
+        };
+        const POSTDIV2_8val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV2_8.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV2_8: ClockNode = .{
             .name = "POSTDIV2_8",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV2_8.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV2_8val,
             .parents = &[_]*const ClockNode{&POSTDIV1_8},
+        };
+        const FOUTPOSTDIV8val = ClockNodeTypes{
+            .output = .{ .max = 3200000000, .min = 16000000 },
         };
         const FOUTPOSTDIV8: ClockNode = .{
             .name = "FOUTPOSTDIV8",
-            .Nodetype = .{ .output = .{ .max = 3200000000, .min = 16000000 } },
+            .Nodetype = FOUTPOSTDIV8val,
             .parents = &[_]*const ClockNode{&POSTDIV2_8},
         };
+        const XBAR0val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR0) };
         const XBAR0: ClockNode = .{
             .name = "XBAR0",
+            .Nodetype = XBAR0val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR0) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4444,25 +4690,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR0Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR0Prediv.get() } };
         const XBAR0Prediv: ClockNode = .{
             .name = "XBAR0Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR0Prediv.get() } },
+            .Nodetype = XBAR0Predivval,
             .parents = &[_]*const ClockNode{&XBAR0},
+        };
+        const XBAR0Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR0Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR0Findiv: ClockNode = .{
             .name = "XBAR0Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR0Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR0Findivval,
             .parents = &[_]*const ClockNode{&XBAR0Prediv},
+        };
+        const XBAR0Outputval = ClockNodeTypes{
+            .output = .{ .max = 400000000, .min = 0 },
         };
         const XBAR0Output: ClockNode = .{
             .name = "XBAR0Output",
-            .Nodetype = .{ .output = .{ .max = 400000000, .min = 0 } },
+            .Nodetype = XBAR0Outputval,
             .parents = &[_]*const ClockNode{&XBAR0Findiv},
         };
+        const XBAR1val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR1) };
         const XBAR1: ClockNode = .{
             .name = "XBAR1",
+            .Nodetype = XBAR1val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR1) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4478,25 +4735,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR1Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR1Prediv.get() } };
         const XBAR1Prediv: ClockNode = .{
             .name = "XBAR1Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR1Prediv.get() } },
+            .Nodetype = XBAR1Predivval,
             .parents = &[_]*const ClockNode{&XBAR1},
+        };
+        const XBAR1Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR1Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR1Findiv: ClockNode = .{
             .name = "XBAR1Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR1Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR1Findivval,
             .parents = &[_]*const ClockNode{&XBAR1Prediv},
+        };
+        const XBAR1Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR1Output: ClockNode = .{
             .name = "XBAR1Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR1Outputval,
             .parents = &[_]*const ClockNode{&XBAR1Findiv},
         };
+        const XBAR2val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR2) };
         const XBAR2: ClockNode = .{
             .name = "XBAR2",
+            .Nodetype = XBAR2val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR2) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4512,25 +4780,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR2Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR2Prediv.get() } };
         const XBAR2Prediv: ClockNode = .{
             .name = "XBAR2Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR2Prediv.get() } },
+            .Nodetype = XBAR2Predivval,
             .parents = &[_]*const ClockNode{&XBAR2},
+        };
+        const XBAR2Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR2Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR2Findiv: ClockNode = .{
             .name = "XBAR2Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR2Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR2Findivval,
             .parents = &[_]*const ClockNode{&XBAR2Prediv},
+        };
+        const XBAR2Outputval = ClockNodeTypes{
+            .output = .{ .max = 600000000, .min = 0 },
         };
         const XBAR2Output: ClockNode = .{
             .name = "XBAR2Output",
-            .Nodetype = .{ .output = .{ .max = 600000000, .min = 0 } },
+            .Nodetype = XBAR2Outputval,
             .parents = &[_]*const ClockNode{&XBAR2Findiv},
         };
+        const XBAR3val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR3) };
         const XBAR3: ClockNode = .{
             .name = "XBAR3",
+            .Nodetype = XBAR3val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR3) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4546,25 +4825,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR3Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR3Prediv.get() } };
         const XBAR3Prediv: ClockNode = .{
             .name = "XBAR3Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR3Prediv.get() } },
+            .Nodetype = XBAR3Predivval,
             .parents = &[_]*const ClockNode{&XBAR3},
+        };
+        const XBAR3Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR3Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR3Findiv: ClockNode = .{
             .name = "XBAR3Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR3Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR3Findivval,
             .parents = &[_]*const ClockNode{&XBAR3Prediv},
+        };
+        const XBAR3Outputval = ClockNodeTypes{
+            .output = .{ .max = 400000000, .min = 0 },
         };
         const XBAR3Output: ClockNode = .{
             .name = "XBAR3Output",
-            .Nodetype = .{ .output = .{ .max = 400000000, .min = 0 } },
+            .Nodetype = XBAR3Outputval,
             .parents = &[_]*const ClockNode{&XBAR3Findiv},
         };
+        const XBAR4val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR4) };
         const XBAR4: ClockNode = .{
             .name = "XBAR4",
+            .Nodetype = XBAR4val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR4) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4580,25 +4870,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR4Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR4Prediv.get() } };
         const XBAR4Prediv: ClockNode = .{
             .name = "XBAR4Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR4Prediv.get() } },
+            .Nodetype = XBAR4Predivval,
             .parents = &[_]*const ClockNode{&XBAR4},
+        };
+        const XBAR4Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR4Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR4Findiv: ClockNode = .{
             .name = "XBAR4Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR4Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR4Findivval,
             .parents = &[_]*const ClockNode{&XBAR4Prediv},
+        };
+        const XBAR4Outputval = ClockNodeTypes{
+            .output = .{ .max = 300000000, .min = 0 },
         };
         const XBAR4Output: ClockNode = .{
             .name = "XBAR4Output",
-            .Nodetype = .{ .output = .{ .max = 300000000, .min = 0 } },
+            .Nodetype = XBAR4Outputval,
             .parents = &[_]*const ClockNode{&XBAR4Findiv},
         };
+        const XBAR5val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR5) };
         const XBAR5: ClockNode = .{
             .name = "XBAR5",
+            .Nodetype = XBAR5val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR5) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4614,25 +4915,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR5Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR5Prediv.get() } };
         const XBAR5Prediv: ClockNode = .{
             .name = "XBAR5Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR5Prediv.get() } },
+            .Nodetype = XBAR5Predivval,
             .parents = &[_]*const ClockNode{&XBAR5},
+        };
+        const XBAR5Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR5Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR5Findiv: ClockNode = .{
             .name = "XBAR5Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR5Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR5Findivval,
             .parents = &[_]*const ClockNode{&XBAR5Prediv},
+        };
+        const XBAR5Outputval = ClockNodeTypes{
+            .output = .{ .max = 400000000, .min = 0 },
         };
         const XBAR5Output: ClockNode = .{
             .name = "XBAR5Output",
-            .Nodetype = .{ .output = .{ .max = 400000000, .min = 0 } },
+            .Nodetype = XBAR5Outputval,
             .parents = &[_]*const ClockNode{&XBAR5Findiv},
         };
+        const XBAR6val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR6) };
         const XBAR6: ClockNode = .{
             .name = "XBAR6",
+            .Nodetype = XBAR6val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR6) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4648,25 +4960,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR6Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR6Prediv.get() } };
         const XBAR6Prediv: ClockNode = .{
             .name = "XBAR6Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR6Prediv.get() } },
+            .Nodetype = XBAR6Predivval,
             .parents = &[_]*const ClockNode{&XBAR6},
+        };
+        const XBAR6Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR6Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR6Findiv: ClockNode = .{
             .name = "XBAR6Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR6Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR6Findivval,
             .parents = &[_]*const ClockNode{&XBAR6Prediv},
+        };
+        const XBAR6Outputval = ClockNodeTypes{
+            .output = .{ .max = 600000000, .min = 0 },
         };
         const XBAR6Output: ClockNode = .{
             .name = "XBAR6Output",
-            .Nodetype = .{ .output = .{ .max = 600000000, .min = 0 } },
+            .Nodetype = XBAR6Outputval,
             .parents = &[_]*const ClockNode{&XBAR6Findiv},
         };
+        const XBAR7val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR7) };
         const XBAR7: ClockNode = .{
             .name = "XBAR7",
+            .Nodetype = XBAR7val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR7) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4677,25 +5000,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR7Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR7Prediv.get() } };
         const XBAR7Prediv: ClockNode = .{
             .name = "XBAR7Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR7Prediv.get() } },
+            .Nodetype = XBAR7Predivval,
             .parents = &[_]*const ClockNode{&XBAR7},
+        };
+        const XBAR7Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR7Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR7Findiv: ClockNode = .{
             .name = "XBAR7Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR7Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR7Findivval,
             .parents = &[_]*const ClockNode{&XBAR7Prediv},
+        };
+        const XBAR7Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR7Output: ClockNode = .{
             .name = "XBAR7Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR7Outputval,
             .parents = &[_]*const ClockNode{&XBAR7Findiv},
         };
+        const XBAR8val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR8) };
         const XBAR8: ClockNode = .{
             .name = "XBAR8",
+            .Nodetype = XBAR8val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR8) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4707,25 +5041,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR8Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR8Prediv.get() } };
         const XBAR8Prediv: ClockNode = .{
             .name = "XBAR8Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR8Prediv.get() } },
+            .Nodetype = XBAR8Predivval,
             .parents = &[_]*const ClockNode{&XBAR8},
+        };
+        const XBAR8Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR8Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR8Findiv: ClockNode = .{
             .name = "XBAR8Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR8Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR8Findivval,
             .parents = &[_]*const ClockNode{&XBAR8Prediv},
+        };
+        const XBAR8Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR8Output: ClockNode = .{
             .name = "XBAR8Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR8Outputval,
             .parents = &[_]*const ClockNode{&XBAR8Findiv},
         };
+        const XBAR9val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR9) };
         const XBAR9: ClockNode = .{
             .name = "XBAR9",
+            .Nodetype = XBAR9val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR9) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4737,25 +5082,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR9Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR9Prediv.get() } };
         const XBAR9Prediv: ClockNode = .{
             .name = "XBAR9Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR9Prediv.get() } },
+            .Nodetype = XBAR9Predivval,
             .parents = &[_]*const ClockNode{&XBAR9},
+        };
+        const XBAR9Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR9Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR9Findiv: ClockNode = .{
             .name = "XBAR9Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR9Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR9Findivval,
             .parents = &[_]*const ClockNode{&XBAR9Prediv},
+        };
+        const XBAR9Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR9Output: ClockNode = .{
             .name = "XBAR9Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR9Outputval,
             .parents = &[_]*const ClockNode{&XBAR9Findiv},
         };
+        const XBAR10val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR10) };
         const XBAR10: ClockNode = .{
             .name = "XBAR10",
+            .Nodetype = XBAR10val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR10) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4768,25 +5124,36 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
+        const XBAR10Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR10Prediv.get() } };
         const XBAR10Prediv: ClockNode = .{
             .name = "XBAR10Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR10Prediv.get() } },
+            .Nodetype = XBAR10Predivval,
             .parents = &[_]*const ClockNode{&XBAR10},
+        };
+        const XBAR10Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR10Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR10Findiv: ClockNode = .{
             .name = "XBAR10Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR10Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR10Findivval,
             .parents = &[_]*const ClockNode{&XBAR10Prediv},
+        };
+        const XBAR10Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR10Output: ClockNode = .{
             .name = "XBAR10Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR10Outputval,
             .parents = &[_]*const ClockNode{&XBAR10Findiv},
         };
+        const XBAR11val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR11) };
         const XBAR11: ClockNode = .{
             .name = "XBAR11",
+            .Nodetype = XBAR11val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR11) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4796,25 +5163,36 @@ pub const ClockTree = struct {
                 &HSIRC,
             },
         };
+        const XBAR11Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR11Prediv.get() } };
         const XBAR11Prediv: ClockNode = .{
             .name = "XBAR11Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR11Prediv.get() } },
+            .Nodetype = XBAR11Predivval,
             .parents = &[_]*const ClockNode{&XBAR11},
+        };
+        const XBAR11Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR11Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR11Findiv: ClockNode = .{
             .name = "XBAR11Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR11Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR11Findivval,
             .parents = &[_]*const ClockNode{&XBAR11Prediv},
+        };
+        const XBAR11Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR11Output: ClockNode = .{
             .name = "XBAR11Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR11Outputval,
             .parents = &[_]*const ClockNode{&XBAR11Findiv},
         };
+        const XBAR12val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR12) };
         const XBAR12: ClockNode = .{
             .name = "XBAR12",
+            .Nodetype = XBAR12val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR12) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4825,25 +5203,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR12Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR12Prediv.get() } };
         const XBAR12Prediv: ClockNode = .{
             .name = "XBAR12Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR12Prediv.get() } },
+            .Nodetype = XBAR12Predivval,
             .parents = &[_]*const ClockNode{&XBAR12},
+        };
+        const XBAR12Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR12Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR12Findiv: ClockNode = .{
             .name = "XBAR12Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR12Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR12Findivval,
             .parents = &[_]*const ClockNode{&XBAR12Prediv},
+        };
+        const XBAR12Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR12Output: ClockNode = .{
             .name = "XBAR12Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR12Outputval,
             .parents = &[_]*const ClockNode{&XBAR12Findiv},
         };
+        const XBAR13val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR13) };
         const XBAR13: ClockNode = .{
             .name = "XBAR13",
+            .Nodetype = XBAR13val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR13) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4854,25 +5243,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR13Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR13Prediv.get() } };
         const XBAR13Prediv: ClockNode = .{
             .name = "XBAR13Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR13Prediv.get() } },
+            .Nodetype = XBAR13Predivval,
             .parents = &[_]*const ClockNode{&XBAR13},
+        };
+        const XBAR13Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR13Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR13Findiv: ClockNode = .{
             .name = "XBAR13Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR13Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR13Findivval,
             .parents = &[_]*const ClockNode{&XBAR13Prediv},
+        };
+        const XBAR13Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR13Output: ClockNode = .{
             .name = "XBAR13Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR13Outputval,
             .parents = &[_]*const ClockNode{&XBAR13Findiv},
         };
+        const XBAR14val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR14) };
         const XBAR14: ClockNode = .{
             .name = "XBAR14",
+            .Nodetype = XBAR14val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR14) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4883,25 +5283,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR14Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR14Prediv.get() } };
         const XBAR14Prediv: ClockNode = .{
             .name = "XBAR14Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR14Prediv.get() } },
+            .Nodetype = XBAR14Predivval,
             .parents = &[_]*const ClockNode{&XBAR14},
+        };
+        const XBAR14Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR14Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR14Findiv: ClockNode = .{
             .name = "XBAR14Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR14Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR14Findivval,
             .parents = &[_]*const ClockNode{&XBAR14Prediv},
+        };
+        const XBAR14Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR14Output: ClockNode = .{
             .name = "XBAR14Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR14Outputval,
             .parents = &[_]*const ClockNode{&XBAR14Findiv},
         };
+        const XBAR15val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR15) };
         const XBAR15: ClockNode = .{
             .name = "XBAR15",
+            .Nodetype = XBAR15val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR15) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4912,25 +5323,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR15Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR15Prediv.get() } };
         const XBAR15Prediv: ClockNode = .{
             .name = "XBAR15Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR15Prediv.get() } },
+            .Nodetype = XBAR15Predivval,
             .parents = &[_]*const ClockNode{&XBAR15},
+        };
+        const XBAR15Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR15Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR15Findiv: ClockNode = .{
             .name = "XBAR15Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR15Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR15Findivval,
             .parents = &[_]*const ClockNode{&XBAR15Prediv},
+        };
+        const XBAR15Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR15Output: ClockNode = .{
             .name = "XBAR15Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR15Outputval,
             .parents = &[_]*const ClockNode{&XBAR15Findiv},
         };
+        const XBAR16val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR16) };
         const XBAR16: ClockNode = .{
             .name = "XBAR16",
+            .Nodetype = XBAR16val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR16) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4943,25 +5365,36 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
+        const XBAR16Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR16Prediv.get() } };
         const XBAR16Prediv: ClockNode = .{
             .name = "XBAR16Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR16Prediv.get() } },
+            .Nodetype = XBAR16Predivval,
             .parents = &[_]*const ClockNode{&XBAR16},
+        };
+        const XBAR16Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR16Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR16Findiv: ClockNode = .{
             .name = "XBAR16Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR16Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR16Findivval,
             .parents = &[_]*const ClockNode{&XBAR16Prediv},
+        };
+        const XBAR16Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR16Output: ClockNode = .{
             .name = "XBAR16Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR16Outputval,
             .parents = &[_]*const ClockNode{&XBAR16Findiv},
         };
+        const XBAR17val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR17) };
         const XBAR17: ClockNode = .{
             .name = "XBAR17",
+            .Nodetype = XBAR17val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR17) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -4974,25 +5407,36 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
+        const XBAR17Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR17Prediv.get() } };
         const XBAR17Prediv: ClockNode = .{
             .name = "XBAR17Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR17Prediv.get() } },
+            .Nodetype = XBAR17Predivval,
             .parents = &[_]*const ClockNode{&XBAR17},
+        };
+        const XBAR17Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR17Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR17Findiv: ClockNode = .{
             .name = "XBAR17Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR17Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR17Findivval,
             .parents = &[_]*const ClockNode{&XBAR17Prediv},
+        };
+        const XBAR17Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR17Output: ClockNode = .{
             .name = "XBAR17Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR17Outputval,
             .parents = &[_]*const ClockNode{&XBAR17Findiv},
         };
+        const XBAR18val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR18) };
         const XBAR18: ClockNode = .{
             .name = "XBAR18",
+            .Nodetype = XBAR18val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR18) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5005,25 +5449,36 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
+        const XBAR18Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR18Prediv.get() } };
         const XBAR18Prediv: ClockNode = .{
             .name = "XBAR18Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR18Prediv.get() } },
+            .Nodetype = XBAR18Predivval,
             .parents = &[_]*const ClockNode{&XBAR18},
+        };
+        const XBAR18Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR18Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR18Findiv: ClockNode = .{
             .name = "XBAR18Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR18Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR18Findivval,
             .parents = &[_]*const ClockNode{&XBAR18Prediv},
+        };
+        const XBAR18Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR18Output: ClockNode = .{
             .name = "XBAR18Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR18Outputval,
             .parents = &[_]*const ClockNode{&XBAR18Findiv},
         };
+        const XBAR19val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR19) };
         const XBAR19: ClockNode = .{
             .name = "XBAR19",
+            .Nodetype = XBAR19val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR19) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5035,25 +5490,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR19Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR19Prediv.get() } };
         const XBAR19Prediv: ClockNode = .{
             .name = "XBAR19Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR19Prediv.get() } },
+            .Nodetype = XBAR19Predivval,
             .parents = &[_]*const ClockNode{&XBAR19},
+        };
+        const XBAR19Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR19Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR19Findiv: ClockNode = .{
             .name = "XBAR19Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR19Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR19Findivval,
             .parents = &[_]*const ClockNode{&XBAR19Prediv},
+        };
+        const XBAR19Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR19Output: ClockNode = .{
             .name = "XBAR19Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR19Outputval,
             .parents = &[_]*const ClockNode{&XBAR19Findiv},
         };
+        const XBAR20val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR20) };
         const XBAR20: ClockNode = .{
             .name = "XBAR20",
+            .Nodetype = XBAR20val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR20) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5065,25 +5531,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR20Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR20Prediv.get() } };
         const XBAR20Prediv: ClockNode = .{
             .name = "XBAR20Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR20Prediv.get() } },
+            .Nodetype = XBAR20Predivval,
             .parents = &[_]*const ClockNode{&XBAR20},
+        };
+        const XBAR20Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR20Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR20Findiv: ClockNode = .{
             .name = "XBAR20Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR20Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR20Findivval,
             .parents = &[_]*const ClockNode{&XBAR20Prediv},
+        };
+        const XBAR20Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR20Output: ClockNode = .{
             .name = "XBAR20Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR20Outputval,
             .parents = &[_]*const ClockNode{&XBAR20Findiv},
         };
+        const XBAR21val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR21) };
         const XBAR21: ClockNode = .{
             .name = "XBAR21",
+            .Nodetype = XBAR21val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR21) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5095,25 +5572,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR21Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR21Prediv.get() } };
         const XBAR21Prediv: ClockNode = .{
             .name = "XBAR21Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR21Prediv.get() } },
+            .Nodetype = XBAR21Predivval,
             .parents = &[_]*const ClockNode{&XBAR21},
+        };
+        const XBAR21Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR21Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR21Findiv: ClockNode = .{
             .name = "XBAR21Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR21Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR21Findivval,
             .parents = &[_]*const ClockNode{&XBAR21Prediv},
+        };
+        const XBAR21Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR21Output: ClockNode = .{
             .name = "XBAR21Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR21Outputval,
             .parents = &[_]*const ClockNode{&XBAR21Findiv},
         };
+        const XBAR22val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR22) };
         const XBAR22: ClockNode = .{
             .name = "XBAR22",
+            .Nodetype = XBAR22val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR22) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5125,25 +5613,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR22Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR22Prediv.get() } };
         const XBAR22Prediv: ClockNode = .{
             .name = "XBAR22Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR22Prediv.get() } },
+            .Nodetype = XBAR22Predivval,
             .parents = &[_]*const ClockNode{&XBAR22},
+        };
+        const XBAR22Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR22Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR22Findiv: ClockNode = .{
             .name = "XBAR22Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR22Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR22Findivval,
             .parents = &[_]*const ClockNode{&XBAR22Prediv},
+        };
+        const XBAR22Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR22Output: ClockNode = .{
             .name = "XBAR22Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR22Outputval,
             .parents = &[_]*const ClockNode{&XBAR22Findiv},
         };
+        const XBAR23val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR23) };
         const XBAR23: ClockNode = .{
             .name = "XBAR23",
+            .Nodetype = XBAR23val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR23) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5157,25 +5656,36 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
+        const XBAR23Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR23Prediv.get() } };
         const XBAR23Prediv: ClockNode = .{
             .name = "XBAR23Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR23Prediv.get() } },
+            .Nodetype = XBAR23Predivval,
             .parents = &[_]*const ClockNode{&XBAR23},
+        };
+        const XBAR23Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR23Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR23Findiv: ClockNode = .{
             .name = "XBAR23Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR23Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR23Findivval,
             .parents = &[_]*const ClockNode{&XBAR23Prediv},
+        };
+        const XBAR23Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR23Output: ClockNode = .{
             .name = "XBAR23Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR23Outputval,
             .parents = &[_]*const ClockNode{&XBAR23Findiv},
         };
+        const XBAR24val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR24) };
         const XBAR24: ClockNode = .{
             .name = "XBAR24",
+            .Nodetype = XBAR24val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR24) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5189,25 +5699,36 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
+        const XBAR24Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR24Prediv.get() } };
         const XBAR24Prediv: ClockNode = .{
             .name = "XBAR24Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR24Prediv.get() } },
+            .Nodetype = XBAR24Predivval,
             .parents = &[_]*const ClockNode{&XBAR24},
+        };
+        const XBAR24Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR24Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR24Findiv: ClockNode = .{
             .name = "XBAR24Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR24Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR24Findivval,
             .parents = &[_]*const ClockNode{&XBAR24Prediv},
+        };
+        const XBAR24Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR24Output: ClockNode = .{
             .name = "XBAR24Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR24Outputval,
             .parents = &[_]*const ClockNode{&XBAR24Findiv},
         };
+        const XBAR25val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR25) };
         const XBAR25: ClockNode = .{
             .name = "XBAR25",
+            .Nodetype = XBAR25val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR25) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5221,25 +5742,36 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
+        const XBAR25Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR25Prediv.get() } };
         const XBAR25Prediv: ClockNode = .{
             .name = "XBAR25Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR25Prediv.get() } },
+            .Nodetype = XBAR25Predivval,
             .parents = &[_]*const ClockNode{&XBAR25},
+        };
+        const XBAR25Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR25Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR25Findiv: ClockNode = .{
             .name = "XBAR25Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR25Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR25Findivval,
             .parents = &[_]*const ClockNode{&XBAR25Prediv},
+        };
+        const XBAR25Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR25Output: ClockNode = .{
             .name = "XBAR25Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR25Outputval,
             .parents = &[_]*const ClockNode{&XBAR25Findiv},
         };
+        const XBAR26val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR26) };
         const XBAR26: ClockNode = .{
             .name = "XBAR26",
+            .Nodetype = XBAR26val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR26) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5249,25 +5781,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR26Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR26Prediv.get() } };
         const XBAR26Prediv: ClockNode = .{
             .name = "XBAR26Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR26Prediv.get() } },
+            .Nodetype = XBAR26Predivval,
             .parents = &[_]*const ClockNode{&XBAR26},
+        };
+        const XBAR26Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR26Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR26Findiv: ClockNode = .{
             .name = "XBAR26Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR26Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR26Findivval,
             .parents = &[_]*const ClockNode{&XBAR26Prediv},
+        };
+        const XBAR26Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR26Output: ClockNode = .{
             .name = "XBAR26Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR26Outputval,
             .parents = &[_]*const ClockNode{&XBAR26Findiv},
         };
+        const XBAR27val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR27) };
         const XBAR27: ClockNode = .{
             .name = "XBAR27",
+            .Nodetype = XBAR27val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR27) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5276,25 +5819,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR27Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR27Prediv.get() } };
         const XBAR27Prediv: ClockNode = .{
             .name = "XBAR27Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR27Prediv.get() } },
+            .Nodetype = XBAR27Predivval,
             .parents = &[_]*const ClockNode{&XBAR27},
+        };
+        const XBAR27Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR27Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR27Findiv: ClockNode = .{
             .name = "XBAR27Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR27Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR27Findivval,
             .parents = &[_]*const ClockNode{&XBAR27Prediv},
+        };
+        const XBAR27Outputval = ClockNodeTypes{
+            .output = .{ .max = 314000000, .min = 0 },
         };
         const XBAR27Output: ClockNode = .{
             .name = "XBAR27Output",
-            .Nodetype = .{ .output = .{ .max = 314000000, .min = 0 } },
+            .Nodetype = XBAR27Outputval,
             .parents = &[_]*const ClockNode{&XBAR27Findiv},
         };
+        const XBAR28val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR28) };
         const XBAR28: ClockNode = .{
             .name = "XBAR28",
+            .Nodetype = XBAR28val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR28) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5304,25 +5858,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR28Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR28Prediv.get() } };
         const XBAR28Prediv: ClockNode = .{
             .name = "XBAR28Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR28Prediv.get() } },
+            .Nodetype = XBAR28Predivval,
             .parents = &[_]*const ClockNode{&XBAR28},
+        };
+        const XBAR28Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR28Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR28Findiv: ClockNode = .{
             .name = "XBAR28Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR28Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR28Findivval,
             .parents = &[_]*const ClockNode{&XBAR28Prediv},
+        };
+        const XBAR28Outputval = ClockNodeTypes{
+            .output = .{ .max = 27000000, .min = 0 },
         };
         const XBAR28Output: ClockNode = .{
             .name = "XBAR28Output",
-            .Nodetype = .{ .output = .{ .max = 27000000, .min = 0 } },
+            .Nodetype = XBAR28Outputval,
             .parents = &[_]*const ClockNode{&XBAR28Findiv},
         };
+        const XBAR29val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR29) };
         const XBAR29: ClockNode = .{
             .name = "XBAR29",
+            .Nodetype = XBAR29val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR29) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5331,25 +5896,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR29Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR29Prediv.get() } };
         const XBAR29Prediv: ClockNode = .{
             .name = "XBAR29Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR29Prediv.get() } },
+            .Nodetype = XBAR29Predivval,
             .parents = &[_]*const ClockNode{&XBAR29},
+        };
+        const XBAR29Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR29Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR29Findiv: ClockNode = .{
             .name = "XBAR29Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR29Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR29Findivval,
             .parents = &[_]*const ClockNode{&XBAR29Prediv},
+        };
+        const XBAR29Outputval = ClockNodeTypes{
+            .output = .{ .max = 333000000, .min = 0 },
         };
         const XBAR29Output: ClockNode = .{
             .name = "XBAR29Output",
-            .Nodetype = .{ .output = .{ .max = 333000000, .min = 0 } },
+            .Nodetype = XBAR29Outputval,
             .parents = &[_]*const ClockNode{&XBAR29Findiv},
         };
+        const XBAR30val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR30) };
         const XBAR30: ClockNode = .{
             .name = "XBAR30",
+            .Nodetype = XBAR30val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR30) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5359,25 +5935,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR30Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR30Prediv.get() } };
         const XBAR30Prediv: ClockNode = .{
             .name = "XBAR30Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR30Prediv.get() } },
+            .Nodetype = XBAR30Predivval,
             .parents = &[_]*const ClockNode{&XBAR30},
+        };
+        const XBAR30Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR30Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR30Findiv: ClockNode = .{
             .name = "XBAR30Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR30Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR30Findivval,
             .parents = &[_]*const ClockNode{&XBAR30Prediv},
+        };
+        const XBAR30Outputval = ClockNodeTypes{
+            .output = .{ .max = 20000000, .min = 0 },
         };
         const XBAR30Output: ClockNode = .{
             .name = "XBAR30Output",
-            .Nodetype = .{ .output = .{ .max = 20000000, .min = 0 } },
+            .Nodetype = XBAR30Outputval,
             .parents = &[_]*const ClockNode{&XBAR30Findiv},
         };
+        const XBAR31val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR31) };
         const XBAR31: ClockNode = .{
             .name = "XBAR31",
+            .Nodetype = XBAR31val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR31) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5387,25 +5974,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR31Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR31Prediv.get() } };
         const XBAR31Prediv: ClockNode = .{
             .name = "XBAR31Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR31Prediv.get() } },
+            .Nodetype = XBAR31Predivval,
             .parents = &[_]*const ClockNode{&XBAR31},
+        };
+        const XBAR31Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR31Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR31Findiv: ClockNode = .{
             .name = "XBAR31Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR31Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR31Findivval,
             .parents = &[_]*const ClockNode{&XBAR31Prediv},
+        };
+        const XBAR31Outputval = ClockNodeTypes{
+            .output = .{ .max = 27000000, .min = 0 },
         };
         const XBAR31Output: ClockNode = .{
             .name = "XBAR31Output",
-            .Nodetype = .{ .output = .{ .max = 27000000, .min = 0 } },
+            .Nodetype = XBAR31Outputval,
             .parents = &[_]*const ClockNode{&XBAR31Findiv},
         };
+        const XBAR32val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR32) };
         const XBAR32: ClockNode = .{
             .name = "XBAR32",
+            .Nodetype = XBAR32val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR32) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5415,25 +6013,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR32Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR32Prediv.get() } };
         const XBAR32Prediv: ClockNode = .{
             .name = "XBAR32Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR32Prediv.get() } },
+            .Nodetype = XBAR32Predivval,
             .parents = &[_]*const ClockNode{&XBAR32},
+        };
+        const XBAR32Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR32Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR32Findiv: ClockNode = .{
             .name = "XBAR32Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR32Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR32Findivval,
             .parents = &[_]*const ClockNode{&XBAR32Prediv},
+        };
+        const XBAR32Outputval = ClockNodeTypes{
+            .output = .{ .max = 27000000, .min = 0 },
         };
         const XBAR32Output: ClockNode = .{
             .name = "XBAR32Output",
-            .Nodetype = .{ .output = .{ .max = 27000000, .min = 0 } },
+            .Nodetype = XBAR32Outputval,
             .parents = &[_]*const ClockNode{&XBAR32Findiv},
         };
+        const XBAR33val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR33) };
         const XBAR33: ClockNode = .{
             .name = "XBAR33",
+            .Nodetype = XBAR33val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR33) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5444,25 +6053,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR33Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR33Prediv.get() } };
         const XBAR33Prediv: ClockNode = .{
             .name = "XBAR33Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR33Prediv.get() } },
+            .Nodetype = XBAR33Predivval,
             .parents = &[_]*const ClockNode{&XBAR33},
+        };
+        const XBAR33Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR33Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR33Findiv: ClockNode = .{
             .name = "XBAR33Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR33Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR33Findivval,
             .parents = &[_]*const ClockNode{&XBAR33Prediv},
+        };
+        const XBAR33Outputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
         };
         const XBAR33Output: ClockNode = .{
             .name = "XBAR33Output",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = XBAR33Outputval,
             .parents = &[_]*const ClockNode{&XBAR33Findiv},
         };
+        const XBAR34val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR34) };
         const XBAR34: ClockNode = .{
             .name = "XBAR34",
+            .Nodetype = XBAR34val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR34) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5472,25 +6092,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR34Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR34Prediv.get() } };
         const XBAR34Prediv: ClockNode = .{
             .name = "XBAR34Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR34Prediv.get() } },
+            .Nodetype = XBAR34Predivval,
             .parents = &[_]*const ClockNode{&XBAR34},
+        };
+        const XBAR34Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR34Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR34Findiv: ClockNode = .{
             .name = "XBAR34Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR34Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR34Findivval,
             .parents = &[_]*const ClockNode{&XBAR34Prediv},
+        };
+        const XBAR34Outputval = ClockNodeTypes{
+            .output = .{ .max = 25000000, .min = 0 },
         };
         const XBAR34Output: ClockNode = .{
             .name = "XBAR34Output",
-            .Nodetype = .{ .output = .{ .max = 25000000, .min = 0 } },
+            .Nodetype = XBAR34Outputval,
             .parents = &[_]*const ClockNode{&XBAR34Findiv},
         };
+        const XBAR35val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR35) };
         const XBAR35: ClockNode = .{
             .name = "XBAR35",
+            .Nodetype = XBAR35val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR35) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5501,25 +6132,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR35Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR35Prediv.get() } };
         const XBAR35Prediv: ClockNode = .{
             .name = "XBAR35Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR35Prediv.get() } },
+            .Nodetype = XBAR35Predivval,
             .parents = &[_]*const ClockNode{&XBAR35},
+        };
+        const XBAR35Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR35Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR35Findiv: ClockNode = .{
             .name = "XBAR35Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR35Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR35Findivval,
             .parents = &[_]*const ClockNode{&XBAR35Prediv},
+        };
+        const XBAR35Outputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
         };
         const XBAR35Output: ClockNode = .{
             .name = "XBAR35Output",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = XBAR35Outputval,
             .parents = &[_]*const ClockNode{&XBAR35Findiv},
         };
+        const XBAR36val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR36) };
         const XBAR36: ClockNode = .{
             .name = "XBAR36",
+            .Nodetype = XBAR36val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR36) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5530,25 +6172,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR36Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR36Prediv.get() } };
         const XBAR36Prediv: ClockNode = .{
             .name = "XBAR36Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR36Prediv.get() } },
+            .Nodetype = XBAR36Predivval,
             .parents = &[_]*const ClockNode{&XBAR36},
+        };
+        const XBAR36Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR36Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR36Findiv: ClockNode = .{
             .name = "XBAR36Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR36Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR36Findivval,
             .parents = &[_]*const ClockNode{&XBAR36Prediv},
+        };
+        const XBAR36Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR36Output: ClockNode = .{
             .name = "XBAR36Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR36Outputval,
             .parents = &[_]*const ClockNode{&XBAR36Findiv},
         };
+        const XBAR37val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR37) };
         const XBAR37: ClockNode = .{
             .name = "XBAR37",
+            .Nodetype = XBAR37val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR37) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5561,25 +6214,36 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
+        const XBAR37Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR37Prediv.get() } };
         const XBAR37Prediv: ClockNode = .{
             .name = "XBAR37Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR37Prediv.get() } },
+            .Nodetype = XBAR37Predivval,
             .parents = &[_]*const ClockNode{&XBAR37},
+        };
+        const XBAR37Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR37Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR37Findiv: ClockNode = .{
             .name = "XBAR37Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR37Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR37Findivval,
             .parents = &[_]*const ClockNode{&XBAR37Prediv},
+        };
+        const XBAR37Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR37Output: ClockNode = .{
             .name = "XBAR37Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR37Outputval,
             .parents = &[_]*const ClockNode{&XBAR37Findiv},
         };
+        const XBAR38val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR38) };
         const XBAR38: ClockNode = .{
             .name = "XBAR38",
+            .Nodetype = XBAR38val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR38) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5590,25 +6254,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR38Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR38Prediv.get() } };
         const XBAR38Prediv: ClockNode = .{
             .name = "XBAR38Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR38Prediv.get() } },
+            .Nodetype = XBAR38Predivval,
             .parents = &[_]*const ClockNode{&XBAR38},
+        };
+        const XBAR38Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR38Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR38Findiv: ClockNode = .{
             .name = "XBAR38Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR38Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR38Findivval,
             .parents = &[_]*const ClockNode{&XBAR38Prediv},
+        };
+        const XBAR38Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR38Output: ClockNode = .{
             .name = "XBAR38Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR38Outputval,
             .parents = &[_]*const ClockNode{&XBAR38Findiv},
         };
+        const XBAR39val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR39) };
         const XBAR39: ClockNode = .{
             .name = "XBAR39",
+            .Nodetype = XBAR39val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR39) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5620,25 +6295,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR39Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR39Prediv.get() } };
         const XBAR39Prediv: ClockNode = .{
             .name = "XBAR39Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR39Prediv.get() } },
+            .Nodetype = XBAR39Predivval,
             .parents = &[_]*const ClockNode{&XBAR39},
+        };
+        const XBAR39Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR39Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR39Findiv: ClockNode = .{
             .name = "XBAR39Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR39Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR39Findivval,
             .parents = &[_]*const ClockNode{&XBAR39Prediv},
+        };
+        const XBAR39Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR39Output: ClockNode = .{
             .name = "XBAR39Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR39Outputval,
             .parents = &[_]*const ClockNode{&XBAR39Findiv},
         };
+        const XBAR40val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR40) };
         const XBAR40: ClockNode = .{
             .name = "XBAR40",
+            .Nodetype = XBAR40val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR40) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5649,25 +6335,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR40Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR40Prediv.get() } };
         const XBAR40Prediv: ClockNode = .{
             .name = "XBAR40Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR40Prediv.get() } },
+            .Nodetype = XBAR40Predivval,
             .parents = &[_]*const ClockNode{&XBAR40},
+        };
+        const XBAR40Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR40Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR40Findiv: ClockNode = .{
             .name = "XBAR40Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR40Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR40Findivval,
             .parents = &[_]*const ClockNode{&XBAR40Prediv},
+        };
+        const XBAR40Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR40Output: ClockNode = .{
             .name = "XBAR40Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR40Outputval,
             .parents = &[_]*const ClockNode{&XBAR40Findiv},
         };
+        const XBAR41val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR41) };
         const XBAR41: ClockNode = .{
             .name = "XBAR41",
+            .Nodetype = XBAR41val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR41) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5678,25 +6375,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR41Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR41Prediv.get() } };
         const XBAR41Prediv: ClockNode = .{
             .name = "XBAR41Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR41Prediv.get() } },
+            .Nodetype = XBAR41Predivval,
             .parents = &[_]*const ClockNode{&XBAR41},
+        };
+        const XBAR41Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR41Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR41Findiv: ClockNode = .{
             .name = "XBAR41Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR41Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR41Findivval,
             .parents = &[_]*const ClockNode{&XBAR41Prediv},
+        };
+        const XBAR41Outputval = ClockNodeTypes{
+            .output = .{ .max = 100000000, .min = 0 },
         };
         const XBAR41Output: ClockNode = .{
             .name = "XBAR41Output",
-            .Nodetype = .{ .output = .{ .max = 100000000, .min = 0 } },
+            .Nodetype = XBAR41Outputval,
             .parents = &[_]*const ClockNode{&XBAR41Findiv},
         };
+        const XBAR42val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR42) };
         const XBAR42: ClockNode = .{
             .name = "XBAR42",
+            .Nodetype = XBAR42val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR42) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5708,25 +6416,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR42Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR42Prediv.get() } };
         const XBAR42Prediv: ClockNode = .{
             .name = "XBAR42Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR42Prediv.get() } },
+            .Nodetype = XBAR42Predivval,
             .parents = &[_]*const ClockNode{&XBAR42},
+        };
+        const XBAR42Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR42Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR42Findiv: ClockNode = .{
             .name = "XBAR42Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR42Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR42Findivval,
             .parents = &[_]*const ClockNode{&XBAR42Prediv},
+        };
+        const XBAR42Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR42Output: ClockNode = .{
             .name = "XBAR42Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR42Outputval,
             .parents = &[_]*const ClockNode{&XBAR42Findiv},
         };
+        const XBAR43val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR43) };
         const XBAR43: ClockNode = .{
             .name = "XBAR43",
+            .Nodetype = XBAR43val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR43) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5735,25 +6454,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR43Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR43Prediv.get() } };
         const XBAR43Prediv: ClockNode = .{
             .name = "XBAR43Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR43Prediv.get() } },
+            .Nodetype = XBAR43Predivval,
             .parents = &[_]*const ClockNode{&XBAR43},
+        };
+        const XBAR43Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR43Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR43Findiv: ClockNode = .{
             .name = "XBAR43Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR43Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR43Findivval,
             .parents = &[_]*const ClockNode{&XBAR43Prediv},
+        };
+        const XBAR43Outputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
         };
         const XBAR43Output: ClockNode = .{
             .name = "XBAR43Output",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = XBAR43Outputval,
             .parents = &[_]*const ClockNode{&XBAR43Findiv},
         };
+        const XBAR44val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR44) };
         const XBAR44: ClockNode = .{
             .name = "XBAR44",
+            .Nodetype = XBAR44val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR44) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5762,25 +6492,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR44Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR44Prediv.get() } };
         const XBAR44Prediv: ClockNode = .{
             .name = "XBAR44Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR44Prediv.get() } },
+            .Nodetype = XBAR44Predivval,
             .parents = &[_]*const ClockNode{&XBAR44},
+        };
+        const XBAR44Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR44Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR44Findiv: ClockNode = .{
             .name = "XBAR44Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR44Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR44Findivval,
             .parents = &[_]*const ClockNode{&XBAR44Prediv},
+        };
+        const XBAR44Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR44Output: ClockNode = .{
             .name = "XBAR44Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR44Outputval,
             .parents = &[_]*const ClockNode{&XBAR44Findiv},
         };
+        const XBAR45val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR45) };
         const XBAR45: ClockNode = .{
             .name = "XBAR45",
+            .Nodetype = XBAR45val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR45) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5789,25 +6530,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR45Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR45Prediv.get() } };
         const XBAR45Prediv: ClockNode = .{
             .name = "XBAR45Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR45Prediv.get() } },
+            .Nodetype = XBAR45Predivval,
             .parents = &[_]*const ClockNode{&XBAR45},
+        };
+        const XBAR45Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR45Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR45Findiv: ClockNode = .{
             .name = "XBAR45Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR45Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR45Findivval,
             .parents = &[_]*const ClockNode{&XBAR45Prediv},
+        };
+        const XBAR45Outputval = ClockNodeTypes{
+            .output = .{ .max = 400000000, .min = 0 },
         };
         const XBAR45Output: ClockNode = .{
             .name = "XBAR45Output",
-            .Nodetype = .{ .output = .{ .max = 400000000, .min = 0 } },
+            .Nodetype = XBAR45Outputval,
             .parents = &[_]*const ClockNode{&XBAR45Findiv},
         };
+        const XBAR46val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR46) };
         const XBAR46: ClockNode = .{
             .name = "XBAR46",
+            .Nodetype = XBAR46val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR46) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5819,25 +6571,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR46Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR46Prediv.get() } };
         const XBAR46Prediv: ClockNode = .{
             .name = "XBAR46Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR46Prediv.get() } },
+            .Nodetype = XBAR46Predivval,
             .parents = &[_]*const ClockNode{&XBAR46},
+        };
+        const XBAR46Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR46Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR46Findiv: ClockNode = .{
             .name = "XBAR46Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR46Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR46Findivval,
             .parents = &[_]*const ClockNode{&XBAR46Prediv},
+        };
+        const XBAR46Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR46Output: ClockNode = .{
             .name = "XBAR46Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR46Outputval,
             .parents = &[_]*const ClockNode{&XBAR46Findiv},
         };
+        const XBAR47val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR47) };
         const XBAR47: ClockNode = .{
             .name = "XBAR47",
+            .Nodetype = XBAR47val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR47) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5846,25 +6609,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR47Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR47Prediv.get() } };
         const XBAR47Prediv: ClockNode = .{
             .name = "XBAR47Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR47Prediv.get() } },
+            .Nodetype = XBAR47Predivval,
             .parents = &[_]*const ClockNode{&XBAR47},
+        };
+        const XBAR47Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR47Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR47Findiv: ClockNode = .{
             .name = "XBAR47Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR47Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR47Findivval,
             .parents = &[_]*const ClockNode{&XBAR47Prediv},
+        };
+        const XBAR47Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR47Output: ClockNode = .{
             .name = "XBAR47Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR47Outputval,
             .parents = &[_]*const ClockNode{&XBAR47Findiv},
         };
+        const XBAR48val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR48) };
         const XBAR48: ClockNode = .{
             .name = "XBAR48",
+            .Nodetype = XBAR48val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR48) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5873,25 +6647,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR48Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR48Prediv.get() } };
         const XBAR48Prediv: ClockNode = .{
             .name = "XBAR48Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR48Prediv.get() } },
+            .Nodetype = XBAR48Predivval,
             .parents = &[_]*const ClockNode{&XBAR48},
+        };
+        const XBAR48Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR48Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR48Findiv: ClockNode = .{
             .name = "XBAR48Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR48Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR48Findivval,
             .parents = &[_]*const ClockNode{&XBAR48Prediv},
+        };
+        const XBAR48Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR48Output: ClockNode = .{
             .name = "XBAR48Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR48Outputval,
             .parents = &[_]*const ClockNode{&XBAR48Findiv},
         };
+        const XBAR49val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR49) };
         const XBAR49: ClockNode = .{
             .name = "XBAR49",
+            .Nodetype = XBAR49val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR49) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5900,25 +6685,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR49Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR49Prediv.get() } };
         const XBAR49Prediv: ClockNode = .{
             .name = "XBAR49Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR49Prediv.get() } },
+            .Nodetype = XBAR49Predivval,
             .parents = &[_]*const ClockNode{&XBAR49},
+        };
+        const XBAR49Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR49Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR49Findiv: ClockNode = .{
             .name = "XBAR49Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR49Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR49Findivval,
             .parents = &[_]*const ClockNode{&XBAR49Prediv},
+        };
+        const XBAR49Outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
         };
         const XBAR49Output: ClockNode = .{
             .name = "XBAR49Output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = XBAR49Outputval,
             .parents = &[_]*const ClockNode{&XBAR49Findiv},
         };
+        const XBAR50val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR50) };
         const XBAR50: ClockNode = .{
             .name = "XBAR50",
+            .Nodetype = XBAR50val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR50) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5927,25 +6723,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR50Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR50Prediv.get() } };
         const XBAR50Prediv: ClockNode = .{
             .name = "XBAR50Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR50Prediv.get() } },
+            .Nodetype = XBAR50Predivval,
             .parents = &[_]*const ClockNode{&XBAR50},
+        };
+        const XBAR50Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR50Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR50Findiv: ClockNode = .{
             .name = "XBAR50Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR50Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR50Findivval,
             .parents = &[_]*const ClockNode{&XBAR50Prediv},
+        };
+        const XBAR50Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR50Output: ClockNode = .{
             .name = "XBAR50Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR50Outputval,
             .parents = &[_]*const ClockNode{&XBAR50Findiv},
         };
+        const XBAR51val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR51) };
         const XBAR51: ClockNode = .{
             .name = "XBAR51",
+            .Nodetype = XBAR51val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR51) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5955,25 +6762,36 @@ pub const ClockTree = struct {
                 &HSIRC,
             },
         };
+        const XBAR51Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR51Prediv.get() } };
         const XBAR51Prediv: ClockNode = .{
             .name = "XBAR51Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR51Prediv.get() } },
+            .Nodetype = XBAR51Predivval,
             .parents = &[_]*const ClockNode{&XBAR51},
+        };
+        const XBAR51Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR51Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR51Findiv: ClockNode = .{
             .name = "XBAR51Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR51Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR51Findivval,
             .parents = &[_]*const ClockNode{&XBAR51Prediv},
+        };
+        const XBAR51Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR51Output: ClockNode = .{
             .name = "XBAR51Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR51Outputval,
             .parents = &[_]*const ClockNode{&XBAR51Findiv},
         };
+        const XBAR52val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR52) };
         const XBAR52: ClockNode = .{
             .name = "XBAR52",
+            .Nodetype = XBAR52val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR52) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -5983,25 +6801,36 @@ pub const ClockTree = struct {
                 &HSIRC,
             },
         };
+        const XBAR52Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR52Prediv.get() } };
         const XBAR52Prediv: ClockNode = .{
             .name = "XBAR52Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR52Prediv.get() } },
+            .Nodetype = XBAR52Predivval,
             .parents = &[_]*const ClockNode{&XBAR52},
+        };
+        const XBAR52Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR52Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR52Findiv: ClockNode = .{
             .name = "XBAR52Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR52Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR52Findivval,
             .parents = &[_]*const ClockNode{&XBAR52Prediv},
+        };
+        const XBAR52Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR52Output: ClockNode = .{
             .name = "XBAR52Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR52Outputval,
             .parents = &[_]*const ClockNode{&XBAR52Findiv},
         };
+        const XBAR53val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR53) };
         const XBAR53: ClockNode = .{
             .name = "XBAR53",
+            .Nodetype = XBAR53val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR53) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6011,25 +6840,36 @@ pub const ClockTree = struct {
                 &HSIRC,
             },
         };
+        const XBAR53Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR53Prediv.get() } };
         const XBAR53Prediv: ClockNode = .{
             .name = "XBAR53Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR53Prediv.get() } },
+            .Nodetype = XBAR53Predivval,
             .parents = &[_]*const ClockNode{&XBAR53},
+        };
+        const XBAR53Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR53Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR53Findiv: ClockNode = .{
             .name = "XBAR53Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR53Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR53Findivval,
             .parents = &[_]*const ClockNode{&XBAR53Prediv},
+        };
+        const XBAR53Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR53Output: ClockNode = .{
             .name = "XBAR53Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR53Outputval,
             .parents = &[_]*const ClockNode{&XBAR53Findiv},
         };
+        const XBAR54val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR54) };
         const XBAR54: ClockNode = .{
             .name = "XBAR54",
+            .Nodetype = XBAR54val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR54) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6038,25 +6878,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR54Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR54Prediv.get() } };
         const XBAR54Prediv: ClockNode = .{
             .name = "XBAR54Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR54Prediv.get() } },
+            .Nodetype = XBAR54Predivval,
             .parents = &[_]*const ClockNode{&XBAR54},
+        };
+        const XBAR54Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR54Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR54Findiv: ClockNode = .{
             .name = "XBAR54Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR54Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR54Findivval,
             .parents = &[_]*const ClockNode{&XBAR54Prediv},
+        };
+        const XBAR54Outputval = ClockNodeTypes{
+            .output = .{ .max = 125000000, .min = 0 },
         };
         const XBAR54Output: ClockNode = .{
             .name = "XBAR54Output",
-            .Nodetype = .{ .output = .{ .max = 125000000, .min = 0 } },
+            .Nodetype = XBAR54Outputval,
             .parents = &[_]*const ClockNode{&XBAR54Findiv},
         };
+        const XBAR55val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR55) };
         const XBAR55: ClockNode = .{
             .name = "XBAR55",
+            .Nodetype = XBAR55val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR55) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6065,25 +6916,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR55Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR55Prediv.get() } };
         const XBAR55Prediv: ClockNode = .{
             .name = "XBAR55Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR55Prediv.get() } },
+            .Nodetype = XBAR55Predivval,
             .parents = &[_]*const ClockNode{&XBAR55},
+        };
+        const XBAR55Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR55Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR55Findiv: ClockNode = .{
             .name = "XBAR55Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR55Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR55Findivval,
             .parents = &[_]*const ClockNode{&XBAR55Prediv},
+        };
+        const XBAR55Outputval = ClockNodeTypes{
+            .output = .{ .max = 125000000, .min = 0 },
         };
         const XBAR55Output: ClockNode = .{
             .name = "XBAR55Output",
-            .Nodetype = .{ .output = .{ .max = 125000000, .min = 0 } },
+            .Nodetype = XBAR55Outputval,
             .parents = &[_]*const ClockNode{&XBAR55Findiv},
         };
+        const XBAR56val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR56) };
         const XBAR56: ClockNode = .{
             .name = "XBAR56",
+            .Nodetype = XBAR56val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR56) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6095,25 +6957,36 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR56Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR56Prediv.get() } };
         const XBAR56Prediv: ClockNode = .{
             .name = "XBAR56Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR56Prediv.get() } },
+            .Nodetype = XBAR56Predivval,
             .parents = &[_]*const ClockNode{&XBAR56},
+        };
+        const XBAR56Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR56Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR56Findiv: ClockNode = .{
             .name = "XBAR56Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR56Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR56Findivval,
             .parents = &[_]*const ClockNode{&XBAR56Prediv},
+        };
+        const XBAR56Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const XBAR56Output: ClockNode = .{
             .name = "XBAR56Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = XBAR56Outputval,
             .parents = &[_]*const ClockNode{&XBAR56Findiv},
         };
+        const XBAR57val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR57) };
         const XBAR57: ClockNode = .{
             .name = "XBAR57",
+            .Nodetype = XBAR57val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR57) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6123,25 +6996,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR57Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR57Prediv.get() } };
         const XBAR57Prediv: ClockNode = .{
             .name = "XBAR57Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR57Prediv.get() } },
+            .Nodetype = XBAR57Predivval,
             .parents = &[_]*const ClockNode{&XBAR57},
+        };
+        const XBAR57Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR57Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR57Findiv: ClockNode = .{
             .name = "XBAR57Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR57Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR57Findivval,
             .parents = &[_]*const ClockNode{&XBAR57Prediv},
+        };
+        const XBAR57Outputval = ClockNodeTypes{
+            .output = .{ .max = 24000000, .min = 0 },
         };
         const XBAR57Output: ClockNode = .{
             .name = "XBAR57Output",
-            .Nodetype = .{ .output = .{ .max = 24000000, .min = 0 } },
+            .Nodetype = XBAR57Outputval,
             .parents = &[_]*const ClockNode{&XBAR57Findiv},
         };
+        const XBAR58val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR58) };
         const XBAR58: ClockNode = .{
             .name = "XBAR58",
+            .Nodetype = XBAR58val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR58) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6151,25 +7035,36 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
+        const XBAR58Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR58Prediv.get() } };
         const XBAR58Prediv: ClockNode = .{
             .name = "XBAR58Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR58Prediv.get() } },
+            .Nodetype = XBAR58Predivval,
             .parents = &[_]*const ClockNode{&XBAR58},
+        };
+        const XBAR58Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR58Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR58Findiv: ClockNode = .{
             .name = "XBAR58Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR58Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR58Findivval,
             .parents = &[_]*const ClockNode{&XBAR58Prediv},
+        };
+        const XBAR58Outputval = ClockNodeTypes{
+            .output = .{ .max = 24000000, .min = 0 },
         };
         const XBAR58Output: ClockNode = .{
             .name = "XBAR58Output",
-            .Nodetype = .{ .output = .{ .max = 24000000, .min = 0 } },
+            .Nodetype = XBAR58Outputval,
             .parents = &[_]*const ClockNode{&XBAR58Findiv},
         };
+        const XBAR59val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR59) };
         const XBAR59: ClockNode = .{
             .name = "XBAR59",
+            .Nodetype = XBAR59val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR59) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6178,25 +7073,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR59Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR59Prediv.get() } };
         const XBAR59Prediv: ClockNode = .{
             .name = "XBAR59Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR59Prediv.get() } },
+            .Nodetype = XBAR59Predivval,
             .parents = &[_]*const ClockNode{&XBAR59},
+        };
+        const XBAR59Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR59Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR59Findiv: ClockNode = .{
             .name = "XBAR59Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR59Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR59Findivval,
             .parents = &[_]*const ClockNode{&XBAR59Prediv},
+        };
+        const XBAR59Outputval = ClockNodeTypes{
+            .output = .{ .max = 600000000, .min = 0 },
         };
         const XBAR59Output: ClockNode = .{
             .name = "XBAR59Output",
-            .Nodetype = .{ .output = .{ .max = 600000000, .min = 0 } },
+            .Nodetype = XBAR59Outputval,
             .parents = &[_]*const ClockNode{&XBAR59Findiv},
         };
+        const XBAR60val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR60) };
         const XBAR60: ClockNode = .{
             .name = "XBAR60",
+            .Nodetype = XBAR60val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR60) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6205,25 +7111,36 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
+        const XBAR60Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR60Prediv.get() } };
         const XBAR60Prediv: ClockNode = .{
             .name = "XBAR60Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR60Prediv.get() } },
+            .Nodetype = XBAR60Predivval,
             .parents = &[_]*const ClockNode{&XBAR60},
+        };
+        const XBAR60Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR60Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR60Findiv: ClockNode = .{
             .name = "XBAR60Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR60Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR60Findivval,
             .parents = &[_]*const ClockNode{&XBAR60Prediv},
+        };
+        const XBAR60Outputval = ClockNodeTypes{
+            .output = .{ .max = 50000000, .min = 0 },
         };
         const XBAR60Output: ClockNode = .{
             .name = "XBAR60Output",
-            .Nodetype = .{ .output = .{ .max = 50000000, .min = 0 } },
+            .Nodetype = XBAR60Outputval,
             .parents = &[_]*const ClockNode{&XBAR60Findiv},
         };
+        const XBAR61val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR61) };
         const XBAR61: ClockNode = .{
             .name = "XBAR61",
+            .Nodetype = XBAR61val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR61) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6239,25 +7156,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR61Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR61Prediv.get() } };
         const XBAR61Prediv: ClockNode = .{
             .name = "XBAR61Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR61Prediv.get() } },
+            .Nodetype = XBAR61Predivval,
             .parents = &[_]*const ClockNode{&XBAR61},
+        };
+        const XBAR61Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR61Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR61Findiv: ClockNode = .{
             .name = "XBAR61Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR61Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR61Findivval,
             .parents = &[_]*const ClockNode{&XBAR61Prediv},
+        };
+        const XBAR61Outputval = ClockNodeTypes{
+            .output = .{ .max = 160000000, .min = 0 },
         };
         const XBAR61Output: ClockNode = .{
             .name = "XBAR61Output",
-            .Nodetype = .{ .output = .{ .max = 160000000, .min = 0 } },
+            .Nodetype = XBAR61Outputval,
             .parents = &[_]*const ClockNode{&XBAR61Findiv},
         };
+        const XBAR62val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR62) };
         const XBAR62: ClockNode = .{
             .name = "XBAR62",
+            .Nodetype = XBAR62val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR62) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6273,25 +7201,36 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
+        const XBAR62Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR62Prediv.get() } };
         const XBAR62Prediv: ClockNode = .{
             .name = "XBAR62Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR62Prediv.get() } },
+            .Nodetype = XBAR62Predivval,
             .parents = &[_]*const ClockNode{&XBAR62},
+        };
+        const XBAR62Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR62Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR62Findiv: ClockNode = .{
             .name = "XBAR62Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR62Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR62Findivval,
             .parents = &[_]*const ClockNode{&XBAR62Prediv},
+        };
+        const XBAR62Outputval = ClockNodeTypes{
+            .output = .{ .max = 160000000, .min = 0 },
         };
         const XBAR62Output: ClockNode = .{
             .name = "XBAR62Output",
-            .Nodetype = .{ .output = .{ .max = 160000000, .min = 0 } },
+            .Nodetype = XBAR62Outputval,
             .parents = &[_]*const ClockNode{&XBAR62Findiv},
         };
+        const XBAR63val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR63) };
         const XBAR63: ClockNode = .{
             .name = "XBAR63",
+            .Nodetype = XBAR63val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.XBAR63) },
             .parents = &[_]*const ClockNode{
                 &FOUTPOSTDIV4,
                 &FOUTPOSTDIV5,
@@ -6303,55 +7242,69 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
+        const XBAR63Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR63Prediv.get() } };
         const XBAR63Prediv: ClockNode = .{
             .name = "XBAR63Prediv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR63Prediv.get() } },
+            .Nodetype = XBAR63Predivval,
             .parents = &[_]*const ClockNode{&XBAR63},
+        };
+        const XBAR63Findivval = ClockNodeTypes{
+            .div = .{
+                .value = config.XBAR63Findiv.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const XBAR63Findiv: ClockNode = .{
             .name = "XBAR63Findiv",
-            .Nodetype = .{ .div = .{ .value = config.XBAR63Findiv.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = XBAR63Findivval,
             .parents = &[_]*const ClockNode{&XBAR63Prediv},
+        };
+        const XBAR63Outputval = ClockNodeTypes{
+            .output = .{ .max = 400000000, .min = 0 },
         };
         const XBAR63Output: ClockNode = .{
             .name = "XBAR63Output",
-            .Nodetype = .{ .output = .{ .max = 400000000, .min = 0 } },
+            .Nodetype = XBAR63Outputval,
             .parents = &[_]*const ClockNode{&XBAR63Findiv},
         };
+        const PLL1Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL1Source) };
         const PLL1Source: ClockNode = .{
             .name = "PLL1Source",
+            .Nodetype = PLL1Sourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.PLL1Source) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &HSEOSC,
                 &MSIRC,
             },
         };
+        const PLL2Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL2Source) };
         const PLL2Source: ClockNode = .{
             .name = "PLL2Source",
+            .Nodetype = PLL2Sourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.PLL2Source) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &HSEOSC,
                 &MSIRC,
             },
         };
+        const PLL3Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL3Source) };
         const PLL3Source: ClockNode = .{
             .name = "PLL3Source",
+            .Nodetype = PLL3Sourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.PLL3Source) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &MSIRC,
                 &HSEOSC,
             },
         };
+        const CKINTSEL0val = ClockNodeTypes{ .multi = @intFromEnum(config.CKINTSEL0) };
         const CKINTSEL0: ClockNode = .{
             .name = "CKINTSEL0",
+            .Nodetype = CKINTSEL0val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CKINTSEL0) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &HSEOSC,
@@ -6437,126 +7390,224 @@ pub const ClockTree = struct {
                 &XBAR61Output,
                 &XBAR62Output,
                 &XBAR63Output,
+            },
+        };
+        const FREFDIV1val = ClockNodeTypes{
+            .div = .{
+                .value = config.FREFDIV1.get(),
+                .limit = .{ .max = 63, .min = 1 },
             },
         };
         const FREFDIV1: ClockNode = .{
             .name = "FREFDIV1",
-            .Nodetype = .{ .div = .{ .value = config.FREFDIV1.get(), .limit = .{ .max = 63, .min = 1 } } },
+            .Nodetype = FREFDIV1val,
             .parents = &[_]*const ClockNode{&PLL1Source},
+        };
+        const FBDIV1val = ClockNodeTypes{
+            .mul = .{
+                .value = config.FBDIV1.get(),
+                .limit = .{ .max = 2500, .min = 16 },
+            },
         };
         const FBDIV1: ClockNode = .{
             .name = "FBDIV1",
-            .Nodetype = .{ .mul = .{ .value = config.FBDIV1.get(), .limit = .{ .max = 2500, .min = 16 } } },
+            .Nodetype = FBDIV1val,
             .parents = &[_]*const ClockNode{&FREFDIV1},
+        };
+        const POSTDIV1_1val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV1_1.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV1_1: ClockNode = .{
             .name = "POSTDIV1_1",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV1_1.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV1_1val,
             .parents = &[_]*const ClockNode{&FBDIV1},
+        };
+        const POSTDIV2_1val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV2_1.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV2_1: ClockNode = .{
             .name = "POSTDIV2_1",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV2_1.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV2_1val,
             .parents = &[_]*const ClockNode{&POSTDIV1_1},
+        };
+        const FOUTPOSTDIV1val = ClockNodeTypes{
+            .output = .{ .max = 3200000000, .min = 16000000 },
         };
         const FOUTPOSTDIV1: ClockNode = .{
             .name = "FOUTPOSTDIV1",
-            .Nodetype = .{ .output = .{ .max = 3200000000, .min = 16000000 } },
+            .Nodetype = FOUTPOSTDIV1val,
             .parents = &[_]*const ClockNode{&POSTDIV2_1},
+        };
+        const PLL1Div42val = ClockNodeTypes{
+            .div = .{ .value = 42 },
         };
         const PLL1Div42: ClockNode = .{
             .name = "PLL1Div42",
-            .Nodetype = .{ .div = .{ .value = 42 } },
+            .Nodetype = PLL1Div42val,
             .parents = &[_]*const ClockNode{&FOUTPOSTDIV1},
+        };
+        const FREFDIV2val = ClockNodeTypes{
+            .div = .{
+                .value = config.FREFDIV2.get(),
+                .limit = .{ .max = 63, .min = 1 },
+            },
         };
         const FREFDIV2: ClockNode = .{
             .name = "FREFDIV2",
-            .Nodetype = .{ .div = .{ .value = config.FREFDIV2.get(), .limit = .{ .max = 63, .min = 1 } } },
+            .Nodetype = FREFDIV2val,
             .parents = &[_]*const ClockNode{&PLL2Source},
+        };
+        const PLL2FRACVval = ClockNodeTypes{
+            .source = .{
+                .value = config.PLL2FRACV.get(),
+                .limit = .{ .max = 16777215, .min = 0 },
+            },
         };
         const PLL2FRACV: ClockNode = .{
             .name = "PLL2FRACV",
-            .Nodetype = .{ .source = .{
-                .value = config.PLL2FRACV.get(),
-                .limit = .{ .max = 16777215, .min = 0 },
-            } },
+            .Nodetype = PLL2FRACVval,
+        };
+        const FBDIV2val = ClockNodeTypes{
+            .mulfrac = .{
+                .value = config.FBDIV2.get(),
+                .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
+            },
         };
         const FBDIV2: ClockNode = .{
             .name = "FBDIV2",
-            .Nodetype = .{ .mulfrac = .{ .value = config.FBDIV2.get(), .limit = .{ .max = 500, .min = 20 } } },
+            .Nodetype = FBDIV2val,
             .parents = &[_]*const ClockNode{ &FREFDIV2, &PLL2FRACV },
+        };
+        const POSTDIV1_2val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV1_2.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV1_2: ClockNode = .{
             .name = "POSTDIV1_2",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV1_2.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV1_2val,
             .parents = &[_]*const ClockNode{&FBDIV2},
+        };
+        const POSTDIV2_2val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV2_2.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV2_2: ClockNode = .{
             .name = "POSTDIV2_2",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV2_2.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV2_2val,
             .parents = &[_]*const ClockNode{&POSTDIV1_2},
+        };
+        const FOUTPOSTDIV2val = ClockNodeTypes{
+            .output = .{ .max = 3200000000, .min = 16000000 },
         };
         const FOUTPOSTDIV2: ClockNode = .{
             .name = "FOUTPOSTDIV2",
-            .Nodetype = .{ .output = .{ .max = 3200000000, .min = 16000000 } },
+            .Nodetype = FOUTPOSTDIV2val,
             .parents = &[_]*const ClockNode{&POSTDIV2_2},
+        };
+        const PLL2Div4val = ClockNodeTypes{
+            .div = .{ .value = 4 },
         };
         const PLL2Div4: ClockNode = .{
             .name = "PLL2Div4",
-            .Nodetype = .{ .div = .{ .value = 4 } },
+            .Nodetype = PLL2Div4val,
             .parents = &[_]*const ClockNode{&FOUTPOSTDIV2},
+        };
+        const FREFDIV3val = ClockNodeTypes{
+            .div = .{
+                .value = config.FREFDIV3.get(),
+                .limit = .{ .max = 63, .min = 1 },
+            },
         };
         const FREFDIV3: ClockNode = .{
             .name = "FREFDIV3",
-            .Nodetype = .{ .div = .{ .value = config.FREFDIV3.get(), .limit = .{ .max = 63, .min = 1 } } },
+            .Nodetype = FREFDIV3val,
             .parents = &[_]*const ClockNode{&PLL3Source},
+        };
+        const PLL3FRACVval = ClockNodeTypes{
+            .source = .{
+                .value = config.PLL3FRACV.get(),
+                .limit = .{ .max = 16777215, .min = 0 },
+            },
         };
         const PLL3FRACV: ClockNode = .{
             .name = "PLL3FRACV",
-            .Nodetype = .{ .source = .{
-                .value = config.PLL3FRACV.get(),
-                .limit = .{ .max = 16777215, .min = 0 },
-            } },
+            .Nodetype = PLL3FRACVval,
+        };
+        const FBDIV3val = ClockNodeTypes{
+            .mulfrac = .{
+                .value = config.FBDIV3.get(),
+                .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
+            },
         };
         const FBDIV3: ClockNode = .{
             .name = "FBDIV3",
-            .Nodetype = .{ .mulfrac = .{ .value = config.FBDIV3.get(), .limit = .{ .max = 500, .min = 20 } } },
+            .Nodetype = FBDIV3val,
             .parents = &[_]*const ClockNode{ &FREFDIV3, &PLL3FRACV },
+        };
+        const POSTDIV1_3val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV1_3.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV1_3: ClockNode = .{
             .name = "POSTDIV1_3",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV1_3.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV1_3val,
             .parents = &[_]*const ClockNode{&FBDIV3},
+        };
+        const POSTDIV2_3val = ClockNodeTypes{
+            .div = .{
+                .value = config.POSTDIV2_3.get(),
+                .limit = .{ .max = 7, .min = 1 },
+            },
         };
         const POSTDIV2_3: ClockNode = .{
             .name = "POSTDIV2_3",
-            .Nodetype = .{ .div = .{ .value = config.POSTDIV2_3.get(), .limit = .{ .max = 7, .min = 1 } } },
+            .Nodetype = POSTDIV2_3val,
             .parents = &[_]*const ClockNode{&POSTDIV1_3},
+        };
+        const FOUTPOSTDIV3val = ClockNodeTypes{
+            .output = .{ .max = 3200000000, .min = 16000000 },
         };
         const FOUTPOSTDIV3: ClockNode = .{
             .name = "FOUTPOSTDIV3",
-            .Nodetype = .{ .output = .{ .max = 3200000000, .min = 16000000 } },
+            .Nodetype = FOUTPOSTDIV3val,
             .parents = &[_]*const ClockNode{&POSTDIV2_3},
+        };
+        const PLL3Div2val = ClockNodeTypes{
+            .div = .{ .value = 2 },
         };
         const PLL3Div2: ClockNode = .{
             .name = "PLL3Div2",
-            .Nodetype = .{ .div = .{ .value = 2 } },
+            .Nodetype = PLL3Div2val,
             .parents = &[_]*const ClockNode{&FOUTPOSTDIV3},
         };
+        const CKEXTSEL0val = ClockNodeTypes{ .multi = @intFromEnum(config.CKEXTSEL0) };
         const CKEXTSEL0: ClockNode = .{
             .name = "CKEXTSEL0",
+            .Nodetype = CKEXTSEL0val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CKEXTSEL0) },
             .parents = &[_]*const ClockNode{
                 &PLL1Div42,
                 &PLL2Div4,
                 &PLL3Div2,
             },
         };
+        const CKINTSEL1val = ClockNodeTypes{ .multi = @intFromEnum(config.CKINTSEL1) };
         const CKINTSEL1: ClockNode = .{
             .name = "CKINTSEL1",
+            .Nodetype = CKINTSEL1val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CKINTSEL1) },
             .parents = &[_]*const ClockNode{
                 &HSIRC,
                 &HSEOSC,
@@ -6644,338 +7695,484 @@ pub const ClockTree = struct {
                 &XBAR63Output,
             },
         };
+        const CKEXTSEL1val = ClockNodeTypes{ .multi = @intFromEnum(config.CKEXTSEL1) };
         const CKEXTSEL1: ClockNode = .{
             .name = "CKEXTSEL1",
+            .Nodetype = CKEXTSEL1val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.CKEXTSEL1) },
             .parents = &[_]*const ClockNode{
                 &PLL1Div42,
                 &PLL2Div4,
                 &PLL3Div2,
             },
         };
+        const OBS0val = ClockNodeTypes{ .multi = @intFromEnum(config.OBS0) };
         const OBS0: ClockNode = .{
             .name = "OBS0",
+            .Nodetype = OBS0val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.OBS0) },
             .parents = &[_]*const ClockNode{
                 &CKINTSEL0,
                 &CKEXTSEL0,
             },
         };
+        const OBS0Outputval = ClockNodeTypes{ .output = null };
         const OBS0Output: ClockNode = .{
             .name = "OBS0Output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = OBS0Outputval,
             .parents = &[_]*const ClockNode{&OBS0},
         };
+        const OBS1val = ClockNodeTypes{ .multi = @intFromEnum(config.OBS1) };
         const OBS1: ClockNode = .{
             .name = "OBS1",
+            .Nodetype = OBS1val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.OBS1) },
             .parents = &[_]*const ClockNode{
                 &CKINTSEL1,
                 &CKEXTSEL1,
             },
         };
+        const OBS1Outputval = ClockNodeTypes{ .output = null };
         const OBS1Output: ClockNode = .{
             .name = "OBS1Output",
-            .Nodetype = .{ .output = null },
+            .Nodetype = OBS1Outputval,
             .parents = &[_]*const ClockNode{&OBS1},
         };
+        const MCO1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.MCO1Mult) };
         const MCO1Mult: ClockNode = .{
             .name = "MCO1Mult",
+            .Nodetype = MCO1Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.MCO1Mult) },
             .parents = &[_]*const ClockNode{
                 &XBAR61Output,
                 &OBS0Output,
             },
         };
+        const MCO1Pinval = ClockNodeTypes{ .output = null };
         const MCO1Pin: ClockNode = .{
             .name = "MCO1Pin",
-            .Nodetype = .{ .output = null },
+            .Nodetype = MCO1Pinval,
             .parents = &[_]*const ClockNode{&MCO1Mult},
         };
+        const MCO2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.MCO2Mult) };
         const MCO2Mult: ClockNode = .{
             .name = "MCO2Mult",
+            .Nodetype = MCO2Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.MCO2Mult) },
             .parents = &[_]*const ClockNode{
                 &XBAR62Output,
                 &OBS1Output,
             },
         };
+        const MCO2Pinval = ClockNodeTypes{ .output = null };
         const MCO2Pin: ClockNode = .{
             .name = "MCO2Pin",
-            .Nodetype = .{ .output = null },
+            .Nodetype = MCO2Pinval,
             .parents = &[_]*const ClockNode{&MCO2Mult},
         };
+        const D3PERval = ClockNodeTypes{ .multi = @intFromEnum(config.D3PER) };
         const D3PER: ClockNode = .{
             .name = "D3PER",
+            .Nodetype = D3PERval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.D3PER) },
             .parents = &[_]*const ClockNode{
                 &MSIRC,
                 &LSIRC,
                 &LSEOSC,
             },
         };
+        const D3PEROutputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
+        };
         const D3PEROutput: ClockNode = .{
             .name = "D3PEROutput",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = D3PEROutputval,
             .parents = &[_]*const ClockNode{&D3PER},
         };
+        const DTSval = ClockNodeTypes{ .multi = @intFromEnum(config.DTS) };
         const DTS: ClockNode = .{
             .name = "DTS",
+            .Nodetype = DTSval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.DTS) },
             .parents = &[_]*const ClockNode{
                 &MSIRC,
                 &HSIRC,
                 &HSEOSC,
             },
         };
+        const DTSOutputval = ClockNodeTypes{
+            .output = .{ .max = 64000000, .min = 0 },
+        };
         const DTSOutput: ClockNode = .{
             .name = "DTSOutput",
-            .Nodetype = .{ .output = .{ .max = 64000000, .min = 0 } },
+            .Nodetype = DTSOutputval,
             .parents = &[_]*const ClockNode{&DTS},
         };
+        const DSIPHYval = ClockNodeTypes{ .multi = @intFromEnum(config.DSIPHY) };
         const DSIPHY: ClockNode = .{
             .name = "DSIPHY",
+            .Nodetype = DSIPHYval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.DSIPHY) },
             .parents = &[_]*const ClockNode{
                 &XBAR28Output,
                 &HSEOSC,
             },
         };
+        const DSIPHYOutputval = ClockNodeTypes{
+            .output = .{ .max = 27000000, .min = 17000000 },
+        };
         const DSIPHYOutput: ClockNode = .{
             .name = "DSIPHYOutput",
-            .Nodetype = .{ .output = .{ .max = 27000000, .min = 17000000 } },
+            .Nodetype = DSIPHYOutputval,
             .parents = &[_]*const ClockNode{&DSIPHY},
         };
+        const DSIBLANEval = ClockNodeTypes{ .multi = @intFromEnum(config.DSIBLANE) };
         const DSIBLANE: ClockNode = .{
             .name = "DSIBLANE",
+            .Nodetype = DSIBLANEval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.DSIBLANE) },
             .parents = &[_]*const ClockNode{
                 &DSIPHYOutput,
                 &XBAR27Output,
             },
         };
+        const DSIBLANEOutputval = ClockNodeTypes{
+            .output = .{ .max = 314000000, .min = 0 },
+        };
         const DSIBLANEOutput: ClockNode = .{
             .name = "DSIBLANEOutput",
-            .Nodetype = .{ .output = .{ .max = 314000000, .min = 0 } },
+            .Nodetype = DSIBLANEOutputval,
             .parents = &[_]*const ClockNode{&DSIBLANE},
         };
+        const USB2PHY1val = ClockNodeTypes{ .multi = @intFromEnum(config.USB2PHY1) };
         const USB2PHY1: ClockNode = .{
             .name = "USB2PHY1",
+            .Nodetype = USB2PHY1val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.USB2PHY1) },
             .parents = &[_]*const ClockNode{
                 &XBAR57Output,
                 &HSEDIV2,
             },
         };
+        const USB2PHY1Outputval = ClockNodeTypes{
+            .output = .{ .max = 24000000, .min = 0 },
+        };
         const USB2PHY1Output: ClockNode = .{
             .name = "USB2PHY1Output",
-            .Nodetype = .{ .output = .{ .max = 24000000, .min = 0 } },
+            .Nodetype = USB2PHY1Outputval,
             .parents = &[_]*const ClockNode{&USB2PHY1},
         };
+        const USB2PHY2val = ClockNodeTypes{ .multi = @intFromEnum(config.USB2PHY2) };
         const USB2PHY2: ClockNode = .{
             .name = "USB2PHY2",
+            .Nodetype = USB2PHY2val,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.USB2PHY2) },
             .parents = &[_]*const ClockNode{
                 &XBAR58Output,
                 &HSEDIV2,
             },
         };
+        const USB2PHY2Outputval = ClockNodeTypes{
+            .output = .{ .max = 24000000, .min = 0 },
+        };
         const USB2PHY2Output: ClockNode = .{
             .name = "USB2PHY2Output",
-            .Nodetype = .{ .output = .{ .max = 24000000, .min = 0 } },
+            .Nodetype = USB2PHY2Outputval,
             .parents = &[_]*const ClockNode{&USB2PHY2},
         };
+        const USB3PCIPHYval = ClockNodeTypes{ .multi = @intFromEnum(config.USB3PCIPHY) };
         const USB3PCIPHY: ClockNode = .{
             .name = "USB3PCIPHY",
+            .Nodetype = USB3PCIPHYval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.USB3PCIPHY) },
             .parents = &[_]*const ClockNode{
                 &XBAR34Output,
                 &HSEDIV2,
             },
         };
+        const USB3PCIPHYOutputval = ClockNodeTypes{
+            .output = .{ .max = 25000000, .min = 0 },
+        };
         const USB3PCIPHYOutput: ClockNode = .{
             .name = "USB3PCIPHYOutput",
-            .Nodetype = .{ .output = .{ .max = 25000000, .min = 0 } },
+            .Nodetype = USB3PCIPHYOutputval,
             .parents = &[_]*const ClockNode{&USB3PCIPHY},
         };
+        const SysClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.SysClkSource) };
         const SysClkSource: ClockNode = .{
             .name = "SysClkSource",
+            .Nodetype = SysClkSourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.SysClkSource) },
             .parents = &[_]*const ClockNode{
                 &XBAR0Output,
                 &HSIRC,
             },
         };
+        const SysCLKOutputval = ClockNodeTypes{
+            .output = .{ .max = 400000000, .min = 0 },
+        };
         const SysCLKOutput: ClockNode = .{
             .name = "SysCLKOutput",
-            .Nodetype = .{ .output = .{ .max = 400000000, .min = 0 } },
+            .Nodetype = SysCLKOutputval,
             .parents = &[_]*const ClockNode{&SysClkSource},
         };
+        const MCUDIVval = ClockNodeTypes{ .div = .{ .value = config.MCUDIV.get() } };
         const MCUDIV: ClockNode = .{
             .name = "MCUDIV",
-            .Nodetype = .{ .div = .{ .value = config.MCUDIV.get() } },
+            .Nodetype = MCUDIVval,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
+        };
+        const McuClockOutputval = ClockNodeTypes{
+            .output = .{ .max = 400000000, .min = 0 },
         };
         const McuClockOutput: ClockNode = .{
             .name = "McuClockOutput",
-            .Nodetype = .{ .output = .{ .max = 400000000, .min = 0 } },
+            .Nodetype = McuClockOutputval,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
+        const APB3DIVval = ClockNodeTypes{ .div = .{ .value = config.APB3DIV.get() } };
         const APB3DIV: ClockNode = .{
             .name = "APB3DIV",
-            .Nodetype = .{ .div = .{ .value = config.APB3DIV.get() } },
+            .Nodetype = APB3DIVval,
             .parents = &[_]*const ClockNode{&MCUDIV},
+        };
+        const APB3Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const APB3Output: ClockNode = .{
             .name = "APB3Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = APB3Outputval,
             .parents = &[_]*const ClockNode{&APB3DIV},
         };
+        const APB4DIVval = ClockNodeTypes{ .div = .{ .value = config.APB4DIV.get() } };
         const APB4DIV: ClockNode = .{
             .name = "APB4DIV",
-            .Nodetype = .{ .div = .{ .value = config.APB4DIV.get() } },
+            .Nodetype = APB4DIVval,
             .parents = &[_]*const ClockNode{&MCUDIV},
+        };
+        const APB4Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const APB4Output: ClockNode = .{
             .name = "APB4Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = APB4Outputval,
             .parents = &[_]*const ClockNode{&APB4DIV},
         };
+        const APBDBGDIVval = ClockNodeTypes{ .div = .{ .value = config.APBDBGDIV.get() } };
         const APBDBGDIV: ClockNode = .{
             .name = "APBDBGDIV",
-            .Nodetype = .{ .div = .{ .value = config.APBDBGDIV.get() } },
+            .Nodetype = APBDBGDIVval,
             .parents = &[_]*const ClockNode{&MCUDIV},
+        };
+        const APBDBGOutputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const APBDBGOutput: ClockNode = .{
             .name = "APBDBGOutput",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = APBDBGOutputval,
             .parents = &[_]*const ClockNode{&APBDBGDIV},
         };
+        const APB1DIVval = ClockNodeTypes{ .div = .{ .value = config.APB1DIV.get() } };
         const APB1DIV: ClockNode = .{
             .name = "APB1DIV",
-            .Nodetype = .{ .div = .{ .value = config.APB1DIV.get() } },
+            .Nodetype = APB1DIVval,
             .parents = &[_]*const ClockNode{&MCUDIV},
+        };
+        const RCC_TIM_G1_PRescaler_Selectionval = ClockNodeTypes{
+            .source = .{ .value = config.RCC_TIM_G1_PRescaler_Selection.get() },
+        };
+        const Tim1Mulval = blk: {
+            if ((RCC_TIM_G1_PRescaler_Selectionval.num_val() == 1)) {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 2 },
+                };
+            } else if ((RCC_TIM_G1_PRescaler_Selectionval.num_val() == 0)) {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 4 },
+                };
+            } else {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 2 },
+                };
+            }
         };
         const Tim1Mul: ClockNode = .{
             .name = "Tim1Mul",
-            .Nodetype = .{ .mul = .{ .value = 2 } },
+            .Nodetype = Tim1Mulval,
             .parents = &[_]*const ClockNode{&APB1DIV},
+        };
+        const Tim1Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const Tim1Output: ClockNode = .{
             .name = "Tim1Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = Tim1Outputval,
             .parents = &[_]*const ClockNode{&Tim1Mul},
+        };
+        const AHBOutputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const AHBOutput: ClockNode = .{
             .name = "AHBOutput",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = AHBOutputval,
             .parents = &[_]*const ClockNode{&MCUDIV},
+        };
+        const APB1Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const APB1Output: ClockNode = .{
             .name = "APB1Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = APB1Outputval,
             .parents = &[_]*const ClockNode{&APB1DIV},
         };
+        const APB2DIVval = ClockNodeTypes{ .div = .{ .value = config.APB2DIV.get() } };
         const APB2DIV: ClockNode = .{
             .name = "APB2DIV",
-            .Nodetype = .{ .div = .{ .value = config.APB2DIV.get() } },
+            .Nodetype = APB2DIVval,
             .parents = &[_]*const ClockNode{&MCUDIV},
+        };
+        const RCC_TIM_G2_PRescaler_Selectionval = ClockNodeTypes{
+            .source = .{ .value = config.RCC_TIM_G2_PRescaler_Selection.get() },
+        };
+        const Tim2Mulval = blk: {
+            if ((RCC_TIM_G2_PRescaler_Selectionval.num_val() == 1)) {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 2 },
+                };
+            } else if ((RCC_TIM_G2_PRescaler_Selectionval.num_val() == 0)) {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 4 },
+                };
+            } else {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 2 },
+                };
+            }
         };
         const Tim2Mul: ClockNode = .{
             .name = "Tim2Mul",
-            .Nodetype = .{ .mul = .{ .value = 2 } },
+            .Nodetype = Tim2Mulval,
             .parents = &[_]*const ClockNode{&APB2DIV},
+        };
+        const Tim2Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const Tim2Output: ClockNode = .{
             .name = "Tim2Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = Tim2Outputval,
             .parents = &[_]*const ClockNode{&Tim2Mul},
+        };
+        const APB2Outputval = ClockNodeTypes{
+            .output = .{ .max = 200000000, .min = 0 },
         };
         const APB2Output: ClockNode = .{
             .name = "APB2Output",
-            .Nodetype = .{ .output = .{ .max = 200000000, .min = 0 } },
+            .Nodetype = APB2Outputval,
             .parents = &[_]*const ClockNode{&APB2DIV},
         };
+        const ADC12Multval = ClockNodeTypes{ .multi = @intFromEnum(config.ADC12Mult) };
         const ADC12Mult: ClockNode = .{
             .name = "ADC12Mult",
+            .Nodetype = ADC12Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.ADC12Mult) },
             .parents = &[_]*const ClockNode{
                 &XBAR46Output,
                 &XBAR0Output,
             },
         };
+        const ADC12outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
+        };
         const ADC12output: ClockNode = .{
             .name = "ADC12output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = ADC12outputval,
             .parents = &[_]*const ClockNode{&ADC12Mult},
         };
+        const ADC3Multval = ClockNodeTypes{ .multi = @intFromEnum(config.ADC3Mult) };
         const ADC3Mult: ClockNode = .{
             .name = "ADC3Mult",
+            .Nodetype = ADC3Multval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.ADC3Mult) },
             .parents = &[_]*const ClockNode{
                 &XBAR47Output,
                 &XBAR0Output,
                 &XBAR46Output,
             },
         };
+        const ADC3outputval = ClockNodeTypes{
+            .output = .{ .max = 133000000, .min = 0 },
+        };
         const ADC3output: ClockNode = .{
             .name = "ADC3output",
-            .Nodetype = .{ .output = .{ .max = 133000000, .min = 0 } },
+            .Nodetype = ADC3outputval,
             .parents = &[_]*const ClockNode{&ADC3Mult},
         };
+        const LVDSMultval = ClockNodeTypes{ .multi = @intFromEnum(config.LVDSMult) };
         const LVDSMult: ClockNode = .{
             .name = "LVDSMult",
+            .Nodetype = LVDSMultval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.LVDSMult) },
             .parents = &[_]*const ClockNode{
                 &XBAR32Output,
                 &HSEOSC,
             },
         };
+        const LVDSoutputval = ClockNodeTypes{ .output = null };
         const LVDSoutput: ClockNode = .{
             .name = "LVDSoutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = LVDSoutputval,
             .parents = &[_]*const ClockNode{&LVDSMult},
+        };
+        const HSERTCDevisorval = ClockNodeTypes{
+            .div = .{
+                .value = config.HSERTCDevisor.get(),
+                .limit = .{ .max = 64, .min = 1 },
+            },
         };
         const HSERTCDevisor: ClockNode = .{
             .name = "HSERTCDevisor",
-            .Nodetype = .{ .div = .{ .value = config.HSERTCDevisor.get(), .limit = .{ .max = 64, .min = 1 } } },
+            .Nodetype = HSERTCDevisorval,
             .parents = &[_]*const ClockNode{&HSEOSC},
         };
+        const RTCClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.RTCClkSource) };
         const RTCClkSource: ClockNode = .{
             .name = "RTCClkSource",
+            .Nodetype = RTCClkSourceval,
 
-            .Nodetype = .{ .multi = @intFromEnum(config.RTCClkSource) },
             .parents = &[_]*const ClockNode{
                 &HSERTCDevisor,
                 &LSEOSC,
                 &LSIRC,
             },
         };
+        const RTCOutputval = ClockNodeTypes{
+            .output = .{ .max = 4000000, .min = 0 },
+        };
         const RTCOutput: ClockNode = .{
             .name = "RTCOutput",
-            .Nodetype = .{ .output = .{ .max = 4000000, .min = 0 } },
+            .Nodetype = RTCOutputval,
             .parents = &[_]*const ClockNode{&RTCClkSource},
         };
+        const IWDGOutputval = ClockNodeTypes{ .output = null };
         const IWDGOutput: ClockNode = .{
             .name = "IWDGOutput",
-            .Nodetype = .{ .output = null },
+            .Nodetype = IWDGOutputval,
             .parents = &[_]*const ClockNode{&LSIRC},
+        };
+        const HSE_Timoutval = ClockNodeTypes{
+            .source = .{
+                .value = config.HSE_Timout.get(),
+                .limit = .{ .max = 4294967295, .min = 1 },
+            },
+        };
+        const LSE_Timoutval = ClockNodeTypes{
+            .source = .{
+                .value = config.LSE_Timout.get(),
+                .limit = .{ .max = 4294967295, .min = 1 },
+            },
+        };
+        const LSE_Drive_Capabilityval = ClockNodeTypes{
+            .source = .{ .value = config.LSE_Drive_Capability.get() },
         };
         return .{
             .HSIRC = HSIRC,
@@ -7355,6 +8552,11 @@ pub const ClockTree = struct {
             .RTCClkSource = RTCClkSource,
             .RTCOutput = RTCOutput,
             .IWDGOutput = IWDGOutput,
+            .HSE_Timout = HSE_Timoutval,
+            .LSE_Timout = LSE_Timoutval,
+            .RCC_TIM_G1_PRescaler_Selection = RCC_TIM_G1_PRescaler_Selectionval,
+            .RCC_TIM_G2_PRescaler_Selection = RCC_TIM_G2_PRescaler_Selectionval,
+            .LSE_Drive_Capability = LSE_Drive_Capabilityval,
         };
     }
 

@@ -5,7 +5,7 @@ const ClockNodeTypes = clock.ClockNodesTypes;
 const ClockState = clock.ClockState;
 const ClockError = clock.ClockError;
 
-pub const HSEOSCConf = enum(u32) {
+pub const HSE_VALUEConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -20,7 +20,7 @@ pub const HSEOSCConf = enum(u32) {
         return 4000000;
     }
 };
-pub const LSEOSCConf = enum(u32) {
+pub const LSE_VALUEConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -35,12 +35,12 @@ pub const LSEOSCConf = enum(u32) {
         return 0;
     }
 };
-pub const RTCClkSourceConf = enum {
+pub const RCC_RTC_Clock_SourceConf = enum {
     HSERTCDevisor,
-    LSEOSC,
-    LSIRC,
+    RCC_RTCCLKSOURCE_LSE,
+    RCC_RTCCLKSOURCE_LSI,
 };
-pub const HSERTCDevisorConf = enum {
+pub const RCC_RTC_Clock_Source_FROM_HSEConf = enum {
     RCC_RTCCLKSOURCE_HSE_DIV2,
     RCC_RTCCLKSOURCE_HSE_DIV3,
     RCC_RTCCLKSOURCE_HSE_DIV4,
@@ -106,14 +106,14 @@ pub const HSERTCDevisorConf = enum {
         };
     }
 };
-pub const SysClkSourceConf = enum {
-    HSIRC,
-    HSEOSC,
-    PLLP,
+pub const SYSCLKSourceConf = enum {
+    RCC_SYSCLKSOURCE_HSI,
+    RCC_SYSCLKSOURCE_HSE,
+    RCC_SYSCLKSOURCE_PLLCLK,
 };
-pub const PLLSourceConf = enum {
-    HSIRC,
-    HSEOSC,
+pub const PLLSourceVirtualConf = enum {
+    RCC_PLLSOURCE_HSI,
+    RCC_PLLSOURCE_HSE,
 };
 pub const PLLMConf = enum(u32) {
     _,
@@ -130,7 +130,7 @@ pub const PLLMConf = enum(u32) {
         return 2;
     }
 };
-pub const AHBPrescalerConf = enum {
+pub const AHBCLKDividerConf = enum {
     RCC_SYSCLK_DIV1,
     RCC_SYSCLK_DIV2,
     RCC_SYSCLK_DIV4,
@@ -154,7 +154,7 @@ pub const AHBPrescalerConf = enum {
         };
     }
 };
-pub const CortexPrescalerConf = enum {
+pub const Cortex_DivConf = enum {
     SYSTICK_CLKSOURCE_HCLK,
     SYSTICK_CLKSOURCE_HCLK_DIV8,
     pub fn get(self: @This()) f32 {
@@ -164,7 +164,7 @@ pub const CortexPrescalerConf = enum {
         };
     }
 };
-pub const APB1PrescalerConf = enum {
+pub const APB1CLKDividerConf = enum {
     RCC_HCLK_DIV1,
     RCC_HCLK_DIV2,
     RCC_HCLK_DIV4,
@@ -180,7 +180,7 @@ pub const APB1PrescalerConf = enum {
         };
     }
 };
-pub const APB2PrescalerConf = enum {
+pub const APB2CLKDividerConf = enum {
     RCC_HCLK_DIV1,
     RCC_HCLK_DIV2,
     RCC_HCLK_DIV4,
@@ -196,11 +196,11 @@ pub const APB2PrescalerConf = enum {
         };
     }
 };
-pub const I2SSrcConf = enum {
-    I2S_CKIN,
-    PLLI2SR,
+pub const I2SClockSourceConf = enum {
+    I2S_CLOCK_EXTERNAL,
+    I2S_CLOCK_PLL,
 };
-pub const PLLI2SSAIDivConf = enum(u32) {
+pub const PLLI2SDivQConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -215,12 +215,12 @@ pub const PLLI2SSAIDivConf = enum(u32) {
         return 1;
     }
 };
-pub const SAI_AMuxSrcConf = enum {
-    PLLI2SSAIDiv,
-    I2S_CKIN,
-    PLLSAISAIDiv,
+pub const SAIClockSource_BlockAConf = enum {
+    SAI_CLKSOURCE_PLLI2S,
+    SAI_CLKSOURCE_EXT,
+    SAI_CLKSOURCE_PLLSAI,
 };
-pub const PLLSAILCDDivConf = enum {
+pub const PLLSAIDivRConf = enum {
     RCC_PLLSAIDIVR_2,
     RCC_PLLSAIDIVR_4,
     RCC_PLLSAIDIVR_8,
@@ -234,7 +234,7 @@ pub const PLLSAILCDDivConf = enum {
         };
     }
 };
-pub const PLLSAISAIDivConf = enum(u32) {
+pub const PLLSAIDivQConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -249,18 +249,18 @@ pub const PLLSAISAIDivConf = enum(u32) {
         return 1;
     }
 };
-pub const SAI_BMuxSrcConf = enum {
-    PLLI2SSAIDiv,
-    I2S_CKIN,
-    PLLSAISAIDiv,
+pub const SAIClockSource_BlockBConf = enum {
+    SAI_CLKSOURCE_PLLI2S,
+    SAI_CLKSOURCE_EXT,
+    SAI_CLKSOURCE_PLLSAI,
 };
-pub const MCO1MultConf = enum {
-    LSEOSC,
-    HSEOSC,
-    HSIRC,
-    PLLP,
+pub const RCC_MCO1SourceConf = enum {
+    RCC_MCO1SOURCE_LSE,
+    RCC_MCO1SOURCE_HSE,
+    RCC_MCO1SOURCE_HSI,
+    RCC_MCO1SOURCE_PLLCLK,
 };
-pub const MCO1DivConf = enum {
+pub const RCC_MCODiv1Conf = enum {
     RCC_MCODIV_1,
     RCC_MCODIV_2,
     RCC_MCODIV_3,
@@ -276,13 +276,13 @@ pub const MCO1DivConf = enum {
         };
     }
 };
-pub const MCO2MultConf = enum {
-    SysClkSource,
-    PLLI2SR,
-    HSEOSC,
-    PLLP,
+pub const RCC_MCO2SourceConf = enum {
+    RCC_MCO2SOURCE_SYSCLK,
+    RCC_MCO2SOURCE_PLLI2SCLK,
+    RCC_MCO2SOURCE_HSE,
+    RCC_MCO2SOURCE_PLLCLK,
 };
-pub const MCO2DivConf = enum {
+pub const RCC_MCODiv2Conf = enum {
     RCC_MCODIV_1,
     RCC_MCODIV_2,
     RCC_MCODIV_3,
@@ -488,27 +488,27 @@ pub const RCC_TIM_PRescaler_SelectionConf = enum {
     }
 };
 pub const Config = struct {
-    HSEOSC: HSEOSCConf = @enumFromInt(25000000),
-    LSEOSC: LSEOSCConf = @enumFromInt(32768),
-    RTCClkSource: RTCClkSourceConf = .LSIRC,
-    HSERTCDevisor: HSERTCDevisorConf = .RCC_RTCCLKSOURCE_HSE_DIV2,
-    SysClkSource: SysClkSourceConf = .HSIRC,
-    PLLSource: PLLSourceConf = .HSIRC,
+    HSEOSC: HSE_VALUEConf = @enumFromInt(25000000),
+    LSEOSC: LSE_VALUEConf = @enumFromInt(32768),
+    RTCClkSource: RCC_RTC_Clock_SourceConf = .RCC_RTCCLKSOURCE_LSI,
+    HSERTCDevisor: RCC_RTC_Clock_Source_FROM_HSEConf = .RCC_RTCCLKSOURCE_HSE_DIV2,
+    SysClkSource: SYSCLKSourceConf = .RCC_SYSCLKSOURCE_HSI,
+    PLLSource: PLLSourceVirtualConf = .RCC_PLLSOURCE_HSI,
     PLLM: PLLMConf = @enumFromInt(16),
-    AHBPrescaler: AHBPrescalerConf = .RCC_SYSCLK_DIV1,
-    CortexPrescaler: CortexPrescalerConf = .SYSTICK_CLKSOURCE_HCLK,
-    APB1Prescaler: APB1PrescalerConf = .RCC_HCLK_DIV1,
-    APB2Prescaler: APB2PrescalerConf = .RCC_HCLK_DIV1,
-    I2SSrc: I2SSrcConf = .PLLI2SR,
-    PLLI2SSAIDiv: PLLI2SSAIDivConf = @enumFromInt(1),
-    SAI_AMuxSrc: SAI_AMuxSrcConf = .PLLSAISAIDiv,
-    PLLSAILCDDiv: PLLSAILCDDivConf = .RCC_PLLSAIDIVR_2,
-    PLLSAISAIDiv: PLLSAISAIDivConf = @enumFromInt(1),
-    SAI_BMuxSrc: SAI_BMuxSrcConf = .PLLSAISAIDiv,
-    MCO1Mult: MCO1MultConf = .HSIRC,
-    MCO1Div: MCO1DivConf = .RCC_MCODIV_1,
-    MCO2Mult: MCO2MultConf = .SysClkSource,
-    MCO2Div: MCO2DivConf = .RCC_MCODIV_1,
+    AHBPrescaler: AHBCLKDividerConf = .RCC_SYSCLK_DIV1,
+    CortexPrescaler: Cortex_DivConf = .SYSTICK_CLKSOURCE_HCLK,
+    APB1Prescaler: APB1CLKDividerConf = .RCC_HCLK_DIV1,
+    APB2Prescaler: APB2CLKDividerConf = .RCC_HCLK_DIV1,
+    I2SSrc: I2SClockSourceConf = .I2S_CLOCK_PLL,
+    PLLI2SSAIDiv: PLLI2SDivQConf = @enumFromInt(1),
+    SAI_AMuxSrc: SAIClockSource_BlockAConf = .SAI_CLKSOURCE_PLLSAI,
+    PLLSAILCDDiv: PLLSAIDivRConf = .RCC_PLLSAIDIVR_2,
+    PLLSAISAIDiv: PLLSAIDivQConf = @enumFromInt(1),
+    SAI_BMuxSrc: SAIClockSource_BlockBConf = .SAI_CLKSOURCE_PLLSAI,
+    MCO1Mult: RCC_MCO1SourceConf = .RCC_MCO1SOURCE_HSI,
+    MCO1Div: RCC_MCODiv1Conf = .RCC_MCODIV_1,
+    MCO2Mult: RCC_MCO2SourceConf = .RCC_MCO2SOURCE_SYSCLK,
+    MCO2Div: RCC_MCODiv2Conf = .RCC_MCODIV_1,
     PLLSAIN: PLLSAINConf = @enumFromInt(49),
     PLLSAIR: PLLSAIRConf = @enumFromInt(2),
     PLLSAIQ: PLLSAIQConf = @enumFromInt(4),
@@ -522,6 +522,81 @@ pub const Config = struct {
     LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
     HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
     RCC_TIM_PRescaler_Selection: RCC_TIM_PRescaler_SelectionConf = .RCC_TIMPRES_DESACTIVATED,
+};
+
+pub const ConfigWithRef = struct {
+    HSE_VALUE: HSE_VALUEConf = @enumFromInt(25000000),
+    LSE_VALUE: LSE_VALUEConf = @enumFromInt(32768),
+    RCC_RTC_Clock_Source: RCC_RTC_Clock_SourceConf = .RCC_RTCCLKSOURCE_LSI,
+    RCC_RTC_Clock_Source_FROM_HSE: RCC_RTC_Clock_Source_FROM_HSEConf = .RCC_RTCCLKSOURCE_HSE_DIV2,
+    SYSCLKSource: SYSCLKSourceConf = .RCC_SYSCLKSOURCE_HSI,
+    PLLSourceVirtual: PLLSourceVirtualConf = .RCC_PLLSOURCE_HSI,
+    PLLM: PLLMConf = @enumFromInt(16),
+    AHBCLKDivider: AHBCLKDividerConf = .RCC_SYSCLK_DIV1,
+    Cortex_Div: Cortex_DivConf = .SYSTICK_CLKSOURCE_HCLK,
+    APB1CLKDivider: APB1CLKDividerConf = .RCC_HCLK_DIV1,
+    APB2CLKDivider: APB2CLKDividerConf = .RCC_HCLK_DIV1,
+    I2SClockSource: I2SClockSourceConf = .I2S_CLOCK_PLL,
+    PLLI2SDivQ: PLLI2SDivQConf = @enumFromInt(1),
+    SAIClockSource_BlockA: SAIClockSource_BlockAConf = .SAI_CLKSOURCE_PLLSAI,
+    PLLSAIDivR: PLLSAIDivRConf = .RCC_PLLSAIDIVR_2,
+    PLLSAIDivQ: PLLSAIDivQConf = @enumFromInt(1),
+    SAIClockSource_BlockB: SAIClockSource_BlockBConf = .SAI_CLKSOURCE_PLLSAI,
+    RCC_MCO1Source: RCC_MCO1SourceConf = .RCC_MCO1SOURCE_HSI,
+    RCC_MCODiv1: RCC_MCODiv1Conf = .RCC_MCODIV_1,
+    RCC_MCO2Source: RCC_MCO2SourceConf = .RCC_MCO2SOURCE_SYSCLK,
+    RCC_MCODiv2: RCC_MCODiv2Conf = .RCC_MCODIV_1,
+    PLLSAIN: PLLSAINConf = @enumFromInt(49),
+    PLLSAIR: PLLSAIRConf = @enumFromInt(2),
+    PLLSAIQ: PLLSAIQConf = @enumFromInt(4),
+    PLLN: PLLNConf = @enumFromInt(192),
+    PLLP: PLLPConf = .RCC_PLLP_DIV2,
+    PLLQ: PLLQConf = @enumFromInt(4),
+    PLLI2SN: PLLI2SNConf = @enumFromInt(192),
+    PLLI2SR: PLLI2SRConf = @enumFromInt(2),
+    PLLI2SQ: PLLI2SQConf = @enumFromInt(2),
+    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
+    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
+    HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
+    RCC_TIM_PRescaler_Selection: RCC_TIM_PRescaler_SelectionConf = .RCC_TIMPRES_DESACTIVATED,
+    pub fn into_config(self: *const ConfigWithRef) Config {
+        return .{
+            .HSEOSC = self.HSE_VALUE,
+            .LSEOSC = self.LSE_VALUE,
+            .RTCClkSource = self.RCC_RTC_Clock_Source,
+            .HSERTCDevisor = self.RCC_RTC_Clock_Source_FROM_HSE,
+            .SysClkSource = self.SYSCLKSource,
+            .PLLSource = self.PLLSourceVirtual,
+            .PLLM = self.PLLM,
+            .AHBPrescaler = self.AHBCLKDivider,
+            .CortexPrescaler = self.Cortex_Div,
+            .APB1Prescaler = self.APB1CLKDivider,
+            .APB2Prescaler = self.APB2CLKDivider,
+            .I2SSrc = self.I2SClockSource,
+            .PLLI2SSAIDiv = self.PLLI2SDivQ,
+            .SAI_AMuxSrc = self.SAIClockSource_BlockA,
+            .PLLSAILCDDiv = self.PLLSAIDivR,
+            .PLLSAISAIDiv = self.PLLSAIDivQ,
+            .SAI_BMuxSrc = self.SAIClockSource_BlockB,
+            .MCO1Mult = self.RCC_MCO1Source,
+            .MCO1Div = self.RCC_MCODiv1,
+            .MCO2Mult = self.RCC_MCO2Source,
+            .MCO2Div = self.RCC_MCODiv2,
+            .PLLSAIN = self.PLLSAIN,
+            .PLLSAIR = self.PLLSAIR,
+            .PLLSAIQ = self.PLLSAIQ,
+            .PLLN = self.PLLN,
+            .PLLP = self.PLLP,
+            .PLLQ = self.PLLQ,
+            .PLLI2SN = self.PLLI2SN,
+            .PLLI2SR = self.PLLI2SR,
+            .PLLI2SQ = self.PLLI2SQ,
+            .HSE_Timout = self.HSE_Timout,
+            .LSE_Timout = self.LSE_Timout,
+            .HSICalibrationValue = self.HSICalibrationValue,
+            .RCC_TIM_PRescaler_Selection = self.RCC_TIM_PRescaler_Selection,
+        };
+    }
 };
 
 pub const ClockTree = struct {

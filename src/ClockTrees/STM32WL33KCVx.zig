@@ -5,7 +5,7 @@ const ClockNodeTypes = clock.ClockNodesTypes;
 const ClockState = clock.ClockState;
 const ClockError = clock.ClockError;
 
-pub const HSEOSCConf = enum {
+pub const HSE_VALUEConf = enum {
     @"48000000",
     @"50000000",
     pub fn get(self: @This()) f32 {
@@ -15,7 +15,7 @@ pub const HSEOSCConf = enum {
         };
     }
 };
-pub const LSEOSCConf = enum(u32) {
+pub const LSE_VALUEConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -30,21 +30,21 @@ pub const LSEOSCConf = enum(u32) {
         return 1000;
     }
 };
-pub const RC64MPLLConf = enum {
-    HSIRC,
-    PLL64RC,
+pub const RC64MPLLSourceConf = enum {
+    RCC_LSCOSOURCE_HSI,
+    RCC_LSCOSOURCE_PLL64,
 };
 pub const ROOTClkSourceConf = enum {
-    HSEOSC,
-    RC64MPLL,
+    RCC_SYSCLKSOURCE_DIRECT_HSE,
+    RCC_SYSCLKSOURCE_RC64MPLL,
 };
-pub const CLKROOTDIVSourceConf = enum {
-    CLK_ROOT_DIV3,
-    CLK_ROOT_DIV4,
+pub const ClkROOTDIVSourceConf = enum {
+    CLK16MHzDiv2,
+    CLK16MHzDiv4,
 };
-pub const ClkSMPSDIVConf = enum {
-    ClkSMPSDiv4,
-    ClkSMPSDiv2,
+pub const ClkSMPSDIVSourceConf = enum {
+    RCC_SMPSCLK_DIV4,
+    RCC_SMPSCLK_DIV2,
 };
 pub const CLK_SPMS_KRM_DIVConf = enum {
     @"8",
@@ -70,19 +70,19 @@ pub const CLK_SPMS_KRM_DIVConf = enum {
         };
     }
 };
-pub const ClkKRMConf = enum {
-    ClkSMPSDIV,
-    CLK_SPMS_KRM_DIV,
+pub const ClkKRMSourceConf = enum {
+    SMPSDIVCLK,
+    CLK_SPMS_KRM,
 };
-pub const LPUARTMultConf = enum {
-    LSEOSC,
-    ClkROOTDIVOutput,
+pub const LPUARTClockSelectionConf = enum {
+    RCC_LPUART1_CLKSOURCE_LSE,
+    RCC_LPUART1_CLKSOURCE_16M,
 };
-pub const LSCOMultConf = enum {
-    LSIRC,
-    LSEOSC,
+pub const LSCOSource1Conf = enum {
+    RCC_LSCOSOURCE_LSI,
+    RCC_LSCOSOURCE_LSE,
 };
-pub const ROOTCLK48PrescalerConf = enum {
+pub const SYSCLK48DividerConf = enum {
     RCC_DIRECT_HSE_DIV1,
     RCC_DIRECT_HSE_DIV2,
     RCC_DIRECT_HSE_DIV3,
@@ -102,7 +102,7 @@ pub const ROOTCLK48PrescalerConf = enum {
         };
     }
 };
-pub const ROOTCLK64PrescalerConf = enum {
+pub const SYSCLK64DividerConf = enum {
     RCC_RC64MPLL_DIV1,
     RCC_RC64MPLL_DIV2,
     RCC_RC64MPLL_DIV4,
@@ -122,29 +122,29 @@ pub const ROOTCLK64PrescalerConf = enum {
         };
     }
 };
-pub const CLKSYSMultConf = enum {
+pub const CLKSYSMultSourceConf = enum {
     ROOTCLK48Prescaler,
     ROOTCLK64Prescaler,
 };
-pub const CLKSPI3I2SMultConf = enum {
-    ClkROOTDIVOutput,
-    Div2,
-    RC64MPLL,
+pub const CLKSPI3I2SMultSourceConf = enum {
+    RCC_SPI3I2S_CLKSOURCE_CLK_ROOT_DIV,
+    RCC_SPI3I2S_CLKSOURCE_CLK_ROOT,
+    RCC_SPI3I2S_CLKSOURCE_CLK_RC64MPLL,
 };
-pub const RTCClkSourceConf = enum {
-    CLKROOTCDevisorON512,
-    LSEOSC,
-    LSIRC,
+pub const RTCClockSelectionConf = enum {
+    RCC_RTC_WDG_SUBG_LPAWUR_LCD_LCSC_CLKSOURCE_DIV512,
+    RCC_RTC_WDG_SUBG_LPAWUR_LCD_LCSC_CLKSOURCE_LSE,
+    RCC_RTC_WDG_SUBG_LPAWUR_LCD_LCSC_CLKSOURCE_LSI,
 };
-pub const MCOMultConf = enum {
-    ClkROOTDIVOutput,
-    ClkSMPSOutput,
-    ROOTCLKOutput,
-    HSEOSC,
-    RC64MPLL,
-    CLKROOTCDevisorON512,
+pub const RCC_MCO1SourceConf = enum {
+    RCC_MCOSOURCE_ADC,
+    RCC_MCOSOURCE_SMPS,
+    RCC_MCO1SOURCE_SYSCLK,
+    RCC_MCO1SOURCE_HSE,
+    RCC_MCOSOURCE_RC64MPLL,
+    RCC_MCOSOURCE_HSI64M_DIV2048,
 };
-pub const MCODivConf = enum {
+pub const RCC_MCODivConf = enum {
     RCC_MCODIV_1,
     RCC_MCODIV_2,
     RCC_MCODIV_4,
@@ -246,29 +246,82 @@ pub const LSE_Drive_CapabilityConf = enum {
     }
 };
 pub const Config = struct {
-    HSEOSC: HSEOSCConf = .@"48000000",
-    LSEOSC: LSEOSCConf = @enumFromInt(32768),
-    RC64MPLL: RC64MPLLConf = .HSIRC,
-    ROOTClkSource: ROOTClkSourceConf = .RC64MPLL,
-    CLKROOTDIVSource: CLKROOTDIVSourceConf = .CLK_ROOT_DIV4,
-    ClkSMPSDIV: ClkSMPSDIVConf = .ClkSMPSDiv2,
+    HSEOSC: HSE_VALUEConf = .@"48000000",
+    LSEOSC: LSE_VALUEConf = @enumFromInt(32768),
+    RC64MPLL: RC64MPLLSourceConf = .RCC_LSCOSOURCE_HSI,
+    ROOTClkSource: ROOTClkSourceConf = .RCC_SYSCLKSOURCE_RC64MPLL,
+    CLKROOTDIVSource: ClkROOTDIVSourceConf = .CLK16MHzDiv4,
+    ClkSMPSDIV: ClkSMPSDIVSourceConf = .RCC_SMPSCLK_DIV2,
     CLK_SPMS_KRM_DIV: CLK_SPMS_KRM_DIVConf = .@"8",
-    ClkKRM: ClkKRMConf = .ClkSMPSDIV,
-    LPUARTMult: LPUARTMultConf = .ClkROOTDIVOutput,
-    LSCOMult: LSCOMultConf = .LSIRC,
-    ROOTCLK48Prescaler: ROOTCLK48PrescalerConf = .RCC_DIRECT_HSE_DIV1,
-    ROOTCLK64Prescaler: ROOTCLK64PrescalerConf = .RCC_RC64MPLL_DIV1,
-    CLKSYSMult: CLKSYSMultConf = .ROOTCLK64Prescaler,
-    CLKSPI3I2SMult: CLKSPI3I2SMultConf = .RC64MPLL,
-    RTCClkSource: RTCClkSourceConf = .LSIRC,
-    MCOMult: MCOMultConf = .ROOTCLKOutput,
-    MCODiv: MCODivConf = .RCC_MCODIV_1,
+    ClkKRM: ClkKRMSourceConf = .SMPSDIVCLK,
+    LPUARTMult: LPUARTClockSelectionConf = .RCC_LPUART1_CLKSOURCE_16M,
+    LSCOMult: LSCOSource1Conf = .RCC_LSCOSOURCE_LSI,
+    ROOTCLK48Prescaler: SYSCLK48DividerConf = .RCC_DIRECT_HSE_DIV1,
+    ROOTCLK64Prescaler: SYSCLK64DividerConf = .RCC_RC64MPLL_DIV1,
+    CLKSYSMult: CLKSYSMultSourceConf = .ROOTCLK64Prescaler,
+    CLKSPI3I2SMult: CLKSPI3I2SMultSourceConf = .RCC_SPI3I2S_CLKSOURCE_CLK_RC64MPLL,
+    RTCClkSource: RTCClockSelectionConf = .RCC_RTC_WDG_SUBG_LPAWUR_LCD_LCSC_CLKSOURCE_LSI,
+    MCOMult: RCC_MCO1SourceConf = .RCC_MCO1SOURCE_SYSCLK,
+    MCODiv: RCC_MCODivConf = .RCC_MCODIV_1,
     HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
     LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
     HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
     HSE_current_control: HSE_current_controlConf = @enumFromInt(40),
     HSE_Capacitor_Tuning: HSE_Capacitor_TuningConf = @enumFromInt(32),
     LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+};
+
+pub const ConfigWithRef = struct {
+    HSE_VALUE: HSE_VALUEConf = .@"48000000",
+    LSE_VALUE: LSE_VALUEConf = @enumFromInt(32768),
+    RC64MPLLSource: RC64MPLLSourceConf = .RCC_LSCOSOURCE_HSI,
+    ROOTClkSource: ROOTClkSourceConf = .RCC_SYSCLKSOURCE_RC64MPLL,
+    ClkROOTDIVSource: ClkROOTDIVSourceConf = .CLK16MHzDiv4,
+    ClkSMPSDIVSource: ClkSMPSDIVSourceConf = .RCC_SMPSCLK_DIV2,
+    CLK_SPMS_KRM_DIV: CLK_SPMS_KRM_DIVConf = .@"8",
+    ClkKRMSource: ClkKRMSourceConf = .SMPSDIVCLK,
+    LPUARTClockSelection: LPUARTClockSelectionConf = .RCC_LPUART1_CLKSOURCE_16M,
+    LSCOSource1: LSCOSource1Conf = .RCC_LSCOSOURCE_LSI,
+    SYSCLK48Divider: SYSCLK48DividerConf = .RCC_DIRECT_HSE_DIV1,
+    SYSCLK64Divider: SYSCLK64DividerConf = .RCC_RC64MPLL_DIV1,
+    CLKSYSMultSource: CLKSYSMultSourceConf = .ROOTCLK64Prescaler,
+    CLKSPI3I2SMultSource: CLKSPI3I2SMultSourceConf = .RCC_SPI3I2S_CLKSOURCE_CLK_RC64MPLL,
+    RTCClockSelection: RTCClockSelectionConf = .RCC_RTC_WDG_SUBG_LPAWUR_LCD_LCSC_CLKSOURCE_LSI,
+    RCC_MCO1Source: RCC_MCO1SourceConf = .RCC_MCO1SOURCE_SYSCLK,
+    RCC_MCODiv: RCC_MCODivConf = .RCC_MCODIV_1,
+    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
+    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
+    HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
+    HSE_current_control: HSE_current_controlConf = @enumFromInt(40),
+    HSE_Capacitor_Tuning: HSE_Capacitor_TuningConf = @enumFromInt(32),
+    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+    pub fn into_config(self: *const ConfigWithRef) Config {
+        return .{
+            .HSEOSC = self.HSE_VALUE,
+            .LSEOSC = self.LSE_VALUE,
+            .RC64MPLL = self.RC64MPLLSource,
+            .ROOTClkSource = self.ROOTClkSource,
+            .CLKROOTDIVSource = self.ClkROOTDIVSource,
+            .ClkSMPSDIV = self.ClkSMPSDIVSource,
+            .CLK_SPMS_KRM_DIV = self.CLK_SPMS_KRM_DIV,
+            .ClkKRM = self.ClkKRMSource,
+            .LPUARTMult = self.LPUARTClockSelection,
+            .LSCOMult = self.LSCOSource1,
+            .ROOTCLK48Prescaler = self.SYSCLK48Divider,
+            .ROOTCLK64Prescaler = self.SYSCLK64Divider,
+            .CLKSYSMult = self.CLKSYSMultSource,
+            .CLKSPI3I2SMult = self.CLKSPI3I2SMultSource,
+            .RTCClkSource = self.RTCClockSelection,
+            .MCOMult = self.RCC_MCO1Source,
+            .MCODiv = self.RCC_MCODiv,
+            .HSE_Timout = self.HSE_Timout,
+            .LSE_Timout = self.LSE_Timout,
+            .HSICalibrationValue = self.HSICalibrationValue,
+            .HSE_current_control = self.HSE_current_control,
+            .HSE_Capacitor_Tuning = self.HSE_Capacitor_Tuning,
+            .LSE_Drive_Capability = self.LSE_Drive_Capability,
+        };
+    }
 };
 
 pub const ClockTree = struct {

@@ -5,7 +5,7 @@ const ClockNodeTypes = clock.ClockNodesTypes;
 const ClockState = clock.ClockState;
 const ClockError = clock.ClockError;
 
-pub const HSEOSCConf = enum(u32) {
+pub const HSE_VALUEConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -20,7 +20,7 @@ pub const HSEOSCConf = enum(u32) {
         return 4000000;
     }
 };
-pub const LSEOSCConf = enum(u32) {
+pub const LSE_VALUEConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -35,35 +35,35 @@ pub const LSEOSCConf = enum(u32) {
         return 1000;
     }
 };
-pub const RC64MPLLConf = enum {
-    HSIRC,
-    PLL64RC,
+pub const RC64MPLLSourceConf = enum {
+    RCC_LSCOSOURCE_HSI,
+    RCC_LSCOSOURCE_PLL64,
 };
-pub const SysClkSourceConf = enum {
-    HSEOSC,
-    RC64MPLL,
+pub const SYSCLKSourceConf = enum {
+    RCC_SYSCLKSOURCE_DIRECT_HSE,
+    RCC_SYSCLKSOURCE_RC64MPLL,
 };
-pub const CLK16MHzSourceConf = enum {
+pub const Clk16MHzSourceConf = enum {
     CLK16MHzDiv2,
     CLK16MHzDiv4,
 };
-pub const ClkSMPSConf = enum {
-    ClkSMPSDiv4,
-    ClkSMPSDiv2,
+pub const ClkSMPSSourceConf = enum {
+    RCC_SMPSCLK_DIV4,
+    RCC_SMPSCLK_DIV2,
 };
-pub const LSCOMultConf = enum {
-    LSIRC,
-    LSEOSC,
+pub const LSCOSource1Conf = enum {
+    RCC_LSCOSOURCE_LSI,
+    RCC_LSCOSOURCE_LSE,
 };
-pub const CLK32MHzSourceConf = enum {
-    CLK32MHzDiv1,
+pub const Clk32MHzSourceConf = enum {
+    SysCLKOutput,
     CLK32MHzDiv2,
 };
-pub const BLEMultConf = enum {
-    Clk16MHzOutput,
-    Clk32MHzOutput,
+pub const BLEMultSourceConf = enum {
+    RCC_RF_CLK_16M,
+    RCC_RF_CLK_32M,
 };
-pub const SYSCLK32PrescalerConf = enum {
+pub const SYSCLK32DividerConf = enum {
     RCC_DIRECT_HSE_DIV1,
     RCC_DIRECT_HSE_DIV2,
     RCC_DIRECT_HSE_DIV4,
@@ -81,7 +81,7 @@ pub const SYSCLK32PrescalerConf = enum {
         };
     }
 };
-pub const SYSCLK64PrescalerConf = enum {
+pub const SYSCLK64DividerConf = enum {
     RCC_RC64MPLL_DIV1,
     RCC_RC64MPLL_DIV2,
     RCC_RC64MPLL_DIV4,
@@ -101,32 +101,32 @@ pub const SYSCLK64PrescalerConf = enum {
         };
     }
 };
-pub const CLKSYSMultConf = enum {
+pub const CLKSYSMultSourceConf = enum {
     SYSCLK32Prescaler,
     SYSCLK64Prescaler,
 };
-pub const CLKI2S3MultConf = enum {
-    Clk32MHzOutput,
-    Clk16MHzOutput,
+pub const CLKI2S3MultSourceConf = enum {
+    RCC_SPI3I2S_CLKSOURCE_32M,
+    RCC_SPI3I2S_CLKSOURCE_16M,
 };
-pub const CLKI2S2MultConf = enum {
-    Clk32MHzOutput,
-    Clk16MHzOutput,
+pub const CLKI2S2MultSourceConf = enum {
+    RCC_SPI2I2S_CLKSOURCE_32M,
+    RCC_SPI2I2S_CLKSOURCE_16M,
 };
-pub const RTCClkSourceConf = enum {
-    CLK16RTCDevisor,
-    LSEOSC,
-    LSIRC,
+pub const RTCClockSelectionConf = enum {
+    RCC_RTC_WDG_BLEWKUP_CLKSOURCE_HSI64M_DIV2048,
+    RCC_RTC_WDG_BLEWKUP_CLKSOURCE_LSE,
+    RCC_RTC_WDG_BLEWKUP_CLKSOURCE_LSI,
 };
-pub const MCOMultConf = enum {
-    Clk16MHzOutput,
-    ClkSMPSOutput,
-    CLKSYSOutput,
-    HSEOSC,
-    HSIRC,
-    CLK16RTCDevisor,
+pub const RCC_MCO1SourceConf = enum {
+    RCC_MCOSOURCE_ADC,
+    RCC_MCOSOURCE_SMPS,
+    RCC_MCO1SOURCE_SYSCLK,
+    RCC_MCO1SOURCE_HSE,
+    RCC_MCO1SOURCE_HSI,
+    RCC_MCOSOURCE_HSI64M_DIV2048,
 };
-pub const MCODivConf = enum {
+pub const RCC_MCODivConf = enum {
     RCC_MCODIV_1,
     RCC_MCODIV_2,
     RCC_MCODIV_4,
@@ -221,29 +221,82 @@ pub const LSE_Drive_CapabilityConf = enum {
     }
 };
 pub const Config = struct {
-    HSEOSC: HSEOSCConf = @enumFromInt(32000000),
-    LSEOSC: LSEOSCConf = @enumFromInt(32768),
-    RC64MPLL: RC64MPLLConf = .HSIRC,
-    SysClkSource: SysClkSourceConf = .RC64MPLL,
-    CLK16MHzSource: CLK16MHzSourceConf = .CLK16MHzDiv4,
-    ClkSMPS: ClkSMPSConf = .ClkSMPSDiv4,
-    LSCOMult: LSCOMultConf = .LSIRC,
-    CLK32MHzSource: CLK32MHzSourceConf = .CLK32MHzDiv2,
-    BLEMult: BLEMultConf = .Clk32MHzOutput,
-    SYSCLK32Prescaler: SYSCLK32PrescalerConf = .RCC_DIRECT_HSE_DIV1,
-    SYSCLK64Prescaler: SYSCLK64PrescalerConf = .RCC_RC64MPLL_DIV1,
-    CLKSYSMult: CLKSYSMultConf = .SYSCLK64Prescaler,
-    CLKI2S3Mult: CLKI2S3MultConf = .Clk32MHzOutput,
-    CLKI2S2Mult: CLKI2S2MultConf = .Clk32MHzOutput,
-    RTCClkSource: RTCClkSourceConf = .LSIRC,
-    MCOMult: MCOMultConf = .CLKSYSOutput,
-    MCODiv: MCODivConf = .RCC_MCODIV_1,
+    HSEOSC: HSE_VALUEConf = @enumFromInt(32000000),
+    LSEOSC: LSE_VALUEConf = @enumFromInt(32768),
+    RC64MPLL: RC64MPLLSourceConf = .RCC_LSCOSOURCE_HSI,
+    SysClkSource: SYSCLKSourceConf = .RCC_SYSCLKSOURCE_RC64MPLL,
+    CLK16MHzSource: Clk16MHzSourceConf = .CLK16MHzDiv4,
+    ClkSMPS: ClkSMPSSourceConf = .RCC_SMPSCLK_DIV4,
+    LSCOMult: LSCOSource1Conf = .RCC_LSCOSOURCE_LSI,
+    CLK32MHzSource: Clk32MHzSourceConf = .CLK32MHzDiv2,
+    BLEMult: BLEMultSourceConf = .RCC_RF_CLK_32M,
+    SYSCLK32Prescaler: SYSCLK32DividerConf = .RCC_DIRECT_HSE_DIV1,
+    SYSCLK64Prescaler: SYSCLK64DividerConf = .RCC_RC64MPLL_DIV1,
+    CLKSYSMult: CLKSYSMultSourceConf = .SYSCLK64Prescaler,
+    CLKI2S3Mult: CLKI2S3MultSourceConf = .RCC_SPI3I2S_CLKSOURCE_64M,
+    CLKI2S2Mult: CLKI2S2MultSourceConf = .RCC_SPI2I2S_CLKSOURCE_32M,
+    RTCClkSource: RTCClockSelectionConf = .RCC_RTC_WDG_BLEWKUP_CLKSOURCE_LSI,
+    MCOMult: RCC_MCO1SourceConf = .RCC_MCO1SOURCE_SYSCLK,
+    MCODiv: RCC_MCODivConf = .RCC_MCODIV_1,
     HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
     LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
     HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
     HSE_current_control: HSE_current_controlConf = .null,
     HSE_Capacitor_Tuning: HSE_Capacitor_TuningConf = @enumFromInt(32),
     LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+};
+
+pub const ConfigWithRef = struct {
+    HSE_VALUE: HSE_VALUEConf = @enumFromInt(32000000),
+    LSE_VALUE: LSE_VALUEConf = @enumFromInt(32768),
+    RC64MPLLSource: RC64MPLLSourceConf = .RCC_LSCOSOURCE_HSI,
+    SYSCLKSource: SYSCLKSourceConf = .RCC_SYSCLKSOURCE_RC64MPLL,
+    Clk16MHzSource: Clk16MHzSourceConf = .CLK16MHzDiv4,
+    ClkSMPSSource: ClkSMPSSourceConf = .RCC_SMPSCLK_DIV4,
+    LSCOSource1: LSCOSource1Conf = .RCC_LSCOSOURCE_LSI,
+    Clk32MHzSource: Clk32MHzSourceConf = .CLK32MHzDiv2,
+    BLEMultSource: BLEMultSourceConf = .RCC_RF_CLK_32M,
+    SYSCLK32Divider: SYSCLK32DividerConf = .RCC_DIRECT_HSE_DIV1,
+    SYSCLK64Divider: SYSCLK64DividerConf = .RCC_RC64MPLL_DIV1,
+    CLKSYSMultSource: CLKSYSMultSourceConf = .SYSCLK64Prescaler,
+    CLKI2S3MultSource: CLKI2S3MultSourceConf = .RCC_SPI3I2S_CLKSOURCE_64M,
+    CLKI2S2MultSource: CLKI2S2MultSourceConf = .RCC_SPI2I2S_CLKSOURCE_32M,
+    RTCClockSelection: RTCClockSelectionConf = .RCC_RTC_WDG_BLEWKUP_CLKSOURCE_LSI,
+    RCC_MCO1Source: RCC_MCO1SourceConf = .RCC_MCO1SOURCE_SYSCLK,
+    RCC_MCODiv: RCC_MCODivConf = .RCC_MCODIV_1,
+    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
+    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
+    HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
+    HSE_current_control: HSE_current_controlConf = .null,
+    HSE_Capacitor_Tuning: HSE_Capacitor_TuningConf = @enumFromInt(32),
+    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+    pub fn into_config(self: *const ConfigWithRef) Config {
+        return .{
+            .HSEOSC = self.HSE_VALUE,
+            .LSEOSC = self.LSE_VALUE,
+            .RC64MPLL = self.RC64MPLLSource,
+            .SysClkSource = self.SYSCLKSource,
+            .CLK16MHzSource = self.Clk16MHzSource,
+            .ClkSMPS = self.ClkSMPSSource,
+            .LSCOMult = self.LSCOSource1,
+            .CLK32MHzSource = self.Clk32MHzSource,
+            .BLEMult = self.BLEMultSource,
+            .SYSCLK32Prescaler = self.SYSCLK32Divider,
+            .SYSCLK64Prescaler = self.SYSCLK64Divider,
+            .CLKSYSMult = self.CLKSYSMultSource,
+            .CLKI2S3Mult = self.CLKI2S3MultSource,
+            .CLKI2S2Mult = self.CLKI2S2MultSource,
+            .RTCClkSource = self.RTCClockSelection,
+            .MCOMult = self.RCC_MCO1Source,
+            .MCODiv = self.RCC_MCODiv,
+            .HSE_Timout = self.HSE_Timout,
+            .LSE_Timout = self.LSE_Timout,
+            .HSICalibrationValue = self.HSICalibrationValue,
+            .HSE_current_control = self.HSE_current_control,
+            .HSE_Capacitor_Tuning = self.HSE_Capacitor_Tuning,
+            .LSE_Drive_Capability = self.LSE_Drive_Capability,
+        };
+    }
 };
 
 pub const ClockTree = struct {

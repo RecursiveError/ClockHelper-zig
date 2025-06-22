@@ -5,7 +5,7 @@ const ClockNodeTypes = clock.ClockNodesTypes;
 const ClockState = clock.ClockState;
 const ClockError = clock.ClockError;
 
-pub const HSEOSCConf = enum(u32) {
+pub const HSE_VALUEConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -20,7 +20,7 @@ pub const HSEOSCConf = enum(u32) {
         return 16000000;
     }
 };
-pub const HSEDIV2Conf = enum {
+pub const HSE_Div2Conf = enum {
     @"2",
     pub fn get(self: @This()) f32 {
         return switch (self) {
@@ -28,7 +28,7 @@ pub const HSEDIV2Conf = enum {
         };
     }
 };
-pub const SPDIFConf = enum(u32) {
+pub const SPDIFFreq_ValueConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -43,7 +43,7 @@ pub const SPDIFConf = enum(u32) {
         return 3072000;
     }
 };
-pub const LSEOSCConf = enum(u32) {
+pub const LSE_VALUEConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -58,7 +58,7 @@ pub const LSEOSCConf = enum(u32) {
         return 0;
     }
 };
-pub const MSIRCConf = enum {
+pub const MSIClockRangeConf = enum {
     RCC_MSI_16MHZ,
     RCC_MSI_4MHZ,
     pub fn get(self: @This()) f32 {
@@ -68,19 +68,19 @@ pub const MSIRCConf = enum {
         };
     }
 };
-pub const XBAR0Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
+pub const XBAR0CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR0PredivConf = enum {
     @"1",
@@ -111,19 +111,19 @@ pub const XBAR0FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR1Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
+pub const XBAR1CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR1PredivConf = enum {
     @"1",
@@ -154,19 +154,19 @@ pub const XBAR1FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR2Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
+pub const XBAR2CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR2PredivConf = enum {
     @"1",
@@ -197,19 +197,19 @@ pub const XBAR2FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR3Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
+pub const XBAR3CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR3PredivConf = enum {
     @"1",
@@ -240,19 +240,19 @@ pub const XBAR3FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR4Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
+pub const XBAR4CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR4PredivConf = enum {
     @"1",
@@ -283,19 +283,19 @@ pub const XBAR4FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR5Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
+pub const XBAR5CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR5PredivConf = enum {
     @"1",
@@ -326,19 +326,19 @@ pub const XBAR5FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR6Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
+pub const XBAR6CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR6PredivConf = enum {
     @"1",
@@ -369,14 +369,14 @@ pub const XBAR6FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR7Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    LSIRC,
-    LSEOSC,
+pub const XBAR7CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR7PredivConf = enum {
     @"1",
@@ -407,15 +407,15 @@ pub const XBAR7FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR8Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR8CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR8PredivConf = enum {
     @"1",
@@ -446,15 +446,15 @@ pub const XBAR8FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR9Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR9CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR9PredivConf = enum {
     @"1",
@@ -485,16 +485,16 @@ pub const XBAR9FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR10Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    I2S_CKIN,
+pub const XBAR10CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_I2S,
 };
 pub const XBAR10PredivConf = enum {
     @"1",
@@ -525,13 +525,13 @@ pub const XBAR10FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR11Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
+pub const XBAR11CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
 };
 pub const XBAR11PredivConf = enum {
     @"1",
@@ -562,14 +562,14 @@ pub const XBAR11FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR12Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    MSIRC,
+pub const XBAR12CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR12PredivConf = enum {
     @"1",
@@ -600,14 +600,14 @@ pub const XBAR12FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR13Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    MSIRC,
+pub const XBAR13CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR13PredivConf = enum {
     @"1",
@@ -638,14 +638,14 @@ pub const XBAR13FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR14Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    MSIRC,
+pub const XBAR14CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR14PredivConf = enum {
     @"1",
@@ -676,14 +676,14 @@ pub const XBAR14FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR15Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    MSIRC,
+pub const XBAR15CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR15PredivConf = enum {
     @"1",
@@ -714,16 +714,16 @@ pub const XBAR15FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR16Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    I2S_CKIN,
+pub const XBAR16CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_I2S,
 };
 pub const XBAR16PredivConf = enum {
     @"1",
@@ -754,16 +754,16 @@ pub const XBAR16FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR17Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    I2S_CKIN,
+pub const XBAR17CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_I2S,
 };
 pub const XBAR17PredivConf = enum {
     @"1",
@@ -794,16 +794,16 @@ pub const XBAR17FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR18Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    I2S_CKIN,
+pub const XBAR18CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_I2S,
 };
 pub const XBAR18PredivConf = enum {
     @"1",
@@ -834,15 +834,15 @@ pub const XBAR18FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR19Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR19CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR19PredivConf = enum {
     @"1",
@@ -873,15 +873,15 @@ pub const XBAR19FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR20Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR20CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR20PredivConf = enum {
     @"1",
@@ -912,15 +912,15 @@ pub const XBAR20FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR21Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR21CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR21PredivConf = enum {
     @"1",
@@ -951,15 +951,15 @@ pub const XBAR21FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR22Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR22CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR22PredivConf = enum {
     @"1",
@@ -990,17 +990,17 @@ pub const XBAR22FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR23Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
+pub const XBAR23CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
 };
 pub const XBAR23PredivConf = enum {
     @"1",
@@ -1031,17 +1031,17 @@ pub const XBAR23FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR24Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
+pub const XBAR24CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
 };
 pub const XBAR24PredivConf = enum {
     @"1",
@@ -1072,17 +1072,17 @@ pub const XBAR24FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR25Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
+pub const XBAR25CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
 };
 pub const XBAR25PredivConf = enum {
     @"1",
@@ -1113,13 +1113,13 @@ pub const XBAR25FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR26Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSEOSC,
+pub const XBAR26CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR26PredivConf = enum {
     @"1",
@@ -1150,12 +1150,12 @@ pub const XBAR26FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR27Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR27CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR27PredivConf = enum {
     @"1",
@@ -1186,13 +1186,13 @@ pub const XBAR27FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR28Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSEOSC,
+pub const XBAR28CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR28PredivConf = enum {
     @"1",
@@ -1223,12 +1223,12 @@ pub const XBAR28FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR29Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR29CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR29PredivConf = enum {
     @"1",
@@ -1259,13 +1259,13 @@ pub const XBAR29FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR30Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSEOSC,
+pub const XBAR30CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR30PredivConf = enum {
     @"1",
@@ -1296,13 +1296,13 @@ pub const XBAR30FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR31Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSEOSC,
+pub const XBAR31CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR31PredivConf = enum {
     @"1",
@@ -1333,13 +1333,13 @@ pub const XBAR31FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR32Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSEOSC,
+pub const XBAR32CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR32PredivConf = enum {
     @"1",
@@ -1370,14 +1370,14 @@ pub const XBAR32FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR33Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
+pub const XBAR33CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR33PredivConf = enum {
     @"1",
@@ -1408,13 +1408,13 @@ pub const XBAR33FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR34Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSEOSC,
+pub const XBAR34CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR34PredivConf = enum {
     @"1",
@@ -1445,14 +1445,14 @@ pub const XBAR34FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR35Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
+pub const XBAR35CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR35PredivConf = enum {
     @"1",
@@ -1483,14 +1483,14 @@ pub const XBAR35FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR36Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    MSIRC,
+pub const XBAR36CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR36PredivConf = enum {
     @"1",
@@ -1521,16 +1521,16 @@ pub const XBAR36FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR37Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    I2S_CKIN,
+pub const XBAR37CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_I2S,
 };
 pub const XBAR37PredivConf = enum {
     @"1",
@@ -1561,14 +1561,14 @@ pub const XBAR37FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR38Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    MSIRC,
+pub const XBAR38CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR38PredivConf = enum {
     @"1",
@@ -1599,15 +1599,15 @@ pub const XBAR38FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR39Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR39CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR39PredivConf = enum {
     @"1",
@@ -1638,14 +1638,14 @@ pub const XBAR39FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR40Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    LSIRC,
-    LSEOSC,
+pub const XBAR40CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR40PredivConf = enum {
     @"1",
@@ -1676,14 +1676,14 @@ pub const XBAR40FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR41Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    LSIRC,
-    LSEOSC,
+pub const XBAR41CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR41PredivConf = enum {
     @"1",
@@ -1714,15 +1714,15 @@ pub const XBAR41FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR42Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR42CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR42PredivConf = enum {
     @"1",
@@ -1753,12 +1753,12 @@ pub const XBAR42FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR43Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR43CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR43PredivConf = enum {
     @"1",
@@ -1789,12 +1789,12 @@ pub const XBAR43FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR44Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR44CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR44PredivConf = enum {
     @"1",
@@ -1825,12 +1825,12 @@ pub const XBAR44FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR45Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR45CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR45PredivConf = enum {
     @"1",
@@ -1861,15 +1861,15 @@ pub const XBAR45FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR46Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR46CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR46PredivConf = enum {
     @"1",
@@ -1900,12 +1900,12 @@ pub const XBAR46FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR47Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR47CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR47PredivConf = enum {
     @"1",
@@ -1936,12 +1936,12 @@ pub const XBAR47FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR48Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR48CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR48PredivConf = enum {
     @"1",
@@ -1972,12 +1972,12 @@ pub const XBAR48FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR49Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR49CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR49PredivConf = enum {
     @"1",
@@ -2008,12 +2008,12 @@ pub const XBAR49FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR50Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR50CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR50PredivConf = enum {
     @"1",
@@ -2044,13 +2044,13 @@ pub const XBAR50FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR51Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
+pub const XBAR51CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
 };
 pub const XBAR51PredivConf = enum {
     @"1",
@@ -2081,13 +2081,13 @@ pub const XBAR51FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR52Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
+pub const XBAR52CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
 };
 pub const XBAR52PredivConf = enum {
     @"1",
@@ -2118,13 +2118,13 @@ pub const XBAR52FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR53Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
+pub const XBAR53CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
 };
 pub const XBAR53PredivConf = enum {
     @"1",
@@ -2155,12 +2155,12 @@ pub const XBAR53FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR54Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR54CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR54PredivConf = enum {
     @"1",
@@ -2191,12 +2191,12 @@ pub const XBAR54FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR55Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR55CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR55PredivConf = enum {
     @"1",
@@ -2227,15 +2227,15 @@ pub const XBAR55FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR56Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR56CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR56PredivConf = enum {
     @"1",
@@ -2266,13 +2266,13 @@ pub const XBAR56FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR57Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSEOSC,
+pub const XBAR57CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR57PredivConf = enum {
     @"1",
@@ -2303,13 +2303,13 @@ pub const XBAR57FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR58Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSEOSC,
+pub const XBAR58CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSE,
 };
 pub const XBAR58PredivConf = enum {
     @"1",
@@ -2340,12 +2340,12 @@ pub const XBAR58FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR59Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR59CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR59PredivConf = enum {
     @"1",
@@ -2376,12 +2376,12 @@ pub const XBAR59FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR60Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
+pub const XBAR60CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
 };
 pub const XBAR60PredivConf = enum {
     @"1",
@@ -2412,19 +2412,19 @@ pub const XBAR60FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR61Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
+pub const XBAR61CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR61PredivConf = enum {
     @"1",
@@ -2455,19 +2455,19 @@ pub const XBAR61FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR62Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
+pub const XBAR62CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
 };
 pub const XBAR62PredivConf = enum {
     @"1",
@@ -2498,15 +2498,15 @@ pub const XBAR62FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const XBAR63Conf = enum {
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+pub const XBAR63CLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
 };
 pub const XBAR63PredivConf = enum {
     @"1",
@@ -2537,239 +2537,239 @@ pub const XBAR63FindivConf = enum(u32) {
         return 1;
     }
 };
-pub const CKINTSEL0Conf = enum {
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    PLL4Source,
-    PLL5Source,
-    PLL6Source,
-    PLL7Source,
-    PLL8Source,
-    PLL1Source,
-    PLL2Source,
-    PLL3Source,
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
-    XBAR0Output,
-    XBAR1Output,
-    XBAR2Output,
-    XBAR3Output,
-    XBAR4Output,
-    XBAR5Output,
-    XBAR6Output,
-    XBAR7Output,
-    XBAR8Output,
-    XBAR9Output,
-    XBAR10Output,
-    XBAR11Output,
-    XBAR12Output,
-    XBAR13Output,
-    XBAR14Output,
-    XBAR15Output,
-    XBAR16Output,
-    XBAR17Output,
-    XBAR18Output,
-    XBAR19Output,
-    XBAR20Output,
-    XBAR21Output,
-    XBAR22Output,
-    XBAR23Output,
-    XBAR24Output,
-    XBAR25Output,
-    XBAR26Output,
-    XBAR27Output,
-    XBAR28Output,
-    XBAR29Output,
-    XBAR30Output,
-    XBAR31Output,
-    XBAR32Output,
-    XBAR33Output,
-    XBAR34Output,
-    XBAR35Output,
-    XBAR36Output,
-    XBAR37Output,
-    XBAR38Output,
-    XBAR39Output,
-    XBAR40Output,
-    XBAR41Output,
-    XBAR42Output,
-    XBAR43Output,
-    XBAR44Output,
-    XBAR45Output,
-    XBAR46Output,
-    XBAR47Output,
-    XBAR48Output,
-    XBAR49Output,
-    XBAR50Output,
-    XBAR51Output,
-    XBAR52Output,
-    XBAR53Output,
-    XBAR54Output,
-    XBAR55Output,
-    XBAR56Output,
-    XBAR57Output,
-    XBAR58Output,
-    XBAR59Output,
-    XBAR60Output,
-    XBAR61Output,
-    XBAR62Output,
-    XBAR63Output,
+pub const CKINTSELCLKSourceConf = enum {
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    XBAR_SRC_PLL4_REF,
+    XBAR_SRC_PLL5_REF,
+    XBAR_SRC_PLL6_REF,
+    XBAR_SRC_PLL7_REF,
+    XBAR_SRC_PLL8_REF,
+    XBAR_SRC_PLL1_REF,
+    XBAR_SRC_PLL2_REF,
+    XBAR_SRC_PLL3_REF,
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
+    XBAR_SRC_ROOT0,
+    XBAR_SRC_ROOT1,
+    XBAR_SRC_ROOT2,
+    XBAR_SRC_ROOT3,
+    XBAR_SRC_ROOT4,
+    XBAR_SRC_ROOT5,
+    XBAR_SRC_ROOT6,
+    XBAR_SRC_ROOT7,
+    XBAR_SRC_ROOT8,
+    XBAR_SRC_ROOT9,
+    XBAR_SRC_ROOT10,
+    XBAR_SRC_ROOT11,
+    XBAR_SRC_ROOT12,
+    XBAR_SRC_ROOT13,
+    XBAR_SRC_ROOT14,
+    XBAR_SRC_ROOT15,
+    XBAR_SRC_ROOT16,
+    XBAR_SRC_ROOT17,
+    XBAR_SRC_ROOT18,
+    XBAR_SRC_ROOT19,
+    XBAR_SRC_ROOT20,
+    XBAR_SRC_ROOT21,
+    XBAR_SRC_ROOT22,
+    XBAR_SRC_ROOT23,
+    XBAR_SRC_ROOT24,
+    XBAR_SRC_ROOT25,
+    XBAR_SRC_ROOT26,
+    XBAR_SRC_ROOT27,
+    XBAR_SRC_ROOT28,
+    XBAR_SRC_ROOT29,
+    XBAR_SRC_ROOT30,
+    XBAR_SRC_ROOT31,
+    XBAR_SRC_ROOT32,
+    XBAR_SRC_ROOT33,
+    XBAR_SRC_ROOT34,
+    XBAR_SRC_ROOT35,
+    XBAR_SRC_ROOT36,
+    XBAR_SRC_ROOT37,
+    XBAR_SRC_ROOT38,
+    XBAR_SRC_ROOT39,
+    XBAR_SRC_ROOT40,
+    XBAR_SRC_ROOT41,
+    XBAR_SRC_ROOT42,
+    XBAR_SRC_ROOT43,
+    XBAR_SRC_ROOT44,
+    XBAR_SRC_ROOT45,
+    XBAR_SRC_ROOT46,
+    XBAR_SRC_ROOT47,
+    XBAR_SRC_ROOT48,
+    XBAR_SRC_ROOT49,
+    XBAR_SRC_ROOT50,
+    XBAR_SRC_ROOT51,
+    XBAR_SRC_ROOT52,
+    XBAR_SRC_ROOT53,
+    XBAR_SRC_ROOT54,
+    XBAR_SRC_ROOT55,
+    XBAR_SRC_ROOT56,
+    XBAR_SRC_ROOT57,
+    XBAR_SRC_ROOT58,
+    XBAR_SRC_ROOT59,
+    XBAR_SRC_ROOT60,
+    XBAR_SRC_ROOT61,
+    XBAR_SRC_ROOT62,
+    XBAR_SRC_ROOT63,
 };
-pub const CKEXTSEL0Conf = enum {
-    PLL1Div42,
-    PLL2Div4,
-    PLL3Div2,
+pub const CKEXTSELCLKSourceConf = enum {
+    XBAR_SRC_PLL1_DIV42,
+    XBAR_SRC_PLL2_DIV4,
+    XBAR_SRC_PLL3_DIV2,
 };
-pub const CKINTSEL1Conf = enum {
-    HSIRC,
-    HSEOSC,
-    MSIRC,
-    PLL4Source,
-    PLL5Source,
-    PLL6Source,
-    PLL7Source,
-    PLL8Source,
-    PLL1Source,
-    PLL2Source,
-    PLL3Source,
-    FOUTPOSTDIV4,
-    FOUTPOSTDIV5,
-    FOUTPOSTDIV6,
-    FOUTPOSTDIV7,
-    FOUTPOSTDIV8,
-    SPDIF,
-    I2S_CKIN,
-    LSIRC,
-    LSEOSC,
-    XBAR0Output,
-    XBAR1Output,
-    XBAR2Output,
-    XBAR3Output,
-    XBAR4Output,
-    XBAR5Output,
-    XBAR6Output,
-    XBAR7Output,
-    XBAR8Output,
-    XBAR9Output,
-    XBAR10Output,
-    XBAR11Output,
-    XBAR12Output,
-    XBAR13Output,
-    XBAR14Output,
-    XBAR15Output,
-    XBAR16Output,
-    XBAR17Output,
-    XBAR18Output,
-    XBAR19Output,
-    XBAR20Output,
-    XBAR21Output,
-    XBAR22Output,
-    XBAR23Output,
-    XBAR24Output,
-    XBAR25Output,
-    XBAR26Output,
-    XBAR27Output,
-    XBAR28Output,
-    XBAR29Output,
-    XBAR30Output,
-    XBAR31Output,
-    XBAR32Output,
-    XBAR33Output,
-    XBAR34Output,
-    XBAR35Output,
-    XBAR36Output,
-    XBAR37Output,
-    XBAR38Output,
-    XBAR39Output,
-    XBAR40Output,
-    XBAR41Output,
-    XBAR42Output,
-    XBAR43Output,
-    XBAR44Output,
-    XBAR45Output,
-    XBAR46Output,
-    XBAR47Output,
-    XBAR48Output,
-    XBAR49Output,
-    XBAR50Output,
-    XBAR51Output,
-    XBAR52Output,
-    XBAR53Output,
-    XBAR54Output,
-    XBAR55Output,
-    XBAR56Output,
-    XBAR57Output,
-    XBAR58Output,
-    XBAR59Output,
-    XBAR60Output,
-    XBAR61Output,
-    XBAR62Output,
-    XBAR63Output,
+pub const CKINTSELCLKSource1Conf = enum {
+    RCC_XBAR_CLKSRC_HSI,
+    RCC_XBAR_CLKSRC_HSE,
+    RCC_XBAR_CLKSRC_MSI,
+    XBAR_SRC_PLL4_REF,
+    XBAR_SRC_PLL5_REF,
+    XBAR_SRC_PLL6_REF,
+    XBAR_SRC_PLL7_REF,
+    XBAR_SRC_PLL8_REF,
+    XBAR_SRC_PLL1_REF,
+    XBAR_SRC_PLL2_REF,
+    XBAR_SRC_PLL3_REF,
+    RCC_XBAR_CLKSRC_PLL4,
+    RCC_XBAR_CLKSRC_PLL5,
+    RCC_XBAR_CLKSRC_PLL6,
+    RCC_XBAR_CLKSRC_PLL7,
+    RCC_XBAR_CLKSRC_PLL8,
+    RCC_XBAR_CLKSRC_SPDIF,
+    RCC_XBAR_CLKSRC_I2S,
+    RCC_XBAR_CLKSRC_LSI,
+    RCC_XBAR_CLKSRC_LSE,
+    XBAR_SRC_ROOT0,
+    XBAR_SRC_ROOT1,
+    XBAR_SRC_ROOT2,
+    XBAR_SRC_ROOT3,
+    XBAR_SRC_ROOT4,
+    XBAR_SRC_ROOT5,
+    XBAR_SRC_ROOT6,
+    XBAR_SRC_ROOT7,
+    XBAR_SRC_ROOT8,
+    XBAR_SRC_ROOT9,
+    XBAR_SRC_ROOT10,
+    XBAR_SRC_ROOT11,
+    XBAR_SRC_ROOT12,
+    XBAR_SRC_ROOT13,
+    XBAR_SRC_ROOT14,
+    XBAR_SRC_ROOT15,
+    XBAR_SRC_ROOT16,
+    XBAR_SRC_ROOT17,
+    XBAR_SRC_ROOT18,
+    XBAR_SRC_ROOT19,
+    XBAR_SRC_ROOT20,
+    XBAR_SRC_ROOT21,
+    XBAR_SRC_ROOT22,
+    XBAR_SRC_ROOT23,
+    XBAR_SRC_ROOT24,
+    XBAR_SRC_ROOT25,
+    XBAR_SRC_ROOT26,
+    XBAR_SRC_ROOT27,
+    XBAR_SRC_ROOT28,
+    XBAR_SRC_ROOT29,
+    XBAR_SRC_ROOT30,
+    XBAR_SRC_ROOT31,
+    XBAR_SRC_ROOT32,
+    XBAR_SRC_ROOT33,
+    XBAR_SRC_ROOT34,
+    XBAR_SRC_ROOT35,
+    XBAR_SRC_ROOT36,
+    XBAR_SRC_ROOT37,
+    XBAR_SRC_ROOT38,
+    XBAR_SRC_ROOT39,
+    XBAR_SRC_ROOT40,
+    XBAR_SRC_ROOT41,
+    XBAR_SRC_ROOT42,
+    XBAR_SRC_ROOT43,
+    XBAR_SRC_ROOT44,
+    XBAR_SRC_ROOT45,
+    XBAR_SRC_ROOT46,
+    XBAR_SRC_ROOT47,
+    XBAR_SRC_ROOT48,
+    XBAR_SRC_ROOT49,
+    XBAR_SRC_ROOT50,
+    XBAR_SRC_ROOT51,
+    XBAR_SRC_ROOT52,
+    XBAR_SRC_ROOT53,
+    XBAR_SRC_ROOT54,
+    XBAR_SRC_ROOT55,
+    XBAR_SRC_ROOT56,
+    XBAR_SRC_ROOT57,
+    XBAR_SRC_ROOT58,
+    XBAR_SRC_ROOT59,
+    XBAR_SRC_ROOT60,
+    XBAR_SRC_ROOT61,
+    XBAR_SRC_ROOT62,
+    XBAR_SRC_ROOT63,
 };
-pub const CKEXTSEL1Conf = enum {
-    PLL1Div42,
-    PLL2Div4,
-    PLL3Div2,
+pub const CKEXTSELCLKSource1Conf = enum {
+    XBAR_SRC_PLL1_DIV42,
+    XBAR_SRC_PLL2_DIV4,
+    XBAR_SRC_PLL3_DIV2,
 };
-pub const OBS0Conf = enum {
-    CKINTSEL0,
-    CKEXTSEL0,
+pub const OBS0SourceConf = enum {
+    RCC_OBS0SOURCE_CKINTSEL,
+    RCC_OBS0SOURCE_CKEXTSEL,
 };
-pub const OBS1Conf = enum {
-    CKINTSEL1,
-    CKEXTSEL1,
+pub const OBS1SourceConf = enum {
+    RCC_OBS1SOURCE_CKINTSEL,
+    RCC_OBS1SOURCE_CKEXTSEL,
 };
-pub const MCO1MultConf = enum {
-    XBAR61Output,
-    OBS0Output,
+pub const RCC_MCO1SourceConf = enum {
+    MUX_MCO1_FLEX61,
+    MUX_MCO1_OBSER0,
 };
-pub const MCO2MultConf = enum {
-    XBAR62Output,
-    OBS1Output,
+pub const RCC_MCO2SourceConf = enum {
+    MUX_MCO2_FLEX62,
+    MUX_MCO2_OBSER1,
 };
-pub const D3PERConf = enum {
-    MSIRC,
-    LSIRC,
-    LSEOSC,
+pub const D3PERCLKSourceConf = enum {
+    MUX_D3PER_MSI,
+    MUX_D3PER_LSI,
+    MUX_D3PER_LSE,
 };
-pub const DTSConf = enum {
-    MSIRC,
-    HSIRC,
-    HSEOSC,
+pub const DTSCLKSourceConf = enum {
+    MUX_DTS_MSI,
+    MUX_DTS_HSI,
+    MUX_DTS_HSE,
 };
-pub const DSIPHYConf = enum {
-    XBAR28Output,
-    HSEOSC,
+pub const DSIPHYCLKSourceConf = enum {
+    MUX_DSIPHY_FLEX28,
+    MUX_DSIPHY_HSE,
 };
-pub const DSIBLANEConf = enum {
-    DSIPHYOutput,
-    XBAR27Output,
+pub const DSIBLANECLKSourceConf = enum {
+    MUX_DSIBLANE_DSIPHY,
+    MUX_DSIBLANE_FLEX27,
 };
-pub const USB2PHY1Conf = enum {
-    XBAR57Output,
-    HSEDIV2,
+pub const USB2PHY1CLKSourceConf = enum {
+    MUX_USB2PHY1_FLEX57,
+    MUX_USB2PHY1_HSE,
 };
-pub const USB2PHY2Conf = enum {
-    XBAR58Output,
-    HSEDIV2,
+pub const USB2PHY2CLKSourceConf = enum {
+    MUX_USB2PHY2_FLEX58,
+    MUX_USB2PHY2_HSE,
 };
-pub const USB3PCIPHYConf = enum {
-    XBAR34Output,
-    HSEDIV2,
+pub const USB3PCIPHYCLKSourceConf = enum {
+    MUX_USB3PCIEPHY_FLEX34,
+    MUX_USB3PCIEPHY_HSE,
 };
-pub const SysClkSourceConf = enum {
-    XBAR0Output,
-    HSIRC,
+pub const MCUCLKSourceConf = enum {
+    RCC_MCUSSOURCE_FLEX0,
+    RCC_MCUSSOURCE_HSI,
 };
-pub const MCUDIVConf = enum {
+pub const MCU_DivConf = enum {
     RCC_MCU_DIV1,
     RCC_MCU_DIV2,
     pub fn get(self: @This()) f32 {
@@ -2859,19 +2859,19 @@ pub const APB2DIVConf = enum {
         };
     }
 };
-pub const ADC12MultConf = enum {
-    XBAR46Output,
-    XBAR0Output,
+pub const ADC12CLockSelectionConf = enum {
+    MUX_ADC12_FLEX46,
+    MUX_ADC12_LSMCU,
 };
-pub const ADC3MultConf = enum {
-    XBAR47Output,
-    XBAR0Output,
-    XBAR46Output,
+pub const ADC3CLockSelectionConf = enum {
+    MUX_ADC3_FLEX47,
+    MUX_ADC3_LSMCU,
+    MUX_ADC3_FLEX46,
 };
 pub const PLL1SourceConf = enum {
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+    RCC_PLL1SOURCE_HSI,
+    RCC_PLL1SOURCE_HSE,
+    RCC_PLL1SOURCE_MSI,
 };
 pub const FREFDIV1Conf = enum(u32) {
     _,
@@ -2889,9 +2889,9 @@ pub const FREFDIV1Conf = enum(u32) {
     }
 };
 pub const PLL2SourceConf = enum {
-    HSIRC,
-    HSEOSC,
-    MSIRC,
+    RCC_PLL2SOURCE_HSI,
+    RCC_PLL2SOURCE_HSE,
+    RCC_PLL2SOURCE_MSI,
 };
 pub const FREFDIV2Conf = enum(u32) {
     _,
@@ -2909,9 +2909,9 @@ pub const FREFDIV2Conf = enum(u32) {
     }
 };
 pub const PLL3SourceConf = enum {
-    HSIRC,
-    MSIRC,
-    HSEOSC,
+    RCC_PLL3SOURCE_HSI,
+    RCC_PLL3SOURCE_MSI,
+    RCC_PLL3SOURCE_HSE,
 };
 pub const FREFDIV3Conf = enum(u32) {
     _,
@@ -2929,9 +2929,9 @@ pub const FREFDIV3Conf = enum(u32) {
     }
 };
 pub const PLL4SourceConf = enum {
-    HSIRC,
-    MSIRC,
-    HSEOSC,
+    RCC_PLL4SOURCE_HSI,
+    RCC_PLL4SOURCE_MSI,
+    RCC_PLL4SOURCE_HSE,
 };
 pub const FREFDIV4Conf = enum(u32) {
     _,
@@ -3174,9 +3174,9 @@ pub const POSTDIV2_4Conf = enum(u32) {
     }
 };
 pub const PLL5SourceConf = enum {
-    HSIRC,
-    MSIRC,
-    HSEOSC,
+    RCC_PLL5SOURCE_HSI,
+    RCC_PLL5SOURCE_MSI,
+    RCC_PLL5SOURCE_HSE,
 };
 pub const FREFDIV5Conf = enum(u32) {
     _,
@@ -3254,9 +3254,9 @@ pub const POSTDIV2_5Conf = enum(u32) {
     }
 };
 pub const PLL6SourceConf = enum {
-    HSIRC,
-    MSIRC,
-    HSEOSC,
+    RCC_PLL6SOURCE_HSI,
+    RCC_PLL6SOURCE_MSI,
+    RCC_PLL6SOURCE_HSE,
 };
 pub const FREFDIV6Conf = enum(u32) {
     _,
@@ -3334,9 +3334,9 @@ pub const POSTDIV2_6Conf = enum(u32) {
     }
 };
 pub const PLL7SourceConf = enum {
-    HSIRC,
-    MSIRC,
-    HSEOSC,
+    RCC_PLL7SOURCE_HSI,
+    RCC_PLL7SOURCE_MSI,
+    RCC_PLL7SOURCE_HSE,
 };
 pub const FREFDIV7Conf = enum(u32) {
     _,
@@ -3414,9 +3414,9 @@ pub const POSTDIV2_7Conf = enum(u32) {
     }
 };
 pub const PLL8SourceConf = enum {
-    HSIRC,
-    MSIRC,
-    HSEOSC,
+    RCC_PLL8SOURCE_HSI,
+    RCC_PLL8SOURCE_MSI,
+    RCC_PLL8SOURCE_HSE,
 };
 pub const FREFDIV8Conf = enum(u32) {
     _,
@@ -3493,7 +3493,7 @@ pub const POSTDIV2_8Conf = enum(u32) {
         return 1;
     }
 };
-pub const HSERTCDevisorConf = enum(u32) {
+pub const RCC_RTC_Clock_Source_FROM_HSEConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
@@ -3508,10 +3508,10 @@ pub const HSERTCDevisorConf = enum(u32) {
         return 1;
     }
 };
-pub const RTCClkSourceConf = enum {
-    HSERTCDevisor,
-    LSEOSC,
-    LSIRC,
+pub const RTCCLockSelectionVirtualConf = enum {
+    RCC_RTCCLKSOURCE_HSE_DIV,
+    RCC_RTCCLKSOURCE_LSE,
+    RCC_RTCCLKSOURCE_LSI,
 };
 pub const HSE_TimoutConf = enum(u32) {
     _,
@@ -3572,234 +3572,234 @@ pub const LSE_Drive_CapabilityConf = enum {
     }
 };
 pub const Config = struct {
-    HSEOSC: HSEOSCConf = @enumFromInt(40000000),
-    HSEDIV2: HSEDIV2Conf = .@"2",
-    SPDIF: SPDIFConf = @enumFromInt(12288000),
-    LSEOSC: LSEOSCConf = @enumFromInt(32768),
-    MSIRC: MSIRCConf = .RCC_MSI_16MHZ,
-    XBAR0: XBAR0Conf = .HSIRC,
+    HSEOSC: HSE_VALUEConf = @enumFromInt(40000000),
+    HSEDIV2: HSE_Div2Conf = .@"2",
+    SPDIF: SPDIFFreq_ValueConf = @enumFromInt(12288000),
+    LSEOSC: LSE_VALUEConf = @enumFromInt(32768),
+    MSIRC: MSIClockRangeConf = .RCC_MSI_16MHZ,
+    XBAR0: XBAR0CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR0Prediv: XBAR0PredivConf = .@"1",
     XBAR0Findiv: XBAR0FindivConf = @enumFromInt(1),
-    XBAR1: XBAR1Conf = .HSIRC,
+    XBAR1: XBAR1CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR1Prediv: XBAR1PredivConf = .@"1",
     XBAR1Findiv: XBAR1FindivConf = @enumFromInt(1),
-    XBAR2: XBAR2Conf = .HSIRC,
+    XBAR2: XBAR2CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR2Prediv: XBAR2PredivConf = .@"1",
     XBAR2Findiv: XBAR2FindivConf = @enumFromInt(1),
-    XBAR3: XBAR3Conf = .HSIRC,
+    XBAR3: XBAR3CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR3Prediv: XBAR3PredivConf = .@"1",
     XBAR3Findiv: XBAR3FindivConf = @enumFromInt(1),
-    XBAR4: XBAR4Conf = .HSIRC,
+    XBAR4: XBAR4CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR4Prediv: XBAR4PredivConf = .@"1",
     XBAR4Findiv: XBAR4FindivConf = @enumFromInt(1),
-    XBAR5: XBAR5Conf = .HSIRC,
+    XBAR5: XBAR5CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR5Prediv: XBAR5PredivConf = .@"1",
     XBAR5Findiv: XBAR5FindivConf = @enumFromInt(1),
-    XBAR6: XBAR6Conf = .HSIRC,
+    XBAR6: XBAR6CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR6Prediv: XBAR6PredivConf = .@"1",
     XBAR6Findiv: XBAR6FindivConf = @enumFromInt(1),
-    XBAR7: XBAR7Conf = .LSIRC,
+    XBAR7: XBAR7CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
     XBAR7Prediv: XBAR7PredivConf = .@"1",
     XBAR7Findiv: XBAR7FindivConf = @enumFromInt(1),
-    XBAR8: XBAR8Conf = .HSIRC,
+    XBAR8: XBAR8CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR8Prediv: XBAR8PredivConf = .@"1",
     XBAR8Findiv: XBAR8FindivConf = @enumFromInt(1),
-    XBAR9: XBAR9Conf = .HSIRC,
+    XBAR9: XBAR9CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR9Prediv: XBAR9PredivConf = .@"1",
     XBAR9Findiv: XBAR9FindivConf = @enumFromInt(1),
-    XBAR10: XBAR10Conf = .HSIRC,
+    XBAR10: XBAR10CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR10Prediv: XBAR10PredivConf = .@"1",
     XBAR10Findiv: XBAR10FindivConf = @enumFromInt(1),
-    XBAR11: XBAR11Conf = .HSIRC,
+    XBAR11: XBAR11CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR11Prediv: XBAR11PredivConf = .@"1",
     XBAR11Findiv: XBAR11FindivConf = @enumFromInt(1),
-    XBAR12: XBAR12Conf = .HSIRC,
+    XBAR12: XBAR12CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR12Prediv: XBAR12PredivConf = .@"1",
     XBAR12Findiv: XBAR12FindivConf = @enumFromInt(1),
-    XBAR13: XBAR13Conf = .HSIRC,
+    XBAR13: XBAR13CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR13Prediv: XBAR13PredivConf = .@"1",
     XBAR13Findiv: XBAR13FindivConf = @enumFromInt(1),
-    XBAR14: XBAR14Conf = .HSIRC,
+    XBAR14: XBAR14CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR14Prediv: XBAR14PredivConf = .@"1",
     XBAR14Findiv: XBAR14FindivConf = @enumFromInt(1),
-    XBAR15: XBAR15Conf = .HSIRC,
+    XBAR15: XBAR15CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR15Prediv: XBAR15PredivConf = .@"1",
     XBAR15Findiv: XBAR15FindivConf = @enumFromInt(1),
-    XBAR16: XBAR16Conf = .HSIRC,
+    XBAR16: XBAR16CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR16Prediv: XBAR16PredivConf = .@"1",
     XBAR16Findiv: XBAR16FindivConf = @enumFromInt(1),
-    XBAR17: XBAR17Conf = .HSIRC,
+    XBAR17: XBAR17CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR17Prediv: XBAR17PredivConf = .@"1",
     XBAR17Findiv: XBAR17FindivConf = @enumFromInt(1),
-    XBAR18: XBAR18Conf = .HSIRC,
+    XBAR18: XBAR18CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR18Prediv: XBAR18PredivConf = .@"1",
     XBAR18Findiv: XBAR18FindivConf = @enumFromInt(1),
-    XBAR19: XBAR19Conf = .HSIRC,
+    XBAR19: XBAR19CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR19Prediv: XBAR19PredivConf = .@"1",
     XBAR19Findiv: XBAR19FindivConf = @enumFromInt(1),
-    XBAR20: XBAR20Conf = .HSIRC,
+    XBAR20: XBAR20CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR20Prediv: XBAR20PredivConf = .@"1",
     XBAR20Findiv: XBAR20FindivConf = @enumFromInt(1),
-    XBAR21: XBAR21Conf = .HSIRC,
+    XBAR21: XBAR21CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR21Prediv: XBAR21PredivConf = .@"1",
     XBAR21Findiv: XBAR21FindivConf = @enumFromInt(1),
-    XBAR22: XBAR22Conf = .HSIRC,
+    XBAR22: XBAR22CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR22Prediv: XBAR22PredivConf = .@"1",
     XBAR22Findiv: XBAR22FindivConf = @enumFromInt(1),
-    XBAR23: XBAR23Conf = .HSIRC,
+    XBAR23: XBAR23CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR23Prediv: XBAR23PredivConf = .@"1",
     XBAR23Findiv: XBAR23FindivConf = @enumFromInt(1),
-    XBAR24: XBAR24Conf = .HSIRC,
+    XBAR24: XBAR24CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR24Prediv: XBAR24PredivConf = .@"1",
     XBAR24Findiv: XBAR24FindivConf = @enumFromInt(1),
-    XBAR25: XBAR25Conf = .HSIRC,
+    XBAR25: XBAR25CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR25Prediv: XBAR25PredivConf = .@"1",
     XBAR25Findiv: XBAR25FindivConf = @enumFromInt(1),
-    XBAR26: XBAR26Conf = .HSEOSC,
+    XBAR26: XBAR26CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
     XBAR26Prediv: XBAR26PredivConf = .@"1",
     XBAR26Findiv: XBAR26FindivConf = @enumFromInt(1),
-    XBAR27: XBAR27Conf = .FOUTPOSTDIV8,
+    XBAR27: XBAR27CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR27Prediv: XBAR27PredivConf = .@"1",
     XBAR27Findiv: XBAR27FindivConf = @enumFromInt(1),
-    XBAR28: XBAR28Conf = .HSEOSC,
+    XBAR28: XBAR28CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
     XBAR28Prediv: XBAR28PredivConf = .@"1",
     XBAR28Findiv: XBAR28FindivConf = @enumFromInt(1),
-    XBAR29: XBAR29Conf = .FOUTPOSTDIV8,
+    XBAR29: XBAR29CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR29Prediv: XBAR29PredivConf = .@"1",
     XBAR29Findiv: XBAR29FindivConf = @enumFromInt(1),
-    XBAR30: XBAR30Conf = .HSEOSC,
+    XBAR30: XBAR30CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
     XBAR30Prediv: XBAR30PredivConf = .@"1",
     XBAR30Findiv: XBAR30FindivConf = @enumFromInt(1),
-    XBAR31: XBAR31Conf = .HSEOSC,
+    XBAR31: XBAR31CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
     XBAR31Prediv: XBAR31PredivConf = .@"1",
     XBAR31Findiv: XBAR31FindivConf = @enumFromInt(1),
-    XBAR32: XBAR32Conf = .HSEOSC,
+    XBAR32: XBAR32CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
     XBAR32Prediv: XBAR32PredivConf = .@"1",
     XBAR32Findiv: XBAR32FindivConf = @enumFromInt(1),
-    XBAR33: XBAR33Conf = .HSIRC,
+    XBAR33: XBAR33CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR33Prediv: XBAR33PredivConf = .@"1",
     XBAR33Findiv: XBAR33FindivConf = @enumFromInt(1),
-    XBAR34: XBAR34Conf = .HSEOSC,
+    XBAR34: XBAR34CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
     XBAR34Prediv: XBAR34PredivConf = .@"1",
     XBAR34Findiv: XBAR34FindivConf = @enumFromInt(1),
-    XBAR35: XBAR35Conf = .HSIRC,
+    XBAR35: XBAR35CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR35Prediv: XBAR35PredivConf = .@"1",
     XBAR35Findiv: XBAR35FindivConf = @enumFromInt(1),
-    XBAR36: XBAR36Conf = .MSIRC,
+    XBAR36: XBAR36CLKSourceConf = .RCC_XBAR_CLKSRC_MSI,
     XBAR36Prediv: XBAR36PredivConf = .@"1",
     XBAR36Findiv: XBAR36FindivConf = @enumFromInt(1),
-    XBAR37: XBAR37Conf = .HSIRC,
+    XBAR37: XBAR37CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR37Prediv: XBAR37PredivConf = .@"1",
     XBAR37Findiv: XBAR37FindivConf = @enumFromInt(1),
-    XBAR38: XBAR38Conf = .HSIRC,
+    XBAR38: XBAR38CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR38Prediv: XBAR38PredivConf = .@"1",
     XBAR38Findiv: XBAR38FindivConf = @enumFromInt(1),
-    XBAR39: XBAR39Conf = .HSIRC,
+    XBAR39: XBAR39CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR39Prediv: XBAR39PredivConf = .@"1",
     XBAR39Findiv: XBAR39FindivConf = @enumFromInt(1),
-    XBAR40: XBAR40Conf = .LSIRC,
+    XBAR40: XBAR40CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
     XBAR40Prediv: XBAR40PredivConf = .@"1",
     XBAR40Findiv: XBAR40FindivConf = @enumFromInt(1),
-    XBAR41: XBAR41Conf = .LSIRC,
+    XBAR41: XBAR41CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
     XBAR41Prediv: XBAR41PredivConf = .@"1",
     XBAR41Findiv: XBAR41FindivConf = @enumFromInt(1),
-    XBAR42: XBAR42Conf = .HSIRC,
+    XBAR42: XBAR42CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR42Prediv: XBAR42PredivConf = .@"1",
     XBAR42Findiv: XBAR42FindivConf = @enumFromInt(1),
-    XBAR43: XBAR43Conf = .FOUTPOSTDIV8,
+    XBAR43: XBAR43CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR43Prediv: XBAR43PredivConf = .@"1",
     XBAR43Findiv: XBAR43FindivConf = @enumFromInt(1),
-    XBAR44: XBAR44Conf = .FOUTPOSTDIV8,
+    XBAR44: XBAR44CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR44Prediv: XBAR44PredivConf = .@"1",
     XBAR44Findiv: XBAR44FindivConf = @enumFromInt(1),
-    XBAR45: XBAR45Conf = .FOUTPOSTDIV8,
+    XBAR45: XBAR45CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR45Prediv: XBAR45PredivConf = .@"1",
     XBAR45Findiv: XBAR45FindivConf = @enumFromInt(1),
-    XBAR46: XBAR46Conf = .HSIRC,
+    XBAR46: XBAR46CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR46Prediv: XBAR46PredivConf = .@"1",
     XBAR46Findiv: XBAR46FindivConf = @enumFromInt(1),
-    XBAR47: XBAR47Conf = .FOUTPOSTDIV8,
+    XBAR47: XBAR47CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR47Prediv: XBAR47PredivConf = .@"1",
     XBAR47Findiv: XBAR47FindivConf = @enumFromInt(1),
-    XBAR48: XBAR48Conf = .FOUTPOSTDIV8,
+    XBAR48: XBAR48CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR48Prediv: XBAR48PredivConf = .@"1",
     XBAR48Findiv: XBAR48FindivConf = @enumFromInt(1),
-    XBAR49: XBAR49Conf = .FOUTPOSTDIV8,
+    XBAR49: XBAR49CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR49Prediv: XBAR49PredivConf = .@"1",
     XBAR49Findiv: XBAR49FindivConf = @enumFromInt(1),
-    XBAR50: XBAR50Conf = .FOUTPOSTDIV8,
+    XBAR50: XBAR50CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR50Prediv: XBAR50PredivConf = .@"1",
     XBAR50Findiv: XBAR50FindivConf = @enumFromInt(1),
-    XBAR51: XBAR51Conf = .HSIRC,
+    XBAR51: XBAR51CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR51Prediv: XBAR51PredivConf = .@"1",
     XBAR51Findiv: XBAR51FindivConf = @enumFromInt(1),
-    XBAR52: XBAR52Conf = .HSIRC,
+    XBAR52: XBAR52CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR52Prediv: XBAR52PredivConf = .@"1",
     XBAR52Findiv: XBAR52FindivConf = @enumFromInt(1),
-    XBAR53: XBAR53Conf = .HSIRC,
+    XBAR53: XBAR53CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR53Prediv: XBAR53PredivConf = .@"1",
     XBAR53Findiv: XBAR53FindivConf = @enumFromInt(1),
-    XBAR54: XBAR54Conf = .FOUTPOSTDIV8,
+    XBAR54: XBAR54CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR54Prediv: XBAR54PredivConf = .@"1",
     XBAR54Findiv: XBAR54FindivConf = @enumFromInt(1),
-    XBAR55: XBAR55Conf = .FOUTPOSTDIV8,
+    XBAR55: XBAR55CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR55Prediv: XBAR55PredivConf = .@"1",
     XBAR55Findiv: XBAR55FindivConf = @enumFromInt(1),
-    XBAR56: XBAR56Conf = .HSIRC,
+    XBAR56: XBAR56CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR56Prediv: XBAR56PredivConf = .@"1",
     XBAR56Findiv: XBAR56FindivConf = @enumFromInt(1),
-    XBAR57: XBAR57Conf = .HSEOSC,
+    XBAR57: XBAR57CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
     XBAR57Prediv: XBAR57PredivConf = .@"1",
     XBAR57Findiv: XBAR57FindivConf = @enumFromInt(1),
-    XBAR58: XBAR58Conf = .HSEOSC,
+    XBAR58: XBAR58CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
     XBAR58Prediv: XBAR58PredivConf = .@"1",
     XBAR58Findiv: XBAR58FindivConf = @enumFromInt(1),
-    XBAR59: XBAR59Conf = .FOUTPOSTDIV8,
+    XBAR59: XBAR59CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR59Prediv: XBAR59PredivConf = .@"1",
     XBAR59Findiv: XBAR59FindivConf = @enumFromInt(1),
-    XBAR60: XBAR60Conf = .FOUTPOSTDIV8,
+    XBAR60: XBAR60CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
     XBAR60Prediv: XBAR60PredivConf = .@"1",
     XBAR60Findiv: XBAR60FindivConf = @enumFromInt(1),
-    XBAR61: XBAR61Conf = .HSIRC,
+    XBAR61: XBAR61CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR61Prediv: XBAR61PredivConf = .@"1",
     XBAR61Findiv: XBAR61FindivConf = @enumFromInt(1),
-    XBAR62: XBAR62Conf = .HSIRC,
+    XBAR62: XBAR62CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR62Prediv: XBAR62PredivConf = .@"1",
     XBAR62Findiv: XBAR62FindivConf = @enumFromInt(1),
-    XBAR63: XBAR63Conf = .HSIRC,
+    XBAR63: XBAR63CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
     XBAR63Prediv: XBAR63PredivConf = .@"1",
     XBAR63Findiv: XBAR63FindivConf = @enumFromInt(1),
-    CKINTSEL0: CKINTSEL0Conf = .MSIRC,
-    CKEXTSEL0: CKEXTSEL0Conf = .PLL1Div42,
-    CKINTSEL1: CKINTSEL1Conf = .MSIRC,
-    CKEXTSEL1: CKEXTSEL1Conf = .PLL1Div42,
-    OBS0: OBS0Conf = .CKINTSEL0,
-    OBS1: OBS1Conf = .CKINTSEL1,
-    MCO1Mult: MCO1MultConf = .XBAR61Output,
-    MCO2Mult: MCO2MultConf = .XBAR62Output,
-    D3PER: D3PERConf = .MSIRC,
-    DTS: DTSConf = .MSIRC,
-    DSIPHY: DSIPHYConf = .XBAR28Output,
-    DSIBLANE: DSIBLANEConf = .DSIPHYOutput,
-    USB2PHY1: USB2PHY1Conf = .XBAR57Output,
-    USB2PHY2: USB2PHY2Conf = .XBAR58Output,
-    USB3PCIPHY: USB3PCIPHYConf = .XBAR34Output,
-    SysClkSource: SysClkSourceConf = .XBAR0Output,
-    MCUDIV: MCUDIVConf = .RCC_MCU_DIV1,
+    CKINTSEL0: CKINTSELCLKSourceConf = .RCC_XBAR_CLKSRC_MSI,
+    CKEXTSEL0: CKEXTSELCLKSourceConf = .PLL1_DIV42,
+    CKINTSEL1: CKINTSELCLKSource1Conf = .RCC_XBAR_CLKSRC_MSI,
+    CKEXTSEL1: CKEXTSELCLKSource1Conf = .PLL1_DIV42,
+    OBS0: OBS0SourceConf = .RCC_OBS0SOURCE_CKINTSEL,
+    OBS1: OBS1SourceConf = .RCC_OBS1SOURCE_CKINTSEL,
+    MCO1Mult: RCC_MCO1SourceConf = .MUX_MCO1_FLEX61,
+    MCO2Mult: RCC_MCO2SourceConf = .MUX_MCO2_FLEX62,
+    D3PER: D3PERCLKSourceConf = .MUX_D3PER_MSI,
+    DTS: DTSCLKSourceConf = .MUX_DTS_MSI,
+    DSIPHY: DSIPHYCLKSourceConf = .MUX_DSIPHY_FLEX28,
+    DSIBLANE: DSIBLANECLKSourceConf = .MUX_DSIBLANE_DSIPHY,
+    USB2PHY1: USB2PHY1CLKSourceConf = .MUX_USB2PHY1_FLEX57,
+    USB2PHY2: USB2PHY2CLKSourceConf = .MUX_USB2PHY2_FLEX58,
+    USB3PCIPHY: USB3PCIPHYCLKSourceConf = .MUX_USB3PCIEPHY_FLEX34,
+    SysClkSource: MCUCLKSourceConf = .RCC_MCUSSOURCE_FLEX0,
+    MCUDIV: MCU_DivConf = .RCC_MCU_DIV1,
     APB3DIV: APB3DIVConf = .RCC_APB3_DIV1,
     APB4DIV: APB4DIVConf = .RCC_APB4_DIV1,
     APBDBGDIV: APBDBGDIVConf = .RCC_APBDBG_DIV1,
     APB1DIV: APB1DIVConf = .RCC_APB1_DIV1,
     APB2DIV: APB2DIVConf = .RCC_APB2_DIV1,
-    ADC12Mult: ADC12MultConf = .XBAR46Output,
-    ADC3Mult: ADC3MultConf = .XBAR47Output,
-    PLL1Source: PLL1SourceConf = .HSIRC,
+    ADC12Mult: ADC12CLockSelectionConf = .MUX_ADC12_FLEX46,
+    ADC3Mult: ADC3CLockSelectionConf = .MUX_ADC3_FLEX47,
+    PLL1Source: PLL1SourceConf = .RCC_PLL1SOURCE_HSI,
     FREFDIV1: FREFDIV1Conf = @enumFromInt(1),
-    PLL2Source: PLL2SourceConf = .HSIRC,
+    PLL2Source: PLL2SourceConf = .RCC_PLL2SOURCE_HSI,
     FREFDIV2: FREFDIV2Conf = @enumFromInt(1),
-    PLL3Source: PLL3SourceConf = .HSIRC,
+    PLL3Source: PLL3SourceConf = .RCC_PLL3SOURCE_HSI,
     FREFDIV3: FREFDIV3Conf = @enumFromInt(1),
-    PLL4Source: PLL4SourceConf = .HSIRC,
+    PLL4Source: PLL4SourceConf = .RCC_PLL4SOURCE_HSI,
     FREFDIV4: FREFDIV4Conf = @enumFromInt(1),
     FBDIV1: FBDIV1Conf = @enumFromInt(25),
     POSTDIV1_1: POSTDIV1_1Conf = @enumFromInt(1),
@@ -3816,37 +3816,594 @@ pub const Config = struct {
     PLL4FRACV: PLL4FRACVConf = @enumFromInt(0),
     POSTDIV1_4: POSTDIV1_4Conf = @enumFromInt(1),
     POSTDIV2_4: POSTDIV2_4Conf = @enumFromInt(1),
-    PLL5Source: PLL5SourceConf = .HSIRC,
+    PLL5Source: PLL5SourceConf = .RCC_PLL5SOURCE_HSI,
     FREFDIV5: FREFDIV5Conf = @enumFromInt(1),
     FBDIV5: FBDIV5Conf = @enumFromInt(12297829382473034410),
     PLL5FRACV: PLL5FRACVConf = @enumFromInt(0),
     POSTDIV1_5: POSTDIV1_5Conf = @enumFromInt(1),
     POSTDIV2_5: POSTDIV2_5Conf = @enumFromInt(1),
-    PLL6Source: PLL6SourceConf = .HSIRC,
+    PLL6Source: PLL6SourceConf = .RCC_PLL6SOURCE_HSI,
     FREFDIV6: FREFDIV6Conf = @enumFromInt(1),
     FBDIV6: FBDIV6Conf = @enumFromInt(12297829382473034410),
     PLL6FRACV: PLL6FRACVConf = @enumFromInt(0),
     POSTDIV1_6: POSTDIV1_6Conf = @enumFromInt(1),
     POSTDIV2_6: POSTDIV2_6Conf = @enumFromInt(1),
-    PLL7Source: PLL7SourceConf = .HSIRC,
+    PLL7Source: PLL7SourceConf = .RCC_PLL7SOURCE_HSI,
     FREFDIV7: FREFDIV7Conf = @enumFromInt(1),
     FBDIV7: FBDIV7Conf = @enumFromInt(12297829382473034410),
     PLL7FRACV: PLL7FRACVConf = @enumFromInt(0),
     POSTDIV1_7: POSTDIV1_7Conf = @enumFromInt(1),
     POSTDIV2_7: POSTDIV2_7Conf = @enumFromInt(1),
-    PLL8Source: PLL8SourceConf = .HSIRC,
+    PLL8Source: PLL8SourceConf = .RCC_PLL8SOURCE_HSI,
     FREFDIV8: FREFDIV8Conf = @enumFromInt(1),
     FBDIV8: FBDIV8Conf = @enumFromInt(12297829382473034410),
     PLL8FRACV: PLL8FRACVConf = @enumFromInt(0),
     POSTDIV1_8: POSTDIV1_8Conf = @enumFromInt(1),
     POSTDIV2_8: POSTDIV2_8Conf = @enumFromInt(1),
-    HSERTCDevisor: HSERTCDevisorConf = @enumFromInt(1),
-    RTCClkSource: RTCClkSourceConf = .LSIRC,
+    HSERTCDevisor: RCC_RTC_Clock_Source_FROM_HSEConf = @enumFromInt(1),
+    RTCClkSource: RTCCLockSelectionVirtualConf = .RCC_RTCCLKSOURCE_LSI,
     HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
     LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
     RCC_TIM_G1_PRescaler_Selection: RCC_TIM_G1_PRescaler_SelectionConf = .RCC_TIMG1PRES_DEACTIVATED,
     RCC_TIM_G2_PRescaler_Selection: RCC_TIM_G2_PRescaler_SelectionConf = .RCC_TIMG2PRES_DEACTIVATED,
     LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+};
+
+pub const ConfigWithRef = struct {
+    HSE_VALUE: HSE_VALUEConf = @enumFromInt(40000000),
+    HSE_Div2: HSE_Div2Conf = .@"2",
+    SPDIFFreq_Value: SPDIFFreq_ValueConf = @enumFromInt(12288000),
+    LSE_VALUE: LSE_VALUEConf = @enumFromInt(32768),
+    MSIClockRange: MSIClockRangeConf = .RCC_MSI_16MHZ,
+    XBAR0CLKSource: XBAR0CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR0Prediv: XBAR0PredivConf = .@"1",
+    XBAR0Findiv: XBAR0FindivConf = @enumFromInt(1),
+    XBAR1CLKSource: XBAR1CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR1Prediv: XBAR1PredivConf = .@"1",
+    XBAR1Findiv: XBAR1FindivConf = @enumFromInt(1),
+    XBAR2CLKSource: XBAR2CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR2Prediv: XBAR2PredivConf = .@"1",
+    XBAR2Findiv: XBAR2FindivConf = @enumFromInt(1),
+    XBAR3CLKSource: XBAR3CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR3Prediv: XBAR3PredivConf = .@"1",
+    XBAR3Findiv: XBAR3FindivConf = @enumFromInt(1),
+    XBAR4CLKSource: XBAR4CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR4Prediv: XBAR4PredivConf = .@"1",
+    XBAR4Findiv: XBAR4FindivConf = @enumFromInt(1),
+    XBAR5CLKSource: XBAR5CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR5Prediv: XBAR5PredivConf = .@"1",
+    XBAR5Findiv: XBAR5FindivConf = @enumFromInt(1),
+    XBAR6CLKSource: XBAR6CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR6Prediv: XBAR6PredivConf = .@"1",
+    XBAR6Findiv: XBAR6FindivConf = @enumFromInt(1),
+    XBAR7CLKSource: XBAR7CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
+    XBAR7Prediv: XBAR7PredivConf = .@"1",
+    XBAR7Findiv: XBAR7FindivConf = @enumFromInt(1),
+    XBAR8CLKSource: XBAR8CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR8Prediv: XBAR8PredivConf = .@"1",
+    XBAR8Findiv: XBAR8FindivConf = @enumFromInt(1),
+    XBAR9CLKSource: XBAR9CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR9Prediv: XBAR9PredivConf = .@"1",
+    XBAR9Findiv: XBAR9FindivConf = @enumFromInt(1),
+    XBAR10CLKSource: XBAR10CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR10Prediv: XBAR10PredivConf = .@"1",
+    XBAR10Findiv: XBAR10FindivConf = @enumFromInt(1),
+    XBAR11CLKSource: XBAR11CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR11Prediv: XBAR11PredivConf = .@"1",
+    XBAR11Findiv: XBAR11FindivConf = @enumFromInt(1),
+    XBAR12CLKSource: XBAR12CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR12Prediv: XBAR12PredivConf = .@"1",
+    XBAR12Findiv: XBAR12FindivConf = @enumFromInt(1),
+    XBAR13CLKSource: XBAR13CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR13Prediv: XBAR13PredivConf = .@"1",
+    XBAR13Findiv: XBAR13FindivConf = @enumFromInt(1),
+    XBAR14CLKSource: XBAR14CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR14Prediv: XBAR14PredivConf = .@"1",
+    XBAR14Findiv: XBAR14FindivConf = @enumFromInt(1),
+    XBAR15CLKSource: XBAR15CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR15Prediv: XBAR15PredivConf = .@"1",
+    XBAR15Findiv: XBAR15FindivConf = @enumFromInt(1),
+    XBAR16CLKSource: XBAR16CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR16Prediv: XBAR16PredivConf = .@"1",
+    XBAR16Findiv: XBAR16FindivConf = @enumFromInt(1),
+    XBAR17CLKSource: XBAR17CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR17Prediv: XBAR17PredivConf = .@"1",
+    XBAR17Findiv: XBAR17FindivConf = @enumFromInt(1),
+    XBAR18CLKSource: XBAR18CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR18Prediv: XBAR18PredivConf = .@"1",
+    XBAR18Findiv: XBAR18FindivConf = @enumFromInt(1),
+    XBAR19CLKSource: XBAR19CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR19Prediv: XBAR19PredivConf = .@"1",
+    XBAR19Findiv: XBAR19FindivConf = @enumFromInt(1),
+    XBAR20CLKSource: XBAR20CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR20Prediv: XBAR20PredivConf = .@"1",
+    XBAR20Findiv: XBAR20FindivConf = @enumFromInt(1),
+    XBAR21CLKSource: XBAR21CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR21Prediv: XBAR21PredivConf = .@"1",
+    XBAR21Findiv: XBAR21FindivConf = @enumFromInt(1),
+    XBAR22CLKSource: XBAR22CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR22Prediv: XBAR22PredivConf = .@"1",
+    XBAR22Findiv: XBAR22FindivConf = @enumFromInt(1),
+    XBAR23CLKSource: XBAR23CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR23Prediv: XBAR23PredivConf = .@"1",
+    XBAR23Findiv: XBAR23FindivConf = @enumFromInt(1),
+    XBAR24CLKSource: XBAR24CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR24Prediv: XBAR24PredivConf = .@"1",
+    XBAR24Findiv: XBAR24FindivConf = @enumFromInt(1),
+    XBAR25CLKSource: XBAR25CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR25Prediv: XBAR25PredivConf = .@"1",
+    XBAR25Findiv: XBAR25FindivConf = @enumFromInt(1),
+    XBAR26CLKSource: XBAR26CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
+    XBAR26Prediv: XBAR26PredivConf = .@"1",
+    XBAR26Findiv: XBAR26FindivConf = @enumFromInt(1),
+    XBAR27CLKSource: XBAR27CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR27Prediv: XBAR27PredivConf = .@"1",
+    XBAR27Findiv: XBAR27FindivConf = @enumFromInt(1),
+    XBAR28CLKSource: XBAR28CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
+    XBAR28Prediv: XBAR28PredivConf = .@"1",
+    XBAR28Findiv: XBAR28FindivConf = @enumFromInt(1),
+    XBAR29CLKSource: XBAR29CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR29Prediv: XBAR29PredivConf = .@"1",
+    XBAR29Findiv: XBAR29FindivConf = @enumFromInt(1),
+    XBAR30CLKSource: XBAR30CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
+    XBAR30Prediv: XBAR30PredivConf = .@"1",
+    XBAR30Findiv: XBAR30FindivConf = @enumFromInt(1),
+    XBAR31CLKSource: XBAR31CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
+    XBAR31Prediv: XBAR31PredivConf = .@"1",
+    XBAR31Findiv: XBAR31FindivConf = @enumFromInt(1),
+    XBAR32CLKSource: XBAR32CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
+    XBAR32Prediv: XBAR32PredivConf = .@"1",
+    XBAR32Findiv: XBAR32FindivConf = @enumFromInt(1),
+    XBAR33CLKSource: XBAR33CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR33Prediv: XBAR33PredivConf = .@"1",
+    XBAR33Findiv: XBAR33FindivConf = @enumFromInt(1),
+    XBAR34CLKSource: XBAR34CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
+    XBAR34Prediv: XBAR34PredivConf = .@"1",
+    XBAR34Findiv: XBAR34FindivConf = @enumFromInt(1),
+    XBAR35CLKSource: XBAR35CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR35Prediv: XBAR35PredivConf = .@"1",
+    XBAR35Findiv: XBAR35FindivConf = @enumFromInt(1),
+    XBAR36CLKSource: XBAR36CLKSourceConf = .RCC_XBAR_CLKSRC_MSI,
+    XBAR36Prediv: XBAR36PredivConf = .@"1",
+    XBAR36Findiv: XBAR36FindivConf = @enumFromInt(1),
+    XBAR37CLKSource: XBAR37CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR37Prediv: XBAR37PredivConf = .@"1",
+    XBAR37Findiv: XBAR37FindivConf = @enumFromInt(1),
+    XBAR38CLKSource: XBAR38CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR38Prediv: XBAR38PredivConf = .@"1",
+    XBAR38Findiv: XBAR38FindivConf = @enumFromInt(1),
+    XBAR39CLKSource: XBAR39CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR39Prediv: XBAR39PredivConf = .@"1",
+    XBAR39Findiv: XBAR39FindivConf = @enumFromInt(1),
+    XBAR40CLKSource: XBAR40CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
+    XBAR40Prediv: XBAR40PredivConf = .@"1",
+    XBAR40Findiv: XBAR40FindivConf = @enumFromInt(1),
+    XBAR41CLKSource: XBAR41CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
+    XBAR41Prediv: XBAR41PredivConf = .@"1",
+    XBAR41Findiv: XBAR41FindivConf = @enumFromInt(1),
+    XBAR42CLKSource: XBAR42CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR42Prediv: XBAR42PredivConf = .@"1",
+    XBAR42Findiv: XBAR42FindivConf = @enumFromInt(1),
+    XBAR43CLKSource: XBAR43CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR43Prediv: XBAR43PredivConf = .@"1",
+    XBAR43Findiv: XBAR43FindivConf = @enumFromInt(1),
+    XBAR44CLKSource: XBAR44CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR44Prediv: XBAR44PredivConf = .@"1",
+    XBAR44Findiv: XBAR44FindivConf = @enumFromInt(1),
+    XBAR45CLKSource: XBAR45CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR45Prediv: XBAR45PredivConf = .@"1",
+    XBAR45Findiv: XBAR45FindivConf = @enumFromInt(1),
+    XBAR46CLKSource: XBAR46CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR46Prediv: XBAR46PredivConf = .@"1",
+    XBAR46Findiv: XBAR46FindivConf = @enumFromInt(1),
+    XBAR47CLKSource: XBAR47CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR47Prediv: XBAR47PredivConf = .@"1",
+    XBAR47Findiv: XBAR47FindivConf = @enumFromInt(1),
+    XBAR48CLKSource: XBAR48CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR48Prediv: XBAR48PredivConf = .@"1",
+    XBAR48Findiv: XBAR48FindivConf = @enumFromInt(1),
+    XBAR49CLKSource: XBAR49CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR49Prediv: XBAR49PredivConf = .@"1",
+    XBAR49Findiv: XBAR49FindivConf = @enumFromInt(1),
+    XBAR50CLKSource: XBAR50CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR50Prediv: XBAR50PredivConf = .@"1",
+    XBAR50Findiv: XBAR50FindivConf = @enumFromInt(1),
+    XBAR51CLKSource: XBAR51CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR51Prediv: XBAR51PredivConf = .@"1",
+    XBAR51Findiv: XBAR51FindivConf = @enumFromInt(1),
+    XBAR52CLKSource: XBAR52CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR52Prediv: XBAR52PredivConf = .@"1",
+    XBAR52Findiv: XBAR52FindivConf = @enumFromInt(1),
+    XBAR53CLKSource: XBAR53CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR53Prediv: XBAR53PredivConf = .@"1",
+    XBAR53Findiv: XBAR53FindivConf = @enumFromInt(1),
+    XBAR54CLKSource: XBAR54CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR54Prediv: XBAR54PredivConf = .@"1",
+    XBAR54Findiv: XBAR54FindivConf = @enumFromInt(1),
+    XBAR55CLKSource: XBAR55CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR55Prediv: XBAR55PredivConf = .@"1",
+    XBAR55Findiv: XBAR55FindivConf = @enumFromInt(1),
+    XBAR56CLKSource: XBAR56CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR56Prediv: XBAR56PredivConf = .@"1",
+    XBAR56Findiv: XBAR56FindivConf = @enumFromInt(1),
+    XBAR57CLKSource: XBAR57CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
+    XBAR57Prediv: XBAR57PredivConf = .@"1",
+    XBAR57Findiv: XBAR57FindivConf = @enumFromInt(1),
+    XBAR58CLKSource: XBAR58CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
+    XBAR58Prediv: XBAR58PredivConf = .@"1",
+    XBAR58Findiv: XBAR58FindivConf = @enumFromInt(1),
+    XBAR59CLKSource: XBAR59CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR59Prediv: XBAR59PredivConf = .@"1",
+    XBAR59Findiv: XBAR59FindivConf = @enumFromInt(1),
+    XBAR60CLKSource: XBAR60CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
+    XBAR60Prediv: XBAR60PredivConf = .@"1",
+    XBAR60Findiv: XBAR60FindivConf = @enumFromInt(1),
+    XBAR61CLKSource: XBAR61CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR61Prediv: XBAR61PredivConf = .@"1",
+    XBAR61Findiv: XBAR61FindivConf = @enumFromInt(1),
+    XBAR62CLKSource: XBAR62CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR62Prediv: XBAR62PredivConf = .@"1",
+    XBAR62Findiv: XBAR62FindivConf = @enumFromInt(1),
+    XBAR63CLKSource: XBAR63CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
+    XBAR63Prediv: XBAR63PredivConf = .@"1",
+    XBAR63Findiv: XBAR63FindivConf = @enumFromInt(1),
+    CKINTSELCLKSource: CKINTSELCLKSourceConf = .RCC_XBAR_CLKSRC_MSI,
+    CKEXTSELCLKSource: CKEXTSELCLKSourceConf = .PLL1_DIV42,
+    CKINTSELCLKSource1: CKINTSELCLKSource1Conf = .RCC_XBAR_CLKSRC_MSI,
+    CKEXTSELCLKSource1: CKEXTSELCLKSource1Conf = .PLL1_DIV42,
+    OBS0Source: OBS0SourceConf = .RCC_OBS0SOURCE_CKINTSEL,
+    OBS1Source: OBS1SourceConf = .RCC_OBS1SOURCE_CKINTSEL,
+    RCC_MCO1Source: RCC_MCO1SourceConf = .MUX_MCO1_FLEX61,
+    RCC_MCO2Source: RCC_MCO2SourceConf = .MUX_MCO2_FLEX62,
+    D3PERCLKSource: D3PERCLKSourceConf = .MUX_D3PER_MSI,
+    DTSCLKSource: DTSCLKSourceConf = .MUX_DTS_MSI,
+    DSIPHYCLKSource: DSIPHYCLKSourceConf = .MUX_DSIPHY_FLEX28,
+    DSIBLANECLKSource: DSIBLANECLKSourceConf = .MUX_DSIBLANE_DSIPHY,
+    USB2PHY1CLKSource: USB2PHY1CLKSourceConf = .MUX_USB2PHY1_FLEX57,
+    USB2PHY2CLKSource: USB2PHY2CLKSourceConf = .MUX_USB2PHY2_FLEX58,
+    USB3PCIPHYCLKSource: USB3PCIPHYCLKSourceConf = .MUX_USB3PCIEPHY_FLEX34,
+    MCUCLKSource: MCUCLKSourceConf = .RCC_MCUSSOURCE_FLEX0,
+    MCU_Div: MCU_DivConf = .RCC_MCU_DIV1,
+    APB3DIV: APB3DIVConf = .RCC_APB3_DIV1,
+    APB4DIV: APB4DIVConf = .RCC_APB4_DIV1,
+    APBDBGDIV: APBDBGDIVConf = .RCC_APBDBG_DIV1,
+    APB1DIV: APB1DIVConf = .RCC_APB1_DIV1,
+    APB2DIV: APB2DIVConf = .RCC_APB2_DIV1,
+    ADC12CLockSelection: ADC12CLockSelectionConf = .MUX_ADC12_FLEX46,
+    ADC3CLockSelection: ADC3CLockSelectionConf = .MUX_ADC3_FLEX47,
+    PLL1Source: PLL1SourceConf = .RCC_PLL1SOURCE_HSI,
+    FREFDIV1: FREFDIV1Conf = @enumFromInt(1),
+    PLL2Source: PLL2SourceConf = .RCC_PLL2SOURCE_HSI,
+    FREFDIV2: FREFDIV2Conf = @enumFromInt(1),
+    PLL3Source: PLL3SourceConf = .RCC_PLL3SOURCE_HSI,
+    FREFDIV3: FREFDIV3Conf = @enumFromInt(1),
+    PLL4Source: PLL4SourceConf = .RCC_PLL4SOURCE_HSI,
+    FREFDIV4: FREFDIV4Conf = @enumFromInt(1),
+    FBDIV1: FBDIV1Conf = @enumFromInt(25),
+    POSTDIV1_1: POSTDIV1_1Conf = @enumFromInt(1),
+    POSTDIV2_1: POSTDIV2_1Conf = @enumFromInt(1),
+    FBDIV2: FBDIV2Conf = @enumFromInt(12297829382473034410),
+    PLL2FRACV: PLL2FRACVConf = @enumFromInt(0),
+    POSTDIV1_2: POSTDIV1_2Conf = @enumFromInt(1),
+    POSTDIV2_2: POSTDIV2_2Conf = @enumFromInt(1),
+    FBDIV3: FBDIV3Conf = @enumFromInt(12297829382473034410),
+    PLL3FRACV: PLL3FRACVConf = @enumFromInt(0),
+    POSTDIV1_3: POSTDIV1_3Conf = @enumFromInt(1),
+    POSTDIV2_3: POSTDIV2_3Conf = @enumFromInt(1),
+    FBDIV4: FBDIV4Conf = @enumFromInt(12297829382473034410),
+    PLL4FRACV: PLL4FRACVConf = @enumFromInt(0),
+    POSTDIV1_4: POSTDIV1_4Conf = @enumFromInt(1),
+    POSTDIV2_4: POSTDIV2_4Conf = @enumFromInt(1),
+    PLL5Source: PLL5SourceConf = .RCC_PLL5SOURCE_HSI,
+    FREFDIV5: FREFDIV5Conf = @enumFromInt(1),
+    FBDIV5: FBDIV5Conf = @enumFromInt(12297829382473034410),
+    PLL5FRACV: PLL5FRACVConf = @enumFromInt(0),
+    POSTDIV1_5: POSTDIV1_5Conf = @enumFromInt(1),
+    POSTDIV2_5: POSTDIV2_5Conf = @enumFromInt(1),
+    PLL6Source: PLL6SourceConf = .RCC_PLL6SOURCE_HSI,
+    FREFDIV6: FREFDIV6Conf = @enumFromInt(1),
+    FBDIV6: FBDIV6Conf = @enumFromInt(12297829382473034410),
+    PLL6FRACV: PLL6FRACVConf = @enumFromInt(0),
+    POSTDIV1_6: POSTDIV1_6Conf = @enumFromInt(1),
+    POSTDIV2_6: POSTDIV2_6Conf = @enumFromInt(1),
+    PLL7Source: PLL7SourceConf = .RCC_PLL7SOURCE_HSI,
+    FREFDIV7: FREFDIV7Conf = @enumFromInt(1),
+    FBDIV7: FBDIV7Conf = @enumFromInt(12297829382473034410),
+    PLL7FRACV: PLL7FRACVConf = @enumFromInt(0),
+    POSTDIV1_7: POSTDIV1_7Conf = @enumFromInt(1),
+    POSTDIV2_7: POSTDIV2_7Conf = @enumFromInt(1),
+    PLL8Source: PLL8SourceConf = .RCC_PLL8SOURCE_HSI,
+    FREFDIV8: FREFDIV8Conf = @enumFromInt(1),
+    FBDIV8: FBDIV8Conf = @enumFromInt(12297829382473034410),
+    PLL8FRACV: PLL8FRACVConf = @enumFromInt(0),
+    POSTDIV1_8: POSTDIV1_8Conf = @enumFromInt(1),
+    POSTDIV2_8: POSTDIV2_8Conf = @enumFromInt(1),
+    RCC_RTC_Clock_Source_FROM_HSE: RCC_RTC_Clock_Source_FROM_HSEConf = @enumFromInt(1),
+    RTCCLockSelectionVirtual: RTCCLockSelectionVirtualConf = .RCC_RTCCLKSOURCE_LSI,
+    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
+    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
+    RCC_TIM_G1_PRescaler_Selection: RCC_TIM_G1_PRescaler_SelectionConf = .RCC_TIMG1PRES_DEACTIVATED,
+    RCC_TIM_G2_PRescaler_Selection: RCC_TIM_G2_PRescaler_SelectionConf = .RCC_TIMG2PRES_DEACTIVATED,
+    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+    pub fn into_config(self: *const ConfigWithRef) Config {
+        return .{
+            .HSEOSC = self.HSE_VALUE,
+            .HSEDIV2 = self.HSE_Div2,
+            .SPDIF = self.SPDIFFreq_Value,
+            .LSEOSC = self.LSE_VALUE,
+            .MSIRC = self.MSIClockRange,
+            .XBAR0 = self.XBAR0CLKSource,
+            .XBAR0Prediv = self.XBAR0Prediv,
+            .XBAR0Findiv = self.XBAR0Findiv,
+            .XBAR1 = self.XBAR1CLKSource,
+            .XBAR1Prediv = self.XBAR1Prediv,
+            .XBAR1Findiv = self.XBAR1Findiv,
+            .XBAR2 = self.XBAR2CLKSource,
+            .XBAR2Prediv = self.XBAR2Prediv,
+            .XBAR2Findiv = self.XBAR2Findiv,
+            .XBAR3 = self.XBAR3CLKSource,
+            .XBAR3Prediv = self.XBAR3Prediv,
+            .XBAR3Findiv = self.XBAR3Findiv,
+            .XBAR4 = self.XBAR4CLKSource,
+            .XBAR4Prediv = self.XBAR4Prediv,
+            .XBAR4Findiv = self.XBAR4Findiv,
+            .XBAR5 = self.XBAR5CLKSource,
+            .XBAR5Prediv = self.XBAR5Prediv,
+            .XBAR5Findiv = self.XBAR5Findiv,
+            .XBAR6 = self.XBAR6CLKSource,
+            .XBAR6Prediv = self.XBAR6Prediv,
+            .XBAR6Findiv = self.XBAR6Findiv,
+            .XBAR7 = self.XBAR7CLKSource,
+            .XBAR7Prediv = self.XBAR7Prediv,
+            .XBAR7Findiv = self.XBAR7Findiv,
+            .XBAR8 = self.XBAR8CLKSource,
+            .XBAR8Prediv = self.XBAR8Prediv,
+            .XBAR8Findiv = self.XBAR8Findiv,
+            .XBAR9 = self.XBAR9CLKSource,
+            .XBAR9Prediv = self.XBAR9Prediv,
+            .XBAR9Findiv = self.XBAR9Findiv,
+            .XBAR10 = self.XBAR10CLKSource,
+            .XBAR10Prediv = self.XBAR10Prediv,
+            .XBAR10Findiv = self.XBAR10Findiv,
+            .XBAR11 = self.XBAR11CLKSource,
+            .XBAR11Prediv = self.XBAR11Prediv,
+            .XBAR11Findiv = self.XBAR11Findiv,
+            .XBAR12 = self.XBAR12CLKSource,
+            .XBAR12Prediv = self.XBAR12Prediv,
+            .XBAR12Findiv = self.XBAR12Findiv,
+            .XBAR13 = self.XBAR13CLKSource,
+            .XBAR13Prediv = self.XBAR13Prediv,
+            .XBAR13Findiv = self.XBAR13Findiv,
+            .XBAR14 = self.XBAR14CLKSource,
+            .XBAR14Prediv = self.XBAR14Prediv,
+            .XBAR14Findiv = self.XBAR14Findiv,
+            .XBAR15 = self.XBAR15CLKSource,
+            .XBAR15Prediv = self.XBAR15Prediv,
+            .XBAR15Findiv = self.XBAR15Findiv,
+            .XBAR16 = self.XBAR16CLKSource,
+            .XBAR16Prediv = self.XBAR16Prediv,
+            .XBAR16Findiv = self.XBAR16Findiv,
+            .XBAR17 = self.XBAR17CLKSource,
+            .XBAR17Prediv = self.XBAR17Prediv,
+            .XBAR17Findiv = self.XBAR17Findiv,
+            .XBAR18 = self.XBAR18CLKSource,
+            .XBAR18Prediv = self.XBAR18Prediv,
+            .XBAR18Findiv = self.XBAR18Findiv,
+            .XBAR19 = self.XBAR19CLKSource,
+            .XBAR19Prediv = self.XBAR19Prediv,
+            .XBAR19Findiv = self.XBAR19Findiv,
+            .XBAR20 = self.XBAR20CLKSource,
+            .XBAR20Prediv = self.XBAR20Prediv,
+            .XBAR20Findiv = self.XBAR20Findiv,
+            .XBAR21 = self.XBAR21CLKSource,
+            .XBAR21Prediv = self.XBAR21Prediv,
+            .XBAR21Findiv = self.XBAR21Findiv,
+            .XBAR22 = self.XBAR22CLKSource,
+            .XBAR22Prediv = self.XBAR22Prediv,
+            .XBAR22Findiv = self.XBAR22Findiv,
+            .XBAR23 = self.XBAR23CLKSource,
+            .XBAR23Prediv = self.XBAR23Prediv,
+            .XBAR23Findiv = self.XBAR23Findiv,
+            .XBAR24 = self.XBAR24CLKSource,
+            .XBAR24Prediv = self.XBAR24Prediv,
+            .XBAR24Findiv = self.XBAR24Findiv,
+            .XBAR25 = self.XBAR25CLKSource,
+            .XBAR25Prediv = self.XBAR25Prediv,
+            .XBAR25Findiv = self.XBAR25Findiv,
+            .XBAR26 = self.XBAR26CLKSource,
+            .XBAR26Prediv = self.XBAR26Prediv,
+            .XBAR26Findiv = self.XBAR26Findiv,
+            .XBAR27 = self.XBAR27CLKSource,
+            .XBAR27Prediv = self.XBAR27Prediv,
+            .XBAR27Findiv = self.XBAR27Findiv,
+            .XBAR28 = self.XBAR28CLKSource,
+            .XBAR28Prediv = self.XBAR28Prediv,
+            .XBAR28Findiv = self.XBAR28Findiv,
+            .XBAR29 = self.XBAR29CLKSource,
+            .XBAR29Prediv = self.XBAR29Prediv,
+            .XBAR29Findiv = self.XBAR29Findiv,
+            .XBAR30 = self.XBAR30CLKSource,
+            .XBAR30Prediv = self.XBAR30Prediv,
+            .XBAR30Findiv = self.XBAR30Findiv,
+            .XBAR31 = self.XBAR31CLKSource,
+            .XBAR31Prediv = self.XBAR31Prediv,
+            .XBAR31Findiv = self.XBAR31Findiv,
+            .XBAR32 = self.XBAR32CLKSource,
+            .XBAR32Prediv = self.XBAR32Prediv,
+            .XBAR32Findiv = self.XBAR32Findiv,
+            .XBAR33 = self.XBAR33CLKSource,
+            .XBAR33Prediv = self.XBAR33Prediv,
+            .XBAR33Findiv = self.XBAR33Findiv,
+            .XBAR34 = self.XBAR34CLKSource,
+            .XBAR34Prediv = self.XBAR34Prediv,
+            .XBAR34Findiv = self.XBAR34Findiv,
+            .XBAR35 = self.XBAR35CLKSource,
+            .XBAR35Prediv = self.XBAR35Prediv,
+            .XBAR35Findiv = self.XBAR35Findiv,
+            .XBAR36 = self.XBAR36CLKSource,
+            .XBAR36Prediv = self.XBAR36Prediv,
+            .XBAR36Findiv = self.XBAR36Findiv,
+            .XBAR37 = self.XBAR37CLKSource,
+            .XBAR37Prediv = self.XBAR37Prediv,
+            .XBAR37Findiv = self.XBAR37Findiv,
+            .XBAR38 = self.XBAR38CLKSource,
+            .XBAR38Prediv = self.XBAR38Prediv,
+            .XBAR38Findiv = self.XBAR38Findiv,
+            .XBAR39 = self.XBAR39CLKSource,
+            .XBAR39Prediv = self.XBAR39Prediv,
+            .XBAR39Findiv = self.XBAR39Findiv,
+            .XBAR40 = self.XBAR40CLKSource,
+            .XBAR40Prediv = self.XBAR40Prediv,
+            .XBAR40Findiv = self.XBAR40Findiv,
+            .XBAR41 = self.XBAR41CLKSource,
+            .XBAR41Prediv = self.XBAR41Prediv,
+            .XBAR41Findiv = self.XBAR41Findiv,
+            .XBAR42 = self.XBAR42CLKSource,
+            .XBAR42Prediv = self.XBAR42Prediv,
+            .XBAR42Findiv = self.XBAR42Findiv,
+            .XBAR43 = self.XBAR43CLKSource,
+            .XBAR43Prediv = self.XBAR43Prediv,
+            .XBAR43Findiv = self.XBAR43Findiv,
+            .XBAR44 = self.XBAR44CLKSource,
+            .XBAR44Prediv = self.XBAR44Prediv,
+            .XBAR44Findiv = self.XBAR44Findiv,
+            .XBAR45 = self.XBAR45CLKSource,
+            .XBAR45Prediv = self.XBAR45Prediv,
+            .XBAR45Findiv = self.XBAR45Findiv,
+            .XBAR46 = self.XBAR46CLKSource,
+            .XBAR46Prediv = self.XBAR46Prediv,
+            .XBAR46Findiv = self.XBAR46Findiv,
+            .XBAR47 = self.XBAR47CLKSource,
+            .XBAR47Prediv = self.XBAR47Prediv,
+            .XBAR47Findiv = self.XBAR47Findiv,
+            .XBAR48 = self.XBAR48CLKSource,
+            .XBAR48Prediv = self.XBAR48Prediv,
+            .XBAR48Findiv = self.XBAR48Findiv,
+            .XBAR49 = self.XBAR49CLKSource,
+            .XBAR49Prediv = self.XBAR49Prediv,
+            .XBAR49Findiv = self.XBAR49Findiv,
+            .XBAR50 = self.XBAR50CLKSource,
+            .XBAR50Prediv = self.XBAR50Prediv,
+            .XBAR50Findiv = self.XBAR50Findiv,
+            .XBAR51 = self.XBAR51CLKSource,
+            .XBAR51Prediv = self.XBAR51Prediv,
+            .XBAR51Findiv = self.XBAR51Findiv,
+            .XBAR52 = self.XBAR52CLKSource,
+            .XBAR52Prediv = self.XBAR52Prediv,
+            .XBAR52Findiv = self.XBAR52Findiv,
+            .XBAR53 = self.XBAR53CLKSource,
+            .XBAR53Prediv = self.XBAR53Prediv,
+            .XBAR53Findiv = self.XBAR53Findiv,
+            .XBAR54 = self.XBAR54CLKSource,
+            .XBAR54Prediv = self.XBAR54Prediv,
+            .XBAR54Findiv = self.XBAR54Findiv,
+            .XBAR55 = self.XBAR55CLKSource,
+            .XBAR55Prediv = self.XBAR55Prediv,
+            .XBAR55Findiv = self.XBAR55Findiv,
+            .XBAR56 = self.XBAR56CLKSource,
+            .XBAR56Prediv = self.XBAR56Prediv,
+            .XBAR56Findiv = self.XBAR56Findiv,
+            .XBAR57 = self.XBAR57CLKSource,
+            .XBAR57Prediv = self.XBAR57Prediv,
+            .XBAR57Findiv = self.XBAR57Findiv,
+            .XBAR58 = self.XBAR58CLKSource,
+            .XBAR58Prediv = self.XBAR58Prediv,
+            .XBAR58Findiv = self.XBAR58Findiv,
+            .XBAR59 = self.XBAR59CLKSource,
+            .XBAR59Prediv = self.XBAR59Prediv,
+            .XBAR59Findiv = self.XBAR59Findiv,
+            .XBAR60 = self.XBAR60CLKSource,
+            .XBAR60Prediv = self.XBAR60Prediv,
+            .XBAR60Findiv = self.XBAR60Findiv,
+            .XBAR61 = self.XBAR61CLKSource,
+            .XBAR61Prediv = self.XBAR61Prediv,
+            .XBAR61Findiv = self.XBAR61Findiv,
+            .XBAR62 = self.XBAR62CLKSource,
+            .XBAR62Prediv = self.XBAR62Prediv,
+            .XBAR62Findiv = self.XBAR62Findiv,
+            .XBAR63 = self.XBAR63CLKSource,
+            .XBAR63Prediv = self.XBAR63Prediv,
+            .XBAR63Findiv = self.XBAR63Findiv,
+            .CKINTSEL0 = self.CKINTSELCLKSource,
+            .CKEXTSEL0 = self.CKEXTSELCLKSource,
+            .CKINTSEL1 = self.CKINTSELCLKSource1,
+            .CKEXTSEL1 = self.CKEXTSELCLKSource1,
+            .OBS0 = self.OBS0Source,
+            .OBS1 = self.OBS1Source,
+            .MCO1Mult = self.RCC_MCO1Source,
+            .MCO2Mult = self.RCC_MCO2Source,
+            .D3PER = self.D3PERCLKSource,
+            .DTS = self.DTSCLKSource,
+            .DSIPHY = self.DSIPHYCLKSource,
+            .DSIBLANE = self.DSIBLANECLKSource,
+            .USB2PHY1 = self.USB2PHY1CLKSource,
+            .USB2PHY2 = self.USB2PHY2CLKSource,
+            .USB3PCIPHY = self.USB3PCIPHYCLKSource,
+            .SysClkSource = self.MCUCLKSource,
+            .MCUDIV = self.MCU_Div,
+            .APB3DIV = self.APB3DIV,
+            .APB4DIV = self.APB4DIV,
+            .APBDBGDIV = self.APBDBGDIV,
+            .APB1DIV = self.APB1DIV,
+            .APB2DIV = self.APB2DIV,
+            .ADC12Mult = self.ADC12CLockSelection,
+            .ADC3Mult = self.ADC3CLockSelection,
+            .PLL1Source = self.PLL1Source,
+            .FREFDIV1 = self.FREFDIV1,
+            .PLL2Source = self.PLL2Source,
+            .FREFDIV2 = self.FREFDIV2,
+            .PLL3Source = self.PLL3Source,
+            .FREFDIV3 = self.FREFDIV3,
+            .PLL4Source = self.PLL4Source,
+            .FREFDIV4 = self.FREFDIV4,
+            .FBDIV1 = self.FBDIV1,
+            .POSTDIV1_1 = self.POSTDIV1_1,
+            .POSTDIV2_1 = self.POSTDIV2_1,
+            .FBDIV2 = self.FBDIV2,
+            .PLL2FRACV = self.PLL2FRACV,
+            .POSTDIV1_2 = self.POSTDIV1_2,
+            .POSTDIV2_2 = self.POSTDIV2_2,
+            .FBDIV3 = self.FBDIV3,
+            .PLL3FRACV = self.PLL3FRACV,
+            .POSTDIV1_3 = self.POSTDIV1_3,
+            .POSTDIV2_3 = self.POSTDIV2_3,
+            .FBDIV4 = self.FBDIV4,
+            .PLL4FRACV = self.PLL4FRACV,
+            .POSTDIV1_4 = self.POSTDIV1_4,
+            .POSTDIV2_4 = self.POSTDIV2_4,
+            .PLL5Source = self.PLL5Source,
+            .FREFDIV5 = self.FREFDIV5,
+            .FBDIV5 = self.FBDIV5,
+            .PLL5FRACV = self.PLL5FRACV,
+            .POSTDIV1_5 = self.POSTDIV1_5,
+            .POSTDIV2_5 = self.POSTDIV2_5,
+            .PLL6Source = self.PLL6Source,
+            .FREFDIV6 = self.FREFDIV6,
+            .FBDIV6 = self.FBDIV6,
+            .PLL6FRACV = self.PLL6FRACV,
+            .POSTDIV1_6 = self.POSTDIV1_6,
+            .POSTDIV2_6 = self.POSTDIV2_6,
+            .PLL7Source = self.PLL7Source,
+            .FREFDIV7 = self.FREFDIV7,
+            .FBDIV7 = self.FBDIV7,
+            .PLL7FRACV = self.PLL7FRACV,
+            .POSTDIV1_7 = self.POSTDIV1_7,
+            .POSTDIV2_7 = self.POSTDIV2_7,
+            .PLL8Source = self.PLL8Source,
+            .FREFDIV8 = self.FREFDIV8,
+            .FBDIV8 = self.FBDIV8,
+            .PLL8FRACV = self.PLL8FRACV,
+            .POSTDIV1_8 = self.POSTDIV1_8,
+            .POSTDIV2_8 = self.POSTDIV2_8,
+            .HSERTCDevisor = self.RCC_RTC_Clock_Source_FROM_HSE,
+            .RTCClkSource = self.RTCCLockSelectionVirtual,
+            .HSE_Timout = self.HSE_Timout,
+            .LSE_Timout = self.LSE_Timout,
+            .RCC_TIM_G1_PRescaler_Selection = self.RCC_TIM_G1_PRescaler_Selection,
+            .RCC_TIM_G2_PRescaler_Selection = self.RCC_TIM_G2_PRescaler_Selection,
+            .LSE_Drive_Capability = self.LSE_Drive_Capability,
+        };
+    }
 };
 
 pub const ClockTree = struct {

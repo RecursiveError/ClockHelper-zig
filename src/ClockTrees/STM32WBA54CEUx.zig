@@ -21,14 +21,6 @@ pub const LSI1_VALUEConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 32600;
-    }
-
-    pub fn min() f32 {
-        return 31400;
-    }
 };
 pub const LSI2_VALUEConf = enum(u32) {
     _,
@@ -36,28 +28,24 @@ pub const LSI2_VALUEConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 32600;
-    }
-
-    pub fn min() f32 {
-        return 31400;
-    }
 };
 pub const LSIDIVConf = enum {
     RCC_LSI_DIV1,
     RCC_LSI_DIV128,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_LSI_DIV1 => 1,
             .RCC_LSI_DIV128 => 128,
+            .RCC_LSI_DIV1 => 1,
         };
     }
 };
 pub const LSISource1Conf = enum {
     RCC_LSCOSOURCE_LSI1,
     RCC_LSCOSOURCE_LSI2,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const LSE_VALUEConf = enum(u32) {
     _,
@@ -65,28 +53,32 @@ pub const LSE_VALUEConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 1000000;
-    }
-
-    pub fn min() f32 {
-        return 1000;
-    }
 };
 pub const RSTClockSelectionVirtualConf = enum {
     RCC_RADIOSTCLKSOURCE_HSE_DIV1000,
     RCC_RADIOSTCLKSOURCE_LSE,
     RCC_RADIOSTCLKSOURCE_LSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const SYSCLKSourceVirtualConf = enum {
     RCC_SYSCLKSOURCE_HSI,
     RCC_SYSCLKSOURCE_HSE,
     RCC_SYSCLKSOURCE_PLLCLK,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const PLLSourceVirtualConf = enum {
     RCC_PLLSOURCE_HSI,
     RCC_PLLSOURCE_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const PLLMConf = enum(u32) {
     _,
@@ -94,49 +86,65 @@ pub const PLLMConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 8;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const RTCClockSelectionConf = enum {
     RCC_RTCCLKSOURCE_HSE_DIV32,
     RCC_RTCCLKSOURCE_LSE,
     RCC_RTCCLKSOURCE_LSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const USART2CLockSelectionVirtualConf = enum {
     RCC_USART2CLKSOURCE_PCLK1,
     RCC_USART2CLKSOURCE_SYSCLK,
     RCC_USART2CLKSOURCE_HSI,
     RCC_USART2CLKSOURCE_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const USART1CLockSelectionVirtualConf = enum {
     RCC_USART1CLKSOURCE_PCLK2,
     RCC_USART1CLKSOURCE_SYSCLK,
     RCC_USART1CLKSOURCE_HSI,
     RCC_USART1CLKSOURCE_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const LPUART1CLockSelectionVirtualConf = enum {
     RCC_LPUART1CLKSOURCE_PCLK7,
     RCC_LPUART1CLKSOURCE_SYSCLK,
     RCC_LPUART1CLKSOURCE_HSI,
     RCC_LPUART1CLKSOURCE_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const LPTIM1CLockSelectionVirtualConf = enum {
     RCC_LPTIM1CLKSOURCE_PCLK7,
     RCC_LPTIM1CLKSOURCE_LSI,
     RCC_LPTIM1CLKSOURCE_HSI,
     RCC_LPTIM1CLKSOURCE_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const LPTIM2CLockSelectionVirtualConf = enum {
     RCC_LPTIM2CLKSOURCE_PCLK1,
     RCC_LPTIM2CLKSOURCE_LSI,
     RCC_LPTIM2CLKSOURCE_HSI,
     RCC_LPTIM2CLKSOURCE_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const ADCCLockSelectionVirtualConf = enum {
     RCC_ADCCLKSOURCE_HCLK,
@@ -144,20 +152,36 @@ pub const ADCCLockSelectionVirtualConf = enum {
     RCC_ADCCLKSOURCE_HSE,
     RCC_ADCCLKSOURCE_HSI,
     RCC_ADCCLKSOURCE_PLL1P,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const ASClockSelectionConf = enum {
     RCC_ASCLKSOURCE_PLL1P,
     RCC_ASCLKSOURCE_PLL1Q,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const I2C1CLockSelectionConf = enum {
     RCC_I2C1CLKSOURCE_PCLK1,
     RCC_I2C1CLKSOURCE_SYSCLK,
     RCC_I2C1CLKSOURCE_HSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const I2C3CLockSelectionConf = enum {
     RCC_I2C3CLKSOURCE_PCLK7,
     RCC_I2C3CLKSOURCE_SYSCLK,
     RCC_I2C3CLKSOURCE_HSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const SAI1CLockSelectionVirtualConf = enum {
     RCC_SAI1CLKSOURCE_PLL1P,
@@ -165,12 +189,20 @@ pub const SAI1CLockSelectionVirtualConf = enum {
     RCC_SAI1CLKSOURCE_PLL1Q,
     RCC_SAI1CLKSOURCE_PIN,
     RCC_SAI1CLKSOURCE_SYSCLK,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const RNGCLockSelectionVirtualConf = enum {
     RCC_RNGCLKSOURCE_LSE,
     RCC_RNGCLKSOURCE_PLL1Q,
     RCC_RNGCLKSOURCE_HSI,
     RCC_RNGCLKSOURCE_LSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const RCC_MCO1SourceVirtualConf = enum {
     RCC_MCO1SOURCE_LSE,
@@ -182,6 +214,10 @@ pub const RCC_MCO1SourceVirtualConf = enum {
     RCC_MCO1SOURCE_PLL1PCLK,
     RCC_MCO1SOURCE_PLL1QCLK,
     RCC_MCO1SOURCE_HCLK5,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const RCC_MCODivConf = enum {
     RCC_MCODIV_1,
@@ -191,25 +227,35 @@ pub const RCC_MCODivConf = enum {
     RCC_MCODIV_16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
+            .RCC_MCODIV_8 => 8,
             .RCC_MCODIV_1 => 1,
             .RCC_MCODIV_2 => 2,
-            .RCC_MCODIV_4 => 4,
-            .RCC_MCODIV_8 => 8,
             .RCC_MCODIV_16 => 16,
+            .RCC_MCODIV_4 => 4,
         };
     }
 };
 pub const LSCOSource1VirtualConf = enum {
     RCC_LSCOSOURCE_LSI,
     RCC_LSCOSOURCE_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const AHB5CLKDividerConf = enum {
     DIV1,
     DIV2,
+    DIV3,
+    DIV4,
+    DIV6,
     pub fn get(self: @This()) f32 {
         return switch (self) {
             .DIV1 => 1,
+            .DIV3 => 3,
+            .DIV4 => 4,
             .DIV2 => 2,
+            .DIV6 => 6,
         };
     }
 };
@@ -221,11 +267,11 @@ pub const AHBCLKDividerConf = enum {
     RCC_SYSCLK_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_SYSCLK_DIV1 => 1,
+            .RCC_SYSCLK_DIV16 => 16,
             .RCC_SYSCLK_DIV2 => 2,
             .RCC_SYSCLK_DIV4 => 4,
             .RCC_SYSCLK_DIV8 => 8,
-            .RCC_SYSCLK_DIV16 => 16,
+            .RCC_SYSCLK_DIV1 => 1,
         };
     }
 };
@@ -233,6 +279,10 @@ pub const CortexCLockSelectionVirtualConf = enum {
     RCC_SYSTICKCLKSOURCE_HCLK_DIV8,
     RCC_SYSTICKCLKSOURCE_LSE,
     RCC_SYSTICKCLKSOURCE_LSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const APB1CLKDividerConf = enum {
     RCC_HCLK_DIV1,
@@ -242,11 +292,11 @@ pub const APB1CLKDividerConf = enum {
     RCC_HCLK_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_HCLK_DIV1 => 1,
-            .RCC_HCLK_DIV2 => 2,
-            .RCC_HCLK_DIV4 => 4,
-            .RCC_HCLK_DIV8 => 8,
             .RCC_HCLK_DIV16 => 16,
+            .RCC_HCLK_DIV2 => 2,
+            .RCC_HCLK_DIV8 => 8,
+            .RCC_HCLK_DIV4 => 4,
+            .RCC_HCLK_DIV1 => 1,
         };
     }
 };
@@ -258,11 +308,11 @@ pub const APB2CLKDividerConf = enum {
     RCC_HCLK_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_HCLK_DIV1 => 1,
-            .RCC_HCLK_DIV2 => 2,
-            .RCC_HCLK_DIV4 => 4,
-            .RCC_HCLK_DIV8 => 8,
             .RCC_HCLK_DIV16 => 16,
+            .RCC_HCLK_DIV2 => 2,
+            .RCC_HCLK_DIV8 => 8,
+            .RCC_HCLK_DIV4 => 4,
+            .RCC_HCLK_DIV1 => 1,
         };
     }
 };
@@ -274,11 +324,11 @@ pub const APB7CLKDividerConf = enum {
     RCC_HCLK_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_HCLK_DIV1 => 1,
-            .RCC_HCLK_DIV2 => 2,
-            .RCC_HCLK_DIV4 => 4,
-            .RCC_HCLK_DIV8 => 8,
             .RCC_HCLK_DIV16 => 16,
+            .RCC_HCLK_DIV2 => 2,
+            .RCC_HCLK_DIV8 => 8,
+            .RCC_HCLK_DIV4 => 4,
+            .RCC_HCLK_DIV1 => 1,
         };
     }
 };
@@ -286,11 +336,19 @@ pub const SPI1CLockSelectionConf = enum {
     RCC_SPI1CLKSOURCE_PCLK2,
     RCC_SPI1CLKSOURCE_SYSCLK,
     RCC_SPI1CLKSOURCE_HSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const SPI3CLockSelectionConf = enum {
     RCC_SPI3CLKSOURCE_PCLK7,
     RCC_SPI3CLKSOURCE_SYSCLK,
     RCC_SPI3CLKSOURCE_HSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const PLLNConf = enum(u32) {
     _,
@@ -298,28 +356,12 @@ pub const PLLNConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 512;
-    }
-
-    pub fn min() f32 {
-        return 4;
-    }
 };
 pub const PLLFRACNConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 8191;
-    }
-
-    pub fn min() f32 {
-        return 0;
     }
 };
 pub const PLL1PConf = enum {
@@ -390,71 +432,71 @@ pub const PLL1PConf = enum {
     @"128",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
-            .@"2" => 2,
-            .@"4" => 4,
-            .@"6" => 6,
-            .@"8" => 8,
-            .@"10" => 10,
-            .@"12" => 12,
-            .@"14" => 14,
-            .@"16" => 16,
-            .@"18" => 18,
-            .@"20" => 20,
-            .@"22" => 22,
-            .@"24" => 24,
-            .@"26" => 26,
-            .@"28" => 28,
-            .@"30" => 30,
-            .@"32" => 32,
+            .@"66" => 66,
             .@"34" => 34,
+            .@"104" => 104,
+            .@"114" => 114,
+            .@"94" => 94,
+            .@"86" => 86,
+            .@"124" => 124,
+            .@"22" => 22,
+            .@"8" => 8,
+            .@"24" => 24,
+            .@"32" => 32,
+            .@"78" => 78,
+            .@"82" => 82,
+            .@"62" => 62,
+            .@"28" => 28,
+            .@"12" => 12,
+            .@"74" => 74,
+            .@"120" => 120,
+            .@"6" => 6,
+            .@"72" => 72,
+            .@"80" => 80,
+            .@"64" => 64,
+            .@"76" => 76,
+            .@"90" => 90,
+            .@"26" => 26,
+            .@"118" => 118,
+            .@"60" => 60,
             .@"36" => 36,
+            .@"20" => 20,
+            .@"18" => 18,
+            .@"100" => 100,
+            .@"10" => 10,
+            .@"88" => 88,
             .@"38" => 38,
-            .@"40" => 40,
-            .@"42" => 42,
-            .@"44" => 44,
             .@"46" => 46,
-            .@"48" => 48,
-            .@"50" => 50,
-            .@"52" => 52,
+            .@"44" => 44,
+            .@"84" => 84,
+            .@"42" => 42,
+            .@"30" => 30,
+            .@"2" => 2,
             .@"54" => 54,
             .@"56" => 56,
-            .@"58" => 58,
-            .@"60" => 60,
-            .@"62" => 62,
-            .@"64" => 64,
-            .@"66" => 66,
-            .@"68" => 68,
-            .@"70" => 70,
-            .@"72" => 72,
-            .@"74" => 74,
-            .@"76" => 76,
-            .@"78" => 78,
-            .@"80" => 80,
-            .@"82" => 82,
-            .@"84" => 84,
-            .@"86" => 86,
-            .@"88" => 88,
-            .@"90" => 90,
-            .@"92" => 92,
-            .@"94" => 94,
-            .@"96" => 96,
-            .@"98" => 98,
-            .@"100" => 100,
-            .@"102" => 102,
-            .@"104" => 104,
-            .@"106" => 106,
-            .@"108" => 108,
             .@"110" => 110,
-            .@"112" => 112,
-            .@"114" => 114,
+            .@"52" => 52,
+            .@"92" => 92,
+            .@"98" => 98,
             .@"116" => 116,
-            .@"118" => 118,
-            .@"120" => 120,
             .@"122" => 122,
-            .@"124" => 124,
-            .@"126" => 126,
+            .@"48" => 48,
+            .@"112" => 112,
+            .@"40" => 40,
+            .@"16" => 16,
+            .@"58" => 58,
+            .@"102" => 102,
             .@"128" => 128,
+            .@"4" => 4,
+            .@"1" => 1,
+            .@"68" => 68,
+            .@"126" => 126,
+            .@"106" => 106,
+            .@"14" => 14,
+            .@"50" => 50,
+            .@"108" => 108,
+            .@"96" => 96,
+            .@"70" => 70,
         };
     }
 };
@@ -464,28 +506,12 @@ pub const PLL1QConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 128;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const PLL1RConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 128;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const HSE_TimoutConf = enum(u32) {
@@ -494,14 +520,6 @@ pub const HSE_TimoutConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 4294967295;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const LSE_TimoutConf = enum(u32) {
     _,
@@ -509,28 +527,12 @@ pub const LSE_TimoutConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 4294967295;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const HSE_TrimmingConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 63;
-    }
-
-    pub fn min() f32 {
-        return 0;
     }
 };
 pub const LSE_TrimmingConf = enum {
@@ -540,10 +542,10 @@ pub const LSE_TrimmingConf = enum {
     RCC_LSETRIMMING_3_4_R,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_LSETRIMMING_R => 0,
-            .RCC_LSETRIMMING_1_2_R => 1,
             .RCC_LSETRIMMING_2_3_R => 2,
             .RCC_LSETRIMMING_3_4_R => 3,
+            .RCC_LSETRIMMING_1_2_R => 1,
+            .RCC_LSETRIMMING_R => 0,
         };
     }
 };
@@ -553,145 +555,157 @@ pub const HSICalibrationValueConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 127;
-    }
-
-    pub fn min() f32 {
-        return 0;
-    }
 };
 pub const LSI2ConfigConf = enum {
+    true,
     false,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .false => 0,
+            .false => 1,
+            .true => 0,
         };
     }
 };
 pub const LSI2_FreqTempSensConf = enum {
+    RCC_LSI2_FREQTEMPSENS_80,
+    RCC_LSI2_FREQTEMPSENS_50,
+    RCC_LSI2_FREQTEMPSENS_20,
     null,
     pub fn get(self: @This()) f32 {
         return switch (self) {
+            .RCC_LSI2_FREQTEMPSENS_80 => 0,
+            .RCC_LSI2_FREQTEMPSENS_20 => 2,
             .null => 0,
+            .RCC_LSI2_FREQTEMPSENS_50 => 1,
         };
     }
 };
 pub const LSI2OpModeConf = enum {
+    RCC_LSI2_MODE_NOMINAL,
+    RCC_LSI2_MODE_LP,
+    RCC_LSI2_MODE_ULP,
     null,
     pub fn get(self: @This()) f32 {
         return switch (self) {
+            .RCC_LSI2_MODE_NOMINAL => 0,
+            .RCC_LSI2_MODE_ULP => 2,
             .null => 0,
+            .RCC_LSI2_MODE_LP => 1,
         };
     }
 };
 pub const LSE_Drive_CapabilityConf = enum {
+    RCC_LSEDRIVE_MEDIUMLOW,
+    RCC_LSEDRIVE_MEDIUMHIGH,
+    RCC_LSEDRIVE_HIGH,
     null,
     pub fn get(self: @This()) f32 {
         return switch (self) {
+            .RCC_LSEDRIVE_MEDIUMHIGH => 1,
             .null => 0,
+            .RCC_LSEDRIVE_MEDIUMLOW => 0,
+            .RCC_LSEDRIVE_HIGH => 2,
         };
     }
 };
 pub const Config = struct {
-    HseDiv: HseDivConf = .RCC_HSE_DIV1,
-    LSIRC: LSI1_VALUEConf = @enumFromInt(32000),
-    LSI2RC: LSI2_VALUEConf = @enumFromInt(32000),
-    LSIDIV: LSIDIVConf = .RCC_LSI_DIV1,
-    LSIOut: LSISource1Conf = .RCC_LSCOSOURCE_LSI1,
-    LSEOSC: LSE_VALUEConf = @enumFromInt(32768),
-    RSTClkSource: RSTClockSelectionVirtualConf = .RCC_RADIOSTCLKSOURCE_HSE_DIV1000,
-    SysClkSource: SYSCLKSourceVirtualConf = .RCC_SYSCLKSOURCE_HSI,
-    PLLSource: PLLSourceVirtualConf = .RCC_PLLSOURCE_HSI,
-    PLLM: PLLMConf = @enumFromInt(1),
-    RTCClkSource: RTCClockSelectionConf = .RCC_RTCCLKSOURCE_LSI,
-    USART2Mult: USART2CLockSelectionVirtualConf = .RCC_USART2CLKSOURCE_PCLK1,
-    USART1Mult: USART1CLockSelectionVirtualConf = .RCC_USART1CLKSOURCE_PCLK2,
-    LPUART1Mult: LPUART1CLockSelectionVirtualConf = .RCC_LPUART1CLKSOURCE_PCLK7,
-    LPTIM1Mult: LPTIM1CLockSelectionVirtualConf = .RCC_LPTIM1CLKSOURCE_PCLK7,
-    LPTIM2Mult: LPTIM2CLockSelectionVirtualConf = .RCC_LPTIM2CLKSOURCE_PCLK1,
-    ADCMult: ADCCLockSelectionVirtualConf = .RCC_ADCCLKSOURCE_HCLK,
-    ASMult: ASClockSelectionConf = .RCC_ASCLKSOURCE_PLL1P,
-    I2C1Mult: I2C1CLockSelectionConf = .RCC_I2C1CLKSOURCE_PCLK1,
-    I2C3Mult: I2C3CLockSelectionConf = .RCC_I2C3CLKSOURCE_PCLK7,
-    SAI1Mult: SAI1CLockSelectionVirtualConf = .RCC_SAI1CLKSOURCE_HSI,
-    RNGMult: RNGCLockSelectionVirtualConf = .RCC_RNGCLKSOURCE_HSI,
-    MCOMult: RCC_MCO1SourceVirtualConf = .RCC_MCO1SOURCE_SYSCLK,
-    MCODiv: RCC_MCODivConf = .RCC_MCODIV_1,
-    LSCOMult: LSCOSource1VirtualConf = .RCC_LSCOSOURCE_LSI,
-    AHB5Prescaler: AHB5CLKDividerConf = .DIV1,
-    AHBPrescaler: AHBCLKDividerConf = .RCC_SYSCLK_DIV1,
-    CortexCLockSelection: CortexCLockSelectionVirtualConf = .RCC_SYSTICKCLKSOURCE_HCLK_DIV8,
-    APB1Prescaler: APB1CLKDividerConf = .RCC_HCLK_DIV1,
-    APB2Prescaler: APB2CLKDividerConf = .RCC_HCLK_DIV1,
-    APB7Prescaler: APB7CLKDividerConf = .RCC_HCLK_DIV1,
-    SPI1Mult: SPI1CLockSelectionConf = .RCC_SPI1CLKSOURCE_PCLK2,
-    SPI3Mult: SPI3CLockSelectionConf = .RCC_SPI3CLKSOURCE_PCLK7,
-    PLLN: PLLNConf = @enumFromInt(129),
-    PLLFRACN: PLLFRACNConf = @enumFromInt(0),
-    PLL1P: PLL1PConf = .@"2",
-    PLL1Q: PLL1QConf = @enumFromInt(2),
-    PLL1R: PLL1RConf = @enumFromInt(2),
-    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
-    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
-    HSE_Trimming: HSE_TrimmingConf = @enumFromInt(0),
-    LSE_Trimming: LSE_TrimmingConf = .RCC_LSETRIMMING_R,
-    HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
-    LSI2Config: LSI2ConfigConf = .false,
-    LSI2_FreqTempSens: LSI2_FreqTempSensConf = .null,
-    LSI2OpMode: LSI2OpModeConf = .null,
-    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+    HseDiv: ?HseDivConf = null,
+    LSIRC: ?LSI1_VALUEConf = null,
+    LSI2RC: ?LSI2_VALUEConf = null,
+    LSIDIV: ?LSIDIVConf = null,
+    LSIOut: ?LSISource1Conf = null,
+    LSEOSC: ?LSE_VALUEConf = null,
+    RSTClkSource: ?RSTClockSelectionVirtualConf = null,
+    SysClkSource: ?SYSCLKSourceVirtualConf = null,
+    PLLSource: ?PLLSourceVirtualConf = null,
+    PLLM: ?PLLMConf = null,
+    RTCClkSource: ?RTCClockSelectionConf = null,
+    USART2Mult: ?USART2CLockSelectionVirtualConf = null,
+    USART1Mult: ?USART1CLockSelectionVirtualConf = null,
+    LPUART1Mult: ?LPUART1CLockSelectionVirtualConf = null,
+    LPTIM1Mult: ?LPTIM1CLockSelectionVirtualConf = null,
+    LPTIM2Mult: ?LPTIM2CLockSelectionVirtualConf = null,
+    ADCMult: ?ADCCLockSelectionVirtualConf = null,
+    ASMult: ?ASClockSelectionConf = null,
+    I2C1Mult: ?I2C1CLockSelectionConf = null,
+    I2C3Mult: ?I2C3CLockSelectionConf = null,
+    SAI1Mult: ?SAI1CLockSelectionVirtualConf = null,
+    RNGMult: ?RNGCLockSelectionVirtualConf = null,
+    MCOMult: ?RCC_MCO1SourceVirtualConf = null,
+    MCODiv: ?RCC_MCODivConf = null,
+    LSCOMult: ?LSCOSource1VirtualConf = null,
+    AHB5Prescaler: ?AHB5CLKDividerConf = null,
+    AHBPrescaler: ?AHBCLKDividerConf = null,
+    CortexCLockSelection: ?CortexCLockSelectionVirtualConf = null,
+    APB1Prescaler: ?APB1CLKDividerConf = null,
+    APB2Prescaler: ?APB2CLKDividerConf = null,
+    APB7Prescaler: ?APB7CLKDividerConf = null,
+    SPI1Mult: ?SPI1CLockSelectionConf = null,
+    SPI3Mult: ?SPI3CLockSelectionConf = null,
+    PLLN: ?PLLNConf = null,
+    PLLFRACN: ?PLLFRACNConf = null,
+    PLL1P: ?PLL1PConf = null,
+    PLL1Q: ?PLL1QConf = null,
+    PLL1R: ?PLL1RConf = null,
+    HSE_Timout: ?HSE_TimoutConf = null,
+    LSE_Timout: ?LSE_TimoutConf = null,
+    HSE_Trimming: ?HSE_TrimmingConf = null,
+    LSE_Trimming: ?LSE_TrimmingConf = null,
+    HSICalibrationValue: ?HSICalibrationValueConf = null,
+    LSI2Config: ?LSI2ConfigConf = null,
+    LSI2_FreqTempSens: ?LSI2_FreqTempSensConf = null,
+    LSI2OpMode: ?LSI2OpModeConf = null,
+    LSE_Drive_Capability: ?LSE_Drive_CapabilityConf = null,
 };
 
 pub const ConfigWithRef = struct {
-    HseDiv: HseDivConf = .RCC_HSE_DIV1,
-    LSI1_VALUE: LSI1_VALUEConf = @enumFromInt(32000),
-    LSI2_VALUE: LSI2_VALUEConf = @enumFromInt(32000),
-    LSIDIV: LSIDIVConf = .RCC_LSI_DIV1,
-    LSISource1: LSISource1Conf = .RCC_LSCOSOURCE_LSI1,
-    LSE_VALUE: LSE_VALUEConf = @enumFromInt(32768),
-    RSTClockSelectionVirtual: RSTClockSelectionVirtualConf = .RCC_RADIOSTCLKSOURCE_HSE_DIV1000,
-    SYSCLKSourceVirtual: SYSCLKSourceVirtualConf = .RCC_SYSCLKSOURCE_HSI,
-    PLLSourceVirtual: PLLSourceVirtualConf = .RCC_PLLSOURCE_HSI,
-    PLLM: PLLMConf = @enumFromInt(1),
-    RTCClockSelection: RTCClockSelectionConf = .RCC_RTCCLKSOURCE_LSI,
-    USART2CLockSelectionVirtual: USART2CLockSelectionVirtualConf = .RCC_USART2CLKSOURCE_PCLK1,
-    USART1CLockSelectionVirtual: USART1CLockSelectionVirtualConf = .RCC_USART1CLKSOURCE_PCLK2,
-    LPUART1CLockSelectionVirtual: LPUART1CLockSelectionVirtualConf = .RCC_LPUART1CLKSOURCE_PCLK7,
-    LPTIM1CLockSelectionVirtual: LPTIM1CLockSelectionVirtualConf = .RCC_LPTIM1CLKSOURCE_PCLK7,
-    LPTIM2CLockSelectionVirtual: LPTIM2CLockSelectionVirtualConf = .RCC_LPTIM2CLKSOURCE_PCLK1,
-    ADCCLockSelectionVirtual: ADCCLockSelectionVirtualConf = .RCC_ADCCLKSOURCE_HCLK,
-    ASClockSelection: ASClockSelectionConf = .RCC_ASCLKSOURCE_PLL1P,
-    I2C1CLockSelection: I2C1CLockSelectionConf = .RCC_I2C1CLKSOURCE_PCLK1,
-    I2C3CLockSelection: I2C3CLockSelectionConf = .RCC_I2C3CLKSOURCE_PCLK7,
-    SAI1CLockSelectionVirtual: SAI1CLockSelectionVirtualConf = .RCC_SAI1CLKSOURCE_HSI,
-    RNGCLockSelectionVirtual: RNGCLockSelectionVirtualConf = .RCC_RNGCLKSOURCE_HSI,
-    RCC_MCO1SourceVirtual: RCC_MCO1SourceVirtualConf = .RCC_MCO1SOURCE_SYSCLK,
-    RCC_MCODiv: RCC_MCODivConf = .RCC_MCODIV_1,
-    LSCOSource1Virtual: LSCOSource1VirtualConf = .RCC_LSCOSOURCE_LSI,
-    AHB5CLKDivider: AHB5CLKDividerConf = .DIV1,
-    AHBCLKDivider: AHBCLKDividerConf = .RCC_SYSCLK_DIV1,
-    CortexCLockSelectionVirtual: CortexCLockSelectionVirtualConf = .RCC_SYSTICKCLKSOURCE_HCLK_DIV8,
-    APB1CLKDivider: APB1CLKDividerConf = .RCC_HCLK_DIV1,
-    APB2CLKDivider: APB2CLKDividerConf = .RCC_HCLK_DIV1,
-    APB7CLKDivider: APB7CLKDividerConf = .RCC_HCLK_DIV1,
-    SPI1CLockSelection: SPI1CLockSelectionConf = .RCC_SPI1CLKSOURCE_PCLK2,
-    SPI3CLockSelection: SPI3CLockSelectionConf = .RCC_SPI3CLKSOURCE_PCLK7,
-    PLLN: PLLNConf = @enumFromInt(129),
-    PLLFRACN: PLLFRACNConf = @enumFromInt(0),
-    PLL1P: PLL1PConf = .@"2",
-    PLL1Q: PLL1QConf = @enumFromInt(2),
-    PLL1R: PLL1RConf = @enumFromInt(2),
-    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
-    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
-    HSE_Trimming: HSE_TrimmingConf = @enumFromInt(0),
-    LSE_Trimming: LSE_TrimmingConf = .RCC_LSETRIMMING_R,
-    HSICalibrationValue: HSICalibrationValueConf = @enumFromInt(16),
-    LSI2Config: LSI2ConfigConf = .false,
-    LSI2_FreqTempSens: LSI2_FreqTempSensConf = .null,
-    LSI2OpMode: LSI2OpModeConf = .null,
-    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+    HseDiv: ?HseDivConf = null,
+    LSI1_VALUE: ?LSI1_VALUEConf = null,
+    LSI2_VALUE: ?LSI2_VALUEConf = null,
+    LSIDIV: ?LSIDIVConf = null,
+    LSISource1: ?LSISource1Conf = null,
+    LSE_VALUE: ?LSE_VALUEConf = null,
+    RSTClockSelectionVirtual: ?RSTClockSelectionVirtualConf = null,
+    SYSCLKSourceVirtual: ?SYSCLKSourceVirtualConf = null,
+    PLLSourceVirtual: ?PLLSourceVirtualConf = null,
+    PLLM: ?PLLMConf = null,
+    RTCClockSelection: ?RTCClockSelectionConf = null,
+    USART2CLockSelectionVirtual: ?USART2CLockSelectionVirtualConf = null,
+    USART1CLockSelectionVirtual: ?USART1CLockSelectionVirtualConf = null,
+    LPUART1CLockSelectionVirtual: ?LPUART1CLockSelectionVirtualConf = null,
+    LPTIM1CLockSelectionVirtual: ?LPTIM1CLockSelectionVirtualConf = null,
+    LPTIM2CLockSelectionVirtual: ?LPTIM2CLockSelectionVirtualConf = null,
+    ADCCLockSelectionVirtual: ?ADCCLockSelectionVirtualConf = null,
+    ASClockSelection: ?ASClockSelectionConf = null,
+    I2C1CLockSelection: ?I2C1CLockSelectionConf = null,
+    I2C3CLockSelection: ?I2C3CLockSelectionConf = null,
+    SAI1CLockSelectionVirtual: ?SAI1CLockSelectionVirtualConf = null,
+    RNGCLockSelectionVirtual: ?RNGCLockSelectionVirtualConf = null,
+    RCC_MCO1SourceVirtual: ?RCC_MCO1SourceVirtualConf = null,
+    RCC_MCODiv: ?RCC_MCODivConf = null,
+    LSCOSource1Virtual: ?LSCOSource1VirtualConf = null,
+    AHB5CLKDivider: ?AHB5CLKDividerConf = null,
+    AHBCLKDivider: ?AHBCLKDividerConf = null,
+    CortexCLockSelectionVirtual: ?CortexCLockSelectionVirtualConf = null,
+    APB1CLKDivider: ?APB1CLKDividerConf = null,
+    APB2CLKDivider: ?APB2CLKDividerConf = null,
+    APB7CLKDivider: ?APB7CLKDividerConf = null,
+    SPI1CLockSelection: ?SPI1CLockSelectionConf = null,
+    SPI3CLockSelection: ?SPI3CLockSelectionConf = null,
+    PLLN: ?PLLNConf = null,
+    PLLFRACN: ?PLLFRACNConf = null,
+    PLL1P: ?PLL1PConf = null,
+    PLL1Q: ?PLL1QConf = null,
+    PLL1R: ?PLL1RConf = null,
+    HSE_Timout: ?HSE_TimoutConf = null,
+    LSE_Timout: ?LSE_TimoutConf = null,
+    HSE_Trimming: ?HSE_TrimmingConf = null,
+    LSE_Trimming: ?LSE_TrimmingConf = null,
+    HSICalibrationValue: ?HSICalibrationValueConf = null,
+    LSI2Config: ?LSI2ConfigConf = null,
+    LSI2_FreqTempSens: ?LSI2_FreqTempSensConf = null,
+    LSI2OpMode: ?LSI2OpModeConf = null,
+    LSE_Drive_Capability: ?LSE_Drive_CapabilityConf = null,
     pub fn into_config(self: *const ConfigWithRef) Config {
         return .{
             .HseDiv = self.HseDiv,
@@ -854,7 +868,22 @@ pub const ClockTree = struct {
             .name = "HSEOSC",
             .Nodetype = HSEOSCval,
         };
-        const HseDivval = ClockNodeTypes{ .div = .{ .value = config.HseDiv.get() } };
+        const HseDivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.HseDiv) |val| {
+                    switch (val) {
+                        .RCC_HSE_DIV1,
+                        .RCC_HSE_DIV2,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const HseDiv: ClockNode = .{
             .name = "HseDiv",
             .Nodetype = HseDivval,
@@ -862,7 +891,7 @@ pub const ClockTree = struct {
         };
         const LSIRCval = ClockNodeTypes{
             .source = .{
-                .value = config.LSIRC.get(),
+                .value = if (config.LSIRC) |val| val.get() else 32000,
                 .limit = .{ .max = 32600, .min = 31400 },
             },
         };
@@ -872,7 +901,7 @@ pub const ClockTree = struct {
         };
         const LSI2RCval = ClockNodeTypes{
             .source = .{
-                .value = config.LSI2RC.get(),
+                .value = if (config.LSI2RC) |val| val.get() else 32000,
                 .limit = .{ .max = 32600, .min = 31400 },
             },
         };
@@ -880,13 +909,43 @@ pub const ClockTree = struct {
             .name = "LSI2RC",
             .Nodetype = LSI2RCval,
         };
-        const LSIDIVval = ClockNodeTypes{ .div = .{ .value = config.LSIDIV.get() } };
+        const LSIDIVval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.LSIDIV) |val| {
+                    switch (val) {
+                        .RCC_LSI_DIV1,
+                        .RCC_LSI_DIV128,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const LSIDIV: ClockNode = .{
             .name = "LSIDIV",
             .Nodetype = LSIDIVval,
             .parents = &[_]*const ClockNode{&LSIRC},
         };
-        const LSIOutval = ClockNodeTypes{ .multi = @intFromEnum(config.LSIOut) };
+        const LSIOutval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LSIOut) |val| {
+                    switch (val) {
+                        .RCC_LSCOSOURCE_LSI1,
+                        .RCC_LSCOSOURCE_LSI2,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const LSIOut: ClockNode = .{
             .name = "LSIOut",
             .Nodetype = LSIOutval,
@@ -898,7 +957,7 @@ pub const ClockTree = struct {
         };
         const LSEOSCval = ClockNodeTypes{
             .source = .{
-                .value = config.LSEOSC.get(),
+                .value = if (config.LSEOSC) |val| val.get() else 32768,
                 .limit = .{ .max = 1000000, .min = 1000 },
             },
         };
@@ -921,7 +980,23 @@ pub const ClockTree = struct {
             .Nodetype = HSERSTDevisorval,
             .parents = &[_]*const ClockNode{&HSEOSC},
         };
-        const RSTClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.RSTClkSource) };
+        const RSTClkSourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.RSTClkSource) |val| {
+                    switch (val) {
+                        .RCC_RADIOSTCLKSOURCE_HSE_DIV1000,
+                        .RCC_RADIOSTCLKSOURCE_LSE,
+                        .RCC_RADIOSTCLKSOURCE_LSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const RSTClkSource: ClockNode = .{
             .name = "RSTClkSource",
             .Nodetype = RSTClkSourceval,
@@ -944,7 +1019,22 @@ pub const ClockTree = struct {
             .Nodetype = RSTRFOutputval,
             .parents = &[_]*const ClockNode{&HSEOSC},
         };
-        const PLLSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLLSource) };
+        const PLLSourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLLSource) |val| {
+                    switch (val) {
+                        .RCC_PLLSOURCE_HSI,
+                        .RCC_PLLSOURCE_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const PLLSource: ClockNode = .{
             .name = "PLLSource",
             .Nodetype = PLLSourceval,
@@ -956,7 +1046,7 @@ pub const ClockTree = struct {
         };
         const PLLMval = ClockNodeTypes{
             .div = .{
-                .value = config.PLLM.get(),
+                .value = if (config.PLLM) |val| val.get() else 1,
                 .limit = .{ .max = 8, .min = 1 },
             },
         };
@@ -967,7 +1057,7 @@ pub const ClockTree = struct {
         };
         const PLLFRACNval = ClockNodeTypes{
             .source = .{
-                .value = config.PLLFRACN.get(),
+                .value = if (config.PLLFRACN) |val| val.get() else 0,
                 .limit = .{ .max = 8191, .min = 0 },
             },
         };
@@ -977,7 +1067,7 @@ pub const ClockTree = struct {
         };
         const PLLNval = ClockNodeTypes{
             .mulfrac = .{
-                .value = config.PLLN.get(),
+                .value = if (config.PLLN) |val| val.get() else 129,
                 .limit = .{ .max = 512, .min = 4 },
             },
         };
@@ -988,7 +1078,7 @@ pub const ClockTree = struct {
         };
         const PLL1Rval = ClockNodeTypes{
             .div = .{
-                .value = config.PLL1R.get(),
+                .value = if (config.PLL1R) |val| val.get() else 2,
                 .limit = .{ .max = 128, .min = 1 },
             },
         };
@@ -997,7 +1087,23 @@ pub const ClockTree = struct {
             .Nodetype = PLL1Rval,
             .parents = &[_]*const ClockNode{&PLLN},
         };
-        const SysClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.SysClkSource) };
+        const SysClkSourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.SysClkSource) |val| {
+                    switch (val) {
+                        .RCC_SYSCLKSOURCE_HSI,
+                        .RCC_SYSCLKSOURCE_HSE,
+                        .RCC_SYSCLKSOURCE_PLLCLK,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const SysClkSource: ClockNode = .{
             .name = "SysClkSource",
             .Nodetype = SysClkSourceval,
@@ -1024,7 +1130,23 @@ pub const ClockTree = struct {
             .Nodetype = HSERTCDevisorval,
             .parents = &[_]*const ClockNode{&HSEOSC},
         };
-        const RTCClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.RTCClkSource) };
+        const RTCClkSourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.RTCClkSource) |val| {
+                    switch (val) {
+                        .RCC_RTCCLKSOURCE_HSE_DIV32,
+                        .RCC_RTCCLKSOURCE_LSE,
+                        .RCC_RTCCLKSOURCE_LSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 2;
+                }
+            },
+        };
         const RTCClkSource: ClockNode = .{
             .name = "RTCClkSource",
             .Nodetype = RTCClkSourceval,
@@ -1049,7 +1171,25 @@ pub const ClockTree = struct {
             .Nodetype = IWDGOutputval,
             .parents = &[_]*const ClockNode{&LSIOut},
         };
-        const AHBPrescalerval = ClockNodeTypes{ .div = .{ .value = config.AHBPrescaler.get() } };
+        const AHBPrescalerval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.AHBPrescaler) |val| {
+                    switch (val) {
+                        .RCC_SYSCLK_DIV1,
+                        .RCC_SYSCLK_DIV2,
+                        .RCC_SYSCLK_DIV4,
+                        .RCC_SYSCLK_DIV8,
+                        .RCC_SYSCLK_DIV16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const AHBPrescaler: ClockNode = .{
             .name = "AHBPrescaler",
             .Nodetype = AHBPrescalerval,
@@ -1063,13 +1203,48 @@ pub const ClockTree = struct {
             .Nodetype = AHBOutputval,
             .parents = &[_]*const ClockNode{&AHBPrescaler},
         };
-        const APB1Prescalerval = ClockNodeTypes{ .div = .{ .value = config.APB1Prescaler.get() } };
+        const APB1Prescalerval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.APB1Prescaler) |val| {
+                    switch (val) {
+                        .RCC_HCLK_DIV1,
+                        .RCC_HCLK_DIV2,
+                        .RCC_HCLK_DIV4,
+                        .RCC_HCLK_DIV8,
+                        .RCC_HCLK_DIV16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const APB1Prescaler: ClockNode = .{
             .name = "APB1Prescaler",
             .Nodetype = APB1Prescalerval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
-        const USART2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.USART2Mult) };
+        const USART2Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.USART2Mult) |val| {
+                    switch (val) {
+                        .RCC_USART2CLKSOURCE_PCLK1,
+                        .RCC_USART2CLKSOURCE_SYSCLK,
+                        .RCC_USART2CLKSOURCE_HSI,
+                        .RCC_USART2CLKSOURCE_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const USART2Mult: ClockNode = .{
             .name = "USART2Mult",
             .Nodetype = USART2Multval,
@@ -1087,13 +1262,48 @@ pub const ClockTree = struct {
             .Nodetype = USART2outputval,
             .parents = &[_]*const ClockNode{&USART2Mult},
         };
-        const APB2Prescalerval = ClockNodeTypes{ .div = .{ .value = config.APB2Prescaler.get() } };
+        const APB2Prescalerval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.APB2Prescaler) |val| {
+                    switch (val) {
+                        .RCC_HCLK_DIV1,
+                        .RCC_HCLK_DIV2,
+                        .RCC_HCLK_DIV4,
+                        .RCC_HCLK_DIV8,
+                        .RCC_HCLK_DIV16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const APB2Prescaler: ClockNode = .{
             .name = "APB2Prescaler",
             .Nodetype = APB2Prescalerval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
-        const USART1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.USART1Mult) };
+        const USART1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.USART1Mult) |val| {
+                    switch (val) {
+                        .RCC_USART1CLKSOURCE_PCLK2,
+                        .RCC_USART1CLKSOURCE_SYSCLK,
+                        .RCC_USART1CLKSOURCE_HSI,
+                        .RCC_USART1CLKSOURCE_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const USART1Mult: ClockNode = .{
             .name = "USART1Mult",
             .Nodetype = USART1Multval,
@@ -1111,7 +1321,25 @@ pub const ClockTree = struct {
             .Nodetype = USART1outputval,
             .parents = &[_]*const ClockNode{&USART1Mult},
         };
-        const APB7Prescalerval = ClockNodeTypes{ .div = .{ .value = config.APB7Prescaler.get() } };
+        const APB7Prescalerval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.APB7Prescaler) |val| {
+                    switch (val) {
+                        .RCC_HCLK_DIV1,
+                        .RCC_HCLK_DIV2,
+                        .RCC_HCLK_DIV4,
+                        .RCC_HCLK_DIV8,
+                        .RCC_HCLK_DIV16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const APB7Prescaler: ClockNode = .{
             .name = "APB7Prescaler",
             .Nodetype = APB7Prescalerval,
@@ -1125,7 +1353,24 @@ pub const ClockTree = struct {
             .Nodetype = APB7Outputval,
             .parents = &[_]*const ClockNode{&APB7Prescaler},
         };
-        const LPUART1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.LPUART1Mult) };
+        const LPUART1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LPUART1Mult) |val| {
+                    switch (val) {
+                        .RCC_LPUART1CLKSOURCE_PCLK7,
+                        .RCC_LPUART1CLKSOURCE_SYSCLK,
+                        .RCC_LPUART1CLKSOURCE_HSI,
+                        .RCC_LPUART1CLKSOURCE_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const LPUART1Mult: ClockNode = .{
             .name = "LPUART1Mult",
             .Nodetype = LPUART1Multval,
@@ -1143,7 +1388,24 @@ pub const ClockTree = struct {
             .Nodetype = LPUART1outputval,
             .parents = &[_]*const ClockNode{&LPUART1Mult},
         };
-        const LPTIM1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.LPTIM1Mult) };
+        const LPTIM1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LPTIM1Mult) |val| {
+                    switch (val) {
+                        .RCC_LPTIM1CLKSOURCE_PCLK7,
+                        .RCC_LPTIM1CLKSOURCE_LSI,
+                        .RCC_LPTIM1CLKSOURCE_HSI,
+                        .RCC_LPTIM1CLKSOURCE_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const LPTIM1Mult: ClockNode = .{
             .name = "LPTIM1Mult",
             .Nodetype = LPTIM1Multval,
@@ -1161,7 +1423,24 @@ pub const ClockTree = struct {
             .Nodetype = LPTIM1outputval,
             .parents = &[_]*const ClockNode{&LPTIM1Mult},
         };
-        const LPTIM2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.LPTIM2Mult) };
+        const LPTIM2Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LPTIM2Mult) |val| {
+                    switch (val) {
+                        .RCC_LPTIM2CLKSOURCE_PCLK1,
+                        .RCC_LPTIM2CLKSOURCE_LSI,
+                        .RCC_LPTIM2CLKSOURCE_HSI,
+                        .RCC_LPTIM2CLKSOURCE_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const LPTIM2Mult: ClockNode = .{
             .name = "LPTIM2Mult",
             .Nodetype = LPTIM2Multval,
@@ -1179,13 +1458,109 @@ pub const ClockTree = struct {
             .Nodetype = LPTIM2outputval,
             .parents = &[_]*const ClockNode{&LPTIM2Mult},
         };
-        const PLL1Pval = ClockNodeTypes{ .div = .{ .value = config.PLL1P.get() } };
+        const PLL1Pval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.PLL1P) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"6",
+                        .@"8",
+                        .@"10",
+                        .@"12",
+                        .@"14",
+                        .@"16",
+                        .@"18",
+                        .@"20",
+                        .@"22",
+                        .@"24",
+                        .@"26",
+                        .@"28",
+                        .@"30",
+                        .@"32",
+                        .@"34",
+                        .@"36",
+                        .@"38",
+                        .@"40",
+                        .@"42",
+                        .@"44",
+                        .@"46",
+                        .@"48",
+                        .@"50",
+                        .@"52",
+                        .@"54",
+                        .@"56",
+                        .@"58",
+                        .@"60",
+                        .@"62",
+                        .@"64",
+                        .@"66",
+                        .@"68",
+                        .@"70",
+                        .@"72",
+                        .@"74",
+                        .@"76",
+                        .@"78",
+                        .@"80",
+                        .@"82",
+                        .@"84",
+                        .@"86",
+                        .@"88",
+                        .@"90",
+                        .@"92",
+                        .@"94",
+                        .@"96",
+                        .@"98",
+                        .@"100",
+                        .@"102",
+                        .@"104",
+                        .@"106",
+                        .@"108",
+                        .@"110",
+                        .@"112",
+                        .@"114",
+                        .@"116",
+                        .@"118",
+                        .@"120",
+                        .@"122",
+                        .@"124",
+                        .@"126",
+                        .@"128",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 2;
+                }
+            },
+        } };
         const PLL1P: ClockNode = .{
             .name = "PLL1P",
             .Nodetype = PLL1Pval,
             .parents = &[_]*const ClockNode{&PLLN},
         };
-        const ADCMultval = ClockNodeTypes{ .multi = @intFromEnum(config.ADCMult) };
+        const ADCMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.ADCMult) |val| {
+                    switch (val) {
+                        .RCC_ADCCLKSOURCE_HCLK,
+                        .RCC_ADCCLKSOURCE_SYSCLK,
+                        .RCC_ADCCLKSOURCE_HSE,
+                        .RCC_ADCCLKSOURCE_HSI,
+                        .RCC_ADCCLKSOURCE_PLL1P,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const ADCMult: ClockNode = .{
             .name = "ADCMult",
             .Nodetype = ADCMultval,
@@ -1206,7 +1581,7 @@ pub const ClockTree = struct {
         };
         const PLL1Qval = ClockNodeTypes{
             .div = .{
-                .value = config.PLL1Q.get(),
+                .value = if (config.PLL1Q) |val| val.get() else 2,
                 .limit = .{ .max = 128, .min = 1 },
             },
         };
@@ -1215,7 +1590,22 @@ pub const ClockTree = struct {
             .Nodetype = PLL1Qval,
             .parents = &[_]*const ClockNode{&PLLN},
         };
-        const ASMultval = ClockNodeTypes{ .multi = @intFromEnum(config.ASMult) };
+        const ASMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.ASMult) |val| {
+                    switch (val) {
+                        .RCC_ASCLKSOURCE_PLL1P,
+                        .RCC_ASCLKSOURCE_PLL1Q,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const ASMult: ClockNode = .{
             .name = "ASMult",
             .Nodetype = ASMultval,
@@ -1231,7 +1621,23 @@ pub const ClockTree = struct {
             .Nodetype = ASoutputval,
             .parents = &[_]*const ClockNode{&ASMult},
         };
-        const I2C1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.I2C1Mult) };
+        const I2C1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.I2C1Mult) |val| {
+                    switch (val) {
+                        .RCC_I2C1CLKSOURCE_PCLK1,
+                        .RCC_I2C1CLKSOURCE_SYSCLK,
+                        .RCC_I2C1CLKSOURCE_HSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const I2C1Mult: ClockNode = .{
             .name = "I2C1Mult",
             .Nodetype = I2C1Multval,
@@ -1248,7 +1654,23 @@ pub const ClockTree = struct {
             .Nodetype = I2C1outputval,
             .parents = &[_]*const ClockNode{&I2C1Mult},
         };
-        const I2C3Multval = ClockNodeTypes{ .multi = @intFromEnum(config.I2C3Mult) };
+        const I2C3Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.I2C3Mult) |val| {
+                    switch (val) {
+                        .RCC_I2C3CLKSOURCE_PCLK7,
+                        .RCC_I2C3CLKSOURCE_SYSCLK,
+                        .RCC_I2C3CLKSOURCE_HSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const I2C3Mult: ClockNode = .{
             .name = "I2C3Mult",
             .Nodetype = I2C3Multval,
@@ -1265,7 +1687,25 @@ pub const ClockTree = struct {
             .Nodetype = I2C3outputval,
             .parents = &[_]*const ClockNode{&I2C3Mult},
         };
-        const SAI1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.SAI1Mult) };
+        const SAI1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.SAI1Mult) |val| {
+                    switch (val) {
+                        .RCC_SAI1CLKSOURCE_PLL1P,
+                        .RCC_SAI1CLKSOURCE_HSI,
+                        .RCC_SAI1CLKSOURCE_PLL1Q,
+                        .RCC_SAI1CLKSOURCE_PIN,
+                        .RCC_SAI1CLKSOURCE_SYSCLK,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        };
         const SAI1Mult: ClockNode = .{
             .name = "SAI1Mult",
             .Nodetype = SAI1Multval,
@@ -1292,7 +1732,24 @@ pub const ClockTree = struct {
             .Nodetype = pllqDivToRNGval,
             .parents = &[_]*const ClockNode{&PLL1Q},
         };
-        const RNGMultval = ClockNodeTypes{ .multi = @intFromEnum(config.RNGMult) };
+        const RNGMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.RNGMult) |val| {
+                    switch (val) {
+                        .RCC_RNGCLKSOURCE_LSE,
+                        .RCC_RNGCLKSOURCE_PLL1Q,
+                        .RCC_RNGCLKSOURCE_HSI,
+                        .RCC_RNGCLKSOURCE_LSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 2;
+                }
+            },
+        };
         const RNGMult: ClockNode = .{
             .name = "RNGMult",
             .Nodetype = RNGMultval,
@@ -1310,7 +1767,23 @@ pub const ClockTree = struct {
             .Nodetype = RNGoutputval,
             .parents = &[_]*const ClockNode{&RNGMult},
         };
-        const AHB5Prescalerval = ClockNodeTypes{ .div = .{ .value = config.AHB5Prescaler.get() } };
+        const AHB5Prescalerval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.AHB5Prescaler) |val| {
+                    switch (val) {
+                        .DIV1,
+                        .DIV2,
+                        => {
+                            break :inner val.get();
+                        },
+                        else => {},
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const AHB5Prescaler: ClockNode = .{
             .name = "AHB5Prescaler",
             .Nodetype = AHB5Prescalerval,
@@ -1324,7 +1797,29 @@ pub const ClockTree = struct {
             .Nodetype = AHB5Outputval,
             .parents = &[_]*const ClockNode{&AHB5Prescaler},
         };
-        const MCOMultval = ClockNodeTypes{ .multi = @intFromEnum(config.MCOMult) };
+        const MCOMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.MCOMult) |val| {
+                    switch (val) {
+                        .RCC_MCO1SOURCE_LSE,
+                        .RCC_MCO1SOURCE_LSI,
+                        .RCC_MCO1SOURCE_HSE,
+                        .RCC_MCO1SOURCE_HSI,
+                        .RCC_MCO1SOURCE_PLL1RCLK,
+                        .RCC_MCO1SOURCE_SYSCLK,
+                        .RCC_MCO1SOURCE_PLL1PCLK,
+                        .RCC_MCO1SOURCE_PLL1QCLK,
+                        .RCC_MCO1SOURCE_HCLK5,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const MCOMult: ClockNode = .{
             .name = "MCOMult",
             .Nodetype = MCOMultval,
@@ -1341,7 +1836,25 @@ pub const ClockTree = struct {
                 &AHB5Output,
             },
         };
-        const MCODivval = ClockNodeTypes{ .div = .{ .value = config.MCODiv.get() } };
+        const MCODivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.MCODiv) |val| {
+                    switch (val) {
+                        .RCC_MCODIV_1,
+                        .RCC_MCODIV_2,
+                        .RCC_MCODIV_4,
+                        .RCC_MCODIV_8,
+                        .RCC_MCODIV_16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const MCODiv: ClockNode = .{
             .name = "MCODiv",
             .Nodetype = MCODivval,
@@ -1353,7 +1866,22 @@ pub const ClockTree = struct {
             .Nodetype = MCOPinval,
             .parents = &[_]*const ClockNode{&MCODiv},
         };
-        const LSCOMultval = ClockNodeTypes{ .multi = @intFromEnum(config.LSCOMult) };
+        const LSCOMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LSCOMult) |val| {
+                    switch (val) {
+                        .RCC_LSCOSOURCE_LSI,
+                        .RCC_LSCOSOURCE_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const LSCOMult: ClockNode = .{
             .name = "LSCOMult",
             .Nodetype = LSCOMultval,
@@ -1401,7 +1929,23 @@ pub const ClockTree = struct {
             .Nodetype = CortexPrescalerval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
-        const CortexCLockSelectionval = ClockNodeTypes{ .multi = @intFromEnum(config.CortexCLockSelection) };
+        const CortexCLockSelectionval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.CortexCLockSelection) |val| {
+                    switch (val) {
+                        .RCC_SYSTICKCLKSOURCE_HCLK_DIV8,
+                        .RCC_SYSTICKCLKSOURCE_LSE,
+                        .RCC_SYSTICKCLKSOURCE_LSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const CortexCLockSelection: ClockNode = .{
             .name = "CortexCLockSelection",
             .Nodetype = CortexCLockSelectionval,
@@ -1490,7 +2034,23 @@ pub const ClockTree = struct {
             .Nodetype = TimPrescOut2val,
             .parents = &[_]*const ClockNode{&TimPrescalerAPB2},
         };
-        const SPI1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.SPI1Mult) };
+        const SPI1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.SPI1Mult) |val| {
+                    switch (val) {
+                        .RCC_SPI1CLKSOURCE_PCLK2,
+                        .RCC_SPI1CLKSOURCE_SYSCLK,
+                        .RCC_SPI1CLKSOURCE_HSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const SPI1Mult: ClockNode = .{
             .name = "SPI1Mult",
             .Nodetype = SPI1Multval,
@@ -1507,7 +2067,23 @@ pub const ClockTree = struct {
             .Nodetype = SPI1outputval,
             .parents = &[_]*const ClockNode{&SPI1Mult},
         };
-        const SPI3Multval = ClockNodeTypes{ .multi = @intFromEnum(config.SPI3Mult) };
+        const SPI3Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.SPI3Mult) |val| {
+                    switch (val) {
+                        .RCC_SPI3CLKSOURCE_PCLK7,
+                        .RCC_SPI3CLKSOURCE_SYSCLK,
+                        .RCC_SPI3CLKSOURCE_HSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const SPI3Mult: ClockNode = .{
             .name = "SPI3Mult",
             .Nodetype = SPI3Multval,
@@ -1538,43 +2114,110 @@ pub const ClockTree = struct {
         };
         const HSE_Timoutval = ClockNodeTypes{
             .source = .{
-                .value = config.HSE_Timout.get(),
+                .value = if (config.HSE_Timout) |val| val.get() else 100,
                 .limit = .{ .max = 4294967295, .min = 1 },
             },
         };
         const LSE_Timoutval = ClockNodeTypes{
             .source = .{
-                .value = config.LSE_Timout.get(),
+                .value = if (config.LSE_Timout) |val| val.get() else 5000,
                 .limit = .{ .max = 4294967295, .min = 1 },
             },
         };
         const HSE_Trimmingval = ClockNodeTypes{
             .source = .{
-                .value = config.HSE_Trimming.get(),
+                .value = if (config.HSE_Trimming) |val| val.get() else 0,
                 .limit = .{ .max = 63, .min = 0 },
             },
         };
-        const LSE_Trimmingval = ClockNodeTypes{
-            .source = .{ .value = config.LSE_Trimming.get() },
-        };
+        const LSE_Trimmingval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.LSE_Trimming) |val| {
+                    switch (val) {
+                        .RCC_LSETRIMMING_R,
+                        .RCC_LSETRIMMING_1_2_R,
+                        .RCC_LSETRIMMING_2_3_R,
+                        .RCC_LSETRIMMING_3_4_R,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        } };
         const HSICalibrationValueval = ClockNodeTypes{
             .source = .{
-                .value = config.HSICalibrationValue.get(),
+                .value = if (config.HSICalibrationValue) |val| val.get() else 16,
                 .limit = .{ .max = 127, .min = 0 },
             },
         };
-        const LSI2Configval = ClockNodeTypes{
-            .source = .{ .value = config.LSI2Config.get() },
-        };
-        const LSI2_FreqTempSensval = ClockNodeTypes{
-            .source = .{ .value = config.LSI2_FreqTempSens.get() },
-        };
-        const LSI2OpModeval = ClockNodeTypes{
-            .source = .{ .value = config.LSI2OpMode.get() },
-        };
-        const LSE_Drive_Capabilityval = ClockNodeTypes{
-            .source = .{ .value = config.LSE_Drive_Capability.get() },
-        };
+        const LSI2Configval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.LSI2Config) |val| {
+                    switch (val) {
+                        .false,
+                        => {
+                            break :inner val.get();
+                        },
+                        else => {},
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        } };
+        const LSI2_FreqTempSensval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.LSI2_FreqTempSens) |val| {
+                    switch (val) {
+                        .null,
+                        => {
+                            break :inner val.get();
+                        },
+                        else => {},
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        } };
+        const LSI2OpModeval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.LSI2OpMode) |val| {
+                    switch (val) {
+                        .null,
+                        => {
+                            break :inner val.get();
+                        },
+                        else => {},
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        } };
+        const LSE_Drive_Capabilityval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.LSE_Drive_Capability) |val| {
+                    switch (val) {
+                        .null,
+                        => {
+                            break :inner val.get();
+                        },
+                        else => {},
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        } };
         return .{
             .HSIRC = HSIRC,
             .HSEOSC = HSEOSC,

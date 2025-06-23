@@ -28,7 +28,11 @@ pub fn main() !void {
         }
         break;
     }
-
+    _ = try main_file.write(
+        \\
+        \\pub const print_clock_configs = @import("print.zig").print_clock_configs;
+        \\
+    );
     main_file.close();
     var ch = std.process.Child.init(&[_][]const u8{ "zig", "fmt", "src/main.zig" }, arena);
     _ = try ch.spawnAndWait();

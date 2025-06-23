@@ -3,7 +3,12 @@ const ClockHelper = @import("ClockHelper");
 
 const STM32F103x = ClockHelper.@"STM32F103C(8-B)Tx";
 
-const config = STM32F103x.Config{};
+const config = STM32F103x.Config{
+    .PLLSource = .RCC_PLLSOURCE_HSE,
+    .PLLMUL = .RCC_PLL_MUL9,
+    .SysClkSource = .RCC_SYSCLKSOURCE_PLLCLK,
+    .APB1Prescaler = .RCC_HCLK_DIV2,
+};
 const Clock = STM32F103x.ClockTree.init_comptime(config);
 const conf_text = ClockHelper.print_clock_configs(config);
 

@@ -11,14 +11,6 @@ pub const HSE_VALUEConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 48000000;
-    }
-
-    pub fn min() f32 {
-        return 16000000;
-    }
 };
 pub const HSE_Div2Conf = enum {
     @"2",
@@ -34,28 +26,12 @@ pub const SPDIFFreq_ValueConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 12288000;
-    }
-
-    pub fn min() f32 {
-        return 3072000;
-    }
 };
 pub const LSE_VALUEConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 1000000;
-    }
-
-    pub fn min() f32 {
-        return 0;
     }
 };
 pub const MSIClockRangeConf = enum {
@@ -81,6 +57,10 @@ pub const XBAR0CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_I2S,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR0PredivConf = enum {
     @"1",
@@ -89,10 +69,10 @@ pub const XBAR0PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -101,14 +81,6 @@ pub const XBAR0FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR1CLKSourceConf = enum {
@@ -124,6 +96,10 @@ pub const XBAR1CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_I2S,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR1PredivConf = enum {
     @"1",
@@ -132,10 +108,10 @@ pub const XBAR1PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -144,14 +120,6 @@ pub const XBAR1FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR2CLKSourceConf = enum {
@@ -167,6 +135,10 @@ pub const XBAR2CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_I2S,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR2PredivConf = enum {
     @"1",
@@ -175,10 +147,10 @@ pub const XBAR2PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -187,14 +159,6 @@ pub const XBAR2FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR3CLKSourceConf = enum {
@@ -210,6 +174,10 @@ pub const XBAR3CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_I2S,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR3PredivConf = enum {
     @"1",
@@ -218,10 +186,10 @@ pub const XBAR3PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -230,14 +198,6 @@ pub const XBAR3FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR4CLKSourceConf = enum {
@@ -253,6 +213,10 @@ pub const XBAR4CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_I2S,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR4PredivConf = enum {
     @"1",
@@ -261,10 +225,10 @@ pub const XBAR4PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -273,14 +237,6 @@ pub const XBAR4FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR5CLKSourceConf = enum {
@@ -296,6 +252,10 @@ pub const XBAR5CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_I2S,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR5PredivConf = enum {
     @"1",
@@ -304,10 +264,10 @@ pub const XBAR5PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -316,14 +276,6 @@ pub const XBAR5FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR6CLKSourceConf = enum {
@@ -339,6 +291,10 @@ pub const XBAR6CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_I2S,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR6PredivConf = enum {
     @"1",
@@ -347,10 +303,10 @@ pub const XBAR6PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -359,14 +315,6 @@ pub const XBAR6FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR7CLKSourceConf = enum {
@@ -377,6 +325,10 @@ pub const XBAR7CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR7PredivConf = enum {
     @"1",
@@ -385,10 +337,10 @@ pub const XBAR7PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -397,14 +349,6 @@ pub const XBAR7FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR8CLKSourceConf = enum {
@@ -416,6 +360,10 @@ pub const XBAR8CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR8PredivConf = enum {
     @"1",
@@ -424,10 +372,10 @@ pub const XBAR8PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -436,14 +384,6 @@ pub const XBAR8FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR9CLKSourceConf = enum {
@@ -455,6 +395,10 @@ pub const XBAR9CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR9PredivConf = enum {
     @"1",
@@ -463,10 +407,10 @@ pub const XBAR9PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -475,14 +419,6 @@ pub const XBAR9FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR10CLKSourceConf = enum {
@@ -495,6 +431,10 @@ pub const XBAR10CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
     RCC_XBAR_CLKSRC_I2S,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR10PredivConf = enum {
     @"1",
@@ -503,10 +443,10 @@ pub const XBAR10PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -516,14 +456,6 @@ pub const XBAR10FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR11CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -532,6 +464,10 @@ pub const XBAR11CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR11PredivConf = enum {
     @"1",
@@ -540,10 +476,10 @@ pub const XBAR11PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -552,14 +488,6 @@ pub const XBAR11FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR12CLKSourceConf = enum {
@@ -570,6 +498,10 @@ pub const XBAR12CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR12PredivConf = enum {
     @"1",
@@ -578,10 +510,10 @@ pub const XBAR12PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -590,14 +522,6 @@ pub const XBAR12FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR13CLKSourceConf = enum {
@@ -608,6 +532,10 @@ pub const XBAR13CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR13PredivConf = enum {
     @"1",
@@ -616,10 +544,10 @@ pub const XBAR13PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -628,14 +556,6 @@ pub const XBAR13FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR14CLKSourceConf = enum {
@@ -646,6 +566,10 @@ pub const XBAR14CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR14PredivConf = enum {
     @"1",
@@ -654,10 +578,10 @@ pub const XBAR14PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -666,14 +590,6 @@ pub const XBAR14FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR15CLKSourceConf = enum {
@@ -684,6 +600,10 @@ pub const XBAR15CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR15PredivConf = enum {
     @"1",
@@ -692,10 +612,10 @@ pub const XBAR15PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -704,14 +624,6 @@ pub const XBAR15FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR16CLKSourceConf = enum {
@@ -724,6 +636,10 @@ pub const XBAR16CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
     RCC_XBAR_CLKSRC_I2S,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR16PredivConf = enum {
     @"1",
@@ -732,10 +648,10 @@ pub const XBAR16PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -744,14 +660,6 @@ pub const XBAR16FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR17CLKSourceConf = enum {
@@ -764,6 +672,10 @@ pub const XBAR17CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
     RCC_XBAR_CLKSRC_I2S,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR17PredivConf = enum {
     @"1",
@@ -772,10 +684,10 @@ pub const XBAR17PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -784,14 +696,6 @@ pub const XBAR17FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR18CLKSourceConf = enum {
@@ -804,6 +708,10 @@ pub const XBAR18CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
     RCC_XBAR_CLKSRC_I2S,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR18PredivConf = enum {
     @"1",
@@ -812,10 +720,10 @@ pub const XBAR18PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -824,14 +732,6 @@ pub const XBAR18FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR19CLKSourceConf = enum {
@@ -843,6 +743,10 @@ pub const XBAR19CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR19PredivConf = enum {
     @"1",
@@ -851,10 +755,10 @@ pub const XBAR19PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -863,14 +767,6 @@ pub const XBAR19FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR20CLKSourceConf = enum {
@@ -882,6 +778,10 @@ pub const XBAR20CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR20PredivConf = enum {
     @"1",
@@ -890,10 +790,10 @@ pub const XBAR20PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -902,14 +802,6 @@ pub const XBAR20FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR21CLKSourceConf = enum {
@@ -921,6 +813,10 @@ pub const XBAR21CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR21PredivConf = enum {
     @"1",
@@ -929,10 +825,10 @@ pub const XBAR21PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -941,14 +837,6 @@ pub const XBAR21FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR22CLKSourceConf = enum {
@@ -960,6 +848,10 @@ pub const XBAR22CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR22PredivConf = enum {
     @"1",
@@ -968,10 +860,10 @@ pub const XBAR22PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -980,14 +872,6 @@ pub const XBAR22FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR23CLKSourceConf = enum {
@@ -1001,6 +885,10 @@ pub const XBAR23CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_MSI,
     RCC_XBAR_CLKSRC_SPDIF,
     RCC_XBAR_CLKSRC_I2S,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR23PredivConf = enum {
     @"1",
@@ -1009,10 +897,10 @@ pub const XBAR23PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1021,14 +909,6 @@ pub const XBAR23FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR24CLKSourceConf = enum {
@@ -1042,6 +922,10 @@ pub const XBAR24CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_MSI,
     RCC_XBAR_CLKSRC_SPDIF,
     RCC_XBAR_CLKSRC_I2S,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR24PredivConf = enum {
     @"1",
@@ -1050,10 +934,10 @@ pub const XBAR24PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1062,14 +946,6 @@ pub const XBAR24FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR25CLKSourceConf = enum {
@@ -1083,6 +959,10 @@ pub const XBAR25CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_MSI,
     RCC_XBAR_CLKSRC_SPDIF,
     RCC_XBAR_CLKSRC_I2S,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR25PredivConf = enum {
     @"1",
@@ -1091,10 +971,10 @@ pub const XBAR25PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1104,14 +984,6 @@ pub const XBAR25FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR26CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1120,6 +992,10 @@ pub const XBAR26CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR26PredivConf = enum {
     @"1",
@@ -1128,10 +1004,10 @@ pub const XBAR26PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1141,14 +1017,6 @@ pub const XBAR26FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR27CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1156,6 +1024,10 @@ pub const XBAR27CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR27PredivConf = enum {
     @"1",
@@ -1164,10 +1036,10 @@ pub const XBAR27PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1177,14 +1049,6 @@ pub const XBAR27FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR28CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1193,6 +1057,10 @@ pub const XBAR28CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR28PredivConf = enum {
     @"1",
@@ -1201,10 +1069,10 @@ pub const XBAR28PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1214,14 +1082,6 @@ pub const XBAR28FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR29CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1229,6 +1089,10 @@ pub const XBAR29CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR29PredivConf = enum {
     @"1",
@@ -1237,10 +1101,10 @@ pub const XBAR29PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1250,14 +1114,6 @@ pub const XBAR29FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR30CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1266,6 +1122,10 @@ pub const XBAR30CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR30PredivConf = enum {
     @"1",
@@ -1274,10 +1134,10 @@ pub const XBAR30PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1287,14 +1147,6 @@ pub const XBAR30FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR31CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1303,6 +1155,10 @@ pub const XBAR31CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR31PredivConf = enum {
     @"1",
@@ -1311,10 +1167,10 @@ pub const XBAR31PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1324,14 +1180,6 @@ pub const XBAR31FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR32CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1340,6 +1188,10 @@ pub const XBAR32CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR32PredivConf = enum {
     @"1",
@@ -1348,10 +1200,10 @@ pub const XBAR32PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1360,14 +1212,6 @@ pub const XBAR32FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR33CLKSourceConf = enum {
@@ -1378,6 +1222,10 @@ pub const XBAR33CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR33PredivConf = enum {
     @"1",
@@ -1386,10 +1234,10 @@ pub const XBAR33PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1399,14 +1247,6 @@ pub const XBAR33FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR34CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1415,6 +1255,10 @@ pub const XBAR34CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR34PredivConf = enum {
     @"1",
@@ -1423,10 +1267,10 @@ pub const XBAR34PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1435,14 +1279,6 @@ pub const XBAR34FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR35CLKSourceConf = enum {
@@ -1453,6 +1289,10 @@ pub const XBAR35CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR35PredivConf = enum {
     @"1",
@@ -1461,10 +1301,10 @@ pub const XBAR35PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1473,14 +1313,6 @@ pub const XBAR35FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR36CLKSourceConf = enum {
@@ -1491,6 +1323,10 @@ pub const XBAR36CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR36PredivConf = enum {
     @"1",
@@ -1499,10 +1335,10 @@ pub const XBAR36PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1511,14 +1347,6 @@ pub const XBAR36FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR37CLKSourceConf = enum {
@@ -1531,6 +1359,10 @@ pub const XBAR37CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
     RCC_XBAR_CLKSRC_I2S,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR37PredivConf = enum {
     @"1",
@@ -1539,10 +1371,10 @@ pub const XBAR37PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1551,14 +1383,6 @@ pub const XBAR37FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR38CLKSourceConf = enum {
@@ -1569,6 +1393,10 @@ pub const XBAR38CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR38PredivConf = enum {
     @"1",
@@ -1577,10 +1405,10 @@ pub const XBAR38PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1589,14 +1417,6 @@ pub const XBAR38FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR39CLKSourceConf = enum {
@@ -1608,6 +1428,10 @@ pub const XBAR39CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR39PredivConf = enum {
     @"1",
@@ -1616,10 +1440,10 @@ pub const XBAR39PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1628,14 +1452,6 @@ pub const XBAR39FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR40CLKSourceConf = enum {
@@ -1646,6 +1462,10 @@ pub const XBAR40CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR40PredivConf = enum {
     @"1",
@@ -1654,10 +1474,10 @@ pub const XBAR40PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1666,14 +1486,6 @@ pub const XBAR40FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR41CLKSourceConf = enum {
@@ -1684,6 +1496,10 @@ pub const XBAR41CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR41PredivConf = enum {
     @"1",
@@ -1692,10 +1508,10 @@ pub const XBAR41PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1704,14 +1520,6 @@ pub const XBAR41FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR42CLKSourceConf = enum {
@@ -1723,6 +1531,10 @@ pub const XBAR42CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR42PredivConf = enum {
     @"1",
@@ -1731,10 +1543,10 @@ pub const XBAR42PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1744,14 +1556,6 @@ pub const XBAR42FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR43CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1759,6 +1563,10 @@ pub const XBAR43CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR43PredivConf = enum {
     @"1",
@@ -1767,10 +1575,10 @@ pub const XBAR43PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1780,14 +1588,6 @@ pub const XBAR43FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR44CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1795,6 +1595,10 @@ pub const XBAR44CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR44PredivConf = enum {
     @"1",
@@ -1803,10 +1607,10 @@ pub const XBAR44PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1816,14 +1620,6 @@ pub const XBAR44FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR45CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1831,6 +1627,10 @@ pub const XBAR45CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR45PredivConf = enum {
     @"1",
@@ -1839,10 +1639,10 @@ pub const XBAR45PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1851,14 +1651,6 @@ pub const XBAR45FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR46CLKSourceConf = enum {
@@ -1870,6 +1662,10 @@ pub const XBAR46CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR46PredivConf = enum {
     @"1",
@@ -1878,10 +1674,10 @@ pub const XBAR46PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1891,14 +1687,6 @@ pub const XBAR46FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR47CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1906,6 +1694,10 @@ pub const XBAR47CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR47PredivConf = enum {
     @"1",
@@ -1914,10 +1706,10 @@ pub const XBAR47PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1927,14 +1719,6 @@ pub const XBAR47FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR48CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1942,6 +1726,10 @@ pub const XBAR48CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR48PredivConf = enum {
     @"1",
@@ -1950,10 +1738,10 @@ pub const XBAR48PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1963,14 +1751,6 @@ pub const XBAR48FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR49CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -1978,6 +1758,10 @@ pub const XBAR49CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR49PredivConf = enum {
     @"1",
@@ -1986,10 +1770,10 @@ pub const XBAR49PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -1999,14 +1783,6 @@ pub const XBAR49FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR50CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2014,6 +1790,10 @@ pub const XBAR50CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR50PredivConf = enum {
     @"1",
@@ -2022,10 +1802,10 @@ pub const XBAR50PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2035,14 +1815,6 @@ pub const XBAR50FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR51CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2051,6 +1823,10 @@ pub const XBAR51CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR51PredivConf = enum {
     @"1",
@@ -2059,10 +1835,10 @@ pub const XBAR51PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2072,14 +1848,6 @@ pub const XBAR51FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR52CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2088,6 +1856,10 @@ pub const XBAR52CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR52PredivConf = enum {
     @"1",
@@ -2096,10 +1868,10 @@ pub const XBAR52PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2109,14 +1881,6 @@ pub const XBAR52FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR53CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2125,6 +1889,10 @@ pub const XBAR53CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR53PredivConf = enum {
     @"1",
@@ -2133,10 +1901,10 @@ pub const XBAR53PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2146,14 +1914,6 @@ pub const XBAR53FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR54CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2161,6 +1921,10 @@ pub const XBAR54CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR54PredivConf = enum {
     @"1",
@@ -2169,10 +1933,10 @@ pub const XBAR54PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2182,14 +1946,6 @@ pub const XBAR54FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR55CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2197,6 +1953,10 @@ pub const XBAR55CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR55PredivConf = enum {
     @"1",
@@ -2205,10 +1965,10 @@ pub const XBAR55PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2217,14 +1977,6 @@ pub const XBAR55FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR56CLKSourceConf = enum {
@@ -2236,6 +1988,10 @@ pub const XBAR56CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR56PredivConf = enum {
     @"1",
@@ -2244,10 +2000,10 @@ pub const XBAR56PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2257,14 +2013,6 @@ pub const XBAR56FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR57CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2273,6 +2021,10 @@ pub const XBAR57CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR57PredivConf = enum {
     @"1",
@@ -2281,10 +2033,10 @@ pub const XBAR57PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2294,14 +2046,6 @@ pub const XBAR57FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR58CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2310,6 +2054,10 @@ pub const XBAR58CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
     RCC_XBAR_CLKSRC_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR58PredivConf = enum {
     @"1",
@@ -2318,10 +2066,10 @@ pub const XBAR58PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2331,14 +2079,6 @@ pub const XBAR58FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR59CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2346,6 +2086,10 @@ pub const XBAR59CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR59PredivConf = enum {
     @"1",
@@ -2354,10 +2098,10 @@ pub const XBAR59PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2367,14 +2111,6 @@ pub const XBAR59FindivConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const XBAR60CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL4,
@@ -2382,6 +2118,10 @@ pub const XBAR60CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_PLL6,
     RCC_XBAR_CLKSRC_PLL7,
     RCC_XBAR_CLKSRC_PLL8,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR60PredivConf = enum {
     @"1",
@@ -2390,10 +2130,10 @@ pub const XBAR60PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2402,14 +2142,6 @@ pub const XBAR60FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR61CLKSourceConf = enum {
@@ -2425,6 +2157,10 @@ pub const XBAR61CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_I2S,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR61PredivConf = enum {
     @"1",
@@ -2433,10 +2169,10 @@ pub const XBAR61PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2445,14 +2181,6 @@ pub const XBAR61FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR62CLKSourceConf = enum {
@@ -2468,6 +2196,10 @@ pub const XBAR62CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_I2S,
     RCC_XBAR_CLKSRC_LSI,
     RCC_XBAR_CLKSRC_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR62PredivConf = enum {
     @"1",
@@ -2476,10 +2208,10 @@ pub const XBAR62PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2488,14 +2220,6 @@ pub const XBAR62FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const XBAR63CLKSourceConf = enum {
@@ -2507,6 +2231,10 @@ pub const XBAR63CLKSourceConf = enum {
     RCC_XBAR_CLKSRC_HSI,
     RCC_XBAR_CLKSRC_HSE,
     RCC_XBAR_CLKSRC_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const XBAR63PredivConf = enum {
     @"1",
@@ -2515,10 +2243,10 @@ pub const XBAR63PredivConf = enum {
     @"1024",
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .@"1" => 1,
             .@"2" => 2,
-            .@"4" => 4,
+            .@"1" => 1,
             .@"1024" => 1024,
+            .@"4" => 4,
         };
     }
 };
@@ -2527,14 +2255,6 @@ pub const XBAR63FindivConf = enum(u32) {
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const CKINTSELCLKSourceConf = enum {
@@ -2622,11 +2342,19 @@ pub const CKINTSELCLKSourceConf = enum {
     XBAR_SRC_ROOT61,
     XBAR_SRC_ROOT62,
     XBAR_SRC_ROOT63,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const CKEXTSELCLKSourceConf = enum {
     XBAR_SRC_PLL1_DIV42,
     XBAR_SRC_PLL2_DIV4,
     XBAR_SRC_PLL3_DIV2,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const CKINTSELCLKSource1Conf = enum {
     RCC_XBAR_CLKSRC_HSI,
@@ -2713,61 +2441,117 @@ pub const CKINTSELCLKSource1Conf = enum {
     XBAR_SRC_ROOT61,
     XBAR_SRC_ROOT62,
     XBAR_SRC_ROOT63,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const CKEXTSELCLKSource1Conf = enum {
     XBAR_SRC_PLL1_DIV42,
     XBAR_SRC_PLL2_DIV4,
     XBAR_SRC_PLL3_DIV2,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const OBS0SourceConf = enum {
     RCC_OBS0SOURCE_CKINTSEL,
     RCC_OBS0SOURCE_CKEXTSEL,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const OBS1SourceConf = enum {
     RCC_OBS1SOURCE_CKINTSEL,
     RCC_OBS1SOURCE_CKEXTSEL,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const RCC_MCO1SourceConf = enum {
     MUX_MCO1_FLEX61,
     MUX_MCO1_OBSER0,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const RCC_MCO2SourceConf = enum {
     MUX_MCO2_FLEX62,
     MUX_MCO2_OBSER1,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const D3PERCLKSourceConf = enum {
     MUX_D3PER_MSI,
     MUX_D3PER_LSI,
     MUX_D3PER_LSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const DTSCLKSourceConf = enum {
     MUX_DTS_MSI,
     MUX_DTS_HSI,
     MUX_DTS_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const DSIPHYCLKSourceConf = enum {
     MUX_DSIPHY_FLEX28,
     MUX_DSIPHY_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const DSIBLANECLKSourceConf = enum {
     MUX_DSIBLANE_DSIPHY,
     MUX_DSIBLANE_FLEX27,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const USB2PHY1CLKSourceConf = enum {
     MUX_USB2PHY1_FLEX57,
     MUX_USB2PHY1_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const USB2PHY2CLKSourceConf = enum {
     MUX_USB2PHY2_FLEX58,
     MUX_USB2PHY2_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const USB3PCIPHYCLKSourceConf = enum {
     MUX_USB3PCIEPHY_FLEX34,
     MUX_USB3PCIEPHY_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const MCUCLKSourceConf = enum {
     RCC_MCUSSOURCE_FLEX0,
     RCC_MCUSSOURCE_HSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const MCU_DivConf = enum {
     RCC_MCU_DIV1,
@@ -2787,11 +2571,11 @@ pub const APB3DIVConf = enum {
     RCC_APB3_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_APB3_DIV1 => 1,
-            .RCC_APB3_DIV2 => 2,
             .RCC_APB3_DIV4 => 4,
             .RCC_APB3_DIV8 => 8,
             .RCC_APB3_DIV16 => 16,
+            .RCC_APB3_DIV2 => 2,
+            .RCC_APB3_DIV1 => 1,
         };
     }
 };
@@ -2803,11 +2587,11 @@ pub const APB4DIVConf = enum {
     RCC_APB4_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_APB4_DIV1 => 1,
-            .RCC_APB4_DIV2 => 2,
-            .RCC_APB4_DIV4 => 4,
-            .RCC_APB4_DIV8 => 8,
             .RCC_APB4_DIV16 => 16,
+            .RCC_APB4_DIV2 => 2,
+            .RCC_APB4_DIV1 => 1,
+            .RCC_APB4_DIV8 => 8,
+            .RCC_APB4_DIV4 => 4,
         };
     }
 };
@@ -2819,10 +2603,10 @@ pub const APBDBGDIVConf = enum {
     RCC_APBDBG_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_APBDBG_DIV1 => 1,
             .RCC_APBDBG_DIV2 => 2,
-            .RCC_APBDBG_DIV4 => 4,
             .RCC_APBDBG_DIV8 => 8,
+            .RCC_APBDBG_DIV4 => 4,
+            .RCC_APBDBG_DIV1 => 1,
             .RCC_APBDBG_DIV16 => 16,
         };
     }
@@ -2835,11 +2619,11 @@ pub const APB1DIVConf = enum {
     RCC_APB1_DIV16,
     pub fn get(self: @This()) f32 {
         return switch (self) {
-            .RCC_APB1_DIV1 => 1,
-            .RCC_APB1_DIV2 => 2,
             .RCC_APB1_DIV4 => 4,
             .RCC_APB1_DIV8 => 8,
             .RCC_APB1_DIV16 => 16,
+            .RCC_APB1_DIV1 => 1,
+            .RCC_APB1_DIV2 => 2,
         };
     }
 };
@@ -2853,8 +2637,8 @@ pub const APB2DIVConf = enum {
         return switch (self) {
             .RCC_APB2_DIV1 => 1,
             .RCC_APB2_DIV2 => 2,
-            .RCC_APB2_DIV4 => 4,
             .RCC_APB2_DIV8 => 8,
+            .RCC_APB2_DIV4 => 4,
             .RCC_APB2_DIV16 => 16,
         };
     }
@@ -2862,20 +2646,36 @@ pub const APB2DIVConf = enum {
 pub const ADC12CLockSelectionConf = enum {
     MUX_ADC12_FLEX46,
     MUX_ADC12_LSMCU,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const ADC3CLockSelectionConf = enum {
     MUX_ADC3_FLEX47,
     MUX_ADC3_LSMCU,
     MUX_ADC3_FLEX46,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const LVDSCLockSelectionConf = enum {
     MUX_LVDSPHY_FLEX32,
     MUX_LVDSPHY_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const PLL1SourceConf = enum {
     RCC_PLL1SOURCE_HSI,
     RCC_PLL1SOURCE_HSE,
     RCC_PLL1SOURCE_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const FREFDIV1Conf = enum(u32) {
     _,
@@ -2883,19 +2683,15 @@ pub const FREFDIV1Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 63;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const PLL2SourceConf = enum {
     RCC_PLL2SOURCE_HSI,
     RCC_PLL2SOURCE_HSE,
     RCC_PLL2SOURCE_MSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const FREFDIV2Conf = enum(u32) {
     _,
@@ -2903,19 +2699,15 @@ pub const FREFDIV2Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 63;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const PLL3SourceConf = enum {
     RCC_PLL3SOURCE_HSI,
     RCC_PLL3SOURCE_MSI,
     RCC_PLL3SOURCE_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const FREFDIV3Conf = enum(u32) {
     _,
@@ -2923,33 +2715,21 @@ pub const FREFDIV3Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 63;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const PLL4SourceConf = enum {
     RCC_PLL4SOURCE_HSI,
     RCC_PLL4SOURCE_MSI,
     RCC_PLL4SOURCE_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const FREFDIV4Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 63;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const FBDIV1Conf = enum(u32) {
@@ -2958,28 +2738,12 @@ pub const FBDIV1Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 2500;
-    }
-
-    pub fn min() f32 {
-        return 16;
-    }
 };
 pub const POSTDIV1_1Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const POSTDIV2_1Conf = enum(u32) {
@@ -2988,28 +2752,12 @@ pub const POSTDIV2_1Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const FBDIV2Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 12297829382473034410;
-    }
-
-    pub fn min() f32 {
-        return 12297829382473034410;
     }
 };
 pub const PLL2FRACVConf = enum(u32) {
@@ -3018,28 +2766,12 @@ pub const PLL2FRACVConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 16777215;
-    }
-
-    pub fn min() f32 {
-        return 0;
-    }
 };
 pub const POSTDIV1_2Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const POSTDIV2_2Conf = enum(u32) {
@@ -3048,28 +2780,12 @@ pub const POSTDIV2_2Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const FBDIV3Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 12297829382473034410;
-    }
-
-    pub fn min() f32 {
-        return 12297829382473034410;
     }
 };
 pub const PLL3FRACVConf = enum(u32) {
@@ -3078,28 +2794,12 @@ pub const PLL3FRACVConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 16777215;
-    }
-
-    pub fn min() f32 {
-        return 0;
-    }
 };
 pub const POSTDIV1_3Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const POSTDIV2_3Conf = enum(u32) {
@@ -3108,28 +2808,12 @@ pub const POSTDIV2_3Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const FBDIV4Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 12297829382473034410;
-    }
-
-    pub fn min() f32 {
-        return 12297829382473034410;
     }
 };
 pub const PLL4FRACVConf = enum(u32) {
@@ -3138,28 +2822,12 @@ pub const PLL4FRACVConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 16777215;
-    }
-
-    pub fn min() f32 {
-        return 0;
-    }
 };
 pub const POSTDIV1_4Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const POSTDIV2_4Conf = enum(u32) {
@@ -3168,33 +2836,21 @@ pub const POSTDIV2_4Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const PLL5SourceConf = enum {
     RCC_PLL5SOURCE_HSI,
     RCC_PLL5SOURCE_MSI,
     RCC_PLL5SOURCE_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const FREFDIV5Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 63;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const FBDIV5Conf = enum(u32) {
@@ -3203,28 +2859,12 @@ pub const FBDIV5Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 12297829382473034410;
-    }
-
-    pub fn min() f32 {
-        return 12297829382473034410;
-    }
 };
 pub const PLL5FRACVConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 16777215;
-    }
-
-    pub fn min() f32 {
-        return 0;
     }
 };
 pub const POSTDIV1_5Conf = enum(u32) {
@@ -3233,14 +2873,6 @@ pub const POSTDIV1_5Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const POSTDIV2_5Conf = enum(u32) {
     _,
@@ -3248,33 +2880,21 @@ pub const POSTDIV2_5Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const PLL6SourceConf = enum {
     RCC_PLL6SOURCE_HSI,
     RCC_PLL6SOURCE_MSI,
     RCC_PLL6SOURCE_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const FREFDIV6Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 63;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const FBDIV6Conf = enum(u32) {
@@ -3283,28 +2903,12 @@ pub const FBDIV6Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 12297829382473034410;
-    }
-
-    pub fn min() f32 {
-        return 12297829382473034410;
-    }
 };
 pub const PLL6FRACVConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 16777215;
-    }
-
-    pub fn min() f32 {
-        return 0;
     }
 };
 pub const POSTDIV1_6Conf = enum(u32) {
@@ -3313,14 +2917,6 @@ pub const POSTDIV1_6Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const POSTDIV2_6Conf = enum(u32) {
     _,
@@ -3328,33 +2924,21 @@ pub const POSTDIV2_6Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const PLL7SourceConf = enum {
     RCC_PLL7SOURCE_HSI,
     RCC_PLL7SOURCE_MSI,
     RCC_PLL7SOURCE_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const FREFDIV7Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 63;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const FBDIV7Conf = enum(u32) {
@@ -3363,28 +2947,12 @@ pub const FBDIV7Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 12297829382473034410;
-    }
-
-    pub fn min() f32 {
-        return 12297829382473034410;
-    }
 };
 pub const PLL7FRACVConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 16777215;
-    }
-
-    pub fn min() f32 {
-        return 0;
     }
 };
 pub const POSTDIV1_7Conf = enum(u32) {
@@ -3393,14 +2961,6 @@ pub const POSTDIV1_7Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const POSTDIV2_7Conf = enum(u32) {
     _,
@@ -3408,33 +2968,21 @@ pub const POSTDIV2_7Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const PLL8SourceConf = enum {
     RCC_PLL8SOURCE_HSI,
     RCC_PLL8SOURCE_MSI,
     RCC_PLL8SOURCE_HSE,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const FREFDIV8Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 63;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const FBDIV8Conf = enum(u32) {
@@ -3443,28 +2991,12 @@ pub const FBDIV8Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 12297829382473034410;
-    }
-
-    pub fn min() f32 {
-        return 12297829382473034410;
-    }
 };
 pub const PLL8FRACVConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 16777215;
-    }
-
-    pub fn min() f32 {
-        return 0;
     }
 };
 pub const POSTDIV1_8Conf = enum(u32) {
@@ -3473,28 +3005,12 @@ pub const POSTDIV1_8Conf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const POSTDIV2_8Conf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 7;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const RCC_RTC_Clock_Source_FROM_HSEConf = enum(u32) {
@@ -3503,19 +3019,15 @@ pub const RCC_RTC_Clock_Source_FROM_HSEConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 64;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const RTCCLockSelectionVirtualConf = enum {
     RCC_RTCCLKSOURCE_HSE_DIV,
     RCC_RTCCLKSOURCE_LSE,
     RCC_RTCCLKSOURCE_LSI,
+
+    pub fn get(self: @This()) usize {
+        return @intFromEnum(self);
+    }
 };
 pub const HSE_TimoutConf = enum(u32) {
     _,
@@ -3523,28 +3035,12 @@ pub const HSE_TimoutConf = enum(u32) {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
     }
-
-    pub fn max() f32 {
-        return 4294967295;
-    }
-
-    pub fn min() f32 {
-        return 1;
-    }
 };
 pub const LSE_TimoutConf = enum(u32) {
     _,
     pub fn get(num: @This()) f32 {
         const val: u32 = @intFromEnum(num);
         return @as(f32, @floatFromInt(val));
-    }
-
-    pub fn max() f32 {
-        return 4294967295;
-    }
-
-    pub fn min() f32 {
-        return 1;
     }
 };
 pub const RCC_TIM_G1_PRescaler_SelectionConf = enum {
@@ -3568,569 +3064,577 @@ pub const RCC_TIM_G2_PRescaler_SelectionConf = enum {
     }
 };
 pub const LSE_Drive_CapabilityConf = enum {
+    RCC_LSEDRIVE_LOW,
+    RCC_LSEDRIVE_MEDIUMLOW,
+    RCC_LSEDRIVE_MEDIUMHIGH,
+    RCC_LSEDRIVE_HIGH,
     null,
     pub fn get(self: @This()) f32 {
         return switch (self) {
+            .RCC_LSEDRIVE_LOW => 0,
+            .RCC_LSEDRIVE_MEDIUMHIGH => 2,
             .null => 0,
+            .RCC_LSEDRIVE_MEDIUMLOW => 1,
+            .RCC_LSEDRIVE_HIGH => 3,
         };
     }
 };
 pub const Config = struct {
-    HSEOSC: HSE_VALUEConf = @enumFromInt(40000000),
-    HSEDIV2: HSE_Div2Conf = .@"2",
-    SPDIF: SPDIFFreq_ValueConf = @enumFromInt(12288000),
-    LSEOSC: LSE_VALUEConf = @enumFromInt(32768),
-    MSIRC: MSIClockRangeConf = .RCC_MSI_16MHZ,
-    XBAR0: XBAR0CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR0Prediv: XBAR0PredivConf = .@"1",
-    XBAR0Findiv: XBAR0FindivConf = @enumFromInt(1),
-    XBAR1: XBAR1CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR1Prediv: XBAR1PredivConf = .@"1",
-    XBAR1Findiv: XBAR1FindivConf = @enumFromInt(1),
-    XBAR2: XBAR2CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR2Prediv: XBAR2PredivConf = .@"1",
-    XBAR2Findiv: XBAR2FindivConf = @enumFromInt(1),
-    XBAR3: XBAR3CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR3Prediv: XBAR3PredivConf = .@"1",
-    XBAR3Findiv: XBAR3FindivConf = @enumFromInt(1),
-    XBAR4: XBAR4CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR4Prediv: XBAR4PredivConf = .@"1",
-    XBAR4Findiv: XBAR4FindivConf = @enumFromInt(1),
-    XBAR5: XBAR5CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR5Prediv: XBAR5PredivConf = .@"1",
-    XBAR5Findiv: XBAR5FindivConf = @enumFromInt(1),
-    XBAR6: XBAR6CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR6Prediv: XBAR6PredivConf = .@"1",
-    XBAR6Findiv: XBAR6FindivConf = @enumFromInt(1),
-    XBAR7: XBAR7CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
-    XBAR7Prediv: XBAR7PredivConf = .@"1",
-    XBAR7Findiv: XBAR7FindivConf = @enumFromInt(1),
-    XBAR8: XBAR8CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR8Prediv: XBAR8PredivConf = .@"1",
-    XBAR8Findiv: XBAR8FindivConf = @enumFromInt(1),
-    XBAR9: XBAR9CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR9Prediv: XBAR9PredivConf = .@"1",
-    XBAR9Findiv: XBAR9FindivConf = @enumFromInt(1),
-    XBAR10: XBAR10CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR10Prediv: XBAR10PredivConf = .@"1",
-    XBAR10Findiv: XBAR10FindivConf = @enumFromInt(1),
-    XBAR11: XBAR11CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR11Prediv: XBAR11PredivConf = .@"1",
-    XBAR11Findiv: XBAR11FindivConf = @enumFromInt(1),
-    XBAR12: XBAR12CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR12Prediv: XBAR12PredivConf = .@"1",
-    XBAR12Findiv: XBAR12FindivConf = @enumFromInt(1),
-    XBAR13: XBAR13CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR13Prediv: XBAR13PredivConf = .@"1",
-    XBAR13Findiv: XBAR13FindivConf = @enumFromInt(1),
-    XBAR14: XBAR14CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR14Prediv: XBAR14PredivConf = .@"1",
-    XBAR14Findiv: XBAR14FindivConf = @enumFromInt(1),
-    XBAR15: XBAR15CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR15Prediv: XBAR15PredivConf = .@"1",
-    XBAR15Findiv: XBAR15FindivConf = @enumFromInt(1),
-    XBAR16: XBAR16CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR16Prediv: XBAR16PredivConf = .@"1",
-    XBAR16Findiv: XBAR16FindivConf = @enumFromInt(1),
-    XBAR17: XBAR17CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR17Prediv: XBAR17PredivConf = .@"1",
-    XBAR17Findiv: XBAR17FindivConf = @enumFromInt(1),
-    XBAR18: XBAR18CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR18Prediv: XBAR18PredivConf = .@"1",
-    XBAR18Findiv: XBAR18FindivConf = @enumFromInt(1),
-    XBAR19: XBAR19CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR19Prediv: XBAR19PredivConf = .@"1",
-    XBAR19Findiv: XBAR19FindivConf = @enumFromInt(1),
-    XBAR20: XBAR20CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR20Prediv: XBAR20PredivConf = .@"1",
-    XBAR20Findiv: XBAR20FindivConf = @enumFromInt(1),
-    XBAR21: XBAR21CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR21Prediv: XBAR21PredivConf = .@"1",
-    XBAR21Findiv: XBAR21FindivConf = @enumFromInt(1),
-    XBAR22: XBAR22CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR22Prediv: XBAR22PredivConf = .@"1",
-    XBAR22Findiv: XBAR22FindivConf = @enumFromInt(1),
-    XBAR23: XBAR23CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR23Prediv: XBAR23PredivConf = .@"1",
-    XBAR23Findiv: XBAR23FindivConf = @enumFromInt(1),
-    XBAR24: XBAR24CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR24Prediv: XBAR24PredivConf = .@"1",
-    XBAR24Findiv: XBAR24FindivConf = @enumFromInt(1),
-    XBAR25: XBAR25CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR25Prediv: XBAR25PredivConf = .@"1",
-    XBAR25Findiv: XBAR25FindivConf = @enumFromInt(1),
-    XBAR26: XBAR26CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR26Prediv: XBAR26PredivConf = .@"1",
-    XBAR26Findiv: XBAR26FindivConf = @enumFromInt(1),
-    XBAR27: XBAR27CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR27Prediv: XBAR27PredivConf = .@"1",
-    XBAR27Findiv: XBAR27FindivConf = @enumFromInt(1),
-    XBAR28: XBAR28CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR28Prediv: XBAR28PredivConf = .@"1",
-    XBAR28Findiv: XBAR28FindivConf = @enumFromInt(1),
-    XBAR29: XBAR29CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR29Prediv: XBAR29PredivConf = .@"1",
-    XBAR29Findiv: XBAR29FindivConf = @enumFromInt(1),
-    XBAR30: XBAR30CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR30Prediv: XBAR30PredivConf = .@"1",
-    XBAR30Findiv: XBAR30FindivConf = @enumFromInt(1),
-    XBAR31: XBAR31CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR31Prediv: XBAR31PredivConf = .@"1",
-    XBAR31Findiv: XBAR31FindivConf = @enumFromInt(1),
-    XBAR32: XBAR32CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR32Prediv: XBAR32PredivConf = .@"1",
-    XBAR32Findiv: XBAR32FindivConf = @enumFromInt(1),
-    XBAR33: XBAR33CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR33Prediv: XBAR33PredivConf = .@"1",
-    XBAR33Findiv: XBAR33FindivConf = @enumFromInt(1),
-    XBAR34: XBAR34CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR34Prediv: XBAR34PredivConf = .@"1",
-    XBAR34Findiv: XBAR34FindivConf = @enumFromInt(1),
-    XBAR35: XBAR35CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR35Prediv: XBAR35PredivConf = .@"1",
-    XBAR35Findiv: XBAR35FindivConf = @enumFromInt(1),
-    XBAR36: XBAR36CLKSourceConf = .RCC_XBAR_CLKSRC_MSI,
-    XBAR36Prediv: XBAR36PredivConf = .@"1",
-    XBAR36Findiv: XBAR36FindivConf = @enumFromInt(1),
-    XBAR37: XBAR37CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR37Prediv: XBAR37PredivConf = .@"1",
-    XBAR37Findiv: XBAR37FindivConf = @enumFromInt(1),
-    XBAR38: XBAR38CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR38Prediv: XBAR38PredivConf = .@"1",
-    XBAR38Findiv: XBAR38FindivConf = @enumFromInt(1),
-    XBAR39: XBAR39CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR39Prediv: XBAR39PredivConf = .@"1",
-    XBAR39Findiv: XBAR39FindivConf = @enumFromInt(1),
-    XBAR40: XBAR40CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
-    XBAR40Prediv: XBAR40PredivConf = .@"1",
-    XBAR40Findiv: XBAR40FindivConf = @enumFromInt(1),
-    XBAR41: XBAR41CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
-    XBAR41Prediv: XBAR41PredivConf = .@"1",
-    XBAR41Findiv: XBAR41FindivConf = @enumFromInt(1),
-    XBAR42: XBAR42CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR42Prediv: XBAR42PredivConf = .@"1",
-    XBAR42Findiv: XBAR42FindivConf = @enumFromInt(1),
-    XBAR43: XBAR43CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR43Prediv: XBAR43PredivConf = .@"1",
-    XBAR43Findiv: XBAR43FindivConf = @enumFromInt(1),
-    XBAR44: XBAR44CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR44Prediv: XBAR44PredivConf = .@"1",
-    XBAR44Findiv: XBAR44FindivConf = @enumFromInt(1),
-    XBAR45: XBAR45CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR45Prediv: XBAR45PredivConf = .@"1",
-    XBAR45Findiv: XBAR45FindivConf = @enumFromInt(1),
-    XBAR46: XBAR46CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR46Prediv: XBAR46PredivConf = .@"1",
-    XBAR46Findiv: XBAR46FindivConf = @enumFromInt(1),
-    XBAR47: XBAR47CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR47Prediv: XBAR47PredivConf = .@"1",
-    XBAR47Findiv: XBAR47FindivConf = @enumFromInt(1),
-    XBAR48: XBAR48CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR48Prediv: XBAR48PredivConf = .@"1",
-    XBAR48Findiv: XBAR48FindivConf = @enumFromInt(1),
-    XBAR49: XBAR49CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR49Prediv: XBAR49PredivConf = .@"1",
-    XBAR49Findiv: XBAR49FindivConf = @enumFromInt(1),
-    XBAR50: XBAR50CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR50Prediv: XBAR50PredivConf = .@"1",
-    XBAR50Findiv: XBAR50FindivConf = @enumFromInt(1),
-    XBAR51: XBAR51CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR51Prediv: XBAR51PredivConf = .@"1",
-    XBAR51Findiv: XBAR51FindivConf = @enumFromInt(1),
-    XBAR52: XBAR52CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR52Prediv: XBAR52PredivConf = .@"1",
-    XBAR52Findiv: XBAR52FindivConf = @enumFromInt(1),
-    XBAR53: XBAR53CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR53Prediv: XBAR53PredivConf = .@"1",
-    XBAR53Findiv: XBAR53FindivConf = @enumFromInt(1),
-    XBAR54: XBAR54CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR54Prediv: XBAR54PredivConf = .@"1",
-    XBAR54Findiv: XBAR54FindivConf = @enumFromInt(1),
-    XBAR55: XBAR55CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR55Prediv: XBAR55PredivConf = .@"1",
-    XBAR55Findiv: XBAR55FindivConf = @enumFromInt(1),
-    XBAR56: XBAR56CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR56Prediv: XBAR56PredivConf = .@"1",
-    XBAR56Findiv: XBAR56FindivConf = @enumFromInt(1),
-    XBAR57: XBAR57CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR57Prediv: XBAR57PredivConf = .@"1",
-    XBAR57Findiv: XBAR57FindivConf = @enumFromInt(1),
-    XBAR58: XBAR58CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR58Prediv: XBAR58PredivConf = .@"1",
-    XBAR58Findiv: XBAR58FindivConf = @enumFromInt(1),
-    XBAR59: XBAR59CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR59Prediv: XBAR59PredivConf = .@"1",
-    XBAR59Findiv: XBAR59FindivConf = @enumFromInt(1),
-    XBAR60: XBAR60CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR60Prediv: XBAR60PredivConf = .@"1",
-    XBAR60Findiv: XBAR60FindivConf = @enumFromInt(1),
-    XBAR61: XBAR61CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR61Prediv: XBAR61PredivConf = .@"1",
-    XBAR61Findiv: XBAR61FindivConf = @enumFromInt(1),
-    XBAR62: XBAR62CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR62Prediv: XBAR62PredivConf = .@"1",
-    XBAR62Findiv: XBAR62FindivConf = @enumFromInt(1),
-    XBAR63: XBAR63CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR63Prediv: XBAR63PredivConf = .@"1",
-    XBAR63Findiv: XBAR63FindivConf = @enumFromInt(1),
-    CKINTSEL0: CKINTSELCLKSourceConf = .RCC_XBAR_CLKSRC_MSI,
-    CKEXTSEL0: CKEXTSELCLKSourceConf = .PLL1_DIV42,
-    CKINTSEL1: CKINTSELCLKSource1Conf = .RCC_XBAR_CLKSRC_MSI,
-    CKEXTSEL1: CKEXTSELCLKSource1Conf = .PLL1_DIV42,
-    OBS0: OBS0SourceConf = .RCC_OBS0SOURCE_CKINTSEL,
-    OBS1: OBS1SourceConf = .RCC_OBS1SOURCE_CKINTSEL,
-    MCO1Mult: RCC_MCO1SourceConf = .MUX_MCO1_FLEX61,
-    MCO2Mult: RCC_MCO2SourceConf = .MUX_MCO2_FLEX62,
-    D3PER: D3PERCLKSourceConf = .MUX_D3PER_MSI,
-    DTS: DTSCLKSourceConf = .MUX_DTS_MSI,
-    DSIPHY: DSIPHYCLKSourceConf = .MUX_DSIPHY_FLEX28,
-    DSIBLANE: DSIBLANECLKSourceConf = .MUX_DSIBLANE_DSIPHY,
-    USB2PHY1: USB2PHY1CLKSourceConf = .MUX_USB2PHY1_FLEX57,
-    USB2PHY2: USB2PHY2CLKSourceConf = .MUX_USB2PHY2_FLEX58,
-    USB3PCIPHY: USB3PCIPHYCLKSourceConf = .MUX_USB3PCIEPHY_FLEX34,
-    SysClkSource: MCUCLKSourceConf = .RCC_MCUSSOURCE_FLEX0,
-    MCUDIV: MCU_DivConf = .RCC_MCU_DIV1,
-    APB3DIV: APB3DIVConf = .RCC_APB3_DIV1,
-    APB4DIV: APB4DIVConf = .RCC_APB4_DIV1,
-    APBDBGDIV: APBDBGDIVConf = .RCC_APBDBG_DIV1,
-    APB1DIV: APB1DIVConf = .RCC_APB1_DIV1,
-    APB2DIV: APB2DIVConf = .RCC_APB2_DIV1,
-    ADC12Mult: ADC12CLockSelectionConf = .MUX_ADC12_FLEX46,
-    ADC3Mult: ADC3CLockSelectionConf = .MUX_ADC3_FLEX47,
-    LVDSMult: LVDSCLockSelectionConf = .MUX_LVDSPHY_FLEX32,
-    PLL1Source: PLL1SourceConf = .RCC_PLL1SOURCE_HSI,
-    FREFDIV1: FREFDIV1Conf = @enumFromInt(1),
-    PLL2Source: PLL2SourceConf = .RCC_PLL2SOURCE_HSI,
-    FREFDIV2: FREFDIV2Conf = @enumFromInt(1),
-    PLL3Source: PLL3SourceConf = .RCC_PLL3SOURCE_HSI,
-    FREFDIV3: FREFDIV3Conf = @enumFromInt(1),
-    PLL4Source: PLL4SourceConf = .RCC_PLL4SOURCE_HSI,
-    FREFDIV4: FREFDIV4Conf = @enumFromInt(1),
-    FBDIV1: FBDIV1Conf = @enumFromInt(25),
-    POSTDIV1_1: POSTDIV1_1Conf = @enumFromInt(1),
-    POSTDIV2_1: POSTDIV2_1Conf = @enumFromInt(1),
-    FBDIV2: FBDIV2Conf = @enumFromInt(12297829382473034410),
-    PLL2FRACV: PLL2FRACVConf = @enumFromInt(0),
-    POSTDIV1_2: POSTDIV1_2Conf = @enumFromInt(1),
-    POSTDIV2_2: POSTDIV2_2Conf = @enumFromInt(1),
-    FBDIV3: FBDIV3Conf = @enumFromInt(12297829382473034410),
-    PLL3FRACV: PLL3FRACVConf = @enumFromInt(0),
-    POSTDIV1_3: POSTDIV1_3Conf = @enumFromInt(1),
-    POSTDIV2_3: POSTDIV2_3Conf = @enumFromInt(1),
-    FBDIV4: FBDIV4Conf = @enumFromInt(12297829382473034410),
-    PLL4FRACV: PLL4FRACVConf = @enumFromInt(0),
-    POSTDIV1_4: POSTDIV1_4Conf = @enumFromInt(1),
-    POSTDIV2_4: POSTDIV2_4Conf = @enumFromInt(1),
-    PLL5Source: PLL5SourceConf = .RCC_PLL5SOURCE_HSI,
-    FREFDIV5: FREFDIV5Conf = @enumFromInt(1),
-    FBDIV5: FBDIV5Conf = @enumFromInt(12297829382473034410),
-    PLL5FRACV: PLL5FRACVConf = @enumFromInt(0),
-    POSTDIV1_5: POSTDIV1_5Conf = @enumFromInt(1),
-    POSTDIV2_5: POSTDIV2_5Conf = @enumFromInt(1),
-    PLL6Source: PLL6SourceConf = .RCC_PLL6SOURCE_HSI,
-    FREFDIV6: FREFDIV6Conf = @enumFromInt(1),
-    FBDIV6: FBDIV6Conf = @enumFromInt(12297829382473034410),
-    PLL6FRACV: PLL6FRACVConf = @enumFromInt(0),
-    POSTDIV1_6: POSTDIV1_6Conf = @enumFromInt(1),
-    POSTDIV2_6: POSTDIV2_6Conf = @enumFromInt(1),
-    PLL7Source: PLL7SourceConf = .RCC_PLL7SOURCE_HSI,
-    FREFDIV7: FREFDIV7Conf = @enumFromInt(1),
-    FBDIV7: FBDIV7Conf = @enumFromInt(12297829382473034410),
-    PLL7FRACV: PLL7FRACVConf = @enumFromInt(0),
-    POSTDIV1_7: POSTDIV1_7Conf = @enumFromInt(1),
-    POSTDIV2_7: POSTDIV2_7Conf = @enumFromInt(1),
-    PLL8Source: PLL8SourceConf = .RCC_PLL8SOURCE_HSI,
-    FREFDIV8: FREFDIV8Conf = @enumFromInt(1),
-    FBDIV8: FBDIV8Conf = @enumFromInt(12297829382473034410),
-    PLL8FRACV: PLL8FRACVConf = @enumFromInt(0),
-    POSTDIV1_8: POSTDIV1_8Conf = @enumFromInt(1),
-    POSTDIV2_8: POSTDIV2_8Conf = @enumFromInt(1),
-    HSERTCDevisor: RCC_RTC_Clock_Source_FROM_HSEConf = @enumFromInt(1),
-    RTCClkSource: RTCCLockSelectionVirtualConf = .RCC_RTCCLKSOURCE_LSI,
-    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
-    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
-    RCC_TIM_G1_PRescaler_Selection: RCC_TIM_G1_PRescaler_SelectionConf = .RCC_TIMG1PRES_DEACTIVATED,
-    RCC_TIM_G2_PRescaler_Selection: RCC_TIM_G2_PRescaler_SelectionConf = .RCC_TIMG2PRES_DEACTIVATED,
-    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+    HSEOSC: ?HSE_VALUEConf = null,
+    HSEDIV2: ?HSE_Div2Conf = null,
+    SPDIF: ?SPDIFFreq_ValueConf = null,
+    LSEOSC: ?LSE_VALUEConf = null,
+    MSIRC: ?MSIClockRangeConf = null,
+    XBAR0: ?XBAR0CLKSourceConf = null,
+    XBAR0Prediv: ?XBAR0PredivConf = null,
+    XBAR0Findiv: ?XBAR0FindivConf = null,
+    XBAR1: ?XBAR1CLKSourceConf = null,
+    XBAR1Prediv: ?XBAR1PredivConf = null,
+    XBAR1Findiv: ?XBAR1FindivConf = null,
+    XBAR2: ?XBAR2CLKSourceConf = null,
+    XBAR2Prediv: ?XBAR2PredivConf = null,
+    XBAR2Findiv: ?XBAR2FindivConf = null,
+    XBAR3: ?XBAR3CLKSourceConf = null,
+    XBAR3Prediv: ?XBAR3PredivConf = null,
+    XBAR3Findiv: ?XBAR3FindivConf = null,
+    XBAR4: ?XBAR4CLKSourceConf = null,
+    XBAR4Prediv: ?XBAR4PredivConf = null,
+    XBAR4Findiv: ?XBAR4FindivConf = null,
+    XBAR5: ?XBAR5CLKSourceConf = null,
+    XBAR5Prediv: ?XBAR5PredivConf = null,
+    XBAR5Findiv: ?XBAR5FindivConf = null,
+    XBAR6: ?XBAR6CLKSourceConf = null,
+    XBAR6Prediv: ?XBAR6PredivConf = null,
+    XBAR6Findiv: ?XBAR6FindivConf = null,
+    XBAR7: ?XBAR7CLKSourceConf = null,
+    XBAR7Prediv: ?XBAR7PredivConf = null,
+    XBAR7Findiv: ?XBAR7FindivConf = null,
+    XBAR8: ?XBAR8CLKSourceConf = null,
+    XBAR8Prediv: ?XBAR8PredivConf = null,
+    XBAR8Findiv: ?XBAR8FindivConf = null,
+    XBAR9: ?XBAR9CLKSourceConf = null,
+    XBAR9Prediv: ?XBAR9PredivConf = null,
+    XBAR9Findiv: ?XBAR9FindivConf = null,
+    XBAR10: ?XBAR10CLKSourceConf = null,
+    XBAR10Prediv: ?XBAR10PredivConf = null,
+    XBAR10Findiv: ?XBAR10FindivConf = null,
+    XBAR11: ?XBAR11CLKSourceConf = null,
+    XBAR11Prediv: ?XBAR11PredivConf = null,
+    XBAR11Findiv: ?XBAR11FindivConf = null,
+    XBAR12: ?XBAR12CLKSourceConf = null,
+    XBAR12Prediv: ?XBAR12PredivConf = null,
+    XBAR12Findiv: ?XBAR12FindivConf = null,
+    XBAR13: ?XBAR13CLKSourceConf = null,
+    XBAR13Prediv: ?XBAR13PredivConf = null,
+    XBAR13Findiv: ?XBAR13FindivConf = null,
+    XBAR14: ?XBAR14CLKSourceConf = null,
+    XBAR14Prediv: ?XBAR14PredivConf = null,
+    XBAR14Findiv: ?XBAR14FindivConf = null,
+    XBAR15: ?XBAR15CLKSourceConf = null,
+    XBAR15Prediv: ?XBAR15PredivConf = null,
+    XBAR15Findiv: ?XBAR15FindivConf = null,
+    XBAR16: ?XBAR16CLKSourceConf = null,
+    XBAR16Prediv: ?XBAR16PredivConf = null,
+    XBAR16Findiv: ?XBAR16FindivConf = null,
+    XBAR17: ?XBAR17CLKSourceConf = null,
+    XBAR17Prediv: ?XBAR17PredivConf = null,
+    XBAR17Findiv: ?XBAR17FindivConf = null,
+    XBAR18: ?XBAR18CLKSourceConf = null,
+    XBAR18Prediv: ?XBAR18PredivConf = null,
+    XBAR18Findiv: ?XBAR18FindivConf = null,
+    XBAR19: ?XBAR19CLKSourceConf = null,
+    XBAR19Prediv: ?XBAR19PredivConf = null,
+    XBAR19Findiv: ?XBAR19FindivConf = null,
+    XBAR20: ?XBAR20CLKSourceConf = null,
+    XBAR20Prediv: ?XBAR20PredivConf = null,
+    XBAR20Findiv: ?XBAR20FindivConf = null,
+    XBAR21: ?XBAR21CLKSourceConf = null,
+    XBAR21Prediv: ?XBAR21PredivConf = null,
+    XBAR21Findiv: ?XBAR21FindivConf = null,
+    XBAR22: ?XBAR22CLKSourceConf = null,
+    XBAR22Prediv: ?XBAR22PredivConf = null,
+    XBAR22Findiv: ?XBAR22FindivConf = null,
+    XBAR23: ?XBAR23CLKSourceConf = null,
+    XBAR23Prediv: ?XBAR23PredivConf = null,
+    XBAR23Findiv: ?XBAR23FindivConf = null,
+    XBAR24: ?XBAR24CLKSourceConf = null,
+    XBAR24Prediv: ?XBAR24PredivConf = null,
+    XBAR24Findiv: ?XBAR24FindivConf = null,
+    XBAR25: ?XBAR25CLKSourceConf = null,
+    XBAR25Prediv: ?XBAR25PredivConf = null,
+    XBAR25Findiv: ?XBAR25FindivConf = null,
+    XBAR26: ?XBAR26CLKSourceConf = null,
+    XBAR26Prediv: ?XBAR26PredivConf = null,
+    XBAR26Findiv: ?XBAR26FindivConf = null,
+    XBAR27: ?XBAR27CLKSourceConf = null,
+    XBAR27Prediv: ?XBAR27PredivConf = null,
+    XBAR27Findiv: ?XBAR27FindivConf = null,
+    XBAR28: ?XBAR28CLKSourceConf = null,
+    XBAR28Prediv: ?XBAR28PredivConf = null,
+    XBAR28Findiv: ?XBAR28FindivConf = null,
+    XBAR29: ?XBAR29CLKSourceConf = null,
+    XBAR29Prediv: ?XBAR29PredivConf = null,
+    XBAR29Findiv: ?XBAR29FindivConf = null,
+    XBAR30: ?XBAR30CLKSourceConf = null,
+    XBAR30Prediv: ?XBAR30PredivConf = null,
+    XBAR30Findiv: ?XBAR30FindivConf = null,
+    XBAR31: ?XBAR31CLKSourceConf = null,
+    XBAR31Prediv: ?XBAR31PredivConf = null,
+    XBAR31Findiv: ?XBAR31FindivConf = null,
+    XBAR32: ?XBAR32CLKSourceConf = null,
+    XBAR32Prediv: ?XBAR32PredivConf = null,
+    XBAR32Findiv: ?XBAR32FindivConf = null,
+    XBAR33: ?XBAR33CLKSourceConf = null,
+    XBAR33Prediv: ?XBAR33PredivConf = null,
+    XBAR33Findiv: ?XBAR33FindivConf = null,
+    XBAR34: ?XBAR34CLKSourceConf = null,
+    XBAR34Prediv: ?XBAR34PredivConf = null,
+    XBAR34Findiv: ?XBAR34FindivConf = null,
+    XBAR35: ?XBAR35CLKSourceConf = null,
+    XBAR35Prediv: ?XBAR35PredivConf = null,
+    XBAR35Findiv: ?XBAR35FindivConf = null,
+    XBAR36: ?XBAR36CLKSourceConf = null,
+    XBAR36Prediv: ?XBAR36PredivConf = null,
+    XBAR36Findiv: ?XBAR36FindivConf = null,
+    XBAR37: ?XBAR37CLKSourceConf = null,
+    XBAR37Prediv: ?XBAR37PredivConf = null,
+    XBAR37Findiv: ?XBAR37FindivConf = null,
+    XBAR38: ?XBAR38CLKSourceConf = null,
+    XBAR38Prediv: ?XBAR38PredivConf = null,
+    XBAR38Findiv: ?XBAR38FindivConf = null,
+    XBAR39: ?XBAR39CLKSourceConf = null,
+    XBAR39Prediv: ?XBAR39PredivConf = null,
+    XBAR39Findiv: ?XBAR39FindivConf = null,
+    XBAR40: ?XBAR40CLKSourceConf = null,
+    XBAR40Prediv: ?XBAR40PredivConf = null,
+    XBAR40Findiv: ?XBAR40FindivConf = null,
+    XBAR41: ?XBAR41CLKSourceConf = null,
+    XBAR41Prediv: ?XBAR41PredivConf = null,
+    XBAR41Findiv: ?XBAR41FindivConf = null,
+    XBAR42: ?XBAR42CLKSourceConf = null,
+    XBAR42Prediv: ?XBAR42PredivConf = null,
+    XBAR42Findiv: ?XBAR42FindivConf = null,
+    XBAR43: ?XBAR43CLKSourceConf = null,
+    XBAR43Prediv: ?XBAR43PredivConf = null,
+    XBAR43Findiv: ?XBAR43FindivConf = null,
+    XBAR44: ?XBAR44CLKSourceConf = null,
+    XBAR44Prediv: ?XBAR44PredivConf = null,
+    XBAR44Findiv: ?XBAR44FindivConf = null,
+    XBAR45: ?XBAR45CLKSourceConf = null,
+    XBAR45Prediv: ?XBAR45PredivConf = null,
+    XBAR45Findiv: ?XBAR45FindivConf = null,
+    XBAR46: ?XBAR46CLKSourceConf = null,
+    XBAR46Prediv: ?XBAR46PredivConf = null,
+    XBAR46Findiv: ?XBAR46FindivConf = null,
+    XBAR47: ?XBAR47CLKSourceConf = null,
+    XBAR47Prediv: ?XBAR47PredivConf = null,
+    XBAR47Findiv: ?XBAR47FindivConf = null,
+    XBAR48: ?XBAR48CLKSourceConf = null,
+    XBAR48Prediv: ?XBAR48PredivConf = null,
+    XBAR48Findiv: ?XBAR48FindivConf = null,
+    XBAR49: ?XBAR49CLKSourceConf = null,
+    XBAR49Prediv: ?XBAR49PredivConf = null,
+    XBAR49Findiv: ?XBAR49FindivConf = null,
+    XBAR50: ?XBAR50CLKSourceConf = null,
+    XBAR50Prediv: ?XBAR50PredivConf = null,
+    XBAR50Findiv: ?XBAR50FindivConf = null,
+    XBAR51: ?XBAR51CLKSourceConf = null,
+    XBAR51Prediv: ?XBAR51PredivConf = null,
+    XBAR51Findiv: ?XBAR51FindivConf = null,
+    XBAR52: ?XBAR52CLKSourceConf = null,
+    XBAR52Prediv: ?XBAR52PredivConf = null,
+    XBAR52Findiv: ?XBAR52FindivConf = null,
+    XBAR53: ?XBAR53CLKSourceConf = null,
+    XBAR53Prediv: ?XBAR53PredivConf = null,
+    XBAR53Findiv: ?XBAR53FindivConf = null,
+    XBAR54: ?XBAR54CLKSourceConf = null,
+    XBAR54Prediv: ?XBAR54PredivConf = null,
+    XBAR54Findiv: ?XBAR54FindivConf = null,
+    XBAR55: ?XBAR55CLKSourceConf = null,
+    XBAR55Prediv: ?XBAR55PredivConf = null,
+    XBAR55Findiv: ?XBAR55FindivConf = null,
+    XBAR56: ?XBAR56CLKSourceConf = null,
+    XBAR56Prediv: ?XBAR56PredivConf = null,
+    XBAR56Findiv: ?XBAR56FindivConf = null,
+    XBAR57: ?XBAR57CLKSourceConf = null,
+    XBAR57Prediv: ?XBAR57PredivConf = null,
+    XBAR57Findiv: ?XBAR57FindivConf = null,
+    XBAR58: ?XBAR58CLKSourceConf = null,
+    XBAR58Prediv: ?XBAR58PredivConf = null,
+    XBAR58Findiv: ?XBAR58FindivConf = null,
+    XBAR59: ?XBAR59CLKSourceConf = null,
+    XBAR59Prediv: ?XBAR59PredivConf = null,
+    XBAR59Findiv: ?XBAR59FindivConf = null,
+    XBAR60: ?XBAR60CLKSourceConf = null,
+    XBAR60Prediv: ?XBAR60PredivConf = null,
+    XBAR60Findiv: ?XBAR60FindivConf = null,
+    XBAR61: ?XBAR61CLKSourceConf = null,
+    XBAR61Prediv: ?XBAR61PredivConf = null,
+    XBAR61Findiv: ?XBAR61FindivConf = null,
+    XBAR62: ?XBAR62CLKSourceConf = null,
+    XBAR62Prediv: ?XBAR62PredivConf = null,
+    XBAR62Findiv: ?XBAR62FindivConf = null,
+    XBAR63: ?XBAR63CLKSourceConf = null,
+    XBAR63Prediv: ?XBAR63PredivConf = null,
+    XBAR63Findiv: ?XBAR63FindivConf = null,
+    CKINTSEL0: ?CKINTSELCLKSourceConf = null,
+    CKEXTSEL0: ?CKEXTSELCLKSourceConf = null,
+    CKINTSEL1: ?CKINTSELCLKSource1Conf = null,
+    CKEXTSEL1: ?CKEXTSELCLKSource1Conf = null,
+    OBS0: ?OBS0SourceConf = null,
+    OBS1: ?OBS1SourceConf = null,
+    MCO1Mult: ?RCC_MCO1SourceConf = null,
+    MCO2Mult: ?RCC_MCO2SourceConf = null,
+    D3PER: ?D3PERCLKSourceConf = null,
+    DTS: ?DTSCLKSourceConf = null,
+    DSIPHY: ?DSIPHYCLKSourceConf = null,
+    DSIBLANE: ?DSIBLANECLKSourceConf = null,
+    USB2PHY1: ?USB2PHY1CLKSourceConf = null,
+    USB2PHY2: ?USB2PHY2CLKSourceConf = null,
+    USB3PCIPHY: ?USB3PCIPHYCLKSourceConf = null,
+    SysClkSource: ?MCUCLKSourceConf = null,
+    MCUDIV: ?MCU_DivConf = null,
+    APB3DIV: ?APB3DIVConf = null,
+    APB4DIV: ?APB4DIVConf = null,
+    APBDBGDIV: ?APBDBGDIVConf = null,
+    APB1DIV: ?APB1DIVConf = null,
+    APB2DIV: ?APB2DIVConf = null,
+    ADC12Mult: ?ADC12CLockSelectionConf = null,
+    ADC3Mult: ?ADC3CLockSelectionConf = null,
+    LVDSMult: ?LVDSCLockSelectionConf = null,
+    PLL1Source: ?PLL1SourceConf = null,
+    FREFDIV1: ?FREFDIV1Conf = null,
+    PLL2Source: ?PLL2SourceConf = null,
+    FREFDIV2: ?FREFDIV2Conf = null,
+    PLL3Source: ?PLL3SourceConf = null,
+    FREFDIV3: ?FREFDIV3Conf = null,
+    PLL4Source: ?PLL4SourceConf = null,
+    FREFDIV4: ?FREFDIV4Conf = null,
+    FBDIV1: ?FBDIV1Conf = null,
+    POSTDIV1_1: ?POSTDIV1_1Conf = null,
+    POSTDIV2_1: ?POSTDIV2_1Conf = null,
+    FBDIV2: ?FBDIV2Conf = null,
+    PLL2FRACV: ?PLL2FRACVConf = null,
+    POSTDIV1_2: ?POSTDIV1_2Conf = null,
+    POSTDIV2_2: ?POSTDIV2_2Conf = null,
+    FBDIV3: ?FBDIV3Conf = null,
+    PLL3FRACV: ?PLL3FRACVConf = null,
+    POSTDIV1_3: ?POSTDIV1_3Conf = null,
+    POSTDIV2_3: ?POSTDIV2_3Conf = null,
+    FBDIV4: ?FBDIV4Conf = null,
+    PLL4FRACV: ?PLL4FRACVConf = null,
+    POSTDIV1_4: ?POSTDIV1_4Conf = null,
+    POSTDIV2_4: ?POSTDIV2_4Conf = null,
+    PLL5Source: ?PLL5SourceConf = null,
+    FREFDIV5: ?FREFDIV5Conf = null,
+    FBDIV5: ?FBDIV5Conf = null,
+    PLL5FRACV: ?PLL5FRACVConf = null,
+    POSTDIV1_5: ?POSTDIV1_5Conf = null,
+    POSTDIV2_5: ?POSTDIV2_5Conf = null,
+    PLL6Source: ?PLL6SourceConf = null,
+    FREFDIV6: ?FREFDIV6Conf = null,
+    FBDIV6: ?FBDIV6Conf = null,
+    PLL6FRACV: ?PLL6FRACVConf = null,
+    POSTDIV1_6: ?POSTDIV1_6Conf = null,
+    POSTDIV2_6: ?POSTDIV2_6Conf = null,
+    PLL7Source: ?PLL7SourceConf = null,
+    FREFDIV7: ?FREFDIV7Conf = null,
+    FBDIV7: ?FBDIV7Conf = null,
+    PLL7FRACV: ?PLL7FRACVConf = null,
+    POSTDIV1_7: ?POSTDIV1_7Conf = null,
+    POSTDIV2_7: ?POSTDIV2_7Conf = null,
+    PLL8Source: ?PLL8SourceConf = null,
+    FREFDIV8: ?FREFDIV8Conf = null,
+    FBDIV8: ?FBDIV8Conf = null,
+    PLL8FRACV: ?PLL8FRACVConf = null,
+    POSTDIV1_8: ?POSTDIV1_8Conf = null,
+    POSTDIV2_8: ?POSTDIV2_8Conf = null,
+    HSERTCDevisor: ?RCC_RTC_Clock_Source_FROM_HSEConf = null,
+    RTCClkSource: ?RTCCLockSelectionVirtualConf = null,
+    HSE_Timout: ?HSE_TimoutConf = null,
+    LSE_Timout: ?LSE_TimoutConf = null,
+    RCC_TIM_G1_PRescaler_Selection: ?RCC_TIM_G1_PRescaler_SelectionConf = null,
+    RCC_TIM_G2_PRescaler_Selection: ?RCC_TIM_G2_PRescaler_SelectionConf = null,
+    LSE_Drive_Capability: ?LSE_Drive_CapabilityConf = null,
 };
 
 pub const ConfigWithRef = struct {
-    HSE_VALUE: HSE_VALUEConf = @enumFromInt(40000000),
-    HSE_Div2: HSE_Div2Conf = .@"2",
-    SPDIFFreq_Value: SPDIFFreq_ValueConf = @enumFromInt(12288000),
-    LSE_VALUE: LSE_VALUEConf = @enumFromInt(32768),
-    MSIClockRange: MSIClockRangeConf = .RCC_MSI_16MHZ,
-    XBAR0CLKSource: XBAR0CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR0Prediv: XBAR0PredivConf = .@"1",
-    XBAR0Findiv: XBAR0FindivConf = @enumFromInt(1),
-    XBAR1CLKSource: XBAR1CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR1Prediv: XBAR1PredivConf = .@"1",
-    XBAR1Findiv: XBAR1FindivConf = @enumFromInt(1),
-    XBAR2CLKSource: XBAR2CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR2Prediv: XBAR2PredivConf = .@"1",
-    XBAR2Findiv: XBAR2FindivConf = @enumFromInt(1),
-    XBAR3CLKSource: XBAR3CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR3Prediv: XBAR3PredivConf = .@"1",
-    XBAR3Findiv: XBAR3FindivConf = @enumFromInt(1),
-    XBAR4CLKSource: XBAR4CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR4Prediv: XBAR4PredivConf = .@"1",
-    XBAR4Findiv: XBAR4FindivConf = @enumFromInt(1),
-    XBAR5CLKSource: XBAR5CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR5Prediv: XBAR5PredivConf = .@"1",
-    XBAR5Findiv: XBAR5FindivConf = @enumFromInt(1),
-    XBAR6CLKSource: XBAR6CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR6Prediv: XBAR6PredivConf = .@"1",
-    XBAR6Findiv: XBAR6FindivConf = @enumFromInt(1),
-    XBAR7CLKSource: XBAR7CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
-    XBAR7Prediv: XBAR7PredivConf = .@"1",
-    XBAR7Findiv: XBAR7FindivConf = @enumFromInt(1),
-    XBAR8CLKSource: XBAR8CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR8Prediv: XBAR8PredivConf = .@"1",
-    XBAR8Findiv: XBAR8FindivConf = @enumFromInt(1),
-    XBAR9CLKSource: XBAR9CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR9Prediv: XBAR9PredivConf = .@"1",
-    XBAR9Findiv: XBAR9FindivConf = @enumFromInt(1),
-    XBAR10CLKSource: XBAR10CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR10Prediv: XBAR10PredivConf = .@"1",
-    XBAR10Findiv: XBAR10FindivConf = @enumFromInt(1),
-    XBAR11CLKSource: XBAR11CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR11Prediv: XBAR11PredivConf = .@"1",
-    XBAR11Findiv: XBAR11FindivConf = @enumFromInt(1),
-    XBAR12CLKSource: XBAR12CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR12Prediv: XBAR12PredivConf = .@"1",
-    XBAR12Findiv: XBAR12FindivConf = @enumFromInt(1),
-    XBAR13CLKSource: XBAR13CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR13Prediv: XBAR13PredivConf = .@"1",
-    XBAR13Findiv: XBAR13FindivConf = @enumFromInt(1),
-    XBAR14CLKSource: XBAR14CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR14Prediv: XBAR14PredivConf = .@"1",
-    XBAR14Findiv: XBAR14FindivConf = @enumFromInt(1),
-    XBAR15CLKSource: XBAR15CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR15Prediv: XBAR15PredivConf = .@"1",
-    XBAR15Findiv: XBAR15FindivConf = @enumFromInt(1),
-    XBAR16CLKSource: XBAR16CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR16Prediv: XBAR16PredivConf = .@"1",
-    XBAR16Findiv: XBAR16FindivConf = @enumFromInt(1),
-    XBAR17CLKSource: XBAR17CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR17Prediv: XBAR17PredivConf = .@"1",
-    XBAR17Findiv: XBAR17FindivConf = @enumFromInt(1),
-    XBAR18CLKSource: XBAR18CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR18Prediv: XBAR18PredivConf = .@"1",
-    XBAR18Findiv: XBAR18FindivConf = @enumFromInt(1),
-    XBAR19CLKSource: XBAR19CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR19Prediv: XBAR19PredivConf = .@"1",
-    XBAR19Findiv: XBAR19FindivConf = @enumFromInt(1),
-    XBAR20CLKSource: XBAR20CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR20Prediv: XBAR20PredivConf = .@"1",
-    XBAR20Findiv: XBAR20FindivConf = @enumFromInt(1),
-    XBAR21CLKSource: XBAR21CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR21Prediv: XBAR21PredivConf = .@"1",
-    XBAR21Findiv: XBAR21FindivConf = @enumFromInt(1),
-    XBAR22CLKSource: XBAR22CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR22Prediv: XBAR22PredivConf = .@"1",
-    XBAR22Findiv: XBAR22FindivConf = @enumFromInt(1),
-    XBAR23CLKSource: XBAR23CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR23Prediv: XBAR23PredivConf = .@"1",
-    XBAR23Findiv: XBAR23FindivConf = @enumFromInt(1),
-    XBAR24CLKSource: XBAR24CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR24Prediv: XBAR24PredivConf = .@"1",
-    XBAR24Findiv: XBAR24FindivConf = @enumFromInt(1),
-    XBAR25CLKSource: XBAR25CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR25Prediv: XBAR25PredivConf = .@"1",
-    XBAR25Findiv: XBAR25FindivConf = @enumFromInt(1),
-    XBAR26CLKSource: XBAR26CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR26Prediv: XBAR26PredivConf = .@"1",
-    XBAR26Findiv: XBAR26FindivConf = @enumFromInt(1),
-    XBAR27CLKSource: XBAR27CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR27Prediv: XBAR27PredivConf = .@"1",
-    XBAR27Findiv: XBAR27FindivConf = @enumFromInt(1),
-    XBAR28CLKSource: XBAR28CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR28Prediv: XBAR28PredivConf = .@"1",
-    XBAR28Findiv: XBAR28FindivConf = @enumFromInt(1),
-    XBAR29CLKSource: XBAR29CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR29Prediv: XBAR29PredivConf = .@"1",
-    XBAR29Findiv: XBAR29FindivConf = @enumFromInt(1),
-    XBAR30CLKSource: XBAR30CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR30Prediv: XBAR30PredivConf = .@"1",
-    XBAR30Findiv: XBAR30FindivConf = @enumFromInt(1),
-    XBAR31CLKSource: XBAR31CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR31Prediv: XBAR31PredivConf = .@"1",
-    XBAR31Findiv: XBAR31FindivConf = @enumFromInt(1),
-    XBAR32CLKSource: XBAR32CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR32Prediv: XBAR32PredivConf = .@"1",
-    XBAR32Findiv: XBAR32FindivConf = @enumFromInt(1),
-    XBAR33CLKSource: XBAR33CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR33Prediv: XBAR33PredivConf = .@"1",
-    XBAR33Findiv: XBAR33FindivConf = @enumFromInt(1),
-    XBAR34CLKSource: XBAR34CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR34Prediv: XBAR34PredivConf = .@"1",
-    XBAR34Findiv: XBAR34FindivConf = @enumFromInt(1),
-    XBAR35CLKSource: XBAR35CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR35Prediv: XBAR35PredivConf = .@"1",
-    XBAR35Findiv: XBAR35FindivConf = @enumFromInt(1),
-    XBAR36CLKSource: XBAR36CLKSourceConf = .RCC_XBAR_CLKSRC_MSI,
-    XBAR36Prediv: XBAR36PredivConf = .@"1",
-    XBAR36Findiv: XBAR36FindivConf = @enumFromInt(1),
-    XBAR37CLKSource: XBAR37CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR37Prediv: XBAR37PredivConf = .@"1",
-    XBAR37Findiv: XBAR37FindivConf = @enumFromInt(1),
-    XBAR38CLKSource: XBAR38CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR38Prediv: XBAR38PredivConf = .@"1",
-    XBAR38Findiv: XBAR38FindivConf = @enumFromInt(1),
-    XBAR39CLKSource: XBAR39CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR39Prediv: XBAR39PredivConf = .@"1",
-    XBAR39Findiv: XBAR39FindivConf = @enumFromInt(1),
-    XBAR40CLKSource: XBAR40CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
-    XBAR40Prediv: XBAR40PredivConf = .@"1",
-    XBAR40Findiv: XBAR40FindivConf = @enumFromInt(1),
-    XBAR41CLKSource: XBAR41CLKSourceConf = .RCC_XBAR_CLKSRC_LSI,
-    XBAR41Prediv: XBAR41PredivConf = .@"1",
-    XBAR41Findiv: XBAR41FindivConf = @enumFromInt(1),
-    XBAR42CLKSource: XBAR42CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR42Prediv: XBAR42PredivConf = .@"1",
-    XBAR42Findiv: XBAR42FindivConf = @enumFromInt(1),
-    XBAR43CLKSource: XBAR43CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR43Prediv: XBAR43PredivConf = .@"1",
-    XBAR43Findiv: XBAR43FindivConf = @enumFromInt(1),
-    XBAR44CLKSource: XBAR44CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR44Prediv: XBAR44PredivConf = .@"1",
-    XBAR44Findiv: XBAR44FindivConf = @enumFromInt(1),
-    XBAR45CLKSource: XBAR45CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR45Prediv: XBAR45PredivConf = .@"1",
-    XBAR45Findiv: XBAR45FindivConf = @enumFromInt(1),
-    XBAR46CLKSource: XBAR46CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR46Prediv: XBAR46PredivConf = .@"1",
-    XBAR46Findiv: XBAR46FindivConf = @enumFromInt(1),
-    XBAR47CLKSource: XBAR47CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR47Prediv: XBAR47PredivConf = .@"1",
-    XBAR47Findiv: XBAR47FindivConf = @enumFromInt(1),
-    XBAR48CLKSource: XBAR48CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR48Prediv: XBAR48PredivConf = .@"1",
-    XBAR48Findiv: XBAR48FindivConf = @enumFromInt(1),
-    XBAR49CLKSource: XBAR49CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR49Prediv: XBAR49PredivConf = .@"1",
-    XBAR49Findiv: XBAR49FindivConf = @enumFromInt(1),
-    XBAR50CLKSource: XBAR50CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR50Prediv: XBAR50PredivConf = .@"1",
-    XBAR50Findiv: XBAR50FindivConf = @enumFromInt(1),
-    XBAR51CLKSource: XBAR51CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR51Prediv: XBAR51PredivConf = .@"1",
-    XBAR51Findiv: XBAR51FindivConf = @enumFromInt(1),
-    XBAR52CLKSource: XBAR52CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR52Prediv: XBAR52PredivConf = .@"1",
-    XBAR52Findiv: XBAR52FindivConf = @enumFromInt(1),
-    XBAR53CLKSource: XBAR53CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR53Prediv: XBAR53PredivConf = .@"1",
-    XBAR53Findiv: XBAR53FindivConf = @enumFromInt(1),
-    XBAR54CLKSource: XBAR54CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR54Prediv: XBAR54PredivConf = .@"1",
-    XBAR54Findiv: XBAR54FindivConf = @enumFromInt(1),
-    XBAR55CLKSource: XBAR55CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR55Prediv: XBAR55PredivConf = .@"1",
-    XBAR55Findiv: XBAR55FindivConf = @enumFromInt(1),
-    XBAR56CLKSource: XBAR56CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR56Prediv: XBAR56PredivConf = .@"1",
-    XBAR56Findiv: XBAR56FindivConf = @enumFromInt(1),
-    XBAR57CLKSource: XBAR57CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR57Prediv: XBAR57PredivConf = .@"1",
-    XBAR57Findiv: XBAR57FindivConf = @enumFromInt(1),
-    XBAR58CLKSource: XBAR58CLKSourceConf = .RCC_XBAR_CLKSRC_HSE,
-    XBAR58Prediv: XBAR58PredivConf = .@"1",
-    XBAR58Findiv: XBAR58FindivConf = @enumFromInt(1),
-    XBAR59CLKSource: XBAR59CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR59Prediv: XBAR59PredivConf = .@"1",
-    XBAR59Findiv: XBAR59FindivConf = @enumFromInt(1),
-    XBAR60CLKSource: XBAR60CLKSourceConf = .RCC_XBAR_CLKSRC_PLL8,
-    XBAR60Prediv: XBAR60PredivConf = .@"1",
-    XBAR60Findiv: XBAR60FindivConf = @enumFromInt(1),
-    XBAR61CLKSource: XBAR61CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR61Prediv: XBAR61PredivConf = .@"1",
-    XBAR61Findiv: XBAR61FindivConf = @enumFromInt(1),
-    XBAR62CLKSource: XBAR62CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR62Prediv: XBAR62PredivConf = .@"1",
-    XBAR62Findiv: XBAR62FindivConf = @enumFromInt(1),
-    XBAR63CLKSource: XBAR63CLKSourceConf = .RCC_XBAR_CLKSRC_HSI,
-    XBAR63Prediv: XBAR63PredivConf = .@"1",
-    XBAR63Findiv: XBAR63FindivConf = @enumFromInt(1),
-    CKINTSELCLKSource: CKINTSELCLKSourceConf = .RCC_XBAR_CLKSRC_MSI,
-    CKEXTSELCLKSource: CKEXTSELCLKSourceConf = .PLL1_DIV42,
-    CKINTSELCLKSource1: CKINTSELCLKSource1Conf = .RCC_XBAR_CLKSRC_MSI,
-    CKEXTSELCLKSource1: CKEXTSELCLKSource1Conf = .PLL1_DIV42,
-    OBS0Source: OBS0SourceConf = .RCC_OBS0SOURCE_CKINTSEL,
-    OBS1Source: OBS1SourceConf = .RCC_OBS1SOURCE_CKINTSEL,
-    RCC_MCO1Source: RCC_MCO1SourceConf = .MUX_MCO1_FLEX61,
-    RCC_MCO2Source: RCC_MCO2SourceConf = .MUX_MCO2_FLEX62,
-    D3PERCLKSource: D3PERCLKSourceConf = .MUX_D3PER_MSI,
-    DTSCLKSource: DTSCLKSourceConf = .MUX_DTS_MSI,
-    DSIPHYCLKSource: DSIPHYCLKSourceConf = .MUX_DSIPHY_FLEX28,
-    DSIBLANECLKSource: DSIBLANECLKSourceConf = .MUX_DSIBLANE_DSIPHY,
-    USB2PHY1CLKSource: USB2PHY1CLKSourceConf = .MUX_USB2PHY1_FLEX57,
-    USB2PHY2CLKSource: USB2PHY2CLKSourceConf = .MUX_USB2PHY2_FLEX58,
-    USB3PCIPHYCLKSource: USB3PCIPHYCLKSourceConf = .MUX_USB3PCIEPHY_FLEX34,
-    MCUCLKSource: MCUCLKSourceConf = .RCC_MCUSSOURCE_FLEX0,
-    MCU_Div: MCU_DivConf = .RCC_MCU_DIV1,
-    APB3DIV: APB3DIVConf = .RCC_APB3_DIV1,
-    APB4DIV: APB4DIVConf = .RCC_APB4_DIV1,
-    APBDBGDIV: APBDBGDIVConf = .RCC_APBDBG_DIV1,
-    APB1DIV: APB1DIVConf = .RCC_APB1_DIV1,
-    APB2DIV: APB2DIVConf = .RCC_APB2_DIV1,
-    ADC12CLockSelection: ADC12CLockSelectionConf = .MUX_ADC12_FLEX46,
-    ADC3CLockSelection: ADC3CLockSelectionConf = .MUX_ADC3_FLEX47,
-    LVDSCLockSelection: LVDSCLockSelectionConf = .MUX_LVDSPHY_FLEX32,
-    PLL1Source: PLL1SourceConf = .RCC_PLL1SOURCE_HSI,
-    FREFDIV1: FREFDIV1Conf = @enumFromInt(1),
-    PLL2Source: PLL2SourceConf = .RCC_PLL2SOURCE_HSI,
-    FREFDIV2: FREFDIV2Conf = @enumFromInt(1),
-    PLL3Source: PLL3SourceConf = .RCC_PLL3SOURCE_HSI,
-    FREFDIV3: FREFDIV3Conf = @enumFromInt(1),
-    PLL4Source: PLL4SourceConf = .RCC_PLL4SOURCE_HSI,
-    FREFDIV4: FREFDIV4Conf = @enumFromInt(1),
-    FBDIV1: FBDIV1Conf = @enumFromInt(25),
-    POSTDIV1_1: POSTDIV1_1Conf = @enumFromInt(1),
-    POSTDIV2_1: POSTDIV2_1Conf = @enumFromInt(1),
-    FBDIV2: FBDIV2Conf = @enumFromInt(12297829382473034410),
-    PLL2FRACV: PLL2FRACVConf = @enumFromInt(0),
-    POSTDIV1_2: POSTDIV1_2Conf = @enumFromInt(1),
-    POSTDIV2_2: POSTDIV2_2Conf = @enumFromInt(1),
-    FBDIV3: FBDIV3Conf = @enumFromInt(12297829382473034410),
-    PLL3FRACV: PLL3FRACVConf = @enumFromInt(0),
-    POSTDIV1_3: POSTDIV1_3Conf = @enumFromInt(1),
-    POSTDIV2_3: POSTDIV2_3Conf = @enumFromInt(1),
-    FBDIV4: FBDIV4Conf = @enumFromInt(12297829382473034410),
-    PLL4FRACV: PLL4FRACVConf = @enumFromInt(0),
-    POSTDIV1_4: POSTDIV1_4Conf = @enumFromInt(1),
-    POSTDIV2_4: POSTDIV2_4Conf = @enumFromInt(1),
-    PLL5Source: PLL5SourceConf = .RCC_PLL5SOURCE_HSI,
-    FREFDIV5: FREFDIV5Conf = @enumFromInt(1),
-    FBDIV5: FBDIV5Conf = @enumFromInt(12297829382473034410),
-    PLL5FRACV: PLL5FRACVConf = @enumFromInt(0),
-    POSTDIV1_5: POSTDIV1_5Conf = @enumFromInt(1),
-    POSTDIV2_5: POSTDIV2_5Conf = @enumFromInt(1),
-    PLL6Source: PLL6SourceConf = .RCC_PLL6SOURCE_HSI,
-    FREFDIV6: FREFDIV6Conf = @enumFromInt(1),
-    FBDIV6: FBDIV6Conf = @enumFromInt(12297829382473034410),
-    PLL6FRACV: PLL6FRACVConf = @enumFromInt(0),
-    POSTDIV1_6: POSTDIV1_6Conf = @enumFromInt(1),
-    POSTDIV2_6: POSTDIV2_6Conf = @enumFromInt(1),
-    PLL7Source: PLL7SourceConf = .RCC_PLL7SOURCE_HSI,
-    FREFDIV7: FREFDIV7Conf = @enumFromInt(1),
-    FBDIV7: FBDIV7Conf = @enumFromInt(12297829382473034410),
-    PLL7FRACV: PLL7FRACVConf = @enumFromInt(0),
-    POSTDIV1_7: POSTDIV1_7Conf = @enumFromInt(1),
-    POSTDIV2_7: POSTDIV2_7Conf = @enumFromInt(1),
-    PLL8Source: PLL8SourceConf = .RCC_PLL8SOURCE_HSI,
-    FREFDIV8: FREFDIV8Conf = @enumFromInt(1),
-    FBDIV8: FBDIV8Conf = @enumFromInt(12297829382473034410),
-    PLL8FRACV: PLL8FRACVConf = @enumFromInt(0),
-    POSTDIV1_8: POSTDIV1_8Conf = @enumFromInt(1),
-    POSTDIV2_8: POSTDIV2_8Conf = @enumFromInt(1),
-    RCC_RTC_Clock_Source_FROM_HSE: RCC_RTC_Clock_Source_FROM_HSEConf = @enumFromInt(1),
-    RTCCLockSelectionVirtual: RTCCLockSelectionVirtualConf = .RCC_RTCCLKSOURCE_LSI,
-    HSE_Timout: HSE_TimoutConf = @enumFromInt(100),
-    LSE_Timout: LSE_TimoutConf = @enumFromInt(5000),
-    RCC_TIM_G1_PRescaler_Selection: RCC_TIM_G1_PRescaler_SelectionConf = .RCC_TIMG1PRES_DEACTIVATED,
-    RCC_TIM_G2_PRescaler_Selection: RCC_TIM_G2_PRescaler_SelectionConf = .RCC_TIMG2PRES_DEACTIVATED,
-    LSE_Drive_Capability: LSE_Drive_CapabilityConf = .null,
+    HSE_VALUE: ?HSE_VALUEConf = null,
+    HSE_Div2: ?HSE_Div2Conf = null,
+    SPDIFFreq_Value: ?SPDIFFreq_ValueConf = null,
+    LSE_VALUE: ?LSE_VALUEConf = null,
+    MSIClockRange: ?MSIClockRangeConf = null,
+    XBAR0CLKSource: ?XBAR0CLKSourceConf = null,
+    XBAR0Prediv: ?XBAR0PredivConf = null,
+    XBAR0Findiv: ?XBAR0FindivConf = null,
+    XBAR1CLKSource: ?XBAR1CLKSourceConf = null,
+    XBAR1Prediv: ?XBAR1PredivConf = null,
+    XBAR1Findiv: ?XBAR1FindivConf = null,
+    XBAR2CLKSource: ?XBAR2CLKSourceConf = null,
+    XBAR2Prediv: ?XBAR2PredivConf = null,
+    XBAR2Findiv: ?XBAR2FindivConf = null,
+    XBAR3CLKSource: ?XBAR3CLKSourceConf = null,
+    XBAR3Prediv: ?XBAR3PredivConf = null,
+    XBAR3Findiv: ?XBAR3FindivConf = null,
+    XBAR4CLKSource: ?XBAR4CLKSourceConf = null,
+    XBAR4Prediv: ?XBAR4PredivConf = null,
+    XBAR4Findiv: ?XBAR4FindivConf = null,
+    XBAR5CLKSource: ?XBAR5CLKSourceConf = null,
+    XBAR5Prediv: ?XBAR5PredivConf = null,
+    XBAR5Findiv: ?XBAR5FindivConf = null,
+    XBAR6CLKSource: ?XBAR6CLKSourceConf = null,
+    XBAR6Prediv: ?XBAR6PredivConf = null,
+    XBAR6Findiv: ?XBAR6FindivConf = null,
+    XBAR7CLKSource: ?XBAR7CLKSourceConf = null,
+    XBAR7Prediv: ?XBAR7PredivConf = null,
+    XBAR7Findiv: ?XBAR7FindivConf = null,
+    XBAR8CLKSource: ?XBAR8CLKSourceConf = null,
+    XBAR8Prediv: ?XBAR8PredivConf = null,
+    XBAR8Findiv: ?XBAR8FindivConf = null,
+    XBAR9CLKSource: ?XBAR9CLKSourceConf = null,
+    XBAR9Prediv: ?XBAR9PredivConf = null,
+    XBAR9Findiv: ?XBAR9FindivConf = null,
+    XBAR10CLKSource: ?XBAR10CLKSourceConf = null,
+    XBAR10Prediv: ?XBAR10PredivConf = null,
+    XBAR10Findiv: ?XBAR10FindivConf = null,
+    XBAR11CLKSource: ?XBAR11CLKSourceConf = null,
+    XBAR11Prediv: ?XBAR11PredivConf = null,
+    XBAR11Findiv: ?XBAR11FindivConf = null,
+    XBAR12CLKSource: ?XBAR12CLKSourceConf = null,
+    XBAR12Prediv: ?XBAR12PredivConf = null,
+    XBAR12Findiv: ?XBAR12FindivConf = null,
+    XBAR13CLKSource: ?XBAR13CLKSourceConf = null,
+    XBAR13Prediv: ?XBAR13PredivConf = null,
+    XBAR13Findiv: ?XBAR13FindivConf = null,
+    XBAR14CLKSource: ?XBAR14CLKSourceConf = null,
+    XBAR14Prediv: ?XBAR14PredivConf = null,
+    XBAR14Findiv: ?XBAR14FindivConf = null,
+    XBAR15CLKSource: ?XBAR15CLKSourceConf = null,
+    XBAR15Prediv: ?XBAR15PredivConf = null,
+    XBAR15Findiv: ?XBAR15FindivConf = null,
+    XBAR16CLKSource: ?XBAR16CLKSourceConf = null,
+    XBAR16Prediv: ?XBAR16PredivConf = null,
+    XBAR16Findiv: ?XBAR16FindivConf = null,
+    XBAR17CLKSource: ?XBAR17CLKSourceConf = null,
+    XBAR17Prediv: ?XBAR17PredivConf = null,
+    XBAR17Findiv: ?XBAR17FindivConf = null,
+    XBAR18CLKSource: ?XBAR18CLKSourceConf = null,
+    XBAR18Prediv: ?XBAR18PredivConf = null,
+    XBAR18Findiv: ?XBAR18FindivConf = null,
+    XBAR19CLKSource: ?XBAR19CLKSourceConf = null,
+    XBAR19Prediv: ?XBAR19PredivConf = null,
+    XBAR19Findiv: ?XBAR19FindivConf = null,
+    XBAR20CLKSource: ?XBAR20CLKSourceConf = null,
+    XBAR20Prediv: ?XBAR20PredivConf = null,
+    XBAR20Findiv: ?XBAR20FindivConf = null,
+    XBAR21CLKSource: ?XBAR21CLKSourceConf = null,
+    XBAR21Prediv: ?XBAR21PredivConf = null,
+    XBAR21Findiv: ?XBAR21FindivConf = null,
+    XBAR22CLKSource: ?XBAR22CLKSourceConf = null,
+    XBAR22Prediv: ?XBAR22PredivConf = null,
+    XBAR22Findiv: ?XBAR22FindivConf = null,
+    XBAR23CLKSource: ?XBAR23CLKSourceConf = null,
+    XBAR23Prediv: ?XBAR23PredivConf = null,
+    XBAR23Findiv: ?XBAR23FindivConf = null,
+    XBAR24CLKSource: ?XBAR24CLKSourceConf = null,
+    XBAR24Prediv: ?XBAR24PredivConf = null,
+    XBAR24Findiv: ?XBAR24FindivConf = null,
+    XBAR25CLKSource: ?XBAR25CLKSourceConf = null,
+    XBAR25Prediv: ?XBAR25PredivConf = null,
+    XBAR25Findiv: ?XBAR25FindivConf = null,
+    XBAR26CLKSource: ?XBAR26CLKSourceConf = null,
+    XBAR26Prediv: ?XBAR26PredivConf = null,
+    XBAR26Findiv: ?XBAR26FindivConf = null,
+    XBAR27CLKSource: ?XBAR27CLKSourceConf = null,
+    XBAR27Prediv: ?XBAR27PredivConf = null,
+    XBAR27Findiv: ?XBAR27FindivConf = null,
+    XBAR28CLKSource: ?XBAR28CLKSourceConf = null,
+    XBAR28Prediv: ?XBAR28PredivConf = null,
+    XBAR28Findiv: ?XBAR28FindivConf = null,
+    XBAR29CLKSource: ?XBAR29CLKSourceConf = null,
+    XBAR29Prediv: ?XBAR29PredivConf = null,
+    XBAR29Findiv: ?XBAR29FindivConf = null,
+    XBAR30CLKSource: ?XBAR30CLKSourceConf = null,
+    XBAR30Prediv: ?XBAR30PredivConf = null,
+    XBAR30Findiv: ?XBAR30FindivConf = null,
+    XBAR31CLKSource: ?XBAR31CLKSourceConf = null,
+    XBAR31Prediv: ?XBAR31PredivConf = null,
+    XBAR31Findiv: ?XBAR31FindivConf = null,
+    XBAR32CLKSource: ?XBAR32CLKSourceConf = null,
+    XBAR32Prediv: ?XBAR32PredivConf = null,
+    XBAR32Findiv: ?XBAR32FindivConf = null,
+    XBAR33CLKSource: ?XBAR33CLKSourceConf = null,
+    XBAR33Prediv: ?XBAR33PredivConf = null,
+    XBAR33Findiv: ?XBAR33FindivConf = null,
+    XBAR34CLKSource: ?XBAR34CLKSourceConf = null,
+    XBAR34Prediv: ?XBAR34PredivConf = null,
+    XBAR34Findiv: ?XBAR34FindivConf = null,
+    XBAR35CLKSource: ?XBAR35CLKSourceConf = null,
+    XBAR35Prediv: ?XBAR35PredivConf = null,
+    XBAR35Findiv: ?XBAR35FindivConf = null,
+    XBAR36CLKSource: ?XBAR36CLKSourceConf = null,
+    XBAR36Prediv: ?XBAR36PredivConf = null,
+    XBAR36Findiv: ?XBAR36FindivConf = null,
+    XBAR37CLKSource: ?XBAR37CLKSourceConf = null,
+    XBAR37Prediv: ?XBAR37PredivConf = null,
+    XBAR37Findiv: ?XBAR37FindivConf = null,
+    XBAR38CLKSource: ?XBAR38CLKSourceConf = null,
+    XBAR38Prediv: ?XBAR38PredivConf = null,
+    XBAR38Findiv: ?XBAR38FindivConf = null,
+    XBAR39CLKSource: ?XBAR39CLKSourceConf = null,
+    XBAR39Prediv: ?XBAR39PredivConf = null,
+    XBAR39Findiv: ?XBAR39FindivConf = null,
+    XBAR40CLKSource: ?XBAR40CLKSourceConf = null,
+    XBAR40Prediv: ?XBAR40PredivConf = null,
+    XBAR40Findiv: ?XBAR40FindivConf = null,
+    XBAR41CLKSource: ?XBAR41CLKSourceConf = null,
+    XBAR41Prediv: ?XBAR41PredivConf = null,
+    XBAR41Findiv: ?XBAR41FindivConf = null,
+    XBAR42CLKSource: ?XBAR42CLKSourceConf = null,
+    XBAR42Prediv: ?XBAR42PredivConf = null,
+    XBAR42Findiv: ?XBAR42FindivConf = null,
+    XBAR43CLKSource: ?XBAR43CLKSourceConf = null,
+    XBAR43Prediv: ?XBAR43PredivConf = null,
+    XBAR43Findiv: ?XBAR43FindivConf = null,
+    XBAR44CLKSource: ?XBAR44CLKSourceConf = null,
+    XBAR44Prediv: ?XBAR44PredivConf = null,
+    XBAR44Findiv: ?XBAR44FindivConf = null,
+    XBAR45CLKSource: ?XBAR45CLKSourceConf = null,
+    XBAR45Prediv: ?XBAR45PredivConf = null,
+    XBAR45Findiv: ?XBAR45FindivConf = null,
+    XBAR46CLKSource: ?XBAR46CLKSourceConf = null,
+    XBAR46Prediv: ?XBAR46PredivConf = null,
+    XBAR46Findiv: ?XBAR46FindivConf = null,
+    XBAR47CLKSource: ?XBAR47CLKSourceConf = null,
+    XBAR47Prediv: ?XBAR47PredivConf = null,
+    XBAR47Findiv: ?XBAR47FindivConf = null,
+    XBAR48CLKSource: ?XBAR48CLKSourceConf = null,
+    XBAR48Prediv: ?XBAR48PredivConf = null,
+    XBAR48Findiv: ?XBAR48FindivConf = null,
+    XBAR49CLKSource: ?XBAR49CLKSourceConf = null,
+    XBAR49Prediv: ?XBAR49PredivConf = null,
+    XBAR49Findiv: ?XBAR49FindivConf = null,
+    XBAR50CLKSource: ?XBAR50CLKSourceConf = null,
+    XBAR50Prediv: ?XBAR50PredivConf = null,
+    XBAR50Findiv: ?XBAR50FindivConf = null,
+    XBAR51CLKSource: ?XBAR51CLKSourceConf = null,
+    XBAR51Prediv: ?XBAR51PredivConf = null,
+    XBAR51Findiv: ?XBAR51FindivConf = null,
+    XBAR52CLKSource: ?XBAR52CLKSourceConf = null,
+    XBAR52Prediv: ?XBAR52PredivConf = null,
+    XBAR52Findiv: ?XBAR52FindivConf = null,
+    XBAR53CLKSource: ?XBAR53CLKSourceConf = null,
+    XBAR53Prediv: ?XBAR53PredivConf = null,
+    XBAR53Findiv: ?XBAR53FindivConf = null,
+    XBAR54CLKSource: ?XBAR54CLKSourceConf = null,
+    XBAR54Prediv: ?XBAR54PredivConf = null,
+    XBAR54Findiv: ?XBAR54FindivConf = null,
+    XBAR55CLKSource: ?XBAR55CLKSourceConf = null,
+    XBAR55Prediv: ?XBAR55PredivConf = null,
+    XBAR55Findiv: ?XBAR55FindivConf = null,
+    XBAR56CLKSource: ?XBAR56CLKSourceConf = null,
+    XBAR56Prediv: ?XBAR56PredivConf = null,
+    XBAR56Findiv: ?XBAR56FindivConf = null,
+    XBAR57CLKSource: ?XBAR57CLKSourceConf = null,
+    XBAR57Prediv: ?XBAR57PredivConf = null,
+    XBAR57Findiv: ?XBAR57FindivConf = null,
+    XBAR58CLKSource: ?XBAR58CLKSourceConf = null,
+    XBAR58Prediv: ?XBAR58PredivConf = null,
+    XBAR58Findiv: ?XBAR58FindivConf = null,
+    XBAR59CLKSource: ?XBAR59CLKSourceConf = null,
+    XBAR59Prediv: ?XBAR59PredivConf = null,
+    XBAR59Findiv: ?XBAR59FindivConf = null,
+    XBAR60CLKSource: ?XBAR60CLKSourceConf = null,
+    XBAR60Prediv: ?XBAR60PredivConf = null,
+    XBAR60Findiv: ?XBAR60FindivConf = null,
+    XBAR61CLKSource: ?XBAR61CLKSourceConf = null,
+    XBAR61Prediv: ?XBAR61PredivConf = null,
+    XBAR61Findiv: ?XBAR61FindivConf = null,
+    XBAR62CLKSource: ?XBAR62CLKSourceConf = null,
+    XBAR62Prediv: ?XBAR62PredivConf = null,
+    XBAR62Findiv: ?XBAR62FindivConf = null,
+    XBAR63CLKSource: ?XBAR63CLKSourceConf = null,
+    XBAR63Prediv: ?XBAR63PredivConf = null,
+    XBAR63Findiv: ?XBAR63FindivConf = null,
+    CKINTSELCLKSource: ?CKINTSELCLKSourceConf = null,
+    CKEXTSELCLKSource: ?CKEXTSELCLKSourceConf = null,
+    CKINTSELCLKSource1: ?CKINTSELCLKSource1Conf = null,
+    CKEXTSELCLKSource1: ?CKEXTSELCLKSource1Conf = null,
+    OBS0Source: ?OBS0SourceConf = null,
+    OBS1Source: ?OBS1SourceConf = null,
+    RCC_MCO1Source: ?RCC_MCO1SourceConf = null,
+    RCC_MCO2Source: ?RCC_MCO2SourceConf = null,
+    D3PERCLKSource: ?D3PERCLKSourceConf = null,
+    DTSCLKSource: ?DTSCLKSourceConf = null,
+    DSIPHYCLKSource: ?DSIPHYCLKSourceConf = null,
+    DSIBLANECLKSource: ?DSIBLANECLKSourceConf = null,
+    USB2PHY1CLKSource: ?USB2PHY1CLKSourceConf = null,
+    USB2PHY2CLKSource: ?USB2PHY2CLKSourceConf = null,
+    USB3PCIPHYCLKSource: ?USB3PCIPHYCLKSourceConf = null,
+    MCUCLKSource: ?MCUCLKSourceConf = null,
+    MCU_Div: ?MCU_DivConf = null,
+    APB3DIV: ?APB3DIVConf = null,
+    APB4DIV: ?APB4DIVConf = null,
+    APBDBGDIV: ?APBDBGDIVConf = null,
+    APB1DIV: ?APB1DIVConf = null,
+    APB2DIV: ?APB2DIVConf = null,
+    ADC12CLockSelection: ?ADC12CLockSelectionConf = null,
+    ADC3CLockSelection: ?ADC3CLockSelectionConf = null,
+    LVDSCLockSelection: ?LVDSCLockSelectionConf = null,
+    PLL1Source: ?PLL1SourceConf = null,
+    FREFDIV1: ?FREFDIV1Conf = null,
+    PLL2Source: ?PLL2SourceConf = null,
+    FREFDIV2: ?FREFDIV2Conf = null,
+    PLL3Source: ?PLL3SourceConf = null,
+    FREFDIV3: ?FREFDIV3Conf = null,
+    PLL4Source: ?PLL4SourceConf = null,
+    FREFDIV4: ?FREFDIV4Conf = null,
+    FBDIV1: ?FBDIV1Conf = null,
+    POSTDIV1_1: ?POSTDIV1_1Conf = null,
+    POSTDIV2_1: ?POSTDIV2_1Conf = null,
+    FBDIV2: ?FBDIV2Conf = null,
+    PLL2FRACV: ?PLL2FRACVConf = null,
+    POSTDIV1_2: ?POSTDIV1_2Conf = null,
+    POSTDIV2_2: ?POSTDIV2_2Conf = null,
+    FBDIV3: ?FBDIV3Conf = null,
+    PLL3FRACV: ?PLL3FRACVConf = null,
+    POSTDIV1_3: ?POSTDIV1_3Conf = null,
+    POSTDIV2_3: ?POSTDIV2_3Conf = null,
+    FBDIV4: ?FBDIV4Conf = null,
+    PLL4FRACV: ?PLL4FRACVConf = null,
+    POSTDIV1_4: ?POSTDIV1_4Conf = null,
+    POSTDIV2_4: ?POSTDIV2_4Conf = null,
+    PLL5Source: ?PLL5SourceConf = null,
+    FREFDIV5: ?FREFDIV5Conf = null,
+    FBDIV5: ?FBDIV5Conf = null,
+    PLL5FRACV: ?PLL5FRACVConf = null,
+    POSTDIV1_5: ?POSTDIV1_5Conf = null,
+    POSTDIV2_5: ?POSTDIV2_5Conf = null,
+    PLL6Source: ?PLL6SourceConf = null,
+    FREFDIV6: ?FREFDIV6Conf = null,
+    FBDIV6: ?FBDIV6Conf = null,
+    PLL6FRACV: ?PLL6FRACVConf = null,
+    POSTDIV1_6: ?POSTDIV1_6Conf = null,
+    POSTDIV2_6: ?POSTDIV2_6Conf = null,
+    PLL7Source: ?PLL7SourceConf = null,
+    FREFDIV7: ?FREFDIV7Conf = null,
+    FBDIV7: ?FBDIV7Conf = null,
+    PLL7FRACV: ?PLL7FRACVConf = null,
+    POSTDIV1_7: ?POSTDIV1_7Conf = null,
+    POSTDIV2_7: ?POSTDIV2_7Conf = null,
+    PLL8Source: ?PLL8SourceConf = null,
+    FREFDIV8: ?FREFDIV8Conf = null,
+    FBDIV8: ?FBDIV8Conf = null,
+    PLL8FRACV: ?PLL8FRACVConf = null,
+    POSTDIV1_8: ?POSTDIV1_8Conf = null,
+    POSTDIV2_8: ?POSTDIV2_8Conf = null,
+    RCC_RTC_Clock_Source_FROM_HSE: ?RCC_RTC_Clock_Source_FROM_HSEConf = null,
+    RTCCLockSelectionVirtual: ?RTCCLockSelectionVirtualConf = null,
+    HSE_Timout: ?HSE_TimoutConf = null,
+    LSE_Timout: ?LSE_TimoutConf = null,
+    RCC_TIM_G1_PRescaler_Selection: ?RCC_TIM_G1_PRescaler_SelectionConf = null,
+    RCC_TIM_G2_PRescaler_Selection: ?RCC_TIM_G2_PRescaler_SelectionConf = null,
+    LSE_Drive_Capability: ?LSE_Drive_CapabilityConf = null,
     pub fn into_config(self: *const ConfigWithRef) Config {
         return .{
             .HSEOSC = self.HSE_VALUE,
@@ -4809,7 +4313,7 @@ pub const ClockTree = struct {
         };
         const HSEOSCval = ClockNodeTypes{
             .source = .{
-                .value = config.HSEOSC.get(),
+                .value = if (config.HSEOSC) |val| val.get() else 40000000,
                 .limit = .{ .max = 48000000, .min = 16000000 },
             },
         };
@@ -4817,7 +4321,21 @@ pub const ClockTree = struct {
             .name = "HSEOSC",
             .Nodetype = HSEOSCval,
         };
-        const HSEDIV2val = ClockNodeTypes{ .div = .{ .value = config.HSEDIV2.get() } };
+        const HSEDIV2val = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.HSEDIV2) |val| {
+                    switch (val) {
+                        .@"2",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 2;
+                }
+            },
+        } };
         const HSEDIV2: ClockNode = .{
             .name = "HSEDIV2",
             .Nodetype = HSEDIV2val,
@@ -4825,7 +4343,7 @@ pub const ClockTree = struct {
         };
         const SPDIFval = ClockNodeTypes{
             .source = .{
-                .value = config.SPDIF.get(),
+                .value = if (config.SPDIF) |val| val.get() else 12288000,
                 .limit = .{ .max = 12288000, .min = 3072000 },
             },
         };
@@ -4842,7 +4360,7 @@ pub const ClockTree = struct {
         };
         const LSEOSCval = ClockNodeTypes{
             .source = .{
-                .value = config.LSEOSC.get(),
+                .value = if (config.LSEOSC) |val| val.get() else 32768,
                 .limit = .{ .max = 1000000, .min = 0 },
             },
         };
@@ -4850,9 +4368,22 @@ pub const ClockTree = struct {
             .name = "LSEOSC",
             .Nodetype = LSEOSCval,
         };
-        const MSIRCval = ClockNodeTypes{
-            .source = .{ .value = config.MSIRC.get() },
-        };
+        const MSIRCval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.MSIRC) |val| {
+                    switch (val) {
+                        .RCC_MSI_16MHZ,
+                        .RCC_MSI_4MHZ,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 16;
+                }
+            },
+        } };
         const MSIRC: ClockNode = .{
             .name = "MSIRC",
             .Nodetype = MSIRCval,
@@ -4864,7 +4395,23 @@ pub const ClockTree = struct {
             .name = "I2S_CKIN",
             .Nodetype = I2S_CKINval,
         };
-        const PLL4Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL4Source) };
+        const PLL4Sourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLL4Source) |val| {
+                    switch (val) {
+                        .RCC_PLL4SOURCE_HSI,
+                        .RCC_PLL4SOURCE_MSI,
+                        .RCC_PLL4SOURCE_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const PLL4Source: ClockNode = .{
             .name = "PLL4Source",
             .Nodetype = PLL4Sourceval,
@@ -4877,7 +4424,7 @@ pub const ClockTree = struct {
         };
         const FREFDIV4val = ClockNodeTypes{
             .div = .{
-                .value = config.FREFDIV4.get(),
+                .value = if (config.FREFDIV4) |val| val.get() else 1,
                 .limit = .{ .max = 63, .min = 1 },
             },
         };
@@ -4888,7 +4435,7 @@ pub const ClockTree = struct {
         };
         const PLL4FRACVval = ClockNodeTypes{
             .source = .{
-                .value = config.PLL4FRACV.get(),
+                .value = if (config.PLL4FRACV) |val| val.get() else 0,
                 .limit = .{ .max = 16777215, .min = 0 },
             },
         };
@@ -4898,7 +4445,7 @@ pub const ClockTree = struct {
         };
         const FBDIV4val = ClockNodeTypes{
             .mulfrac = .{
-                .value = config.FBDIV4.get(),
+                .value = if (config.FBDIV4) |val| val.get() else 12297829382473034410,
                 .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
             },
         };
@@ -4909,7 +4456,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV1_4val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV1_4.get(),
+                .value = if (config.POSTDIV1_4) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -4920,7 +4467,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV2_4val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV2_4.get(),
+                .value = if (config.POSTDIV2_4) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -4937,7 +4484,23 @@ pub const ClockTree = struct {
             .Nodetype = FOUTPOSTDIV4val,
             .parents = &[_]*const ClockNode{&POSTDIV2_4},
         };
-        const PLL5Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL5Source) };
+        const PLL5Sourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLL5Source) |val| {
+                    switch (val) {
+                        .RCC_PLL5SOURCE_HSI,
+                        .RCC_PLL5SOURCE_MSI,
+                        .RCC_PLL5SOURCE_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const PLL5Source: ClockNode = .{
             .name = "PLL5Source",
             .Nodetype = PLL5Sourceval,
@@ -4950,7 +4513,7 @@ pub const ClockTree = struct {
         };
         const FREFDIV5val = ClockNodeTypes{
             .div = .{
-                .value = config.FREFDIV5.get(),
+                .value = if (config.FREFDIV5) |val| val.get() else 1,
                 .limit = .{ .max = 63, .min = 1 },
             },
         };
@@ -4961,7 +4524,7 @@ pub const ClockTree = struct {
         };
         const PLL5FRACVval = ClockNodeTypes{
             .source = .{
-                .value = config.PLL5FRACV.get(),
+                .value = if (config.PLL5FRACV) |val| val.get() else 0,
                 .limit = .{ .max = 16777215, .min = 0 },
             },
         };
@@ -4971,7 +4534,7 @@ pub const ClockTree = struct {
         };
         const FBDIV5val = ClockNodeTypes{
             .mulfrac = .{
-                .value = config.FBDIV5.get(),
+                .value = if (config.FBDIV5) |val| val.get() else 12297829382473034410,
                 .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
             },
         };
@@ -4982,7 +4545,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV1_5val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV1_5.get(),
+                .value = if (config.POSTDIV1_5) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -4993,7 +4556,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV2_5val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV2_5.get(),
+                .value = if (config.POSTDIV2_5) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -5010,7 +4573,23 @@ pub const ClockTree = struct {
             .Nodetype = FOUTPOSTDIV5val,
             .parents = &[_]*const ClockNode{&POSTDIV2_5},
         };
-        const PLL6Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL6Source) };
+        const PLL6Sourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLL6Source) |val| {
+                    switch (val) {
+                        .RCC_PLL6SOURCE_HSI,
+                        .RCC_PLL6SOURCE_MSI,
+                        .RCC_PLL6SOURCE_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const PLL6Source: ClockNode = .{
             .name = "PLL6Source",
             .Nodetype = PLL6Sourceval,
@@ -5023,7 +4602,7 @@ pub const ClockTree = struct {
         };
         const FREFDIV6val = ClockNodeTypes{
             .div = .{
-                .value = config.FREFDIV6.get(),
+                .value = if (config.FREFDIV6) |val| val.get() else 1,
                 .limit = .{ .max = 63, .min = 1 },
             },
         };
@@ -5034,7 +4613,7 @@ pub const ClockTree = struct {
         };
         const PLL6FRACVval = ClockNodeTypes{
             .source = .{
-                .value = config.PLL6FRACV.get(),
+                .value = if (config.PLL6FRACV) |val| val.get() else 0,
                 .limit = .{ .max = 16777215, .min = 0 },
             },
         };
@@ -5044,7 +4623,7 @@ pub const ClockTree = struct {
         };
         const FBDIV6val = ClockNodeTypes{
             .mulfrac = .{
-                .value = config.FBDIV6.get(),
+                .value = if (config.FBDIV6) |val| val.get() else 12297829382473034410,
                 .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
             },
         };
@@ -5055,7 +4634,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV1_6val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV1_6.get(),
+                .value = if (config.POSTDIV1_6) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -5066,7 +4645,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV2_6val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV2_6.get(),
+                .value = if (config.POSTDIV2_6) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -5083,7 +4662,23 @@ pub const ClockTree = struct {
             .Nodetype = FOUTPOSTDIV6val,
             .parents = &[_]*const ClockNode{&POSTDIV2_6},
         };
-        const PLL7Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL7Source) };
+        const PLL7Sourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLL7Source) |val| {
+                    switch (val) {
+                        .RCC_PLL7SOURCE_HSI,
+                        .RCC_PLL7SOURCE_MSI,
+                        .RCC_PLL7SOURCE_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const PLL7Source: ClockNode = .{
             .name = "PLL7Source",
             .Nodetype = PLL7Sourceval,
@@ -5096,7 +4691,7 @@ pub const ClockTree = struct {
         };
         const FREFDIV7val = ClockNodeTypes{
             .div = .{
-                .value = config.FREFDIV7.get(),
+                .value = if (config.FREFDIV7) |val| val.get() else 1,
                 .limit = .{ .max = 63, .min = 1 },
             },
         };
@@ -5107,7 +4702,7 @@ pub const ClockTree = struct {
         };
         const PLL7FRACVval = ClockNodeTypes{
             .source = .{
-                .value = config.PLL7FRACV.get(),
+                .value = if (config.PLL7FRACV) |val| val.get() else 0,
                 .limit = .{ .max = 16777215, .min = 0 },
             },
         };
@@ -5117,7 +4712,7 @@ pub const ClockTree = struct {
         };
         const FBDIV7val = ClockNodeTypes{
             .mulfrac = .{
-                .value = config.FBDIV7.get(),
+                .value = if (config.FBDIV7) |val| val.get() else 12297829382473034410,
                 .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
             },
         };
@@ -5128,7 +4723,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV1_7val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV1_7.get(),
+                .value = if (config.POSTDIV1_7) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -5139,7 +4734,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV2_7val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV2_7.get(),
+                .value = if (config.POSTDIV2_7) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -5156,7 +4751,23 @@ pub const ClockTree = struct {
             .Nodetype = FOUTPOSTDIV7val,
             .parents = &[_]*const ClockNode{&POSTDIV2_7},
         };
-        const PLL8Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL8Source) };
+        const PLL8Sourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLL8Source) |val| {
+                    switch (val) {
+                        .RCC_PLL8SOURCE_HSI,
+                        .RCC_PLL8SOURCE_MSI,
+                        .RCC_PLL8SOURCE_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const PLL8Source: ClockNode = .{
             .name = "PLL8Source",
             .Nodetype = PLL8Sourceval,
@@ -5169,7 +4780,7 @@ pub const ClockTree = struct {
         };
         const FREFDIV8val = ClockNodeTypes{
             .div = .{
-                .value = config.FREFDIV8.get(),
+                .value = if (config.FREFDIV8) |val| val.get() else 1,
                 .limit = .{ .max = 63, .min = 1 },
             },
         };
@@ -5180,7 +4791,7 @@ pub const ClockTree = struct {
         };
         const PLL8FRACVval = ClockNodeTypes{
             .source = .{
-                .value = config.PLL8FRACV.get(),
+                .value = if (config.PLL8FRACV) |val| val.get() else 0,
                 .limit = .{ .max = 16777215, .min = 0 },
             },
         };
@@ -5190,7 +4801,7 @@ pub const ClockTree = struct {
         };
         const FBDIV8val = ClockNodeTypes{
             .mulfrac = .{
-                .value = config.FBDIV8.get(),
+                .value = if (config.FBDIV8) |val| val.get() else 12297829382473034410,
                 .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
             },
         };
@@ -5201,7 +4812,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV1_8val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV1_8.get(),
+                .value = if (config.POSTDIV1_8) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -5212,7 +4823,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV2_8val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV2_8.get(),
+                .value = if (config.POSTDIV2_8) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -5229,7 +4840,32 @@ pub const ClockTree = struct {
             .Nodetype = FOUTPOSTDIV8val,
             .parents = &[_]*const ClockNode{&POSTDIV2_8},
         };
-        const XBAR0val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR0) };
+        const XBAR0val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR0) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR0: ClockNode = .{
             .name = "XBAR0",
             .Nodetype = XBAR0val,
@@ -5249,7 +4885,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR0Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR0Prediv.get() } };
+        const XBAR0Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR0Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR0Prediv: ClockNode = .{
             .name = "XBAR0Prediv",
             .Nodetype = XBAR0Predivval,
@@ -5257,7 +4910,7 @@ pub const ClockTree = struct {
         };
         const XBAR0Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR0Findiv.get(),
+                .value = if (config.XBAR0Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5274,7 +4927,32 @@ pub const ClockTree = struct {
             .Nodetype = XBAR0Outputval,
             .parents = &[_]*const ClockNode{&XBAR0Findiv},
         };
-        const XBAR1val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR1) };
+        const XBAR1val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR1) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR1: ClockNode = .{
             .name = "XBAR1",
             .Nodetype = XBAR1val,
@@ -5294,7 +4972,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR1Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR1Prediv.get() } };
+        const XBAR1Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR1Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR1Prediv: ClockNode = .{
             .name = "XBAR1Prediv",
             .Nodetype = XBAR1Predivval,
@@ -5302,7 +4997,7 @@ pub const ClockTree = struct {
         };
         const XBAR1Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR1Findiv.get(),
+                .value = if (config.XBAR1Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5319,7 +5014,32 @@ pub const ClockTree = struct {
             .Nodetype = XBAR1Outputval,
             .parents = &[_]*const ClockNode{&XBAR1Findiv},
         };
-        const XBAR2val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR2) };
+        const XBAR2val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR2) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR2: ClockNode = .{
             .name = "XBAR2",
             .Nodetype = XBAR2val,
@@ -5339,7 +5059,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR2Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR2Prediv.get() } };
+        const XBAR2Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR2Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR2Prediv: ClockNode = .{
             .name = "XBAR2Prediv",
             .Nodetype = XBAR2Predivval,
@@ -5347,7 +5084,7 @@ pub const ClockTree = struct {
         };
         const XBAR2Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR2Findiv.get(),
+                .value = if (config.XBAR2Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5364,7 +5101,32 @@ pub const ClockTree = struct {
             .Nodetype = XBAR2Outputval,
             .parents = &[_]*const ClockNode{&XBAR2Findiv},
         };
-        const XBAR3val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR3) };
+        const XBAR3val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR3) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR3: ClockNode = .{
             .name = "XBAR3",
             .Nodetype = XBAR3val,
@@ -5384,7 +5146,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR3Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR3Prediv.get() } };
+        const XBAR3Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR3Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR3Prediv: ClockNode = .{
             .name = "XBAR3Prediv",
             .Nodetype = XBAR3Predivval,
@@ -5392,7 +5171,7 @@ pub const ClockTree = struct {
         };
         const XBAR3Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR3Findiv.get(),
+                .value = if (config.XBAR3Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5409,7 +5188,32 @@ pub const ClockTree = struct {
             .Nodetype = XBAR3Outputval,
             .parents = &[_]*const ClockNode{&XBAR3Findiv},
         };
-        const XBAR4val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR4) };
+        const XBAR4val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR4) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR4: ClockNode = .{
             .name = "XBAR4",
             .Nodetype = XBAR4val,
@@ -5429,7 +5233,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR4Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR4Prediv.get() } };
+        const XBAR4Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR4Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR4Prediv: ClockNode = .{
             .name = "XBAR4Prediv",
             .Nodetype = XBAR4Predivval,
@@ -5437,7 +5258,7 @@ pub const ClockTree = struct {
         };
         const XBAR4Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR4Findiv.get(),
+                .value = if (config.XBAR4Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5454,7 +5275,32 @@ pub const ClockTree = struct {
             .Nodetype = XBAR4Outputval,
             .parents = &[_]*const ClockNode{&XBAR4Findiv},
         };
-        const XBAR5val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR5) };
+        const XBAR5val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR5) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR5: ClockNode = .{
             .name = "XBAR5",
             .Nodetype = XBAR5val,
@@ -5474,7 +5320,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR5Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR5Prediv.get() } };
+        const XBAR5Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR5Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR5Prediv: ClockNode = .{
             .name = "XBAR5Prediv",
             .Nodetype = XBAR5Predivval,
@@ -5482,7 +5345,7 @@ pub const ClockTree = struct {
         };
         const XBAR5Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR5Findiv.get(),
+                .value = if (config.XBAR5Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5499,7 +5362,32 @@ pub const ClockTree = struct {
             .Nodetype = XBAR5Outputval,
             .parents = &[_]*const ClockNode{&XBAR5Findiv},
         };
-        const XBAR6val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR6) };
+        const XBAR6val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR6) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR6: ClockNode = .{
             .name = "XBAR6",
             .Nodetype = XBAR6val,
@@ -5519,7 +5407,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR6Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR6Prediv.get() } };
+        const XBAR6Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR6Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR6Prediv: ClockNode = .{
             .name = "XBAR6Prediv",
             .Nodetype = XBAR6Predivval,
@@ -5527,7 +5432,7 @@ pub const ClockTree = struct {
         };
         const XBAR6Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR6Findiv.get(),
+                .value = if (config.XBAR6Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5544,7 +5449,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR6Outputval,
             .parents = &[_]*const ClockNode{&XBAR6Findiv},
         };
-        const XBAR7val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR7) };
+        const XBAR7val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR7) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR7: ClockNode = .{
             .name = "XBAR7",
             .Nodetype = XBAR7val,
@@ -5559,7 +5484,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR7Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR7Prediv.get() } };
+        const XBAR7Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR7Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR7Prediv: ClockNode = .{
             .name = "XBAR7Prediv",
             .Nodetype = XBAR7Predivval,
@@ -5567,7 +5509,7 @@ pub const ClockTree = struct {
         };
         const XBAR7Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR7Findiv.get(),
+                .value = if (config.XBAR7Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5584,7 +5526,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR7Outputval,
             .parents = &[_]*const ClockNode{&XBAR7Findiv},
         };
-        const XBAR8val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR8) };
+        const XBAR8val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR8) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR8: ClockNode = .{
             .name = "XBAR8",
             .Nodetype = XBAR8val,
@@ -5600,7 +5563,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR8Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR8Prediv.get() } };
+        const XBAR8Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR8Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR8Prediv: ClockNode = .{
             .name = "XBAR8Prediv",
             .Nodetype = XBAR8Predivval,
@@ -5608,7 +5588,7 @@ pub const ClockTree = struct {
         };
         const XBAR8Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR8Findiv.get(),
+                .value = if (config.XBAR8Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5625,7 +5605,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR8Outputval,
             .parents = &[_]*const ClockNode{&XBAR8Findiv},
         };
-        const XBAR9val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR9) };
+        const XBAR9val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR9) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR9: ClockNode = .{
             .name = "XBAR9",
             .Nodetype = XBAR9val,
@@ -5641,7 +5642,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR9Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR9Prediv.get() } };
+        const XBAR9Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR9Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR9Prediv: ClockNode = .{
             .name = "XBAR9Prediv",
             .Nodetype = XBAR9Predivval,
@@ -5649,7 +5667,7 @@ pub const ClockTree = struct {
         };
         const XBAR9Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR9Findiv.get(),
+                .value = if (config.XBAR9Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5666,7 +5684,29 @@ pub const ClockTree = struct {
             .Nodetype = XBAR9Outputval,
             .parents = &[_]*const ClockNode{&XBAR9Findiv},
         };
-        const XBAR10val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR10) };
+        const XBAR10val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR10) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR10: ClockNode = .{
             .name = "XBAR10",
             .Nodetype = XBAR10val,
@@ -5683,7 +5723,24 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
-        const XBAR10Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR10Prediv.get() } };
+        const XBAR10Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR10Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR10Prediv: ClockNode = .{
             .name = "XBAR10Prediv",
             .Nodetype = XBAR10Predivval,
@@ -5691,7 +5748,7 @@ pub const ClockTree = struct {
         };
         const XBAR10Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR10Findiv.get(),
+                .value = if (config.XBAR10Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5708,7 +5765,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR10Outputval,
             .parents = &[_]*const ClockNode{&XBAR10Findiv},
         };
-        const XBAR11val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR11) };
+        const XBAR11val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR11) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR11: ClockNode = .{
             .name = "XBAR11",
             .Nodetype = XBAR11val,
@@ -5722,7 +5798,24 @@ pub const ClockTree = struct {
                 &HSIRC,
             },
         };
-        const XBAR11Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR11Prediv.get() } };
+        const XBAR11Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR11Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR11Prediv: ClockNode = .{
             .name = "XBAR11Prediv",
             .Nodetype = XBAR11Predivval,
@@ -5730,7 +5823,7 @@ pub const ClockTree = struct {
         };
         const XBAR11Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR11Findiv.get(),
+                .value = if (config.XBAR11Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5747,7 +5840,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR11Outputval,
             .parents = &[_]*const ClockNode{&XBAR11Findiv},
         };
-        const XBAR12val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR12) };
+        const XBAR12val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR12) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR12: ClockNode = .{
             .name = "XBAR12",
             .Nodetype = XBAR12val,
@@ -5762,7 +5875,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR12Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR12Prediv.get() } };
+        const XBAR12Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR12Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR12Prediv: ClockNode = .{
             .name = "XBAR12Prediv",
             .Nodetype = XBAR12Predivval,
@@ -5770,7 +5900,7 @@ pub const ClockTree = struct {
         };
         const XBAR12Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR12Findiv.get(),
+                .value = if (config.XBAR12Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5787,7 +5917,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR12Outputval,
             .parents = &[_]*const ClockNode{&XBAR12Findiv},
         };
-        const XBAR13val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR13) };
+        const XBAR13val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR13) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR13: ClockNode = .{
             .name = "XBAR13",
             .Nodetype = XBAR13val,
@@ -5802,7 +5952,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR13Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR13Prediv.get() } };
+        const XBAR13Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR13Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR13Prediv: ClockNode = .{
             .name = "XBAR13Prediv",
             .Nodetype = XBAR13Predivval,
@@ -5810,7 +5977,7 @@ pub const ClockTree = struct {
         };
         const XBAR13Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR13Findiv.get(),
+                .value = if (config.XBAR13Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5827,7 +5994,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR13Outputval,
             .parents = &[_]*const ClockNode{&XBAR13Findiv},
         };
-        const XBAR14val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR14) };
+        const XBAR14val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR14) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR14: ClockNode = .{
             .name = "XBAR14",
             .Nodetype = XBAR14val,
@@ -5842,7 +6029,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR14Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR14Prediv.get() } };
+        const XBAR14Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR14Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR14Prediv: ClockNode = .{
             .name = "XBAR14Prediv",
             .Nodetype = XBAR14Predivval,
@@ -5850,7 +6054,7 @@ pub const ClockTree = struct {
         };
         const XBAR14Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR14Findiv.get(),
+                .value = if (config.XBAR14Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5867,7 +6071,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR14Outputval,
             .parents = &[_]*const ClockNode{&XBAR14Findiv},
         };
-        const XBAR15val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR15) };
+        const XBAR15val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR15) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR15: ClockNode = .{
             .name = "XBAR15",
             .Nodetype = XBAR15val,
@@ -5882,7 +6106,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR15Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR15Prediv.get() } };
+        const XBAR15Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR15Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR15Prediv: ClockNode = .{
             .name = "XBAR15Prediv",
             .Nodetype = XBAR15Predivval,
@@ -5890,7 +6131,7 @@ pub const ClockTree = struct {
         };
         const XBAR15Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR15Findiv.get(),
+                .value = if (config.XBAR15Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5907,7 +6148,29 @@ pub const ClockTree = struct {
             .Nodetype = XBAR15Outputval,
             .parents = &[_]*const ClockNode{&XBAR15Findiv},
         };
-        const XBAR16val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR16) };
+        const XBAR16val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR16) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR16: ClockNode = .{
             .name = "XBAR16",
             .Nodetype = XBAR16val,
@@ -5924,7 +6187,24 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
-        const XBAR16Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR16Prediv.get() } };
+        const XBAR16Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR16Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR16Prediv: ClockNode = .{
             .name = "XBAR16Prediv",
             .Nodetype = XBAR16Predivval,
@@ -5932,7 +6212,7 @@ pub const ClockTree = struct {
         };
         const XBAR16Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR16Findiv.get(),
+                .value = if (config.XBAR16Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5949,7 +6229,29 @@ pub const ClockTree = struct {
             .Nodetype = XBAR16Outputval,
             .parents = &[_]*const ClockNode{&XBAR16Findiv},
         };
-        const XBAR17val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR17) };
+        const XBAR17val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR17) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR17: ClockNode = .{
             .name = "XBAR17",
             .Nodetype = XBAR17val,
@@ -5966,7 +6268,24 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
-        const XBAR17Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR17Prediv.get() } };
+        const XBAR17Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR17Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR17Prediv: ClockNode = .{
             .name = "XBAR17Prediv",
             .Nodetype = XBAR17Predivval,
@@ -5974,7 +6293,7 @@ pub const ClockTree = struct {
         };
         const XBAR17Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR17Findiv.get(),
+                .value = if (config.XBAR17Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -5991,7 +6310,29 @@ pub const ClockTree = struct {
             .Nodetype = XBAR17Outputval,
             .parents = &[_]*const ClockNode{&XBAR17Findiv},
         };
-        const XBAR18val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR18) };
+        const XBAR18val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR18) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR18: ClockNode = .{
             .name = "XBAR18",
             .Nodetype = XBAR18val,
@@ -6008,7 +6349,24 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
-        const XBAR18Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR18Prediv.get() } };
+        const XBAR18Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR18Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR18Prediv: ClockNode = .{
             .name = "XBAR18Prediv",
             .Nodetype = XBAR18Predivval,
@@ -6016,7 +6374,7 @@ pub const ClockTree = struct {
         };
         const XBAR18Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR18Findiv.get(),
+                .value = if (config.XBAR18Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6033,7 +6391,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR18Outputval,
             .parents = &[_]*const ClockNode{&XBAR18Findiv},
         };
-        const XBAR19val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR19) };
+        const XBAR19val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR19) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR19: ClockNode = .{
             .name = "XBAR19",
             .Nodetype = XBAR19val,
@@ -6049,7 +6428,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR19Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR19Prediv.get() } };
+        const XBAR19Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR19Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR19Prediv: ClockNode = .{
             .name = "XBAR19Prediv",
             .Nodetype = XBAR19Predivval,
@@ -6057,7 +6453,7 @@ pub const ClockTree = struct {
         };
         const XBAR19Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR19Findiv.get(),
+                .value = if (config.XBAR19Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6074,7 +6470,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR19Outputval,
             .parents = &[_]*const ClockNode{&XBAR19Findiv},
         };
-        const XBAR20val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR20) };
+        const XBAR20val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR20) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR20: ClockNode = .{
             .name = "XBAR20",
             .Nodetype = XBAR20val,
@@ -6090,7 +6507,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR20Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR20Prediv.get() } };
+        const XBAR20Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR20Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR20Prediv: ClockNode = .{
             .name = "XBAR20Prediv",
             .Nodetype = XBAR20Predivval,
@@ -6098,7 +6532,7 @@ pub const ClockTree = struct {
         };
         const XBAR20Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR20Findiv.get(),
+                .value = if (config.XBAR20Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6115,7 +6549,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR20Outputval,
             .parents = &[_]*const ClockNode{&XBAR20Findiv},
         };
-        const XBAR21val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR21) };
+        const XBAR21val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR21) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR21: ClockNode = .{
             .name = "XBAR21",
             .Nodetype = XBAR21val,
@@ -6131,7 +6586,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR21Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR21Prediv.get() } };
+        const XBAR21Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR21Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR21Prediv: ClockNode = .{
             .name = "XBAR21Prediv",
             .Nodetype = XBAR21Predivval,
@@ -6139,7 +6611,7 @@ pub const ClockTree = struct {
         };
         const XBAR21Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR21Findiv.get(),
+                .value = if (config.XBAR21Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6156,7 +6628,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR21Outputval,
             .parents = &[_]*const ClockNode{&XBAR21Findiv},
         };
-        const XBAR22val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR22) };
+        const XBAR22val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR22) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR22: ClockNode = .{
             .name = "XBAR22",
             .Nodetype = XBAR22val,
@@ -6172,7 +6665,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR22Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR22Prediv.get() } };
+        const XBAR22Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR22Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR22Prediv: ClockNode = .{
             .name = "XBAR22Prediv",
             .Nodetype = XBAR22Predivval,
@@ -6180,7 +6690,7 @@ pub const ClockTree = struct {
         };
         const XBAR22Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR22Findiv.get(),
+                .value = if (config.XBAR22Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6197,7 +6707,30 @@ pub const ClockTree = struct {
             .Nodetype = XBAR22Outputval,
             .parents = &[_]*const ClockNode{&XBAR22Findiv},
         };
-        const XBAR23val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR23) };
+        const XBAR23val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR23) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR23: ClockNode = .{
             .name = "XBAR23",
             .Nodetype = XBAR23val,
@@ -6215,7 +6748,24 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
-        const XBAR23Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR23Prediv.get() } };
+        const XBAR23Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR23Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR23Prediv: ClockNode = .{
             .name = "XBAR23Prediv",
             .Nodetype = XBAR23Predivval,
@@ -6223,7 +6773,7 @@ pub const ClockTree = struct {
         };
         const XBAR23Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR23Findiv.get(),
+                .value = if (config.XBAR23Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6240,7 +6790,30 @@ pub const ClockTree = struct {
             .Nodetype = XBAR23Outputval,
             .parents = &[_]*const ClockNode{&XBAR23Findiv},
         };
-        const XBAR24val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR24) };
+        const XBAR24val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR24) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR24: ClockNode = .{
             .name = "XBAR24",
             .Nodetype = XBAR24val,
@@ -6258,7 +6831,24 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
-        const XBAR24Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR24Prediv.get() } };
+        const XBAR24Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR24Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR24Prediv: ClockNode = .{
             .name = "XBAR24Prediv",
             .Nodetype = XBAR24Predivval,
@@ -6266,7 +6856,7 @@ pub const ClockTree = struct {
         };
         const XBAR24Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR24Findiv.get(),
+                .value = if (config.XBAR24Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6283,7 +6873,30 @@ pub const ClockTree = struct {
             .Nodetype = XBAR24Outputval,
             .parents = &[_]*const ClockNode{&XBAR24Findiv},
         };
-        const XBAR25val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR25) };
+        const XBAR25val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR25) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR25: ClockNode = .{
             .name = "XBAR25",
             .Nodetype = XBAR25val,
@@ -6301,7 +6914,24 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
-        const XBAR25Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR25Prediv.get() } };
+        const XBAR25Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR25Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR25Prediv: ClockNode = .{
             .name = "XBAR25Prediv",
             .Nodetype = XBAR25Predivval,
@@ -6309,7 +6939,7 @@ pub const ClockTree = struct {
         };
         const XBAR25Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR25Findiv.get(),
+                .value = if (config.XBAR25Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6326,7 +6956,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR25Outputval,
             .parents = &[_]*const ClockNode{&XBAR25Findiv},
         };
-        const XBAR26val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR26) };
+        const XBAR26val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR26) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR26: ClockNode = .{
             .name = "XBAR26",
             .Nodetype = XBAR26val,
@@ -6340,7 +6989,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR26Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR26Prediv.get() } };
+        const XBAR26Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR26Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR26Prediv: ClockNode = .{
             .name = "XBAR26Prediv",
             .Nodetype = XBAR26Predivval,
@@ -6348,7 +7014,7 @@ pub const ClockTree = struct {
         };
         const XBAR26Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR26Findiv.get(),
+                .value = if (config.XBAR26Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6365,7 +7031,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR26Outputval,
             .parents = &[_]*const ClockNode{&XBAR26Findiv},
         };
-        const XBAR27val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR27) };
+        const XBAR27val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR27) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR27: ClockNode = .{
             .name = "XBAR27",
             .Nodetype = XBAR27val,
@@ -6378,7 +7062,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR27Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR27Prediv.get() } };
+        const XBAR27Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR27Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR27Prediv: ClockNode = .{
             .name = "XBAR27Prediv",
             .Nodetype = XBAR27Predivval,
@@ -6386,7 +7087,7 @@ pub const ClockTree = struct {
         };
         const XBAR27Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR27Findiv.get(),
+                .value = if (config.XBAR27Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6403,7 +7104,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR27Outputval,
             .parents = &[_]*const ClockNode{&XBAR27Findiv},
         };
-        const XBAR28val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR28) };
+        const XBAR28val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR28) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR28: ClockNode = .{
             .name = "XBAR28",
             .Nodetype = XBAR28val,
@@ -6417,7 +7137,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR28Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR28Prediv.get() } };
+        const XBAR28Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR28Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR28Prediv: ClockNode = .{
             .name = "XBAR28Prediv",
             .Nodetype = XBAR28Predivval,
@@ -6425,7 +7162,7 @@ pub const ClockTree = struct {
         };
         const XBAR28Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR28Findiv.get(),
+                .value = if (config.XBAR28Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6442,7 +7179,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR28Outputval,
             .parents = &[_]*const ClockNode{&XBAR28Findiv},
         };
-        const XBAR29val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR29) };
+        const XBAR29val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR29) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR29: ClockNode = .{
             .name = "XBAR29",
             .Nodetype = XBAR29val,
@@ -6455,7 +7210,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR29Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR29Prediv.get() } };
+        const XBAR29Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR29Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR29Prediv: ClockNode = .{
             .name = "XBAR29Prediv",
             .Nodetype = XBAR29Predivval,
@@ -6463,7 +7235,7 @@ pub const ClockTree = struct {
         };
         const XBAR29Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR29Findiv.get(),
+                .value = if (config.XBAR29Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6480,7 +7252,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR29Outputval,
             .parents = &[_]*const ClockNode{&XBAR29Findiv},
         };
-        const XBAR30val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR30) };
+        const XBAR30val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR30) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR30: ClockNode = .{
             .name = "XBAR30",
             .Nodetype = XBAR30val,
@@ -6494,7 +7285,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR30Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR30Prediv.get() } };
+        const XBAR30Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR30Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR30Prediv: ClockNode = .{
             .name = "XBAR30Prediv",
             .Nodetype = XBAR30Predivval,
@@ -6502,7 +7310,7 @@ pub const ClockTree = struct {
         };
         const XBAR30Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR30Findiv.get(),
+                .value = if (config.XBAR30Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6519,7 +7327,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR30Outputval,
             .parents = &[_]*const ClockNode{&XBAR30Findiv},
         };
-        const XBAR31val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR31) };
+        const XBAR31val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR31) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR31: ClockNode = .{
             .name = "XBAR31",
             .Nodetype = XBAR31val,
@@ -6533,7 +7360,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR31Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR31Prediv.get() } };
+        const XBAR31Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR31Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR31Prediv: ClockNode = .{
             .name = "XBAR31Prediv",
             .Nodetype = XBAR31Predivval,
@@ -6541,7 +7385,7 @@ pub const ClockTree = struct {
         };
         const XBAR31Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR31Findiv.get(),
+                .value = if (config.XBAR31Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6558,7 +7402,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR31Outputval,
             .parents = &[_]*const ClockNode{&XBAR31Findiv},
         };
-        const XBAR32val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR32) };
+        const XBAR32val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR32) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR32: ClockNode = .{
             .name = "XBAR32",
             .Nodetype = XBAR32val,
@@ -6572,7 +7435,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR32Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR32Prediv.get() } };
+        const XBAR32Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR32Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR32Prediv: ClockNode = .{
             .name = "XBAR32Prediv",
             .Nodetype = XBAR32Predivval,
@@ -6580,7 +7460,7 @@ pub const ClockTree = struct {
         };
         const XBAR32Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR32Findiv.get(),
+                .value = if (config.XBAR32Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6597,7 +7477,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR32Outputval,
             .parents = &[_]*const ClockNode{&XBAR32Findiv},
         };
-        const XBAR33val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR33) };
+        const XBAR33val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR33) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR33: ClockNode = .{
             .name = "XBAR33",
             .Nodetype = XBAR33val,
@@ -6612,7 +7512,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR33Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR33Prediv.get() } };
+        const XBAR33Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR33Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR33Prediv: ClockNode = .{
             .name = "XBAR33Prediv",
             .Nodetype = XBAR33Predivval,
@@ -6620,7 +7537,7 @@ pub const ClockTree = struct {
         };
         const XBAR33Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR33Findiv.get(),
+                .value = if (config.XBAR33Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6637,7 +7554,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR33Outputval,
             .parents = &[_]*const ClockNode{&XBAR33Findiv},
         };
-        const XBAR34val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR34) };
+        const XBAR34val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR34) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR34: ClockNode = .{
             .name = "XBAR34",
             .Nodetype = XBAR34val,
@@ -6651,7 +7587,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR34Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR34Prediv.get() } };
+        const XBAR34Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR34Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR34Prediv: ClockNode = .{
             .name = "XBAR34Prediv",
             .Nodetype = XBAR34Predivval,
@@ -6659,7 +7612,7 @@ pub const ClockTree = struct {
         };
         const XBAR34Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR34Findiv.get(),
+                .value = if (config.XBAR34Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6676,7 +7629,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR34Outputval,
             .parents = &[_]*const ClockNode{&XBAR34Findiv},
         };
-        const XBAR35val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR35) };
+        const XBAR35val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR35) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR35: ClockNode = .{
             .name = "XBAR35",
             .Nodetype = XBAR35val,
@@ -6691,7 +7664,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR35Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR35Prediv.get() } };
+        const XBAR35Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR35Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR35Prediv: ClockNode = .{
             .name = "XBAR35Prediv",
             .Nodetype = XBAR35Predivval,
@@ -6699,7 +7689,7 @@ pub const ClockTree = struct {
         };
         const XBAR35Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR35Findiv.get(),
+                .value = if (config.XBAR35Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6716,7 +7706,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR35Outputval,
             .parents = &[_]*const ClockNode{&XBAR35Findiv},
         };
-        const XBAR36val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR36) };
+        const XBAR36val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR36) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 6;
+                }
+            },
+        };
         const XBAR36: ClockNode = .{
             .name = "XBAR36",
             .Nodetype = XBAR36val,
@@ -6731,7 +7741,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR36Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR36Prediv.get() } };
+        const XBAR36Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR36Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR36Prediv: ClockNode = .{
             .name = "XBAR36Prediv",
             .Nodetype = XBAR36Predivval,
@@ -6739,7 +7766,7 @@ pub const ClockTree = struct {
         };
         const XBAR36Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR36Findiv.get(),
+                .value = if (config.XBAR36Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6756,7 +7783,29 @@ pub const ClockTree = struct {
             .Nodetype = XBAR36Outputval,
             .parents = &[_]*const ClockNode{&XBAR36Findiv},
         };
-        const XBAR37val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR37) };
+        const XBAR37val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR37) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR37: ClockNode = .{
             .name = "XBAR37",
             .Nodetype = XBAR37val,
@@ -6773,7 +7822,24 @@ pub const ClockTree = struct {
                 &I2S_CKIN,
             },
         };
-        const XBAR37Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR37Prediv.get() } };
+        const XBAR37Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR37Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR37Prediv: ClockNode = .{
             .name = "XBAR37Prediv",
             .Nodetype = XBAR37Predivval,
@@ -6781,7 +7847,7 @@ pub const ClockTree = struct {
         };
         const XBAR37Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR37Findiv.get(),
+                .value = if (config.XBAR37Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6798,7 +7864,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR37Outputval,
             .parents = &[_]*const ClockNode{&XBAR37Findiv},
         };
-        const XBAR38val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR38) };
+        const XBAR38val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR38) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR38: ClockNode = .{
             .name = "XBAR38",
             .Nodetype = XBAR38val,
@@ -6813,7 +7899,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR38Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR38Prediv.get() } };
+        const XBAR38Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR38Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR38Prediv: ClockNode = .{
             .name = "XBAR38Prediv",
             .Nodetype = XBAR38Predivval,
@@ -6821,7 +7924,7 @@ pub const ClockTree = struct {
         };
         const XBAR38Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR38Findiv.get(),
+                .value = if (config.XBAR38Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6838,7 +7941,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR38Outputval,
             .parents = &[_]*const ClockNode{&XBAR38Findiv},
         };
-        const XBAR39val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR39) };
+        const XBAR39val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR39) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR39: ClockNode = .{
             .name = "XBAR39",
             .Nodetype = XBAR39val,
@@ -6854,7 +7978,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR39Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR39Prediv.get() } };
+        const XBAR39Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR39Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR39Prediv: ClockNode = .{
             .name = "XBAR39Prediv",
             .Nodetype = XBAR39Predivval,
@@ -6862,7 +8003,7 @@ pub const ClockTree = struct {
         };
         const XBAR39Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR39Findiv.get(),
+                .value = if (config.XBAR39Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6879,7 +8020,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR39Outputval,
             .parents = &[_]*const ClockNode{&XBAR39Findiv},
         };
-        const XBAR40val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR40) };
+        const XBAR40val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR40) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR40: ClockNode = .{
             .name = "XBAR40",
             .Nodetype = XBAR40val,
@@ -6894,7 +8055,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR40Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR40Prediv.get() } };
+        const XBAR40Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR40Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR40Prediv: ClockNode = .{
             .name = "XBAR40Prediv",
             .Nodetype = XBAR40Predivval,
@@ -6902,7 +8080,7 @@ pub const ClockTree = struct {
         };
         const XBAR40Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR40Findiv.get(),
+                .value = if (config.XBAR40Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6919,7 +8097,27 @@ pub const ClockTree = struct {
             .Nodetype = XBAR40Outputval,
             .parents = &[_]*const ClockNode{&XBAR40Findiv},
         };
-        const XBAR41val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR41) };
+        const XBAR41val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR41) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR41: ClockNode = .{
             .name = "XBAR41",
             .Nodetype = XBAR41val,
@@ -6934,7 +8132,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR41Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR41Prediv.get() } };
+        const XBAR41Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR41Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR41Prediv: ClockNode = .{
             .name = "XBAR41Prediv",
             .Nodetype = XBAR41Predivval,
@@ -6942,7 +8157,7 @@ pub const ClockTree = struct {
         };
         const XBAR41Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR41Findiv.get(),
+                .value = if (config.XBAR41Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -6959,7 +8174,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR41Outputval,
             .parents = &[_]*const ClockNode{&XBAR41Findiv},
         };
-        const XBAR42val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR42) };
+        const XBAR42val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR42) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR42: ClockNode = .{
             .name = "XBAR42",
             .Nodetype = XBAR42val,
@@ -6975,7 +8211,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR42Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR42Prediv.get() } };
+        const XBAR42Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR42Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR42Prediv: ClockNode = .{
             .name = "XBAR42Prediv",
             .Nodetype = XBAR42Predivval,
@@ -6983,7 +8236,7 @@ pub const ClockTree = struct {
         };
         const XBAR42Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR42Findiv.get(),
+                .value = if (config.XBAR42Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7000,7 +8253,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR42Outputval,
             .parents = &[_]*const ClockNode{&XBAR42Findiv},
         };
-        const XBAR43val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR43) };
+        const XBAR43val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR43) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR43: ClockNode = .{
             .name = "XBAR43",
             .Nodetype = XBAR43val,
@@ -7013,7 +8284,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR43Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR43Prediv.get() } };
+        const XBAR43Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR43Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR43Prediv: ClockNode = .{
             .name = "XBAR43Prediv",
             .Nodetype = XBAR43Predivval,
@@ -7021,7 +8309,7 @@ pub const ClockTree = struct {
         };
         const XBAR43Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR43Findiv.get(),
+                .value = if (config.XBAR43Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7038,7 +8326,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR43Outputval,
             .parents = &[_]*const ClockNode{&XBAR43Findiv},
         };
-        const XBAR44val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR44) };
+        const XBAR44val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR44) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR44: ClockNode = .{
             .name = "XBAR44",
             .Nodetype = XBAR44val,
@@ -7051,7 +8357,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR44Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR44Prediv.get() } };
+        const XBAR44Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR44Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR44Prediv: ClockNode = .{
             .name = "XBAR44Prediv",
             .Nodetype = XBAR44Predivval,
@@ -7059,7 +8382,7 @@ pub const ClockTree = struct {
         };
         const XBAR44Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR44Findiv.get(),
+                .value = if (config.XBAR44Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7076,7 +8399,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR44Outputval,
             .parents = &[_]*const ClockNode{&XBAR44Findiv},
         };
-        const XBAR45val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR45) };
+        const XBAR45val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR45) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR45: ClockNode = .{
             .name = "XBAR45",
             .Nodetype = XBAR45val,
@@ -7089,7 +8430,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR45Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR45Prediv.get() } };
+        const XBAR45Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR45Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR45Prediv: ClockNode = .{
             .name = "XBAR45Prediv",
             .Nodetype = XBAR45Predivval,
@@ -7097,7 +8455,7 @@ pub const ClockTree = struct {
         };
         const XBAR45Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR45Findiv.get(),
+                .value = if (config.XBAR45Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7114,7 +8472,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR45Outputval,
             .parents = &[_]*const ClockNode{&XBAR45Findiv},
         };
-        const XBAR46val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR46) };
+        const XBAR46val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR46) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR46: ClockNode = .{
             .name = "XBAR46",
             .Nodetype = XBAR46val,
@@ -7130,7 +8509,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR46Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR46Prediv.get() } };
+        const XBAR46Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR46Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR46Prediv: ClockNode = .{
             .name = "XBAR46Prediv",
             .Nodetype = XBAR46Predivval,
@@ -7138,7 +8534,7 @@ pub const ClockTree = struct {
         };
         const XBAR46Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR46Findiv.get(),
+                .value = if (config.XBAR46Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7155,7 +8551,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR46Outputval,
             .parents = &[_]*const ClockNode{&XBAR46Findiv},
         };
-        const XBAR47val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR47) };
+        const XBAR47val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR47) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR47: ClockNode = .{
             .name = "XBAR47",
             .Nodetype = XBAR47val,
@@ -7168,7 +8582,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR47Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR47Prediv.get() } };
+        const XBAR47Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR47Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR47Prediv: ClockNode = .{
             .name = "XBAR47Prediv",
             .Nodetype = XBAR47Predivval,
@@ -7176,7 +8607,7 @@ pub const ClockTree = struct {
         };
         const XBAR47Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR47Findiv.get(),
+                .value = if (config.XBAR47Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7193,7 +8624,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR47Outputval,
             .parents = &[_]*const ClockNode{&XBAR47Findiv},
         };
-        const XBAR48val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR48) };
+        const XBAR48val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR48) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR48: ClockNode = .{
             .name = "XBAR48",
             .Nodetype = XBAR48val,
@@ -7206,7 +8655,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR48Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR48Prediv.get() } };
+        const XBAR48Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR48Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR48Prediv: ClockNode = .{
             .name = "XBAR48Prediv",
             .Nodetype = XBAR48Predivval,
@@ -7214,7 +8680,7 @@ pub const ClockTree = struct {
         };
         const XBAR48Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR48Findiv.get(),
+                .value = if (config.XBAR48Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7231,7 +8697,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR48Outputval,
             .parents = &[_]*const ClockNode{&XBAR48Findiv},
         };
-        const XBAR49val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR49) };
+        const XBAR49val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR49) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR49: ClockNode = .{
             .name = "XBAR49",
             .Nodetype = XBAR49val,
@@ -7244,7 +8728,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR49Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR49Prediv.get() } };
+        const XBAR49Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR49Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR49Prediv: ClockNode = .{
             .name = "XBAR49Prediv",
             .Nodetype = XBAR49Predivval,
@@ -7252,7 +8753,7 @@ pub const ClockTree = struct {
         };
         const XBAR49Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR49Findiv.get(),
+                .value = if (config.XBAR49Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7269,7 +8770,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR49Outputval,
             .parents = &[_]*const ClockNode{&XBAR49Findiv},
         };
-        const XBAR50val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR50) };
+        const XBAR50val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR50) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR50: ClockNode = .{
             .name = "XBAR50",
             .Nodetype = XBAR50val,
@@ -7282,7 +8801,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR50Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR50Prediv.get() } };
+        const XBAR50Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR50Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR50Prediv: ClockNode = .{
             .name = "XBAR50Prediv",
             .Nodetype = XBAR50Predivval,
@@ -7290,7 +8826,7 @@ pub const ClockTree = struct {
         };
         const XBAR50Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR50Findiv.get(),
+                .value = if (config.XBAR50Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7307,7 +8843,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR50Outputval,
             .parents = &[_]*const ClockNode{&XBAR50Findiv},
         };
-        const XBAR51val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR51) };
+        const XBAR51val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR51) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR51: ClockNode = .{
             .name = "XBAR51",
             .Nodetype = XBAR51val,
@@ -7321,7 +8876,24 @@ pub const ClockTree = struct {
                 &HSIRC,
             },
         };
-        const XBAR51Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR51Prediv.get() } };
+        const XBAR51Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR51Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR51Prediv: ClockNode = .{
             .name = "XBAR51Prediv",
             .Nodetype = XBAR51Predivval,
@@ -7329,7 +8901,7 @@ pub const ClockTree = struct {
         };
         const XBAR51Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR51Findiv.get(),
+                .value = if (config.XBAR51Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7346,7 +8918,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR51Outputval,
             .parents = &[_]*const ClockNode{&XBAR51Findiv},
         };
-        const XBAR52val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR52) };
+        const XBAR52val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR52) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR52: ClockNode = .{
             .name = "XBAR52",
             .Nodetype = XBAR52val,
@@ -7360,7 +8951,24 @@ pub const ClockTree = struct {
                 &HSIRC,
             },
         };
-        const XBAR52Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR52Prediv.get() } };
+        const XBAR52Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR52Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR52Prediv: ClockNode = .{
             .name = "XBAR52Prediv",
             .Nodetype = XBAR52Predivval,
@@ -7368,7 +8976,7 @@ pub const ClockTree = struct {
         };
         const XBAR52Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR52Findiv.get(),
+                .value = if (config.XBAR52Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7385,7 +8993,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR52Outputval,
             .parents = &[_]*const ClockNode{&XBAR52Findiv},
         };
-        const XBAR53val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR53) };
+        const XBAR53val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR53) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR53: ClockNode = .{
             .name = "XBAR53",
             .Nodetype = XBAR53val,
@@ -7399,7 +9026,24 @@ pub const ClockTree = struct {
                 &HSIRC,
             },
         };
-        const XBAR53Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR53Prediv.get() } };
+        const XBAR53Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR53Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR53Prediv: ClockNode = .{
             .name = "XBAR53Prediv",
             .Nodetype = XBAR53Predivval,
@@ -7407,7 +9051,7 @@ pub const ClockTree = struct {
         };
         const XBAR53Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR53Findiv.get(),
+                .value = if (config.XBAR53Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7424,7 +9068,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR53Outputval,
             .parents = &[_]*const ClockNode{&XBAR53Findiv},
         };
-        const XBAR54val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR54) };
+        const XBAR54val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR54) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR54: ClockNode = .{
             .name = "XBAR54",
             .Nodetype = XBAR54val,
@@ -7437,7 +9099,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR54Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR54Prediv.get() } };
+        const XBAR54Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR54Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR54Prediv: ClockNode = .{
             .name = "XBAR54Prediv",
             .Nodetype = XBAR54Predivval,
@@ -7445,7 +9124,7 @@ pub const ClockTree = struct {
         };
         const XBAR54Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR54Findiv.get(),
+                .value = if (config.XBAR54Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7462,7 +9141,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR54Outputval,
             .parents = &[_]*const ClockNode{&XBAR54Findiv},
         };
-        const XBAR55val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR55) };
+        const XBAR55val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR55) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR55: ClockNode = .{
             .name = "XBAR55",
             .Nodetype = XBAR55val,
@@ -7475,7 +9172,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR55Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR55Prediv.get() } };
+        const XBAR55Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR55Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR55Prediv: ClockNode = .{
             .name = "XBAR55Prediv",
             .Nodetype = XBAR55Predivval,
@@ -7483,7 +9197,7 @@ pub const ClockTree = struct {
         };
         const XBAR55Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR55Findiv.get(),
+                .value = if (config.XBAR55Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7500,7 +9214,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR55Outputval,
             .parents = &[_]*const ClockNode{&XBAR55Findiv},
         };
-        const XBAR56val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR56) };
+        const XBAR56val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR56) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR56: ClockNode = .{
             .name = "XBAR56",
             .Nodetype = XBAR56val,
@@ -7516,7 +9251,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR56Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR56Prediv.get() } };
+        const XBAR56Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR56Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR56Prediv: ClockNode = .{
             .name = "XBAR56Prediv",
             .Nodetype = XBAR56Predivval,
@@ -7524,7 +9276,7 @@ pub const ClockTree = struct {
         };
         const XBAR56Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR56Findiv.get(),
+                .value = if (config.XBAR56Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7541,7 +9293,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR56Outputval,
             .parents = &[_]*const ClockNode{&XBAR56Findiv},
         };
-        const XBAR57val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR57) };
+        const XBAR57val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR57) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR57: ClockNode = .{
             .name = "XBAR57",
             .Nodetype = XBAR57val,
@@ -7555,7 +9326,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR57Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR57Prediv.get() } };
+        const XBAR57Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR57Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR57Prediv: ClockNode = .{
             .name = "XBAR57Prediv",
             .Nodetype = XBAR57Predivval,
@@ -7563,7 +9351,7 @@ pub const ClockTree = struct {
         };
         const XBAR57Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR57Findiv.get(),
+                .value = if (config.XBAR57Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7580,7 +9368,26 @@ pub const ClockTree = struct {
             .Nodetype = XBAR57Outputval,
             .parents = &[_]*const ClockNode{&XBAR57Findiv},
         };
-        const XBAR58val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR58) };
+        const XBAR58val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR58) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR58: ClockNode = .{
             .name = "XBAR58",
             .Nodetype = XBAR58val,
@@ -7594,7 +9401,24 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const XBAR58Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR58Prediv.get() } };
+        const XBAR58Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR58Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR58Prediv: ClockNode = .{
             .name = "XBAR58Prediv",
             .Nodetype = XBAR58Predivval,
@@ -7602,7 +9426,7 @@ pub const ClockTree = struct {
         };
         const XBAR58Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR58Findiv.get(),
+                .value = if (config.XBAR58Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7619,7 +9443,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR58Outputval,
             .parents = &[_]*const ClockNode{&XBAR58Findiv},
         };
-        const XBAR59val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR59) };
+        const XBAR59val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR59) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR59: ClockNode = .{
             .name = "XBAR59",
             .Nodetype = XBAR59val,
@@ -7632,7 +9474,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR59Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR59Prediv.get() } };
+        const XBAR59Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR59Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR59Prediv: ClockNode = .{
             .name = "XBAR59Prediv",
             .Nodetype = XBAR59Predivval,
@@ -7640,7 +9499,7 @@ pub const ClockTree = struct {
         };
         const XBAR59Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR59Findiv.get(),
+                .value = if (config.XBAR59Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7657,7 +9516,25 @@ pub const ClockTree = struct {
             .Nodetype = XBAR59Outputval,
             .parents = &[_]*const ClockNode{&XBAR59Findiv},
         };
-        const XBAR60val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR60) };
+        const XBAR60val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR60) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 4;
+                }
+            },
+        };
         const XBAR60: ClockNode = .{
             .name = "XBAR60",
             .Nodetype = XBAR60val,
@@ -7670,7 +9547,24 @@ pub const ClockTree = struct {
                 &FOUTPOSTDIV8,
             },
         };
-        const XBAR60Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR60Prediv.get() } };
+        const XBAR60Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR60Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR60Prediv: ClockNode = .{
             .name = "XBAR60Prediv",
             .Nodetype = XBAR60Predivval,
@@ -7678,7 +9572,7 @@ pub const ClockTree = struct {
         };
         const XBAR60Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR60Findiv.get(),
+                .value = if (config.XBAR60Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7695,7 +9589,32 @@ pub const ClockTree = struct {
             .Nodetype = XBAR60Outputval,
             .parents = &[_]*const ClockNode{&XBAR60Findiv},
         };
-        const XBAR61val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR61) };
+        const XBAR61val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR61) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR61: ClockNode = .{
             .name = "XBAR61",
             .Nodetype = XBAR61val,
@@ -7715,7 +9634,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR61Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR61Prediv.get() } };
+        const XBAR61Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR61Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR61Prediv: ClockNode = .{
             .name = "XBAR61Prediv",
             .Nodetype = XBAR61Predivval,
@@ -7723,7 +9659,7 @@ pub const ClockTree = struct {
         };
         const XBAR61Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR61Findiv.get(),
+                .value = if (config.XBAR61Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7740,7 +9676,32 @@ pub const ClockTree = struct {
             .Nodetype = XBAR61Outputval,
             .parents = &[_]*const ClockNode{&XBAR61Findiv},
         };
-        const XBAR62val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR62) };
+        const XBAR62val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR62) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR62: ClockNode = .{
             .name = "XBAR62",
             .Nodetype = XBAR62val,
@@ -7760,7 +9721,24 @@ pub const ClockTree = struct {
                 &LSEOSC,
             },
         };
-        const XBAR62Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR62Prediv.get() } };
+        const XBAR62Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR62Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR62Prediv: ClockNode = .{
             .name = "XBAR62Prediv",
             .Nodetype = XBAR62Predivval,
@@ -7768,7 +9746,7 @@ pub const ClockTree = struct {
         };
         const XBAR62Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR62Findiv.get(),
+                .value = if (config.XBAR62Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7785,7 +9763,28 @@ pub const ClockTree = struct {
             .Nodetype = XBAR62Outputval,
             .parents = &[_]*const ClockNode{&XBAR62Findiv},
         };
-        const XBAR63val = ClockNodeTypes{ .multi = @intFromEnum(config.XBAR63) };
+        const XBAR63val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.XBAR63) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
         const XBAR63: ClockNode = .{
             .name = "XBAR63",
             .Nodetype = XBAR63val,
@@ -7801,7 +9800,24 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const XBAR63Predivval = ClockNodeTypes{ .div = .{ .value = config.XBAR63Prediv.get() } };
+        const XBAR63Predivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.XBAR63Prediv) |val| {
+                    switch (val) {
+                        .@"1",
+                        .@"2",
+                        .@"4",
+                        .@"1024",
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const XBAR63Prediv: ClockNode = .{
             .name = "XBAR63Prediv",
             .Nodetype = XBAR63Predivval,
@@ -7809,7 +9825,7 @@ pub const ClockTree = struct {
         };
         const XBAR63Findivval = ClockNodeTypes{
             .div = .{
-                .value = config.XBAR63Findiv.get(),
+                .value = if (config.XBAR63Findiv) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -7826,7 +9842,23 @@ pub const ClockTree = struct {
             .Nodetype = XBAR63Outputval,
             .parents = &[_]*const ClockNode{&XBAR63Findiv},
         };
-        const PLL1Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL1Source) };
+        const PLL1Sourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLL1Source) |val| {
+                    switch (val) {
+                        .RCC_PLL1SOURCE_HSI,
+                        .RCC_PLL1SOURCE_HSE,
+                        .RCC_PLL1SOURCE_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const PLL1Source: ClockNode = .{
             .name = "PLL1Source",
             .Nodetype = PLL1Sourceval,
@@ -7837,7 +9869,23 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const PLL2Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL2Source) };
+        const PLL2Sourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLL2Source) |val| {
+                    switch (val) {
+                        .RCC_PLL2SOURCE_HSI,
+                        .RCC_PLL2SOURCE_HSE,
+                        .RCC_PLL2SOURCE_MSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const PLL2Source: ClockNode = .{
             .name = "PLL2Source",
             .Nodetype = PLL2Sourceval,
@@ -7848,7 +9896,23 @@ pub const ClockTree = struct {
                 &MSIRC,
             },
         };
-        const PLL3Sourceval = ClockNodeTypes{ .multi = @intFromEnum(config.PLL3Source) };
+        const PLL3Sourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLL3Source) |val| {
+                    switch (val) {
+                        .RCC_PLL3SOURCE_HSI,
+                        .RCC_PLL3SOURCE_MSI,
+                        .RCC_PLL3SOURCE_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const PLL3Source: ClockNode = .{
             .name = "PLL3Source",
             .Nodetype = PLL3Sourceval,
@@ -7859,7 +9923,104 @@ pub const ClockTree = struct {
                 &HSEOSC,
             },
         };
-        const CKINTSEL0val = ClockNodeTypes{ .multi = @intFromEnum(config.CKINTSEL0) };
+        const CKINTSEL0val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.CKINTSEL0) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .XBAR_SRC_PLL4_REF,
+                        .XBAR_SRC_PLL5_REF,
+                        .XBAR_SRC_PLL6_REF,
+                        .XBAR_SRC_PLL7_REF,
+                        .XBAR_SRC_PLL8_REF,
+                        .XBAR_SRC_PLL1_REF,
+                        .XBAR_SRC_PLL2_REF,
+                        .XBAR_SRC_PLL3_REF,
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        .XBAR_SRC_ROOT0,
+                        .XBAR_SRC_ROOT1,
+                        .XBAR_SRC_ROOT2,
+                        .XBAR_SRC_ROOT3,
+                        .XBAR_SRC_ROOT4,
+                        .XBAR_SRC_ROOT5,
+                        .XBAR_SRC_ROOT6,
+                        .XBAR_SRC_ROOT7,
+                        .XBAR_SRC_ROOT8,
+                        .XBAR_SRC_ROOT9,
+                        .XBAR_SRC_ROOT10,
+                        .XBAR_SRC_ROOT11,
+                        .XBAR_SRC_ROOT12,
+                        .XBAR_SRC_ROOT13,
+                        .XBAR_SRC_ROOT14,
+                        .XBAR_SRC_ROOT15,
+                        .XBAR_SRC_ROOT16,
+                        .XBAR_SRC_ROOT17,
+                        .XBAR_SRC_ROOT18,
+                        .XBAR_SRC_ROOT19,
+                        .XBAR_SRC_ROOT20,
+                        .XBAR_SRC_ROOT21,
+                        .XBAR_SRC_ROOT22,
+                        .XBAR_SRC_ROOT23,
+                        .XBAR_SRC_ROOT24,
+                        .XBAR_SRC_ROOT25,
+                        .XBAR_SRC_ROOT26,
+                        .XBAR_SRC_ROOT27,
+                        .XBAR_SRC_ROOT28,
+                        .XBAR_SRC_ROOT29,
+                        .XBAR_SRC_ROOT30,
+                        .XBAR_SRC_ROOT31,
+                        .XBAR_SRC_ROOT32,
+                        .XBAR_SRC_ROOT33,
+                        .XBAR_SRC_ROOT34,
+                        .XBAR_SRC_ROOT35,
+                        .XBAR_SRC_ROOT36,
+                        .XBAR_SRC_ROOT37,
+                        .XBAR_SRC_ROOT38,
+                        .XBAR_SRC_ROOT39,
+                        .XBAR_SRC_ROOT40,
+                        .XBAR_SRC_ROOT41,
+                        .XBAR_SRC_ROOT42,
+                        .XBAR_SRC_ROOT43,
+                        .XBAR_SRC_ROOT44,
+                        .XBAR_SRC_ROOT45,
+                        .XBAR_SRC_ROOT46,
+                        .XBAR_SRC_ROOT47,
+                        .XBAR_SRC_ROOT48,
+                        .XBAR_SRC_ROOT49,
+                        .XBAR_SRC_ROOT50,
+                        .XBAR_SRC_ROOT51,
+                        .XBAR_SRC_ROOT52,
+                        .XBAR_SRC_ROOT53,
+                        .XBAR_SRC_ROOT54,
+                        .XBAR_SRC_ROOT55,
+                        .XBAR_SRC_ROOT56,
+                        .XBAR_SRC_ROOT57,
+                        .XBAR_SRC_ROOT58,
+                        .XBAR_SRC_ROOT59,
+                        .XBAR_SRC_ROOT60,
+                        .XBAR_SRC_ROOT61,
+                        .XBAR_SRC_ROOT62,
+                        .XBAR_SRC_ROOT63,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 2;
+                }
+            },
+        };
         const CKINTSEL0: ClockNode = .{
             .name = "CKINTSEL0",
             .Nodetype = CKINTSEL0val,
@@ -7953,7 +10114,7 @@ pub const ClockTree = struct {
         };
         const FREFDIV1val = ClockNodeTypes{
             .div = .{
-                .value = config.FREFDIV1.get(),
+                .value = if (config.FREFDIV1) |val| val.get() else 1,
                 .limit = .{ .max = 63, .min = 1 },
             },
         };
@@ -7964,7 +10125,7 @@ pub const ClockTree = struct {
         };
         const FBDIV1val = ClockNodeTypes{
             .mul = .{
-                .value = config.FBDIV1.get(),
+                .value = if (config.FBDIV1) |val| val.get() else 25,
                 .limit = .{ .max = 2500, .min = 16 },
             },
         };
@@ -7975,7 +10136,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV1_1val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV1_1.get(),
+                .value = if (config.POSTDIV1_1) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -7986,7 +10147,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV2_1val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV2_1.get(),
+                .value = if (config.POSTDIV2_1) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -8013,7 +10174,7 @@ pub const ClockTree = struct {
         };
         const FREFDIV2val = ClockNodeTypes{
             .div = .{
-                .value = config.FREFDIV2.get(),
+                .value = if (config.FREFDIV2) |val| val.get() else 1,
                 .limit = .{ .max = 63, .min = 1 },
             },
         };
@@ -8024,7 +10185,7 @@ pub const ClockTree = struct {
         };
         const PLL2FRACVval = ClockNodeTypes{
             .source = .{
-                .value = config.PLL2FRACV.get(),
+                .value = if (config.PLL2FRACV) |val| val.get() else 0,
                 .limit = .{ .max = 16777215, .min = 0 },
             },
         };
@@ -8034,7 +10195,7 @@ pub const ClockTree = struct {
         };
         const FBDIV2val = ClockNodeTypes{
             .mulfrac = .{
-                .value = config.FBDIV2.get(),
+                .value = if (config.FBDIV2) |val| val.get() else 12297829382473034410,
                 .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
             },
         };
@@ -8045,7 +10206,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV1_2val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV1_2.get(),
+                .value = if (config.POSTDIV1_2) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -8056,7 +10217,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV2_2val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV2_2.get(),
+                .value = if (config.POSTDIV2_2) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -8083,7 +10244,7 @@ pub const ClockTree = struct {
         };
         const FREFDIV3val = ClockNodeTypes{
             .div = .{
-                .value = config.FREFDIV3.get(),
+                .value = if (config.FREFDIV3) |val| val.get() else 1,
                 .limit = .{ .max = 63, .min = 1 },
             },
         };
@@ -8094,7 +10255,7 @@ pub const ClockTree = struct {
         };
         const PLL3FRACVval = ClockNodeTypes{
             .source = .{
-                .value = config.PLL3FRACV.get(),
+                .value = if (config.PLL3FRACV) |val| val.get() else 0,
                 .limit = .{ .max = 16777215, .min = 0 },
             },
         };
@@ -8104,7 +10265,7 @@ pub const ClockTree = struct {
         };
         const FBDIV3val = ClockNodeTypes{
             .mulfrac = .{
-                .value = config.FBDIV3.get(),
+                .value = if (config.FBDIV3) |val| val.get() else 12297829382473034410,
                 .limit = .{ .max = 12297829382473034410, .min = 12297829382473034410 },
             },
         };
@@ -8115,7 +10276,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV1_3val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV1_3.get(),
+                .value = if (config.POSTDIV1_3) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -8126,7 +10287,7 @@ pub const ClockTree = struct {
         };
         const POSTDIV2_3val = ClockNodeTypes{
             .div = .{
-                .value = config.POSTDIV2_3.get(),
+                .value = if (config.POSTDIV2_3) |val| val.get() else 1,
                 .limit = .{ .max = 7, .min = 1 },
             },
         };
@@ -8151,7 +10312,23 @@ pub const ClockTree = struct {
             .Nodetype = PLL3Div2val,
             .parents = &[_]*const ClockNode{&FOUTPOSTDIV3},
         };
-        const CKEXTSEL0val = ClockNodeTypes{ .multi = @intFromEnum(config.CKEXTSEL0) };
+        const CKEXTSEL0val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.CKEXTSEL0) |val| {
+                    switch (val) {
+                        .XBAR_SRC_PLL1_DIV42,
+                        .XBAR_SRC_PLL2_DIV4,
+                        .XBAR_SRC_PLL3_DIV2,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const CKEXTSEL0: ClockNode = .{
             .name = "CKEXTSEL0",
             .Nodetype = CKEXTSEL0val,
@@ -8162,7 +10339,104 @@ pub const ClockTree = struct {
                 &PLL3Div2,
             },
         };
-        const CKINTSEL1val = ClockNodeTypes{ .multi = @intFromEnum(config.CKINTSEL1) };
+        const CKINTSEL1val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.CKINTSEL1) |val| {
+                    switch (val) {
+                        .RCC_XBAR_CLKSRC_HSI,
+                        .RCC_XBAR_CLKSRC_HSE,
+                        .RCC_XBAR_CLKSRC_MSI,
+                        .XBAR_SRC_PLL4_REF,
+                        .XBAR_SRC_PLL5_REF,
+                        .XBAR_SRC_PLL6_REF,
+                        .XBAR_SRC_PLL7_REF,
+                        .XBAR_SRC_PLL8_REF,
+                        .XBAR_SRC_PLL1_REF,
+                        .XBAR_SRC_PLL2_REF,
+                        .XBAR_SRC_PLL3_REF,
+                        .RCC_XBAR_CLKSRC_PLL4,
+                        .RCC_XBAR_CLKSRC_PLL5,
+                        .RCC_XBAR_CLKSRC_PLL6,
+                        .RCC_XBAR_CLKSRC_PLL7,
+                        .RCC_XBAR_CLKSRC_PLL8,
+                        .RCC_XBAR_CLKSRC_SPDIF,
+                        .RCC_XBAR_CLKSRC_I2S,
+                        .RCC_XBAR_CLKSRC_LSI,
+                        .RCC_XBAR_CLKSRC_LSE,
+                        .XBAR_SRC_ROOT0,
+                        .XBAR_SRC_ROOT1,
+                        .XBAR_SRC_ROOT2,
+                        .XBAR_SRC_ROOT3,
+                        .XBAR_SRC_ROOT4,
+                        .XBAR_SRC_ROOT5,
+                        .XBAR_SRC_ROOT6,
+                        .XBAR_SRC_ROOT7,
+                        .XBAR_SRC_ROOT8,
+                        .XBAR_SRC_ROOT9,
+                        .XBAR_SRC_ROOT10,
+                        .XBAR_SRC_ROOT11,
+                        .XBAR_SRC_ROOT12,
+                        .XBAR_SRC_ROOT13,
+                        .XBAR_SRC_ROOT14,
+                        .XBAR_SRC_ROOT15,
+                        .XBAR_SRC_ROOT16,
+                        .XBAR_SRC_ROOT17,
+                        .XBAR_SRC_ROOT18,
+                        .XBAR_SRC_ROOT19,
+                        .XBAR_SRC_ROOT20,
+                        .XBAR_SRC_ROOT21,
+                        .XBAR_SRC_ROOT22,
+                        .XBAR_SRC_ROOT23,
+                        .XBAR_SRC_ROOT24,
+                        .XBAR_SRC_ROOT25,
+                        .XBAR_SRC_ROOT26,
+                        .XBAR_SRC_ROOT27,
+                        .XBAR_SRC_ROOT28,
+                        .XBAR_SRC_ROOT29,
+                        .XBAR_SRC_ROOT30,
+                        .XBAR_SRC_ROOT31,
+                        .XBAR_SRC_ROOT32,
+                        .XBAR_SRC_ROOT33,
+                        .XBAR_SRC_ROOT34,
+                        .XBAR_SRC_ROOT35,
+                        .XBAR_SRC_ROOT36,
+                        .XBAR_SRC_ROOT37,
+                        .XBAR_SRC_ROOT38,
+                        .XBAR_SRC_ROOT39,
+                        .XBAR_SRC_ROOT40,
+                        .XBAR_SRC_ROOT41,
+                        .XBAR_SRC_ROOT42,
+                        .XBAR_SRC_ROOT43,
+                        .XBAR_SRC_ROOT44,
+                        .XBAR_SRC_ROOT45,
+                        .XBAR_SRC_ROOT46,
+                        .XBAR_SRC_ROOT47,
+                        .XBAR_SRC_ROOT48,
+                        .XBAR_SRC_ROOT49,
+                        .XBAR_SRC_ROOT50,
+                        .XBAR_SRC_ROOT51,
+                        .XBAR_SRC_ROOT52,
+                        .XBAR_SRC_ROOT53,
+                        .XBAR_SRC_ROOT54,
+                        .XBAR_SRC_ROOT55,
+                        .XBAR_SRC_ROOT56,
+                        .XBAR_SRC_ROOT57,
+                        .XBAR_SRC_ROOT58,
+                        .XBAR_SRC_ROOT59,
+                        .XBAR_SRC_ROOT60,
+                        .XBAR_SRC_ROOT61,
+                        .XBAR_SRC_ROOT62,
+                        .XBAR_SRC_ROOT63,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 2;
+                }
+            },
+        };
         const CKINTSEL1: ClockNode = .{
             .name = "CKINTSEL1",
             .Nodetype = CKINTSEL1val,
@@ -8254,7 +10528,23 @@ pub const ClockTree = struct {
                 &XBAR63Output,
             },
         };
-        const CKEXTSEL1val = ClockNodeTypes{ .multi = @intFromEnum(config.CKEXTSEL1) };
+        const CKEXTSEL1val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.CKEXTSEL1) |val| {
+                    switch (val) {
+                        .XBAR_SRC_PLL1_DIV42,
+                        .XBAR_SRC_PLL2_DIV4,
+                        .XBAR_SRC_PLL3_DIV2,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const CKEXTSEL1: ClockNode = .{
             .name = "CKEXTSEL1",
             .Nodetype = CKEXTSEL1val,
@@ -8265,7 +10555,22 @@ pub const ClockTree = struct {
                 &PLL3Div2,
             },
         };
-        const OBS0val = ClockNodeTypes{ .multi = @intFromEnum(config.OBS0) };
+        const OBS0val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.OBS0) |val| {
+                    switch (val) {
+                        .RCC_OBS0SOURCE_CKINTSEL,
+                        .RCC_OBS0SOURCE_CKEXTSEL,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const OBS0: ClockNode = .{
             .name = "OBS0",
             .Nodetype = OBS0val,
@@ -8281,7 +10586,22 @@ pub const ClockTree = struct {
             .Nodetype = OBS0Outputval,
             .parents = &[_]*const ClockNode{&OBS0},
         };
-        const OBS1val = ClockNodeTypes{ .multi = @intFromEnum(config.OBS1) };
+        const OBS1val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.OBS1) |val| {
+                    switch (val) {
+                        .RCC_OBS1SOURCE_CKINTSEL,
+                        .RCC_OBS1SOURCE_CKEXTSEL,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const OBS1: ClockNode = .{
             .name = "OBS1",
             .Nodetype = OBS1val,
@@ -8297,7 +10617,22 @@ pub const ClockTree = struct {
             .Nodetype = OBS1Outputval,
             .parents = &[_]*const ClockNode{&OBS1},
         };
-        const MCO1Multval = ClockNodeTypes{ .multi = @intFromEnum(config.MCO1Mult) };
+        const MCO1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.MCO1Mult) |val| {
+                    switch (val) {
+                        .MUX_MCO1_FLEX61,
+                        .MUX_MCO1_OBSER0,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const MCO1Mult: ClockNode = .{
             .name = "MCO1Mult",
             .Nodetype = MCO1Multval,
@@ -8313,7 +10648,22 @@ pub const ClockTree = struct {
             .Nodetype = MCO1Pinval,
             .parents = &[_]*const ClockNode{&MCO1Mult},
         };
-        const MCO2Multval = ClockNodeTypes{ .multi = @intFromEnum(config.MCO2Mult) };
+        const MCO2Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.MCO2Mult) |val| {
+                    switch (val) {
+                        .MUX_MCO2_FLEX62,
+                        .MUX_MCO2_OBSER1,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const MCO2Mult: ClockNode = .{
             .name = "MCO2Mult",
             .Nodetype = MCO2Multval,
@@ -8329,7 +10679,23 @@ pub const ClockTree = struct {
             .Nodetype = MCO2Pinval,
             .parents = &[_]*const ClockNode{&MCO2Mult},
         };
-        const D3PERval = ClockNodeTypes{ .multi = @intFromEnum(config.D3PER) };
+        const D3PERval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.D3PER) |val| {
+                    switch (val) {
+                        .MUX_D3PER_MSI,
+                        .MUX_D3PER_LSI,
+                        .MUX_D3PER_LSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const D3PER: ClockNode = .{
             .name = "D3PER",
             .Nodetype = D3PERval,
@@ -8348,7 +10714,23 @@ pub const ClockTree = struct {
             .Nodetype = D3PEROutputval,
             .parents = &[_]*const ClockNode{&D3PER},
         };
-        const DTSval = ClockNodeTypes{ .multi = @intFromEnum(config.DTS) };
+        const DTSval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.DTS) |val| {
+                    switch (val) {
+                        .MUX_DTS_MSI,
+                        .MUX_DTS_HSI,
+                        .MUX_DTS_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const DTS: ClockNode = .{
             .name = "DTS",
             .Nodetype = DTSval,
@@ -8367,7 +10749,22 @@ pub const ClockTree = struct {
             .Nodetype = DTSOutputval,
             .parents = &[_]*const ClockNode{&DTS},
         };
-        const DSIPHYval = ClockNodeTypes{ .multi = @intFromEnum(config.DSIPHY) };
+        const DSIPHYval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.DSIPHY) |val| {
+                    switch (val) {
+                        .MUX_DSIPHY_FLEX28,
+                        .MUX_DSIPHY_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const DSIPHY: ClockNode = .{
             .name = "DSIPHY",
             .Nodetype = DSIPHYval,
@@ -8385,7 +10782,22 @@ pub const ClockTree = struct {
             .Nodetype = DSIPHYOutputval,
             .parents = &[_]*const ClockNode{&DSIPHY},
         };
-        const DSIBLANEval = ClockNodeTypes{ .multi = @intFromEnum(config.DSIBLANE) };
+        const DSIBLANEval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.DSIBLANE) |val| {
+                    switch (val) {
+                        .MUX_DSIBLANE_DSIPHY,
+                        .MUX_DSIBLANE_FLEX27,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const DSIBLANE: ClockNode = .{
             .name = "DSIBLANE",
             .Nodetype = DSIBLANEval,
@@ -8403,7 +10815,22 @@ pub const ClockTree = struct {
             .Nodetype = DSIBLANEOutputval,
             .parents = &[_]*const ClockNode{&DSIBLANE},
         };
-        const USB2PHY1val = ClockNodeTypes{ .multi = @intFromEnum(config.USB2PHY1) };
+        const USB2PHY1val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.USB2PHY1) |val| {
+                    switch (val) {
+                        .MUX_USB2PHY1_FLEX57,
+                        .MUX_USB2PHY1_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const USB2PHY1: ClockNode = .{
             .name = "USB2PHY1",
             .Nodetype = USB2PHY1val,
@@ -8421,7 +10848,22 @@ pub const ClockTree = struct {
             .Nodetype = USB2PHY1Outputval,
             .parents = &[_]*const ClockNode{&USB2PHY1},
         };
-        const USB2PHY2val = ClockNodeTypes{ .multi = @intFromEnum(config.USB2PHY2) };
+        const USB2PHY2val = ClockNodeTypes{
+            .multi = inner: {
+                if (config.USB2PHY2) |val| {
+                    switch (val) {
+                        .MUX_USB2PHY2_FLEX58,
+                        .MUX_USB2PHY2_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const USB2PHY2: ClockNode = .{
             .name = "USB2PHY2",
             .Nodetype = USB2PHY2val,
@@ -8439,7 +10881,22 @@ pub const ClockTree = struct {
             .Nodetype = USB2PHY2Outputval,
             .parents = &[_]*const ClockNode{&USB2PHY2},
         };
-        const USB3PCIPHYval = ClockNodeTypes{ .multi = @intFromEnum(config.USB3PCIPHY) };
+        const USB3PCIPHYval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.USB3PCIPHY) |val| {
+                    switch (val) {
+                        .MUX_USB3PCIEPHY_FLEX34,
+                        .MUX_USB3PCIEPHY_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const USB3PCIPHY: ClockNode = .{
             .name = "USB3PCIPHY",
             .Nodetype = USB3PCIPHYval,
@@ -8457,7 +10914,22 @@ pub const ClockTree = struct {
             .Nodetype = USB3PCIPHYOutputval,
             .parents = &[_]*const ClockNode{&USB3PCIPHY},
         };
-        const SysClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.SysClkSource) };
+        const SysClkSourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.SysClkSource) |val| {
+                    switch (val) {
+                        .RCC_MCUSSOURCE_FLEX0,
+                        .RCC_MCUSSOURCE_HSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const SysClkSource: ClockNode = .{
             .name = "SysClkSource",
             .Nodetype = SysClkSourceval,
@@ -8475,7 +10947,22 @@ pub const ClockTree = struct {
             .Nodetype = SysCLKOutputval,
             .parents = &[_]*const ClockNode{&SysClkSource},
         };
-        const MCUDIVval = ClockNodeTypes{ .div = .{ .value = config.MCUDIV.get() } };
+        const MCUDIVval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.MCUDIV) |val| {
+                    switch (val) {
+                        .RCC_MCU_DIV1,
+                        .RCC_MCU_DIV2,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const MCUDIV: ClockNode = .{
             .name = "MCUDIV",
             .Nodetype = MCUDIVval,
@@ -8489,7 +10976,25 @@ pub const ClockTree = struct {
             .Nodetype = McuClockOutputval,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
-        const APB3DIVval = ClockNodeTypes{ .div = .{ .value = config.APB3DIV.get() } };
+        const APB3DIVval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.APB3DIV) |val| {
+                    switch (val) {
+                        .RCC_APB3_DIV1,
+                        .RCC_APB3_DIV2,
+                        .RCC_APB3_DIV4,
+                        .RCC_APB3_DIV8,
+                        .RCC_APB3_DIV16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const APB3DIV: ClockNode = .{
             .name = "APB3DIV",
             .Nodetype = APB3DIVval,
@@ -8503,7 +11008,25 @@ pub const ClockTree = struct {
             .Nodetype = APB3Outputval,
             .parents = &[_]*const ClockNode{&APB3DIV},
         };
-        const APB4DIVval = ClockNodeTypes{ .div = .{ .value = config.APB4DIV.get() } };
+        const APB4DIVval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.APB4DIV) |val| {
+                    switch (val) {
+                        .RCC_APB4_DIV1,
+                        .RCC_APB4_DIV2,
+                        .RCC_APB4_DIV4,
+                        .RCC_APB4_DIV8,
+                        .RCC_APB4_DIV16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const APB4DIV: ClockNode = .{
             .name = "APB4DIV",
             .Nodetype = APB4DIVval,
@@ -8517,7 +11040,25 @@ pub const ClockTree = struct {
             .Nodetype = APB4Outputval,
             .parents = &[_]*const ClockNode{&APB4DIV},
         };
-        const APBDBGDIVval = ClockNodeTypes{ .div = .{ .value = config.APBDBGDIV.get() } };
+        const APBDBGDIVval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.APBDBGDIV) |val| {
+                    switch (val) {
+                        .RCC_APBDBG_DIV1,
+                        .RCC_APBDBG_DIV2,
+                        .RCC_APBDBG_DIV4,
+                        .RCC_APBDBG_DIV8,
+                        .RCC_APBDBG_DIV16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const APBDBGDIV: ClockNode = .{
             .name = "APBDBGDIV",
             .Nodetype = APBDBGDIVval,
@@ -8531,15 +11072,46 @@ pub const ClockTree = struct {
             .Nodetype = APBDBGOutputval,
             .parents = &[_]*const ClockNode{&APBDBGDIV},
         };
-        const APB1DIVval = ClockNodeTypes{ .div = .{ .value = config.APB1DIV.get() } };
+        const APB1DIVval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.APB1DIV) |val| {
+                    switch (val) {
+                        .RCC_APB1_DIV1,
+                        .RCC_APB1_DIV2,
+                        .RCC_APB1_DIV4,
+                        .RCC_APB1_DIV8,
+                        .RCC_APB1_DIV16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const APB1DIV: ClockNode = .{
             .name = "APB1DIV",
             .Nodetype = APB1DIVval,
             .parents = &[_]*const ClockNode{&MCUDIV},
         };
-        const RCC_TIM_G1_PRescaler_Selectionval = ClockNodeTypes{
-            .source = .{ .value = config.RCC_TIM_G1_PRescaler_Selection.get() },
-        };
+        const RCC_TIM_G1_PRescaler_Selectionval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.RCC_TIM_G1_PRescaler_Selection) |val| {
+                    switch (val) {
+                        .RCC_TIMG1PRES_ACTIVATED,
+                        .RCC_TIMG1PRES_DEACTIVATED,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const Tim1Mulval = blk: {
             if ((RCC_TIM_G1_PRescaler_Selectionval.num_val() == 1)) {
                 break :blk ClockNodeTypes{
@@ -8584,15 +11156,46 @@ pub const ClockTree = struct {
             .Nodetype = APB1Outputval,
             .parents = &[_]*const ClockNode{&APB1DIV},
         };
-        const APB2DIVval = ClockNodeTypes{ .div = .{ .value = config.APB2DIV.get() } };
+        const APB2DIVval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.APB2DIV) |val| {
+                    switch (val) {
+                        .RCC_APB2_DIV1,
+                        .RCC_APB2_DIV2,
+                        .RCC_APB2_DIV4,
+                        .RCC_APB2_DIV8,
+                        .RCC_APB2_DIV16,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const APB2DIV: ClockNode = .{
             .name = "APB2DIV",
             .Nodetype = APB2DIVval,
             .parents = &[_]*const ClockNode{&MCUDIV},
         };
-        const RCC_TIM_G2_PRescaler_Selectionval = ClockNodeTypes{
-            .source = .{ .value = config.RCC_TIM_G2_PRescaler_Selection.get() },
-        };
+        const RCC_TIM_G2_PRescaler_Selectionval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.RCC_TIM_G2_PRescaler_Selection) |val| {
+                    switch (val) {
+                        .RCC_TIMG2PRES_ACTIVATED,
+                        .RCC_TIMG2PRES_DEACTIVATED,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
         const Tim2Mulval = blk: {
             if ((RCC_TIM_G2_PRescaler_Selectionval.num_val() == 1)) {
                 break :blk ClockNodeTypes{
@@ -8629,7 +11232,22 @@ pub const ClockTree = struct {
             .Nodetype = APB2Outputval,
             .parents = &[_]*const ClockNode{&APB2DIV},
         };
-        const ADC12Multval = ClockNodeTypes{ .multi = @intFromEnum(config.ADC12Mult) };
+        const ADC12Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.ADC12Mult) |val| {
+                    switch (val) {
+                        .MUX_ADC12_FLEX46,
+                        .MUX_ADC12_LSMCU,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const ADC12Mult: ClockNode = .{
             .name = "ADC12Mult",
             .Nodetype = ADC12Multval,
@@ -8647,7 +11265,23 @@ pub const ClockTree = struct {
             .Nodetype = ADC12outputval,
             .parents = &[_]*const ClockNode{&ADC12Mult},
         };
-        const ADC3Multval = ClockNodeTypes{ .multi = @intFromEnum(config.ADC3Mult) };
+        const ADC3Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.ADC3Mult) |val| {
+                    switch (val) {
+                        .MUX_ADC3_FLEX47,
+                        .MUX_ADC3_LSMCU,
+                        .MUX_ADC3_FLEX46,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const ADC3Mult: ClockNode = .{
             .name = "ADC3Mult",
             .Nodetype = ADC3Multval,
@@ -8666,7 +11300,22 @@ pub const ClockTree = struct {
             .Nodetype = ADC3outputval,
             .parents = &[_]*const ClockNode{&ADC3Mult},
         };
-        const LVDSMultval = ClockNodeTypes{ .multi = @intFromEnum(config.LVDSMult) };
+        const LVDSMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LVDSMult) |val| {
+                    switch (val) {
+                        .MUX_LVDSPHY_FLEX32,
+                        .MUX_LVDSPHY_HSE,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
         const LVDSMult: ClockNode = .{
             .name = "LVDSMult",
             .Nodetype = LVDSMultval,
@@ -8684,7 +11333,7 @@ pub const ClockTree = struct {
         };
         const HSERTCDevisorval = ClockNodeTypes{
             .div = .{
-                .value = config.HSERTCDevisor.get(),
+                .value = if (config.HSERTCDevisor) |val| val.get() else 1,
                 .limit = .{ .max = 64, .min = 1 },
             },
         };
@@ -8693,7 +11342,23 @@ pub const ClockTree = struct {
             .Nodetype = HSERTCDevisorval,
             .parents = &[_]*const ClockNode{&HSEOSC},
         };
-        const RTCClkSourceval = ClockNodeTypes{ .multi = @intFromEnum(config.RTCClkSource) };
+        const RTCClkSourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.RTCClkSource) |val| {
+                    switch (val) {
+                        .RCC_RTCCLKSOURCE_HSE_DIV,
+                        .RCC_RTCCLKSOURCE_LSE,
+                        .RCC_RTCCLKSOURCE_LSI,
+                        => {
+                            break :inner val.get();
+                        },
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 2;
+                }
+            },
+        };
         const RTCClkSource: ClockNode = .{
             .name = "RTCClkSource",
             .Nodetype = RTCClkSourceval,
@@ -8720,19 +11385,32 @@ pub const ClockTree = struct {
         };
         const HSE_Timoutval = ClockNodeTypes{
             .source = .{
-                .value = config.HSE_Timout.get(),
+                .value = if (config.HSE_Timout) |val| val.get() else 100,
                 .limit = .{ .max = 4294967295, .min = 1 },
             },
         };
         const LSE_Timoutval = ClockNodeTypes{
             .source = .{
-                .value = config.LSE_Timout.get(),
+                .value = if (config.LSE_Timout) |val| val.get() else 5000,
                 .limit = .{ .max = 4294967295, .min = 1 },
             },
         };
-        const LSE_Drive_Capabilityval = ClockNodeTypes{
-            .source = .{ .value = config.LSE_Drive_Capability.get() },
-        };
+        const LSE_Drive_Capabilityval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.LSE_Drive_Capability) |val| {
+                    switch (val) {
+                        .null,
+                        => {
+                            break :inner val.get();
+                        },
+                        else => {},
+                    }
+                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                } else {
+                    break :inner 0;
+                }
+            },
+        } };
         return .{
             .HSIRC = HSIRC,
             .HSEOSC = HSEOSC,

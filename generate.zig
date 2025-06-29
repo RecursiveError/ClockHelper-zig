@@ -1065,44 +1065,50 @@ fn create_output_val(_: *const Element, value: ReferenceValue, writer: std.io.An
 }
 
 fn create_check_options(element: *const Element, valid_op: []const []const u8, value: ReferenceValue, writer: std.io.AnyWriter) anyerror!void {
-    try writer.print(
-        \\if(config.@"{s}") |val| {{
-        \\switch(val) {{
-        \\
-    , .{element.name});
-
-    for (valid_op) |op| {
-        try writer.print(
-            \\ .@"{s}",
-            \\
-        , .{op});
-    }
-
-    try writer.print(
-        \\ => {{break :inner val.get();}},
-        \\
-    , .{});
-
     const qtd = ValuesQtd.get(element.name) orelse 0;
     if (qtd > valid_op.len) {
+        try writer.print(
+            \\if(config.@"{s}") |val| {{
+            \\switch(val) {{
+            \\
+        , .{element.name});
+
+        for (valid_op) |op| {
+            try writer.print(
+                \\ .@"{s}",
+                \\
+            , .{op});
+        }
+
+        try writer.print(
+            \\ => {{break :inner val.get();}},
+            \\
+        , .{});
+
         try writer.print(
             \\else => {{}},
             \\
         , .{});
-    }
 
-    if (global_expr) |expr| {
-        try writer.print(
-            \\}}
-            \\@compileError(std.fmt.comptimePrint("value {{s}}, cannot be used if expr: {{s}} is true", .{{@tagName(val), "{s}" }}));
-            \\
-        , .{expr});
+        if (global_expr) |expr| {
+            try writer.print(
+                \\}}
+                \\@compileError(std.fmt.comptimePrint("value {{s}}, cannot be used if expr: {{s}} is true", .{{@tagName(val), "{s}" }}));
+                \\
+            , .{expr});
+        } else {
+            try writer.print(
+                \\}}
+                \\@compileError(std.fmt.comptimePrint("value {{s}} depends on an expression that returned false", .{{@tagName(val)}}));
+                \\
+            , .{});
+        }
     } else {
         try writer.print(
-            \\}}
-            \\@compileError(std.fmt.comptimePrint("value {{s}} depends on an expression that returned false", .{{@tagName(val)}}));
+            \\if(config.@"{s}") |val| {{
+            \\ break :inner val.get();
             \\
-        , .{});
+        , .{element.name});
     }
 
     try writer.print(

@@ -904,14 +904,7 @@ pub const ClockTree = struct {
         const LSIDIVval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.LSIDIV) |val| {
-                    switch (val) {
-                        .RCC_LSI_DIV1,
-                        .RCC_LSI_DIV128,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -935,14 +928,7 @@ pub const ClockTree = struct {
         const MSIKSourceval = ClockNodeTypes{ .source = .{
             .value = inner: {
                 if (config.MSIKSource) |val| {
-                    switch (val) {
-                        .RCC_MSI_RC0,
-                        .RCC_MSI_RC1,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 96;
                 }
@@ -955,14 +941,7 @@ pub const ClockTree = struct {
         const MSISSourceval = ClockNodeTypes{ .source = .{
             .value = inner: {
                 if (config.MSISSource) |val| {
-                    switch (val) {
-                        .RCC_MSI_RC0,
-                        .RCC_MSI_RC1,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 96;
                 }
@@ -975,16 +954,7 @@ pub const ClockTree = struct {
         const MSIKDIVval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.MSIKDIV) |val| {
-                    switch (val) {
-                        .RCC_MSI_DIV1,
-                        .RCC_MSI_DIV2,
-                        .RCC_MSI_DIV4,
-                        .RCC_MSI_DIV8,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -998,16 +968,7 @@ pub const ClockTree = struct {
         const MSISDIVval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.MSISDIV) |val| {
-                    switch (val) {
-                        .RCC_MSI_DIV1,
-                        .RCC_MSI_DIV2,
-                        .RCC_MSI_DIV4,
-                        .RCC_MSI_DIV8,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 8;
                 }
@@ -1036,15 +997,7 @@ pub const ClockTree = struct {
         const SysClkSourceval = ClockNodeTypes{
             .multi = inner: {
                 if (config.SysClkSource) |val| {
-                    switch (val) {
-                        .RCC_SYSCLKSOURCE_MSIS,
-                        .RCC_SYSCLKSOURCE_HSI,
-                        .RCC_SYSCLKSOURCE_HSE,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1071,21 +1024,7 @@ pub const ClockTree = struct {
         const AHBPrescalerval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.AHBPrescaler) |val| {
-                    switch (val) {
-                        .RCC_SYSCLK_DIV1,
-                        .RCC_SYSCLK_DIV2,
-                        .RCC_SYSCLK_DIV4,
-                        .RCC_SYSCLK_DIV8,
-                        .RCC_SYSCLK_DIV16,
-                        .RCC_SYSCLK_DIV64,
-                        .RCC_SYSCLK_DIV128,
-                        .RCC_SYSCLK_DIV256,
-                        .RCC_SYSCLK_DIV512,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -1107,17 +1046,7 @@ pub const ClockTree = struct {
         const APB2Prescalerval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.APB2Prescaler) |val| {
-                    switch (val) {
-                        .RCC_HCLK_DIV1,
-                        .RCC_HCLK_DIV2,
-                        .RCC_HCLK_DIV4,
-                        .RCC_HCLK_DIV8,
-                        .RCC_HCLK_DIV16,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -1131,14 +1060,7 @@ pub const ClockTree = struct {
         const SPI1Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.SPI1Mult) |val| {
-                    switch (val) {
-                        .RCC_SPI1CLKSOURCE_PCLK2,
-                        .RCC_SPI1CLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1162,17 +1084,7 @@ pub const ClockTree = struct {
         const APB1Prescalerval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.APB1Prescaler) |val| {
-                    switch (val) {
-                        .RCC_HCLK_DIV1,
-                        .RCC_HCLK_DIV2,
-                        .RCC_HCLK_DIV4,
-                        .RCC_HCLK_DIV8,
-                        .RCC_HCLK_DIV16,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -1186,14 +1098,7 @@ pub const ClockTree = struct {
         const SPI3Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.SPI3Mult) |val| {
-                    switch (val) {
-                        .RCC_SPI3CLKSOURCE_PCLK1,
-                        .RCC_SPI3CLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1217,14 +1122,7 @@ pub const ClockTree = struct {
         const SPI2Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.SPI2Mult) |val| {
-                    switch (val) {
-                        .RCC_SPI2CLKSOURCE_PCLK1,
-                        .RCC_SPI2CLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1256,15 +1154,7 @@ pub const ClockTree = struct {
         const RTCClkSourceval = ClockNodeTypes{
             .multi = inner: {
                 if (config.RTCClkSource) |val| {
-                    switch (val) {
-                        .RCC_RTCCLKSOURCE_HSE_DIV32,
-                        .RCC_RTCCLKSOURCE_LSE,
-                        .RCC_RTCCLKSOURCE_LSI,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 2;
                 }
@@ -1297,14 +1187,7 @@ pub const ClockTree = struct {
         const USART1Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.USART1Mult) |val| {
-                    switch (val) {
-                        .RCC_USART1CLKSOURCE_PCLK2,
-                        .RCC_USART1CLKSOURCE_HSI,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1328,14 +1211,7 @@ pub const ClockTree = struct {
         const USART3Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.USART3Mult) |val| {
-                    switch (val) {
-                        .RCC_USART3CLKSOURCE_PCLK1,
-                        .RCC_USART3CLKSOURCE_HSI,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1359,14 +1235,7 @@ pub const ClockTree = struct {
         const UART4Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.UART4Mult) |val| {
-                    switch (val) {
-                        .RCC_UART4CLKSOURCE_PCLK1,
-                        .RCC_UART4CLKSOURCE_HSI,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1390,15 +1259,7 @@ pub const ClockTree = struct {
         const ADCMultval = ClockNodeTypes{
             .multi = inner: {
                 if (config.ADCMult) |val| {
-                    switch (val) {
-                        .RCC_ADCDACCLKSOURCE_HCLK,
-                        .RCC_ADCDACCLKSOURCE_HSE,
-                        .RCC_ADCDACCLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1417,22 +1278,7 @@ pub const ClockTree = struct {
         const ADCDivval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.ADCDiv) |val| {
-                    switch (val) {
-                        .RCC_ADCDACCLK_DIV1,
-                        .RCC_ADCDACCLK_DIV2,
-                        .RCC_ADCDACCLK_DIV4,
-                        .RCC_ADCDACCLK_DIV8,
-                        .RCC_ADCDACCLK_DIV16,
-                        .RCC_ADCDACCLK_DIV32,
-                        .RCC_ADCDACCLK_DIV64,
-                        .RCC_ADCDACCLK_DIV128,
-                        .RCC_ADCDACCLK_DIV256,
-                        .RCC_ADCDACCLK_DIV512,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -1452,14 +1298,7 @@ pub const ClockTree = struct {
         const UART5Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.UART5Mult) |val| {
-                    switch (val) {
-                        .RCC_UART5CLKSOURCE_PCLK1,
-                        .RCC_UART5CLKSOURCE_HSI,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1483,17 +1322,7 @@ pub const ClockTree = struct {
         const APB3Prescalerval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.APB3Prescaler) |val| {
-                    switch (val) {
-                        .RCC_HCLK_DIV1,
-                        .RCC_HCLK_DIV2,
-                        .RCC_HCLK_DIV4,
-                        .RCC_HCLK_DIV8,
-                        .RCC_HCLK_DIV16,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -1515,16 +1344,7 @@ pub const ClockTree = struct {
         const LPUART1Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.LPUART1Mult) |val| {
-                    switch (val) {
-                        .RCC_LPUART1CLKSOURCE_PCLK3,
-                        .RCC_LPUART1CLKSOURCE_HSI,
-                        .RCC_LPUART1CLKSOURCE_LSE,
-                        .RCC_LPUART1CLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1550,16 +1370,7 @@ pub const ClockTree = struct {
         const LPTIM1Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.LPTIM1Mult) |val| {
-                    switch (val) {
-                        .RCC_LPTIM1CLKSOURCE_MSIK,
-                        .RCC_LPTIM1CLKSOURCE_LSI,
-                        .RCC_LPTIM1CLKSOURCE_HSI,
-                        .RCC_LPTIM1CLKSOURCE_LSE,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1587,16 +1398,7 @@ pub const ClockTree = struct {
         const LPTIM2Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.LPTIM2Mult) |val| {
-                    switch (val) {
-                        .RCC_LPTIM2CLKSOURCE_PCLK1,
-                        .RCC_LPTIM2CLKSOURCE_LSI,
-                        .RCC_LPTIM2CLKSOURCE_HSI,
-                        .RCC_LPTIM2CLKSOURCE_LSE,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1622,14 +1424,7 @@ pub const ClockTree = struct {
         const DACMultval = ClockNodeTypes{
             .multi = inner: {
                 if (config.DACMult) |val| {
-                    switch (val) {
-                        .RCC_DAC1SHCLKSOURCE_LSE,
-                        .RCC_DAC1SHCLKSOURCE_LSI,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -1653,16 +1448,7 @@ pub const ClockTree = struct {
         const ICLKMultval = ClockNodeTypes{
             .multi = inner: {
                 if (config.ICLKMult) |val| {
-                    switch (val) {
-                        .RCC_ICLKCLKSOURCE_SYSCLK,
-                        .RCC_ICLKCLKSOURCE_MSIK,
-                        .RCC_ICLKCLKSOURCE_HSE,
-                        .RCC_ICLKCLKSOURCE_HSI48,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1690,14 +1476,7 @@ pub const ClockTree = struct {
         const USBDivval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.USBDiv) |val| {
-                    switch (val) {
-                        .RCC_USB1CLKSOURCE_ICLK,
-                        .RCC_USB1CLKSOURCE_ICLK_DIV2,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -1717,14 +1496,7 @@ pub const ClockTree = struct {
         const FDCANMultval = ClockNodeTypes{
             .multi = inner: {
                 if (config.FDCANMult) |val| {
-                    switch (val) {
-                        .RCC_FDCANCLKSOURCE_SYSCLK,
-                        .RCC_FDCANCLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1748,14 +1520,7 @@ pub const ClockTree = struct {
         const I2C1Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.I2C1Mult) |val| {
-                    switch (val) {
-                        .RCC_I2C1CLKSOURCE_PCLK1,
-                        .RCC_I2C1CLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1779,14 +1544,7 @@ pub const ClockTree = struct {
         const I3C1Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.I3C1Mult) |val| {
-                    switch (val) {
-                        .RCC_I3C1CLKSOURCE_PCLK1,
-                        .RCC_I3C1CLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1810,14 +1568,7 @@ pub const ClockTree = struct {
         const I3C2Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.I3C2Mult) |val| {
-                    switch (val) {
-                        .RCC_I3C2CLKSOURCE_PCLK2,
-                        .RCC_I3C2CLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1841,14 +1592,7 @@ pub const ClockTree = struct {
         const I2C2Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.I2C2Mult) |val| {
-                    switch (val) {
-                        .RCC_I2C2CLKSOURCE_PCLK1,
-                        .RCC_I2C2CLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1872,14 +1616,7 @@ pub const ClockTree = struct {
         const I2C3Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.I2C3Mult) |val| {
-                    switch (val) {
-                        .RCC_I2C3CLKSOURCE_PCLK3,
-                        .RCC_I2C3CLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1903,15 +1640,7 @@ pub const ClockTree = struct {
         const SAI1Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.SAI1Mult) |val| {
-                    switch (val) {
-                        .RCC_SAI1CLKSOURCE_MSIK,
-                        .RCC_SAI1CLKSOURCE_PIN,
-                        .RCC_SAI1CLKSOURCE_HSE,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1936,16 +1665,7 @@ pub const ClockTree = struct {
         const ADF1Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.ADF1Mult) |val| {
-                    switch (val) {
-                        .RCC_ADF1CLKSOURCE_HCLK,
-                        .RCC_ADF1CLKSOURCE_PIN,
-                        .RCC_ADF1CLKSOURCE_MSIK,
-                        .RCC_ADF1CLKSOURCE_SAI1K,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -1971,14 +1691,7 @@ pub const ClockTree = struct {
         const OCTOSPIMMultval = ClockNodeTypes{
             .multi = inner: {
                 if (config.OCTOSPIMMult) |val| {
-                    switch (val) {
-                        .RCC_OCTOSPICLKSOURCE_SYSCLK,
-                        .RCC_OCTOSPICLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -2002,16 +1715,7 @@ pub const ClockTree = struct {
         const LPTIM3Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.LPTIM3Mult) |val| {
-                    switch (val) {
-                        .RCC_LPTIM34CLKSOURCE_MSIK,
-                        .RCC_LPTIM34CLKSOURCE_LSI,
-                        .RCC_LPTIM34CLKSOURCE_HSI,
-                        .RCC_LPTIM34CLKSOURCE_LSE,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -2037,14 +1741,7 @@ pub const ClockTree = struct {
         const RNGMultval = ClockNodeTypes{
             .multi = inner: {
                 if (config.RNGMult) |val| {
-                    switch (val) {
-                        .RCC_RNGCLKSOURCE_HSI48,
-                        .RCC_RNGCLKSOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -2070,20 +1767,7 @@ pub const ClockTree = struct {
         const MCOMultval = ClockNodeTypes{
             .multi = inner: {
                 if (config.MCOMult) |val| {
-                    switch (val) {
-                        .RCC_MCO1SOURCE_LSE,
-                        .RCC_MCO1SOURCE_LSI,
-                        .RCC_MCO1SOURCE_HSE,
-                        .RCC_MCO1SOURCE_HSI,
-                        .RCC_MCO1SOURCE_SYSCLK,
-                        .RCC_MCO1SOURCE_MSIS,
-                        .RCC_MCO1SOURCE_HSI48,
-                        .RCC_MCO1SOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 4;
                 }
@@ -2107,20 +1791,7 @@ pub const ClockTree = struct {
         const MCODivval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.MCODiv) |val| {
-                    switch (val) {
-                        .RCC_MCODIV_1,
-                        .RCC_MCODIV_2,
-                        .RCC_MCODIV_4,
-                        .RCC_MCODIV_8,
-                        .RCC_MCODIV_16,
-                        .RCC_MCODIV_32,
-                        .RCC_MCODIV_64,
-                        .RCC_MCODIV_128,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -2140,20 +1811,7 @@ pub const ClockTree = struct {
         const MCO2Multval = ClockNodeTypes{
             .multi = inner: {
                 if (config.MCO2Mult) |val| {
-                    switch (val) {
-                        .RCC_MCO2SOURCE_LSE,
-                        .RCC_MCO2SOURCE_LSI,
-                        .RCC_MCO2SOURCE_HSE,
-                        .RCC_MCO2SOURCE_HSI,
-                        .RCC_MCO2SOURCE_SYSCLK,
-                        .RCC_MCO2SOURCE_MSIS,
-                        .RCC_MCO2SOURCE_HSI48,
-                        .RCC_MCO2SOURCE_MSIK,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 4;
                 }
@@ -2177,20 +1835,7 @@ pub const ClockTree = struct {
         const MCO2Divval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.MCO2Div) |val| {
-                    switch (val) {
-                        .RCC_MCO2DIV_1,
-                        .RCC_MCO2DIV_2,
-                        .RCC_MCO2DIV_4,
-                        .RCC_MCO2DIV_8,
-                        .RCC_MCO2DIV_16,
-                        .RCC_MCO2DIV_32,
-                        .RCC_MCO2DIV_64,
-                        .RCC_MCO2DIV_128,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 1;
                 }
@@ -2210,14 +1855,7 @@ pub const ClockTree = struct {
         const LSCOMultval = ClockNodeTypes{
             .multi = inner: {
                 if (config.LSCOMult) |val| {
-                    switch (val) {
-                        .RCC_LSCOSOURCE_LSI,
-                        .RCC_LSCOSOURCE_LSE,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -2249,13 +1887,7 @@ pub const ClockTree = struct {
         const CortexPrescalerval = ClockNodeTypes{ .div = .{
             .value = inner: {
                 if (config.CortexPrescaler) |val| {
-                    switch (val) {
-                        .@"8",
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 8;
                 }
@@ -2269,15 +1901,7 @@ pub const ClockTree = struct {
         const CortexCLockSelectionval = ClockNodeTypes{
             .multi = inner: {
                 if (config.CortexCLockSelection) |val| {
-                    switch (val) {
-                        .RCC_SYSTICKCLKSOURCE_HCLK_DIV8,
-                        .RCC_SYSTICKCLKSOURCE_LSE,
-                        .RCC_SYSTICKCLKSOURCE_LSI,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }
@@ -2394,15 +2018,7 @@ pub const ClockTree = struct {
         const MSIAutoCalibrationval = ClockNodeTypes{ .source = .{
             .value = inner: {
                 if (config.MSIAutoCalibration) |val| {
-                    switch (val) {
-                        .DISABLED,
-                        .PLLMODE_MSIK,
-                        .PLLMODE_MSIS,
-                        => {
-                            break :inner val.get();
-                        },
-                    }
-                    @compileError(std.fmt.comptimePrint("value {s} depends on an expression that returned false", .{@tagName(val)}));
+                    break :inner val.get();
                 } else {
                     break :inner 0;
                 }

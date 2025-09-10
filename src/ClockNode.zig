@@ -261,7 +261,7 @@ pub const ClockNode = struct {
 
     fn mulfrac(self: Self, node: *const MulFrac) ClockState {
         if (self.parents) |parents| {
-            if (parents.len > 2) {
+            if (parents.len >= 2) {
                 const value = node.value;
                 const limit = self.limit_check(value, node.limit);
                 switch (limit) {
@@ -271,7 +271,11 @@ pub const ClockNode = struct {
 
                         switch (frac) {
                             .Ok => |from_frac| {
-                                const frac_max = parents[1].Nodetype.frac.max;
+                                const frac_max = switch (parents[1].Nodetype) {
+                                    .frac => |f| f.max,
+                                    .source => |s| s.limit.?.max,
+                                    else => return .{ .NoParent = .{ .node = self } },
+                                };
                                 switch (input) {
                                     .Ok => |from_input| {
                                         return .{ .Ok = node.get(

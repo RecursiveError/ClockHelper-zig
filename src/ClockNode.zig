@@ -192,7 +192,11 @@ pub const ClockNode = struct {
     fn print_multi_frac(node: *const ClockNode) []const u8 {
         const mul_val = node.Nodetype.mulfrac.value;
         const frac_val = node.parents.?[1].get_value() catch unreachable;
-        const frac_max = node.parents.?[1].Nodetype.frac.max;
+        const frac_max = switch (node.parents.?[1].Nodetype) {
+            .frac => |f| f.max,
+            .source => |s| if (s.limit) |l| l.max else s.value,
+            else => 0,
+        };
         return comptimePrint("{d} + ({d}/{d})", .{ mul_val, frac_val, frac_max });
     }
 

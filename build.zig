@@ -18,9 +18,14 @@ pub fn build(b: *std.Build) void {
 
     const ClockParser = b.addExecutable(.{
         .name = "clock_helper",
-        .root_source_file = b.path("src/ClockParser.zig"),
-        .target = target,
-        .optimize = optimize,
+        .root_module = b.addModule(
+            "clock_helper",
+            .{
+                .target = target,
+                .optimize = optimize,
+                .root_source_file = b.path("src/ClockParser.zig"),
+            },
+        ),
     });
 
     const clap = b.dependency("clap", .{});
@@ -33,9 +38,14 @@ pub fn build(b: *std.Build) void {
 
     const generic_example = b.addExecutable(.{
         .name = "generic_example",
-        .root_source_file = b.path("examples/generic_example.zig"),
-        .target = target,
-        .optimize = optimize,
+        .root_module = b.addModule(
+            "generic_example",
+            .{
+                .target = target,
+                .optimize = optimize,
+                .root_source_file = b.path("examples/generic_example.zig"),
+            },
+        ),
     });
     generic_example.root_module.addImport("ClockHelper", ClockHelper);
 

@@ -23,14 +23,20 @@ pub fn main() !void {
         if (file) |entry| {
             switch (entry.kind) {
                 .file => {
-                    std.debug.print("create new file from: {s}\n", .{entry.name});
-                    const name = entry.name;
-                    const out_name = std.fmt.bufPrint(&out_buffer, "src/ClockTrees/{s}.zig", .{name[0..(name.len - 5)]}) catch continue;
-                    const json_file = json_dir.openFile(name, .{}) catch continue;
-                    create_files(json_file, out_name) catch |err| {
-                        std.log.info("Fail to create {s} Error: {any}", .{ name, err });
-                    };
-                    json_file.close();
+                    if (std.mem.startsWith(u8, entry.name, "STM32")) {
+                        if ((entry.name[5] == 'M') or (entry.name[5] == 'W')) {
+                            std.debug.print("SKIP {s}\n STM32Mxx/Wxx is not supported yet\n", .{entry.name});
+                            continue;
+                        }
+                        std.debug.print("create new file from: {s}\n", .{entry.name});
+                        const name = entry.name;
+                        const out_name = std.fmt.bufPrint(&out_buffer, "src/ClockTrees/{s}.zig", .{name[0..(name.len - 5)]}) catch continue;
+                        const json_file = json_dir.openFile(name, .{}) catch continue;
+                        create_files(json_file, out_name) catch |err| {
+                            std.log.info("Fail to create {s} Error: {any}", .{ name, err });
+                        };
+                        json_file.close();
+                    }
                 },
                 else => {},
             }
@@ -72,8 +78,8 @@ fn create_files(json_file: std.fs.File, out_name: []const u8) !void {
     var arena_state = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena_state.deinit();
     const arena = arena_state.allocator();
-    const file_slice = json_file.readToEndAlloc(arena, 2042 * 1000) catch unreachable;
 
+    const file_slice = json_file.readToEndAlloc(arena, 2042 * 1000) catch unreachable;
     const corrent_tree = try std.json.parseFromSlice(Tree, arena, file_slice, .{ .duplicate_field_behavior = .use_last });
     const tree = &corrent_tree.value;
     const clear_tree = try clean_tree(tree, arena);
@@ -81,7 +87,10 @@ fn create_files(json_file: std.fs.File, out_name: []const u8) !void {
     const zig_file = try std.fs.cwd().createFile(out_name, .{ .truncate = false });
     errdefer zig_file.close();
     try load_global_maps(&clear_tree, arena);
-    _ = try zig_file.write(
+    var writer_buf: [8000]u8 = undefined;
+    var writer = zig_file.writer(&writer_buf);
+
+    _ = try writer.interface.writeAll(
         \\const std = @import("std");
         \\const clock = @import("../ClockNode.zig");
         \\const ClockNode = clock.ClockNode;
@@ -91,35 +100,37 @@ fn create_files(json_file: std.fs.File, out_name: []const u8) !void {
         \\
         \\
     );
-    try create_configs(&clear_tree, zig_file.writer().any());
-    try create_conf_struct(&clear_tree, zig_file.writer().any());
-    try create_alter_conf_struct(&clear_tree, zig_file.writer().any());
-    try create_clock_struct(&clear_tree, zig_file.writer().any());
+
+    try create_configs(&clear_tree, &writer.interface);
+    try create_conf_struct(&clear_tree, &writer.interface);
+    try create_alter_conf_struct(&clear_tree, &writer.interface);
+    try create_clock_struct(&clear_tree, &writer.interface);
+    try writer.interface.flush();
     zig_file.close();
     var ch = std.process.Child.init(&[_][]const u8{ "zig", "fmt", out_name }, arena);
     _ = try ch.spawnAndWait();
 }
 
 fn clean_tree(base_tree: *const Tree, alloc: std.mem.Allocator) !Tree {
-    var new_elements = std.ArrayList(Element).init(alloc);
+    var new_elements = try std.ArrayList(Element).initCapacity(alloc, 1);
     for (base_tree.element) |element| {
         if (TypeMap.get(element.Elementtype)) |_| {
             switch (get_default_value(element.reference)) {
                 .NoReference => continue,
                 else => {},
             }
-            try new_elements.append(element);
+            try new_elements.append(alloc, element);
         }
     }
 
     var new_tree = base_tree.*;
-    new_tree.element = try new_elements.toOwnedSlice();
+    new_tree.element = try new_elements.toOwnedSlice(alloc);
 
     return new_tree;
 }
 
 fn get_default_value(references: []Reference) ReferenceValue {
-    var val: ReferenceValue = undefined;
+    var val: ReferenceValue = .NoReference;
     for (references) |ref| {
         //only care abount the null expression
         if (ref.expr) |_| continue;
@@ -159,7 +170,7 @@ fn check_input(name: []const u8) bool {
 
 //========= config types =========
 ///create enum configs for each type in clocktree
-fn create_configs(tree: *const Tree, writer: std.io.AnyWriter) !void {
+fn create_configs(tree: *const Tree, writer: *std.Io.Writer) !void {
     const palloc = std.heap.page_allocator;
     var parentmap = std.StringHashMap(void).init(palloc);
     defer parentmap.deinit();
@@ -189,7 +200,7 @@ fn create_configs(tree: *const Tree, writer: std.io.AnyWriter) !void {
     }
 }
 
-fn create_list_config(element: *const Element, writer: std.io.AnyWriter, alloc: std.mem.Allocator) !void {
+fn create_list_config(element: *const Element, writer: *std.Io.Writer, alloc: std.mem.Allocator) !void {
     var valuemap = std.StringHashMap(f32).init(alloc);
     defer valuemap.deinit();
 
@@ -233,7 +244,7 @@ fn create_list_config(element: *const Element, writer: std.io.AnyWriter, alloc: 
     try ValuesQtd.put(element.name, qtd);
 }
 
-fn create_mutiplexor_config(element: *const Element, writer: std.io.AnyWriter) !void {
+fn create_mutiplexor_config(element: *const Element, writer: *std.Io.Writer) !void {
     try writer.print("pub const @\"{s}Conf\" = enum{{\n", .{element.reference_id});
     var qtd: usize = 0;
     for (element.sources) |sources| {
@@ -263,7 +274,7 @@ fn create_mutiplexor_config(element: *const Element, writer: std.io.AnyWriter) !
     try ValuesQtd.put(element.name, qtd);
 }
 
-fn create_number_config(element: *const Element, writer: std.io.AnyWriter) !void {
+fn create_number_config(element: *const Element, writer: *std.Io.Writer) !void {
     const name = element.reference_id;
 
     try writer.print(
@@ -280,7 +291,7 @@ fn create_number_config(element: *const Element, writer: std.io.AnyWriter) !void
 
 //======= config struct ==========
 ///cretate the config struct
-fn create_conf_struct(tree: *const Tree, writer: std.io.AnyWriter) !void {
+fn create_conf_struct(tree: *const Tree, writer: *std.Io.Writer) !void {
     try writer.print("pub const Config = struct {{\n", .{});
     for (tree.element) |element| {
         const name = element.name;
@@ -337,7 +348,7 @@ fn create_conf_struct(tree: *const Tree, writer: std.io.AnyWriter) !void {
     try writer.print("}};\n\n", .{});
 }
 
-fn create_alter_conf_struct(tree: *const Tree, writer: std.io.AnyWriter) !void {
+fn create_alter_conf_struct(tree: *const Tree, writer: *std.Io.Writer) !void {
     const palloc = std.heap.page_allocator;
     var parentmap = std.StringHashMap(void).init(palloc);
     defer parentmap.deinit();
@@ -402,7 +413,7 @@ fn create_alter_conf_struct(tree: *const Tree, writer: std.io.AnyWriter) !void {
     try writer.print("}};\n\n", .{});
 }
 
-fn create_into_config(tree: *const Tree, writer: std.io.AnyWriter) !void {
+fn create_into_config(tree: *const Tree, writer: *std.Io.Writer) !void {
     _ = try writer.write(
         \\pub fn into_config(self: *const ConfigWithRef) Config {
         \\ return .{
@@ -431,17 +442,20 @@ fn create_into_config(tree: *const Tree, writer: std.io.AnyWriter) !void {
 
 //======= Clock Struct ========
 
-fn create_clock_struct(tree: *const Tree, writer: std.io.AnyWriter) !void {
+fn create_clock_struct(tree: *const Tree, writer: *std.Io.Writer) !void {
     try writer.print(
         \\pub const ClockTree = struct {{
-        \\  const this = @This();
+        \\  const Self = @This();
         \\
         \\
     , .{});
 
     try create_clock_types(tree, writer);
     try create_init_comptime(tree, writer);
-    try create_clock_validate(tree, writer);
+    try create_into_runtime(tree, writer);
+    try create_runtime_deinit(tree, writer);
+    try create_runtime_apply(tree, writer);
+    //try create_clock_validate(tree, writer);
 
     try writer.print(
         \\}};
@@ -450,7 +464,7 @@ fn create_clock_struct(tree: *const Tree, writer: std.io.AnyWriter) !void {
     , .{});
 }
 
-const ValueTyRef = *const fn (*const Element, ReferenceValue, std.io.AnyWriter) anyerror!void;
+const ValueTyRef = *const fn (*const Element, ReferenceValue, bool, *std.Io.Writer) anyerror!void;
 const ValueTyMap = std.StaticStringMap(ValueTyRef).initComptime(.{
     .{ "ExtraRef", create_source_val },
     .{ "distinctValsSource", create_source_val },
@@ -467,7 +481,7 @@ const ValueTyMap = std.StaticStringMap(ValueTyRef).initComptime(.{
     .{ "activeOutput", create_output_val },
 });
 
-const TypeRef = *const fn (*const Element, std.io.AnyWriter) anyerror!void;
+const TypeRef = *const fn (*const Element, *std.Io.Writer) anyerror!void;
 const TypeMap = std.StaticStringMap(TypeRef).initComptime(.{
     .{ "ExtraRef", create_source },
     .{ "distinctValsSource", create_source },
@@ -484,7 +498,7 @@ const TypeMap = std.StaticStringMap(TypeRef).initComptime(.{
     .{ "activeOutput", create_output },
 });
 
-fn create_clock_types(tree: *const Tree, writer: std.io.AnyWriter) !void {
+fn create_clock_types(tree: *const Tree, writer: *std.Io.Writer) !void {
     for (tree.element) |element| {
         if (std.mem.eql(u8, "ExtraRef", element.Elementtype)) {
             try writer.print("@\"{s}\": ClockNodeTypes,\n", .{element.name});
@@ -495,12 +509,12 @@ fn create_clock_types(tree: *const Tree, writer: std.io.AnyWriter) !void {
     _ = try writer.write("\n");
 }
 
-fn create_init_comptime(tree: *const Tree, writer: std.io.AnyWriter) !void {
+fn create_init_comptime(tree: *const Tree, writer: *std.Io.Writer) !void {
     const palloc = std.heap.page_allocator;
     var parentmap = std.StringHashMap(bool).init(palloc);
     defer parentmap.deinit();
     try writer.print(
-        \\pub fn init_comptime(comptime config: Config) this {{
+        \\pub fn init(comptime config: Config) Self {{
         \\
     , .{});
     for (tree.element) |element| {
@@ -525,6 +539,115 @@ fn create_init_comptime(tree: *const Tree, writer: std.io.AnyWriter) !void {
     );
 }
 
+fn create_into_runtime(tree: *const Tree, writer: *std.Io.Writer) !void {
+    try writer.writeAll(
+        \\pub fn init_runtime_tree(self: *Self, alloc: std.mem.Allocator) !void {
+    );
+
+    for (tree.element) |element| {
+        if (std.mem.eql(u8, "ExtraRef", element.Elementtype)) continue;
+        const name = element.name;
+        try writer.print(
+            \\self.@"{s}".parents = try alloc.dupe(*const ClockNode, &.{{
+        , .{name});
+
+        for (element.sources) |source| {
+            switch (source) {
+                .input => |input| {
+                    if (check_input(input.from)) {
+                        try writer.print("&self.@\"{s}\",", .{input.from});
+                    }
+                },
+                else => {},
+            }
+        }
+
+        try writer.writeAll("});\n");
+    }
+
+    try writer.writeAll(
+        \\}
+    );
+}
+
+fn create_runtime_deinit(tree: *const Tree, writer: *std.Io.Writer) !void {
+    try writer.writeAll(
+        \\pub fn deinit_runtime_tree(self: *Self, alloc: std.mem.Allocator) void {
+    );
+
+    for (tree.element) |element| {
+        if (std.mem.eql(u8, "ExtraRef", element.Elementtype)) continue;
+        const name = element.name;
+        try writer.print(
+            \\alloc.free(self.@"{s}".parents.?);
+        , .{name});
+    }
+
+    try writer.writeAll(
+        \\}
+    );
+}
+
+fn create_runtime_apply(tree: *const Tree, writer: *std.Io.Writer) !void {
+    var map = std.StringHashMap(void).init(std.heap.page_allocator);
+    defer map.deinit();
+
+    try writer.writeAll("pub fn runtime_apply(self: *Self, config: Config) error{InvalidConfig}!void {");
+    for (tree.element) |element| {
+        if (map.get(element.reference_id)) |_| continue;
+        try map.put(element.reference_id, {});
+        try create_runtime_apply_values(element, &map, writer);
+    }
+    try writer.writeAll("}");
+}
+
+fn create_runtime_apply_values(element: Element, map: *std.StringHashMap(void), writer: *std.Io.Writer) !void {
+    for (element.sources) |src| {
+        switch (src) {
+            .input => |in| {
+                const in_element = nameMap.get(in.from) orelse continue;
+                if (map.get(in_element.reference_id)) |_| continue;
+                if (std.mem.eql(u8, in_element.reference_id, element.reference_id)) continue;
+                try map.put(in_element.reference_id, {});
+                try create_runtime_apply_values(in_element, map, writer);
+            },
+            else => continue,
+        }
+    }
+    for (element.reference) |ref| {
+        try apply_expr(ref, map, writer);
+    }
+    try create_node_value(&element, true, writer);
+    if (std.mem.eql(u8, element.Elementtype, "ExtraRef")) {
+        try writer.print("self.@\"{0s}\" = @\"{0s}val\";\n", .{element.name});
+    } else {
+        try writer.print("self.@\"{0s}\".nodetype = @\"{0s}val\";\n", .{element.name});
+    }
+}
+
+fn apply_expr(ref: Reference, map: *std.StringHashMap(void), writer: *std.Io.Writer) anyerror!void {
+    if (ref.expr) |expr| {
+        const len = expr.len;
+        var idx: usize = 0;
+        while (idx < len) {
+            switch (expr[idx]) {
+                '&', '|', '=', '!', '(', ')', '/', ' ', '<', '>' => {
+                    idx += 1;
+                },
+                else => {
+                    const str = get_cur_str(expr[idx..]);
+                    idx += str.len;
+                    const ref_id = RefIDmap.get(str) orelse continue;
+                    const exp_element = nameMap.get(ref_id) orelse continue;
+                    if (map.get(exp_element.reference_id)) |_| continue;
+                    try map.put(exp_element.reference_id, {});
+                    try create_runtime_apply_values(exp_element, map, writer);
+                },
+            }
+        }
+    }
+}
+
 const NodeType = enum { none, simple, frac, multi };
 const NodeMap = std.StaticStringMap(NodeType).initComptime(.{
     .{ "distinctValsSource", NodeType.none },
@@ -540,7 +663,7 @@ const NodeMap = std.StaticStringMap(NodeType).initComptime(.{
     .{ "output", NodeType.simple },
     .{ "activeOutput", NodeType.simple },
 });
-fn create_node_source(element: *const Element, writer: std.io.AnyWriter, parentmap: *std.StringHashMap(bool)) !void {
+fn create_node_source(element: *const Element, writer: *std.Io.Writer, parentmap: *std.StringHashMap(bool)) !void {
     //std.debug.print("create source for: {s}\n", .{element.name});
     const nodet: NodeType = NodeMap.get(element.Elementtype) orelse NodeType.none;
 
@@ -631,13 +754,13 @@ fn is_element(str: []const u8) bool {
     return if (nameMap.get(str)) |_| true else false;
 }
 
-fn create_node(element: *const Element, writer: std.io.AnyWriter) !void {
-    try create_node_value(element, writer);
+fn create_node(element: *const Element, writer: *std.Io.Writer) !void {
+    try create_node_value(element, false, writer);
     if (std.mem.eql(u8, "ExtraRef", element.Elementtype)) return;
     try writer.print(
         \\const @"{0s}": ClockNode = .{{
         \\  .name = "{0s}",
-        \\  .Nodetype = @"{0s}val",
+        \\  .nodetype = @"{0s}val",
         \\
     , .{element.name});
     const callback = TypeMap.get(element.Elementtype) orelse return error.InvalidType;
@@ -655,7 +778,7 @@ fn create_node(element: *const Element, writer: std.io.AnyWriter) !void {
 }
 
 var global_expr: ?[]const u8 = null;
-fn create_node_value(element: *const Element, writer: std.io.AnyWriter) !void {
+fn create_node_value(element: *const Element, runtime: bool, writer: *std.Io.Writer) !void {
     const callback = ValueTyMap.get(element.Elementtype) orelse return error.InvalidType;
     const defualt = get_default_value(element.reference);
     var have_expr: bool = false;
@@ -673,7 +796,7 @@ fn create_node_value(element: *const Element, writer: std.io.AnyWriter) !void {
                 \\  break :blk 
             , .{zig_expr});
 
-            callback(element, reference.value, writer) catch |err| {
+            callback(element, reference.value, runtime, writer) catch |err| {
                 switch (err) {
                     error.RecursiveNode => {},
                     else => return err,
@@ -690,7 +813,7 @@ fn create_node_value(element: *const Element, writer: std.io.AnyWriter) !void {
                 \\else if({s}){{
                 \\  break :blk 
             , .{zig_expr});
-            callback(element, reference.value, writer) catch |err| {
+            callback(element, reference.value, runtime, writer) catch |err| {
                 switch (err) {
                     error.RecursiveNode => {},
                     else => return err,
@@ -710,7 +833,7 @@ fn create_node_value(element: *const Element, writer: std.io.AnyWriter) !void {
             \\else {{
             \\  break :blk 
         , .{});
-        callback(element, defualt, writer) catch |err| {
+        callback(element, defualt, runtime, writer) catch |err| {
             switch (err) {
                 error.RecursiveNode => {},
                 else => return err,
@@ -722,7 +845,7 @@ fn create_node_value(element: *const Element, writer: std.io.AnyWriter) !void {
             \\
         , .{});
     } else {
-        callback(element, defualt, writer) catch |err| {
+        callback(element, defualt, runtime, writer) catch |err| {
             switch (err) {
                 error.RecursiveNode => {},
                 else => return err,
@@ -834,7 +957,7 @@ fn find_fist_input(sources: []const ClockTree.Sources) ![]const u8 {
     return error.NoInputFind;
 }
 
-fn create_prescaler(element: *const Element, writer: std.io.AnyWriter) anyerror!void {
+fn create_prescaler(element: *const Element, writer: *std.Io.Writer) anyerror!void {
     const name = element.name;
     const first_input = try find_fist_input(element.sources);
     if (std.mem.eql(u8, name, first_input)) return error.RecursiveNode;
@@ -851,7 +974,7 @@ const PLLMap = std.StaticStringMap([]const u8).initComptime(.{
     .{ "divisor", "DIV" },
 });
 
-fn create_prescaler_val(element: *const Element, value: ReferenceValue, writer: std.io.AnyWriter) anyerror!void {
+fn create_prescaler_val(element: *const Element, value: ReferenceValue, runtime: bool, writer: *std.Io.Writer) anyerror!void {
     const name = element.name;
     const first_input = try find_fist_input(element.sources);
     if (std.mem.eql(u8, name, first_input)) return error.RecursiveNode;
@@ -861,7 +984,7 @@ fn create_prescaler_val(element: *const Element, value: ReferenceValue, writer: 
     switch (value) {
         .Number => |limits| {
             try writer.print(
-                \\ClockNodeTypes{{ .{s} = .{{ .value = if(config.@"{s}") |val| val.get() else {d}, .limit = .{{ .max = {d}, .min = {d} }}, }}, }};
+                \\ClockNodeTypes{{ .{s} = .{{ .value = if(config.@"{s}") |val| val.get() else {d}, .limit = .{{ .max = @min(1_000_000_000, {d}), .min = {d} }}, }}, }};
                 \\
             , .{ lower_prefix, name, limits.default, limits.max, limits.min });
         },
@@ -878,7 +1001,7 @@ fn create_prescaler_val(element: *const Element, value: ReferenceValue, writer: 
                 \\ClockNodeTypes{{ .{s} = .{{ .value = inner: {{
                 \\
             , .{lower_prefix});
-            try create_check_options(element, lists.id_list, value, writer);
+            try create_check_options(element, lists.id_list, value, runtime, writer);
 
             try writer.print(
                 \\  }},
@@ -945,7 +1068,7 @@ fn find_fract(sources: []Sources) !FracIds {
         .inputid = default[0].from,
     };
 }
-fn create_mulfrac(element: *const Element, writer: std.io.AnyWriter) anyerror!void {
+fn create_mulfrac(element: *const Element, writer: *std.Io.Writer) anyerror!void {
     const inputs = try find_fract(element.sources);
     try writer.print(
         \\.parents = &[_]*const ClockNode{{&@"{s}", &@"{s}"}},
@@ -953,12 +1076,12 @@ fn create_mulfrac(element: *const Element, writer: std.io.AnyWriter) anyerror!vo
     , .{ inputs.inputid, inputs.fractid });
 }
 
-fn create_mulfrac_val(element: *const Element, value: ReferenceValue, writer: std.io.AnyWriter) anyerror!void {
+fn create_mulfrac_val(element: *const Element, value: ReferenceValue, runtime: bool, writer: *std.Io.Writer) anyerror!void {
     const name = element.name;
     switch (value) {
         .Number => |limits| {
             try writer.print(
-                \\ClockNodeTypes{{ .mulfrac = .{{ .value = if(config.@"{s}") |val| val.get() else {d}, .limit = .{{ .max = {d}, .min = {d} }}, }}, }};
+                \\ClockNodeTypes{{ .mulfrac = .{{ .value = if(config.@"{s}") |val| val.get() else {d}, .limit = .{{ .max = @min(1_000_000_000, {d}), .min = {d} }}, }}, }};
                 \\
             , .{ name, limits.default, limits.max, limits.min });
         },
@@ -973,7 +1096,7 @@ fn create_mulfrac_val(element: *const Element, value: ReferenceValue, writer: st
                 \\ClockNodeTypes{{ .mulfrac = .{{ .value = inner: {{
                 \\
             , .{});
-            try create_check_options(element, lists.id_list, value, writer);
+            try create_check_options(element, lists.id_list, value, runtime, writer);
 
             try writer.print(
                 \\  }},
@@ -988,7 +1111,7 @@ fn create_mulfrac_val(element: *const Element, value: ReferenceValue, writer: st
     }
 }
 
-fn create_multiplex(element: *const Element, writer: std.io.AnyWriter) anyerror!void {
+fn create_multiplex(element: *const Element, writer: *std.Io.Writer) anyerror!void {
     try writer.print(
         \\
         \\.parents = &[_]*const ClockNode{{
@@ -1010,7 +1133,7 @@ fn create_multiplex(element: *const Element, writer: std.io.AnyWriter) anyerror!
     );
 }
 
-fn create_multiplex_val(element: *const Element, val: ReferenceValue, writer: std.io.AnyWriter) anyerror!void {
+fn create_multiplex_val(element: *const Element, val: ReferenceValue, runtime: bool, writer: *std.Io.Writer) anyerror!void {
     var inputs_ids: [200][]const u8 = undefined;
     var inputs_idx: usize = 0;
 
@@ -1029,7 +1152,7 @@ fn create_multiplex_val(element: *const Element, val: ReferenceValue, writer: st
         \\ClockNodeTypes{{ .multi = inner: {{
         \\
     , .{});
-    try create_check_options(element, inputs_ids[0..inputs_idx], val, writer);
+    try create_check_options(element, inputs_ids[0..inputs_idx], val, runtime, writer);
 
     try writer.print(
         \\  }},
@@ -1038,7 +1161,7 @@ fn create_multiplex_val(element: *const Element, val: ReferenceValue, writer: st
     , .{});
 }
 
-fn create_output(element: *const Element, writer: std.io.AnyWriter) anyerror!void {
+fn create_output(element: *const Element, writer: *std.Io.Writer) anyerror!void {
     const input_id = try find_fist_input(element.sources);
     if (std.mem.eql(u8, element.name, input_id)) return error.RecursiveNode;
     try writer.print(
@@ -1047,11 +1170,11 @@ fn create_output(element: *const Element, writer: std.io.AnyWriter) anyerror!voi
     , .{input_id});
 }
 
-fn create_output_val(_: *const Element, value: ReferenceValue, writer: std.io.AnyWriter) anyerror!void {
+fn create_output_val(_: *const Element, value: ReferenceValue, _: bool, writer: *std.Io.Writer) anyerror!void {
     switch (value) {
         .Number => |num| {
             try writer.print(
-                \\ClockNodeTypes{{ .output = .{{ .max = {d}, .min = {d} }}, }};
+                \\ClockNodeTypes{{ .output = .{{ .max = @min(1_000_000_000, {d}), .min = {d} }}, }};
                 \\
             , .{ num.max, num.min });
         },
@@ -1064,7 +1187,7 @@ fn create_output_val(_: *const Element, value: ReferenceValue, writer: std.io.An
     }
 }
 
-fn create_check_options(element: *const Element, valid_op: []const []const u8, value: ReferenceValue, writer: std.io.AnyWriter) anyerror!void {
+fn create_check_options(element: *const Element, valid_op: []const []const u8, value: ReferenceValue, runtime: bool, writer: *std.Io.Writer) anyerror!void {
     const qtd = ValuesQtd.get(element.name) orelse 0;
     if (qtd > valid_op.len) {
         try writer.print(
@@ -1091,17 +1214,33 @@ fn create_check_options(element: *const Element, valid_op: []const []const u8, v
         , .{});
 
         if (global_expr) |expr| {
-            try writer.print(
-                \\}}
-                \\@compileError(std.fmt.comptimePrint("value {{s}}, cannot be used if expr: {{s}} is true", .{{@tagName(val), "{s}" }}));
-                \\
-            , .{expr});
+            if (runtime) {
+                try writer.print(
+                    \\}}
+                    \\return error.InvalidConfig;
+                    \\
+                , .{});
+            } else {
+                try writer.print(
+                    \\}}
+                    \\@compileError(std.fmt.comptimePrint("value {{s}}, cannot be used if expr: {{s}} is true", .{{@tagName(val), "{s}" }}));
+                    \\
+                , .{expr});
+            }
         } else {
-            try writer.print(
-                \\}}
-                \\@compileError(std.fmt.comptimePrint("value {{s}} depends on an expression that returned false", .{{@tagName(val)}}));
-                \\
-            , .{});
+            if (runtime) {
+                try writer.print(
+                    \\}}
+                    \\return error.InvalidConfig;
+                    \\
+                , .{});
+            } else {
+                try writer.print(
+                    \\}}
+                    \\@compileError(std.fmt.comptimePrint("value {{s}} depends on an expression that returned false", .{{@tagName(val)}}));
+                    \\
+                , .{});
+            }
         }
     } else {
         try writer.print(
@@ -1119,14 +1258,14 @@ fn create_check_options(element: *const Element, valid_op: []const []const u8, v
     , .{get_default_value_num(value, element)});
 }
 
-fn create_source(_: *const Element, _: std.io.AnyWriter) anyerror!void {}
+fn create_source(_: *const Element, _: *std.Io.Writer) anyerror!void {}
 
-fn create_source_val(element: *const Element, value: ReferenceValue, writer: std.io.AnyWriter) anyerror!void {
+fn create_source_val(element: *const Element, value: ReferenceValue, runtime: bool, writer: *std.Io.Writer) anyerror!void {
     const name = element.name;
     switch (value) {
         .Number => |limits| {
             try writer.print(
-                \\ClockNodeTypes{{ .source = .{{ .value = if(config.@"{s}") |val| val.get() else {d}, .limit = .{{ .max = {d}, .min = {d} }}, }}, }};
+                \\ClockNodeTypes{{ .source = .{{ .value = if(config.@"{s}") |val| val.get() else {d}, .limit = .{{ .max = @min(1_000_000_000, {d}), .min = {d} }}, }}, }};
                 \\
             , .{ name, limits.default, limits.max, limits.min });
         },
@@ -1141,7 +1280,7 @@ fn create_source_val(element: *const Element, value: ReferenceValue, writer: std
                 \\ClockNodeTypes{{ .source = .{{ .value = inner: {{
                 \\
             , .{});
-            try create_check_options(element, lists.id_list, value, writer);
+            try create_check_options(element, lists.id_list, value, runtime, writer);
 
             try writer.print(
                 \\  }},
@@ -1154,7 +1293,7 @@ fn create_source_val(element: *const Element, value: ReferenceValue, writer: std
     }
 }
 
-fn create_clock_validate(tree: *const Tree, writer: std.io.AnyWriter) !void {
+fn create_clock_validate(tree: *const Tree, writer: *std.Io.Writer) !void {
     try writer.print(
         \\
         \\ pub fn validate(comptime self: *const this) void {{

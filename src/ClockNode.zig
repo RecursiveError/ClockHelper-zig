@@ -71,11 +71,11 @@ pub const ClockState = union(enum) {
 pub const ClockNode = struct {
     const Self = *const @This();
     name: []const u8,
-    Nodetype: ClockNodesTypes,
+    nodetype: ClockNodesTypes,
     parents: ?[]const *const ClockNode = null,
 
     pub fn get(self: Self) ClockState {
-        switch (self.Nodetype) {
+        switch (self.nodetype) {
             .source => |node| {
                 return self.source(&node);
             },
@@ -119,7 +119,7 @@ pub const ClockNode = struct {
 
     pub fn get_parent(node: *const ClockNode) ?*const ClockNode {
         if (node.parents) |parents| {
-            switch (node.Nodetype) {
+            switch (node.nodetype) {
                 .mul, .div, .mulfrac, .output => {
                     return parents[0];
                 },
@@ -177,7 +177,7 @@ pub const ClockNode = struct {
         const parent = get_parent(node) orelse node;
         const value = parent.get_value() catch unreachable;
 
-        const type_data = switch (node.Nodetype) {
+        const type_data = switch (node.nodetype) {
             .div => |data| comptimePrint("{d}/{d}", .{ value, data.value }),
             .mul => |data| comptimePrint("{d} * {d}", .{ value, data.value }),
             .output, .source => comptimePrint("{d}", .{value}),
@@ -190,9 +190,9 @@ pub const ClockNode = struct {
     }
 
     fn print_multi_frac(node: *const ClockNode) []const u8 {
-        const mul_val = node.Nodetype.mulfrac.value;
+        const mul_val = node.nodetype.mulfrac.value;
         const frac_val = node.parents.?[1].get_value() catch unreachable;
-        const frac_max = switch (node.parents.?[1].Nodetype) {
+        const frac_max = switch (node.parents.?[1].nodetype) {
             .frac => |f| f.max,
             .source => |s| if (s.limit) |l| l.max else s.value,
             else => 0,
@@ -275,7 +275,7 @@ pub const ClockNode = struct {
 
                         switch (frac) {
                             .Ok => |from_frac| {
-                                const frac_max = switch (parents[1].Nodetype) {
+                                const frac_max = switch (parents[1].nodetype) {
                                     .frac => |f| f.max,
                                     .source => |s| s.limit.?.max,
                                     else => return .{ .NoParent = .{ .node = self } },

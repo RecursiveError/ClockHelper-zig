@@ -7,7 +7,9 @@ pub fn main() !void {
 
     const cwd = std.fs.cwd();
     cwd.deleteFile("src/main.zig") catch {};
+    var buf: [1024]u8 = undefined;
     var main_file = try cwd.createFile("src/main.zig", .{});
+    var f_writer = main_file.writer(&buf);
 
     var tree_dir = try cwd.openDir("src/ClockTrees", .{ .iterate = true });
     var iter = tree_dir.iterate();
@@ -19,7 +21,7 @@ pub fn main() !void {
                     const name = entry.name;
                     if (std.mem.indexOf(u8, name, ".zig")) |_| {
                         const short_name = name[0..(name.len - 4)];
-                        try main_file.writer().print("pub const @\"{s}\" = @import(\"ClockTrees/{s}\");\n\n", .{ short_name, name });
+                        try f_writer.interface.print("pub const @\"{s}\" = @import(\"ClockTrees/{s}\");\n\n", .{ short_name, name });
                     }
                 },
                 else => {},
@@ -28,11 +30,12 @@ pub fn main() !void {
         }
         break;
     }
-    _ = try main_file.write(
+    try f_writer.interface.writeAll(
         \\
         \\pub const print_clock_configs = @import("print.zig").print_clock_configs;
         \\
     );
+    try f_writer.interface.flush();
     main_file.close();
     var ch = std.process.Child.init(&[_][]const u8{ "zig", "fmt", "src/main.zig" }, arena);
     _ = try ch.spawnAndWait();

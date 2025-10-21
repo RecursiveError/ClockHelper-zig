@@ -721,7 +721,7 @@ pub const ConfigWithRef = struct {
 };
 
 pub const ClockTree = struct {
-    const this = @This();
+    const Self = @This();
 
     HSIRC: ClockNode,
     HSISYS: ClockNode,
@@ -809,13 +809,13 @@ pub const ClockTree = struct {
     LSE_Drive_Capability: ClockNodeTypes,
     LSE_Drive_CapabilityArg: ClockNodeTypes,
 
-    pub fn init_comptime(comptime config: Config) this {
+    pub fn init(comptime config: Config) Self {
         const HSIRCval = ClockNodeTypes{
             .source = .{ .value = 16000000 },
         };
         const HSIRC: ClockNode = .{
             .name = "HSIRC",
-            .Nodetype = HSIRCval,
+            .nodetype = HSIRCval,
         };
         const HSISYSval = ClockNodeTypes{ .div = .{
             .value = inner: {
@@ -828,7 +828,7 @@ pub const ClockTree = struct {
         } };
         const HSISYS: ClockNode = .{
             .name = "HSISYS",
-            .Nodetype = HSISYSval,
+            .nodetype = HSISYSval,
             .parents = &[_]*const ClockNode{&HSIRC},
         };
         const HSI48RCval = ClockNodeTypes{
@@ -836,34 +836,34 @@ pub const ClockTree = struct {
         };
         const HSI48RC: ClockNode = .{
             .name = "HSI48RC",
-            .Nodetype = HSI48RCval,
+            .nodetype = HSI48RCval,
         };
         const HSEOSCval = ClockNodeTypes{
             .source = .{
                 .value = if (config.HSEOSC) |val| val.get() else 8000000,
-                .limit = .{ .max = 48000000, .min = 4000000 },
+                .limit = .{ .max = @min(1_000_000_000, 48000000), .min = 4000000 },
             },
         };
         const HSEOSC: ClockNode = .{
             .name = "HSEOSC",
-            .Nodetype = HSEOSCval,
+            .nodetype = HSEOSCval,
         };
         const LSIRCval = ClockNodeTypes{
             .source = .{ .value = 32000 },
         };
         const LSIRC: ClockNode = .{
             .name = "LSIRC",
-            .Nodetype = LSIRCval,
+            .nodetype = LSIRCval,
         };
         const LSEOSCval = ClockNodeTypes{
             .source = .{
                 .value = if (config.LSEOSC) |val| val.get() else 32768,
-                .limit = .{ .max = 1000000, .min = 1000 },
+                .limit = .{ .max = @min(1_000_000_000, 1000000), .min = 1000 },
             },
         };
         const LSEOSC: ClockNode = .{
             .name = "LSEOSC",
-            .Nodetype = LSEOSCval,
+            .nodetype = LSEOSCval,
         };
         const PLLSourceval = ClockNodeTypes{
             .multi = inner: {
@@ -876,7 +876,7 @@ pub const ClockTree = struct {
         };
         const PLLSource: ClockNode = .{
             .name = "PLLSource",
-            .Nodetype = PLLSourceval,
+            .nodetype = PLLSourceval,
 
             .parents = &[_]*const ClockNode{
                 &HSIRC,
@@ -894,18 +894,18 @@ pub const ClockTree = struct {
         } };
         const PLLM: ClockNode = .{
             .name = "PLLM",
-            .Nodetype = PLLMval,
+            .nodetype = PLLMval,
             .parents = &[_]*const ClockNode{&PLLSource},
         };
         const PLLNval = ClockNodeTypes{
             .mul = .{
                 .value = if (config.PLLN) |val| val.get() else 8,
-                .limit = .{ .max = 86, .min = 8 },
+                .limit = .{ .max = @min(1_000_000_000, 86), .min = 8 },
             },
         };
         const PLLN: ClockNode = .{
             .name = "PLLN",
-            .Nodetype = PLLNval,
+            .nodetype = PLLNval,
             .parents = &[_]*const ClockNode{&PLLM},
         };
         const PLLRval = ClockNodeTypes{ .div = .{
@@ -919,7 +919,7 @@ pub const ClockTree = struct {
         } };
         const PLLR: ClockNode = .{
             .name = "PLLR",
-            .Nodetype = PLLRval,
+            .nodetype = PLLRval,
             .parents = &[_]*const ClockNode{&PLLN},
         };
         const SysClkSourceval = ClockNodeTypes{
@@ -933,7 +933,7 @@ pub const ClockTree = struct {
         };
         const SysClkSource: ClockNode = .{
             .name = "SysClkSource",
-            .Nodetype = SysClkSourceval,
+            .nodetype = SysClkSourceval,
 
             .parents = &[_]*const ClockNode{
                 &LSEOSC,
@@ -946,7 +946,7 @@ pub const ClockTree = struct {
         const SysCLKOutputval = ClockNodeTypes{ .output = null };
         const SysCLKOutput: ClockNode = .{
             .name = "SysCLKOutput",
-            .Nodetype = SysCLKOutputval,
+            .nodetype = SysCLKOutputval,
             .parents = &[_]*const ClockNode{&SysClkSource},
         };
         const HSERTCDevisorval = ClockNodeTypes{
@@ -954,7 +954,7 @@ pub const ClockTree = struct {
         };
         const HSERTCDevisor: ClockNode = .{
             .name = "HSERTCDevisor",
-            .Nodetype = HSERTCDevisorval,
+            .nodetype = HSERTCDevisorval,
             .parents = &[_]*const ClockNode{&HSEOSC},
         };
         const RTCClkSourceval = ClockNodeTypes{
@@ -968,7 +968,7 @@ pub const ClockTree = struct {
         };
         const RTCClkSource: ClockNode = .{
             .name = "RTCClkSource",
-            .Nodetype = RTCClkSourceval,
+            .nodetype = RTCClkSourceval,
 
             .parents = &[_]*const ClockNode{
                 &HSERTCDevisor,
@@ -979,19 +979,19 @@ pub const ClockTree = struct {
         const RTCOutputval = ClockNodeTypes{ .output = null };
         const RTCOutput: ClockNode = .{
             .name = "RTCOutput",
-            .Nodetype = RTCOutputval,
+            .nodetype = RTCOutputval,
             .parents = &[_]*const ClockNode{&RTCClkSource},
         };
         const RTCWkupOutputval = ClockNodeTypes{ .output = null };
         const RTCWkupOutput: ClockNode = .{
             .name = "RTCWkupOutput",
-            .Nodetype = RTCWkupOutputval,
+            .nodetype = RTCWkupOutputval,
             .parents = &[_]*const ClockNode{&RTCClkSource},
         };
         const IWDGOutputval = ClockNodeTypes{ .output = null };
         const IWDGOutput: ClockNode = .{
             .name = "IWDGOutput",
-            .Nodetype = IWDGOutputval,
+            .nodetype = IWDGOutputval,
             .parents = &[_]*const ClockNode{&LSIRC},
         };
         const AHBPrescalerval = ClockNodeTypes{ .div = .{
@@ -1005,15 +1005,15 @@ pub const ClockTree = struct {
         } };
         const AHBPrescaler: ClockNode = .{
             .name = "AHBPrescaler",
-            .Nodetype = AHBPrescalerval,
+            .nodetype = AHBPrescalerval,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
         const AHBOutputval = ClockNodeTypes{
-            .output = .{ .max = 64000000, .min = 0 },
+            .output = .{ .max = @min(1_000_000_000, 64000000), .min = 0 },
         };
         const AHBOutput: ClockNode = .{
             .name = "AHBOutput",
-            .Nodetype = AHBOutputval,
+            .nodetype = AHBOutputval,
             .parents = &[_]*const ClockNode{&AHBPrescaler},
         };
         const APBPrescalerval = ClockNodeTypes{ .div = .{
@@ -1027,7 +1027,7 @@ pub const ClockTree = struct {
         } };
         const APBPrescaler: ClockNode = .{
             .name = "APBPrescaler",
-            .Nodetype = APBPrescalerval,
+            .nodetype = APBPrescalerval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
         const USART1Multval = ClockNodeTypes{
@@ -1041,7 +1041,7 @@ pub const ClockTree = struct {
         };
         const USART1Mult: ClockNode = .{
             .name = "USART1Mult",
-            .Nodetype = USART1Multval,
+            .nodetype = USART1Multval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1053,7 +1053,7 @@ pub const ClockTree = struct {
         const USART1outputval = ClockNodeTypes{ .output = null };
         const USART1output: ClockNode = .{
             .name = "USART1output",
-            .Nodetype = USART1outputval,
+            .nodetype = USART1outputval,
             .parents = &[_]*const ClockNode{&USART1Mult},
         };
         const USART2Multval = ClockNodeTypes{
@@ -1067,7 +1067,7 @@ pub const ClockTree = struct {
         };
         const USART2Mult: ClockNode = .{
             .name = "USART2Mult",
-            .Nodetype = USART2Multval,
+            .nodetype = USART2Multval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1079,7 +1079,7 @@ pub const ClockTree = struct {
         const USART2outputval = ClockNodeTypes{ .output = null };
         const USART2output: ClockNode = .{
             .name = "USART2output",
-            .Nodetype = USART2outputval,
+            .nodetype = USART2outputval,
             .parents = &[_]*const ClockNode{&USART2Mult},
         };
         const PLLPval = ClockNodeTypes{ .div = .{
@@ -1093,7 +1093,7 @@ pub const ClockTree = struct {
         } };
         const PLLP: ClockNode = .{
             .name = "PLLP",
-            .Nodetype = PLLPval,
+            .nodetype = PLLPval,
             .parents = &[_]*const ClockNode{&PLLN},
         };
         const I2S_CKINval = ClockNodeTypes{
@@ -1101,7 +1101,7 @@ pub const ClockTree = struct {
         };
         const I2S_CKIN: ClockNode = .{
             .name = "I2S_CKIN",
-            .Nodetype = I2S_CKINval,
+            .nodetype = I2S_CKINval,
         };
         const I2S1Multval = ClockNodeTypes{
             .multi = inner: {
@@ -1114,7 +1114,7 @@ pub const ClockTree = struct {
         };
         const I2S1Mult: ClockNode = .{
             .name = "I2S1Mult",
-            .Nodetype = I2S1Multval,
+            .nodetype = I2S1Multval,
 
             .parents = &[_]*const ClockNode{
                 &SysCLKOutput,
@@ -1126,7 +1126,7 @@ pub const ClockTree = struct {
         const I2S1outputval = ClockNodeTypes{ .output = null };
         const I2S1output: ClockNode = .{
             .name = "I2S1output",
-            .Nodetype = I2S1outputval,
+            .nodetype = I2S1outputval,
             .parents = &[_]*const ClockNode{&I2S1Mult},
         };
         const I2S2Multval = ClockNodeTypes{
@@ -1140,7 +1140,7 @@ pub const ClockTree = struct {
         };
         const I2S2Mult: ClockNode = .{
             .name = "I2S2Mult",
-            .Nodetype = I2S2Multval,
+            .nodetype = I2S2Multval,
 
             .parents = &[_]*const ClockNode{
                 &SysCLKOutput,
@@ -1152,7 +1152,7 @@ pub const ClockTree = struct {
         const I2S2outputval = ClockNodeTypes{ .output = null };
         const I2S2output: ClockNode = .{
             .name = "I2S2output",
-            .Nodetype = I2S2outputval,
+            .nodetype = I2S2outputval,
             .parents = &[_]*const ClockNode{&I2S2Mult},
         };
         const USART3Multval = ClockNodeTypes{
@@ -1166,7 +1166,7 @@ pub const ClockTree = struct {
         };
         const USART3Mult: ClockNode = .{
             .name = "USART3Mult",
-            .Nodetype = USART3Multval,
+            .nodetype = USART3Multval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1178,7 +1178,7 @@ pub const ClockTree = struct {
         const USART3outputval = ClockNodeTypes{ .output = null };
         const USART3output: ClockNode = .{
             .name = "USART3output",
-            .Nodetype = USART3outputval,
+            .nodetype = USART3outputval,
             .parents = &[_]*const ClockNode{&USART3Mult},
         };
         const LPUART1Multval = ClockNodeTypes{
@@ -1192,7 +1192,7 @@ pub const ClockTree = struct {
         };
         const LPUART1Mult: ClockNode = .{
             .name = "LPUART1Mult",
-            .Nodetype = LPUART1Multval,
+            .nodetype = LPUART1Multval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1204,7 +1204,7 @@ pub const ClockTree = struct {
         const LPUART1outputval = ClockNodeTypes{ .output = null };
         const LPUART1output: ClockNode = .{
             .name = "LPUART1output",
-            .Nodetype = LPUART1outputval,
+            .nodetype = LPUART1outputval,
             .parents = &[_]*const ClockNode{&LPUART1Mult},
         };
         const LPTIM1Multval = ClockNodeTypes{
@@ -1218,7 +1218,7 @@ pub const ClockTree = struct {
         };
         const LPTIM1Mult: ClockNode = .{
             .name = "LPTIM1Mult",
-            .Nodetype = LPTIM1Multval,
+            .nodetype = LPTIM1Multval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1230,7 +1230,7 @@ pub const ClockTree = struct {
         const LPTIM1outputval = ClockNodeTypes{ .output = null };
         const LPTIM1output: ClockNode = .{
             .name = "LPTIM1output",
-            .Nodetype = LPTIM1outputval,
+            .nodetype = LPTIM1outputval,
             .parents = &[_]*const ClockNode{&LPTIM1Mult},
         };
         const LPTIM2Multval = ClockNodeTypes{
@@ -1244,7 +1244,7 @@ pub const ClockTree = struct {
         };
         const LPTIM2Mult: ClockNode = .{
             .name = "LPTIM2Mult",
-            .Nodetype = LPTIM2Multval,
+            .nodetype = LPTIM2Multval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1256,7 +1256,7 @@ pub const ClockTree = struct {
         const LPTIM2outputval = ClockNodeTypes{ .output = null };
         const LPTIM2output: ClockNode = .{
             .name = "LPTIM2output",
-            .Nodetype = LPTIM2outputval,
+            .nodetype = LPTIM2outputval,
             .parents = &[_]*const ClockNode{&LPTIM2Mult},
         };
         const LPUART2Multval = ClockNodeTypes{
@@ -1270,7 +1270,7 @@ pub const ClockTree = struct {
         };
         const LPUART2Mult: ClockNode = .{
             .name = "LPUART2Mult",
-            .Nodetype = LPUART2Multval,
+            .nodetype = LPUART2Multval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1282,7 +1282,7 @@ pub const ClockTree = struct {
         const LPUART2outputval = ClockNodeTypes{ .output = null };
         const LPUART2output: ClockNode = .{
             .name = "LPUART2output",
-            .Nodetype = LPUART2outputval,
+            .nodetype = LPUART2outputval,
             .parents = &[_]*const ClockNode{&LPUART2Mult},
         };
         const HSICECCDevisorval = ClockNodeTypes{
@@ -1290,7 +1290,7 @@ pub const ClockTree = struct {
         };
         const HSICECCDevisor: ClockNode = .{
             .name = "HSICECCDevisor",
-            .Nodetype = HSICECCDevisorval,
+            .nodetype = HSICECCDevisorval,
             .parents = &[_]*const ClockNode{&HSIRC},
         };
         const CECMultval = ClockNodeTypes{
@@ -1304,7 +1304,7 @@ pub const ClockTree = struct {
         };
         const CECMult: ClockNode = .{
             .name = "CECMult",
-            .Nodetype = CECMultval,
+            .nodetype = CECMultval,
 
             .parents = &[_]*const ClockNode{
                 &HSICECCDevisor,
@@ -1314,7 +1314,7 @@ pub const ClockTree = struct {
         const CECoutputval = ClockNodeTypes{ .output = null };
         const CECoutput: ClockNode = .{
             .name = "CECoutput",
-            .Nodetype = CECoutputval,
+            .nodetype = CECoutputval,
             .parents = &[_]*const ClockNode{&CECMult},
         };
         const TimPrescalerAPBval = blk: {
@@ -1330,7 +1330,7 @@ pub const ClockTree = struct {
         };
         const TimPrescalerAPB: ClockNode = .{
             .name = "TimPrescalerAPB",
-            .Nodetype = TimPrescalerAPBval,
+            .nodetype = TimPrescalerAPBval,
             .parents = &[_]*const ClockNode{&APBPrescaler},
         };
         const PLLQval = ClockNodeTypes{ .div = .{
@@ -1344,7 +1344,7 @@ pub const ClockTree = struct {
         } };
         const PLLQ: ClockNode = .{
             .name = "PLLQ",
-            .Nodetype = PLLQval,
+            .nodetype = PLLQval,
             .parents = &[_]*const ClockNode{&PLLN},
         };
         const TIM1Multval = ClockNodeTypes{
@@ -1358,7 +1358,7 @@ pub const ClockTree = struct {
         };
         const TIM1Mult: ClockNode = .{
             .name = "TIM1Mult",
-            .Nodetype = TIM1Multval,
+            .nodetype = TIM1Multval,
 
             .parents = &[_]*const ClockNode{
                 &TimPrescalerAPB,
@@ -1366,11 +1366,11 @@ pub const ClockTree = struct {
             },
         };
         const TIM1outputval = ClockNodeTypes{
-            .output = .{ .max = 128000000, .min = 0 },
+            .output = .{ .max = @min(1_000_000_000, 128000000), .min = 0 },
         };
         const TIM1output: ClockNode = .{
             .name = "TIM1output",
-            .Nodetype = TIM1outputval,
+            .nodetype = TIM1outputval,
             .parents = &[_]*const ClockNode{&TIM1Mult},
         };
         const TIM15Multval = ClockNodeTypes{
@@ -1384,7 +1384,7 @@ pub const ClockTree = struct {
         };
         const TIM15Mult: ClockNode = .{
             .name = "TIM15Mult",
-            .Nodetype = TIM15Multval,
+            .nodetype = TIM15Multval,
 
             .parents = &[_]*const ClockNode{
                 &TimPrescalerAPB,
@@ -1394,7 +1394,7 @@ pub const ClockTree = struct {
         const TIM15outputval = ClockNodeTypes{ .output = null };
         const TIM15output: ClockNode = .{
             .name = "TIM15output",
-            .Nodetype = TIM15outputval,
+            .nodetype = TIM15outputval,
             .parents = &[_]*const ClockNode{&TIM15Mult},
         };
         const ADCMultval = ClockNodeTypes{
@@ -1408,7 +1408,7 @@ pub const ClockTree = struct {
         };
         const ADCMult: ClockNode = .{
             .name = "ADCMult",
-            .Nodetype = ADCMultval,
+            .nodetype = ADCMultval,
 
             .parents = &[_]*const ClockNode{
                 &SysCLKOutput,
@@ -1417,11 +1417,11 @@ pub const ClockTree = struct {
             },
         };
         const ADCoutputval = ClockNodeTypes{
-            .output = .{ .max = 80000000, .min = 140000 },
+            .output = .{ .max = @min(1_000_000_000, 80000000), .min = 140000 },
         };
         const ADCoutput: ClockNode = .{
             .name = "ADCoutput",
-            .Nodetype = ADCoutputval,
+            .nodetype = ADCoutputval,
             .parents = &[_]*const ClockNode{&ADCMult},
         };
         const RNGHSIDivval = ClockNodeTypes{
@@ -1429,7 +1429,7 @@ pub const ClockTree = struct {
         };
         const RNGHSIDiv: ClockNode = .{
             .name = "RNGHSIDiv",
-            .Nodetype = RNGHSIDivval,
+            .nodetype = RNGHSIDivval,
             .parents = &[_]*const ClockNode{&HSIRC},
         };
         const CK48Multval = ClockNodeTypes{
@@ -1443,7 +1443,7 @@ pub const ClockTree = struct {
         };
         const CK48Mult: ClockNode = .{
             .name = "CK48Mult",
-            .Nodetype = CK48Multval,
+            .nodetype = CK48Multval,
 
             .parents = &[_]*const ClockNode{
                 &SysCLKOutput,
@@ -1462,15 +1462,15 @@ pub const ClockTree = struct {
         } };
         const RNGDIV: ClockNode = .{
             .name = "RNGDIV",
-            .Nodetype = RNGDIVval,
+            .nodetype = RNGDIVval,
             .parents = &[_]*const ClockNode{&CK48Mult},
         };
         const RNGoutputval = ClockNodeTypes{
-            .output = .{ .max = 48000000, .min = 0 },
+            .output = .{ .max = @min(1_000_000_000, 48000000), .min = 0 },
         };
         const RNGoutput: ClockNode = .{
             .name = "RNGoutput",
-            .Nodetype = RNGoutputval,
+            .nodetype = RNGoutputval,
         };
         const I2C1Multval = ClockNodeTypes{
             .multi = inner: {
@@ -1483,7 +1483,7 @@ pub const ClockTree = struct {
         };
         const I2C1Mult: ClockNode = .{
             .name = "I2C1Mult",
-            .Nodetype = I2C1Multval,
+            .nodetype = I2C1Multval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1494,7 +1494,7 @@ pub const ClockTree = struct {
         const I2C1outputval = ClockNodeTypes{ .output = null };
         const I2C1output: ClockNode = .{
             .name = "I2C1output",
-            .Nodetype = I2C1outputval,
+            .nodetype = I2C1outputval,
             .parents = &[_]*const ClockNode{&I2C1Mult},
         };
         const I2C2Multval = ClockNodeTypes{
@@ -1508,7 +1508,7 @@ pub const ClockTree = struct {
         };
         const I2C2Mult: ClockNode = .{
             .name = "I2C2Mult",
-            .Nodetype = I2C2Multval,
+            .nodetype = I2C2Multval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1519,7 +1519,7 @@ pub const ClockTree = struct {
         const I2C2outputval = ClockNodeTypes{ .output = null };
         const I2C2output: ClockNode = .{
             .name = "I2C2output",
-            .Nodetype = I2C2outputval,
+            .nodetype = I2C2outputval,
             .parents = &[_]*const ClockNode{&I2C2Mult},
         };
         const FDCANMultval = ClockNodeTypes{
@@ -1533,7 +1533,7 @@ pub const ClockTree = struct {
         };
         const FDCANMult: ClockNode = .{
             .name = "FDCANMult",
-            .Nodetype = FDCANMultval,
+            .nodetype = FDCANMultval,
 
             .parents = &[_]*const ClockNode{
                 &APBPrescaler,
@@ -1544,7 +1544,7 @@ pub const ClockTree = struct {
         const FDCANoutputval = ClockNodeTypes{ .output = null };
         const FDCANoutput: ClockNode = .{
             .name = "FDCANoutput",
-            .Nodetype = FDCANoutputval,
+            .nodetype = FDCANoutputval,
             .parents = &[_]*const ClockNode{&FDCANMult},
         };
         const USBMultval = ClockNodeTypes{
@@ -1558,7 +1558,7 @@ pub const ClockTree = struct {
         };
         const USBMult: ClockNode = .{
             .name = "USBMult",
-            .Nodetype = USBMultval,
+            .nodetype = USBMultval,
 
             .parents = &[_]*const ClockNode{
                 &HSI48RC,
@@ -1567,11 +1567,11 @@ pub const ClockTree = struct {
             },
         };
         const USBoutputval = ClockNodeTypes{
-            .output = .{ .max = 48120000, .min = 47880000 },
+            .output = .{ .max = @min(1_000_000_000, 48120000), .min = 47880000 },
         };
         const USBoutput: ClockNode = .{
             .name = "USBoutput",
-            .Nodetype = USBoutputval,
+            .nodetype = USBoutputval,
             .parents = &[_]*const ClockNode{&USBMult},
         };
         const MCOMultval = ClockNodeTypes{
@@ -1585,7 +1585,7 @@ pub const ClockTree = struct {
         };
         const MCOMult: ClockNode = .{
             .name = "MCOMult",
-            .Nodetype = MCOMultval,
+            .nodetype = MCOMultval,
 
             .parents = &[_]*const ClockNode{
                 &LSEOSC,
@@ -1612,13 +1612,13 @@ pub const ClockTree = struct {
         } };
         const MCODiv: ClockNode = .{
             .name = "MCODiv",
-            .Nodetype = MCODivval,
+            .nodetype = MCODivval,
             .parents = &[_]*const ClockNode{&MCOMult},
         };
         const MCOPinval = ClockNodeTypes{ .output = null };
         const MCOPin: ClockNode = .{
             .name = "MCOPin",
-            .Nodetype = MCOPinval,
+            .nodetype = MCOPinval,
             .parents = &[_]*const ClockNode{&MCODiv},
         };
         const MCO2Multval = ClockNodeTypes{
@@ -1632,7 +1632,7 @@ pub const ClockTree = struct {
         };
         const MCO2Mult: ClockNode = .{
             .name = "MCO2Mult",
-            .Nodetype = MCO2Multval,
+            .nodetype = MCO2Multval,
 
             .parents = &[_]*const ClockNode{
                 &LSEOSC,
@@ -1659,13 +1659,13 @@ pub const ClockTree = struct {
         } };
         const MCO2Div: ClockNode = .{
             .name = "MCO2Div",
-            .Nodetype = MCO2Divval,
+            .nodetype = MCO2Divval,
             .parents = &[_]*const ClockNode{&MCO2Mult},
         };
         const MCO2Pinval = ClockNodeTypes{ .output = null };
         const MCO2Pin: ClockNode = .{
             .name = "MCO2Pin",
-            .Nodetype = MCO2Pinval,
+            .nodetype = MCO2Pinval,
             .parents = &[_]*const ClockNode{&MCO2Div},
         };
         const LSCOMultval = ClockNodeTypes{
@@ -1679,7 +1679,7 @@ pub const ClockTree = struct {
         };
         const LSCOMult: ClockNode = .{
             .name = "LSCOMult",
-            .Nodetype = LSCOMultval,
+            .nodetype = LSCOMultval,
 
             .parents = &[_]*const ClockNode{
                 &LSIRC,
@@ -1689,19 +1689,19 @@ pub const ClockTree = struct {
         const LSCOOutputval = ClockNodeTypes{ .output = null };
         const LSCOOutput: ClockNode = .{
             .name = "LSCOOutput",
-            .Nodetype = LSCOOutputval,
+            .nodetype = LSCOOutputval,
             .parents = &[_]*const ClockNode{&LSCOMult},
         };
         const PWRCLKoutputval = ClockNodeTypes{ .output = null };
         const PWRCLKoutput: ClockNode = .{
             .name = "PWRCLKoutput",
-            .Nodetype = PWRCLKoutputval,
+            .nodetype = PWRCLKoutputval,
             .parents = &[_]*const ClockNode{&SysCLKOutput},
         };
         const HCLKOutputval = ClockNodeTypes{ .output = null };
         const HCLKOutput: ClockNode = .{
             .name = "HCLKOutput",
-            .Nodetype = HCLKOutputval,
+            .nodetype = HCLKOutputval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
         const CortexPrescalerval = ClockNodeTypes{ .div = .{
@@ -1715,67 +1715,67 @@ pub const ClockTree = struct {
         } };
         const CortexPrescaler: ClockNode = .{
             .name = "CortexPrescaler",
-            .Nodetype = CortexPrescalerval,
+            .nodetype = CortexPrescalerval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
         const CortexSysOutputval = ClockNodeTypes{ .output = null };
         const CortexSysOutput: ClockNode = .{
             .name = "CortexSysOutput",
-            .Nodetype = CortexSysOutputval,
+            .nodetype = CortexSysOutputval,
             .parents = &[_]*const ClockNode{&CortexPrescaler},
         };
         const FCLKCortexOutputval = ClockNodeTypes{ .output = null };
         const FCLKCortexOutput: ClockNode = .{
             .name = "FCLKCortexOutput",
-            .Nodetype = FCLKCortexOutputval,
+            .nodetype = FCLKCortexOutputval,
             .parents = &[_]*const ClockNode{&AHBOutput},
         };
         const APBOutputval = ClockNodeTypes{
-            .output = .{ .max = 64000000, .min = 0 },
+            .output = .{ .max = @min(1_000_000_000, 64000000), .min = 0 },
         };
         const APBOutput: ClockNode = .{
             .name = "APBOutput",
-            .Nodetype = APBOutputval,
+            .nodetype = APBOutputval,
             .parents = &[_]*const ClockNode{&APBPrescaler},
         };
         const TimPrescOut1val = ClockNodeTypes{ .output = null };
         const TimPrescOut1: ClockNode = .{
             .name = "TimPrescOut1",
-            .Nodetype = TimPrescOut1val,
+            .nodetype = TimPrescOut1val,
             .parents = &[_]*const ClockNode{&TimPrescalerAPB},
         };
         const PLLPoutputval = ClockNodeTypes{
-            .output = .{ .max = 40000000, .min = 3090000 },
+            .output = .{ .max = @min(1_000_000_000, 40000000), .min = 3090000 },
         };
         const PLLPoutput: ClockNode = .{
             .name = "PLLPoutput",
-            .Nodetype = PLLPoutputval,
+            .nodetype = PLLPoutputval,
             .parents = &[_]*const ClockNode{&PLLP},
         };
         const PLLQoutputval = ClockNodeTypes{
-            .output = .{ .max = 128000000, .min = 12000000 },
+            .output = .{ .max = @min(1_000_000_000, 128000000), .min = 12000000 },
         };
         const PLLQoutput: ClockNode = .{
             .name = "PLLQoutput",
-            .Nodetype = PLLQoutputval,
+            .nodetype = PLLQoutputval,
             .parents = &[_]*const ClockNode{&PLLQ},
         };
         const HSE_Timoutval = ClockNodeTypes{
             .source = .{
                 .value = if (config.HSE_Timout) |val| val.get() else 100,
-                .limit = .{ .max = 4294967295, .min = 1 },
+                .limit = .{ .max = @min(1_000_000_000, 4294967295), .min = 1 },
             },
         };
         const LSE_Timoutval = ClockNodeTypes{
             .source = .{
                 .value = if (config.LSE_Timout) |val| val.get() else 5000,
-                .limit = .{ .max = 4294967295, .min = 1 },
+                .limit = .{ .max = @min(1_000_000_000, 4294967295), .min = 1 },
             },
         };
         const HSICalibrationValueval = ClockNodeTypes{
             .source = .{
                 .value = if (config.HSICalibrationValue) |val| val.get() else 64,
-                .limit = .{ .max = 127, .min = 0 },
+                .limit = .{ .max = @min(1_000_000_000, 127), .min = 0 },
             },
         };
         const LSE_Drive_Capabilityval = ClockNodeTypes{ .source = .{
@@ -1891,32 +1891,931 @@ pub const ClockTree = struct {
             .LSE_Drive_CapabilityArg = LSE_Drive_CapabilityArgval,
         };
     }
-
-    pub fn validate(comptime self: *const this) void {
-        _ = self.USART1output.get_comptime();
-        _ = self.USART2output.get_comptime();
-        _ = self.I2S1output.get_comptime();
-        _ = self.I2S2output.get_comptime();
-        _ = self.USART3output.get_comptime();
-        _ = self.LPUART1output.get_comptime();
-        _ = self.LPTIM1output.get_comptime();
-        _ = self.LPTIM2output.get_comptime();
-        _ = self.LPUART2output.get_comptime();
-        _ = self.CECoutput.get_comptime();
-        _ = self.TIM1output.get_comptime();
-        _ = self.TIM15output.get_comptime();
-        _ = self.ADCoutput.get_comptime();
-        _ = self.RNGoutput.get_comptime();
-        _ = self.I2C1output.get_comptime();
-        _ = self.I2C2output.get_comptime();
-        _ = self.FDCANoutput.get_comptime();
-        _ = self.USBoutput.get_comptime();
-        _ = self.PWRCLKoutput.get_comptime();
-        _ = self.AHBOutput.get_comptime();
-        _ = self.HCLKOutput.get_comptime();
-        _ = self.CortexSysOutput.get_comptime();
-        _ = self.FCLKCortexOutput.get_comptime();
-        _ = self.APBOutput.get_comptime();
-        _ = self.TimPrescOut1.get_comptime();
+    pub fn init_runtime_tree(self: *Self, alloc: std.mem.Allocator) !void {
+        self.HSIRC.parents = try alloc.dupe(*const ClockNode, &.{});
+        self.HSISYS.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.HSIRC,
+        });
+        self.HSI48RC.parents = try alloc.dupe(*const ClockNode, &.{});
+        self.HSEOSC.parents = try alloc.dupe(*const ClockNode, &.{});
+        self.LSIRC.parents = try alloc.dupe(*const ClockNode, &.{});
+        self.LSEOSC.parents = try alloc.dupe(*const ClockNode, &.{});
+        self.SysClkSource.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LSEOSC,
+            &self.HSISYS,
+            &self.HSEOSC,
+            &self.PLLR,
+            &self.LSIRC,
+        });
+        self.SysCLKOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.SysClkSource,
+        });
+        self.PLLSource.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.HSIRC,
+            &self.HSEOSC,
+        });
+        self.PLLM.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.PLLSource,
+        });
+        self.HSERTCDevisor.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.HSEOSC,
+        });
+        self.RTCClkSource.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.HSERTCDevisor,
+            &self.LSEOSC,
+            &self.LSIRC,
+        });
+        self.RTCOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.RTCClkSource,
+        });
+        self.RTCWkupOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.RTCClkSource,
+        });
+        self.IWDGOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LSIRC,
+        });
+        self.USART1Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.SysCLKOutput,
+            &self.HSIRC,
+            &self.LSEOSC,
+        });
+        self.USART1output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.USART1Mult,
+        });
+        self.USART2Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.SysCLKOutput,
+            &self.HSIRC,
+            &self.LSEOSC,
+        });
+        self.USART2output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.USART2Mult,
+        });
+        self.I2S1Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.SysCLKOutput,
+            &self.PLLP,
+            &self.HSIRC,
+            &self.I2S_CKIN,
+        });
+        self.I2S1output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.I2S1Mult,
+        });
+        self.I2S2Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.SysCLKOutput,
+            &self.PLLP,
+            &self.HSIRC,
+            &self.I2S_CKIN,
+        });
+        self.I2S2output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.I2S2Mult,
+        });
+        self.USART3Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.SysCLKOutput,
+            &self.HSIRC,
+            &self.LSEOSC,
+        });
+        self.USART3output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.USART3Mult,
+        });
+        self.LPUART1Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.SysCLKOutput,
+            &self.HSIRC,
+            &self.LSEOSC,
+        });
+        self.LPUART1output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LPUART1Mult,
+        });
+        self.LPTIM1Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.LSIRC,
+            &self.HSIRC,
+            &self.LSEOSC,
+        });
+        self.LPTIM1output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LPTIM1Mult,
+        });
+        self.LPTIM2Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.LSIRC,
+            &self.HSIRC,
+            &self.LSEOSC,
+        });
+        self.LPTIM2output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LPTIM2Mult,
+        });
+        self.LPUART2Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.SysCLKOutput,
+            &self.HSIRC,
+            &self.LSEOSC,
+        });
+        self.LPUART2output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LPUART2Mult,
+        });
+        self.HSICECCDevisor.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.HSIRC,
+        });
+        self.CECMult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.HSICECCDevisor,
+            &self.LSEOSC,
+        });
+        self.CECoutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.CECMult,
+        });
+        self.TIM1Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.TimPrescalerAPB,
+            &self.PLLQ,
+        });
+        self.TIM1output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.TIM1Mult,
+        });
+        self.TIM15Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.TimPrescalerAPB,
+            &self.PLLQ,
+        });
+        self.TIM15output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.TIM15Mult,
+        });
+        self.ADCMult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.SysCLKOutput,
+            &self.HSIRC,
+            &self.PLLP,
+        });
+        self.ADCoutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.ADCMult,
+        });
+        self.RNGDIV.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.CK48Mult,
+        });
+        self.RNGHSIDiv.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.HSIRC,
+        });
+        self.CK48Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.SysCLKOutput,
+            &self.PLLQ,
+            &self.RNGHSIDiv,
+        });
+        self.RNGoutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.RNGoutput,
+        });
+        self.I2C1Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.SysCLKOutput,
+            &self.HSIRC,
+        });
+        self.I2C1output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.I2C1Mult,
+        });
+        self.I2C2Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.SysCLKOutput,
+            &self.HSIRC,
+        });
+        self.I2C2output.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.I2C2Mult,
+        });
+        self.FDCANMult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+            &self.PLLQ,
+            &self.HSEOSC,
+        });
+        self.FDCANoutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.FDCANMult,
+        });
+        self.USBMult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.HSI48RC,
+            &self.PLLQ,
+            &self.HSEOSC,
+        });
+        self.USBoutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.USBMult,
+        });
+        self.I2S_CKIN.parents = try alloc.dupe(*const ClockNode, &.{});
+        self.MCOMult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LSEOSC,
+            &self.LSIRC,
+            &self.HSEOSC,
+            &self.HSIRC,
+            &self.PLLR,
+            &self.SysCLKOutput,
+            &self.HSI48RC,
+            &self.PLLP,
+            &self.PLLQ,
+            &self.RTCClkSource,
+            &self.RTCWkupOutput,
+        });
+        self.MCODiv.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.MCOMult,
+        });
+        self.MCOPin.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.MCODiv,
+        });
+        self.MCO2Mult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LSEOSC,
+            &self.LSIRC,
+            &self.HSEOSC,
+            &self.HSIRC,
+            &self.PLLR,
+            &self.SysCLKOutput,
+            &self.HSI48RC,
+            &self.PLLP,
+            &self.PLLQ,
+            &self.RTCClkSource,
+            &self.RTCWkupOutput,
+        });
+        self.MCO2Div.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.MCO2Mult,
+        });
+        self.MCO2Pin.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.MCO2Div,
+        });
+        self.LSCOMult.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LSIRC,
+            &self.LSEOSC,
+        });
+        self.LSCOOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.LSCOMult,
+        });
+        self.AHBPrescaler.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.SysCLKOutput,
+        });
+        self.PWRCLKoutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.SysCLKOutput,
+        });
+        self.AHBOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.AHBPrescaler,
+        });
+        self.HCLKOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.AHBOutput,
+        });
+        self.CortexPrescaler.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.AHBOutput,
+        });
+        self.CortexSysOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.CortexPrescaler,
+        });
+        self.FCLKCortexOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.AHBOutput,
+        });
+        self.APBPrescaler.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.AHBOutput,
+        });
+        self.APBOutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+        });
+        self.TimPrescalerAPB.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.APBPrescaler,
+        });
+        self.TimPrescOut1.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.TimPrescalerAPB,
+        });
+        self.PLLN.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.PLLM,
+        });
+        self.PLLP.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.PLLN,
+        });
+        self.PLLPoutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.PLLP,
+        });
+        self.PLLQ.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.PLLN,
+        });
+        self.PLLQoutput.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.PLLQ,
+        });
+        self.PLLR.parents = try alloc.dupe(*const ClockNode, &.{
+            &self.PLLN,
+        });
+    }
+    pub fn deinit_runtime_tree(self: *Self, alloc: std.mem.Allocator) void {
+        alloc.free(self.HSIRC.parents.?);
+        alloc.free(self.HSISYS.parents.?);
+        alloc.free(self.HSI48RC.parents.?);
+        alloc.free(self.HSEOSC.parents.?);
+        alloc.free(self.LSIRC.parents.?);
+        alloc.free(self.LSEOSC.parents.?);
+        alloc.free(self.SysClkSource.parents.?);
+        alloc.free(self.SysCLKOutput.parents.?);
+        alloc.free(self.PLLSource.parents.?);
+        alloc.free(self.PLLM.parents.?);
+        alloc.free(self.HSERTCDevisor.parents.?);
+        alloc.free(self.RTCClkSource.parents.?);
+        alloc.free(self.RTCOutput.parents.?);
+        alloc.free(self.RTCWkupOutput.parents.?);
+        alloc.free(self.IWDGOutput.parents.?);
+        alloc.free(self.USART1Mult.parents.?);
+        alloc.free(self.USART1output.parents.?);
+        alloc.free(self.USART2Mult.parents.?);
+        alloc.free(self.USART2output.parents.?);
+        alloc.free(self.I2S1Mult.parents.?);
+        alloc.free(self.I2S1output.parents.?);
+        alloc.free(self.I2S2Mult.parents.?);
+        alloc.free(self.I2S2output.parents.?);
+        alloc.free(self.USART3Mult.parents.?);
+        alloc.free(self.USART3output.parents.?);
+        alloc.free(self.LPUART1Mult.parents.?);
+        alloc.free(self.LPUART1output.parents.?);
+        alloc.free(self.LPTIM1Mult.parents.?);
+        alloc.free(self.LPTIM1output.parents.?);
+        alloc.free(self.LPTIM2Mult.parents.?);
+        alloc.free(self.LPTIM2output.parents.?);
+        alloc.free(self.LPUART2Mult.parents.?);
+        alloc.free(self.LPUART2output.parents.?);
+        alloc.free(self.HSICECCDevisor.parents.?);
+        alloc.free(self.CECMult.parents.?);
+        alloc.free(self.CECoutput.parents.?);
+        alloc.free(self.TIM1Mult.parents.?);
+        alloc.free(self.TIM1output.parents.?);
+        alloc.free(self.TIM15Mult.parents.?);
+        alloc.free(self.TIM15output.parents.?);
+        alloc.free(self.ADCMult.parents.?);
+        alloc.free(self.ADCoutput.parents.?);
+        alloc.free(self.RNGDIV.parents.?);
+        alloc.free(self.RNGHSIDiv.parents.?);
+        alloc.free(self.CK48Mult.parents.?);
+        alloc.free(self.RNGoutput.parents.?);
+        alloc.free(self.I2C1Mult.parents.?);
+        alloc.free(self.I2C1output.parents.?);
+        alloc.free(self.I2C2Mult.parents.?);
+        alloc.free(self.I2C2output.parents.?);
+        alloc.free(self.FDCANMult.parents.?);
+        alloc.free(self.FDCANoutput.parents.?);
+        alloc.free(self.USBMult.parents.?);
+        alloc.free(self.USBoutput.parents.?);
+        alloc.free(self.I2S_CKIN.parents.?);
+        alloc.free(self.MCOMult.parents.?);
+        alloc.free(self.MCODiv.parents.?);
+        alloc.free(self.MCOPin.parents.?);
+        alloc.free(self.MCO2Mult.parents.?);
+        alloc.free(self.MCO2Div.parents.?);
+        alloc.free(self.MCO2Pin.parents.?);
+        alloc.free(self.LSCOMult.parents.?);
+        alloc.free(self.LSCOOutput.parents.?);
+        alloc.free(self.AHBPrescaler.parents.?);
+        alloc.free(self.PWRCLKoutput.parents.?);
+        alloc.free(self.AHBOutput.parents.?);
+        alloc.free(self.HCLKOutput.parents.?);
+        alloc.free(self.CortexPrescaler.parents.?);
+        alloc.free(self.CortexSysOutput.parents.?);
+        alloc.free(self.FCLKCortexOutput.parents.?);
+        alloc.free(self.APBPrescaler.parents.?);
+        alloc.free(self.APBOutput.parents.?);
+        alloc.free(self.TimPrescalerAPB.parents.?);
+        alloc.free(self.TimPrescOut1.parents.?);
+        alloc.free(self.PLLN.parents.?);
+        alloc.free(self.PLLP.parents.?);
+        alloc.free(self.PLLPoutput.parents.?);
+        alloc.free(self.PLLQ.parents.?);
+        alloc.free(self.PLLQoutput.parents.?);
+        alloc.free(self.PLLR.parents.?);
+    }
+    pub fn runtime_apply(self: *Self, config: Config) error{InvalidConfig}!void {
+        const HSIRCval = ClockNodeTypes{
+            .source = .{ .value = 16000000 },
+        };
+        self.HSIRC.nodetype = HSIRCval;
+        const HSISYSval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.HSISYS) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
+        self.HSISYS.nodetype = HSISYSval;
+        const HSI48RCval = ClockNodeTypes{
+            .source = .{ .value = 48000000 },
+        };
+        self.HSI48RC.nodetype = HSI48RCval;
+        const HSEOSCval = ClockNodeTypes{
+            .source = .{
+                .value = if (config.HSEOSC) |val| val.get() else 8000000,
+                .limit = .{ .max = @min(1_000_000_000, 48000000), .min = 4000000 },
+            },
+        };
+        self.HSEOSC.nodetype = HSEOSCval;
+        const LSIRCval = ClockNodeTypes{
+            .source = .{ .value = 32000 },
+        };
+        self.LSIRC.nodetype = LSIRCval;
+        const LSEOSCval = ClockNodeTypes{
+            .source = .{
+                .value = if (config.LSEOSC) |val| val.get() else 32768,
+                .limit = .{ .max = @min(1_000_000_000, 1000000), .min = 1000 },
+            },
+        };
+        self.LSEOSC.nodetype = LSEOSCval;
+        const PLLSourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.PLLSource) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.PLLSource.nodetype = PLLSourceval;
+        const PLLMval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.PLLM) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
+        self.PLLM.nodetype = PLLMval;
+        const PLLNval = ClockNodeTypes{
+            .mul = .{
+                .value = if (config.PLLN) |val| val.get() else 8,
+                .limit = .{ .max = @min(1_000_000_000, 86), .min = 8 },
+            },
+        };
+        self.PLLN.nodetype = PLLNval;
+        const PLLRval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.PLLR) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 2;
+                }
+            },
+        } };
+        self.PLLR.nodetype = PLLRval;
+        const SysClkSourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.SysClkSource) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 1;
+                }
+            },
+        };
+        self.SysClkSource.nodetype = SysClkSourceval;
+        const SysCLKOutputval = ClockNodeTypes{ .output = null };
+        self.SysCLKOutput.nodetype = SysCLKOutputval;
+        const HSERTCDevisorval = ClockNodeTypes{
+            .div = .{ .value = 32 },
+        };
+        self.HSERTCDevisor.nodetype = HSERTCDevisorval;
+        const RTCClkSourceval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.RTCClkSource) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 2;
+                }
+            },
+        };
+        self.RTCClkSource.nodetype = RTCClkSourceval;
+        const RTCOutputval = ClockNodeTypes{ .output = null };
+        self.RTCOutput.nodetype = RTCOutputval;
+        const RTCWkupOutputval = ClockNodeTypes{ .output = null };
+        self.RTCWkupOutput.nodetype = RTCWkupOutputval;
+        const IWDGOutputval = ClockNodeTypes{ .output = null };
+        self.IWDGOutput.nodetype = IWDGOutputval;
+        const AHBPrescalerval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.AHBPrescaler) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
+        self.AHBPrescaler.nodetype = AHBPrescalerval;
+        const AHBOutputval = ClockNodeTypes{
+            .output = .{ .max = @min(1_000_000_000, 64000000), .min = 0 },
+        };
+        self.AHBOutput.nodetype = AHBOutputval;
+        const APBPrescalerval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.APBPrescaler) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
+        self.APBPrescaler.nodetype = APBPrescalerval;
+        const USART1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.USART1Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.USART1Mult.nodetype = USART1Multval;
+        const USART1outputval = ClockNodeTypes{ .output = null };
+        self.USART1output.nodetype = USART1outputval;
+        const USART2Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.USART2Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.USART2Mult.nodetype = USART2Multval;
+        const USART2outputval = ClockNodeTypes{ .output = null };
+        self.USART2output.nodetype = USART2outputval;
+        const PLLPval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.PLLP) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 2;
+                }
+            },
+        } };
+        self.PLLP.nodetype = PLLPval;
+        const I2S_CKINval = ClockNodeTypes{
+            .source = .{ .value = 48000 },
+        };
+        self.I2S_CKIN.nodetype = I2S_CKINval;
+        const I2S1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.I2S1Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.I2S1Mult.nodetype = I2S1Multval;
+        const I2S1outputval = ClockNodeTypes{ .output = null };
+        self.I2S1output.nodetype = I2S1outputval;
+        const I2S2Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.I2S2Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.I2S2Mult.nodetype = I2S2Multval;
+        const I2S2outputval = ClockNodeTypes{ .output = null };
+        self.I2S2output.nodetype = I2S2outputval;
+        const USART3Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.USART3Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.USART3Mult.nodetype = USART3Multval;
+        const USART3outputval = ClockNodeTypes{ .output = null };
+        self.USART3output.nodetype = USART3outputval;
+        const LPUART1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LPUART1Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.LPUART1Mult.nodetype = LPUART1Multval;
+        const LPUART1outputval = ClockNodeTypes{ .output = null };
+        self.LPUART1output.nodetype = LPUART1outputval;
+        const LPTIM1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LPTIM1Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.LPTIM1Mult.nodetype = LPTIM1Multval;
+        const LPTIM1outputval = ClockNodeTypes{ .output = null };
+        self.LPTIM1output.nodetype = LPTIM1outputval;
+        const LPTIM2Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LPTIM2Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.LPTIM2Mult.nodetype = LPTIM2Multval;
+        const LPTIM2outputval = ClockNodeTypes{ .output = null };
+        self.LPTIM2output.nodetype = LPTIM2outputval;
+        const LPUART2Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LPUART2Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.LPUART2Mult.nodetype = LPUART2Multval;
+        const LPUART2outputval = ClockNodeTypes{ .output = null };
+        self.LPUART2output.nodetype = LPUART2outputval;
+        const HSICECCDevisorval = ClockNodeTypes{
+            .div = .{ .value = 488 },
+        };
+        self.HSICECCDevisor.nodetype = HSICECCDevisorval;
+        const CECMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.CECMult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.CECMult.nodetype = CECMultval;
+        const CECoutputval = ClockNodeTypes{ .output = null };
+        self.CECoutput.nodetype = CECoutputval;
+        const TimPrescalerAPBval = blk: {
+            if (APBPrescalerval.num_val() == 1) {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 1 },
+                };
+            } else {
+                break :blk ClockNodeTypes{
+                    .mul = .{ .value = 2 },
+                };
+            }
+        };
+        self.TimPrescalerAPB.nodetype = TimPrescalerAPBval;
+        const PLLQval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.PLLQ) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 2;
+                }
+            },
+        } };
+        self.PLLQ.nodetype = PLLQval;
+        const TIM1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.TIM1Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.TIM1Mult.nodetype = TIM1Multval;
+        const TIM1outputval = ClockNodeTypes{
+            .output = .{ .max = @min(1_000_000_000, 128000000), .min = 0 },
+        };
+        self.TIM1output.nodetype = TIM1outputval;
+        const TIM15Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.TIM15Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.TIM15Mult.nodetype = TIM15Multval;
+        const TIM15outputval = ClockNodeTypes{ .output = null };
+        self.TIM15output.nodetype = TIM15outputval;
+        const ADCMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.ADCMult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.ADCMult.nodetype = ADCMultval;
+        const ADCoutputval = ClockNodeTypes{
+            .output = .{ .max = @min(1_000_000_000, 80000000), .min = 140000 },
+        };
+        self.ADCoutput.nodetype = ADCoutputval;
+        const RNGHSIDivval = ClockNodeTypes{
+            .div = .{ .value = 8 },
+        };
+        self.RNGHSIDiv.nodetype = RNGHSIDivval;
+        const CK48Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.CK48Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 2;
+                }
+            },
+        };
+        self.CK48Mult.nodetype = CK48Multval;
+        const RNGDIVval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.RNGDIV) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
+        self.RNGDIV.nodetype = RNGDIVval;
+        const RNGoutputval = ClockNodeTypes{
+            .output = .{ .max = @min(1_000_000_000, 48000000), .min = 0 },
+        };
+        self.RNGoutput.nodetype = RNGoutputval;
+        const I2C1Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.I2C1Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.I2C1Mult.nodetype = I2C1Multval;
+        const I2C1outputval = ClockNodeTypes{ .output = null };
+        self.I2C1output.nodetype = I2C1outputval;
+        const I2C2Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.I2C2Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.I2C2Mult.nodetype = I2C2Multval;
+        const I2C2outputval = ClockNodeTypes{ .output = null };
+        self.I2C2output.nodetype = I2C2outputval;
+        const FDCANMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.FDCANMult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.FDCANMult.nodetype = FDCANMultval;
+        const FDCANoutputval = ClockNodeTypes{ .output = null };
+        self.FDCANoutput.nodetype = FDCANoutputval;
+        const USBMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.USBMult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.USBMult.nodetype = USBMultval;
+        const USBoutputval = ClockNodeTypes{
+            .output = .{ .max = @min(1_000_000_000, 48120000), .min = 47880000 },
+        };
+        self.USBoutput.nodetype = USBoutputval;
+        const MCOMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.MCOMult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
+        self.MCOMult.nodetype = MCOMultval;
+        const MCODivval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.MCODiv) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
+        self.MCODiv.nodetype = MCODivval;
+        const MCOPinval = ClockNodeTypes{ .output = null };
+        self.MCOPin.nodetype = MCOPinval;
+        const MCO2Multval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.MCO2Mult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 5;
+                }
+            },
+        };
+        self.MCO2Mult.nodetype = MCO2Multval;
+        const MCO2Divval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.MCO2Div) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
+        self.MCO2Div.nodetype = MCO2Divval;
+        const MCO2Pinval = ClockNodeTypes{ .output = null };
+        self.MCO2Pin.nodetype = MCO2Pinval;
+        const LSCOMultval = ClockNodeTypes{
+            .multi = inner: {
+                if (config.LSCOMult) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        };
+        self.LSCOMult.nodetype = LSCOMultval;
+        const LSCOOutputval = ClockNodeTypes{ .output = null };
+        self.LSCOOutput.nodetype = LSCOOutputval;
+        const PWRCLKoutputval = ClockNodeTypes{ .output = null };
+        self.PWRCLKoutput.nodetype = PWRCLKoutputval;
+        const HCLKOutputval = ClockNodeTypes{ .output = null };
+        self.HCLKOutput.nodetype = HCLKOutputval;
+        const CortexPrescalerval = ClockNodeTypes{ .div = .{
+            .value = inner: {
+                if (config.CortexPrescaler) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 1;
+                }
+            },
+        } };
+        self.CortexPrescaler.nodetype = CortexPrescalerval;
+        const CortexSysOutputval = ClockNodeTypes{ .output = null };
+        self.CortexSysOutput.nodetype = CortexSysOutputval;
+        const FCLKCortexOutputval = ClockNodeTypes{ .output = null };
+        self.FCLKCortexOutput.nodetype = FCLKCortexOutputval;
+        const APBOutputval = ClockNodeTypes{
+            .output = .{ .max = @min(1_000_000_000, 64000000), .min = 0 },
+        };
+        self.APBOutput.nodetype = APBOutputval;
+        const TimPrescOut1val = ClockNodeTypes{ .output = null };
+        self.TimPrescOut1.nodetype = TimPrescOut1val;
+        const PLLPoutputval = ClockNodeTypes{
+            .output = .{ .max = @min(1_000_000_000, 40000000), .min = 3090000 },
+        };
+        self.PLLPoutput.nodetype = PLLPoutputval;
+        const PLLQoutputval = ClockNodeTypes{
+            .output = .{ .max = @min(1_000_000_000, 128000000), .min = 12000000 },
+        };
+        self.PLLQoutput.nodetype = PLLQoutputval;
+        const HSE_Timoutval = ClockNodeTypes{
+            .source = .{
+                .value = if (config.HSE_Timout) |val| val.get() else 100,
+                .limit = .{ .max = @min(1_000_000_000, 4294967295), .min = 1 },
+            },
+        };
+        self.HSE_Timout = HSE_Timoutval;
+        const LSE_Timoutval = ClockNodeTypes{
+            .source = .{
+                .value = if (config.LSE_Timout) |val| val.get() else 5000,
+                .limit = .{ .max = @min(1_000_000_000, 4294967295), .min = 1 },
+            },
+        };
+        self.LSE_Timout = LSE_Timoutval;
+        const HSICalibrationValueval = ClockNodeTypes{
+            .source = .{
+                .value = if (config.HSICalibrationValue) |val| val.get() else 64,
+                .limit = .{ .max = @min(1_000_000_000, 127), .min = 0 },
+            },
+        };
+        self.HSICalibrationValue = HSICalibrationValueval;
+        const LSE_Drive_Capabilityval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.LSE_Drive_Capability) |val| {
+                    switch (val) {
+                        .null,
+                        => {
+                            break :inner val.get();
+                        },
+                        else => {},
+                    }
+                    return error.InvalidConfig;
+                } else {
+                    break :inner 0;
+                }
+            },
+        } };
+        self.LSE_Drive_Capability = LSE_Drive_Capabilityval;
+        const LSE_Drive_CapabilityArgval = ClockNodeTypes{ .source = .{
+            .value = inner: {
+                if (config.LSE_Drive_CapabilityArg) |val| {
+                    break :inner val.get();
+                } else {
+                    break :inner 0;
+                }
+            },
+        } };
+        self.LSE_Drive_CapabilityArg = LSE_Drive_CapabilityArgval;
     }
 };

@@ -11,7 +11,7 @@ pub fn build(b: *std.Build) void {
     });
 
     const ClockHelper = b.addModule("ClockHelper", .{
-        .root_source_file = b.path("src/main.zig"),
+        .root_source_file = b.path("src/lib.zig"),
         .target = target,
         .optimize = optimize,
     });

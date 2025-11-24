@@ -20,12 +20,18 @@ pub fn main() !void {
         \\SysClock: {d}Mhz
         \\AHB Clock: {d}Mhz
         \\APB1 Clock: {d}Mhz
+        \\TimAPB1: {d}Mhz
         \\APB2 Clock: {d}Mhz
+        \\TimAPB2: {d}Mhz
+        \\USB: {d}Mhz
         \\
     , .{
         (Clock.SysCLKOutput / 1_000_000),
         (Clock.AHBOutput / 1_000_000),
         (Clock.APB1Output / 1_000_000),
+        (Clock.TimPrescOut1 / 1_000_000),
         (Clock.APB2Output / 1_000_000),
+        (Clock.TimPrescOut2 / 1_000_000),
+        (Clock.USBoutput / 1_000_000),
     }));
 }

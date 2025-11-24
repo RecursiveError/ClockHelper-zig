@@ -450,13 +450,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             const HSI_VALUEValue: ?f32 = blk: {
                 break :blk 16000000;
             };
-
-            std.mem.doNotOptimizeAway(HSI_VALUEValue);
             const ADCFreq_ValueValue: ?f32 = blk: {
                 break :blk 16000000;
             };
-
-            std.mem.doNotOptimizeAway(ADCFreq_ValueValue);
             const MSIClockRangeValue: ?MSIClockRangeList = blk: {
                 const conf_item = config.MSIClockRange;
                 if (conf_item) |item| {
@@ -473,8 +469,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_MSIRANGE_5;
             };
-
-            std.mem.doNotOptimizeAway(MSIClockRangeValue);
             const HCLKFreq_ValueValue: ?f32 = blk: {
                 HCLKFreq_ValueLimit = .{
                     .min = null,
@@ -482,8 +476,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 };
                 break :blk null;
             };
-
-            std.mem.doNotOptimizeAway(HCLKFreq_ValueValue);
             const PWR_Regulator_Voltage_ScaleValue: ?PWR_Regulator_Voltage_ScaleList = blk: {
                 if (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 16000000, .@">")))) {
                     scale1 = true;
@@ -574,8 +566,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE1;
             };
-
-            std.mem.doNotOptimizeAway(PWR_Regulator_Voltage_ScaleValue);
             const HSE_VALUEValue: ?f32 = blk: {
                 if ((((PLLscale) or config.flags.CSSEnabled)) and config.flags.HSEByPass) {
                     const config_val = config.HSE_VALUE;
@@ -753,13 +743,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk config_val orelse 24000000;
             };
-
-            std.mem.doNotOptimizeAway(HSE_VALUEValue);
             const LSI_VALUEValue: ?f32 = blk: {
                 break :blk 37000;
             };
-
-            std.mem.doNotOptimizeAway(LSI_VALUEValue);
             const LSE_VALUEValue: ?f32 = blk: {
                 if (config.flags.LSEOscillator) {
                     if (config.LSE_VALUE) |val| {
@@ -817,8 +803,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk config_val orelse 32768;
             };
-
-            std.mem.doNotOptimizeAway(LSE_VALUEValue);
             const RCC_RTC_Clock_Source_FROM_HSEValue: ?RCC_RTC_Clock_Source_FROM_HSEList = blk: {
                 const conf_item = config.RCC_RTC_Clock_Source_FROM_HSE;
                 if (conf_item) |item| {
@@ -832,8 +816,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_RTCCLKSOURCE_HSE_DIV2;
             };
-
-            std.mem.doNotOptimizeAway(RCC_RTC_Clock_Source_FROM_HSEValue);
             const RTCClockSelectionValue: ?RTCClockSelectionList = blk: {
                 if ((check_MCU("Semaphore_input_Channel1TIM11") and check_MCU("TIM11") and check_MCU("SEM2RCC_HSE_REQUIRED_TIM11"))) {
                     const conf_item = config.RTCClockSelection;
@@ -862,8 +844,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_RTCCLKSOURCE_LSI;
             };
-
-            std.mem.doNotOptimizeAway(RTCClockSelectionValue);
             const RTCEnableValue: ?RTCEnableList = blk: {
                 if ((check_MCU("Semaphore_input_Channel1TIM11") and check_MCU("TIM11") and check_MCU("SEM2RCC_HSE_REQUIRED_TIM11")) or config.flags.RTCUsed_ForRCC) {
                     const item: RTCEnableList = .true;
@@ -872,8 +852,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: RTCEnableList = .false;
                 break :blk item;
             };
-
-            std.mem.doNotOptimizeAway(RTCEnableValue);
             const RTCFreq_ValueValue: ?f32 = blk: {
                 if ((!(check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSE, .@"=")) and !(check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSI, .@"=")) and (check_ref(@TypeOf(RTCEnableValue), RTCEnableValue, .true, .@"=")))) {
                     RTCFreq_ValueLimit = .{
@@ -884,8 +862,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk 37000;
             };
-
-            std.mem.doNotOptimizeAway(RTCFreq_ValueValue);
             const LCDEnableValue: ?LCDEnableList = blk: {
                 if (config.flags.LCDUsed_ForRCC) {
                     const item: LCDEnableList = .true;
@@ -894,8 +870,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: LCDEnableList = .false;
                 break :blk item;
             };
-
-            std.mem.doNotOptimizeAway(LCDEnableValue);
             const LCDFreq_ValueValue: ?f32 = blk: {
                 if ((!(check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSE, .@"=")) and !(check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSI, .@"=")) and (check_ref(@TypeOf(LCDEnableValue), LCDEnableValue, .true, .@"=")))) {
                     LCDFreq_ValueLimit = .{
@@ -906,13 +880,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk 37000;
             };
-
-            std.mem.doNotOptimizeAway(LCDFreq_ValueValue);
             const WatchDogFreq_ValueValue: ?f32 = blk: {
                 break :blk 37000;
             };
-
-            std.mem.doNotOptimizeAway(WatchDogFreq_ValueValue);
             const SYSCLKSourceValue: ?SYSCLKSourceList = blk: {
                 const conf_item = config.SYSCLKSource;
                 if (conf_item) |item| {
@@ -926,8 +896,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_SYSCLKSOURCE_MSI;
             };
-
-            std.mem.doNotOptimizeAway(SYSCLKSourceValue);
             const SYSCLKFreq_VALUEValue: ?f32 = blk: {
                 if (config.flags.RTCUsed_ForRCC or config.flags.LCDUsed_ForRCC) {
                     const min: ?f32 = RTCFreq_ValueValue;
@@ -946,13 +914,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 };
                 break :blk null;
             };
-
-            std.mem.doNotOptimizeAway(SYSCLKFreq_VALUEValue);
             const PWRFreq_ValueValue: ?f32 = blk: {
                 break :blk 2097000;
             };
-
-            std.mem.doNotOptimizeAway(PWRFreq_ValueValue);
             const AHBCLKDividerValue: ?AHBCLKDividerList = blk: {
                 const conf_item = config.AHBCLKDivider;
                 if (conf_item) |item| {
@@ -971,13 +935,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_SYSCLK_DIV1;
             };
-
-            std.mem.doNotOptimizeAway(AHBCLKDividerValue);
             const AHBFreq_ValueValue: ?f32 = blk: {
                 break :blk 2097000;
             };
-
-            std.mem.doNotOptimizeAway(AHBFreq_ValueValue);
             const TimPrescalerValue: ?TimPrescalerList = blk: {
                 const conf_item = config.TimPrescaler;
                 if (conf_item) |item| {
@@ -989,18 +949,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .SYSTICK_CLKSOURCE_HCLK;
             };
-
-            std.mem.doNotOptimizeAway(TimPrescalerValue);
             const TimerFreq_ValueValue: ?f32 = blk: {
                 break :blk 2097000;
             };
-
-            std.mem.doNotOptimizeAway(TimerFreq_ValueValue);
             const FCLKCortexFreq_ValueValue: ?f32 = blk: {
                 break :blk 2097000;
             };
-
-            std.mem.doNotOptimizeAway(FCLKCortexFreq_ValueValue);
             const APB1CLKDividerValue: ?APB1CLKDividerList = blk: {
                 const conf_item = config.APB1CLKDivider;
                 if (conf_item) |item| {
@@ -1015,8 +969,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_HCLK_DIV1;
             };
-
-            std.mem.doNotOptimizeAway(APB1CLKDividerValue);
             const APB1Freq_ValueValue: ?f32 = blk: {
                 if ((config.flags.RTCUsed_ForRCC or config.flags.LCDUsed_ForRCC) and !config.flags.USBUsed_ForRCC) {
                     const min: ?f32 = RTCFreq_ValueValue;
@@ -1041,21 +993,15 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 };
                 break :blk null;
             };
-
-            std.mem.doNotOptimizeAway(APB1Freq_ValueValue);
             const APB1TimCLKDividerValue: ?f32 = blk: {
                 if (check_ref(@TypeOf(APB1CLKDividerValue), APB1CLKDividerValue, .RCC_HCLK_DIV1, .@"=")) {
                     break :blk 1;
                 }
                 break :blk 2;
             };
-
-            std.mem.doNotOptimizeAway(APB1TimCLKDividerValue);
             const APB1TimFreq_ValueValue: ?f32 = blk: {
                 break :blk 2097000;
             };
-
-            std.mem.doNotOptimizeAway(APB1TimFreq_ValueValue);
             const APB2CLKDividerValue: ?APB2CLKDividerList = blk: {
                 const conf_item = config.APB2CLKDivider;
                 if (conf_item) |item| {
@@ -1070,8 +1016,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_HCLK_DIV1;
             };
-
-            std.mem.doNotOptimizeAway(APB2CLKDividerValue);
             const APB2Freq_ValueValue: ?f32 = blk: {
                 APB2Freq_ValueLimit = .{
                     .min = null,
@@ -1079,21 +1023,15 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 };
                 break :blk null;
             };
-
-            std.mem.doNotOptimizeAway(APB2Freq_ValueValue);
             const APB2TimCLKDividerValue: ?f32 = blk: {
                 if (check_ref(@TypeOf(APB2CLKDividerValue), APB2CLKDividerValue, .RCC_HCLK_DIV1, .@"=")) {
                     break :blk 1;
                 }
                 break :blk 2;
             };
-
-            std.mem.doNotOptimizeAway(APB2TimCLKDividerValue);
             const APB2TimFreq_ValueValue: ?f32 = blk: {
                 break :blk 2097000;
             };
-
-            std.mem.doNotOptimizeAway(APB2TimFreq_ValueValue);
             const RCC_MCOSourceValue: ?RCC_MCOSourceList = blk: {
                 const conf_item = config.RCC_MCOSource;
                 if (conf_item) |item| {
@@ -1110,8 +1048,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_MCO1SOURCE_SYSCLK;
             };
-
-            std.mem.doNotOptimizeAway(RCC_MCOSourceValue);
             const RCC_MCODivValue: ?RCC_MCODivList = blk: {
                 const conf_item = config.RCC_MCODiv;
                 if (conf_item) |item| {
@@ -1126,13 +1062,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_MCODIV_1;
             };
-
-            std.mem.doNotOptimizeAway(RCC_MCODivValue);
             const MCOPinFreq_ValueValue: ?f32 = blk: {
                 break :blk 2097000;
             };
-
-            std.mem.doNotOptimizeAway(MCOPinFreq_ValueValue);
             const PLLSourceValue: ?PLLSourceList = blk: {
                 if ((config.flags.USBUsed_ForRCC)) {
                     const item: PLLSourceList = .RCC_PLLSOURCE_HSE;
@@ -1161,16 +1093,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_PLLSOURCE_HSI;
             };
-
-            std.mem.doNotOptimizeAway(PLLSourceValue);
             const PLLUsedValue: ?f32 = blk: {
                 if ((check_ref(@TypeOf(SYSCLKSourceValue), SYSCLKSourceValue, .RCC_SYSCLKSOURCE_PLLCLK, .@"=")) or ((check_ref(@TypeOf(RCC_MCOSourceValue), RCC_MCOSourceValue, .RCC_MCO1SOURCE_PLLCLK, .@"=")) and config.flags.MCOConfig) or config.flags.USBUsed_ForRCC or config.flags.SDIOUsed_ForRCC) {
                     break :blk 1;
                 }
                 break :blk 0;
             };
-
-            std.mem.doNotOptimizeAway(PLLUsedValue);
             const VCOInputFreq_ValueValue: ?f32 = blk: {
                 if (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
                     VCOInputFreq_ValueLimit = .{
@@ -1181,8 +1109,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk 16000000;
             };
-
-            std.mem.doNotOptimizeAway(VCOInputFreq_ValueValue);
             const PLLMULValue: ?PLLMULList = blk: {
                 const conf_item = config.PLLMUL;
                 if (conf_item) |item| {
@@ -1201,13 +1127,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_PLL_MUL3;
             };
-
-            std.mem.doNotOptimizeAway(PLLMULValue);
             const DIV2USBValue: ?f32 = blk: {
                 break :blk 2;
             };
-
-            std.mem.doNotOptimizeAway(DIV2USBValue);
             const PLLDIVValue: ?PLLDIVList = blk: {
                 const conf_item = config.PLLDIV;
                 if (conf_item) |item| {
@@ -1220,8 +1142,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .RCC_PLL_DIV2;
             };
-
-            std.mem.doNotOptimizeAway(PLLDIVValue);
             const @"48MHZClocksFreq_ValueValue": ?f32 = blk: {
                 @"48MHZClocksFreq_ValueLimit" = .{
                     .min = 4.788e7,
@@ -1229,8 +1149,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 };
                 break :blk null;
             };
-
-            std.mem.doNotOptimizeAway(@"48MHZClocksFreq_ValueValue");
             const VDD_VALUEValue: ?f32 = blk: {
                 if (check_MCU("STM32L100_Value_Line") and !check_MCU("DIE427")) {
                     const config_val = config.extra.VDD_VALUE;
@@ -1338,8 +1256,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk config_val orelse 3.3;
             };
-
-            std.mem.doNotOptimizeAway(VDD_VALUEValue);
             const INSTRUCTION_CACHE_ENABLEValue: ?INSTRUCTION_CACHE_ENABLEList = blk: {
                 const conf_item = config.extra.INSTRUCTION_CACHE_ENABLE;
                 if (conf_item) |item| {
@@ -1351,8 +1267,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .@"1";
             };
-
-            std.mem.doNotOptimizeAway(INSTRUCTION_CACHE_ENABLEValue);
             const PREFETCH_ENABLEValue: ?PREFETCH_ENABLEList = blk: {
                 const conf_item = config.extra.PREFETCH_ENABLE;
                 if (conf_item) |item| {
@@ -1364,8 +1278,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .@"0";
             };
-
-            std.mem.doNotOptimizeAway(PREFETCH_ENABLEValue);
             const DATA_CACHE_ENABLEValue: ?DATA_CACHE_ENABLEList = blk: {
                 const conf_item = config.extra.DATA_CACHE_ENABLE;
                 if (conf_item) |item| {
@@ -1377,8 +1289,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .@"1";
             };
-
-            std.mem.doNotOptimizeAway(DATA_CACHE_ENABLEValue);
             const FLatencyValue: ?FLatencyList = blk: {
                 if ((((((check_ref(@TypeOf(VDD_VALUEValue), VDD_VALUEValue, 1.71, .@">")) or (check_ref(@TypeOf(VDD_VALUEValue), VDD_VALUEValue, 1.71, .@"="))) and ((check_ref(@TypeOf(VDD_VALUEValue), VDD_VALUEValue, 3.6, .@"<")) or (check_ref(@TypeOf(VDD_VALUEValue), VDD_VALUEValue, 3.6, .@"=")))) and (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 16000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 16000000, .@"="))))) and (scale1 or scale11)) or
                     (((((check_ref(@TypeOf(VDD_VALUEValue), VDD_VALUEValue, 1.65, .@">")) or (check_ref(@TypeOf(VDD_VALUEValue), VDD_VALUEValue, 1.65, .@"="))) and ((check_ref(@TypeOf(VDD_VALUEValue), VDD_VALUEValue, 3.6, .@"<")) or (check_ref(@TypeOf(VDD_VALUEValue), VDD_VALUEValue, 3.6, .@"=")))) and (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 8000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 8000000, .@"="))))) and (scale2)) or
@@ -1432,16 +1342,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
                 break :blk conf_item orelse .FLASH_LATENCY_0;
             };
-
-            std.mem.doNotOptimizeAway(FLatencyValue);
             const HSIUsedValue: ?f32 = blk: {
                 if (((check_MCU("HSIusedPLL")) and (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"="))) or (check_ref(@TypeOf(SYSCLKSourceValue), SYSCLKSourceValue, .RCC_SYSCLKSOURCE_HSI, .@"=")) or ((check_ref(@TypeOf(RCC_MCOSourceValue), RCC_MCOSourceValue, .RCC_MCO1SOURCE_HSI, .@"=")) and (config.flags.MCOConfig)) or config.flags.USE_ADC) {
                     break :blk 1;
                 }
                 break :blk 0;
             };
-
-            std.mem.doNotOptimizeAway(HSIUsedValue);
             const HSICalibrationValueValue: ?f32 = blk: {
                 if (check_ref(@TypeOf(HSIUsedValue), HSIUsedValue, 1, .@"=")) {
                     const config_val = config.extra.HSICalibrationValue;
@@ -1514,16 +1420,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 16;
             };
-
-            std.mem.doNotOptimizeAway(HSICalibrationValueValue);
             const MSIUsedValue: ?f32 = blk: {
                 if ((check_MCU("Semaphore_input_Channel1TIM11") and check_MCU("TIM11") and check_MCU("SEM2RCC_MSI_REQUIRED_TIM11")) or (check_ref(@TypeOf(SYSCLKSourceValue), SYSCLKSourceValue, .RCC_SYSCLKSOURCE_MSI, .@"=")) or ((check_ref(@TypeOf(RCC_MCOSourceValue), RCC_MCOSourceValue, .RCC_MCO1SOURCE_MSI, .@"=")) and config.flags.MCOConfig)) {
                     break :blk 1;
                 }
                 break :blk 0;
             };
-
-            std.mem.doNotOptimizeAway(MSIUsedValue);
             const MSICalibrationValueValue: ?f32 = blk: {
                 if (check_ref(@TypeOf(MSIUsedValue), MSIUsedValue, 1, .@"=")) {
                     const config_val = config.extra.MSICalibrationValue;
@@ -1596,8 +1498,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 0;
             };
-
-            std.mem.doNotOptimizeAway(MSICalibrationValueValue);
             const HSE_TimoutValue: ?f32 = blk: {
                 const config_val = config.extra.HSE_Timout;
                 if (config_val) |val| {
@@ -1634,8 +1534,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 100;
             };
-
-            std.mem.doNotOptimizeAway(HSE_TimoutValue);
             const LSE_TimoutValue: ?f32 = blk: {
                 const config_val = config.extra.LSE_Timout;
                 if (config_val) |val| {
@@ -1672,8 +1570,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 5000;
             };
-
-            std.mem.doNotOptimizeAway(LSE_TimoutValue);
             const ADCEnableValue: ?ADCEnableList = blk: {
                 if (config.flags.USE_ADC) {
                     const item: ADCEnableList = .true;
@@ -1682,8 +1578,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: ADCEnableList = .false;
                 break :blk item;
             };
-
-            std.mem.doNotOptimizeAway(ADCEnableValue);
             const EnableHSERTCDevisorValue: ?EnableHSERTCDevisorList = blk: {
                 if ((check_MCU("Semaphore_input_Channel1TIM11") and check_MCU("TIM11") and check_MCU("SEM2RCC_HSE_REQUIRED_TIM11")) or (config.flags.RTCUsed_ForRCC and (config.flags.HSEOscillator or config.flags.HSEByPass))) {
                     const item: EnableHSERTCDevisorList = .true;
@@ -1692,8 +1586,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: EnableHSERTCDevisorList = .false;
                 break :blk item;
             };
-
-            std.mem.doNotOptimizeAway(EnableHSERTCDevisorValue);
             const EnableHSELCDDevisorValue: ?EnableHSELCDDevisorList = blk: {
                 if (config.flags.LCDUsed_ForRCC and (config.flags.HSEOscillator or config.flags.HSEByPass)) {
                     const item: EnableHSELCDDevisorList = .true;
@@ -1702,8 +1594,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: EnableHSELCDDevisorList = .false;
                 break :blk item;
             };
-
-            std.mem.doNotOptimizeAway(EnableHSELCDDevisorValue);
             const IWDGEnableValue: ?IWDGEnableList = blk: {
                 if (config.flags.IWDGUsed_ForRCC) {
                     const item: IWDGEnableList = .true;
@@ -1712,8 +1602,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: IWDGEnableList = .false;
                 break :blk item;
             };
-
-            std.mem.doNotOptimizeAway(IWDGEnableValue);
             const MCOEnableValue: ?MCOEnableList = blk: {
                 if (config.flags.MCOConfig) {
                     const item: MCOEnableList = .true;
@@ -1722,8 +1610,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: MCOEnableList = .false;
                 break :blk item;
             };
-
-            std.mem.doNotOptimizeAway(MCOEnableValue);
             const USBEnableValue: ?USBEnableList = blk: {
                 if (config.flags.USBUsed_ForRCC) {
                     const item: USBEnableList = .true;
@@ -1732,8 +1618,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: USBEnableList = .false;
                 break :blk item;
             };
-
-            std.mem.doNotOptimizeAway(USBEnableValue);
             const SDIOEnableValue: ?SDIOEnableList = blk: {
                 if (config.flags.SDIOUsed_ForRCC) {
                     const item: SDIOEnableList = .true;
@@ -1742,8 +1626,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: SDIOEnableList = .false;
                 break :blk item;
             };
-
-            std.mem.doNotOptimizeAway(SDIOEnableValue);
 
             var HSIRC = ClockNode{
                 .name = "HSIRC",
@@ -1981,6 +1863,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSIRC.nodetype = .source;
             HSIRC.value = HSIRC_clk_value;
             if (check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"=")) {
+                std.mem.doNotOptimizeAway(ADCFreq_ValueValue);
                 ADCOutput.nodetype = .output;
                 ADCOutput.parents = &.{&HSIRC};
             }
@@ -2081,16 +1964,19 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 RTCClkSource.parents = &.{RTCClkSourceparents[RTCClkSource_clk_value.get()]};
             }
             if (check_ref(@TypeOf(RTCEnableValue), RTCEnableValue, .true, .@"=")) {
+                std.mem.doNotOptimizeAway(RTCFreq_ValueValue);
                 RTCOutput.limit = RTCFreq_ValueLimit;
                 RTCOutput.nodetype = .output;
                 RTCOutput.parents = &.{&RTCClkSource};
             }
             if (check_ref(@TypeOf(LCDEnableValue), LCDEnableValue, .true, .@"=")) {
+                std.mem.doNotOptimizeAway(LCDFreq_ValueValue);
                 LCDOutput.limit = LCDFreq_ValueLimit;
                 LCDOutput.nodetype = .output;
                 LCDOutput.parents = &.{&RTCClkSource};
             }
             if (check_ref(@TypeOf(IWDGEnableValue), IWDGEnableValue, .true, .@"=")) {
+                std.mem.doNotOptimizeAway(WatchDogFreq_ValueValue);
                 IWDGOutput.nodetype = .output;
                 IWDGOutput.parents = &.{&LSIRC};
             }
@@ -2114,9 +2000,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             };
             SysClkSource.nodetype = .multi;
             SysClkSource.parents = &.{SysClkSourceparents[SysClkSource_clk_value.get()]};
+
+            std.mem.doNotOptimizeAway(SYSCLKFreq_VALUEValue);
             SysCLKOutput.limit = SYSCLKFreq_VALUELimit;
             SysCLKOutput.nodetype = .output;
             SysCLKOutput.parents = &.{&SysClkSource};
+
+            std.mem.doNotOptimizeAway(PWRFreq_ValueValue);
             PWROutput.nodetype = .output;
             PWROutput.parents = &.{&SysCLKOutput};
 
@@ -2134,9 +2024,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             AHBPrescaler.nodetype = .div;
             AHBPrescaler.value = AHBPrescaler_clk_value.get();
             AHBPrescaler.parents = &.{&SysCLKOutput};
+
+            std.mem.doNotOptimizeAway(HCLKFreq_ValueValue);
             AHBOutput.limit = HCLKFreq_ValueLimit;
             AHBOutput.nodetype = .output;
             AHBOutput.parents = &.{&AHBPrescaler};
+
+            std.mem.doNotOptimizeAway(AHBFreq_ValueValue);
             HCLKOutput.nodetype = .output;
             HCLKOutput.parents = &.{&AHBOutput};
 
@@ -2154,8 +2048,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             TIMPrescaler.nodetype = .div;
             TIMPrescaler.value = TIMPrescaler_clk_value.get();
             TIMPrescaler.parents = &.{&AHBOutput};
+
+            std.mem.doNotOptimizeAway(TimerFreq_ValueValue);
             TIMOutput.nodetype = .output;
             TIMOutput.parents = &.{&TIMPrescaler};
+
+            std.mem.doNotOptimizeAway(FCLKCortexFreq_ValueValue);
             FCLKCortexOutput.nodetype = .output;
             FCLKCortexOutput.parents = &.{&AHBOutput};
 
@@ -2173,6 +2071,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB1Prescaler.nodetype = .div;
             APB1Prescaler.value = APB1Prescaler_clk_value.get();
             APB1Prescaler.parents = &.{&AHBOutput};
+
+            std.mem.doNotOptimizeAway(APB1Freq_ValueValue);
             APB1Output.limit = APB1Freq_ValueLimit;
             APB1Output.nodetype = .output;
             APB1Output.parents = &.{&APB1Prescaler};
@@ -2191,6 +2091,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             TimPrescalerAPB1.nodetype = .mul;
             TimPrescalerAPB1.value = TimPrescalerAPB1_clk_value;
             TimPrescalerAPB1.parents = &.{&APB1Prescaler};
+
+            std.mem.doNotOptimizeAway(APB1TimFreq_ValueValue);
             TimPrescOut.nodetype = .output;
             TimPrescOut.parents = &.{&TimPrescalerAPB1};
 
@@ -2208,6 +2110,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB2Prescaler.nodetype = .div;
             APB2Prescaler.value = APB2Prescaler_clk_value.get();
             APB2Prescaler.parents = &.{&AHBOutput};
+
+            std.mem.doNotOptimizeAway(APB2Freq_ValueValue);
             APB2Output.limit = APB2Freq_ValueLimit;
             APB2Output.nodetype = .output;
             APB2Output.parents = &.{&APB2Prescaler};
@@ -2226,6 +2130,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PeriphPrescaler.nodetype = .mul;
             PeriphPrescaler.value = PeriphPrescaler_clk_value;
             PeriphPrescaler.parents = &.{&APB2Prescaler};
+
+            std.mem.doNotOptimizeAway(APB2TimFreq_ValueValue);
             PeriphPrescOutput.nodetype = .output;
             PeriphPrescOutput.parents = &.{&PeriphPrescaler};
             if (check_ref(@TypeOf(MCOEnableValue), MCOEnableValue, .true, .@"=")) {
@@ -2269,6 +2175,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MCODiv.parents = &.{&MCOMult};
             }
             if (check_ref(@TypeOf(MCOEnableValue), MCOEnableValue, .true, .@"=")) {
+                std.mem.doNotOptimizeAway(MCOPinFreq_ValueValue);
                 MCOPin.nodetype = .output;
                 MCOPin.parents = &.{&MCODiv};
             }
@@ -2290,6 +2197,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             };
             PLLSource.nodetype = .multi;
             PLLSource.parents = &.{PLLSourceparents[PLLSource_clk_value.get()]};
+
+            std.mem.doNotOptimizeAway(VCOInputFreq_ValueValue);
             VCOIIuput.limit = VCOInputFreq_ValueLimit;
             VCOIIuput.nodetype = .output;
             VCOIIuput.parents = &.{&PLLSource};
@@ -2341,6 +2250,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             if (check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SDIOEnableValue), SDIOEnableValue, .true, .@"="))
             {
+                std.mem.doNotOptimizeAway(@"48MHZClocksFreq_ValueValue");
                 USBOutput.limit = @"48MHZClocksFreq_ValueLimit";
                 USBOutput.nodetype = .output;
                 USBOutput.parents = &.{&USBPres};

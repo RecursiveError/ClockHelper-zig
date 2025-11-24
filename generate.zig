@@ -966,11 +966,11 @@ fn write_actual_node(writer: *std.Io.Writer, context: *const Context, ref: Refer
     }
 
     try writer.writeAll("\n};\n");
-    try writer.print(
-        \\
-        \\std.mem.doNotOptimizeAway(@"{s}Value");
-        \\
-    , .{ref.ref_name});
+    //try writer.print(
+    //    \\
+    //    \\std.mem.doNotOptimizeAway(@"{s}Value");
+    //    \\
+    //, .{ref.ref_name});
 }
 
 fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, alloc: std.mem.Allocator) ![]const u8 {
@@ -2018,6 +2018,12 @@ fn write_actual_clock_value(writer: *std.Io.Writer, node: ClockNode, node_var: C
             \\  "{1s}",
             \\}});
         , .{ node.name, ref_name, err_expr, err_log });
+    } else {
+        try writer.print(
+            \\
+            \\std.mem.doNotOptimizeAway(@"{s}Value");
+            \\
+        , .{ref_name});
     }
     switch (clk_t) {
         .source => try create_source(node, is_list(ref, context), writer),

@@ -679,6 +679,10 @@ pub const MCOEnableList = enum {
     true,
     false,
 };
+pub const EnableCSSLSEList = enum {
+    true,
+    false,
+};
 pub const Cortex2Freq_ValueUnion = union(enum) {
     float: f32,
     list: Cortex2Freq_ValueList,
@@ -930,10 +934,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             MSIUsedForSys: ?f32 = null, //from extra RCC references
             HSIUsedForSys: ?f32 = null, //from extra RCC references
             LSEUsed: ?f32 = null, //from extra RCC references
+            EnableCSSLSE: ?EnableCSSLSEList = null, //from extra RCC references
             PLLUsed: ?f32 = null, //from extra RCC references
         };
 
-        const Tree_Output = struct {
+        pub const Tree_Output = struct {
             clock: Clock_Output,
             config: Config_Output,
         };
@@ -1012,6 +1017,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var MCOSourceLSI: bool = false;
             var HCLKDiv1: bool = false;
             var MSIAutoCalibrationON: bool = false;
+            var RCC_LSECSS_ENABLED: bool = false;
             var SYSCLKFreq_VALUELimit: Limit = .{};
             var RTCFreq_ValueLimit: Limit = .{};
             var LCDFreq_ValueLimit: Limit = .{};
@@ -2685,6 +2691,34 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: MCOEnableList = .false;
                 break :blk item;
             };
+            const EnableCSSLSEValue: ?EnableCSSLSEList = blk: {
+                if ((((check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSE, .@"="))) and (config.flags.RTCUsed_ForRCC or config.flags.LCDUsed_ForRCC))) {
+                    const conf_item = config.EnableCSSLSE;
+                    if (conf_item) |item| {
+                        switch (item) {
+                            .true => RCC_LSECSS_ENABLED = true,
+                            .false => {},
+                        }
+                    }
+
+                    break :blk conf_item orelse .false;
+                }
+                const item: EnableCSSLSEList = .false;
+                const conf_item = config.EnableCSSLSE;
+                if (conf_item) |i| {
+                    if (item != i) {
+                        try comptime_fail_or_error(error.InvalidConfig,
+                            \\
+                            \\Error on {s} | expr: {s} diagnostic: {s} 
+                            \\Expected Fixed List Value: {s} found {any}
+                            \\note: the current condition limits the choice to only one list item,
+                            \\select the expected option or leave the value as null.
+                            \\
+                        , .{ "EnableCSSLSE", "Else", "No Extra Log", "false", i });
+                    }
+                }
+                break :blk item;
+            };
 
             var HSIRC = ClockNode{
                 .name = "HSIRC",
@@ -4274,6 +4308,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             ref_out.MSIUsedForSys = MSIUsedForSysValue;
             ref_out.HSIUsedForSys = HSIUsedForSysValue;
             ref_out.LSEUsed = LSEUsedValue;
+            ref_out.EnableCSSLSE = EnableCSSLSEValue;
             ref_out.PLLUsed = PLLUsedValue;
             return Tree_Output{
                 .clock = out,

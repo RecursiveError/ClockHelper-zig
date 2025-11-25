@@ -1293,6 +1293,18 @@ pub const CECEnableList = enum {
     true,
     false,
 };
+pub const EnableHSEList = enum {
+    true,
+    false,
+};
+pub const EnableLSERTCList = enum {
+    true,
+    false,
+};
+pub const EnableLSEList = enum {
+    true,
+    false,
+};
 pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
     return struct {
         pub const Flags = struct {
@@ -1781,11 +1793,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             VCOInput3Freq_Value: ?f32 = null, //from extra RCC references
             PLL3Used: ?f32 = null, //from extra RCC references
             HSIUsed: ?f32 = null, //from extra RCC references
+            EnableHSE: ?EnableHSEList = null, //from extra RCC references
+            EnableLSERTC: ?EnableLSERTCList = null, //from extra RCC references
+            EnableLSE: ?EnableLSEList = null, //from extra RCC references
             PLL1PUsed: ?f32 = null, //from extra RCC references
             cKPerUsed: ?f32 = null, //from extra RCC references
         };
 
-        const Tree_Output = struct {
+        pub const Tree_Output = struct {
             clock: Clock_Output,
             config: Config_Output,
         };
@@ -5849,6 +5864,30 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: CECEnableList = .false;
                 break :blk item;
             };
+            const EnableHSEValue: ?EnableHSEList = blk: {
+                if ((config.flags.HSEOscillator or config.flags.HSEByPass or config.flags.HSEDIGByPass)) {
+                    const item: EnableHSEList = .true;
+                    break :blk item;
+                }
+                const item: EnableHSEList = .false;
+                break :blk item;
+            };
+            const EnableLSERTCValue: ?EnableLSERTCList = blk: {
+                if ((config.flags.RTCUsed_ForRCC) and (config.flags.LSEOscillator or config.flags.LSEByPass or config.flags.LSEDIGByPass)) {
+                    const item: EnableLSERTCList = .true;
+                    break :blk item;
+                }
+                const item: EnableLSERTCList = .false;
+                break :blk item;
+            };
+            const EnableLSEValue: ?EnableLSEList = blk: {
+                if ((config.flags.LSEOscillator or config.flags.LSEByPass or config.flags.LSEDIGByPass)) {
+                    const item: EnableLSEList = .true;
+                    break :blk item;
+                }
+                const item: EnableLSEList = .false;
+                break :blk item;
+            };
 
             var HSIRC = ClockNode{
                 .name = "HSIRC",
@@ -9021,6 +9060,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             ref_out.VCOInput3Freq_Value = VCOInput3Freq_ValueValue;
             ref_out.PLL3Used = PLL3UsedValue;
             ref_out.HSIUsed = HSIUsedValue;
+            ref_out.EnableHSE = EnableHSEValue;
+            ref_out.EnableLSERTC = EnableLSERTCValue;
+            ref_out.EnableLSE = EnableLSEValue;
             ref_out.PLL1PUsed = PLL1PUsedValue;
             ref_out.cKPerUsed = cKPerUsedValue;
             return Tree_Output{

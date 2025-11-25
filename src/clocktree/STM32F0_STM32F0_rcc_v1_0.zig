@@ -399,6 +399,14 @@ pub const USART2EnableList = enum {
     true,
     false,
 };
+pub const EnableMCOMultDivisorList = enum {
+    true,
+    false,
+};
+pub const EnableLSERTCList = enum {
+    true,
+    false,
+};
 pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
     return struct {
         pub const Flags = struct {
@@ -421,6 +429,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             I2S1Used_ForRCC: bool = false,
             I2S2Used_ForRCC: bool = false,
             IWDGUsed_ForRCC: bool = false,
+            MCOUsed_ForRCC: bool = false,
         };
         //optional extra configurations
         pub const ExtraConfig = struct {
@@ -573,9 +582,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             I2C1Enable: ?I2C1EnableList = null, //from extra RCC references
             USART1Enable: ?USART1EnableList = null, //from extra RCC references
             USART2Enable: ?USART2EnableList = null, //from extra RCC references
+            EnableMCOMultDivisor: ?EnableMCOMultDivisorList = null, //from extra RCC references
+            EnableLSERTC: ?EnableLSERTCList = null, //from extra RCC references
+            HSEUsed: ?f32 = null, //from extra RCC references
+            LSIUsed: ?f32 = null, //from extra RCC references
+            HSI48Used: ?f32 = null, //from extra RCC references
         };
 
-        const Tree_Output = struct {
+        pub const Tree_Output = struct {
             clock: Clock_Output,
             config: Config_Output,
         };
@@ -2156,6 +2170,40 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: USART2EnableList = .false;
                 break :blk item;
             };
+            const EnableMCOMultDivisorValue: ?EnableMCOMultDivisorList = blk: {
+                if (config.flags.MCOUsed_ForRCC) {
+                    const item: EnableMCOMultDivisorList = .true;
+                    break :blk item;
+                }
+                const item: EnableMCOMultDivisorList = .false;
+                break :blk item;
+            };
+            const EnableLSERTCValue: ?EnableLSERTCList = blk: {
+                if (config.flags.RTCUsed_ForRCC and (config.flags.LSEOscillator or config.flags.LSEByPass)) {
+                    const item: EnableLSERTCList = .true;
+                    break :blk item;
+                }
+                const item: EnableLSERTCList = .false;
+                break :blk item;
+            };
+            const HSEUsedValue: ?f32 = blk: {
+                if ((check_MCU("SEM2RCC_HSE_REQUIRED_TIM14") and check_MCU("TIM14") and check_MCU("Semaphore_input_Channel1TIM14")) or ((config.flags.RTCUsed_ForRCC) and !((check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSE, .@"=")) or (check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSI, .@"=")))) or ((check_MCU("PLLSourceHSE")) and (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"="))) or (check_ref(@TypeOf(SYSCLKSourceValue), SYSCLKSourceValue, .RCC_SYSCLKSOURCE_HSE, .@"=")) or ((check_ref(@TypeOf(RCC_MCOSourceValue), RCC_MCOSourceValue, .RCC_MCO1SOURCE_HSE, .@"=")) and ((check_MCU("SEM2RCC_MCO_REQUIRED_TIM14") and check_MCU("TIM14") and check_MCU("Semaphore_input_Channel1TIM14")) or config.flags.MCOConfig))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const LSIUsedValue: ?f32 = blk: {
+                if ((config.flags.IWDGUsed_ForRCC or ((check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSI, .@"=")) and (config.flags.RTCUsed_ForRCC)) or ((check_ref(@TypeOf(RCC_MCOSourceValue), RCC_MCOSourceValue, .RCC_MCO1SOURCE_LSI, .@"=")) and ((check_MCU("SEM2RCC_MCO_REQUIRED_TIM14") and check_MCU("TIM14") and check_MCU("Semaphore_input_Channel1TIM14")) or config.flags.MCOConfig)))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const HSI48UsedValue: ?f32 = blk: {
+                if ((((check_MCU("PLLSourceHSI48")) and (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"="))) or (check_ref(@TypeOf(SYSCLKSourceValue), SYSCLKSourceValue, .RCC_SYSCLKSOURCE_HSI48, .@"=")) or ((check_ref(@TypeOf(RCC_MCOSourceValue), RCC_MCOSourceValue, .RCC_MCO1SOURCE_HSI48, .@"=")) and ((check_MCU("SEM2RCC_MCO_REQUIRED_TIM14") and check_MCU("TIM14") and check_MCU("Semaphore_input_Channel1TIM14")) or config.flags.MCOConfig)) or (config.flags.USBUsed_ForRCC and !check_MCU("STM32F0x0_Value_Line") and (check_ref(@TypeOf(USBClockSelectionValue), USBClockSelectionValue, .RCC_USBCLKSOURCE_HSI48, .@"="))))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
 
             var HSIRC = ClockNode{
                 .name = "HSIRC",
@@ -3536,6 +3584,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             ref_out.I2C1Enable = I2C1EnableValue;
             ref_out.USART1Enable = USART1EnableValue;
             ref_out.USART2Enable = USART2EnableValue;
+            ref_out.EnableMCOMultDivisor = EnableMCOMultDivisorValue;
+            ref_out.EnableLSERTC = EnableLSERTCValue;
+            ref_out.HSEUsed = HSEUsedValue;
+            ref_out.LSIUsed = LSIUsedValue;
+            ref_out.HSI48Used = HSI48UsedValue;
             return Tree_Output{
                 .clock = out,
                 .config = ref_out,

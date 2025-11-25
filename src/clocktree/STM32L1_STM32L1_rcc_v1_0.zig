@@ -277,6 +277,22 @@ pub const SDIOEnableList = enum {
     true,
     false,
 };
+pub const EnableCSSLSEList = enum {
+    true,
+    false,
+};
+pub const EnableHSEList = enum {
+    true,
+    false,
+};
+pub const EnableLSERTCList = enum {
+    true,
+    false,
+};
+pub const EnableLSEList = enum {
+    true,
+    false,
+};
 pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
     return struct {
         pub const Flags = struct {
@@ -409,9 +425,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             MCOEnable: ?MCOEnableList = null, //from extra RCC references
             USBEnable: ?USBEnableList = null, //from extra RCC references
             SDIOEnable: ?SDIOEnableList = null, //from extra RCC references
+            EnableCSSLSE: ?EnableCSSLSEList = null, //from extra RCC references
+            EnableHSE: ?EnableHSEList = null, //from extra RCC references
+            EnableLSERTC: ?EnableLSERTCList = null, //from extra RCC references
+            EnableLSE: ?EnableLSEList = null, //from extra RCC references
+            HSEUsed: ?f32 = null, //from extra RCC references
+            LSEUsed: ?f32 = null, //from extra RCC references
+            LSIUsed: ?f32 = null, //from extra RCC references
         };
 
-        const Tree_Output = struct {
+        pub const Tree_Output = struct {
             clock: Clock_Output,
             config: Config_Output,
         };
@@ -437,6 +460,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var scale2: bool = false;
             var scale11: bool = false;
             var scale3: bool = false;
+            var NVICusedCssLSE: bool = false;
             var RTCFreq_ValueLimit: Limit = .{};
             var LCDFreq_ValueLimit: Limit = .{};
             var SYSCLKFreq_VALUELimit: Limit = .{};
@@ -1626,6 +1650,76 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: SDIOEnableList = .false;
                 break :blk item;
             };
+            const EnableCSSLSEValue: ?EnableCSSLSEList = blk: {
+                if ((((check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSE, .@"="))) and (config.flags.RTCUsed_ForRCC or config.flags.LCDUsed_ForRCC))) {
+                    const conf_item = config.EnableCSSLSE;
+                    if (conf_item) |item| {
+                        switch (item) {
+                            .true => NVICusedCssLSE = true,
+                            .false => {},
+                        }
+                    }
+
+                    break :blk conf_item orelse .false;
+                }
+                const item: EnableCSSLSEList = .false;
+                const conf_item = config.EnableCSSLSE;
+                if (conf_item) |i| {
+                    if (item != i) {
+                        try comptime_fail_or_error(error.InvalidConfig,
+                            \\
+                            \\Error on {s} | expr: {s} diagnostic: {s} 
+                            \\Expected Fixed List Value: {s} found {any}
+                            \\note: the current condition limits the choice to only one list item,
+                            \\select the expected option or leave the value as null.
+                            \\
+                        , .{ "EnableCSSLSE", "Else", "No Extra Log", "false", i });
+                    }
+                }
+                break :blk item;
+            };
+            const EnableHSEValue: ?EnableHSEList = blk: {
+                if ((check_MCU("Semaphore_input_Channel1TIM11") and check_MCU("TIM11") and check_MCU("SEM2RCC_HSE_REQUIRED_TIM11")) or (config.flags.HSEOscillator or config.flags.HSEByPass)) {
+                    const item: EnableHSEList = .true;
+                    break :blk item;
+                }
+                const item: EnableHSEList = .false;
+                break :blk item;
+            };
+            const EnableLSERTCValue: ?EnableLSERTCList = blk: {
+                if ((config.flags.RTCUsed_ForRCC or config.flags.LCDUsed_ForRCC or (check_MCU("Semaphore_input_Channel1TIM11") and check_MCU("TIM11") and check_MCU("SEM2RCC_HSE_REQUIRED_TIM11"))) and (config.flags.LSEOscillator or config.flags.LSEByPass)) {
+                    const item: EnableLSERTCList = .true;
+                    break :blk item;
+                }
+                const item: EnableLSERTCList = .false;
+                break :blk item;
+            };
+            const EnableLSEValue: ?EnableLSEList = blk: {
+                if ((config.flags.LSEOscillator or config.flags.LSEByPass)) {
+                    const item: EnableLSEList = .true;
+                    break :blk item;
+                }
+                const item: EnableLSEList = .false;
+                break :blk item;
+            };
+            const HSEUsedValue: ?f32 = blk: {
+                if ((check_MCU("Semaphore_input_Channel1TIM11") and check_MCU("TIM11") and check_MCU("SEM2RCC_HSE_REQUIRED_TIM11")) or ((config.flags.RTCUsed_ForRCC or config.flags.LCDUsed_ForRCC) and !((check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSE, .@"=")) or (check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSI, .@"=")))) or ((check_ref(@TypeOf(PLLSourceValue), PLLSourceValue, .RCC_PLLSOURCE_HSE, .@"=")) and (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"="))) or (check_ref(@TypeOf(SYSCLKSourceValue), SYSCLKSourceValue, .RCC_SYSCLKSOURCE_HSE, .@"=")) or ((check_ref(@TypeOf(RCC_MCOSourceValue), RCC_MCOSourceValue, .RCC_MCO1SOURCE_HSE, .@"=")) and (config.flags.MCOConfig))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const LSEUsedValue: ?f32 = blk: {
+                if ((check_MCU("Semaphore_TI1_TIM10L1RemapTIM10") and check_MCU("TIM10") and check_MCU("SEM2RCC_LSE_REQUIRED1_TIM10")) or ((check_MCU("Semaphore_ClockSourceETRMode2TIM10") or check_MCU("Semaphore_TriggerSourceETRTIM10") or check_MCU("Semaphore_ETRasClearingSourceTIM10")) and !check_MCU("Semaphore_TIM10_ETR_Remap_TGOTIM10") and check_MCU("TIM10") and check_MCU("SEM2RCC_LSE_REQUIRED_TIM10")) or ((check_MCU("Semaphore_ClockSourceETRMode2TIM11") or check_MCU("Semaphore_TriggerSourceETRTIM11") or check_MCU("Semaphore_ETRasClearingSourceTIM11")) and !check_MCU("Semaphore_TIM11_ETR_Remap_TGOTIM11") and check_MCU("TIM11") and check_MCU("SEM2RCC_LSE_REQUIRED_TIM11")) or ((check_MCU("Semaphore_input_Channel1TIM9") and check_MCU("TIM9") and check_MCU("SEM2RCC_LSE_REQUIRED_TIM9")) and (config.flags.LSEByPass or config.flags.LSEOscillator)) or ((check_ref(@TypeOf(RCC_MCOSourceValue), RCC_MCOSourceValue, .RCC_MCO1SOURCE_LSE, .@"=")) and config.flags.MCOConfig) or ((check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSE, .@"=")) and (config.flags.RTCUsed_ForRCC or config.flags.LCDUsed_ForRCC))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const LSIUsedValue: ?f32 = blk: {
+                if ((check_MCU("Semaphore_TI1_TIM10L1RemapTIM10") and check_MCU("TIM10") and check_MCU("SEM2RCC_LSI_REQUIRED_TIM10")) or (config.flags.IWDGUsed_ForRCC or ((check_ref(@TypeOf(RTCClockSelectionValue), RTCClockSelectionValue, .RCC_RTCCLKSOURCE_LSI, .@"=")) and (config.flags.RTCUsed_ForRCC or config.flags.LCDUsed_ForRCC)) or ((check_ref(@TypeOf(RCC_MCOSourceValue), RCC_MCOSourceValue, .RCC_MCO1SOURCE_LSI, .@"=")) and (config.flags.MCOConfig)))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
 
             var HSIRC = ClockNode{
                 .name = "HSIRC",
@@ -2333,6 +2427,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             ref_out.MCOEnable = MCOEnableValue;
             ref_out.USBEnable = USBEnableValue;
             ref_out.SDIOEnable = SDIOEnableValue;
+            ref_out.EnableCSSLSE = EnableCSSLSEValue;
+            ref_out.EnableHSE = EnableHSEValue;
+            ref_out.EnableLSERTC = EnableLSERTCValue;
+            ref_out.EnableLSE = EnableLSEValue;
+            ref_out.HSEUsed = HSEUsedValue;
+            ref_out.LSEUsed = LSEUsedValue;
+            ref_out.LSIUsed = LSIUsedValue;
             return Tree_Output{
                 .clock = out,
                 .config = ref_out,

@@ -444,6 +444,18 @@ pub const RNGEnableList = enum {
     true,
     false,
 };
+pub const EnableHSEList = enum {
+    true,
+    false,
+};
+pub const EnableLSERTCList = enum {
+    true,
+    false,
+};
+pub const EnableLSEList = enum {
+    true,
+    false,
+};
 pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
     return struct {
         pub const Flags = struct {
@@ -468,6 +480,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FMPI2C1Used_ForRCC: bool = false,
             SDIOUsed_ForRCC: bool = false,
             RNGUsed_ForRCC: bool = false,
+            CECUsed_ForRCC: bool = false,
         };
         //optional extra configurations
         pub const ExtraConfig = struct {
@@ -646,9 +659,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             EnableUSB: ?EnableUSBList = null, //from extra RCC references
             EnableSDIO: ?EnableSDIOList = null, //from extra RCC references
             RNGEnable: ?RNGEnableList = null, //from extra RCC references
+            EnableHSE: ?EnableHSEList = null, //from extra RCC references
+            EnableLSERTC: ?EnableLSERTCList = null, //from extra RCC references
+            EnableLSE: ?EnableLSEList = null, //from extra RCC references
+            HSEUsed: ?f32 = null, //from extra RCC references
+            LSEUsed: ?f32 = null, //from extra RCC references
+            HSIUsed: ?f32 = null, //from extra RCC references
+            LSIUsed: ?f32 = null, //from extra RCC references
+            PLLUsed: ?f32 = null, //from extra RCC references
         };
 
-        const Tree_Output = struct {
+        pub const Tree_Output = struct {
             clock: Clock_Output,
             config: Config_Output,
         };
@@ -2218,6 +2239,60 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: RNGEnableList = .false;
                 break :blk item;
             };
+            const EnableHSEValue: ?EnableHSEList = blk: {
+                if ((config.flags.HSEOscillator or config.flags.HSEByPass) or ((config.flags.HSEByPass or config.flags.HSEOscillator) and (check_MCU("SEM2RCC_HSE_REQUIRED_TIM11") and check_MCU("TIM11") and check_MCU("Semaphore_input_Channel1TIM11")))) {
+                    const item: EnableHSEList = .true;
+                    break :blk item;
+                }
+                const item: EnableHSEList = .false;
+                break :blk item;
+            };
+            const EnableLSERTCValue: ?EnableLSERTCList = blk: {
+                if ((((config.flags.HSEByPass or config.flags.HSEOscillator) and (check_MCU("SEM2RCC_HSE_REQUIRED_TIM11") and check_MCU("TIM11") and check_MCU("Semaphore_input_Channel1TIM11"))) or config.flags.RTCUsed_ForRCC) and (config.flags.LSEOscillator or config.flags.LSEByPass)) {
+                    const item: EnableLSERTCList = .true;
+                    break :blk item;
+                }
+                const item: EnableLSERTCList = .false;
+                break :blk item;
+            };
+            const EnableLSEValue: ?EnableLSEList = blk: {
+                if ((config.flags.LSEOscillator or config.flags.LSEByPass)) {
+                    const item: EnableLSEList = .true;
+                    break :blk item;
+                }
+                const item: EnableLSEList = .false;
+                break :blk item;
+            };
+            const HSEUsedValue: ?f32 = blk: {
+                if (((config.flags.HSEByPass or config.flags.HSEOscillator) and (check_MCU("SEM2RCC_HSE_REQUIRED_TIM11") and check_MCU("TIM11") and check_MCU("Semaphore_input_Channel1TIM11"))) or (config.flags.RTCUsed_ForRCC and !((check_ref(@TypeOf(RCC_RTC_Clock_SourceValue), RCC_RTC_Clock_SourceValue, .RCC_RTCCLKSOURCE_LSE, .@"=")) or (check_ref(@TypeOf(RCC_RTC_Clock_SourceValue), RCC_RTC_Clock_SourceValue, .RCC_RTCCLKSOURCE_LSI, .@"=")))) or ((check_ref(@TypeOf(PLLSourceValue), PLLSourceValue, .RCC_PLLSOURCE_HSE, .@"=")) and (((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLLCLK, .@"=")) and config.flags.MCO1Config) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or config.flags.RNGUsed_ForRCC or config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC or (config.flags.SDIOUsed_ForRCC and SDIOSourceIsClock48) or SysSourceIsPLLclk or (!I2S1SourceIsEXT and ((config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC) or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1") and DFSDMADSourceI2S1))) or (!I2S2SourceIsEXT and ((config.flags.I2S1Used_ForRCC or config.flags.I2S4Used_ForRCC or config.flags.I2S5Used_ForRCC) or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1") and DFSDMADSourceI2S2))))) or (check_ref(@TypeOf(SYSCLKSourceValue), SYSCLKSourceValue, .RCC_SYSCLKSOURCE_HSE, .@"=")) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_HSE, .@"=")) and (config.flags.MCO1Config)) or (((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_HSE, .@"=")) or (MCOSourceIsPLLI2SP and (check_ref(@TypeOf(PLLSourceValue), PLLSourceValue, .RCC_PLLSOURCE_HSE, .@"=")))) and (config.flags.MCO2Config))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const LSEUsedValue: ?f32 = blk: {
+                if ((check_MCU("SEM2RCC_LSE_REQUIRED_TIM5") and check_MCU("TIM5") and check_MCU("Semaphore_input_Channel4TIM5")) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_LSE, .@"=")) and (config.flags.MCO1Config)) or ((check_ref(@TypeOf(RCC_RTC_Clock_SourceValue), RCC_RTC_Clock_SourceValue, .RCC_RTCCLKSOURCE_LSE, .@"=")) and config.flags.RTCUsed_ForRCC) or ((check_MCU("CECClockSelection")) and config.flags.CECUsed_ForRCC)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const HSIUsedValue: ?f32 = blk: {
+                if ((((MCOSourceIsPLLI2SP and (check_ref(@TypeOf(PLLSourceValue), PLLSourceValue, .RCC_PLLSOURCE_HSI, .@"=")))) and (config.flags.MCO2Config)) or ((check_ref(@TypeOf(FMPI2C1SelectionValue), FMPI2C1SelectionValue, .RCC_FMPI2C1CLKSOURCE_HSI, .@"=")) and config.flags.FMPI2C1Used_ForRCC) or (check_MCU("PLLSourceHSI") and (((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLLCLK, .@"=")) and config.flags.MCO1Config) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or config.flags.RNGUsed_ForRCC or config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC or (config.flags.SDIOUsed_ForRCC and SDIOSourceIsClock48) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLLCLK, .@"=")) and config.flags.MCO1Config) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or SysSourceIsPLLclk or (!I2S1SourceIsEXT and ((config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC) or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1") and DFSDMADSourceI2S1))) or (!I2S2SourceIsEXT and ((config.flags.I2S1Used_ForRCC or config.flags.I2S4Used_ForRCC or config.flags.I2S5Used_ForRCC) or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1") and DFSDMADSourceI2S2))))) or (check_ref(@TypeOf(SYSCLKSourceValue), SYSCLKSourceValue, .RCC_SYSCLKSOURCE_HSI, .@"=")) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_HSI, .@"=")) and (config.flags.MCO1Config))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const LSIUsedValue: ?f32 = blk: {
+                if ((check_MCU("SEM2RCC_LSI_REQUIRED_TIM5") and check_MCU("TIM5") and check_MCU("Semaphore_input_Channel4TIM5")) or config.flags.IWDGUsed_ForRCC or ((check_ref(@TypeOf(RCC_RTC_Clock_SourceValue), RCC_RTC_Clock_SourceValue, .RCC_RTCCLKSOURCE_LSI, .@"=")) and (config.flags.RTCUsed_ForRCC))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLLUsedValue: ?f32 = blk: {
+                if (((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLLCLK, .@"=")) and config.flags.MCO1Config) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or SysSourceIsPLLclk or (I2S1SourceIsPllR and ((config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC) or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1") and DFSDMADSourceI2S1))) or (I2S2SourceIsPllR and ((config.flags.I2S1Used_ForRCC or config.flags.I2S4Used_ForRCC or config.flags.I2S5Used_ForRCC) or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1") and DFSDMADSourceI2S2))) or (USBSourceisPLLQ and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.RNGUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC or (config.flags.SDIOUsed_ForRCC and SDIOSourceIsClock48)))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
 
             var HSIRC = ClockNode{
                 .name = "HSIRC",
@@ -3486,6 +3561,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             ref_out.EnableUSB = EnableUSBValue;
             ref_out.EnableSDIO = EnableSDIOValue;
             ref_out.RNGEnable = RNGEnableValue;
+            ref_out.EnableHSE = EnableHSEValue;
+            ref_out.EnableLSERTC = EnableLSERTCValue;
+            ref_out.EnableLSE = EnableLSEValue;
+            ref_out.HSEUsed = HSEUsedValue;
+            ref_out.LSEUsed = LSEUsedValue;
+            ref_out.HSIUsed = HSIUsedValue;
+            ref_out.LSIUsed = LSIUsedValue;
+            ref_out.PLLUsed = PLLUsedValue;
             return Tree_Output{
                 .clock = out,
                 .config = ref_out,

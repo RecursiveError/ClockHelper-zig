@@ -1862,6 +1862,10 @@ pub const IWDGEnableList = enum {
     true,
     false,
 };
+pub const EnableLSERTCList = enum {
+    true,
+    false,
+};
 pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
     return struct {
         pub const Flags = struct {
@@ -2542,9 +2546,33 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             RTCEnable: ?RTCEnableList = null, //from extra RCC references
             IWDGEnable: ?IWDGEnableList = null, //from extra RCC references
             LSEUsed: ?f32 = null, //from extra RCC references
+            PLL1Used: ?f32 = null, //from extra RCC references
+            PLL2Used: ?f32 = null, //from extra RCC references
+            PLL3Used: ?f32 = null, //from extra RCC references
+            PLL4Used: ?f32 = null, //from extra RCC references
+            EnableLSERTC: ?EnableLSERTCList = null, //from extra RCC references
+            IC1Used: ?f32 = null, //from extra RCC references
+            IC2Used: ?f32 = null, //from extra RCC references
+            IC3Used: ?f32 = null, //from extra RCC references
+            IC4Used: ?f32 = null, //from extra RCC references
+            IC5Used: ?f32 = null, //from extra RCC references
+            IC6Used: ?f32 = null, //from extra RCC references
+            IC7Used: ?f32 = null, //from extra RCC references
+            IC8Used: ?f32 = null, //from extra RCC references
+            IC9Used: ?f32 = null, //from extra RCC references
+            IC10Used: ?f32 = null, //from extra RCC references
+            IC11Used: ?f32 = null, //from extra RCC references
+            IC12Used: ?f32 = null, //from extra RCC references
+            IC14Used: ?f32 = null, //from extra RCC references
+            IC15Used: ?f32 = null, //from extra RCC references
+            IC16Used: ?f32 = null, //from extra RCC references
+            IC17Used: ?f32 = null, //from extra RCC references
+            IC18Used: ?f32 = null, //from extra RCC references
+            IC19Used: ?f32 = null, //from extra RCC references
+            IC20Used: ?f32 = null, //from extra RCC references
         };
 
-        const Tree_Output = struct {
+        pub const Tree_Output = struct {
             clock: Clock_Output,
             config: Config_Output,
         };
@@ -7726,6 +7754,152 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     break :blk item;
                 }
                 const item: IWDGEnableList = .false;
+                break :blk item;
+            };
+            const IC1UsedValue: ?f32 = blk: {
+                if (CPUCLKSOURCE_IC1) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC2UsedValue: ?f32 = blk: {
+                if (SYSBCLKSOURCE_IC2_IC6_IC11) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC3UsedValue: ?f32 = blk: {
+                if ((FMCCLKSOURCE_IC3 and config.flags.FMC_Used) or (XSPI1CLKSOURCE_IC3 and config.flags.XSPI1_Used) or (XSPI2CLKSOURCE_IC3 and config.flags.XSPI2_Used) or (XSPI3CLKSOURCE_IC3 and config.flags.XSPI3_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC4UsedValue: ?f32 = blk: {
+                if ((SDMMC1CLKSOURCE_IC4 and config.flags.SDMMC1_Used) or (SDMMC2CLKSOURCE_IC4 and config.flags.SDMMC2_Used) or (FMCCLKSOURCE_IC4 and config.flags.FMC_Used) or (XSPI1CLKSOURCE_IC4 and config.flags.XSPI1_Used) or (XSPI2CLKSOURCE_IC4 and config.flags.XSPI2_Used) or (XSPI3CLKSOURCE_IC4 and config.flags.XSPI3_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC5UsedValue: ?f32 = blk: {
+                if ((SDMMC1CLKSOURCE_IC5 and config.flags.SDMMC1_Used) or (SDMMC2CLKSOURCE_IC5 and config.flags.SDMMC2_Used) or (CLKPCLKSOURCE_IC5) or (MCO1SOURCE_IC5 and config.flags.MCO1Config)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC6UsedValue: ?f32 = blk: {
+                if ((SYSCCLKSOURCE_IC2_IC6_IC11)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC7UsedValue: ?f32 = blk: {
+                if ((ADCCLKSOURCE_IC7 and (config.flags.ADC1_Used or config.flags.ADC2_Used)) or (ADF1CLKSOURCE_IC7 and config.flags.ADF1_Used) or (MDF1CLKSOURCE_IC7 and config.flags.MDF1_Used) or (SAI1CLKSOURCE_IC7 and config.flags.SAI1_Used) or (SAI2CLKSOURCE_IC7 and config.flags.SAI2_Used) or (SPDIFRX1CLKSOURCE_IC7 and config.flags.SPDIFRX1_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC8UsedValue: ?f32 = blk: {
+                if ((SPI1CLKSOURCE_IC8 and config.flags.SPI1_Used) or (SPI2CLKSOURCE_IC8 and config.flags.SPI2_Used) or (SPI3CLKSOURCE_IC8 and config.flags.SPI3_Used) or (SPI6CLKSOURCE_IC8 and config.flags.SPI6_Used) or (ADCCLKSOURCE_IC8 and (config.flags.ADC1_Used or config.flags.ADC2_Used)) or (ADF1CLKSOURCE_IC8 and config.flags.ADF1_Used) or (MDF1CLKSOURCE_IC8 and config.flags.MDF1_Used) or (SAI1CLKSOURCE_IC8 and config.flags.SAI1_Used) or (SAI2CLKSOURCE_IC8 and config.flags.SAI2_Used) or (SPDIFRX1CLKSOURCE_IC8 and config.flags.SPDIFRX1_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC9UsedValue: ?f32 = blk: {
+                if ((SPI1CLKSOURCE_IC9 and config.flags.SPI1_Used) or (SPI2CLKSOURCE_IC9 and config.flags.SPI2_Used) or (SPI3CLKSOURCE_IC9 and config.flags.SPI3_Used) or (check_MCU("SPI4CLKSOURCE_IC9") and config.flags.SPI4_Used) or (SPI5CLKSOURCE_IC9 and config.flags.SPI5_Used) or (SPI6CLKSOURCE_IC9 and config.flags.SPI6_Used) or (LPUART1CLKSOURCE_IC9 and config.flags.LPUART1_Used) or (USART1CLKSOURCE_IC9 and config.flags.USART1_Used) or (USART2CLKSOURCE_IC9 and config.flags.USART2_Used) or (USART3CLKSOURCE_IC9 and config.flags.USART3_Used) or (UART4CLKSOURCE_IC9 and config.flags.UART4_Used) or (UART5CLKSOURCE_IC9 and config.flags.UART5_Used) or (USART6CLKSOURCE_IC9 and config.flags.USART6_Used) or (UART7CLKSOURCE_IC9 and config.flags.UART7_Used) or (UART8CLKSOURCE_IC9 and config.flags.UART8_Used) or (UART9CLKSOURCE_IC9 and config.flags.UART9_Used) or (USART10CLKSOURCE_IC9 and config.flags.USART10_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC10UsedValue: ?f32 = blk: {
+                if ((MCO1SOURCE_IC10 and config.flags.MCO1Config) or (CLKPCLKSOURCE_IC10) or (I2C1CLKSOURCE_IC10 and config.flags.I2C1_Used) or (I2C2CLKSOURCE_IC10 and config.flags.I2C2_Used) or (I2C3CLKSOURCE_IC10 and config.flags.I2C3_Used) or (I2C4CLKSOURCE_IC10 and config.flags.I2C4_Used) or (I3C1CLKSOURCE_IC10 and config.flags.I3C1_Used) or (I3C2CLKSOURCE_IC10 and config.flags.I3C2_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC11UsedValue: ?f32 = blk: {
+                if ((SYSDCLKSOURCE_IC2_IC6_IC11)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC12UsedValue: ?f32 = blk: {
+                if ((ETH1CLKSOURCE_IC12 and config.flags.ETH1_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC14UsedValue: ?f32 = blk: {
+                if ((check_MCU("SPI4CLKSOURCE_IC14") and config.flags.SPI4_Used) or (SPI5CLKSOURCE_IC14 and config.flags.SPI5_Used) or (LPUART1CLKSOURCE_IC14 and config.flags.LPUART1_Used) or (USART1CLKSOURCE_IC14 and config.flags.USART1_Used) or (USART2CLKSOURCE_IC14 and config.flags.USART2_Used) or (USART3CLKSOURCE_IC14 and config.flags.USART3_Used) or (UART4CLKSOURCE_IC14 and config.flags.UART4_Used) or (UART5CLKSOURCE_IC14 and config.flags.UART5_Used) or (USART6CLKSOURCE_IC14 and config.flags.USART6_Used) or (UART7CLKSOURCE_IC14 and config.flags.UART7_Used) or (UART8CLKSOURCE_IC14 and config.flags.UART8_Used) or (UART9CLKSOURCE_IC14 and config.flags.UART9_Used) or (USART10CLKSOURCE_IC14 and config.flags.USART10_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC15UsedValue: ?f32 = blk: {
+                if ((MCO2SOURCE_IC15 and config.flags.MCO2Config) or (CLKPCLKSOURCE_IC15) or (I2C1CLKSOURCE_IC15 and config.flags.I2C1_Used) or (I2C2CLKSOURCE_IC15 and config.flags.I2C2_Used) or (I2C3CLKSOURCE_IC15 and config.flags.I2C3_Used) or (I2C4CLKSOURCE_IC15 and config.flags.I2C4_Used) or (I3C1CLKSOURCE_IC15 and config.flags.I3C1_Used) or (I3C2CLKSOURCE_IC15 and config.flags.I3C2_Used) or (LPTIM1CLKSOURCE_IC15 and config.flags.LPTIM1_Used) or (LPTIM2CLKSOURCE_IC15 and config.flags.LPTIM2_Used) or (LPTIM3CLKSOURCE_IC15 and config.flags.LPTIM3_Used) or (LPTIM4CLKSOURCE_IC15 and config.flags.LPTIM4_Used) or (LPTIM5CLKSOURCE_IC15 and config.flags.LPTIM5_Used) or (OTGPHY1CLKSOURCE_IC15 and OTGHS1CLKSOURCE_PHY and config.flags.USB1_OTG_HS_Used) or (OTGPHY2CLKSOURCE_IC15 and OTGHS2CLKSOURCE_PHY and config.flags.USB2_OTG_HS_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC16UsedValue: ?f32 = blk: {
+                if ((LTDCCLKSOURCE_IC16 and config.flags.LTDC_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC17UsedValue: ?f32 = blk: {
+                if ((DCMIPPCLKSOURCE_IC17 and (config.flags.DCMI_Used or config.flags.DCMIPP_Used))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC18UsedValue: ?f32 = blk: {
+                if ((config.flags.CSI_Used)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC19UsedValue: ?f32 = blk: {
+                if ((CLKPCLKSOURCE_IC19) or (FDCANCLKSOURCE_IC19 and (config.flags.FDCAN1_Used or config.flags.FDCAN2_Used or config.flags.FDCAN3_Used))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const IC20UsedValue: ?f32 = blk: {
+                if ((CLKPCLKSOURCE_IC20) or (PSSICLKSOURCE_IC20 and config.flags.PSSI_Used) or (MCO2SOURCE_IC20 and config.flags.MCO2Config)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL1UsedValue: ?f32 = blk: {
+                if ((IC1_PLL1 and check_ref(@TypeOf(IC1UsedValue), IC1UsedValue, 1, .@"=")) or (IC2_PLL1 and check_ref(@TypeOf(IC2UsedValue), IC2UsedValue, 1, .@"=")) or (IC3_PLL1 and check_ref(@TypeOf(IC3UsedValue), IC3UsedValue, 1, .@"=")) or (IC4_PLL1 and check_ref(@TypeOf(IC4UsedValue), IC4UsedValue, 1, .@"=")) or (IC5_PLL1 and check_ref(@TypeOf(IC5UsedValue), IC5UsedValue, 1, .@"=")) or (IC6_PLL1 and check_ref(@TypeOf(IC6UsedValue), IC6UsedValue, 1, .@"=")) or (IC7_PLL1 and check_ref(@TypeOf(IC7UsedValue), IC7UsedValue, 1, .@"=")) or (IC8_PLL1 and check_ref(@TypeOf(IC8UsedValue), IC8UsedValue, 1, .@"=")) or (IC9_PLL1 and check_ref(@TypeOf(IC9UsedValue), IC9UsedValue, 1, .@"=")) or (IC10_PLL1 and check_ref(@TypeOf(IC10UsedValue), IC10UsedValue, 1, .@"=")) or (IC11_PLL1 and check_ref(@TypeOf(IC11UsedValue), IC11UsedValue, 1, .@"=")) or (IC12_PLL1 and check_ref(@TypeOf(IC12UsedValue), IC12UsedValue, 1, .@"=")) or (IC14_PLL1 and check_ref(@TypeOf(IC14UsedValue), IC14UsedValue, 1, .@"=")) or (IC15_PLL1 and check_ref(@TypeOf(IC15UsedValue), IC15UsedValue, 1, .@"=")) or (IC16_PLL1 and check_ref(@TypeOf(IC16UsedValue), IC16UsedValue, 1, .@"=")) or (IC17_PLL1 and check_ref(@TypeOf(IC17UsedValue), IC17UsedValue, 1, .@"=")) or (IC18_PLL1 and check_ref(@TypeOf(IC18UsedValue), IC18UsedValue, 1, .@"=")) or (IC19_PLL1 and check_ref(@TypeOf(IC19UsedValue), IC19UsedValue, 1, .@"=")) or (IC20_PLL1 and check_ref(@TypeOf(IC20UsedValue), IC20UsedValue, 1, .@"="))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL2UsedValue: ?f32 = blk: {
+                if ((IC1_PLL2 and check_ref(@TypeOf(IC1UsedValue), IC1UsedValue, 1, .@"=")) or (IC2_PLL2 and check_ref(@TypeOf(IC2UsedValue), IC2UsedValue, 1, .@"=")) or (IC3_PLL2 and check_ref(@TypeOf(IC3UsedValue), IC3UsedValue, 1, .@"=")) or (IC4_PLL2 and check_ref(@TypeOf(IC4UsedValue), IC4UsedValue, 1, .@"=")) or (IC5_PLL2 and check_ref(@TypeOf(IC5UsedValue), IC5UsedValue, 1, .@"=")) or (IC6_PLL2 and check_ref(@TypeOf(IC6UsedValue), IC6UsedValue, 1, .@"=")) or (IC7_PLL2 and check_ref(@TypeOf(IC7UsedValue), IC7UsedValue, 1, .@"=")) or (IC8_PLL2 and check_ref(@TypeOf(IC8UsedValue), IC8UsedValue, 1, .@"=")) or (IC9_PLL2 and check_ref(@TypeOf(IC9UsedValue), IC9UsedValue, 1, .@"=")) or (IC10_PLL2 and check_ref(@TypeOf(IC10UsedValue), IC10UsedValue, 1, .@"=")) or (IC11_PLL2 and check_ref(@TypeOf(IC11UsedValue), IC11UsedValue, 1, .@"=")) or (IC12_PLL2 and check_ref(@TypeOf(IC12UsedValue), IC12UsedValue, 1, .@"=")) or (IC14_PLL2 and check_ref(@TypeOf(IC14UsedValue), IC14UsedValue, 1, .@"=")) or (IC15_PLL2 and check_ref(@TypeOf(IC15UsedValue), IC15UsedValue, 1, .@"=")) or (IC16_PLL2 and check_ref(@TypeOf(IC16UsedValue), IC16UsedValue, 1, .@"=")) or (IC17_PLL2 and check_ref(@TypeOf(IC17UsedValue), IC17UsedValue, 1, .@"=")) or (IC18_PLL2 and check_ref(@TypeOf(IC18UsedValue), IC18UsedValue, 1, .@"=")) or (IC19_PLL2 and check_ref(@TypeOf(IC19UsedValue), IC19UsedValue, 1, .@"=")) or (IC20_PLL2 and check_ref(@TypeOf(IC20UsedValue), IC20UsedValue, 1, .@"="))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL3UsedValue: ?f32 = blk: {
+                if ((IC1_PLL3 and check_ref(@TypeOf(IC1UsedValue), IC1UsedValue, 1, .@"=")) or (IC2_PLL3 and check_ref(@TypeOf(IC2UsedValue), IC2UsedValue, 1, .@"=")) or (IC3_PLL3 and check_ref(@TypeOf(IC3UsedValue), IC3UsedValue, 1, .@"=")) or (IC4_PLL3 and check_ref(@TypeOf(IC4UsedValue), IC4UsedValue, 1, .@"=")) or (IC5_PLL3 and check_ref(@TypeOf(IC5UsedValue), IC5UsedValue, 1, .@"=")) or (IC6_PLL3 and check_ref(@TypeOf(IC6UsedValue), IC6UsedValue, 1, .@"=")) or (IC7_PLL3 and check_ref(@TypeOf(IC7UsedValue), IC7UsedValue, 1, .@"=")) or (IC8_PLL3 and check_ref(@TypeOf(IC8UsedValue), IC8UsedValue, 1, .@"=")) or (IC9_PLL3 and check_ref(@TypeOf(IC9UsedValue), IC9UsedValue, 1, .@"=")) or (IC10_PLL3 and check_ref(@TypeOf(IC10UsedValue), IC10UsedValue, 1, .@"=")) or (IC11_PLL3 and check_ref(@TypeOf(IC11UsedValue), IC11UsedValue, 1, .@"=")) or (IC12_PLL3 and check_ref(@TypeOf(IC12UsedValue), IC12UsedValue, 1, .@"=")) or (IC14_PLL3 and check_ref(@TypeOf(IC14UsedValue), IC14UsedValue, 1, .@"=")) or (IC15_PLL3 and check_ref(@TypeOf(IC15UsedValue), IC15UsedValue, 1, .@"=")) or (IC16_PLL3 and check_ref(@TypeOf(IC16UsedValue), IC16UsedValue, 1, .@"=")) or (IC17_PLL3 and check_ref(@TypeOf(IC17UsedValue), IC17UsedValue, 1, .@"=")) or (IC18_PLL3 and check_ref(@TypeOf(IC18UsedValue), IC18UsedValue, 1, .@"=")) or (IC19_PLL3 and check_ref(@TypeOf(IC19UsedValue), IC19UsedValue, 1, .@"=")) or (IC20_PLL3 and check_ref(@TypeOf(IC20UsedValue), IC20UsedValue, 1, .@"="))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL4UsedValue: ?f32 = blk: {
+                if ((IC1_PLL4 and check_ref(@TypeOf(IC1UsedValue), IC1UsedValue, 1, .@"=")) or (IC2_PLL4 and check_ref(@TypeOf(IC2UsedValue), IC2UsedValue, 1, .@"=")) or (IC3_PLL4 and check_ref(@TypeOf(IC3UsedValue), IC3UsedValue, 1, .@"=")) or (IC4_PLL4 and check_ref(@TypeOf(IC4UsedValue), IC4UsedValue, 1, .@"=")) or (IC5_PLL4 and check_ref(@TypeOf(IC5UsedValue), IC5UsedValue, 1, .@"=")) or (IC6_PLL4 and check_ref(@TypeOf(IC6UsedValue), IC6UsedValue, 1, .@"=")) or (IC7_PLL4 and check_ref(@TypeOf(IC7UsedValue), IC7UsedValue, 1, .@"=")) or (IC8_PLL4 and check_ref(@TypeOf(IC8UsedValue), IC8UsedValue, 1, .@"=")) or (IC9_PLL4 and check_ref(@TypeOf(IC9UsedValue), IC9UsedValue, 1, .@"=")) or (IC10_PLL4 and check_ref(@TypeOf(IC10UsedValue), IC10UsedValue, 1, .@"=")) or (IC11_PLL4 and check_ref(@TypeOf(IC11UsedValue), IC11UsedValue, 1, .@"=")) or (IC12_PLL4 and check_ref(@TypeOf(IC12UsedValue), IC12UsedValue, 1, .@"=")) or (IC14_PLL4 and check_ref(@TypeOf(IC14UsedValue), IC14UsedValue, 1, .@"=")) or (IC15_PLL4 and check_ref(@TypeOf(IC15UsedValue), IC15UsedValue, 1, .@"=")) or (IC16_PLL4 and check_ref(@TypeOf(IC16UsedValue), IC16UsedValue, 1, .@"=")) or (IC17_PLL4 and check_ref(@TypeOf(IC17UsedValue), IC17UsedValue, 1, .@"=")) or (IC18_PLL4 and check_ref(@TypeOf(IC18UsedValue), IC18UsedValue, 1, .@"=")) or (IC19_PLL4 and check_ref(@TypeOf(IC19UsedValue), IC19UsedValue, 1, .@"=")) or (IC20_PLL4 and check_ref(@TypeOf(IC20UsedValue), IC20UsedValue, 1, .@"="))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const EnableLSERTCValue: ?EnableLSERTCList = blk: {
+                if ((config.flags.RTC_Used) and (config.flags.LSEOscillator or config.flags.LSEByPass or config.flags.LSEDIGByPass)) {
+                    const item: EnableLSERTCList = .true;
+                    break :blk item;
+                }
+                const item: EnableLSERTCList = .false;
                 break :blk item;
             };
 
@@ -13118,6 +13292,30 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             ref_out.RTCEnable = RTCEnableValue;
             ref_out.IWDGEnable = IWDGEnableValue;
             ref_out.LSEUsed = LSEUsedValue;
+            ref_out.PLL1Used = PLL1UsedValue;
+            ref_out.PLL2Used = PLL2UsedValue;
+            ref_out.PLL3Used = PLL3UsedValue;
+            ref_out.PLL4Used = PLL4UsedValue;
+            ref_out.EnableLSERTC = EnableLSERTCValue;
+            ref_out.IC1Used = IC1UsedValue;
+            ref_out.IC2Used = IC2UsedValue;
+            ref_out.IC3Used = IC3UsedValue;
+            ref_out.IC4Used = IC4UsedValue;
+            ref_out.IC5Used = IC5UsedValue;
+            ref_out.IC6Used = IC6UsedValue;
+            ref_out.IC7Used = IC7UsedValue;
+            ref_out.IC8Used = IC8UsedValue;
+            ref_out.IC9Used = IC9UsedValue;
+            ref_out.IC10Used = IC10UsedValue;
+            ref_out.IC11Used = IC11UsedValue;
+            ref_out.IC12Used = IC12UsedValue;
+            ref_out.IC14Used = IC14UsedValue;
+            ref_out.IC15Used = IC15UsedValue;
+            ref_out.IC16Used = IC16UsedValue;
+            ref_out.IC17Used = IC17UsedValue;
+            ref_out.IC18Used = IC18UsedValue;
+            ref_out.IC19Used = IC19UsedValue;
+            ref_out.IC20Used = IC20UsedValue;
             return Tree_Output{
                 .clock = out,
                 .config = ref_out,

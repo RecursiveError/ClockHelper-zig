@@ -1201,6 +1201,14 @@ pub const Max650List = enum {
     true,
     false,
 };
+pub const EnableLSERTCList = enum {
+    true,
+    false,
+};
+pub const MCO2I2SEnableList = enum {
+    true,
+    false,
+};
 pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
     return struct {
         pub const Flags = struct {
@@ -1738,9 +1746,23 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PLL4QUsed: ?f32 = null, //from extra RCC references
             PLL4RUsed: ?f32 = null, //from extra RCC references
             LSEUsed: ?f32 = null, //from extra RCC references
+            PLL1Used: ?f32 = null, //from extra RCC references
+            PLL1UsedTFA: ?f32 = null, //from extra RCC references
+            PLL1UsedA7: ?f32 = null, //from extra RCC references
+            PLL2Used: ?f32 = null, //from extra RCC references
+            PLL2UsedTFA: ?f32 = null, //from extra RCC references
+            PLL2UsedA7: ?f32 = null, //from extra RCC references
+            PLL3Used: ?f32 = null, //from extra RCC references
+            PLL3UsedTFA: ?f32 = null, //from extra RCC references
+            PLL3UsedA7: ?f32 = null, //from extra RCC references
+            PLL4Used: ?f32 = null, //from extra RCC references
+            PLL4UsedTFA: ?f32 = null, //from extra RCC references
+            PLL4UsedA7: ?f32 = null, //from extra RCC references
+            EnableLSERTC: ?EnableLSERTCList = null, //from extra RCC references
+            MCO2I2SEnable: ?MCO2I2SEnableList = null, //from extra RCC references
         };
 
-        const Tree_Output = struct {
+        pub const Tree_Output = struct {
             clock: Clock_Output,
             config: Config_Output,
         };
@@ -5480,6 +5502,94 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     break :blk item;
                 }
                 const item: EnableHSEUSBPHYDevisorList = .false;
+                break :blk item;
+            };
+            const PLL1UsedValue: ?f32 = blk: {
+                if ((MPUSOURCE_PLL1 or MPUSOURCE_MPUDIV) and (check_ref(@TypeOf(PLL1UserDefinedConfigValue), PLL1UserDefinedConfigValue, .true, .@"="))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL1UsedTFAValue: ?f32 = blk: {
+                if ((MPUSOURCE_PLL1 or MPUSOURCE_MPUDIV) and (check_ref(@TypeOf(PLL1UserDefinedConfigValue), PLL1UserDefinedConfigValue, .true, .@"="))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL1UsedA7Value: ?f32 = blk: {
+                if ((MPUSOURCE_PLL1 or MPUSOURCE_MPUDIV) and (check_ref(@TypeOf(PLL1UserDefinedConfigValue), PLL1UserDefinedConfigValue, .true, .@"="))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL2UsedValue: ?f32 = blk: {
+                if (AXISSOURCE_PLL2 or check_MCU("DDR3") or check_MCU("LPDDR2") or check_MCU("LPDDR3") or config.flags.GPUUsed_ForRCC) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL2UsedTFAValue: ?f32 = blk: {
+                if (AXISSOURCE_PLL2 or check_MCU("DDR3") or check_MCU("LPDDR2") or check_MCU("LPDDR3")) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL2UsedA7Value: ?f32 = blk: {
+                if (AXISSOURCE_PLL2 or check_MCU("DDR3") or check_MCU("LPDDR2") or check_MCU("LPDDR3")) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL3UsedValue: ?f32 = blk: {
+                if (ADCCLKSOURCE_PLL3 and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC)) or SPI1CLKSOURCE_PLL3_R and (config.flags.SPI1Used_ForRCC or config.flags.I2S1Used_ForRCC) or SPI23CLKSOURCE_PLL3_R and (config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC) or SPI23CLKSOURCE_PLL3 and (config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC) or ETHCLKSOURCE_PLL3 and config.flags.ETHUsed_ForRCC or SPI1CLKSOURCE_PLL3 and (config.flags.SPI1Used_ForRCC or config.flags.I2S1Used_ForRCC) or MCUCLKSOURCE_PLL3 or I2C46CLKSOURCE_PLL3 and config.flags.I2C4Used_ForRCC or (((config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC) and SAI2CLKSOURCE_SPDIF) or config.flags.SPDIFRXUsed_ForRCC) and SPDIFRXCLKSOURCE_PLL3 or QSPICLKSOURCE_PLL3 and check_MCU("QSPI_Selected") or FMCCLKSOURCE_PLL3 and config.flags.FMCUsed_ForRCC or (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC) and SDMMC12CLKSOURCE_PLL3 or SDMMC3CLKSOURCE_PLL3 and config.flags.SDMMC3Used_ForRCC or LPTIM45CLKSOURCE_PLL3 and (config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC) or LPTIM1CLKSOURCE_PLL3 and config.flags.LPTIM1Used_ForRCC or USART1CLKSOURCE_PLL3 and config.flags.USART1Used_ForRCC or SPI6CLKSOURCE_PLL3 and config.flags.SPI6Used_ForRCC or SAI2CLKSOURCE_PLL3 and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC) or SAI1CLKSOURCE_PLL3 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or config.flags.DFSDM1Used_ForRCC and (check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1") or check_MCU("DFSDM1_LINUX"))) or SAI3CLKSOURCE_PLL3 and (config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC) or FDCANCLKSOURCE_PLL3 and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC) or SAI1CLKSOURCE_PLL3_R and ((config.flags.DFSDM1Used_ForRCC and (check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1") or check_MCU("DFSDM1_LINUX"))) or config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC) or SAI2CLKSOURCE_PLL3_R and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC) or SAI3CLKSOURCE_PLL3_R and (config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC) or SAI4CLKSOURCE_PLL3_R and (config.flags.SAI4_SAIAUsed_ForRCC or config.flags.SAI4_SAIBUsed_ForRCC)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL3UsedTFAValue: ?f32 = blk: {
+                if (MCUCLKSOURCE_PLL3 or (FMCCLKSOURCE_PLL3 and check_MCU("FMC_BOOTLOADER")) or (I2C46CLKSOURCE_PLL3 and (check_MCU("I2C4_BOOTLOADER") or check_MCU("I2C6_BOOTLOADER"))) or (QSPICLKSOURCE_PLL3 and check_MCU("QUADSPI_BOOTLOADER")) or (SDMMC12CLKSOURCE_PLL3 and (check_MCU("SDMMC1_BOOTLOADER") or check_MCU("SDMMC2_BOOTLOADER"))) or (SDMMC3CLKSOURCE_PLL3 and check_MCU("SDMMC3_BOOTLOADER")) or (USART1CLKSOURCE_PLL3 and check_MCU("USART1_BOOTLOADER"))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL3UsedA7Value: ?f32 = blk: {
+                if (ADCCLKSOURCE_PLL3 and (check_MCU("ADC1_LINUX") or check_MCU("ADC2_LINUX") or check_MCU("ADC1_CUBE") or check_MCU("ADC2_CUBE")) or (SPI1CLKSOURCE_PLL3_R or SPI1CLKSOURCE_PLL3) and (check_MCU("SPI1_LINUX") or check_MCU("I2S1_LINUX") or check_MCU("SPI1_CUBE")) or (SPI23CLKSOURCE_PLL3_R or SPI23CLKSOURCE_PLL3) and (check_MCU("SPI2_LINUX") or check_MCU("SPI3_LINUX") or check_MCU("I2S2_LINUX") or check_MCU("I2S3_LINUX") or check_MCU("SPI2_CUBE") or check_MCU("SPI3_CUBE")) or SPI6CLKSOURCE_PLL3 and (check_MCU("SPI6_LINUX") or check_MCU("SPI6_SECURE_OS")) or ETHCLKSOURCE_PLL3 and check_MCU("ETH1_LINUX") or MCUCLKSOURCE_PLL3 or SPDIFRXCLKSOURCE_PLL3 and (check_MCU("SPDIFRX_LINUX") or check_MCU("SPDIFRX_CUBE")) or QSPICLKSOURCE_PLL3 and (check_MCU("QUADSPI_LINUX") or check_MCU("QUADSPI_CUBE")) or FMCCLKSOURCE_PLL3 and (check_MCU("FMC_LINUX") or check_MCU("FMC_CUBE")) or SDMMC12CLKSOURCE_PLL3 and (check_MCU("SDMMC1_LINUX") or check_MCU("SDMMC2_LINUX")) or SDMMC3CLKSOURCE_PLL3 and (check_MCU("SDMMC3_LINUX") or check_MCU("SDMMC3_CUBE")) or LPTIM45CLKSOURCE_PLL3 and (check_MCU("LPTIM4_LINUX") or check_MCU("LPTIM5_LINUX") or check_MCU("LPTIM4_CUBE") or check_MCU("LPTIM5_CUBE")) or LPTIM1CLKSOURCE_PLL3 and (check_MCU("LPTIM1_LINUX") or check_MCU("LPTIM1_CUBE")) or USART1CLKSOURCE_PLL3 and (check_MCU("USART1_SECURE_OS") or check_MCU("USART1_LINUX")) or FDCANCLKSOURCE_PLL3 and (check_MCU("FDCAN1_LINUX") or check_MCU("FDCAN2_LINUX") or check_MCU("FDCAN1_CUBE") or check_MCU("FDCAN2_CUBE")) or (SAI1CLKSOURCE_PLL3_R or SAI1CLKSOURCE_PLL3) and (check_MCU("SAI1_LINUX") or check_MCU("DFSDM1_LINUX") or check_MCU("SAI1_CUBE") or check_MCU("DFSDM1_CUBE")) or (SAI3CLKSOURCE_PLL3_R or SAI3CLKSOURCE_PLL3) and (check_MCU("SAI3_LINUX") or check_MCU("SAI3_CUBE")) or (SAI4CLKSOURCE_PLL3_R or SAI4CLKSOURCE_PLL3) and (check_MCU("SAI4_LINUX") or check_MCU("SAI4_CUBE")) or (SAI2CLKSOURCE_PLL3_R or SAI2CLKSOURCE_PLL3 or (SAI2CLKSOURCE_SPDIF and SPDIFRXCLKSOURCE_PLL3)) and (check_MCU("SAI2_LINUX") or check_MCU("SAI2_CUBE")) or I2C46CLKSOURCE_PLL3 and (check_MCU("I2C4_LINUX") or check_MCU("I2C4_SECURE_OS") or check_MCU("I2C6_LINUX") or check_MCU("I2C6_SECURE_OS"))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL4UsedValue: ?f32 = blk: {
+                if (ETHCLKSOURCE_PLL4 and config.flags.ETHUsed_ForRCC or config.flags.MCO2Config and MCO2SOURCE_PLL4 or config.flags.LTDCUsed_ForRCC or config.flags.DSIUsed_ForRCC and DSICLKSOURCE_PLL4 or I2C12CLKSOURCE_PLL4 and (config.flags.I2C2Used_ForRCC or config.flags.I2C3Used_ForRCC or config.flags.I2C1Used_ForRCC) or I2C35CLKSOURCE_PLL4 and (config.flags.I2C3Used_ForRCC or config.flags.I2C5Used_ForRCC) or (((config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC) and SAI2CLKSOURCE_SPDIF) or config.flags.SPDIFRXUsed_ForRCC) and SPDIFRXCLKSOURCE_PLL4 or QSPICLKSOURCE_PLL4 and check_MCU("QSPI_Selected") or FMCCLKSOURCE_PLL4 and config.flags.FMCUsed_ForRCC or (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC) and SDMMC12CLKSOURCE_PLL4 or SDMMC3CLKSOURCE_PLL4 and config.flags.SDMMC3Used_ForRCC or LPTIM45CLKSOURCE_PLL4 and (config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC) or LPTIM23CLKSOURCE_PLL4 and (config.flags.LPTIM2Used_ForRCC or config.flags.LPTIM3Used_ForRCC) or LPTIM1CLKSOURCE_PLL4 and config.flags.LPTIM1Used_ForRCC or USART1CLKSOURCE_PLL4 and config.flags.USART1Used_ForRCC or UART24CLKSOURCE_PLL4 and (config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC) or UART35CLKSOURCE_PLL4 and (config.flags.USART3Used_ForRCC or config.flags.UART5Used_ForRCC) or USART6CLKSOURCE_PLL4 and config.flags.USART6Used_ForRCC or UART78CLKSOURCE_PLL4 and (config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC) or RNG1CLKSOURCE_PLL4 and config.flags.RNG1Used_ForRCC or RNG2CLKSOURCE_PLL4 and config.flags.RNG2Used_ForRCC or SPI6CLKSOURCE_PLL4 and config.flags.SPI6Used_ForRCC or SPI45CLKSOURCE_PLL4 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC) or (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC) and SAI2CLKSOURCE_PLL4 or SAI4CLKSOURCE_PLL4 and (config.flags.SAI4_SAIAUsed_ForRCC or config.flags.SAI4_SAIBUsed_ForRCC) or SPI1CLKSOURCE_PLL4 and (config.flags.SPI1Used_ForRCC or config.flags.I2S1Used_ForRCC) or SPI23CLKSOURCE_PLL4 and (config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC) or SAI1CLKSOURCE_PLL4 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or config.flags.DFSDM1Used_ForRCC and (check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1") or check_MCU("DFSDM1_LINUX"))) or SAI3CLKSOURCE_PLL4 and (config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC) or (FDCANCLKSOURCE_PLL4 or FDCANCLKSOURCE_PLL4_R) and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC) or ADCCLKSOURCE_PLL4 and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC)) or USBPHYCLKSOURCE_PLL4 and USBOCLKSOURCE_PHY and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC) or USBOCLKSOURCE_PLL4 and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC)) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL4UsedTFAValue: ?f32 = blk: {
+                if ((FMCCLKSOURCE_PLL4 and check_MCU("FMC_BOOTLOADER")) or (QSPICLKSOURCE_PLL4 and check_MCU("QUADSPI_BOOTLOADER")) or (SDMMC12CLKSOURCE_PLL4 and (check_MCU("SDMMC1_BOOTLOADER") or check_MCU("SDMMC2_BOOTLOADER"))) or (SDMMC3CLKSOURCE_PLL4 and check_MCU("SDMMC3_BOOTLOADER")) or (USART1CLKSOURCE_PLL4 and check_MCU("USART1_BOOTLOADER")) or (UART24CLKSOURCE_PLL4 and (check_MCU("USART2_BOOTLOADER") or check_MCU("UART4_BOOTLOADER"))) or (UART35CLKSOURCE_PLL4 and (check_MCU("USART3_BOOTLOADER") or check_MCU("UART5_BOOTLOADER"))) or (USART6CLKSOURCE_PLL4 and check_MCU("USART6_BOOTLOADER")) or (UART78CLKSOURCE_PLL4 and (check_MCU("UART7_BOOTLOADER") or check_MCU("UART8_BOOTLOADER"))) or (USBOCLKSOURCE_PLL4 and check_MCU("USB_OTG_HS_BOOTLOADER")) or (USBPHYCLKSOURCE_PLL4 and USBOCLKSOURCE_PHY and check_MCU("USB_OTG_HS_BOOTLOADER"))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL4UsedA7Value: ?f32 = blk: {
+                if (config.flags.LTDCUsed_ForRCC or DSICLKSOURCE_PLL4 and check_MCU("DSI_LINUX") or check_MCU("I2C4CLKSOURCE_PLL4R") and config.flags.I2C4Used_ForRCC and (check_MCU("I2C4_LINUX") or check_MCU("I2C4_SECURE_OS")) or ETHCLKSOURCE_PLL4 and check_MCU("ETH1_LINUX") or I2C12CLKSOURCE_PLL4 and (check_MCU("I2C2_LINUX") or check_MCU("I2C1_LINUX") or check_MCU("I2C2_CUBE") or check_MCU("I2C1_CUBE")) or I2C35CLKSOURCE_PLL4 and (check_MCU("I2C3_LINUX") or check_MCU("I2C5_LINUX") or check_MCU("I2C3_CUBE") or check_MCU("I2C5_CUBE")) or SPDIFRXCLKSOURCE_PLL4 and (check_MCU("SPDIFRX_LINUX") or check_MCU("SPDIFRX_CUBE")) or QSPICLKSOURCE_PLL4 and (check_MCU("QUADSPI_LINUX") or check_MCU("QUADSPI_CUBE")) or FMCCLKSOURCE_PLL4 and (check_MCU("FMC_LINUX") or check_MCU("FMC_CUBE")) or SDMMC12CLKSOURCE_PLL4 and (check_MCU("SDMMC1_LINUX") or check_MCU("SDMMC2_LINUX")) or SDMMC3CLKSOURCE_PLL4 and (check_MCU("SDMMC3_LINUX") or check_MCU("SDMMC3_CUBE")) or LPTIM45CLKSOURCE_PLL4 and (check_MCU("LPTIM4_LINUX") or check_MCU("LPTIM5_LINUX") or check_MCU("LPTIM4_CUBE") or check_MCU("LPTIM5_CUBE")) or LPTIM23CLKSOURCE_PLL4 and (check_MCU("LPTIM2_LINUX") or check_MCU("LPTIM3_LINUX") or check_MCU("LPTIM2_CUBE") or check_MCU("LPTIM3_CUBE")) or LPTIM1CLKSOURCE_PLL4 and (check_MCU("LPTIM1_LINUX") or check_MCU("LPTIM1_CUBE")) or USART1CLKSOURCE_PLL4 and (check_MCU("USART1_SECURE_OS") or check_MCU("USART1_LINUX")) or UART24CLKSOURCE_PLL4 and (check_MCU("USART2_LINUX") or check_MCU("UART4_LINUX") or check_MCU("USART2_CUBE") or check_MCU("UART4_CUBE")) or UART35CLKSOURCE_PLL4 and (check_MCU("USART3_LINUX") or check_MCU("UART5_LINUX") or check_MCU("USART3_CUBE") or check_MCU("UART5_CUBE")) or USART6CLKSOURCE_PLL4 and (check_MCU("USART6_LINUX") or check_MCU("USART6_CUBE")) or UART78CLKSOURCE_PLL4 and (check_MCU("UART7_LINUX") or check_MCU("UART8_LINUX") or check_MCU("UART7_CUBE") or check_MCU("UART8_CUBE")) or RNG1CLKSOURCE_PLL4 and (check_MCU("RNG1_LINUX") or check_MCU("RNG1_SECURE_OS")) or RNG2CLKSOURCE_PLL4 and check_MCU("RNG2_CUBE") or SPI45CLKSOURCE_PLL4 and (check_MCU("SPI4_LINUX") or check_MCU("SPI5_LINUX") or check_MCU("SPI4_CUBE") or check_MCU("SPI5_CUBE")) or (SAI2CLKSOURCE_PLL4 or (SAI2CLKSOURCE_SPDIF and SPDIFRXCLKSOURCE_PLL4)) and (check_MCU("SAI2_LINUX") or check_MCU("SAI2_CUBE")) or SPI1CLKSOURCE_PLL4 and (check_MCU("SPI1_LINUX") or check_MCU("I2S1_LINUX") or check_MCU("SPI1_CUBE")) or SPI23CLKSOURCE_PLL4 and (check_MCU("SPI2_LINUX") or check_MCU("SPI3_LINUX") or check_MCU("I2S2_LINUX") or check_MCU("I2S3_LINUX") or check_MCU("SPI2_CUBE") or check_MCU("SPI3_CUBE")) or SAI1CLKSOURCE_PLL4 and (check_MCU("SAI1_LINUX") or check_MCU("DFSDM1_LINUX") or check_MCU("SAI1_CUBE") or check_MCU("DFSDM1_CUBE")) or SAI3CLKSOURCE_PLL4 and (check_MCU("SAI3_LINUX") or check_MCU("SAI3_CUBE")) or SAI4CLKSOURCE_PLL4 and (check_MCU("SAI4_LINUX") or check_MCU("SAI4_CUBE")) or (FDCANCLKSOURCE_PLL4 or FDCANCLKSOURCE_PLL4_R) and (check_MCU("FDCAN1_LINUX") or check_MCU("FDCAN2_LINUX") or check_MCU("FDCAN1_CUBE") or check_MCU("FDCAN2_CUBE")) or ADCCLKSOURCE_PLL4 and (check_MCU("ADC1_LINUX") or check_MCU("ADC2_LINUX") or check_MCU("ADC1_CUBE") or check_MCU("ADC2_CUBE")) or USBOCLKSOURCE_PLL4 and check_MCU("USB_OTG_HS_LINUX") or USBPHYCLKSOURCE_PLL4 and USBOCLKSOURCE_PHY and (check_MCU("USB_OTG_HS_LINUX") or check_MCU("USBH_HS1_LINUX") or check_MCU("USBH_HS2_LINUX"))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const EnableLSERTCValue: ?EnableLSERTCList = blk: {
+                if ((config.flags.RTCUsed_ForRCC) and (config.flags.LSEOscillator or config.flags.LSEByPass or config.flags.LSEDIGByPass)) {
+                    const item: EnableLSERTCList = .true;
+                    break :blk item;
+                }
+                const item: EnableLSERTCList = .false;
+                break :blk item;
+            };
+            const MCO2I2SEnableValue: ?MCO2I2SEnableList = blk: {
+                if ((config.flags.MCO2Config)) {
+                    const item: MCO2I2SEnableList = .true;
+                    break :blk item;
+                }
+                const item: MCO2I2SEnableList = .false;
                 break :blk item;
             };
 
@@ -9349,6 +9459,20 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             ref_out.PLL4QUsed = PLL4QUsedValue;
             ref_out.PLL4RUsed = PLL4RUsedValue;
             ref_out.LSEUsed = LSEUsedValue;
+            ref_out.PLL1Used = PLL1UsedValue;
+            ref_out.PLL1UsedTFA = PLL1UsedTFAValue;
+            ref_out.PLL1UsedA7 = PLL1UsedA7Value;
+            ref_out.PLL2Used = PLL2UsedValue;
+            ref_out.PLL2UsedTFA = PLL2UsedTFAValue;
+            ref_out.PLL2UsedA7 = PLL2UsedA7Value;
+            ref_out.PLL3Used = PLL3UsedValue;
+            ref_out.PLL3UsedTFA = PLL3UsedTFAValue;
+            ref_out.PLL3UsedA7 = PLL3UsedA7Value;
+            ref_out.PLL4Used = PLL4UsedValue;
+            ref_out.PLL4UsedTFA = PLL4UsedTFAValue;
+            ref_out.PLL4UsedA7 = PLL4UsedA7Value;
+            ref_out.EnableLSERTC = EnableLSERTCValue;
+            ref_out.MCO2I2SEnable = MCO2I2SEnableValue;
             return Tree_Output{
                 .clock = out,
                 .config = ref_out,

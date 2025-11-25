@@ -446,7 +446,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSIUsed: ?f32 = null, //from extra RCC references
         };
 
-        const Tree_Output = struct {
+        pub const Tree_Output = struct {
             clock: Clock_Output,
             config: Config_Output,
         };

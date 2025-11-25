@@ -692,7 +692,7 @@ fn generate_types(tree: *const ClockTree, writer: *std.Io.Writer, context: *cons
 
     try writer.writeAll(
         \\
-        \\const Tree_Output = struct {
+        \\pub const Tree_Output = struct {
         \\  clock: Clock_Output,
         \\  config: Config_Output,
         \\};

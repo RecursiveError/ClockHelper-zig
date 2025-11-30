@@ -4173,6 +4173,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
         /// Configuration output after processing the clock tree.
         /// Values marked as null indicate that the RCC configuration should remain at its reset value.
         pub const Config_Output = struct {
+            flags: Flags = .{},
             HSE_VALUE: ?f32 = null, //from RCC Clock Config
             HSE_Div2: ?HSE_Div2List = null, //from RCC Clock Config
             SPDIFFreq_Value: ?f32 = null, //from RCC Clock Config
@@ -4605,6 +4606,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
         pub fn get_clocks(config: Config) anyerror!Tree_Output {
             var out = Clock_Output{};
             var ref_out = Config_Output{};
+            ref_out.flags = config.flags;
 
             //Semaphores flags
 

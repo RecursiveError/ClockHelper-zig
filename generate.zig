@@ -653,6 +653,7 @@ fn generate_types(tree: *const ClockTree, writer: *std.Io.Writer, context: *cons
         \\/// Configuration output after processing the clock tree.
         \\/// Values marked as null indicate that the RCC configuration should remain at its reset value.
         \\pub const Config_Output = struct {
+        \\flags: Flags = .{},
         \\ 
     );
 
@@ -787,6 +788,7 @@ fn generate_get_clocks(tree: *const ClockTree, writer: *std.Io.Writer, context: 
         \\pub fn get_clocks(config: Config) anyerror!Tree_Output {
         \\var out = Clock_Output{};
         \\var ref_out = Config_Output{};
+        \\ref_out.flags = config.flags;
         \\
         \\
     );

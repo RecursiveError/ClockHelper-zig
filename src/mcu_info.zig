@@ -7,6 +7,7 @@ pub const MCU_Info = struct {
 //Clock Types
 pub const Clock_Tree = struct {
     nodes: []const Clock_Node,
+    extra_nodes: []const []const u8,
     references: []const Reference, //all references
     extra_reference: []const []const u8, // names of references used as dependencies
     config_ref_names: []const []const u8, // names of references that are part of the main configuration

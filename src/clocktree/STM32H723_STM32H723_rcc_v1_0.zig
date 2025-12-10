@@ -1385,6 +1385,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             CECoutput: f32 = 0,
             HrtimMult: f32 = 0,
             HRTIMoutput: f32 = 0,
+            VCOInput: f32 = 0,
+            VCO2Input: f32 = 0,
+            VCO3Input: f32 = 0,
+            VCO1Output: f32 = 0,
+            PLL1CLK: f32 = 0,
+            VCO2Output: f32 = 0,
+            VCO3Output: f32 = 0,
         };
         /// Configuration output after processing the clock tree.
         /// Values marked as null indicate that the RCC configuration should remain at its reset value.
@@ -1521,11 +1528,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             CECEnable: ?CECEnableList = null, //from extra RCC references
             HRTIMEnable: ?HRTIMEnableList = null, //from extra RCC references
             LSEUsed: ?f32 = null, //from extra RCC references
-            VCOInput1Freq_Value: ?f32 = null, //from extra RCC references
             PLLUsed: ?f32 = null, //from extra RCC references
-            VCOInput2Freq_Value: ?f32 = null, //from extra RCC references
             PLL2Used: ?f32 = null, //from extra RCC references
-            VCOInput3Freq_Value: ?f32 = null, //from extra RCC references
             PLL3Used: ?f32 = null, //from extra RCC references
             CSIUsed: ?f32 = null, //from extra RCC references
             HSIUsed: ?f32 = null, //from extra RCC references
@@ -1555,8 +1559,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var TRACECLKSOURCE_CSI: bool = false;
             var TRACECLKSOURCE_HSE: bool = false;
             var TRACECLKSOURCE_PLLCLK: bool = false;
-            var SYSCLKSOURCE_CSI: bool = false;
             var SYSCLKSOURCE_HSI: bool = false;
+            var SYSCLKSOURCE_CSI: bool = false;
             var SYSCLKSOURCE_HSE: bool = false;
             var SYSCLKSOURCE_PLLCLK: bool = false;
             var MCO1SOURCE_LSE: bool = false;
@@ -1570,14 +1574,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var MCO2SOURCE_PLLCLK: bool = false;
             var MCO2SOURCE_CSI: bool = false;
             var MCO2SOURCE_LSI: bool = false;
-            var AHBCLKDivider1: bool = false;
-            var HCLKDiv1: bool = false;
-            var D2PPRE1_1: bool = false;
-            var D2PPRE1_2: bool = false;
-            var D2PPRE1_4: bool = false;
-            var D2PPRE2_1: bool = false;
-            var D2PPRE2_2: bool = false;
-            var D2PPRE2_4: bool = false;
             var PERSOURCE_HSI: bool = false;
             var PERSOURCE_CSI: bool = false;
             var PERSOURCE_HSE: bool = false;
@@ -1696,6 +1692,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var CECCLKSOURCE_CSI: bool = false;
             var HRTIMCLKSOURCE_PCLK2: bool = false;
             var HRTIMCLKSOURCE_CPU1: bool = false;
+            var AHBCLKDivider1: bool = false;
+            var HCLKDiv1: bool = false;
+            var D2PPRE1_1: bool = false;
+            var D2PPRE1_2: bool = false;
+            var D2PPRE1_4: bool = false;
+            var D2PPRE2_1: bool = false;
+            var D2PPRE2_2: bool = false;
+            var D2PPRE2_4: bool = false;
             var TimPrescalerEnabled: bool = false;
             var scale3: bool = false;
             var scale2: bool = false;
@@ -1724,10 +1728,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var APB2Freq_ValueLimit: Limit = .{};
             var AHB4Freq_ValueLimit: Limit = .{};
             var APB4Freq_ValueLimit: Limit = .{};
+            var PLLFRACNLimit: Limit = .{};
             var DIVQ1Freq_ValueLimit: Limit = .{};
+            var PLL2FRACNLimit: Limit = .{};
             var DIVP2Freq_ValueLimit: Limit = .{};
             var DIVQ2Freq_ValueLimit: Limit = .{};
             var DIVR2Freq_ValueLimit: Limit = .{};
+            var PLL3FRACNLimit: Limit = .{};
             var DIVP3Freq_ValueLimit: Limit = .{};
             var DIVQ3Freq_ValueLimit: Limit = .{};
             var LTDCFreq_ValueLimit: Limit = .{};
@@ -1757,10 +1764,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var USBFreq_ValueLimit: Limit = .{};
             var FDCANFreq_ValueLimit: Limit = .{};
             var ADCFreq_ValueLimit: Limit = .{};
+            var VCOInput1Freq_ValueLimit: Limit = .{};
+            var VCOInput2Freq_ValueLimit: Limit = .{};
+            var VCOInput3Freq_ValueLimit: Limit = .{};
+            var VCO1OutputFreq_ValueLimit: Limit = .{};
+            var DIVP1Freq_ValueLimit: Limit = .{};
+            var VCO2OutputFreq_ValueLimit: Limit = .{};
+            var VCO3OutputFreq_ValueLimit: Limit = .{};
             //Ref Values
 
             const HSI_VALUEValue: ?f32 = blk: {
-                break :blk 64000000;
+                break :blk 6.4e7;
             };
             const HSIDivValue: ?HSIDivList = blk: {
                 const conf_item = config.HSIDiv;
@@ -1780,7 +1794,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.HSE_VALUE;
                     if (config_val) |val| {
                         if (val < 4e6) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {e} found: {e}
@@ -1795,7 +1809,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 5e7) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {e} found: {e}
@@ -1815,7 +1829,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.HSE_VALUE;
                 if (config_val) |val| {
                     if (val < 4e6) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {e} found: {e}
@@ -1830,7 +1844,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 5e7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {e} found: {e}
@@ -1851,7 +1865,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.LSI_VALUE;
                 if (config_val) |val| {
                     if (val < 3.14e4) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {e} found: {e}
@@ -1866,7 +1880,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 3.26e4) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {e} found: {e}
@@ -1887,7 +1901,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 if (config.flags.LSEOscillator) {
                     if (config.LSE_VALUE) |val| {
                         if (val != 3.2768e4) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed Value: {e} found: {e}
@@ -1903,12 +1917,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                     }
-                    break :blk 32768;
+                    break :blk 3.2768e4;
                 }
                 const config_val = config.LSE_VALUE;
                 if (config_val) |val| {
                     if (val < 0e0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {e} found: {e}
@@ -1923,7 +1937,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 1e6) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {e} found: {e}
@@ -1941,13 +1955,29 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk config_val orelse 32768;
             };
             const CSI_VALUEValue: ?f32 = blk: {
-                break :blk 4000000;
+                break :blk 4e6;
             };
             const HSI48_VALUEValue: ?f32 = blk: {
-                break :blk 48000000;
+                break :blk 4.8e7;
             };
             const EXTERNAL_CLOCK_VALUEValue: ?f32 = blk: {
-                break :blk 12288000;
+                break :blk 1.2288e7;
+            };
+            const SYSCLKSourceValue: ?SYSCLKSourceList = blk: {
+                const conf_item = config.SYSCLKSource;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_SYSCLKSOURCE_CSI => SYSCLKSOURCE_CSI = true,
+                        .RCC_SYSCLKSOURCE_HSI => SYSCLKSOURCE_HSI = true,
+                        .RCC_SYSCLKSOURCE_HSE => SYSCLKSOURCE_HSE = true,
+                        .RCC_SYSCLKSOURCE_PLLCLK => SYSCLKSOURCE_PLLCLK = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    SYSCLKSOURCE_HSI = true;
+                    break :blk .RCC_SYSCLKSOURCE_HSI;
+                };
             };
             const traceClkSourceValue: ?traceClkSourceList = blk: {
                 if (!(check_MCU("SWD") or check_MCU("JTAG")) or SYSCLKSOURCE_HSI) {
@@ -1970,26 +2000,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk null;
             };
             const TraceFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
-            };
-            const SYSCLKSourceValue: ?SYSCLKSourceList = blk: {
-                const conf_item = config.SYSCLKSource;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_SYSCLKSOURCE_CSI => SYSCLKSOURCE_CSI = true,
-                        .RCC_SYSCLKSOURCE_HSI => SYSCLKSOURCE_HSI = true,
-                        .RCC_SYSCLKSOURCE_HSE => SYSCLKSOURCE_HSE = true,
-                        .RCC_SYSCLKSOURCE_PLLCLK => SYSCLKSOURCE_PLLCLK = true,
-                    }
-                }
-
-                break :blk conf_item orelse .RCC_SYSCLKSOURCE_HSI;
+                break :blk 9.6e7;
             };
             const SYSCLKFreq_VALUEValue: ?f32 = blk: {
                 SYSCLKFreq_VALUELimit = .{
                     .min = null,
                     .max = 5.5e8,
                 };
+
                 break :blk null;
             };
             const RCC_MCO1SourceValue: ?RCC_MCO1SourceList = blk: {
@@ -2004,7 +2022,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_MCO1SOURCE_HSI;
+                break :blk conf_item orelse {
+                    MCO1SOURCE_HSI = true;
+                    break :blk .RCC_MCO1SOURCE_HSI;
+                };
             };
             const RCC_MCODiv1Value: ?RCC_MCODiv1List = blk: {
                 const conf_item = config.RCC_MCODiv1;
@@ -2031,7 +2052,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_MCODIV_1;
             };
             const MCO1PinFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const RCC_MCO2SourceValue: ?RCC_MCO2SourceList = blk: {
                 const conf_item = config.RCC_MCO2Source;
@@ -2046,7 +2067,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_MCO2SOURCE_SYSCLK;
+                break :blk conf_item orelse {
+                    MCO2SOURCE_SYSCLK = true;
+                    break :blk .RCC_MCO2SOURCE_SYSCLK;
+                };
             };
             const RCC_MCODiv2Value: ?RCC_MCODiv2List = blk: {
                 const conf_item = config.RCC_MCODiv2;
@@ -2073,7 +2097,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_MCODIV_1;
             };
             const MCO2PinFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const D1CPREValue: ?D1CPREList = blk: {
                 const conf_item = config.D1CPRE;
@@ -2091,13 +2115,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_SYSCLK_DIV1;
+                break :blk conf_item orelse {
+                    AHBCLKDivider1 = true;
+                    break :blk .RCC_SYSCLK_DIV1;
+                };
             };
             const D1CPREFreq_ValueValue: ?f32 = blk: {
                 D1CPREFreq_ValueLimit = .{
                     .min = null,
                     .max = 5.5e8,
                 };
+
                 break :blk null;
             };
             const CpuClockFreq_ValueValue: ?f32 = blk: {
@@ -2105,6 +2133,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 5.5e8,
                 };
+
                 break :blk null;
             };
             const Cortex_DivValue: ?Cortex_DivList = blk: {
@@ -2116,13 +2145,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .SYSTICK_CLKSOURCE_HCLK;
+                break :blk conf_item orelse {
+                    HCLKDiv1 = true;
+                    break :blk .SYSTICK_CLKSOURCE_HCLK;
+                };
             };
             const CortexFreq_ValueValue: ?f32 = blk: {
                 CortexFreq_ValueLimit = .{
                     .min = null,
                     .max = 5.5e8,
                 };
+
                 break :blk null;
             };
             const HPREValue: ?HPREList = blk: {
@@ -2148,6 +2181,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2.75e8,
                 };
+
                 break :blk null;
             };
             const AXIClockFreq_ValueValue: ?f32 = blk: {
@@ -2155,6 +2189,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2.75e8,
                 };
+
                 break :blk null;
             };
             const HCLK3ClockFreq_ValueValue: ?f32 = blk: {
@@ -2162,6 +2197,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2.75e8,
                 };
+
                 break :blk null;
             };
             const D1PPREValue: ?D1PPREList = blk: {
@@ -2183,6 +2219,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.375e8,
                 };
+
                 break :blk null;
             };
             const D2PPRE1Value: ?D2PPRE1List = blk: {
@@ -2197,7 +2234,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_APB1_DIV1;
+                break :blk conf_item orelse {
+                    D2PPRE1_1 = true;
+                    break :blk .RCC_APB1_DIV1;
+                };
             };
             const RCC_TIM_PRescaler_SelectionValue: ?RCC_TIM_PRescaler_SelectionList = blk: {
                 const conf_item = config.extra.RCC_TIM_PRescaler_Selection;
@@ -2227,13 +2267,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk 2;
             };
             const Tim1OutputFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const AHB12Freq_ValueValue: ?f32 = blk: {
                 AHB12Freq_ValueLimit = .{
                     .min = null,
                     .max = 2.75e8,
                 };
+
                 break :blk null;
             };
             const APB1Freq_ValueValue: ?f32 = blk: {
@@ -2241,6 +2282,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.375e8,
                 };
+
                 break :blk null;
             };
             const D2PPRE2Value: ?D2PPRE2List = blk: {
@@ -2255,13 +2297,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_APB2_DIV1;
+                break :blk conf_item orelse {
+                    D2PPRE2_1 = true;
+                    break :blk .RCC_APB2_DIV1;
+                };
             };
             const APB2Freq_ValueValue: ?f32 = blk: {
                 APB2Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
+
                 break :blk null;
             };
             const Tim2MulValue: ?f32 = blk: {
@@ -2281,13 +2327,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk 2;
             };
             const Tim2OutputFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const AHB4Freq_ValueValue: ?f32 = blk: {
                 AHB4Freq_ValueLimit = .{
                     .min = null,
                     .max = 2.75e8,
                 };
+
                 break :blk null;
             };
             const D3PPREValue: ?D3PPREList = blk: {
@@ -2309,7 +2356,23 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.375e8,
                 };
+
                 break :blk null;
+            };
+            const USBCLockSelectionValue: ?USBCLockSelectionList = blk: {
+                const conf_item = config.USBCLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_USBCLKSOURCE_PLL => USBCLKSOURCE_PLL1Q = true,
+                        .RCC_USBCLKSOURCE_PLL3 => USBCLKSOURCE_PLL3Q = true,
+                        .RCC_USBCLKSOURCE_HSI48 => USBCLKSOURCE_RC48 = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    USBCLKSOURCE_PLL1Q = true;
+                    break :blk .RCC_USBCLKSOURCE_PLL;
+                };
             };
             const PLLSourceValue: ?PLLSourceList = blk: {
                 if (((config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC) and (USBCLKSOURCE_PLL3Q or USBCLKSOURCE_PLL1Q))) {
@@ -2317,7 +2380,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const conf_item = config.PLLSource;
                     if (conf_item) |i| {
                         if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed List Value: {s} found {any}
@@ -2350,16 +2413,19 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_CLKPSOURCE_HSI;
+                break :blk conf_item orelse {
+                    PERSOURCE_HSI = true;
+                    break :blk .RCC_CLKPSOURCE_HSI;
+                };
             };
             const CKPERFreq_ValueValue: ?f32 = blk: {
-                break :blk 12288000;
+                break :blk 1.2288e7;
             };
             const DIVM1Value: ?f32 = blk: {
                 const config_val = config.DIVM1;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2374,7 +2440,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 63) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2395,7 +2461,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.DIVM2;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2410,7 +2476,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 63) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2431,7 +2497,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.DIVM3;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2446,7 +2512,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 63) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2467,7 +2533,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.DIVN1;
                 if (config_val) |val| {
                     if (val < 4) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2482,7 +2548,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 512) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2501,45 +2567,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             };
             const PLLFRACNValue: ?f32 = blk: {
                 const config_val = config.PLLFRACN;
-                if (config_val) |val| {
-                    if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Underflow Value - min: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLLFRACN",
-                            "Else",
-                            "No Extra Log",
-                            0,
-                            val,
-                        });
-                    }
-                    if (val > 8191) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Overflow Value - max: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLLFRACN",
-                            "Else",
-                            "No Extra Log",
-                            8191,
-                            val,
-                        });
-                    }
-                }
+                PLLFRACNLimit = .{
+                    .min = 0,
+                    .max = 8191,
+                };
+
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 0;
             };
             const DIVP1Value: ?f32 = blk: {
                 const config_val = config.DIVP1;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2554,7 +2593,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 128) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2575,7 +2614,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.DIVQ1;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2590,7 +2629,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 128) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2607,21 +2646,182 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 2;
             };
+            const SPI123CLockSelectionValue: ?SPI123CLockSelectionList = blk: {
+                const conf_item = config.SPI123CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_SPI123CLKSOURCE_PLL => SPI123CLKSOURCE_PLLQ1 = true,
+                        .RCC_SPI123CLKSOURCE_PLL2 => SPI123CLKSOURCE_PLLP2 = true,
+                        .RCC_SPI123CLKSOURCE_PLL3 => SPI123CLKSOURCE_PLLP3 = true,
+                        .RCC_SPI123CLKSOURCE_PIN => SPI123CLKSOURCE_CKIN = true,
+                        .RCC_SPI123CLKSOURCE_CLKP => SPI123CLKSOURCE_PER = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    SPI123CLKSOURCE_PLLQ1 = true;
+                    break :blk .RCC_SPI123CLKSOURCE_PLL;
+                };
+            };
+            const SAI1CLockSelectionValue: ?SAI1CLockSelectionList = blk: {
+                const conf_item = config.SAI1CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_SAI1CLKSOURCE_PLL => SAI1CLKSOURCE_PLLQ1 = true,
+                        .RCC_SAI1CLKSOURCE_PLL2 => SAI1CLKSOURCE_PLLP2 = true,
+                        .RCC_SAI1CLKSOURCE_PLL3 => SAI1CLKSOURCE_PLLP3 = true,
+                        .RCC_SAI1CLKSOURCE_PIN => SAI1CLKSOURCE_CKIN = true,
+                        .RCC_SAI1CLKSOURCE_CLKP => SAI1CLKSOURCE_PER = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    SAI1CLKSOURCE_PLLQ1 = true;
+                    break :blk .RCC_SAI1CLKSOURCE_PLL;
+                };
+            };
+            const SAI4BCLockSelectionValue: ?SAI4BCLockSelectionList = blk: {
+                const conf_item = config.SAI4BCLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_SAI4BCLKSOURCE_PLL => SAI4BCLKSOURCE_PLLQ1 = true,
+                        .RCC_SAI4BCLKSOURCE_PLL2 => SAI4BCLKSOURCE_PLLP2 = true,
+                        .RCC_SAI4BCLKSOURCE_PLL3 => SAI4BCLKSOURCE_PLLP3 = true,
+                        .RCC_SAI4BCLKSOURCE_PIN => SAI4BCLKSOURCE_CKIN = true,
+                        .RCC_SAI4BCLKSOURCE_CLKP => SAI4BCLKSOURCE_PER = true,
+                        .RCC_SAI4BCLKSOURCE_SPDIF => SAI4BCLKSOURCE_SPDIF = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    SAI4BCLKSOURCE_PLLQ1 = true;
+                    break :blk .RCC_SAI4BCLKSOURCE_PLL;
+                };
+            };
+            const SAI4ACLockSelectionValue: ?SAI4ACLockSelectionList = blk: {
+                const conf_item = config.SAI4ACLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_SAI4ACLKSOURCE_PLL => SAI4ACLKSOURCE_PLLQ1 = true,
+                        .RCC_SAI4ACLKSOURCE_PLL2 => SAI4ACLKSOURCE_PLLP2 = true,
+                        .RCC_SAI4ACLKSOURCE_PLL3 => SAI4ACLKSOURCE_PLLP3 = true,
+                        .RCC_SAI4ACLKSOURCE_PIN => SAI4ACLKSOURCE_CKIN = true,
+                        .RCC_SAI4ACLKSOURCE_CLKP => SAI4ACLKSOURCE_PER = true,
+                        .RCC_SAI4ACLKSOURCE_SPDIF => SAI4ACLKSOURCE_SPDIF = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    SAI4ACLKSOURCE_PLLQ1 = true;
+                    break :blk .RCC_SAI4ACLKSOURCE_PLL;
+                };
+            };
+            const RNGCLockSelectionValue: ?RNGCLockSelectionList = blk: {
+                const conf_item = config.RNGCLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_RNGCLKSOURCE_HSI48 => RNGCLKSOURCE_RC48 = true,
+                        .RCC_RNGCLKSOURCE_PLL => RNGCLKSOURCE_PLLQ1 = true,
+                        .RCC_RNGCLKSOURCE_LSE => RNGCLKSOURCE_LSE = true,
+                        .RCC_RNGCLKSOURCE_LSI => RNGCLKSOURCE_LSI = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    RNGCLKSOURCE_RC48 = true;
+                    break :blk .RCC_RNGCLKSOURCE_HSI48;
+                };
+            };
+            const SPDIFCLockSelectionValue: ?SPDIFCLockSelectionList = blk: {
+                const conf_item = config.SPDIFCLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_SPDIFRXCLKSOURCE_PLL => SPDIFCLKSOURCE_PLL1Q = true,
+                        .RCC_SPDIFRXCLKSOURCE_PLL2 => SPDIFCLKSOURCE_PLL2R = true,
+                        .RCC_SPDIFRXCLKSOURCE_PLL3 => SPDIFCLKSOURCE_PLL3R = true,
+                        .RCC_SPDIFRXCLKSOURCE_HSI => SPDIFCLKSOURCE_HSI = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    SPDIFCLKSOURCE_PLL1Q = true;
+                    break :blk .RCC_SPDIFRXCLKSOURCE_PLL;
+                };
+            };
+            const QSPICLockSelectionValue: ?QSPICLockSelectionList = blk: {
+                const conf_item = config.QSPICLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_OSPICLKSOURCE_D1HCLK => QSPICLKSOURCE_HCLK3 = true,
+                        .RCC_OSPICLKSOURCE_PLL => QSPICLKSOURCE_PLL1Q = true,
+                        .RCC_OSPICLKSOURCE_PLL2 => QSPICLKSOURCE_PLL2R = true,
+                        .RCC_OSPICLKSOURCE_CLKP => QSPICLKSOURCE_PER = true,
+                    }
+                }
+
+                break :blk conf_item orelse null;
+            };
+            const FMCCLockSelectionValue: ?FMCCLockSelectionList = blk: {
+                const conf_item = config.FMCCLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_FMCCLKSOURCE_D1HCLK => FMCCLKSOURCE_HCLK3 = true,
+                        .RCC_FMCCLKSOURCE_PLL => FMCCLKSOURCE_PLL1Q = true,
+                        .RCC_FMCCLKSOURCE_PLL2 => FMCCLKSOURCE_PLL2R = true,
+                        .RCC_FMCCLKSOURCE_CLKP => FMCCLKSOURCE_PER = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    FMCCLKSOURCE_HCLK3 = true;
+                    break :blk .RCC_FMCCLKSOURCE_D1HCLK;
+                };
+            };
+            const SDMMC1CLockSelectionValue: ?SDMMC1CLockSelectionList = blk: {
+                const conf_item = config.SDMMC1CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_SDMMCCLKSOURCE_PLL => SDMMC1CLKSOURCE_PLL1Q = true,
+                        .RCC_SDMMCCLKSOURCE_PLL2 => SDMMC1CLKSOURCE_PLL2R = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    SDMMC1CLKSOURCE_PLL1Q = true;
+                    break :blk .RCC_SDMMCCLKSOURCE_PLL;
+                };
+            };
+            const FDCANCLockSelectionValue: ?FDCANCLockSelectionList = blk: {
+                const conf_item = config.FDCANCLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_FDCANCLKSOURCE_HSE => FDCANCLKSOURCE_HSE = true,
+                        .RCC_FDCANCLKSOURCE_PLL => FDCANCLKSOURCE_PLL1Q = true,
+                        .RCC_FDCANCLKSOURCE_PLL2 => FDCANCLKSOURCE_PLL2Q = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    FDCANCLKSOURCE_PLL1Q = true;
+                    break :blk .RCC_FDCANCLKSOURCE_PLL;
+                };
+            };
             const DIVQ1Freq_ValueValue: ?f32 = blk: {
                 if ((SPI123CLKSOURCE_PLLQ1 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLQ1") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLQ1 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLQ1 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLQ1 and config.flags.SAI4_SAIAUsed_ForRCC) or (RNGCLKSOURCE_PLLQ1 and config.flags.RNGUsed_ForRCC) or (SPDIFCLKSOURCE_PLL1Q and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL1Q and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL1Q and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL1Q and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC)) or (USBCLKSOURCE_PLL1Q and config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC) or (FDCANCLKSOURCE_PLL1Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC))) {
                     DIVQ1Freq_ValueLimit = .{
                         .min = null,
                         .max = 8.36e8,
                     };
+
                     break :blk null;
                 }
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const DIVR1Value: ?f32 = blk: {
                 const config_val = config.DIVR1;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2636,7 +2836,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 128) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2654,13 +2854,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 2;
             };
             const DIVR1Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const DIVN2Value: ?f32 = blk: {
                 const config_val = config.DIVN2;
                 if (config_val) |val| {
                     if (val < 4) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2675,7 +2875,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 512) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2694,45 +2894,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             };
             const PLL2FRACNValue: ?f32 = blk: {
                 const config_val = config.PLL2FRACN;
-                if (config_val) |val| {
-                    if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Underflow Value - min: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL2FRACN",
-                            "Else",
-                            "No Extra Log",
-                            0,
-                            val,
-                        });
-                    }
-                    if (val > 8191) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Overflow Value - max: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL2FRACN",
-                            "Else",
-                            "No Extra Log",
-                            8191,
-                            val,
-                        });
-                    }
-                }
+                PLL2FRACNLimit = .{
+                    .min = 0,
+                    .max = 8191,
+                };
+
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 0;
             };
             const DIVP2Value: ?f32 = blk: {
                 const config_val = config.DIVP2;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2747,7 +2920,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 128) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2763,6 +2936,75 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 2;
+            };
+            const LPTIM1CLockSelectionValue: ?LPTIM1CLockSelectionList = blk: {
+                const conf_item = config.LPTIM1CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_LPTIM1CLKSOURCE_D2PCLK1 => LPTIM1CLKSOURCE_PCLK1 = true,
+                        .RCC_LPTIM1CLKSOURCE_PLL2 => LPTIM1CLKSOURCE_PLLP2 = true,
+                        .RCC_LPTIM1CLKSOURCE_PLL3 => LPTIM1CLKSOURCE_PLLR3 = true,
+                        .RCC_LPTIM1CLKSOURCE_LSE => LPTIM1CLKSOURCE_LSE = true,
+                        .RCC_LPTIM1CLKSOURCE_LSI => LPTIM1CLKSOURCE_LSI = true,
+                        .RCC_LPTIM1CLKSOURCE_CLKP => LPTIM1CLKSOURCE_PER = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    LPTIM1CLKSOURCE_PCLK1 = true;
+                    break :blk .RCC_LPTIM1CLKSOURCE_D2PCLK1;
+                };
+            };
+            const LPTIM345CLockSelectionValue: ?LPTIM345CLockSelectionList = blk: {
+                const conf_item = config.LPTIM345CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_LPTIM345CLKSOURCE_D3PCLK1 => LPTIM345CLKSOURCE_PCLK4 = true,
+                        .RCC_LPTIM345CLKSOURCE_PLL2 => LPTIM345CLKSOURCE_PLLP2 = true,
+                        .RCC_LPTIM345CLKSOURCE_PLL3 => LPTIM345CLKSOURCE_PLLR3 = true,
+                        .RCC_LPTIM345CLKSOURCE_LSE => LPTIM345CLKSOURCE_LSE = true,
+                        .RCC_LPTIM345CLKSOURCE_LSI => LPTIM345CLKSOURCE_LSI = true,
+                        .RCC_LPTIM345CLKSOURCE_CLKP => LPTIM345CLKSOURCE_PER = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    LPTIM345CLKSOURCE_PCLK4 = true;
+                    break :blk .RCC_LPTIM345CLKSOURCE_D3PCLK1;
+                };
+            };
+            const LPTIM2CLockSelectionValue: ?LPTIM2CLockSelectionList = blk: {
+                const conf_item = config.LPTIM2CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_LPTIM2CLKSOURCE_D3PCLK1 => LPTIM2CLKSOURCE_PCLK4 = true,
+                        .RCC_LPTIM2CLKSOURCE_PLL2 => LPTIM2CLKSOURCE_PLLP2 = true,
+                        .RCC_LPTIM2CLKSOURCE_PLL3 => LPTIM2CLKSOURCE_PLLR3 = true,
+                        .RCC_LPTIM2CLKSOURCE_LSE => LPTIM2CLKSOURCE_LSE = true,
+                        .RCC_LPTIM2CLKSOURCE_LSI => LPTIM2CLKSOURCE_LSI = true,
+                        .RCC_LPTIM2CLKSOURCE_CLKP => LPTIM2CLKSOURCE_PER = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    LPTIM2CLKSOURCE_PCLK4 = true;
+                    break :blk .RCC_LPTIM2CLKSOURCE_D3PCLK1;
+                };
+            };
+            const ADCCLockSelectionValue: ?ADCCLockSelectionList = blk: {
+                const conf_item = config.ADCCLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_ADCCLKSOURCE_PLL2 => ADCCLKSOURCE_PLL2P = true,
+                        .RCC_ADCCLKSOURCE_PLL3 => ADCCLKSOURCE_PLL3R = true,
+                        .RCC_ADCCLKSOURCE_CLKP => ADCCLKSOURCE_PER = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    ADCCLKSOURCE_PLL2P = true;
+                    break :blk .RCC_ADCCLKSOURCE_PLL2;
+                };
             };
             const DIVP2Freq_ValueValue: ?f32 = blk: {
                 if (((MCO2SOURCE_PLL2PCLK) and (config.flags.MCO2Config)) or (SPI123CLKSOURCE_PLLP2 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP2") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP2 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP2 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP2 and config.flags.SAI4_SAIAUsed_ForRCC) or (LPTIM1CLKSOURCE_PLLP2 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLP2 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLP2 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL2P and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC)))) {
@@ -2770,15 +3012,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 8.36e8,
                     };
+
                     break :blk null;
                 }
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const DIVQ2Value: ?f32 = blk: {
                 const config_val = config.DIVQ2;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2793,7 +3036,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 128) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2810,21 +3053,113 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 2;
             };
+            const USART16CLockSelectionValue: ?USART16CLockSelectionList = blk: {
+                const conf_item = config.USART16CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_USART16910CLKSOURCE_D2PCLK2 => USART16CLKSOURCE_PCLK2 = true,
+                        .RCC_USART16910CLKSOURCE_PLL2 => USART16CLKSOURCE_PLLQ2 = true,
+                        .RCC_USART16910CLKSOURCE_PLL3 => USART16CLKSOURCE_PLLQ3 = true,
+                        .RCC_USART16910CLKSOURCE_HSI => USART16CLKSOURCE_HSI = true,
+                        .RCC_USART16910CLKSOURCE_CSI => USART16CLKSOURCE_CSI = true,
+                        .RCC_USART16910CLKSOURCE_LSE => USART16CLKSOURCE_LSE = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    USART16CLKSOURCE_PCLK2 = true;
+                    break :blk .RCC_USART16910CLKSOURCE_D2PCLK2;
+                };
+            };
+            const USART234578CLockSelectionValue: ?USART234578CLockSelectionList = blk: {
+                const conf_item = config.USART234578CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_USART234578CLKSOURCE_D2PCLK1 => USART2CLKSOURCE_PCLK1 = true,
+                        .RCC_USART234578CLKSOURCE_PLL2 => USART2CLKSOURCE_PLLQ2 = true,
+                        .RCC_USART234578CLKSOURCE_PLL3 => USART2CLKSOURCE_PLLQ3 = true,
+                        .RCC_USART234578CLKSOURCE_HSI => USART2CLKSOURCE_HSI = true,
+                        .RCC_USART234578CLKSOURCE_CSI => USART2CLKSOURCE_CSI = true,
+                        .RCC_USART234578CLKSOURCE_LSE => USART2CLKSOURCE_LSE = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    USART2CLKSOURCE_PCLK1 = true;
+                    break :blk .RCC_USART234578CLKSOURCE_D2PCLK1;
+                };
+            };
+            const LPUART1CLockSelectionValue: ?LPUART1CLockSelectionList = blk: {
+                const conf_item = config.LPUART1CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_LPUART1CLKSOURCE_D3PCLK1 => LPUART1CLKSOURCE_PCLK3 = true,
+                        .RCC_LPUART1CLKSOURCE_PLL2 => LPUART1CLKSOURCE_PLL2Q = true,
+                        .RCC_LPUART1CLKSOURCE_PLL3 => LPUART1CLKSOURCE_PLL3Q = true,
+                        .RCC_LPUART1CLKSOURCE_HSI => LPUART1CLKSOURCE_HSI = true,
+                        .RCC_LPUART1CLKSOURCE_CSI => LPUART1CLKSOURCE_CSI = true,
+                        .RCC_LPUART1CLKSOURCE_LSE => LPUART1CLKSOURCE_LSE = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    LPUART1CLKSOURCE_PCLK3 = true;
+                    break :blk .RCC_LPUART1CLKSOURCE_D3PCLK1;
+                };
+            };
+            const SPI6CLockSelectionValue: ?SPI6CLockSelectionList = blk: {
+                const conf_item = config.SPI6CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_SPI6CLKSOURCE_D3PCLK1 => SPI6CLKSOURCE_PCLK4 = true,
+                        .RCC_SPI6CLKSOURCE_PLL2 => SPI6CLKSOURCE_PLLQ2 = true,
+                        .RCC_SPI6CLKSOURCE_PLL3 => SPI6CLKSOURCE_PLLQ3 = true,
+                        .RCC_SPI6CLKSOURCE_HSI => SPI6CLKSOURCE_HSI = true,
+                        .RCC_SPI6CLKSOURCE_CSI => SPI6CLKSOURCE_CSI = true,
+                        .RCC_SPI6CLKSOURCE_HSE => SPI6CLKSOURCE_HSE = true,
+                        .RCC_SPI6CLKSOURCE_PIN => SPI6CLKSOURCE_PIN = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    SPI6CLKSOURCE_PCLK4 = true;
+                    break :blk .RCC_SPI6CLKSOURCE_D3PCLK1;
+                };
+            };
+            const Spi45ClockSelectionValue: ?Spi45ClockSelectionList = blk: {
+                const conf_item = config.Spi45ClockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_SPI45CLKSOURCE_D2PCLK1 => SPI45CLKSOURCE_PCLK1 = true,
+                        .RCC_SPI45CLKSOURCE_PLL2 => SPI45CLKSOURCE_PLLQ2 = true,
+                        .RCC_SPI45CLKSOURCE_PLL3 => SPI45CLKSOURCE_PLLQ3 = true,
+                        .RCC_SPI45CLKSOURCE_HSI => SPI45CLKSOURCE_HSI = true,
+                        .RCC_SPI45CLKSOURCE_CSI => SPI45CLKSOURCE_CSI = true,
+                        .RCC_SPI45CLKSOURCE_HSE => SPI45CLKSOURCE_HSE = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    SPI45CLKSOURCE_PCLK1 = true;
+                    break :blk .RCC_SPI45CLKSOURCE_D2PCLK1;
+                };
+            };
             const DIVQ2Freq_ValueValue: ?f32 = blk: {
                 if ((USART16CLKSOURCE_PLLQ2 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ2 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL2Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ2 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ2 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (FDCANCLKSOURCE_PLL2Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC))) {
                     DIVQ2Freq_ValueLimit = .{
                         .min = null,
                         .max = 8.36e8,
                     };
+
                     break :blk null;
                 }
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const DIVR2Value: ?f32 = blk: {
                 const config_val = config.DIVR2;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2839,7 +3174,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 128) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2862,15 +3197,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 8.36e8,
                     };
+
                     break :blk null;
                 }
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const DIVN3Value: ?f32 = blk: {
                 const config_val = config.DIVN3;
                 if (config_val) |val| {
                     if (val < 4) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2885,7 +3221,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 512) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2906,7 +3242,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.DIVP3;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -2921,7 +3257,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 128) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -2940,38 +3276,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             };
             const PLL3FRACNValue: ?f32 = blk: {
                 const config_val = config.PLL3FRACN;
-                if (config_val) |val| {
-                    if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Underflow Value - min: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL3FRACN",
-                            "Else",
-                            "No Extra Log",
-                            0,
-                            val,
-                        });
-                    }
-                    if (val > 8191) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Overflow Value - max: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL3FRACN",
-                            "Else",
-                            "No Extra Log",
-                            8191,
-                            val,
-                        });
-                    }
-                }
+                PLL3FRACNLimit = .{
+                    .min = 0,
+                    .max = 8191,
+                };
+
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 0;
             };
             const DIVP3Freq_ValueValue: ?f32 = blk: {
@@ -2980,15 +3289,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 8.36e8,
                     };
+
                     break :blk null;
                 }
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const DIVQ3Value: ?f32 = blk: {
                 const config_val = config.DIVQ3;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3003,7 +3313,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 128) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3026,15 +3336,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 8.36e8,
                     };
+
                     break :blk null;
                 }
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const DIVR3Value: ?f32 = blk: {
                 const config_val = config.DIVR3;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3049,7 +3360,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 128) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3066,37 +3377,144 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 2;
             };
+            const PWR_Regulator_Voltage_ScaleValue: ?PWR_Regulator_Voltage_ScaleList = blk: {
+                if (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 85000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 85000000, .@"=")))) {
+                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
+                    if (conf_item) |item| {
+                        switch (item) {
+                            .PWR_REGULATOR_VOLTAGE_SCALE3 => scale3 = true,
+                            .PWR_REGULATOR_VOLTAGE_SCALE2 => scale2 = true,
+                            .PWR_REGULATOR_VOLTAGE_SCALE1 => scale1 = true,
+                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
+                        }
+                    }
+
+                    break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE3;
+                } else if (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 150000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 150000000, .@"="))) and (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 85000000, .@">"))) {
+                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
+                    if (conf_item) |item| {
+                        switch (item) {
+                            .PWR_REGULATOR_VOLTAGE_SCALE3 => {},
+                            .PWR_REGULATOR_VOLTAGE_SCALE2 => scale2 = true,
+                            .PWR_REGULATOR_VOLTAGE_SCALE1 => scale1 = true,
+                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
+                        }
+                    }
+
+                    break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE2;
+                } else if (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 200000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 200000000, .@"="))) and (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 150000000, .@">"))) {
+                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
+                    if (conf_item) |item| {
+                        switch (item) {
+                            .PWR_REGULATOR_VOLTAGE_SCALE3 => {},
+                            .PWR_REGULATOR_VOLTAGE_SCALE2 => {},
+                            .PWR_REGULATOR_VOLTAGE_SCALE1 => scale1 = true,
+                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
+                        }
+                    }
+
+                    break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE1;
+                } else if (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 275000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 275000000, .@"="))) and (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 200000000, .@">"))) {
+                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
+                    if (conf_item) |item| {
+                        switch (item) {
+                            .PWR_REGULATOR_VOLTAGE_SCALE3 => {},
+                            .PWR_REGULATOR_VOLTAGE_SCALE2 => {},
+                            .PWR_REGULATOR_VOLTAGE_SCALE1 => {},
+                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
+                        }
+                    }
+
+                    break :blk conf_item orelse {
+                        scale0 = true;
+                        break :blk .PWR_REGULATOR_VOLTAGE_SCALE0;
+                    };
+                } else if ((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 275000000, .@">"))) {
+                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
+                    if (conf_item) |item| {
+                        switch (item) {
+                            .PWR_REGULATOR_VOLTAGE_SCALE3 => {},
+                            .PWR_REGULATOR_VOLTAGE_SCALE2 => {},
+                            .PWR_REGULATOR_VOLTAGE_SCALE1 => {},
+                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
+                        }
+                    }
+
+                    break :blk conf_item orelse {
+                        scale0 = true;
+                        break :blk .PWR_REGULATOR_VOLTAGE_SCALE0;
+                    };
+                }
+                break :blk null;
+            };
             const LTDCFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
                     LTDCFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.66e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     LTDCFreq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     LTDCFreq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     LTDCFreq_ValueLimit = .{
                         .min = null,
                         .max = 5e7,
                     };
+
                     break :blk null;
                 }
                 LTDCFreq_ValueLimit = .{
                     .min = null,
                     .max = 1.66e8,
                 };
+
                 break :blk null;
+            };
+            const I2C123CLockSelectionValue: ?I2C123CLockSelectionList = blk: {
+                const conf_item = config.I2C123CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_I2C1235CLKSOURCE_D2PCLK1 => I2C1235CLKSOURCE_PCLK1 = true,
+                        .RCC_I2C1235CLKSOURCE_PLL3 => I2C1235CLKSOURCE_PLLR3 = true,
+                        .RCC_I2C1235CLKSOURCE_HSI => I2C1235CLKSOURCE_HSI = true,
+                        .RCC_I2C1235CLKSOURCE_CSI => I2C1235CLKSOURCE_CSI = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    I2C1235CLKSOURCE_PCLK1 = true;
+                    break :blk .RCC_I2C1235CLKSOURCE_D2PCLK1;
+                };
+            };
+            const I2C4CLockSelectionValue: ?I2C4CLockSelectionList = blk: {
+                const conf_item = config.I2C4CLockSelection;
+                if (conf_item) |item| {
+                    switch (item) {
+                        .RCC_I2C4CLKSOURCE_D3PCLK1 => I2C4CLKSOURCE_PCLK4 = true,
+                        .RCC_I2C4CLKSOURCE_PLL3 => I2C4CLKSOURCE_PLLR3 = true,
+                        .RCC_I2C4CLKSOURCE_HSI => I2C4CLKSOURCE_HSI = true,
+                        .RCC_I2C4CLKSOURCE_CSI => I2C4CLKSOURCE_CSI = true,
+                    }
+                }
+
+                break :blk conf_item orelse {
+                    I2C4CLKSOURCE_PCLK4 = true;
+                    break :blk .RCC_I2C4CLKSOURCE_D3PCLK1;
+                };
             };
             const DIVR3Freq_ValueValue: ?f32 = blk: {
                 if ((I2C1235CLKSOURCE_PLLR3 and (config.flags.I2C2Used_ForRCC or config.flags.I2C3Used_ForRCC or config.flags.I2C5Used_ForRCC or config.flags.I2C1Used_ForRCC)) or (I2C4CLKSOURCE_PLLR3 and config.flags.I2C4Used_ForRCC) or (SPDIFCLKSOURCE_PLL3R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (LPTIM1CLKSOURCE_PLLR3 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLR3 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLR3 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL3R and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC)))) {
@@ -3104,9 +3522,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 8.36e8,
                     };
+
                     break :blk null;
                 }
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const RCC_RTC_Clock_Source_FROM_HSEValue: ?RCC_RTC_Clock_Source_FROM_HSEList = blk: {
                 const conf_item = config.RCC_RTC_Clock_Source_FROM_HSE;
@@ -3185,92 +3604,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     switch (item) {
                         .RCC_RTCCLKSOURCE_LSE => {},
                         .RCC_RTCCLKSOURCE_LSI => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV2 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV3 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV4 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV5 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV6 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV7 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV8 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV9 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV10 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV11 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV12 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV13 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV14 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV15 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV16 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV17 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV18 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV19 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV20 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV21 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV22 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV23 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV24 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV25 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV26 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV27 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV28 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV29 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV30 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV31 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV32 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV33 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV34 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV35 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV36 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV37 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV38 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV39 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV40 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV41 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV42 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV43 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV44 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV45 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV46 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV47 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV48 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV49 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV50 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV51 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV52 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV53 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV54 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV55 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV56 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV57 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV58 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV59 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV60 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV61 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV62 => {},
-                        .RCC_RTCCLKSOURCE_HSE_DIV63 => {},
+                        .HSERTCDevisor => {},
                     }
                 }
 
                 break :blk conf_item orelse .RCC_RTCCLKSOURCE_LSI;
             };
             const RTCFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const WatchDogFreq_ValueValue: ?f32 = blk: {
-                break :blk 32000;
-            };
-            const SPI123CLockSelectionValue: ?SPI123CLockSelectionList = blk: {
-                const conf_item = config.SPI123CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_SPI123CLKSOURCE_PLL => SPI123CLKSOURCE_PLLQ1 = true,
-                        .RCC_SPI123CLKSOURCE_PLL2 => SPI123CLKSOURCE_PLLP2 = true,
-                        .RCC_SPI123CLKSOURCE_PLL3 => SPI123CLKSOURCE_PLLP3 = true,
-                        .RCC_SPI123CLKSOURCE_PIN => SPI123CLKSOURCE_CKIN = true,
-                        .RCC_SPI123CLKSOURCE_CLKP => SPI123CLKSOURCE_PER = true,
-                    }
-                }
-
-                break :blk conf_item orelse .RCC_SPI123CLKSOURCE_PLL;
+                break :blk 3.2e4;
             };
             const SPI123Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3278,45 +3622,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 2.5e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     SPI123Freq_ValueLimit = .{
                         .min = null,
                         .max = 1.8e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     SPI123Freq_ValueLimit = .{
                         .min = null,
                         .max = 1.25e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     SPI123Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 }
                 SPI123Freq_ValueLimit = .{
                     .min = null,
                     .max = 2.5e8,
                 };
-                break :blk null;
-            };
-            const SAI1CLockSelectionValue: ?SAI1CLockSelectionList = blk: {
-                const conf_item = config.SAI1CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_SAI1CLKSOURCE_PLL => SAI1CLKSOURCE_PLLQ1 = true,
-                        .RCC_SAI1CLKSOURCE_PLL2 => SAI1CLKSOURCE_PLLP2 = true,
-                        .RCC_SAI1CLKSOURCE_PLL3 => SAI1CLKSOURCE_PLLP3 = true,
-                        .RCC_SAI1CLKSOURCE_PIN => SAI1CLKSOURCE_CKIN = true,
-                        .RCC_SAI1CLKSOURCE_CLKP => SAI1CLKSOURCE_PER = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_SAI1CLKSOURCE_PLL;
+                break :blk null;
             };
             const DFSDMACLkFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3324,30 +3659,35 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 2.5e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     DFSDMACLkFreq_ValueLimit = .{
                         .min = null,
                         .max = 2e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     DFSDMACLkFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.5e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     DFSDMACLkFreq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 }
                 DFSDMACLkFreq_ValueLimit = .{
                     .min = null,
                     .max = 2.5e8,
                 };
+
                 break :blk null;
             };
             const SAI1Freq_ValueValue: ?f32 = blk: {
@@ -3356,46 +3696,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.66e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     SAI1Freq_ValueLimit = .{
                         .min = null,
                         .max = 1.5e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     SAI1Freq_ValueLimit = .{
                         .min = null,
                         .max = 1.13e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     SAI1Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 }
                 SAI1Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.66e8,
                 };
-                break :blk null;
-            };
-            const SAI4BCLockSelectionValue: ?SAI4BCLockSelectionList = blk: {
-                const conf_item = config.SAI4BCLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_SAI4BCLKSOURCE_PLL => SAI4BCLKSOURCE_PLLQ1 = true,
-                        .RCC_SAI4BCLKSOURCE_PLL2 => SAI4BCLKSOURCE_PLLP2 = true,
-                        .RCC_SAI4BCLKSOURCE_PLL3 => SAI4BCLKSOURCE_PLLP3 = true,
-                        .RCC_SAI4BCLKSOURCE_PIN => SAI4BCLKSOURCE_CKIN = true,
-                        .RCC_SAI4BCLKSOURCE_CLKP => SAI4BCLKSOURCE_PER = true,
-                        .RCC_SAI4BCLKSOURCE_SPDIF => SAI4BCLKSOURCE_SPDIF = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_SAI4BCLKSOURCE_PLL;
+                break :blk null;
             };
             const SAI4BFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3403,46 +3733,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.66e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     SAI4BFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.5e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     SAI4BFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.13e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     SAI4BFreq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 }
                 SAI4BFreq_ValueLimit = .{
                     .min = null,
                     .max = 1.66e8,
                 };
-                break :blk null;
-            };
-            const SAI4ACLockSelectionValue: ?SAI4ACLockSelectionList = blk: {
-                const conf_item = config.SAI4ACLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_SAI4ACLKSOURCE_PLL => SAI4ACLKSOURCE_PLLQ1 = true,
-                        .RCC_SAI4ACLKSOURCE_PLL2 => SAI4ACLKSOURCE_PLLP2 = true,
-                        .RCC_SAI4ACLKSOURCE_PLL3 => SAI4ACLKSOURCE_PLLP3 = true,
-                        .RCC_SAI4ACLKSOURCE_PIN => SAI4ACLKSOURCE_CKIN = true,
-                        .RCC_SAI4ACLKSOURCE_CLKP => SAI4ACLKSOURCE_PER = true,
-                        .RCC_SAI4ACLKSOURCE_SPDIF => SAI4ACLKSOURCE_SPDIF = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_SAI4ACLKSOURCE_PLL;
+                break :blk null;
             };
             const SAI4AFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3450,44 +3770,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.66e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     SAI4AFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.5e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     SAI4AFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.13e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     SAI4AFreq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 }
                 SAI4AFreq_ValueLimit = .{
                     .min = null,
                     .max = 1.66e8,
                 };
-                break :blk null;
-            };
-            const RNGCLockSelectionValue: ?RNGCLockSelectionList = blk: {
-                const conf_item = config.RNGCLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_RNGCLKSOURCE_HSI48 => RNGCLKSOURCE_RC48 = true,
-                        .RCC_RNGCLKSOURCE_PLL => RNGCLKSOURCE_PLLQ1 = true,
-                        .RCC_RNGCLKSOURCE_LSE => RNGCLKSOURCE_LSE = true,
-                        .RCC_RNGCLKSOURCE_LSI => RNGCLKSOURCE_LSI = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_RNGCLKSOURCE_HSI48;
+                break :blk null;
             };
             const RNGFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3495,44 +3807,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 2.5e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     RNGFreq_ValueLimit = .{
                         .min = null,
                         .max = 2e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     RNGFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.5e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     RNGFreq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 }
                 RNGFreq_ValueLimit = .{
                     .min = null,
                     .max = 2.5e8,
                 };
-                break :blk null;
-            };
-            const I2C123CLockSelectionValue: ?I2C123CLockSelectionList = blk: {
-                const conf_item = config.I2C123CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_I2C1235CLKSOURCE_D2PCLK1 => I2C1235CLKSOURCE_PCLK1 = true,
-                        .RCC_I2C1235CLKSOURCE_PLL3 => I2C1235CLKSOURCE_PLLR3 = true,
-                        .RCC_I2C1235CLKSOURCE_HSI => I2C1235CLKSOURCE_HSI = true,
-                        .RCC_I2C1235CLKSOURCE_CSI => I2C1235CLKSOURCE_CSI = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_I2C1235CLKSOURCE_D2PCLK1;
+                break :blk null;
             };
             const I2C123Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3540,44 +3844,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     I2C123Freq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     I2C123Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     I2C123Freq_ValueLimit = .{
                         .min = null,
                         .max = 4.3e7,
                     };
+
                     break :blk null;
                 }
                 I2C123Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const I2C4CLockSelectionValue: ?I2C4CLockSelectionList = blk: {
-                const conf_item = config.I2C4CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_I2C4CLKSOURCE_D3PCLK1 => I2C4CLKSOURCE_PCLK4 = true,
-                        .RCC_I2C4CLKSOURCE_PLL3 => I2C4CLKSOURCE_PLLR3 = true,
-                        .RCC_I2C4CLKSOURCE_HSI => I2C4CLKSOURCE_HSI = true,
-                        .RCC_I2C4CLKSOURCE_CSI => I2C4CLKSOURCE_CSI = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_I2C4CLKSOURCE_D3PCLK1;
+                break :blk null;
             };
             const I2C4Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3585,44 +3881,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     I2C4Freq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     I2C4Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     I2C4Freq_ValueLimit = .{
                         .min = null,
                         .max = 4.3e7,
                     };
+
                     break :blk null;
                 }
                 I2C4Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const SPDIFCLockSelectionValue: ?SPDIFCLockSelectionList = blk: {
-                const conf_item = config.SPDIFCLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_SPDIFRXCLKSOURCE_PLL => SPDIFCLKSOURCE_PLL1Q = true,
-                        .RCC_SPDIFRXCLKSOURCE_PLL2 => SPDIFCLKSOURCE_PLL2R = true,
-                        .RCC_SPDIFRXCLKSOURCE_PLL3 => SPDIFCLKSOURCE_PLL3R = true,
-                        .RCC_SPDIFRXCLKSOURCE_HSI => SPDIFCLKSOURCE_HSI = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_SPDIFRXCLKSOURCE_PLL;
+                break :blk null;
             };
             const SPDIFRXFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3630,44 +3918,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 2.5e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     SPDIFRXFreq_ValueLimit = .{
                         .min = null,
                         .max = 2e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     SPDIFRXFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.5e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     SPDIFRXFreq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 }
                 SPDIFRXFreq_ValueLimit = .{
                     .min = null,
                     .max = 2.5e8,
                 };
-                break :blk null;
-            };
-            const QSPICLockSelectionValue: ?QSPICLockSelectionList = blk: {
-                const conf_item = config.QSPICLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_OSPICLKSOURCE_D1HCLK => QSPICLKSOURCE_HCLK3 = true,
-                        .RCC_OSPICLKSOURCE_PLL => QSPICLKSOURCE_PLL1Q = true,
-                        .RCC_OSPICLKSOURCE_PLL2 => QSPICLKSOURCE_PLL2R = true,
-                        .RCC_OSPICLKSOURCE_CLKP => QSPICLKSOURCE_PER = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_QSPICLKSOURCE_D1HCLK;
+                break :blk null;
             };
             const QSPIFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3675,44 +3955,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 3.33e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     QSPIFreq_ValueLimit = .{
                         .min = null,
                         .max = 2e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     QSPIFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.5e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     QSPIFreq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 }
                 QSPIFreq_ValueLimit = .{
                     .min = null,
                     .max = 3.33e8,
                 };
-                break :blk null;
-            };
-            const FMCCLockSelectionValue: ?FMCCLockSelectionList = blk: {
-                const conf_item = config.FMCCLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_FMCCLKSOURCE_D1HCLK => FMCCLKSOURCE_HCLK3 = true,
-                        .RCC_FMCCLKSOURCE_PLL => FMCCLKSOURCE_PLL1Q = true,
-                        .RCC_FMCCLKSOURCE_PLL2 => FMCCLKSOURCE_PLL2R = true,
-                        .RCC_FMCCLKSOURCE_CLKP => FMCCLKSOURCE_PER = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_FMCCLKSOURCE_D1HCLK;
+                break :blk null;
             };
             const FMCFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3720,30 +3992,35 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 2.75e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     FMCFreq_ValueLimit = .{
                         .min = null,
                         .max = 2e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     FMCFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.5e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     FMCFreq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 }
                 FMCFreq_ValueLimit = .{
                     .min = null,
                     .max = 2.75e8,
                 };
+
                 break :blk null;
             };
             const SWPCLockSelectionValue: ?SWPCLockSelectionList = blk: {
@@ -3755,7 +4032,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_SWPMI1CLKSOURCE_D2PCLK1;
+                break :blk conf_item orelse {
+                    SWPCLKSOURCE_HCLK1 = true;
+                    break :blk .RCC_SWPMI1CLKSOURCE_D2PCLK1;
+                };
             };
             const SWPMI1Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3763,42 +4043,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     SWPMI1Freq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     SWPMI1Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     SWPMI1Freq_ValueLimit = .{
                         .min = null,
                         .max = 4.3e7,
                     };
+
                     break :blk null;
                 }
                 SWPMI1Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const SDMMC1CLockSelectionValue: ?SDMMC1CLockSelectionList = blk: {
-                const conf_item = config.SDMMC1CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_SDMMCCLKSOURCE_PLL => SDMMC1CLKSOURCE_PLL1Q = true,
-                        .RCC_SDMMCCLKSOURCE_PLL2 => SDMMC1CLKSOURCE_PLL2R = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_SDMMCCLKSOURCE_PLL;
+                break :blk null;
             };
             const SDMMCFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3806,30 +4080,35 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 2.5e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     SDMMCFreq_ValueLimit = .{
                         .min = null,
                         .max = 2e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     SDMMCFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.5e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     SDMMCFreq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 }
                 SDMMCFreq_ValueLimit = .{
                     .min = null,
                     .max = 2.5e8,
                 };
+
                 break :blk null;
             };
             const DFSDMCLockSelectionValue: ?DFSDMCLockSelectionList = blk: {
@@ -3841,7 +4120,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_DFSDM1CLKSOURCE_D2PCLK1;
+                break :blk conf_item orelse {
+                    DFSDMCLKSOURCE_PCLK2 = true;
+                    break :blk .RCC_DFSDM1CLKSOURCE_D2PCLK1;
+                };
             };
             const DFSDMFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3849,46 +4131,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 2.75e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     DFSDMFreq_ValueLimit = .{
                         .min = null,
                         .max = 2e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     DFSDMFreq_ValueLimit = .{
                         .min = null,
                         .max = 1.4e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     DFSDMFreq_ValueLimit = .{
                         .min = null,
                         .max = 8.5e7,
                     };
+
                     break :blk null;
                 }
                 DFSDMFreq_ValueLimit = .{
                     .min = null,
                     .max = 2.75e8,
                 };
-                break :blk null;
-            };
-            const USART16CLockSelectionValue: ?USART16CLockSelectionList = blk: {
-                const conf_item = config.USART16CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_USART16910CLKSOURCE_D2PCLK2 => USART16CLKSOURCE_PCLK2 = true,
-                        .RCC_USART16910CLKSOURCE_PLL2 => USART16CLKSOURCE_PLLQ2 = true,
-                        .RCC_USART16910CLKSOURCE_PLL3 => USART16CLKSOURCE_PLLQ3 = true,
-                        .RCC_USART16910CLKSOURCE_HSI => USART16CLKSOURCE_HSI = true,
-                        .RCC_USART16910CLKSOURCE_CSI => USART16CLKSOURCE_CSI = true,
-                        .RCC_USART16910CLKSOURCE_LSE => USART16CLKSOURCE_LSE = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_USART16910CLKSOURCE_D2PCLK2;
+                break :blk null;
             };
             const USART16Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3896,46 +4168,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     USART16Freq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     USART16Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     USART16Freq_ValueLimit = .{
                         .min = null,
                         .max = 4.3e7,
                     };
+
                     break :blk null;
                 }
                 USART16Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const USART234578CLockSelectionValue: ?USART234578CLockSelectionList = blk: {
-                const conf_item = config.USART234578CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_USART234578CLKSOURCE_D2PCLK1 => USART2CLKSOURCE_PCLK1 = true,
-                        .RCC_USART234578CLKSOURCE_PLL2 => USART2CLKSOURCE_PLLQ2 = true,
-                        .RCC_USART234578CLKSOURCE_PLL3 => USART2CLKSOURCE_PLLQ3 = true,
-                        .RCC_USART234578CLKSOURCE_HSI => USART2CLKSOURCE_HSI = true,
-                        .RCC_USART234578CLKSOURCE_CSI => USART2CLKSOURCE_CSI = true,
-                        .RCC_USART234578CLKSOURCE_LSE => USART2CLKSOURCE_LSE = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_USART234578CLKSOURCE_D2PCLK1;
+                break :blk null;
             };
             const USART234578Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3943,46 +4205,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     USART234578Freq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     USART234578Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     USART234578Freq_ValueLimit = .{
                         .min = null,
                         .max = 4.3e7,
                     };
+
                     break :blk null;
                 }
                 USART234578Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const LPUART1CLockSelectionValue: ?LPUART1CLockSelectionList = blk: {
-                const conf_item = config.LPUART1CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_LPUART1CLKSOURCE_D3PCLK1 => LPUART1CLKSOURCE_PCLK3 = true,
-                        .RCC_LPUART1CLKSOURCE_PLL2 => LPUART1CLKSOURCE_PLL2Q = true,
-                        .RCC_LPUART1CLKSOURCE_PLL3 => LPUART1CLKSOURCE_PLL3Q = true,
-                        .RCC_LPUART1CLKSOURCE_HSI => LPUART1CLKSOURCE_HSI = true,
-                        .RCC_LPUART1CLKSOURCE_CSI => LPUART1CLKSOURCE_CSI = true,
-                        .RCC_LPUART1CLKSOURCE_LSE => LPUART1CLKSOURCE_LSE = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_LPUART1CLKSOURCE_D3PCLK1;
+                break :blk null;
             };
             const LPUART1Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -3990,46 +4242,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     LPUART1Freq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     LPUART1Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     LPUART1Freq_ValueLimit = .{
                         .min = null,
                         .max = 4.3e7,
                     };
+
                     break :blk null;
                 }
                 LPUART1Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const LPTIM1CLockSelectionValue: ?LPTIM1CLockSelectionList = blk: {
-                const conf_item = config.LPTIM1CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_LPTIM1CLKSOURCE_D2PCLK1 => LPTIM1CLKSOURCE_PCLK1 = true,
-                        .RCC_LPTIM1CLKSOURCE_PLL2 => LPTIM1CLKSOURCE_PLLP2 = true,
-                        .RCC_LPTIM1CLKSOURCE_PLL3 => LPTIM1CLKSOURCE_PLLR3 = true,
-                        .RCC_LPTIM1CLKSOURCE_LSE => LPTIM1CLKSOURCE_LSE = true,
-                        .RCC_LPTIM1CLKSOURCE_LSI => LPTIM1CLKSOURCE_LSI = true,
-                        .RCC_LPTIM1CLKSOURCE_CLKP => LPTIM1CLKSOURCE_PER = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_LPTIM1CLKSOURCE_D2PCLK1;
+                break :blk null;
             };
             const LPTIM1Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -4037,46 +4279,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     LPTIM1Freq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     LPTIM1Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     LPTIM1Freq_ValueLimit = .{
                         .min = null,
                         .max = 4.3e7,
                     };
+
                     break :blk null;
                 }
                 LPTIM1Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const LPTIM345CLockSelectionValue: ?LPTIM345CLockSelectionList = blk: {
-                const conf_item = config.LPTIM345CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_LPTIM345CLKSOURCE_D3PCLK1 => LPTIM345CLKSOURCE_PCLK4 = true,
-                        .RCC_LPTIM345CLKSOURCE_PLL2 => LPTIM345CLKSOURCE_PLLP2 = true,
-                        .RCC_LPTIM345CLKSOURCE_PLL3 => LPTIM345CLKSOURCE_PLLR3 = true,
-                        .RCC_LPTIM345CLKSOURCE_LSE => LPTIM345CLKSOURCE_LSE = true,
-                        .RCC_LPTIM345CLKSOURCE_LSI => LPTIM345CLKSOURCE_LSI = true,
-                        .RCC_LPTIM345CLKSOURCE_CLKP => LPTIM345CLKSOURCE_PER = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_LPTIM345CLKSOURCE_D3PCLK1;
+                break :blk null;
             };
             const LPTIM345Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -4084,46 +4316,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     LPTIM345Freq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     LPTIM345Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     LPTIM345Freq_ValueLimit = .{
                         .min = null,
                         .max = 4.3e7,
                     };
+
                     break :blk null;
                 }
                 LPTIM345Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const LPTIM2CLockSelectionValue: ?LPTIM2CLockSelectionList = blk: {
-                const conf_item = config.LPTIM2CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_LPTIM2CLKSOURCE_D3PCLK1 => LPTIM2CLKSOURCE_PCLK4 = true,
-                        .RCC_LPTIM2CLKSOURCE_PLL2 => LPTIM2CLKSOURCE_PLLP2 = true,
-                        .RCC_LPTIM2CLKSOURCE_PLL3 => LPTIM2CLKSOURCE_PLLR3 = true,
-                        .RCC_LPTIM2CLKSOURCE_LSE => LPTIM2CLKSOURCE_LSE = true,
-                        .RCC_LPTIM2CLKSOURCE_LSI => LPTIM2CLKSOURCE_LSI = true,
-                        .RCC_LPTIM2CLKSOURCE_CLKP => LPTIM2CLKSOURCE_PER = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_LPTIM2CLKSOURCE_D3PCLK1;
+                break :blk null;
             };
             const LPTIM2Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -4131,47 +4353,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     LPTIM2Freq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     LPTIM2Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     LPTIM2Freq_ValueLimit = .{
                         .min = null,
                         .max = 4.3e7,
                     };
+
                     break :blk null;
                 }
                 LPTIM2Freq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const SPI6CLockSelectionValue: ?SPI6CLockSelectionList = blk: {
-                const conf_item = config.SPI6CLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_SPI6CLKSOURCE_D3PCLK1 => SPI6CLKSOURCE_PCLK4 = true,
-                        .RCC_SPI6CLKSOURCE_PLL2 => SPI6CLKSOURCE_PLLQ2 = true,
-                        .RCC_SPI6CLKSOURCE_PLL3 => SPI6CLKSOURCE_PLLQ3 = true,
-                        .RCC_SPI6CLKSOURCE_HSI => SPI6CLKSOURCE_HSI = true,
-                        .RCC_SPI6CLKSOURCE_CSI => SPI6CLKSOURCE_CSI = true,
-                        .RCC_SPI6CLKSOURCE_HSE => SPI6CLKSOURCE_HSE = true,
-                        .RCC_SPI6CLKSOURCE_PIN => SPI6CLKSOURCE_PIN = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_SPI6CLKSOURCE_D3PCLK1;
+                break :blk null;
             };
             const SPI6Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -4179,46 +4390,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 2.5e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     SPI6Freq_ValueLimit = .{
                         .min = null,
                         .max = 1.8e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     SPI6Freq_ValueLimit = .{
                         .min = null,
                         .max = 1.25e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     SPI6Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 }
                 SPI6Freq_ValueLimit = .{
                     .min = null,
                     .max = 2.5e8,
                 };
-                break :blk null;
-            };
-            const Spi45ClockSelectionValue: ?Spi45ClockSelectionList = blk: {
-                const conf_item = config.Spi45ClockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_SPI45CLKSOURCE_D2PCLK1 => SPI45CLKSOURCE_PCLK1 = true,
-                        .RCC_SPI45CLKSOURCE_PLL2 => SPI45CLKSOURCE_PLLQ2 = true,
-                        .RCC_SPI45CLKSOURCE_PLL3 => SPI45CLKSOURCE_PLLQ3 = true,
-                        .RCC_SPI45CLKSOURCE_HSI => SPI45CLKSOURCE_HSI = true,
-                        .RCC_SPI45CLKSOURCE_CSI => SPI45CLKSOURCE_CSI = true,
-                        .RCC_SPI45CLKSOURCE_HSE => SPI45CLKSOURCE_HSE = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_SPI45CLKSOURCE_D2PCLK1;
+                break :blk null;
             };
             const SPI45Freq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -4226,43 +4427,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 2.5e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     SPI45Freq_ValueLimit = .{
                         .min = null,
                         .max = 1.8e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     SPI45Freq_ValueLimit = .{
                         .min = null,
                         .max = 1.25e8,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     SPI45Freq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 }
                 SPI45Freq_ValueLimit = .{
                     .min = null,
                     .max = 2.5e8,
                 };
-                break :blk null;
-            };
-            const USBCLockSelectionValue: ?USBCLockSelectionList = blk: {
-                const conf_item = config.USBCLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_USBCLKSOURCE_PLL => USBCLKSOURCE_PLL1Q = true,
-                        .RCC_USBCLKSOURCE_PLL3 => USBCLKSOURCE_PLL3Q = true,
-                        .RCC_USBCLKSOURCE_HSI48 => USBCLKSOURCE_RC48 = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_USBCLKSOURCE_PLL;
+                break :blk null;
             };
             const USBFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -4270,37 +4464,29 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.25e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     USBFreq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2 or scale3) {
                     USBFreq_ValueLimit = .{
                         .min = null,
                         .max = 5e7,
                     };
+
                     break :blk null;
                 }
                 USBFreq_ValueLimit = .{
                     .min = null,
                     .max = 1.25e8,
                 };
-                break :blk null;
-            };
-            const FDCANCLockSelectionValue: ?FDCANCLockSelectionList = blk: {
-                const conf_item = config.FDCANCLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_FDCANCLKSOURCE_HSE => FDCANCLKSOURCE_HSE = true,
-                        .RCC_FDCANCLKSOURCE_PLL => FDCANCLKSOURCE_PLL1Q = true,
-                        .RCC_FDCANCLKSOURCE_PLL2 => FDCANCLKSOURCE_PLL2Q = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_FDCANCLKSOURCE_PLL;
+                break :blk null;
             };
             const FDCANFreq_ValueValue: ?f32 = blk: {
                 if (scale0) {
@@ -4308,43 +4494,36 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.375e8,
                     };
+
                     break :blk null;
                 } else if (scale1) {
                     FDCANFreq_ValueLimit = .{
                         .min = null,
                         .max = 1e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     FDCANFreq_ValueLimit = .{
                         .min = null,
                         .max = 7.5e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     FDCANFreq_ValueLimit = .{
                         .min = null,
                         .max = 5e7,
                     };
+
                     break :blk null;
                 }
                 FDCANFreq_ValueLimit = .{
                     .min = null,
                     .max = 1.375e8,
                 };
-                break :blk null;
-            };
-            const ADCCLockSelectionValue: ?ADCCLockSelectionList = blk: {
-                const conf_item = config.ADCCLockSelection;
-                if (conf_item) |item| {
-                    switch (item) {
-                        .RCC_ADCCLKSOURCE_PLL2 => ADCCLKSOURCE_PLL2P = true,
-                        .RCC_ADCCLKSOURCE_PLL3 => ADCCLKSOURCE_PLL3R = true,
-                        .RCC_ADCCLKSOURCE_CLKP => ADCCLKSOURCE_PER = true,
-                    }
-                }
 
-                break :blk conf_item orelse .RCC_ADCCLKSOURCE_PLL2;
+                break :blk null;
             };
             const ADCFreq_ValueValue: ?f32 = blk: {
                 if (scale0 or scale1) {
@@ -4352,24 +4531,28 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1.6e8,
                     };
+
                     break :blk null;
                 } else if (scale2) {
                     ADCFreq_ValueLimit = .{
                         .min = null,
                         .max = 6e7,
                     };
+
                     break :blk null;
                 } else if (scale3) {
                     ADCFreq_ValueLimit = .{
                         .min = null,
                         .max = 4e7,
                     };
+
                     break :blk null;
                 }
                 ADCFreq_ValueLimit = .{
                     .min = null,
                     .max = 1.6e8,
                 };
+
                 break :blk null;
             };
             const RCC_CEC_FROM_CSIValue: ?f32 = blk: {
@@ -4385,10 +4568,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_CECCLKSOURCE_LSI;
+                break :blk conf_item orelse {
+                    CECCLKSOURCE_LSI = true;
+                    break :blk .RCC_CECCLKSOURCE_LSI;
+                };
             };
             const CECFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const HRTIMCLockSelectionValue: ?HRTIMCLockSelectionList = blk: {
                 const conf_item = config.HRTIMCLockSelection;
@@ -4399,16 +4585,228 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_HRTIM1CLK_TIMCLK;
+                break :blk conf_item orelse {
+                    HRTIMCLKSOURCE_PCLK2 = true;
+                    break :blk .RCC_HRTIM1CLK_TIMCLK;
+                };
             };
             const HRTIMFreq_ValueValue: ?f32 = blk: {
-                break :blk 32000;
+                break :blk 3.2e4;
+            };
+            const VCOInput1Freq_ValueValue: ?f32 = blk: {
+                if ((SYSCLKSOURCE_PLLCLK) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLL1QCLK, .@"=")) and (config.flags.MCO1Config)) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or (SPI123CLKSOURCE_PLLQ1 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLQ1") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLQ1 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLQ1 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLQ1 and config.flags.SAI4_SAIAUsed_ForRCC) or (RNGCLKSOURCE_PLLQ1 and config.flags.RNGUsed_ForRCC) or (SPDIFCLKSOURCE_PLL1Q and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL1Q and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL1Q and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL1Q and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC)) or (USBCLKSOURCE_PLL1Q and config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC) or (FDCANCLKSOURCE_PLL1Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC))) {
+                    VCOInput1Freq_ValueLimit = .{
+                        .min = 1e6,
+                        .max = 1.6e7,
+                    };
+
+                    break :blk null;
+                }
+                break :blk 9.6e7;
+            };
+            const VCOInput2Freq_ValueValue: ?f32 = blk: {
+                if (((MCO2SOURCE_PLL2PCLK) and (config.flags.MCO2Config)) or (SPI123CLKSOURCE_PLLP2 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP2") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP2 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP2 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP2 and config.flags.SAI4_SAIAUsed_ForRCC) or (LPTIM1CLKSOURCE_PLLP2 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLP2 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLP2 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL2P and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC))) or (USART16CLKSOURCE_PLLQ2 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ2 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL2Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ2 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ2 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (FDCANCLKSOURCE_PLL2Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC)) or (SPDIFCLKSOURCE_PLL2R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL2R and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL2R and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL2R and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC))) {
+                    VCOInput2Freq_ValueLimit = .{
+                        .min = 1e6,
+                        .max = 1.6e7,
+                    };
+
+                    break :blk null;
+                }
+                break :blk 9.6e7;
+            };
+            const VCOInput3Freq_ValueValue: ?f32 = blk: {
+                if ((SPI123CLKSOURCE_PLLP3 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP3") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP3 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP3 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP3 and config.flags.SAI4_SAIAUsed_ForRCC) or (USART16CLKSOURCE_PLLQ3 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ3 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL3Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ3 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ3 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (USBCLKSOURCE_PLL3Q and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC)) or (I2C1235CLKSOURCE_PLLR3 and (config.flags.I2C2Used_ForRCC or config.flags.I2C3Used_ForRCC or config.flags.I2C5Used_ForRCC or config.flags.I2C1Used_ForRCC)) or (I2C4CLKSOURCE_PLLR3 and config.flags.I2C4Used_ForRCC) or (SPDIFCLKSOURCE_PLL3R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (LPTIM1CLKSOURCE_PLLR3 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLR3 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLR3 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL3R and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC)))) {
+                    VCOInput3Freq_ValueLimit = .{
+                        .min = 1e6,
+                        .max = 1.6e7,
+                    };
+
+                    break :blk null;
+                }
+                break :blk 9.6e7;
+            };
+            const PLLUsedValue: ?f32 = blk: {
+                if (TRACECLKSOURCE_PLLCLK and (check_MCU("SWD") or check_MCU("JTAG")) or (SYSCLKSOURCE_PLLCLK) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLL1QCLK, .@"=")) and (config.flags.MCO1Config)) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or (SPI123CLKSOURCE_PLLQ1 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLQ1") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLQ1 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLQ1 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLQ1 and config.flags.SAI4_SAIAUsed_ForRCC) or (RNGCLKSOURCE_PLLQ1 and config.flags.RNGUsed_ForRCC) or (SPDIFCLKSOURCE_PLL1Q and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL1Q and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL1Q and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL1Q and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC)) or (USBCLKSOURCE_PLL1Q and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC)) or (FDCANCLKSOURCE_PLL1Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL1_VCI_RangeValue: ?PLL1_VCI_RangeList = blk: {
+                if (((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 1000000, .@">") or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 1000000, .@"="))) and (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 2000000, .@"<"))) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
+                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_0;
+                    break :blk item;
+                } else if (((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 2000000, .@">") or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 2000000, .@"="))) and (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 4000000, .@"<"))) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
+                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_1;
+                    break :blk item;
+                } else if (((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 4000000, .@">") or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 4000000, .@"="))) and (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 8000000, .@"<"))) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
+                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_2;
+                    break :blk item;
+                } else if (((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 8000000, .@">") or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 8000000, .@"="))) and ((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 16000000, .@"<")) or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 16000000, .@"=")))) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
+                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_3;
+                    break :blk item;
+                } else if (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
+                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_3;
+                    break :blk item;
+                }
+                const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_3;
+                break :blk item;
+            };
+            const PLL1_VCO_SELValue: ?PLL1_VCO_SELList = blk: {
+                if ((check_ref(@TypeOf(PLL1_VCI_RangeValue), PLL1_VCI_RangeValue, .RCC_PLL1VCIRANGE_0, .@"=")) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
+                    const item: PLL1_VCO_SELList = .RCC_PLL1VCOMEDIUM;
+                    break :blk item;
+                } else if (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
+                    const item: PLL1_VCO_SELList = .RCC_PLL1VCOWIDE;
+                    break :blk item;
+                }
+                const item: PLL1_VCO_SELList = .RCC_PLL1VCOWIDE;
+                break :blk item;
+            };
+            const VCO1OutputFreq_ValueValue: ?f32 = blk: {
+                if (((SYSCLKSOURCE_PLLCLK) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLL1QCLK, .@"=")) and (config.flags.MCO1Config)) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or (SPI123CLKSOURCE_PLLQ1 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLQ1") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLQ1 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLQ1 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLQ1 and config.flags.SAI4_SAIAUsed_ForRCC) or (RNGCLKSOURCE_PLLQ1 and config.flags.RNGUsed_ForRCC) or (SPDIFCLKSOURCE_PLL1Q and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL1Q and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL1Q and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL1Q and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC)) or (USBCLKSOURCE_PLL1Q and config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC) or (FDCANCLKSOURCE_PLL1Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC))) and (check_ref(@TypeOf(PLL1_VCO_SELValue), PLL1_VCO_SELValue, .RCC_PLL1VCOWIDE, .@"="))) {
+                    VCO1OutputFreq_ValueLimit = .{
+                        .min = 1.92e8,
+                        .max = 8.36e8,
+                    };
+
+                    break :blk null;
+                } else if ((SYSCLKSOURCE_PLLCLK) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLL1QCLK, .@"=")) and (config.flags.MCO1Config)) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or (SPI123CLKSOURCE_PLLQ1 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLQ1") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLQ1 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLQ1 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLQ1 and config.flags.SAI4_SAIAUsed_ForRCC) or (RNGCLKSOURCE_PLLQ1 and config.flags.RNGUsed_ForRCC) or (SPDIFCLKSOURCE_PLL1Q and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL1Q and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL1Q and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL1Q and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC)) or (USBCLKSOURCE_PLL1Q and config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC) or (FDCANCLKSOURCE_PLL1Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC))) {
+                    VCO1OutputFreq_ValueLimit = .{
+                        .min = 1.5e8,
+                        .max = 4.2e8,
+                    };
+
+                    break :blk null;
+                }
+                break :blk 9.6e7;
+            };
+            const DIVP1Freq_ValueValue: ?f32 = blk: {
+                if ((SYSCLKSOURCE_PLLCLK) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLL1QCLK, .@"=")) and (config.flags.MCO1Config)) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config)) {
+                    DIVP1Freq_ValueLimit = .{
+                        .min = null,
+                        .max = 8.36e8,
+                    };
+
+                    break :blk null;
+                }
+                break :blk 9.6e7;
+            };
+            const PLL2UsedValue: ?f32 = blk: {
+                if (((MCO2SOURCE_PLL2PCLK) and (config.flags.MCO2Config)) or (SPI123CLKSOURCE_PLLP2 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP2") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP2 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP2 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP2 and config.flags.SAI4_SAIAUsed_ForRCC) or (LPTIM1CLKSOURCE_PLLP2 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLP2 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLP2 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL2P and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC))) or (USART16CLKSOURCE_PLLQ2 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ2 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL2Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ2 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ2 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (FDCANCLKSOURCE_PLL2Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC)) or (SPDIFCLKSOURCE_PLL2R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL2R and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL2R and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL2R and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL2_VCI_RangeValue: ?PLL2_VCI_RangeList = blk: {
+                if (((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 1000000, .@">") or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 1000000, .@"="))) and (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 2000000, .@"<"))) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
+                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_0;
+                    break :blk item;
+                } else if (((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 2000000, .@">") or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 2000000, .@"="))) and (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 4000000, .@"<"))) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
+                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_1;
+                    break :blk item;
+                } else if (((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 4000000, .@">") or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 4000000, .@"="))) and (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 8000000, .@"<"))) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
+                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_2;
+                    break :blk item;
+                } else if (((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 8000000, .@">") or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 8000000, .@"="))) and (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 1600000, .@"<")) and ((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 16000000, .@"<")) or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 16000000, .@"=")))) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
+                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_3;
+                    break :blk item;
+                } else if (check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
+                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_3;
+                    break :blk item;
+                }
+                const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_3;
+                break :blk item;
+            };
+            const PLL2_VCO_SELValue: ?PLL2_VCO_SELList = blk: {
+                if ((check_ref(@TypeOf(PLL2_VCI_RangeValue), PLL2_VCI_RangeValue, .RCC_PLL2VCIRANGE_0, .@"=")) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
+                    const item: PLL2_VCO_SELList = .RCC_PLL2VCOMEDIUM;
+                    break :blk item;
+                } else if (check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
+                    const item: PLL2_VCO_SELList = .RCC_PLL2VCOWIDE;
+                    break :blk item;
+                }
+                const item: PLL2_VCO_SELList = .RCC_PLL2VCOWIDE;
+                break :blk item;
+            };
+            const VCO2OutputFreq_ValueValue: ?f32 = blk: {
+                if ((((MCO2SOURCE_PLL2PCLK) and (config.flags.MCO2Config)) or (SPI123CLKSOURCE_PLLP2 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP2") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP2 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP2 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP2 and config.flags.SAI4_SAIAUsed_ForRCC) or (LPTIM1CLKSOURCE_PLLP2 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLP2 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLP2 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL2P and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC))) or (USART16CLKSOURCE_PLLQ2 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ2 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL2Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ2 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ2 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (FDCANCLKSOURCE_PLL2Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC)) or (SPDIFCLKSOURCE_PLL2R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL2R and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL2R and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL2R and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC))) and (check_ref(@TypeOf(PLL2_VCO_SELValue), PLL2_VCO_SELValue, .RCC_PLL2VCOWIDE, .@"="))) {
+                    VCO2OutputFreq_ValueLimit = .{
+                        .min = 1.92e8,
+                        .max = 8.36e8,
+                    };
+
+                    break :blk null;
+                } else if (((MCO2SOURCE_PLL2PCLK) and (config.flags.MCO2Config)) or (SPI123CLKSOURCE_PLLP2 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP2") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP2 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP2 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP2 and config.flags.SAI4_SAIAUsed_ForRCC) or (LPTIM1CLKSOURCE_PLLP2 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLP2 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLP2 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL2P and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC))) or (USART16CLKSOURCE_PLLQ2 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ2 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL2Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ2 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ2 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (FDCANCLKSOURCE_PLL2Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC)) or (SPDIFCLKSOURCE_PLL2R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL2R and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL2R and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL2R and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC))) {
+                    VCO2OutputFreq_ValueLimit = .{
+                        .min = 1.5e8,
+                        .max = 4.2e8,
+                    };
+
+                    break :blk null;
+                }
+                break :blk 9.6e7;
+            };
+            const PLL3UsedValue: ?f32 = blk: {
+                if (config.flags.LTDCUsed_ForRCC or (SPI123CLKSOURCE_PLLP3 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP3") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP3 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP3 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP3 and config.flags.SAI4_SAIAUsed_ForRCC) or (USART16CLKSOURCE_PLLQ3 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ3 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL3Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ3 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ3 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (USBCLKSOURCE_PLL3Q and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC)) or (I2C1235CLKSOURCE_PLLR3 and (config.flags.I2C2Used_ForRCC or config.flags.I2C3Used_ForRCC or config.flags.I2C5Used_ForRCC or config.flags.I2C1Used_ForRCC)) or (I2C4CLKSOURCE_PLLR3 and config.flags.I2C4Used_ForRCC) or (SPDIFCLKSOURCE_PLL3R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (LPTIM1CLKSOURCE_PLLR3 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLR3 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLR3 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL3R and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC)))) {
+                    break :blk 1;
+                }
+                break :blk 0;
+            };
+            const PLL3_VCI_RangeValue: ?PLL3_VCI_RangeList = blk: {
+                if (((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 1000000, .@">") or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 1000000, .@"="))) and (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 2000000, .@"<"))) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
+                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_0;
+                    break :blk item;
+                } else if (((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 2000000, .@">") or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 2000000, .@"="))) and (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 4000000, .@"<"))) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
+                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_1;
+                    break :blk item;
+                } else if (((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 4000000, .@">") or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 4000000, .@"="))) and (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 8000000, .@"<"))) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
+                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_2;
+                    break :blk item;
+                } else if (((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 8000000, .@">") or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 8000000, .@"="))) and ((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 16000000, .@"<")) or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 16000000, .@"=")))) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
+                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_3;
+                    break :blk item;
+                } else if (check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
+                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_3;
+                    break :blk item;
+                }
+                const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_3;
+                break :blk item;
+            };
+            const PLL3_VCO_SELValue: ?PLL3_VCO_SELList = blk: {
+                if ((check_ref(@TypeOf(PLL3_VCI_RangeValue), PLL3_VCI_RangeValue, .RCC_PLL3VCIRANGE_0, .@"=")) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
+                    const item: PLL3_VCO_SELList = .RCC_PLL3VCOMEDIUM;
+                    break :blk item;
+                } else if (check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
+                    const item: PLL3_VCO_SELList = .RCC_PLL3VCOWIDE;
+                    break :blk item;
+                }
+                const item: PLL3_VCO_SELList = .RCC_PLL3VCOWIDE;
+                break :blk item;
+            };
+            const VCO3OutputFreq_ValueValue: ?f32 = blk: {
+                if (((SPI123CLKSOURCE_PLLP3 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP3") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP3 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP3 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP3 and config.flags.SAI4_SAIAUsed_ForRCC) or (USART16CLKSOURCE_PLLQ3 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ3 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL3Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ3 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ3 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (USBCLKSOURCE_PLL3Q and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC)) or (I2C1235CLKSOURCE_PLLR3 and (config.flags.I2C2Used_ForRCC or config.flags.I2C3Used_ForRCC or config.flags.I2C5Used_ForRCC or config.flags.I2C1Used_ForRCC)) or (I2C4CLKSOURCE_PLLR3 and config.flags.I2C4Used_ForRCC) or (SPDIFCLKSOURCE_PLL3R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (LPTIM1CLKSOURCE_PLLR3 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLR3 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLR3 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL3R and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC)))) and (check_ref(@TypeOf(PLL3_VCO_SELValue), PLL3_VCO_SELValue, .RCC_PLL3VCOWIDE, .@"="))) {
+                    VCO3OutputFreq_ValueLimit = .{
+                        .min = 1.92e8,
+                        .max = 8.36e8,
+                    };
+
+                    break :blk null;
+                } else if (((SPI123CLKSOURCE_PLLP3 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP3") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP3 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP3 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP3 and config.flags.SAI4_SAIAUsed_ForRCC) or (USART16CLKSOURCE_PLLQ3 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ3 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL3Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ3 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ3 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (USBCLKSOURCE_PLL3Q and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC)) or (I2C1235CLKSOURCE_PLLR3 and (config.flags.I2C2Used_ForRCC or config.flags.I2C3Used_ForRCC or config.flags.I2C5Used_ForRCC or config.flags.I2C1Used_ForRCC)) or (I2C4CLKSOURCE_PLLR3 and config.flags.I2C4Used_ForRCC) or (SPDIFCLKSOURCE_PLL3R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (LPTIM1CLKSOURCE_PLLR3 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLR3 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLR3 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL3R and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC))))) {
+                    VCO3OutputFreq_ValueLimit = .{
+                        .min = 1.5e8,
+                        .max = 4.2e8,
+                    };
+
+                    break :blk null;
+                }
+                break :blk 9.6e7;
             };
             const VDD_VALUEValue: ?f32 = blk: {
                 const config_val = config.extra.VDD_VALUE;
                 if (config_val) |val| {
                     if (val < 1.62e0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {e} found: {e}
@@ -4423,7 +4821,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 3.6e0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {e} found: {e}
@@ -4440,75 +4838,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk config_val orelse 3.3;
             };
-            const PWR_Regulator_Voltage_ScaleValue: ?PWR_Regulator_Voltage_ScaleList = blk: {
-                if (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 85000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 85000000, .@"=")))) {
-                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
-                    if (conf_item) |item| {
-                        switch (item) {
-                            .PWR_REGULATOR_VOLTAGE_SCALE3 => scale3 = true,
-                            .PWR_REGULATOR_VOLTAGE_SCALE2 => scale2 = true,
-                            .PWR_REGULATOR_VOLTAGE_SCALE1 => scale1 = true,
-                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
-                        }
-                    }
-
-                    break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE3;
-                } else if (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 150000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 150000000, .@"="))) and (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 85000000, .@">"))) {
-                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
-                    if (conf_item) |item| {
-                        switch (item) {
-                            .PWR_REGULATOR_VOLTAGE_SCALE3 => {},
-                            .PWR_REGULATOR_VOLTAGE_SCALE2 => scale2 = true,
-                            .PWR_REGULATOR_VOLTAGE_SCALE1 => scale1 = true,
-                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
-                        }
-                    }
-
-                    break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE2;
-                } else if (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 200000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 200000000, .@"="))) and (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 150000000, .@">"))) {
-                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
-                    if (conf_item) |item| {
-                        switch (item) {
-                            .PWR_REGULATOR_VOLTAGE_SCALE3 => {},
-                            .PWR_REGULATOR_VOLTAGE_SCALE2 => {},
-                            .PWR_REGULATOR_VOLTAGE_SCALE1 => scale1 = true,
-                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
-                        }
-                    }
-
-                    break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE1;
-                } else if (((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 275000000, .@"<")) or (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 275000000, .@"="))) and (check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 200000000, .@">"))) {
-                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
-                    if (conf_item) |item| {
-                        switch (item) {
-                            .PWR_REGULATOR_VOLTAGE_SCALE3 => {},
-                            .PWR_REGULATOR_VOLTAGE_SCALE2 => {},
-                            .PWR_REGULATOR_VOLTAGE_SCALE1 => {},
-                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
-                        }
-                    }
-
-                    break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE0;
-                } else if ((check_ref(@TypeOf(HCLKFreq_ValueValue), HCLKFreq_ValueValue, 275000000, .@">"))) {
-                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
-                    if (conf_item) |item| {
-                        switch (item) {
-                            .PWR_REGULATOR_VOLTAGE_SCALE3 => {},
-                            .PWR_REGULATOR_VOLTAGE_SCALE2 => {},
-                            .PWR_REGULATOR_VOLTAGE_SCALE1 => {},
-                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
-                        }
-                    }
-
-                    break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE0;
-                }
-                break :blk null;
-            };
             const HSE_TimoutValue: ?f32 = blk: {
                 const config_val = config.extra.HSE_Timout;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -4523,7 +4857,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 1073741823) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -4544,7 +4878,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.extra.LSE_Timout;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -4559,7 +4893,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 1073741823) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -4594,10 +4928,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         }
                     }
 
-                    break :blk conf_item orelse .false;
+                    break :blk conf_item orelse null;
                 }
                 if (config.extra.LSE_Drive_Capability) |_| {
-                    try comptime_fail_or_error(error.InvalidConfig,
+                    return comptime_fail_or_error(error.InvalidConfig,
                         \\
                         \\Error on {s} | expr: {s} diagnostic: {s} 
                         \\Value should be null.
@@ -4652,259 +4986,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const item: FLatencyList = .FLASH_LATENCY_0;
                 break :blk item;
             };
-            const VCOInput1Freq_ValueValue: ?f32 = blk: {
-                if ((SYSCLKSOURCE_PLLCLK) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLL1QCLK, .@"=")) and (config.flags.MCO1Config)) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or (SPI123CLKSOURCE_PLLQ1 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLQ1") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLQ1 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLQ1 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLQ1 and config.flags.SAI4_SAIAUsed_ForRCC) or (RNGCLKSOURCE_PLLQ1 and config.flags.RNGUsed_ForRCC) or (SPDIFCLKSOURCE_PLL1Q and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL1Q and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL1Q and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL1Q and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC)) or (USBCLKSOURCE_PLL1Q and config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC) or (FDCANCLKSOURCE_PLL1Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC))) {
-                    const config_val = config.VCOInput1Freq_Value;
-                    if (config_val) |val| {
-                        if (val < 1e6) {
-                            try comptime_fail_or_error(error.InvalidConfig,
-                                \\
-                                \\Error on {s} | expr: {s} diagnostic: {s} 
-                                \\Underflow Value - min: {e} found: {e}
-                                \\note: ranges values may change depending on the configuration
-                                \\
-                            , .{
-                                "VCOInput1Freq_Value",
-                                "(SYSCLKSOURCE_PLLCLK)|((RCC_MCO1Source=RCC_MCO1SOURCE_PLL1QCLK)& (MCO1Config))|((RCC_MCO2Source=RCC_MCO2SOURCE_PLLCLK)& MCO2Config)|(SPI123CLKSOURCE_PLLQ1&(I2S1Used_ForRCC|I2S2Used_ForRCC|I2S3Used_ForRCC|SPI1Used_ForRCC|SPI2Used_ForRCC|SPI3Used_ForRCC))|(SAI23CLKSOURCE_PLLQ1& (SAI2_SAIAUsed_ForRCC|SAI2_SAIBUsed_ForRCC|SAI3_SAIAUsed_ForRCC|SAI3_SAIBUsed_ForRCC))|(SAI1CLKSOURCE_PLLQ1& (SAI1_SAIAUsed_ForRCC|SAI1_SAIBUsed_ForRCC|(DFSDM1Used_ForRCC & SEM2RCC_SAI1_CK_REQUIRED_DFSDM1)))|(SAI4BCLKSOURCE_PLLQ1&SAI4_SAIBUsed_ForRCC )|(SAI4ACLKSOURCE_PLLQ1&SAI4_SAIAUsed_ForRCC )|(RNGCLKSOURCE_PLLQ1&RNGUsed_ForRCC)|(SPDIFCLKSOURCE_PLL1Q& (SPDIFRX1Used_ForRCC|(SAI4_SAIBUsed_ForRCC & SAI4BCLKSOURCE_SPDIF | SAI4_SAIAUsed_ForRCC & SAI4ACLKSOURCE_SPDIF)))|(QSPICLKSOURCE_PLL1Q & (OCTOSPI1Used_ForRCC | OCTOSPI2Used_ForRCC))|(FMCCLKSOURCE_PLL1Q& FMCUsed_ForRCC)|(SDMMC1CLKSOURCE_PLL1Q&(SDMMC1Used_ForRCC|SDMMC2Used_ForRCC ))|(USBCLKSOURCE_PLL1Q & USB_OTG_FSUsed_ForRCC|USB_OTG_HSUsed_ForRCC|USB_OTG_HSEmbeddedPHYUsed_ForRCC)|(FDCANCLKSOURCE_PLL1Q&(FDCAN1Used_ForRCC|FDCAN2Used_ForRCC|FDCAN3Used_ForRCC))",
-                                "No Extra Log",
-                                1e6,
-                                val,
-                            });
-                        }
-                        if (val > 1.6e7) {
-                            try comptime_fail_or_error(error.InvalidConfig,
-                                \\
-                                \\Error on {s} | expr: {s} diagnostic: {s} 
-                                \\Overflow Value - max: {e} found: {e}
-                                \\note: ranges values may change depending on the configuration
-                                \\
-                            , .{
-                                "VCOInput1Freq_Value",
-                                "(SYSCLKSOURCE_PLLCLK)|((RCC_MCO1Source=RCC_MCO1SOURCE_PLL1QCLK)& (MCO1Config))|((RCC_MCO2Source=RCC_MCO2SOURCE_PLLCLK)& MCO2Config)|(SPI123CLKSOURCE_PLLQ1&(I2S1Used_ForRCC|I2S2Used_ForRCC|I2S3Used_ForRCC|SPI1Used_ForRCC|SPI2Used_ForRCC|SPI3Used_ForRCC))|(SAI23CLKSOURCE_PLLQ1& (SAI2_SAIAUsed_ForRCC|SAI2_SAIBUsed_ForRCC|SAI3_SAIAUsed_ForRCC|SAI3_SAIBUsed_ForRCC))|(SAI1CLKSOURCE_PLLQ1& (SAI1_SAIAUsed_ForRCC|SAI1_SAIBUsed_ForRCC|(DFSDM1Used_ForRCC & SEM2RCC_SAI1_CK_REQUIRED_DFSDM1)))|(SAI4BCLKSOURCE_PLLQ1&SAI4_SAIBUsed_ForRCC )|(SAI4ACLKSOURCE_PLLQ1&SAI4_SAIAUsed_ForRCC )|(RNGCLKSOURCE_PLLQ1&RNGUsed_ForRCC)|(SPDIFCLKSOURCE_PLL1Q& (SPDIFRX1Used_ForRCC|(SAI4_SAIBUsed_ForRCC & SAI4BCLKSOURCE_SPDIF | SAI4_SAIAUsed_ForRCC & SAI4ACLKSOURCE_SPDIF)))|(QSPICLKSOURCE_PLL1Q & (OCTOSPI1Used_ForRCC | OCTOSPI2Used_ForRCC))|(FMCCLKSOURCE_PLL1Q& FMCUsed_ForRCC)|(SDMMC1CLKSOURCE_PLL1Q&(SDMMC1Used_ForRCC|SDMMC2Used_ForRCC ))|(USBCLKSOURCE_PLL1Q & USB_OTG_FSUsed_ForRCC|USB_OTG_HSUsed_ForRCC|USB_OTG_HSEmbeddedPHYUsed_ForRCC)|(FDCANCLKSOURCE_PLL1Q&(FDCAN1Used_ForRCC|FDCAN2Used_ForRCC|FDCAN3Used_ForRCC))",
-                                "No Extra Log",
-                                1.6e7,
-                                val,
-                            });
-                        }
-                    }
-                    break :blk config_val orelse 96000000;
-                }
-                if (config.VCOInput1Freq_Value) |val| {
-                    if (val != 9.6e7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Expected Fixed Value: {e} found: {e}
-                            \\note: some values are fixed depending on the clock configuration.
-                            \\
-                            \\
-                        , .{
-                            "VCOInput1Freq_Value",
-                            "Else",
-                            "No Extra Log",
-                            9.6e7,
-                            val,
-                        });
-                    }
-                }
-                break :blk 96000000;
-            };
-            const PLLUsedValue: ?f32 = blk: {
-                if (TRACECLKSOURCE_PLLCLK and (check_MCU("SWD") or check_MCU("JTAG")) or (SYSCLKSOURCE_PLLCLK) or ((check_ref(@TypeOf(RCC_MCO1SourceValue), RCC_MCO1SourceValue, .RCC_MCO1SOURCE_PLL1QCLK, .@"=")) and (config.flags.MCO1Config)) or ((check_ref(@TypeOf(RCC_MCO2SourceValue), RCC_MCO2SourceValue, .RCC_MCO2SOURCE_PLLCLK, .@"=")) and config.flags.MCO2Config) or (SPI123CLKSOURCE_PLLQ1 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLQ1") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLQ1 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLQ1 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLQ1 and config.flags.SAI4_SAIAUsed_ForRCC) or (RNGCLKSOURCE_PLLQ1 and config.flags.RNGUsed_ForRCC) or (SPDIFCLKSOURCE_PLL1Q and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL1Q and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL1Q and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL1Q and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC)) or (USBCLKSOURCE_PLL1Q and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC)) or (FDCANCLKSOURCE_PLL1Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC))) {
-                    break :blk 1;
-                }
-                break :blk 0;
-            };
-            const PLL1_VCI_RangeValue: ?PLL1_VCI_RangeList = blk: {
-                if (((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 1000000, .@">") or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 1000000, .@"="))) and (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 2000000, .@"<"))) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
-                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_0;
-                    break :blk item;
-                } else if (((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 2000000, .@">") or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 2000000, .@"="))) and (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 4000000, .@"<"))) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
-                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_1;
-                    break :blk item;
-                } else if (((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 4000000, .@">") or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 4000000, .@"="))) and (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 8000000, .@"<"))) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
-                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_2;
-                    break :blk item;
-                } else if (((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 8000000, .@">") or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 8000000, .@"="))) and ((check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 16000000, .@"<")) or (check_ref(@TypeOf(VCOInput1Freq_ValueValue), VCOInput1Freq_ValueValue, 16000000, .@"=")))) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
-                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_3;
-                    break :blk item;
-                } else if (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
-                    const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_3;
-                    break :blk item;
-                }
-                const item: PLL1_VCI_RangeList = .RCC_PLL1VCIRANGE_3;
-                break :blk item;
-            };
-            const VCOInput2Freq_ValueValue: ?f32 = blk: {
-                if (((MCO2SOURCE_PLL2PCLK) and (config.flags.MCO2Config)) or (SPI123CLKSOURCE_PLLP2 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP2") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP2 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP2 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP2 and config.flags.SAI4_SAIAUsed_ForRCC) or (LPTIM1CLKSOURCE_PLLP2 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLP2 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLP2 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL2P and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC))) or (USART16CLKSOURCE_PLLQ2 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ2 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL2Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ2 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ2 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (FDCANCLKSOURCE_PLL2Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC)) or (SPDIFCLKSOURCE_PLL2R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL2R and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL2R and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL2R and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC))) {
-                    const config_val = config.VCOInput2Freq_Value;
-                    if (config_val) |val| {
-                        if (val < 1e6) {
-                            try comptime_fail_or_error(error.InvalidConfig,
-                                \\
-                                \\Error on {s} | expr: {s} diagnostic: {s} 
-                                \\Underflow Value - min: {e} found: {e}
-                                \\note: ranges values may change depending on the configuration
-                                \\
-                            , .{
-                                "VCOInput2Freq_Value",
-                                " ((MCO2SOURCE_PLL2PCLK)& (MCO2Config))|(SPI123CLKSOURCE_PLLP2&(I2S1Used_ForRCC|I2S2Used_ForRCC|I2S3Used_ForRCC|SPI1Used_ForRCC|SPI2Used_ForRCC|SPI3Used_ForRCC))|(SAI23CLKSOURCE_PLLP2& (SAI2_SAIAUsed_ForRCC|SAI2_SAIBUsed_ForRCC|SAI3_SAIAUsed_ForRCC|SAI3_SAIBUsed_ForRCC))|(SAI1CLKSOURCE_PLLP2& (SAI1_SAIAUsed_ForRCC|SAI1_SAIBUsed_ForRCC|(DFSDM1Used_ForRCC & SEM2RCC_SAI1_CK_REQUIRED_DFSDM1)))|(SAI4BCLKSOURCE_PLLP2&SAI4_SAIBUsed_ForRCC )|(SAI4ACLKSOURCE_PLLP2&SAI4_SAIAUsed_ForRCC ) |(LPTIM1CLKSOURCE_PLLP2 & LPTIM1Used_ForRCC)|(LPTIM345CLKSOURCE_PLLP2&(LPTIM3Used_ForRCC|LPTIM4Used_ForRCC|LPTIM5Used_ForRCC))|(LPTIM2CLKSOURCE_PLLP2&LPTIM2Used_ForRCC)|(ADCCLKSOURCE_PLL2P&((USE_ADC1&ADC1UsedAsynchronousCLK_ForRCC)|(USE_ADC2&ADC2UsedAsynchronousCLK_ForRCC)|(USE_ADC3&ADC3UsedAsynchronousCLK_ForRCC)))|(USART16CLKSOURCE_PLLQ2&(USART6Used_ForRCC|USART1Used_ForRCC|USART10Used_ForRCC|UART9Used_ForRCC))|(USART2CLKSOURCE_PLLQ2& (USART3Used_ForRCC|USART2Used_ForRCC|UART4Used_ForRCC|UART7Used_ForRCC|UART8Used_ForRCC|UART5Used_ForRCC))|(LPUART1CLKSOURCE_PLL2Q&LPUARTUsed_ForRCC)|(SPI6CLKSOURCE_PLLQ2&(SPI6Used_ForRCC|I2S6Used_ForRCC))|(SPI45CLKSOURCE_PLLQ2&(SPI4Used_ForRCC|SPI5Used_ForRCC))|(FDCANCLKSOURCE_PLL2Q&(FDCAN1Used_ForRCC|FDCAN2Used_ForRCC|FDCAN3Used_ForRCC))|(SPDIFCLKSOURCE_PLL2R&(SPDIFRX1Used_ForRCC|(SAI4_SAIBUsed_ForRCC & SAI4BCLKSOURCE_SPDIF | SAI4_SAIAUsed_ForRCC & SAI4ACLKSOURCE_SPDIF)))|(QSPICLKSOURCE_PLL2R&(OCTOSPI1Used_ForRCC | OCTOSPI2Used_ForRCC))|(FMCCLKSOURCE_PLL2R&FMCUsed_ForRCC)|(SDMMC1CLKSOURCE_PLL2R&(SDMMC1Used_ForRCC|SDMMC2Used_ForRCC))",
-                                "No Extra Log",
-                                1e6,
-                                val,
-                            });
-                        }
-                        if (val > 1.6e7) {
-                            try comptime_fail_or_error(error.InvalidConfig,
-                                \\
-                                \\Error on {s} | expr: {s} diagnostic: {s} 
-                                \\Overflow Value - max: {e} found: {e}
-                                \\note: ranges values may change depending on the configuration
-                                \\
-                            , .{
-                                "VCOInput2Freq_Value",
-                                " ((MCO2SOURCE_PLL2PCLK)& (MCO2Config))|(SPI123CLKSOURCE_PLLP2&(I2S1Used_ForRCC|I2S2Used_ForRCC|I2S3Used_ForRCC|SPI1Used_ForRCC|SPI2Used_ForRCC|SPI3Used_ForRCC))|(SAI23CLKSOURCE_PLLP2& (SAI2_SAIAUsed_ForRCC|SAI2_SAIBUsed_ForRCC|SAI3_SAIAUsed_ForRCC|SAI3_SAIBUsed_ForRCC))|(SAI1CLKSOURCE_PLLP2& (SAI1_SAIAUsed_ForRCC|SAI1_SAIBUsed_ForRCC|(DFSDM1Used_ForRCC & SEM2RCC_SAI1_CK_REQUIRED_DFSDM1)))|(SAI4BCLKSOURCE_PLLP2&SAI4_SAIBUsed_ForRCC )|(SAI4ACLKSOURCE_PLLP2&SAI4_SAIAUsed_ForRCC ) |(LPTIM1CLKSOURCE_PLLP2 & LPTIM1Used_ForRCC)|(LPTIM345CLKSOURCE_PLLP2&(LPTIM3Used_ForRCC|LPTIM4Used_ForRCC|LPTIM5Used_ForRCC))|(LPTIM2CLKSOURCE_PLLP2&LPTIM2Used_ForRCC)|(ADCCLKSOURCE_PLL2P&((USE_ADC1&ADC1UsedAsynchronousCLK_ForRCC)|(USE_ADC2&ADC2UsedAsynchronousCLK_ForRCC)|(USE_ADC3&ADC3UsedAsynchronousCLK_ForRCC)))|(USART16CLKSOURCE_PLLQ2&(USART6Used_ForRCC|USART1Used_ForRCC|USART10Used_ForRCC|UART9Used_ForRCC))|(USART2CLKSOURCE_PLLQ2& (USART3Used_ForRCC|USART2Used_ForRCC|UART4Used_ForRCC|UART7Used_ForRCC|UART8Used_ForRCC|UART5Used_ForRCC))|(LPUART1CLKSOURCE_PLL2Q&LPUARTUsed_ForRCC)|(SPI6CLKSOURCE_PLLQ2&(SPI6Used_ForRCC|I2S6Used_ForRCC))|(SPI45CLKSOURCE_PLLQ2&(SPI4Used_ForRCC|SPI5Used_ForRCC))|(FDCANCLKSOURCE_PLL2Q&(FDCAN1Used_ForRCC|FDCAN2Used_ForRCC|FDCAN3Used_ForRCC))|(SPDIFCLKSOURCE_PLL2R&(SPDIFRX1Used_ForRCC|(SAI4_SAIBUsed_ForRCC & SAI4BCLKSOURCE_SPDIF | SAI4_SAIAUsed_ForRCC & SAI4ACLKSOURCE_SPDIF)))|(QSPICLKSOURCE_PLL2R&(OCTOSPI1Used_ForRCC | OCTOSPI2Used_ForRCC))|(FMCCLKSOURCE_PLL2R&FMCUsed_ForRCC)|(SDMMC1CLKSOURCE_PLL2R&(SDMMC1Used_ForRCC|SDMMC2Used_ForRCC))",
-                                "No Extra Log",
-                                1.6e7,
-                                val,
-                            });
-                        }
-                    }
-                    break :blk config_val orelse 96000000;
-                }
-                if (config.VCOInput2Freq_Value) |val| {
-                    if (val != 9.6e7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Expected Fixed Value: {e} found: {e}
-                            \\note: some values are fixed depending on the clock configuration.
-                            \\
-                            \\
-                        , .{
-                            "VCOInput2Freq_Value",
-                            "Else",
-                            "No Extra Log",
-                            9.6e7,
-                            val,
-                        });
-                    }
-                }
-                break :blk 96000000;
-            };
-            const PLL2UsedValue: ?f32 = blk: {
-                if (((MCO2SOURCE_PLL2PCLK) and (config.flags.MCO2Config)) or (SPI123CLKSOURCE_PLLP2 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP2") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP2 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP2 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP2 and config.flags.SAI4_SAIAUsed_ForRCC) or (LPTIM1CLKSOURCE_PLLP2 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLP2 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLP2 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL2P and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC))) or (USART16CLKSOURCE_PLLQ2 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ2 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL2Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ2 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ2 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (FDCANCLKSOURCE_PLL2Q and (config.flags.FDCAN1Used_ForRCC or config.flags.FDCAN2Used_ForRCC or config.flags.FDCAN3Used_ForRCC)) or (SPDIFCLKSOURCE_PLL2R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (QSPICLKSOURCE_PLL2R and (config.flags.OCTOSPI1Used_ForRCC or config.flags.OCTOSPI2Used_ForRCC)) or (FMCCLKSOURCE_PLL2R and config.flags.FMCUsed_ForRCC) or (SDMMC1CLKSOURCE_PLL2R and (config.flags.SDMMC1Used_ForRCC or config.flags.SDMMC2Used_ForRCC))) {
-                    break :blk 1;
-                }
-                break :blk 0;
-            };
-            const PLL2_VCI_RangeValue: ?PLL2_VCI_RangeList = blk: {
-                if (((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 1000000, .@">") or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 1000000, .@"="))) and (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 2000000, .@"<"))) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
-                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_0;
-                    break :blk item;
-                } else if (((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 2000000, .@">") or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 2000000, .@"="))) and (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 4000000, .@"<"))) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
-                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_1;
-                    break :blk item;
-                } else if (((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 4000000, .@">") or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 4000000, .@"="))) and (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 8000000, .@"<"))) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
-                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_2;
-                    break :blk item;
-                } else if (((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 8000000, .@">") or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 8000000, .@"="))) and (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 1600000, .@"<")) and ((check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 16000000, .@"<")) or (check_ref(@TypeOf(VCOInput2Freq_ValueValue), VCOInput2Freq_ValueValue, 16000000, .@"=")))) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
-                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_3;
-                    break :blk item;
-                } else if (check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
-                    const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_3;
-                    break :blk item;
-                }
-                const item: PLL2_VCI_RangeList = .RCC_PLL2VCIRANGE_3;
-                break :blk item;
-            };
-            const VCOInput3Freq_ValueValue: ?f32 = blk: {
-                if ((SPI123CLKSOURCE_PLLP3 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP3") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP3 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP3 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP3 and config.flags.SAI4_SAIAUsed_ForRCC) or (USART16CLKSOURCE_PLLQ3 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ3 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL3Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ3 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ3 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (USBCLKSOURCE_PLL3Q and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC)) or (I2C1235CLKSOURCE_PLLR3 and (config.flags.I2C2Used_ForRCC or config.flags.I2C3Used_ForRCC or config.flags.I2C5Used_ForRCC or config.flags.I2C1Used_ForRCC)) or (I2C4CLKSOURCE_PLLR3 and config.flags.I2C4Used_ForRCC) or (SPDIFCLKSOURCE_PLL3R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (LPTIM1CLKSOURCE_PLLR3 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLR3 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLR3 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL3R and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC)))) {
-                    const config_val = config.VCOInput3Freq_Value;
-                    if (config_val) |val| {
-                        if (val < 1e6) {
-                            try comptime_fail_or_error(error.InvalidConfig,
-                                \\
-                                \\Error on {s} | expr: {s} diagnostic: {s} 
-                                \\Underflow Value - min: {e} found: {e}
-                                \\note: ranges values may change depending on the configuration
-                                \\
-                            , .{
-                                "VCOInput3Freq_Value",
-                                "(SPI123CLKSOURCE_PLLP3&(I2S1Used_ForRCC|I2S2Used_ForRCC|I2S3Used_ForRCC|SPI1Used_ForRCC|SPI2Used_ForRCC|SPI3Used_ForRCC))|(SAI23CLKSOURCE_PLLP3& (SAI2_SAIAUsed_ForRCC|SAI2_SAIBUsed_ForRCC|SAI3_SAIAUsed_ForRCC|SAI3_SAIBUsed_ForRCC))|(SAI1CLKSOURCE_PLLP3& (SAI1_SAIAUsed_ForRCC|SAI1_SAIBUsed_ForRCC|(DFSDM1Used_ForRCC & SEM2RCC_SAI1_CK_REQUIRED_DFSDM1)))|(SAI4BCLKSOURCE_PLLP3&SAI4_SAIBUsed_ForRCC )|(SAI4ACLKSOURCE_PLLP3&SAI4_SAIAUsed_ForRCC ) |(USART16CLKSOURCE_PLLQ3&(USART6Used_ForRCC|USART1Used_ForRCC|USART10Used_ForRCC|UART9Used_ForRCC))|(USART2CLKSOURCE_PLLQ3& (USART3Used_ForRCC|USART2Used_ForRCC|UART4Used_ForRCC|UART7Used_ForRCC|UART8Used_ForRCC|UART5Used_ForRCC))|(LPUART1CLKSOURCE_PLL3Q&LPUARTUsed_ForRCC)|(SPI6CLKSOURCE_PLLQ3&(SPI6Used_ForRCC|I2S6Used_ForRCC))|(SPI45CLKSOURCE_PLLQ3&(SPI4Used_ForRCC|SPI5Used_ForRCC))|(USBCLKSOURCE_PLL3Q &( USB_OTG_FSUsed_ForRCC|USB_OTG_HSUsed_ForRCC|USB_OTG_HSEmbeddedPHYUsed_ForRCC))|(I2C1235CLKSOURCE_PLLR3&(I2C2Used_ForRCC|I2C3Used_ForRCC|I2C5Used_ForRCC|I2C1Used_ForRCC))|(I2C4CLKSOURCE_PLLR3&I2C4Used_ForRCC)|(SPDIFCLKSOURCE_PLL3R&(SPDIFRX1Used_ForRCC|(SAI4_SAIBUsed_ForRCC & SAI4BCLKSOURCE_SPDIF | SAI4_SAIAUsed_ForRCC & SAI4ACLKSOURCE_SPDIF)))|(LPTIM1CLKSOURCE_PLLR3&LPTIM1Used_ForRCC)|(LPTIM345CLKSOURCE_PLLR3&(LPTIM3Used_ForRCC|LPTIM4Used_ForRCC|LPTIM5Used_ForRCC))|(LPTIM2CLKSOURCE_PLLR3&LPTIM2Used_ForRCC)|(ADCCLKSOURCE_PLL3R&((USE_ADC1&ADC1UsedAsynchronousCLK_ForRCC)|(USE_ADC2&ADC2UsedAsynchronousCLK_ForRCC)|(USE_ADC3&ADC3UsedAsynchronousCLK_ForRCC)))",
-                                "No Extra Log",
-                                1e6,
-                                val,
-                            });
-                        }
-                        if (val > 1.6e7) {
-                            try comptime_fail_or_error(error.InvalidConfig,
-                                \\
-                                \\Error on {s} | expr: {s} diagnostic: {s} 
-                                \\Overflow Value - max: {e} found: {e}
-                                \\note: ranges values may change depending on the configuration
-                                \\
-                            , .{
-                                "VCOInput3Freq_Value",
-                                "(SPI123CLKSOURCE_PLLP3&(I2S1Used_ForRCC|I2S2Used_ForRCC|I2S3Used_ForRCC|SPI1Used_ForRCC|SPI2Used_ForRCC|SPI3Used_ForRCC))|(SAI23CLKSOURCE_PLLP3& (SAI2_SAIAUsed_ForRCC|SAI2_SAIBUsed_ForRCC|SAI3_SAIAUsed_ForRCC|SAI3_SAIBUsed_ForRCC))|(SAI1CLKSOURCE_PLLP3& (SAI1_SAIAUsed_ForRCC|SAI1_SAIBUsed_ForRCC|(DFSDM1Used_ForRCC & SEM2RCC_SAI1_CK_REQUIRED_DFSDM1)))|(SAI4BCLKSOURCE_PLLP3&SAI4_SAIBUsed_ForRCC )|(SAI4ACLKSOURCE_PLLP3&SAI4_SAIAUsed_ForRCC ) |(USART16CLKSOURCE_PLLQ3&(USART6Used_ForRCC|USART1Used_ForRCC|USART10Used_ForRCC|UART9Used_ForRCC))|(USART2CLKSOURCE_PLLQ3& (USART3Used_ForRCC|USART2Used_ForRCC|UART4Used_ForRCC|UART7Used_ForRCC|UART8Used_ForRCC|UART5Used_ForRCC))|(LPUART1CLKSOURCE_PLL3Q&LPUARTUsed_ForRCC)|(SPI6CLKSOURCE_PLLQ3&(SPI6Used_ForRCC|I2S6Used_ForRCC))|(SPI45CLKSOURCE_PLLQ3&(SPI4Used_ForRCC|SPI5Used_ForRCC))|(USBCLKSOURCE_PLL3Q &( USB_OTG_FSUsed_ForRCC|USB_OTG_HSUsed_ForRCC|USB_OTG_HSEmbeddedPHYUsed_ForRCC))|(I2C1235CLKSOURCE_PLLR3&(I2C2Used_ForRCC|I2C3Used_ForRCC|I2C5Used_ForRCC|I2C1Used_ForRCC))|(I2C4CLKSOURCE_PLLR3&I2C4Used_ForRCC)|(SPDIFCLKSOURCE_PLL3R&(SPDIFRX1Used_ForRCC|(SAI4_SAIBUsed_ForRCC & SAI4BCLKSOURCE_SPDIF | SAI4_SAIAUsed_ForRCC & SAI4ACLKSOURCE_SPDIF)))|(LPTIM1CLKSOURCE_PLLR3&LPTIM1Used_ForRCC)|(LPTIM345CLKSOURCE_PLLR3&(LPTIM3Used_ForRCC|LPTIM4Used_ForRCC|LPTIM5Used_ForRCC))|(LPTIM2CLKSOURCE_PLLR3&LPTIM2Used_ForRCC)|(ADCCLKSOURCE_PLL3R&((USE_ADC1&ADC1UsedAsynchronousCLK_ForRCC)|(USE_ADC2&ADC2UsedAsynchronousCLK_ForRCC)|(USE_ADC3&ADC3UsedAsynchronousCLK_ForRCC)))",
-                                "No Extra Log",
-                                1.6e7,
-                                val,
-                            });
-                        }
-                    }
-                    break :blk config_val orelse 96000000;
-                }
-                if (config.VCOInput3Freq_Value) |val| {
-                    if (val != 9.6e7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Expected Fixed Value: {e} found: {e}
-                            \\note: some values are fixed depending on the clock configuration.
-                            \\
-                            \\
-                        , .{
-                            "VCOInput3Freq_Value",
-                            "Else",
-                            "No Extra Log",
-                            9.6e7,
-                            val,
-                        });
-                    }
-                }
-                break :blk 96000000;
-            };
-            const PLL3UsedValue: ?f32 = blk: {
-                if (config.flags.LTDCUsed_ForRCC or (SPI123CLKSOURCE_PLLP3 and (config.flags.I2S1Used_ForRCC or config.flags.I2S2Used_ForRCC or config.flags.I2S3Used_ForRCC or config.flags.SPI1Used_ForRCC or config.flags.SPI2Used_ForRCC or config.flags.SPI3Used_ForRCC)) or (check_MCU("SAI23CLKSOURCE_PLLP3") and (config.flags.SAI2_SAIAUsed_ForRCC or config.flags.SAI2_SAIBUsed_ForRCC or config.flags.SAI3_SAIAUsed_ForRCC or config.flags.SAI3_SAIBUsed_ForRCC)) or (SAI1CLKSOURCE_PLLP3 and (config.flags.SAI1_SAIAUsed_ForRCC or config.flags.SAI1_SAIBUsed_ForRCC or (config.flags.DFSDM1Used_ForRCC and check_MCU("SEM2RCC_SAI1_CK_REQUIRED_DFSDM1")))) or (SAI4BCLKSOURCE_PLLP3 and config.flags.SAI4_SAIBUsed_ForRCC) or (SAI4ACLKSOURCE_PLLP3 and config.flags.SAI4_SAIAUsed_ForRCC) or (USART16CLKSOURCE_PLLQ3 and (config.flags.USART6Used_ForRCC or config.flags.USART1Used_ForRCC or config.flags.USART10Used_ForRCC or config.flags.UART9Used_ForRCC)) or (USART2CLKSOURCE_PLLQ3 and (config.flags.USART3Used_ForRCC or config.flags.USART2Used_ForRCC or config.flags.UART4Used_ForRCC or config.flags.UART7Used_ForRCC or config.flags.UART8Used_ForRCC or config.flags.UART5Used_ForRCC)) or (LPUART1CLKSOURCE_PLL3Q and config.flags.LPUARTUsed_ForRCC) or (SPI6CLKSOURCE_PLLQ3 and (config.flags.SPI6Used_ForRCC or config.flags.I2S6Used_ForRCC)) or (SPI45CLKSOURCE_PLLQ3 and (config.flags.SPI4Used_ForRCC or config.flags.SPI5Used_ForRCC)) or (USBCLKSOURCE_PLL3Q and (config.flags.USB_OTG_FSUsed_ForRCC or config.flags.USB_OTG_HSUsed_ForRCC or config.flags.USB_OTG_HSEmbeddedPHYUsed_ForRCC)) or (I2C1235CLKSOURCE_PLLR3 and (config.flags.I2C2Used_ForRCC or config.flags.I2C3Used_ForRCC or config.flags.I2C5Used_ForRCC or config.flags.I2C1Used_ForRCC)) or (I2C4CLKSOURCE_PLLR3 and config.flags.I2C4Used_ForRCC) or (SPDIFCLKSOURCE_PLL3R and (config.flags.SPDIFRX1Used_ForRCC or (config.flags.SAI4_SAIBUsed_ForRCC and SAI4BCLKSOURCE_SPDIF or config.flags.SAI4_SAIAUsed_ForRCC and SAI4ACLKSOURCE_SPDIF))) or (LPTIM1CLKSOURCE_PLLR3 and config.flags.LPTIM1Used_ForRCC) or (LPTIM345CLKSOURCE_PLLR3 and (config.flags.LPTIM3Used_ForRCC or config.flags.LPTIM4Used_ForRCC or config.flags.LPTIM5Used_ForRCC)) or (LPTIM2CLKSOURCE_PLLR3 and config.flags.LPTIM2Used_ForRCC) or (ADCCLKSOURCE_PLL3R and ((config.flags.USE_ADC1 and config.flags.ADC1UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC2 and config.flags.ADC2UsedAsynchronousCLK_ForRCC) or (config.flags.USE_ADC3 and config.flags.ADC3UsedAsynchronousCLK_ForRCC)))) {
-                    break :blk 1;
-                }
-                break :blk 0;
-            };
-            const PLL3_VCI_RangeValue: ?PLL3_VCI_RangeList = blk: {
-                if (((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 1000000, .@">") or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 1000000, .@"="))) and (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 2000000, .@"<"))) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
-                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_0;
-                    break :blk item;
-                } else if (((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 2000000, .@">") or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 2000000, .@"="))) and (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 4000000, .@"<"))) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
-                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_1;
-                    break :blk item;
-                } else if (((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 4000000, .@">") or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 4000000, .@"="))) and (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 8000000, .@"<"))) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
-                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_2;
-                    break :blk item;
-                } else if (((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 8000000, .@">") or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 8000000, .@"="))) and ((check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 16000000, .@"<")) or (check_ref(@TypeOf(VCOInput3Freq_ValueValue), VCOInput3Freq_ValueValue, 16000000, .@"=")))) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
-                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_3;
-                    break :blk item;
-                } else if (check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
-                    const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_3;
-                    break :blk item;
-                }
-                const item: PLL3_VCI_RangeList = .RCC_PLL3VCIRANGE_3;
-                break :blk item;
-            };
             const PrescalerValue: ?PrescalerList = blk: {
                 if (!config.flags.CRSActivatedSourceLSE and !config.flags.CRSActivatedSourceUSB and !config.flags.CRSActivatedSourceGPIO) {
                     if (config.extra.Prescaler) |_| {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Value should be null.
@@ -4929,7 +5014,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_CRS_SYNC_DIV1;
+                break :blk conf_item orelse {
+                    RccCrsSyncDiv1 = true;
+                    break :blk .RCC_CRS_SYNC_DIV1;
+                };
             };
             const SourceValue: ?SourceList = blk: {
                 if (!config.flags.CRSActivatedSourceLSE and !config.flags.CRSActivatedSourceUSB and !config.flags.CRSActivatedSourceGPIO) {
@@ -4950,7 +5038,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             const PolarityValue: ?PolarityList = blk: {
                 if (!config.flags.CRSActivatedSourceLSE and !config.flags.CRSActivatedSourceUSB and !config.flags.CRSActivatedSourceGPIO) {
                     if (config.extra.Polarity) |_| {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Value should be null.
@@ -4974,7 +5062,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             const ReloadValueTypeValue: ?ReloadValueTypeList = blk: {
                 if (!config.flags.CRSActivatedSourceLSE and !config.flags.CRSActivatedSourceUSB and !config.flags.CRSActivatedSourceGPIO) {
                     if (config.extra.ReloadValueType) |_| {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Value should be null.
@@ -4993,12 +5081,15 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .automatic;
+                break :blk conf_item orelse {
+                    AutomaticRelaod = true;
+                    break :blk .automatic;
+                };
             };
             const ReloadValueValue: ?f32 = blk: {
                 if (!config.flags.CRSActivatedSourceLSE and !config.flags.CRSActivatedSourceUSB and !config.flags.CRSActivatedSourceGPIO) {
                     if (config.extra.ReloadValue) |_| {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Value should be null.
@@ -5010,7 +5101,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     break :blk null;
                 } else if (AutomaticRelaod) {
                     if (config.extra.ReloadValue) |_| {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Value should be null.
@@ -5024,7 +5115,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.extra.ReloadValue;
                     if (config_val) |val| {
                         if (val < 0) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -5039,7 +5130,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 65535) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -5059,7 +5150,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.extra.ReloadValue;
                     if (config_val) |val| {
                         if (val < 0) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -5074,7 +5165,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 65535) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -5094,7 +5185,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.extra.ReloadValue;
                     if (config_val) |val| {
                         if (val < 0) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -5109,7 +5200,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 65535) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -5129,7 +5220,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.extra.ReloadValue;
                 if (config_val) |val| {
                     if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5144,7 +5235,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 65535) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -5159,12 +5250,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                 }
-                break :blk if (config_val) |i| @as(f32, @floatFromInt(i));
+                break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else null;
             };
             const FsyncValue: ?f32 = blk: {
                 if (!config.flags.CRSActivatedSourceLSE and !config.flags.CRSActivatedSourceUSB and !config.flags.CRSActivatedSourceGPIO) {
                     if (config.extra.Fsync) |_| {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Value should be null.
@@ -5178,7 +5269,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.extra.Fsync;
                     if (config_val) |val| {
                         if (val < 1) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -5193,7 +5284,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 48000000) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -5208,7 +5299,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                     }
-                    break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 1;
+                    break :blk if (config_val) |i| i else 1;
                 } else if (config.flags.CRSActivatedSourceLSE and RccCrsSyncDiv1) {
                     const val: ?f32 = LSE_VALUEValue;
                     break :blk val;
@@ -5260,7 +5351,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 if (config.extra.Fsync) |val| {
                     if (val != 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Expected Fixed Value: {d} found: {d}
@@ -5280,7 +5371,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             const ErrorLimitValueValue: ?f32 = blk: {
                 if (!config.flags.CRSActivatedSourceLSE and !config.flags.CRSActivatedSourceUSB and !config.flags.CRSActivatedSourceGPIO) {
                     if (config.extra.ErrorLimitValue) |_| {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Value should be null.
@@ -5294,7 +5385,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.extra.ErrorLimitValue;
                 if (config_val) |val| {
                     if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5309,7 +5400,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 255) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -5329,7 +5420,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             const HSI48CalibrationValueValue: ?f32 = blk: {
                 if (!config.flags.CRSActivatedSourceLSE and !config.flags.CRSActivatedSourceUSB and !config.flags.CRSActivatedSourceGPIO) {
                     if (config.extra.HSI48CalibrationValue) |_| {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Value should be null.
@@ -5343,7 +5434,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.extra.HSI48CalibrationValue;
                 if (config_val) |val| {
                     if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5358,7 +5449,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 63) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -5392,7 +5483,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.extra.CSICalibrationValue;
                     if (config_val) |val| {
                         if (val < 0) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -5407,7 +5498,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 31) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -5427,7 +5518,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.extra.CSICalibrationValue;
                 if (config_val) |val| {
                     if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5442,7 +5533,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 31) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -5470,7 +5561,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.extra.HSICalibrationValue;
                     if (config_val) |val| {
                         if (val < 0) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -5485,7 +5576,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 127) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -5505,7 +5596,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.extra.HSICalibrationValue;
                 if (config_val) |val| {
                     if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5520,7 +5611,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 127) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -5536,39 +5627,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 64;
-            };
-            const PLL1_VCO_SELValue: ?PLL1_VCO_SELList = blk: {
-                if ((check_ref(@TypeOf(PLL1_VCI_RangeValue), PLL1_VCI_RangeValue, .RCC_PLL1VCIRANGE_0, .@"=")) and check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
-                    const item: PLL1_VCO_SELList = .RCC_PLL1VCOMEDIUM;
-                    break :blk item;
-                } else if (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=")) {
-                    const item: PLL1_VCO_SELList = .RCC_PLL1VCOWIDE;
-                    break :blk item;
-                }
-                const item: PLL1_VCO_SELList = .RCC_PLL1VCOWIDE;
-                break :blk item;
-            };
-            const PLL2_VCO_SELValue: ?PLL2_VCO_SELList = blk: {
-                if ((check_ref(@TypeOf(PLL2_VCI_RangeValue), PLL2_VCI_RangeValue, .RCC_PLL2VCIRANGE_0, .@"=")) and check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
-                    const item: PLL2_VCO_SELList = .RCC_PLL2VCOMEDIUM;
-                    break :blk item;
-                } else if (check_ref(@TypeOf(PLL2UsedValue), PLL2UsedValue, 1, .@"=")) {
-                    const item: PLL2_VCO_SELList = .RCC_PLL2VCOWIDE;
-                    break :blk item;
-                }
-                const item: PLL2_VCO_SELList = .RCC_PLL2VCOWIDE;
-                break :blk item;
-            };
-            const PLL3_VCO_SELValue: ?PLL3_VCO_SELList = blk: {
-                if ((check_ref(@TypeOf(PLL3_VCI_RangeValue), PLL3_VCI_RangeValue, .RCC_PLL3VCIRANGE_0, .@"=")) and check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
-                    const item: PLL3_VCO_SELList = .RCC_PLL3VCOMEDIUM;
-                    break :blk item;
-                } else if (check_ref(@TypeOf(PLL3UsedValue), PLL3UsedValue, 1, .@"=")) {
-                    const item: PLL3_VCO_SELList = .RCC_PLL3VCOWIDE;
-                    break :blk item;
-                }
-                const item: PLL3_VCO_SELList = .RCC_PLL3VCOWIDE;
-                break :blk item;
             };
             const LSIEnableValue: ?LSIEnableList = blk: {
                 const item: LSIEnableList = .true;
@@ -6673,7 +6731,49 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 .parents = &.{},
             };
 
-            const HSIRC_clk_value = HSI_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            var VCOInput = ClockNode{
+                .name = "VCOInput",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO2Input = ClockNode{
+                .name = "VCO2Input",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO3Input = ClockNode{
+                .name = "VCO3Input",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO1Output = ClockNode{
+                .name = "VCO1Output",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var PLL1CLK = ClockNode{
+                .name = "PLL1CLK",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO2Output = ClockNode{
+                .name = "VCO2Output",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO3Output = ClockNode{
+                .name = "VCO3Output",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            const HSIRC_clk_value = HSI_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -6687,7 +6787,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSIRC.nodetype = .source;
             HSIRC.value = HSIRC_clk_value;
 
-            const HSIDiv_clk_value = HSIDivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const HSIDiv_clk_value = HSIDivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -6702,7 +6802,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSIDiv.value = HSIDiv_clk_value.get();
             HSIDiv.parents = &.{&HSIRC};
 
-            const HSEOSC_clk_value = HSE_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const HSEOSC_clk_value = HSE_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -6716,7 +6816,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSEOSC.nodetype = .source;
             HSEOSC.value = HSEOSC_clk_value;
             if (check_ref(@TypeOf(LSIEnableValue), LSIEnableValue, .true, .@"=")) {
-                const LSIRC_clk_value = LSI_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LSIRC_clk_value = LSI_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -6731,7 +6831,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LSIRC.value = LSIRC_clk_value;
             }
 
-            const LSEOSC_clk_value = LSE_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const LSEOSC_clk_value = LSE_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -6745,7 +6845,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             LSEOSC.nodetype = .source;
             LSEOSC.value = LSEOSC_clk_value;
 
-            const CSIRC_clk_value = CSI_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const CSIRC_clk_value = CSI_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -6759,7 +6859,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             CSIRC.nodetype = .source;
             CSIRC.value = CSIRC_clk_value;
 
-            const HSI48_clk_value = HSI48_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const HSI48_clk_value = HSI48_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -6773,7 +6873,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSI48.nodetype = .source;
             HSI48.value = HSI48_clk_value;
             if (check_ref(@TypeOf(ExtClockEnableValue), ExtClockEnableValue, .true, .@"=")) {
-                const I2S_CKIN_clk_value = EXTERNAL_CLOCK_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I2S_CKIN_clk_value = EXTERNAL_CLOCK_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -6787,8 +6887,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I2S_CKIN.nodetype = .source;
                 I2S_CKIN.value = I2S_CKIN_clk_value;
             }
-            if (check_ref(@TypeOf(TraceEnableValue), TraceEnableValue, .true, .@"=")) {
-                const traceClkSource_clk_value = traceClkSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            if (check_ref(@TypeOf(TraceEnableValue), TraceEnableValue, .auto, .@"=")) {
+                const traceClkSource_clk_value = traceClkSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -6808,13 +6908,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 traceClkSource.nodetype = .multi;
                 traceClkSource.parents = &.{traceClkSourceparents[traceClkSource_clk_value.get()]};
             }
-            if (check_ref(@TypeOf(TraceEnableValue), TraceEnableValue, .true, .@"=")) {
+            if (check_ref(@TypeOf(TraceEnableValue), TraceEnableValue, .auto, .@"=")) {
                 std.mem.doNotOptimizeAway(TraceFreq_ValueValue);
                 TraceCLKOutput.nodetype = .output;
                 TraceCLKOutput.parents = &.{&traceClkSource};
             }
 
-            const SysClkSource_clk_value = SYSCLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const SysClkSource_clk_value = SYSCLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -6839,7 +6939,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             SysCLKOutput.nodetype = .output;
             SysCLKOutput.parents = &.{&SysClkSource};
             if (check_ref(@TypeOf(MCO1OutPutEnableValue), MCO1OutPutEnableValue, .true, .@"=")) {
-                const MCO1Mult_clk_value = RCC_MCO1SourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const MCO1Mult_clk_value = RCC_MCO1SourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -6861,7 +6961,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MCO1Mult.parents = &.{MCO1Multparents[MCO1Mult_clk_value.get()]};
             }
             if (check_ref(@TypeOf(MCO1OutPutEnableValue), MCO1OutPutEnableValue, .true, .@"=")) {
-                const MCO1Div_clk_value = RCC_MCODiv1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const MCO1Div_clk_value = RCC_MCODiv1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -6882,7 +6982,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MCO1Pin.parents = &.{&MCO1Div};
             }
             if (check_ref(@TypeOf(MCO2OutPutEnableValue), MCO2OutPutEnableValue, .true, .@"=")) {
-                const MCO2Mult_clk_value = RCC_MCO2SourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const MCO2Mult_clk_value = RCC_MCO2SourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -6905,7 +7005,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MCO2Mult.parents = &.{MCO2Multparents[MCO2Mult_clk_value.get()]};
             }
             if (check_ref(@TypeOf(MCO2OutPutEnableValue), MCO2OutPutEnableValue, .true, .@"=")) {
-                const MCO2Div_clk_value = RCC_MCODiv2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const MCO2Div_clk_value = RCC_MCODiv2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -6926,7 +7026,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MCO2Pin.parents = &.{&MCO2Div};
             }
 
-            const D1CPRE_clk_value = D1CPREValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const D1CPRE_clk_value = D1CPREValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -6951,7 +7051,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             CpuClockOutput.nodetype = .output;
             CpuClockOutput.parents = &.{&D1CPRE};
 
-            const CortexPrescaler_clk_value = Cortex_DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const CortexPrescaler_clk_value = Cortex_DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -6971,7 +7071,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             CortexSysOutput.nodetype = .output;
             CortexSysOutput.parents = &.{&CortexPrescaler};
 
-            const HPRE_clk_value = HPREValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const HPRE_clk_value = HPREValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7001,7 +7101,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HCLK3Output.nodetype = .output;
             HCLK3Output.parents = &.{&AHBOutput};
 
-            const D1PPRE_clk_value = D1PPREValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const D1PPRE_clk_value = D1PPREValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7021,7 +7121,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB3Output.nodetype = .output;
             APB3Output.parents = &.{&D1PPRE};
 
-            const D2PPRE1_clk_value = D2PPRE1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const D2PPRE1_clk_value = D2PPRE1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7036,7 +7136,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             D2PPRE1.value = D2PPRE1_clk_value.get();
             D2PPRE1.parents = &.{&AHBOutput};
 
-            const Tim1Mul_clk_value = Tim1MulValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const Tim1Mul_clk_value = Tim1MulValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7065,7 +7165,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB1Output.nodetype = .output;
             APB1Output.parents = &.{&D2PPRE1};
 
-            const D2PPRE2_clk_value = D2PPRE2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const D2PPRE2_clk_value = D2PPRE2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7085,7 +7185,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB2Output.nodetype = .output;
             APB2Output.parents = &.{&D2PPRE2};
 
-            const Tim2Mul_clk_value = Tim2MulValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const Tim2Mul_clk_value = Tim2MulValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7109,7 +7209,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             AHB4Output.nodetype = .output;
             AHB4Output.parents = &.{&AHBOutput};
 
-            const D3PPRE_clk_value = D3PPREValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const D3PPRE_clk_value = D3PPREValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7129,7 +7229,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB4Output.nodetype = .output;
             APB4Output.parents = &.{&D3PPRE};
 
-            const PLLSource_clk_value = PLLSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLLSource_clk_value = PLLSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7148,7 +7248,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PLLSource.nodetype = .multi;
             PLLSource.parents = &.{PLLSourceparents[PLLSource_clk_value.get()]};
             if (check_ref(@TypeOf(cKPerEnableValue), cKPerEnableValue, .true, .@"=")) {
-                const CKPERSource_clk_value = CKPERSourceSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const CKPERSource_clk_value = CKPERSourceSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7173,7 +7273,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 CKPERoutput.parents = &.{&CKPERSource};
             }
 
-            const DIVM1_clk_value = DIVM1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const DIVM1_clk_value = DIVM1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7188,7 +7288,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             DIVM1.value = DIVM1_clk_value;
             DIVM1.parents = &.{&PLLSource};
 
-            const DIVM2_clk_value = DIVM2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const DIVM2_clk_value = DIVM2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7203,7 +7303,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             DIVM2.value = DIVM2_clk_value;
             DIVM2.parents = &.{&PLLSource};
 
-            const DIVM3_clk_value = DIVM3Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const DIVM3_clk_value = DIVM3Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7218,7 +7318,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             DIVM3.value = DIVM3_clk_value;
             DIVM3.parents = &.{&PLLSource};
 
-            const DIVN1_clk_value = DIVN1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const DIVN1_clk_value = DIVN1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7233,7 +7333,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             DIVN1.value = DIVN1_clk_value;
             DIVN1.parents = &.{ &DIVM1, &PLLFRACN };
 
-            const PLLFRACN_clk_value = PLLFRACNValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLLFRACN_clk_value = PLLFRACNValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7244,10 +7344,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 "No Extra Log",
                 "PLLFRACN",
             });
+            PLLFRACN.limit = PLLFRACNLimit;
             PLLFRACN.nodetype = .source;
             PLLFRACN.value = PLLFRACN_clk_value;
 
-            const DIVP1_clk_value = DIVP1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const DIVP1_clk_value = DIVP1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7275,7 +7376,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(FMCEnableValue), FMCEnableValue, .true, .@"=") or
                 check_ref(@TypeOf(OCTOSPIEnableValue), OCTOSPIEnableValue, .true, .@"="))
             {
-                const DIVQ1_clk_value = DIVQ1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DIVQ1_clk_value = DIVQ1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7309,7 +7410,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 DIVQ1output.parents = &.{&DIVQ1};
             }
             if (check_ref(@TypeOf(TraceEnablePllValue), TraceEnablePllValue, .true, .@"=")) {
-                const DIVR1_clk_value = DIVR1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DIVR1_clk_value = DIVR1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7330,7 +7431,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 DIVR1output.parents = &.{&DIVR1};
             }
 
-            const DIVN2_clk_value = DIVN2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const DIVN2_clk_value = DIVN2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7345,7 +7446,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             DIVN2.value = DIVN2_clk_value;
             DIVN2.parents = &.{ &DIVM2, &PLL2FRACN };
 
-            const PLL2FRACN_clk_value = PLL2FRACNValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL2FRACN_clk_value = PLL2FRACNValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7356,6 +7457,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 "No Extra Log",
                 "PLL2FRACN",
             });
+            PLL2FRACN.limit = PLL2FRACNLimit;
             PLL2FRACN.nodetype = .source;
             PLL2FRACN.value = PLL2FRACN_clk_value;
             if (check_ref(@TypeOf(MCO2OutPutEnableValue), MCO2OutPutEnableValue, .true, .@"=") or
@@ -7368,7 +7470,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(SAI1EnableValue), SAI1EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SPI123EnableValue), SPI123EnableValue, .true, .@"="))
             {
-                const DIVP2_clk_value = DIVP2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DIVP2_clk_value = DIVP2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7405,7 +7507,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(USART16EnableValue), USART16EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SPI45EnableValue), SPI45EnableValue, .true, .@"="))
             {
-                const DIVQ2_clk_value = DIVQ2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DIVQ2_clk_value = DIVQ2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7437,7 +7539,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(FMCEnableValue), FMCEnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SPDIFEnableValue), SPDIFEnableValue, .true, .@"="))
             {
-                const DIVR2_clk_value = DIVR2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DIVR2_clk_value = DIVR2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7463,7 +7565,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 DIVR2output.parents = &.{&DIVR2};
             }
 
-            const DIVN3_clk_value = DIVN3Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const DIVN3_clk_value = DIVN3Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7482,7 +7584,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(SAI1EnableValue), SAI1EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SPI123EnableValue), SPI123EnableValue, .true, .@"="))
             {
-                const DIVP3_clk_value = DIVP3Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DIVP3_clk_value = DIVP3Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7498,7 +7600,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 DIVP3.parents = &.{&DIVN3};
             }
 
-            const PLL3FRACN_clk_value = PLL3FRACNValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL3FRACN_clk_value = PLL3FRACNValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -7509,6 +7611,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 "No Extra Log",
                 "PLL3FRACN",
             });
+            PLL3FRACN.limit = PLL3FRACNLimit;
             PLL3FRACN.nodetype = .source;
             PLL3FRACN.value = PLL3FRACN_clk_value;
             if (check_ref(@TypeOf(SAI4AEnableValue), SAI4AEnableValue, .true, .@"=") or
@@ -7528,7 +7631,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(USART16EnableValue), USART16EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SPI45EnableValue), SPI45EnableValue, .true, .@"="))
             {
-                const DIVQ3_clk_value = DIVQ3Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DIVQ3_clk_value = DIVQ3Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7564,7 +7667,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(LPTIM1EnableValue), LPTIM1EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SPDIFEnableValue), SPDIFEnableValue, .true, .@"="))
             {
-                const DIVR3_clk_value = DIVR3Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DIVR3_clk_value = DIVR3Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7600,7 +7703,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 DIVR3output.parents = &.{&DIVR3};
             }
             if (check_ref(@TypeOf(EnableHSERTCDevisorValue), EnableHSERTCDevisorValue, .true, .@"=")) {
-                const HSERTCDevisor_clk_value = RCC_RTC_Clock_Source_FROM_HSEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const HSERTCDevisor_clk_value = RCC_RTC_Clock_Source_FROM_HSEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7616,7 +7719,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 HSERTCDevisor.parents = &.{&HSEOSC};
             }
             if (check_ref(@TypeOf(RTCEnableValue), RTCEnableValue, .true, .@"=")) {
-                const RTCClkSource_clk_value = RTCClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const RTCClkSource_clk_value = RTCClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7646,7 +7749,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IWDGOutput.parents = &.{&LSIRC};
             }
             if (check_ref(@TypeOf(SPI123EnableValue), SPI123EnableValue, .true, .@"=")) {
-                const SPI123Mult_clk_value = SPI123CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPI123Mult_clk_value = SPI123CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7674,7 +7777,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPI123output.parents = &.{&SPI123Mult};
             }
             if (check_ref(@TypeOf(SAI1EnableValue), SAI1EnableValue, .true, .@"=")) {
-                const SAI1Mult_clk_value = SAI1CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SAI1Mult_clk_value = SAI1CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7708,7 +7811,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SAI1output.parents = &.{&SAI1Mult};
             }
             if (check_ref(@TypeOf(SAI4BEnableValue), SAI4BEnableValue, .true, .@"=")) {
-                const SAI4BMult_clk_value = SAI4BCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SAI4BMult_clk_value = SAI4BCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7737,7 +7840,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SAI4Boutput.parents = &.{&SAI4BMult};
             }
             if (check_ref(@TypeOf(SAI4AEnableValue), SAI4AEnableValue, .true, .@"=")) {
-                const SAI4AMult_clk_value = SAI4ACLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SAI4AMult_clk_value = SAI4ACLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7766,7 +7869,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SAI4Aoutput.parents = &.{&SAI4AMult};
             }
             if (check_ref(@TypeOf(RNGEnableValue), RNGEnableValue, .true, .@"=")) {
-                const RNGMult_clk_value = RNGCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const RNGMult_clk_value = RNGCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7793,7 +7896,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 RNGoutput.parents = &.{&RNGMult};
             }
             if (check_ref(@TypeOf(I2C1235EnableValue), I2C1235EnableValue, .true, .@"=")) {
-                const I2C1235Mult_clk_value = I2C123CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I2C1235Mult_clk_value = I2C123CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7820,7 +7923,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I2C1235output.parents = &.{&I2C1235Mult};
             }
             if (check_ref(@TypeOf(I2C4EnableValue), I2C4EnableValue, .true, .@"=")) {
-                const I2C4Mult_clk_value = I2C4CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I2C4Mult_clk_value = I2C4CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7847,7 +7950,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I2C4output.parents = &.{&I2C4Mult};
             }
             if (check_ref(@TypeOf(SPDIFEnableValue), SPDIFEnableValue, .true, .@"=")) {
-                const SPDIFMult_clk_value = SPDIFCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPDIFMult_clk_value = SPDIFCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7874,7 +7977,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPDIFoutput.parents = &.{&SPDIFMult};
             }
             if (check_ref(@TypeOf(OCTOSPIEnableValue), OCTOSPIEnableValue, .true, .@"=")) {
-                const QSPIMult_clk_value = QSPICLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const QSPIMult_clk_value = QSPICLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7901,7 +8004,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 QSPIoutput.parents = &.{&QSPIMult};
             }
             if (check_ref(@TypeOf(FMCEnableValue), FMCEnableValue, .true, .@"=")) {
-                const FMCMult_clk_value = FMCCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const FMCMult_clk_value = FMCCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7928,7 +8031,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 FMCoutput.parents = &.{&FMCMult};
             }
             if (check_ref(@TypeOf(SWPEnableValue), SWPEnableValue, .true, .@"=")) {
-                const SWPMult_clk_value = SWPCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SWPMult_clk_value = SWPCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7953,7 +8056,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SWPoutput.parents = &.{&SWPMult};
             }
             if (check_ref(@TypeOf(SDMMC1EnableValue), SDMMC1EnableValue, .true, .@"=")) {
-                const SDMMCMult_clk_value = SDMMC1CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SDMMCMult_clk_value = SDMMC1CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -7978,7 +8081,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SDMMCoutput.parents = &.{&SDMMCMult};
             }
             if (check_ref(@TypeOf(DFSDMEnableValue), DFSDMEnableValue, .true, .@"=")) {
-                const DFSDMMult_clk_value = DFSDMCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DFSDMMult_clk_value = DFSDMCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8003,7 +8106,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 DFSDMoutput.parents = &.{&DFSDMMult};
             }
             if (check_ref(@TypeOf(USART16EnableValue), USART16EnableValue, .true, .@"=")) {
-                const USART16Mult_clk_value = USART16CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const USART16Mult_clk_value = USART16CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8032,7 +8135,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 USART16output.parents = &.{&USART16Mult};
             }
             if (check_ref(@TypeOf(USART234578EnableValue), USART234578EnableValue, .true, .@"=")) {
-                const USART234578Mult_clk_value = USART234578CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const USART234578Mult_clk_value = USART234578CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8061,7 +8164,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 USART234578output.parents = &.{&USART234578Mult};
             }
             if (check_ref(@TypeOf(LPUART1EnableValue), LPUART1EnableValue, .true, .@"=")) {
-                const LPUART1Mult_clk_value = LPUART1CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPUART1Mult_clk_value = LPUART1CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8090,7 +8193,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPUART1output.parents = &.{&LPUART1Mult};
             }
             if (check_ref(@TypeOf(LPTIM1EnableValue), LPTIM1EnableValue, .true, .@"=")) {
-                const LPTIM1Mult_clk_value = LPTIM1CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPTIM1Mult_clk_value = LPTIM1CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8119,7 +8222,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPTIM1output.parents = &.{&LPTIM1Mult};
             }
             if (check_ref(@TypeOf(LPTIM345EnableValue), LPTIM345EnableValue, .true, .@"=")) {
-                const LPTIM345Mult_clk_value = LPTIM345CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPTIM345Mult_clk_value = LPTIM345CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8148,7 +8251,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPTIM345output.parents = &.{&LPTIM345Mult};
             }
             if (check_ref(@TypeOf(LPTIM2EnableValue), LPTIM2EnableValue, .true, .@"=")) {
-                const LPTIM2Mult_clk_value = LPTIM2CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPTIM2Mult_clk_value = LPTIM2CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8177,7 +8280,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPTIM2output.parents = &.{&LPTIM2Mult};
             }
             if (check_ref(@TypeOf(SPI6EnableValue), SPI6EnableValue, .true, .@"=")) {
-                const SPI6Mult_clk_value = SPI6CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPI6Mult_clk_value = SPI6CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8207,7 +8310,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPI6output.parents = &.{&SPI6Mult};
             }
             if (check_ref(@TypeOf(SPI45EnableValue), SPI45EnableValue, .true, .@"=")) {
-                const SPI45Mult_clk_value = Spi45ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPI45Mult_clk_value = Spi45ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8236,7 +8339,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPI45output.parents = &.{&SPI45Mult};
             }
             if (check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"=")) {
-                const USBMult_clk_value = USBCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const USBMult_clk_value = USBCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8262,7 +8365,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 USBoutput.parents = &.{&USBMult};
             }
             if (check_ref(@TypeOf(FDCANEnableValue), FDCANEnableValue, .true, .@"=")) {
-                const FDCANMult_clk_value = FDCANCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const FDCANMult_clk_value = FDCANCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8288,7 +8391,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 FDCANoutput.parents = &.{&FDCANMult};
             }
             if (check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"=")) {
-                const ADCMult_clk_value = ADCCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const ADCMult_clk_value = ADCCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8314,7 +8417,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 ADCoutput.parents = &.{&ADCMult};
             }
             if (check_ref(@TypeOf(CECEnableValue), CECEnableValue, .true, .@"=")) {
-                const CECCSIDevisor_clk_value = RCC_CEC_FROM_CSIValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const CECCSIDevisor_clk_value = RCC_CEC_FROM_CSIValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8330,7 +8433,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 CECCSIDevisor.parents = &.{&CSIRC};
             }
             if (check_ref(@TypeOf(CECEnableValue), CECEnableValue, .true, .@"=")) {
-                const CECMult_clk_value = CECCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const CECMult_clk_value = CECCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8355,7 +8458,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 CECoutput.parents = &.{&CECMult};
             }
             if (check_ref(@TypeOf(HRTIMEnableValue), HRTIMEnableValue, .true, .@"=")) {
-                const HrtimMult_clk_value = HRTIMCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const HrtimMult_clk_value = HRTIMCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -8379,135 +8482,177 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 HRTIMoutput.parents = &.{&HrtimMult};
             }
 
-            out.HSIRC = try HSIRC.get_output();
+            std.mem.doNotOptimizeAway(VCOInput1Freq_ValueValue);
+            VCOInput.limit = VCOInput1Freq_ValueLimit;
+            VCOInput.nodetype = .output;
+            VCOInput.parents = &.{&DIVM1};
+
+            std.mem.doNotOptimizeAway(VCOInput2Freq_ValueValue);
+            VCO2Input.limit = VCOInput2Freq_ValueLimit;
+            VCO2Input.nodetype = .output;
+            VCO2Input.parents = &.{&DIVM2};
+
+            std.mem.doNotOptimizeAway(VCOInput3Freq_ValueValue);
+            VCO3Input.limit = VCOInput3Freq_ValueLimit;
+            VCO3Input.nodetype = .output;
+            VCO3Input.parents = &.{&DIVM3};
+
+            std.mem.doNotOptimizeAway(VCO1OutputFreq_ValueValue);
+            VCO1Output.limit = VCO1OutputFreq_ValueLimit;
+            VCO1Output.nodetype = .output;
+            VCO1Output.parents = &.{&DIVN1};
+
+            std.mem.doNotOptimizeAway(DIVP1Freq_ValueValue);
+            PLL1CLK.limit = DIVP1Freq_ValueLimit;
+            PLL1CLK.nodetype = .output;
+            PLL1CLK.parents = &.{&DIVP1};
+
+            std.mem.doNotOptimizeAway(VCO2OutputFreq_ValueValue);
+            VCO2Output.limit = VCO2OutputFreq_ValueLimit;
+            VCO2Output.nodetype = .output;
+            VCO2Output.parents = &.{&DIVN2};
+
+            std.mem.doNotOptimizeAway(VCO3OutputFreq_ValueValue);
+            VCO3Output.limit = VCO3OutputFreq_ValueLimit;
+            VCO3Output.nodetype = .output;
+            VCO3Output.parents = &.{&DIVN3};
+
+            out.CpuClockOutput = try CpuClockOutput.get_output();
+            out.CortexSysOutput = try CortexSysOutput.get_output();
+            out.CortexPrescaler = try CortexPrescaler.get_output();
+            out.D1CPREOutput = try D1CPREOutput.get_output();
+            out.HRTIMoutput = try HRTIMoutput.get_output();
+            out.HrtimMult = try HrtimMult.get_output();
+            out.APB3Output = try APB3Output.get_output();
+            out.LPUART1output = try LPUART1output.get_output();
+            out.LPUART1Mult = try LPUART1Mult.get_output();
+            out.D1PPRE = try D1PPRE.get_output();
+            out.APB1Output = try APB1Output.get_output();
+            out.Tim1Output = try Tim1Output.get_output();
+            out.Tim1Mul = try Tim1Mul.get_output();
+            out.SWPoutput = try SWPoutput.get_output();
+            out.SWPMult = try SWPMult.get_output();
+            out.LPTIM1output = try LPTIM1output.get_output();
+            out.LPTIM1Mult = try LPTIM1Mult.get_output();
+            out.I2C1235output = try I2C1235output.get_output();
+            out.I2C1235Mult = try I2C1235Mult.get_output();
+            out.USART234578output = try USART234578output.get_output();
+            out.USART234578Mult = try USART234578Mult.get_output();
+            out.D2PPRE1 = try D2PPRE1.get_output();
+            out.APB2Output = try APB2Output.get_output();
+            out.DFSDMoutput = try DFSDMoutput.get_output();
+            out.DFSDMMult = try DFSDMMult.get_output();
+            out.SPI45output = try SPI45output.get_output();
+            out.SPI45Mult = try SPI45Mult.get_output();
+            out.USART16output = try USART16output.get_output();
+            out.USART16Mult = try USART16Mult.get_output();
+            out.Tim2Output = try Tim2Output.get_output();
+            out.Tim2Mul = try Tim2Mul.get_output();
+            out.D2PPRE2 = try D2PPRE2.get_output();
+            out.AXIClockOutput = try AXIClockOutput.get_output();
+            out.QSPIoutput = try QSPIoutput.get_output();
+            out.QSPIMult = try QSPIMult.get_output();
+            out.FMCoutput = try FMCoutput.get_output();
+            out.FMCMult = try FMCMult.get_output();
+            out.HCLK3Output = try HCLK3Output.get_output();
+            out.AHB4Output = try AHB4Output.get_output();
+            out.AHB12Output = try AHB12Output.get_output();
+            out.APB4Output = try APB4Output.get_output();
+            out.SPI6output = try SPI6output.get_output();
+            out.SPI6Mult = try SPI6Mult.get_output();
+            out.LPTIM345output = try LPTIM345output.get_output();
+            out.LPTIM345Mult = try LPTIM345Mult.get_output();
+            out.LPTIM2output = try LPTIM2output.get_output();
+            out.LPTIM2Mult = try LPTIM2Mult.get_output();
+            out.I2C4output = try I2C4output.get_output();
+            out.I2C4Mult = try I2C4Mult.get_output();
+            out.D3PPRE = try D3PPRE.get_output();
+            out.AHBOutput = try AHBOutput.get_output();
+            out.HPRE = try HPRE.get_output();
+            out.D1CPRE = try D1CPRE.get_output();
+            out.MCO2Pin = try MCO2Pin.get_output();
+            out.MCO2Div = try MCO2Div.get_output();
+            out.MCO2Mult = try MCO2Mult.get_output();
+            out.SysCLKOutput = try SysCLKOutput.get_output();
+            out.SysClkSource = try SysClkSource.get_output();
+            out.DIVP1 = try DIVP1.get_output();
+            out.SDMMCoutput = try SDMMCoutput.get_output();
+            out.SDMMCMult = try SDMMCMult.get_output();
+            out.FDCANoutput = try FDCANoutput.get_output();
+            out.FDCANMult = try FDCANMult.get_output();
+            out.SPDIFoutput = try SPDIFoutput.get_output();
+            out.SAI4Boutput = try SAI4Boutput.get_output();
+            out.SAI4BMult = try SAI4BMult.get_output();
+            out.SAI4Aoutput = try SAI4Aoutput.get_output();
+            out.SAI4AMult = try SAI4AMult.get_output();
+            out.SPDIFMult = try SPDIFMult.get_output();
+            out.SPI123output = try SPI123output.get_output();
+            out.SPI123Mult = try SPI123Mult.get_output();
+            out.SAI1output = try SAI1output.get_output();
+            out.DFSDMACLKoutput = try DFSDMACLKoutput.get_output();
+            out.SAI1Mult = try SAI1Mult.get_output();
+            out.USBoutput = try USBoutput.get_output();
+            out.USBMult = try USBMult.get_output();
+            out.RNGoutput = try RNGoutput.get_output();
+            out.RNGMult = try RNGMult.get_output();
+            out.MCO1Pin = try MCO1Pin.get_output();
+            out.MCO1Div = try MCO1Div.get_output();
+            out.MCO1Mult = try MCO1Mult.get_output();
+            out.DIVQ1output = try DIVQ1output.get_output();
+            out.DIVQ1 = try DIVQ1.get_output();
+            out.DIVR1output = try DIVR1output.get_output();
+            out.TraceCLKOutput = try TraceCLKOutput.get_output();
+            out.traceClkSource = try traceClkSource.get_output();
+            out.DIVR1 = try DIVR1.get_output();
+            out.DIVN1 = try DIVN1.get_output();
+            out.DIVM1 = try DIVM1.get_output();
+            out.ADCoutput = try ADCoutput.get_output();
+            out.ADCMult = try ADCMult.get_output();
+            out.DIVP2output = try DIVP2output.get_output();
+            out.DIVP2 = try DIVP2.get_output();
+            out.DIVQ2output = try DIVQ2output.get_output();
+            out.DIVQ2 = try DIVQ2.get_output();
+            out.DIVR2output = try DIVR2output.get_output();
+            out.DIVR2 = try DIVR2.get_output();
+            out.DIVN2 = try DIVN2.get_output();
+            out.DIVM2 = try DIVM2.get_output();
+            out.DIVP3output = try DIVP3output.get_output();
+            out.DIVP3 = try DIVP3.get_output();
+            out.DIVQ3output = try DIVQ3output.get_output();
+            out.DIVQ3 = try DIVQ3.get_output();
+            out.DIVR3output = try DIVR3output.get_output();
+            out.LTDCOutput = try LTDCOutput.get_output();
+            out.DIVR3 = try DIVR3.get_output();
+            out.DIVN3 = try DIVN3.get_output();
+            out.DIVM3 = try DIVM3.get_output();
+            out.PLLSource = try PLLSource.get_output();
+            out.CKPERoutput = try CKPERoutput.get_output();
+            out.CKPERSource = try CKPERSource.get_output();
             out.HSIDiv = try HSIDiv.get_output();
+            out.HSIRC = try HSIRC.get_output();
+            out.RTCOutput = try RTCOutput.get_output();
+            out.RTCClkSource = try RTCClkSource.get_output();
+            out.HSERTCDevisor = try HSERTCDevisor.get_output();
             out.HSEOSC = try HSEOSC.get_output();
+            out.IWDGOutput = try IWDGOutput.get_output();
+            out.CECoutput = try CECoutput.get_output();
+            out.CECMult = try CECMult.get_output();
             out.LSIRC = try LSIRC.get_output();
             out.LSEOSC = try LSEOSC.get_output();
+            out.CECCSIDevisor = try CECCSIDevisor.get_output();
             out.CSIRC = try CSIRC.get_output();
             out.HSI48 = try HSI48.get_output();
             out.I2S_CKIN = try I2S_CKIN.get_output();
-            out.traceClkSource = try traceClkSource.get_output();
-            out.TraceCLKOutput = try TraceCLKOutput.get_output();
-            out.SysClkSource = try SysClkSource.get_output();
-            out.SysCLKOutput = try SysCLKOutput.get_output();
-            out.MCO1Mult = try MCO1Mult.get_output();
-            out.MCO1Div = try MCO1Div.get_output();
-            out.MCO1Pin = try MCO1Pin.get_output();
-            out.MCO2Mult = try MCO2Mult.get_output();
-            out.MCO2Div = try MCO2Div.get_output();
-            out.MCO2Pin = try MCO2Pin.get_output();
-            out.D1CPRE = try D1CPRE.get_output();
-            out.D1CPREOutput = try D1CPREOutput.get_output();
-            out.CpuClockOutput = try CpuClockOutput.get_output();
-            out.CortexPrescaler = try CortexPrescaler.get_output();
-            out.CortexSysOutput = try CortexSysOutput.get_output();
-            out.HPRE = try HPRE.get_output();
-            out.AHBOutput = try AHBOutput.get_output();
-            out.AXIClockOutput = try AXIClockOutput.get_output();
-            out.HCLK3Output = try HCLK3Output.get_output();
-            out.D1PPRE = try D1PPRE.get_output();
-            out.APB3Output = try APB3Output.get_output();
-            out.D2PPRE1 = try D2PPRE1.get_output();
-            out.Tim1Mul = try Tim1Mul.get_output();
-            out.Tim1Output = try Tim1Output.get_output();
-            out.AHB12Output = try AHB12Output.get_output();
-            out.APB1Output = try APB1Output.get_output();
-            out.D2PPRE2 = try D2PPRE2.get_output();
-            out.APB2Output = try APB2Output.get_output();
-            out.Tim2Mul = try Tim2Mul.get_output();
-            out.Tim2Output = try Tim2Output.get_output();
-            out.AHB4Output = try AHB4Output.get_output();
-            out.D3PPRE = try D3PPRE.get_output();
-            out.APB4Output = try APB4Output.get_output();
-            out.PLLSource = try PLLSource.get_output();
-            out.CKPERSource = try CKPERSource.get_output();
-            out.CKPERoutput = try CKPERoutput.get_output();
-            out.DIVM1 = try DIVM1.get_output();
-            out.DIVM2 = try DIVM2.get_output();
-            out.DIVM3 = try DIVM3.get_output();
-            out.DIVN1 = try DIVN1.get_output();
             out.PLLFRACN = try PLLFRACN.get_output();
-            out.DIVP1 = try DIVP1.get_output();
-            out.DIVQ1 = try DIVQ1.get_output();
-            out.DIVQ1output = try DIVQ1output.get_output();
-            out.DIVR1 = try DIVR1.get_output();
-            out.DIVR1output = try DIVR1output.get_output();
-            out.DIVN2 = try DIVN2.get_output();
             out.PLL2FRACN = try PLL2FRACN.get_output();
-            out.DIVP2 = try DIVP2.get_output();
-            out.DIVP2output = try DIVP2output.get_output();
-            out.DIVQ2 = try DIVQ2.get_output();
-            out.DIVQ2output = try DIVQ2output.get_output();
-            out.DIVR2 = try DIVR2.get_output();
-            out.DIVR2output = try DIVR2output.get_output();
-            out.DIVN3 = try DIVN3.get_output();
-            out.DIVP3 = try DIVP3.get_output();
             out.PLL3FRACN = try PLL3FRACN.get_output();
-            out.DIVP3output = try DIVP3output.get_output();
-            out.DIVQ3 = try DIVQ3.get_output();
-            out.DIVQ3output = try DIVQ3output.get_output();
-            out.DIVR3 = try DIVR3.get_output();
-            out.LTDCOutput = try LTDCOutput.get_output();
-            out.DIVR3output = try DIVR3output.get_output();
-            out.HSERTCDevisor = try HSERTCDevisor.get_output();
-            out.RTCClkSource = try RTCClkSource.get_output();
-            out.RTCOutput = try RTCOutput.get_output();
-            out.IWDGOutput = try IWDGOutput.get_output();
-            out.SPI123Mult = try SPI123Mult.get_output();
-            out.SPI123output = try SPI123output.get_output();
-            out.SAI1Mult = try SAI1Mult.get_output();
-            out.DFSDMACLKoutput = try DFSDMACLKoutput.get_output();
-            out.SAI1output = try SAI1output.get_output();
-            out.SAI4BMult = try SAI4BMult.get_output();
-            out.SAI4Boutput = try SAI4Boutput.get_output();
-            out.SAI4AMult = try SAI4AMult.get_output();
-            out.SAI4Aoutput = try SAI4Aoutput.get_output();
-            out.RNGMult = try RNGMult.get_output();
-            out.RNGoutput = try RNGoutput.get_output();
-            out.I2C1235Mult = try I2C1235Mult.get_output();
-            out.I2C1235output = try I2C1235output.get_output();
-            out.I2C4Mult = try I2C4Mult.get_output();
-            out.I2C4output = try I2C4output.get_output();
-            out.SPDIFMult = try SPDIFMult.get_output();
-            out.SPDIFoutput = try SPDIFoutput.get_output();
-            out.QSPIMult = try QSPIMult.get_output();
-            out.QSPIoutput = try QSPIoutput.get_output();
-            out.FMCMult = try FMCMult.get_output();
-            out.FMCoutput = try FMCoutput.get_output();
-            out.SWPMult = try SWPMult.get_output();
-            out.SWPoutput = try SWPoutput.get_output();
-            out.SDMMCMult = try SDMMCMult.get_output();
-            out.SDMMCoutput = try SDMMCoutput.get_output();
-            out.DFSDMMult = try DFSDMMult.get_output();
-            out.DFSDMoutput = try DFSDMoutput.get_output();
-            out.USART16Mult = try USART16Mult.get_output();
-            out.USART16output = try USART16output.get_output();
-            out.USART234578Mult = try USART234578Mult.get_output();
-            out.USART234578output = try USART234578output.get_output();
-            out.LPUART1Mult = try LPUART1Mult.get_output();
-            out.LPUART1output = try LPUART1output.get_output();
-            out.LPTIM1Mult = try LPTIM1Mult.get_output();
-            out.LPTIM1output = try LPTIM1output.get_output();
-            out.LPTIM345Mult = try LPTIM345Mult.get_output();
-            out.LPTIM345output = try LPTIM345output.get_output();
-            out.LPTIM2Mult = try LPTIM2Mult.get_output();
-            out.LPTIM2output = try LPTIM2output.get_output();
-            out.SPI6Mult = try SPI6Mult.get_output();
-            out.SPI6output = try SPI6output.get_output();
-            out.SPI45Mult = try SPI45Mult.get_output();
-            out.SPI45output = try SPI45output.get_output();
-            out.USBMult = try USBMult.get_output();
-            out.USBoutput = try USBoutput.get_output();
-            out.FDCANMult = try FDCANMult.get_output();
-            out.FDCANoutput = try FDCANoutput.get_output();
-            out.ADCMult = try ADCMult.get_output();
-            out.ADCoutput = try ADCoutput.get_output();
-            out.CECCSIDevisor = try CECCSIDevisor.get_output();
-            out.CECMult = try CECMult.get_output();
-            out.CECoutput = try CECoutput.get_output();
-            out.HrtimMult = try HrtimMult.get_output();
-            out.HRTIMoutput = try HRTIMoutput.get_output();
+            out.VCOInput = try VCOInput.get_extra_output();
+            out.VCO2Input = try VCO2Input.get_extra_output();
+            out.VCO3Input = try VCO3Input.get_extra_output();
+            out.VCO1Output = try VCO1Output.get_extra_output();
+            out.PLL1CLK = try PLL1CLK.get_extra_output();
+            out.VCO2Output = try VCO2Output.get_extra_output();
+            out.VCO3Output = try VCO3Output.get_extra_output();
             ref_out.HSIDiv = HSIDivValue;
             ref_out.HSE_VALUE = HSE_VALUEValue;
             ref_out.LSI_VALUE = LSI_VALUEValue;
@@ -8639,11 +8784,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             ref_out.CECEnable = CECEnableValue;
             ref_out.HRTIMEnable = HRTIMEnableValue;
             ref_out.LSEUsed = LSEUsedValue;
-            ref_out.VCOInput1Freq_Value = VCOInput1Freq_ValueValue;
             ref_out.PLLUsed = PLLUsedValue;
-            ref_out.VCOInput2Freq_Value = VCOInput2Freq_ValueValue;
             ref_out.PLL2Used = PLL2UsedValue;
-            ref_out.VCOInput3Freq_Value = VCOInput3Freq_ValueValue;
             ref_out.PLL3Used = PLL3UsedValue;
             ref_out.CSIUsed = CSIUsedValue;
             ref_out.HSIUsed = HSIUsedValue;

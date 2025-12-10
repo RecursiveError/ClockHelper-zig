@@ -1,5 +1,8 @@
 const std = @import("std");
 const McuInfo = @import("src/mcu_info.zig");
+const hal_data = @import("src/microzig_data.zig");
+
+const ChipData = hal_data.ChipFile;
 
 const Mcu = McuInfo.MCU_Info;
 const ClockTree = McuInfo.Clock_Tree;
@@ -40,8 +43,12 @@ const Context = struct {
     ///used to get the source reference of a given semafore
     semaphores: std.StringArrayHashMap([]const u8),
 
+    ///Used to get the semafore map (item name -> semafore name) of a given reference list name
+    semaphore_item: std.StringArrayHashMap(std.StringArrayHashMap([]const u8)),
+
     /// used to get the node associated with the selected name
     nodes: std.StringArrayHashMap(ClockNode),
+    extra_nodes: std.StringArrayHashMap(void),
 
     ///return de node associated with ref
     node_ref: std.StringArrayHashMap([]const u8),
@@ -66,12 +73,14 @@ const Context = struct {
     extra_configs: std.StringArrayHashMap(void),
 
     //count the total items of a reference list
-    total_list_item: std.StringHashMap(usize),
+    total_list_item: std.StringHashMap([]const ListItem),
 
     pub fn init(allocator: std.mem.Allocator) Context {
         return Context{
             .semaphores = .init(allocator),
+            .semaphore_item = .init(allocator),
             .nodes = .init(allocator),
+            .extra_nodes = .init(allocator),
             .node_ref = .init(allocator),
             .nodes_enable = .init(allocator),
             .inputs_sources = .init(allocator),
@@ -87,6 +96,7 @@ const Context = struct {
     pub fn deinit(self: *Context) void {
         self.semaphores.deinit();
         self.nodes.deinit();
+        self.extra_nodes.deinit();
         self.node_ref.deinit();
         self.nodes_enable.deinit();
         self.inputs_sources.deinit();
@@ -96,6 +106,13 @@ const Context = struct {
         self.extra_flags.deinit();
         self.extra_configs.deinit();
         self.total_list_item.deinit();
+
+        for (self.semaphore_item.values()) |map| {
+            const to_free: *std.StringArrayHashMap([]const u8) = @constCast(&map);
+            to_free.deinit();
+        }
+
+        self.semaphore_item.deinit();
     }
 
     pub fn get_name_context(self: *const Context, name: []const u8) ?ContextType {
@@ -114,11 +131,23 @@ const MCU_OUTPUT_PATH = "src/mcus/";
 
 const CLOCK_TREE_DATA_PATH = "clock_ref_data/";
 const CLOCK_TREE_OUTPUT_PATH = "src/clocktree/";
+//const CLOCK_TREE_OUTPUT_PATH = "/home/guilherme/Área de trabalho/microzig/port/stmicro/stm32/stm32-clocks/clocktree/";
+
+const hal_folder_path = "/home/guilherme/.cache/zig/p/N-V-__8AAFi8WBlOh-NikHFVBjzQE0F1KixgKjVWYnlijPNm/data/chips/";
 
 var global_ref_name: []const u8 = undefined;
 pub fn main() !void {
+    const allocator = std.heap.page_allocator;
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    defer arena.deinit();
+
+    //store the formal chip name as a key and the hal chip name as value
+    var hal_chip_names = std.StringArrayHashMap([]const u8).init(arena.allocator());
+    defer hal_chip_names.deinit();
+
+    try get_chip_hal_names(arena.allocator(), &hal_chip_names);
     const list = try generate_clock_trees();
-    try generate_mcu_data(list);
+    try generate_mcu_data(list, &hal_chip_names, arena.allocator());
 
     for (list) |i| {
         std.heap.page_allocator.free(i);
@@ -126,19 +155,59 @@ pub fn main() !void {
     std.heap.page_allocator.free(list);
 }
 
+fn get_chip_hal_names(alloc: std.mem.Allocator, map: *std.StringArrayHashMap([]const u8)) !void {
+    var hal_dir = try std.fs.cwd().openDir(hal_folder_path, .{ .iterate = true });
+    defer hal_dir.close();
+
+    var hal_iter = hal_dir.iterate();
+    var json_buf: [8192]u8 = undefined;
+    while (try hal_iter.next()) |entry| {
+        if (entry.kind != .file) continue;
+        if (!std.mem.endsWith(u8, entry.name, ".json")) continue;
+
+        var file = try hal_dir.openFile(entry.name, .{});
+        var reader = file.reader(&json_buf);
+        var j_reader = std.json.Reader.init(alloc, &reader.interface);
+        defer j_reader.deinit();
+        const json = try std.json.parseFromTokenSource(ChipData, alloc, &j_reader, .{});
+        defer json.deinit();
+        const chip_inst: ChipData = json.value;
+        const hal_name = try alloc.dupe(u8, chip_inst.name);
+        const formal_name = try alloc.dupe(u8, chip_inst.packages[0].name);
+        std.log.info("got HAL entry:  {s} formal MCU name {s}", .{ hal_name, formal_name });
+        try map.put(formal_name, hal_name);
+        file.close();
+    }
+}
+
 //mcu data generation
 
-fn generate_mcu_data(clk_tree_list: []const []const u8) !void {
+fn generate_mcu_data(clk_tree_list: []const []const u8, hal_names: *std.StringArrayHashMap([]const u8), alloc: std.mem.Allocator) !void {
+    var hal_clk_name_map = std.StringArrayHashMap([]const u8).init(alloc);
+    defer hal_clk_name_map.deinit();
+
+    var temp_buf: [4086]u8 = undefined;
     var root_buf: [4096]u8 = undefined;
     var root_file = try std.fs.cwd().createFile("src/lib.zig", .{});
     var writer = root_file.writer(&root_buf);
     const interface = &writer.interface;
 
+    var hal_buf: [4096]u8 = undefined;
+    var hal_file = try std.fs.cwd().createFile("src/hal_data.zig", .{});
+    var hal_writer = hal_file.writer(&hal_buf);
+    const hal_interface = &hal_writer.interface;
+    try interface.writeAll("const std = @import(\"std\");\n");
+    try hal_interface.writeAll("const std = @import(\"std\");\n");
+
     var mcu_dir = try std.fs.cwd().openDir(MCU_DATA_PATH, .{ .iterate = true });
     defer mcu_dir.close();
-    try interface.writeAll("const std = @import(\"std\");\n");
     for (clk_tree_list) |i| {
         try interface.print(
+            \\const @"{0s}" = @import("clocktree/{0s}.zig");
+            \\
+        , .{i});
+
+        try hal_interface.print(
             \\const @"{0s}" = @import("clocktree/{0s}.zig");
             \\
         , .{i});
@@ -146,9 +215,11 @@ fn generate_mcu_data(clk_tree_list: []const []const u8) !void {
 
     var mcu_iter = mcu_dir.iterate();
     var json_buf: [4096]u8 = undefined;
-    std.log.info("starting MCU data generation; this may take a few minutes", .{});
+    std.log.info("starting MCU data generation; this may take a few minutes\n\n", .{});
     var count: usize = 0;
     while (try mcu_iter.next()) |mcu| {
+        var temp_writer = std.Io.Writer.fixed(&temp_buf);
+
         count += 1;
         var mcu_file = try mcu_dir.openFile(mcu.name, .{});
         var reader = mcu_file.reader(&json_buf);
@@ -157,27 +228,97 @@ fn generate_mcu_data(clk_tree_list: []const []const u8) !void {
         const json = try std.json.parseFromTokenSource(Mcu, std.heap.page_allocator, &j_reader, .{});
         defer json.deinit();
         const mcu_inst: Mcu = json.value;
-        try interface.print(
+        try temp_writer.print(
             \\pub const @"{s}" = @"{s}".ClockTree(std.StaticStringMap(void).initComptime(.{{
             \\
         , .{ mcu_inst.name, mcu_inst.clock_ref_file_union });
         for (mcu_inst.extra_data) |data| {
-            try interface.print(
+            try temp_writer.print(
                 \\.{{ "{s}", {{}} }},
                 \\
             , .{data});
         }
 
-        try interface.writeAll("\n}));\n");
+        try temp_writer.writeAll("\n}));\n");
+
+        try interface.writeAll(temp_writer.buffered());
+        if (try check_hal_name(mcu_inst.name, hal_names, &hal_clk_name_map, alloc)) {
+            try hal_interface.writeAll(temp_writer.buffered());
+        }
 
         mcu_file.close();
         std.log.info("finished: {d} \x1b[1A\x1b[2K", .{count});
     }
+    std.log.info("MCU data generation finished. Generating HAL mappings...", .{});
+    try hal_interface.writeAll(
+        \\
+        \\//HAL to ClockHelper MCU name mappings
+        \\
+    );
+    for (hal_clk_name_map.keys()) |k| {
+        try hal_interface.print(
+            \\pub const @"{s}" = @"{s}";
+            \\
+        , .{ k, hal_clk_name_map.get(k).? });
+    }
+
+    try hal_interface.writeAll(
+        \\pub fn get_mcu_tree(comptime mcu_name: []const u8) type {
+        \\if(!@hasDecl(@This(), mcu_name)){
+        \\    @compileError("Unknown MCU: " ++ mcu_name);
+        \\}
+        \\return @field(@This(), mcu_name);
+        \\}
+    );
+
     try interface.flush();
+    try hal_interface.flush();
     root_file.close();
+    hal_file.close();
     std.log.info("\n\n", .{});
     var ch = std.process.Child.init(&[_][]const u8{ "zig", "fmt", "src/lib.zig" }, std.heap.page_allocator);
+    var ch2 = std.process.Child.init(&[_][]const u8{ "zig", "fmt", "src/hal_data.zig" }, std.heap.page_allocator);
+
     _ = try ch.spawnAndWait();
+    _ = try ch2.spawnAndWait();
+}
+
+fn check_hal_name(
+    cpu_name: []const u8,
+    hal_names: *const std.StringArrayHashMap([]const u8),
+    hal_clk: *std.StringArrayHashMap([]const u8),
+    alloc: std.mem.Allocator,
+) !bool {
+    var name_buf: [256]u8 = undefined;
+    var copy_clocktree: bool = false;
+
+    //check if the name exists directly
+    if (hal_names.get(cpu_name)) |formal_name| {
+        try hal_clk.put(formal_name, try alloc.dupe(u8, cpu_name));
+        return true;
+    }
+    //check if is a variant with parenthesis
+    if (std.mem.indexOf(u8, cpu_name, "(")) |s_idx| {
+        if (std.mem.indexOf(u8, cpu_name, ")")) |e_idx| {
+            const st_slice = cpu_name[0..s_idx];
+            const end_slice = cpu_name[e_idx + 1 ..];
+            var name_variant = std.mem.splitAny(u8, cpu_name[(s_idx + 1)..e_idx], ",/- ");
+            while (name_variant.next()) |var_name| {
+                const full_name = std.fmt.bufPrint(
+                    &name_buf,
+                    "{s}{s}{s}",
+                    .{ st_slice, var_name, end_slice },
+                ) catch continue;
+
+                if (hal_names.get(full_name)) |formal_name| {
+                    try hal_clk.put(formal_name, try alloc.dupe(u8, cpu_name));
+                    copy_clocktree = true;
+                }
+            }
+        }
+    }
+
+    return copy_clocktree;
 }
 
 // ============ Clock Tree Generation ===========
@@ -229,12 +370,12 @@ fn process_clock_json(file: *std.fs.File, out_file: *std.fs.File) !void {
     defer context.deinit();
     var out_writer = out_file.writer(&writer_buffer);
 
-    try init_clocktree_context(&json.value, &context);
+    try init_clocktree_context(&json.value, &context, alloc);
     try generate_clock_file(&json.value, &out_writer.interface, &context, alloc);
     try out_writer.interface.flush();
 }
 
-fn init_clocktree_context(clock_tree: *const ClockTree, context: *Context) !void {
+fn init_clocktree_context(clock_tree: *const ClockTree, context: *Context, alloc: std.mem.Allocator) !void {
     //process_semaphores and references
     //semaphores are only in reference types List and List_Item
     for (clock_tree.references) |ref| {
@@ -243,21 +384,9 @@ fn init_clocktree_context(clock_tree: *const ClockTree, context: *Context) !void
         if (check_multi_type(&ref)) |val| {
             try context.multi_type_ref.put(ref_name, val);
         }
-        for (ref.variants) |v| {
-            switch (v.ref) {
-                .list => |l| {
-                    for (l.itens) |i| {
-                        if (i.semaphore) |s| {
-                            try context.semaphores.put(s, ref_name);
-                        }
-                    }
-                },
-                .single_item => |i| {
-                    if (i.semaphore) |s| {
-                        try context.semaphores.put(s, ref_name);
-                    }
-                },
-                else => {},
+        if (std.mem.containsAtLeast(u8, ref_name, 1, "Enable")) {
+            if (!is_ref_static(ref.variants)) {
+                try context.extra_configs.put(ref_name, {});
             }
         }
     }
@@ -272,8 +401,23 @@ fn init_clocktree_context(clock_tree: *const ClockTree, context: *Context) !void
                 try context.nodes_enable.put(f_name, node_name);
             }
         }
+        // Some multiplexor sources do not have a direct reference in the reference files.
+        // This is because their selection value includes the clock and configuration of an arbitrary node.
+        // The code generator is not able to assume cross-references.
+        // So add the node's input as an arbitrary item in the selection list.
+        // NOTE: This does not cause significant problems because the cross-referenced clock can be configured separately.
+        // NOTE: This can be easily changed in the generation JSON files.
+
+        var orphan_list: std.StringArrayHashMap(usize) = .init(alloc); // reference name + index
+        const is_multi = std.mem.eql(u8, "multiplexor", node.node_type) or
+            std.mem.eql(u8, "xbar", node.node_type);
         for (node.variants) |v| {
-            for (v.inputs) |in| {
+            for (v.inputs, 0..) |in, index| {
+                if (is_multi) {
+                    if (in.source_ref == null) {
+                        try orphan_list.put(in.source, index);
+                    }
+                }
                 const ref = in.source_ref orelse continue;
                 try context.inputs_sources.put(ref, in.source);
             }
@@ -281,8 +425,38 @@ fn init_clocktree_context(clock_tree: *const ClockTree, context: *Context) !void
 
         var ref_iter = std.mem.splitAny(u8, node.reference, "|/\\,+-= ");
         while (ref_iter.next()) |r| {
-            try context.node_ref.put(r, node.name);
+            if (context.references.get(r)) |to_change| {
+                if (is_multi) {
+                    var variants_list = try std.ArrayList(RefVariant).initCapacity(alloc, 0);
+                    var corrent_ref = to_change;
+                    for (to_change.variants) |v| {
+                        switch (v.ref) {
+                            .list => |l| {
+                                var corrent_v = v;
+                                var itens = try std.ArrayList(ListItem).initCapacity(alloc, l.itens.len);
+                                try itens.appendSlice(alloc, l.itens);
+                                for (orphan_list.keys()) |orphan| {
+                                    const new_i = ListItem{
+                                        .name = try alloc.dupe(u8, orphan),
+                                        .value = @floatFromInt(orphan_list.get(orphan) orelse unreachable),
+                                        .semaphore = null,
+                                    };
+                                    try itens.append(alloc, new_i);
+                                }
+                                corrent_v.ref.list.itens = try itens.toOwnedSlice(alloc);
+                                try variants_list.append(alloc, corrent_v);
+                            },
+                            else => {},
+                        }
+                    }
+                    corrent_ref.variants = try variants_list.toOwnedSlice(alloc);
+                    try context.references.put(r, corrent_ref);
+                }
+                try context.node_ref.put(r, node.name);
+            }
         }
+
+        orphan_list.deinit();
     }
 
     //Process Extra Flags
@@ -298,6 +472,10 @@ fn init_clocktree_context(clock_tree: *const ClockTree, context: *Context) !void
         if (context.references.contains(extra)) {
             try context.extra_references.put(extra, {});
         }
+    }
+
+    for (clock_tree.extra_nodes) |extra_n| {
+        try context.extra_nodes.put(extra_n, {});
     }
 }
 
@@ -413,6 +591,7 @@ fn generate_list_types(tree: *const ClockTree, writer: *std.Io.Writer, context: 
 
             try created_list.put(name, {});
             var multi_list = std.StringArrayHashMap(ListItem).init(alloc);
+            var item_semaphore_map = std.StringArrayHashMap([]const u8).init(alloc);
             for (node.variants) |v| {
                 for (v.inputs, 0..) |in, idx| {
                     if (in.source_ref) |s| {
@@ -420,11 +599,16 @@ fn generate_list_types(tree: *const ClockTree, writer: *std.Io.Writer, context: 
                             std.log.info("not found ref for {s} - {s}", .{ node.name, name });
                             continue;
                         };
+                        const semaphore = find_multi_list_semaphore(s, ref);
                         try multi_list.put(s, .{
                             .name = s,
-                            .semaphore = find_multi_list_semaphore(s, ref),
+                            .semaphore = semaphore,
                             .value = @as(f32, @floatFromInt(idx)),
                         });
+                        if (semaphore) |sem| {
+                            try ctx.semaphores.put(sem, name);
+                            try item_semaphore_map.put(s, sem);
+                        }
                     } else {
                         try multi_list.put(in.source, .{
                             .name = in.source,
@@ -441,15 +625,16 @@ fn generate_list_types(tree: *const ClockTree, writer: *std.Io.Writer, context: 
                 values,
                 .multi,
             );
-            try ctx.total_list_item.put(name, values.len);
+            try ctx.total_list_item.put(try alloc.dupe(u8, name), try alloc.dupe(ListItem, values));
 
             multi_list.deinit();
+            try ctx.semaphore_item.put(name, item_semaphore_map);
         }
     }
 
     for (tree.references) |ref| {
         if (created_list.contains(ref.ref_name)) continue;
-        const itens = try list_itens(ref.variants, alloc);
+        const itens = try list_itens(ref, ctx, alloc);
         if (itens.len == 0) continue;
         try write_list(
             writer,
@@ -457,26 +642,36 @@ fn generate_list_types(tree: *const ClockTree, writer: *std.Io.Writer, context: 
             itens,
             get_list_type(itens),
         );
-        try ctx.total_list_item.put(ref.ref_name, itens.len);
+        try ctx.total_list_item.put(ref.ref_name, try alloc.dupe(ListItem, itens));
     }
 }
 /// merge all items from all list variants of a reference
-fn list_itens(variants: []const RefVariant, alloc: std.mem.Allocator) ![]const ListItem {
+fn list_itens(reference: Reference, ctx: *Context, alloc: std.mem.Allocator) ![]const ListItem {
     var list = std.StringArrayHashMap(ListItem).init(alloc);
     defer list.deinit();
-    for (variants) |v| {
+    var item_semaphore_map = std.StringArrayHashMap([]const u8).init(alloc);
+    for (reference.variants) |v| {
         switch (v.ref) {
             .list => |l| {
                 for (l.itens) |i| {
+                    if (i.semaphore) |sem| {
+                        try ctx.semaphores.put(sem, reference.ref_name);
+                        try item_semaphore_map.put(i.name, sem);
+                    }
                     try list.put(i.name, i);
                 }
             },
             .single_item => |i| {
+                if (i.semaphore) |sem| {
+                    try ctx.semaphores.put(sem, reference.ref_name);
+                    try item_semaphore_map.put(i.name, sem);
+                }
                 try list.put(i.name, i);
             },
             else => {},
         }
     }
+    try ctx.semaphore_item.put(reference.ref_name, item_semaphore_map);
     return try alloc.dupe(ListItem, list.values());
 }
 
@@ -899,6 +1094,11 @@ fn write_parent_ref_value(writer: *std.Io.Writer, context: *const Context, _: Re
             if (done.contains(in_ref.ref_name)) continue;
             try done.put(in_ref.ref_name, {});
             try write_ref_value(writer, context, in_ref, alloc, done);
+        } else if (context.semaphores.get(token)) |ref| {
+            const in_ref = context.references.get(ref) orelse continue;
+            if (done.contains(in_ref.ref_name)) continue;
+            try done.put(in_ref.ref_name, {});
+            try write_ref_value(writer, context, in_ref, alloc, done);
         }
     }
 }
@@ -1063,6 +1263,7 @@ fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, a
                             // if a reference refers to itself in an expression, use the config value
                             // if no configuration is found, the expression is invalid
                             const ref = context.references.get(name).?;
+
                             if (std.mem.eql(u8, name, str)) {
                                 if (is_ref_config(ref, context)) {
                                     prefix = if (context.extra_configs.contains(name)) "config.extra." else "config.";
@@ -1078,11 +1279,23 @@ fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, a
                                 idx += next_str.len;
 
                                 if (next_str.len == 0) {
-                                    std.log.info("not fount next str on pre: {s} op: {s} expr: {s}", .{ str, op, expr[idx..] });
+                                    std.log.info("not found next str on pre: {s} op: {s} expr: {s}", .{ str, op, expr[idx..] });
                                     return error.MalformedExpr;
                                 }
 
-                                const next_prefix = if (!is_numeric(next_str)) ".@\"" else "";
+                                const next_prefix = blk: {
+                                    if (!is_numeric(next_str)) {
+                                        if (context.total_list_item.get(str)) |total| {
+                                            if (!is_in_list(next_str, total)) {
+                                                const ret = std.fmt.bufPrint(inner[inner_idx..], "false", .{}) catch unreachable;
+                                                inner_idx += ret.len;
+                                                continue;
+                                            }
+                                        }
+                                        break :blk ".@\"";
+                                    }
+                                    break :blk "";
+                                };
                                 const next_posfix = if (!is_numeric(next_str)) "\"" else "";
 
                                 if (!is_math_oprator(op)) {
@@ -1116,9 +1329,20 @@ fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, a
                                     inner_idx += ret.len;
                                 }
                             } else {
+                                var small_buf: [120]u8 = undefined;
                                 if (std.mem.indexOf(u8, str, "Used")) |_| {
                                     const used_ref = context.references.get(str) orelse return error.MalformedExpr;
-                                    const line = if (is_list(used_ref, context)) "@\"true\"" else "1";
+                                    const line = blk: {
+                                        if (is_list(used_ref, context)) {
+                                            if (context.total_list_item.get(str)) |total| {
+                                                if (!is_in_list("true", total)) {
+                                                    const ret = try std.fmt.bufPrint(&small_buf, "@\"{s}\"", .{total[0].name});
+                                                    break :blk ret;
+                                                }
+                                            }
+                                            break :blk "@\"true\"";
+                                        } else break :blk "1";
+                                    };
                                     const ret = std.fmt.bufPrint(inner[inner_idx..],
                                         \\ check_ref(@TypeOf({0s}@"{1s}{2s}"), {0s}@"{1s}{2s}", {3s}, .@"=") 
                                     , .{ prefix, str, posfix, line }) catch unreachable;
@@ -1315,14 +1539,11 @@ fn is_major_int(ref: Reference) bool {
 }
 // function that indicates whether the numeric range should be checked immediately
 fn check_for_range(name: []const u8, ctx: *const Context) bool {
-    const clk_name = ctx.node_ref.get(name) orelse {
-        return true;
-    };
-    const clk = ctx.nodes.get(clk_name) orelse {
-        return true;
-    };
+    const clk_name = ctx.node_ref.get(name) orelse return true;
+    const clk = ctx.nodes.get(clk_name) orelse return true;
 
     if (std.mem.eql(u8, clk.node_type, "output") or
+        std.mem.eql(u8, clk.node_type, "fractional") or
         std.mem.eql(u8, clk.node_type, "fixedSource") or
         std.mem.eql(u8, clk.node_type, "activeOutput") or
         std.mem.eql(u8, clk.node_type, "pixelClockSource")) return false;
@@ -1391,8 +1612,31 @@ fn write_reference_value(writer: *std.Io.Writer, context: *const Context, ref: R
         .float_range => |r| try writer_float_range(writer, r, runtime_ctx, context, arena.allocator()),
         .integer_range => |r| try writer_int_range(writer, r, runtime_ctx, context, arena.allocator()),
         .dynamic_range => |d| try writer_dynamic_range(writer, d, runtime_ctx, context, arena.allocator()),
-        .single_item => |i| try writer_list_item(writer, i, runtime_ctx, context, arena.allocator()),
-        .list => |l| try writer_list(writer, l, runtime_ctx, context, arena.allocator()),
+        .single_item => |i| {
+            //const new_ctx = RuntimeRef{
+            //    .name = runtime_ctx.name,
+            //    .val = runtime_ctx.val,
+            //    .is_runtime = !std.mem.containsAtLeast(u8, runtime_ctx.name, 1, "Enable"),
+            //};
+            try writer_list_item(writer, i, runtime_ctx, context, arena.allocator());
+        },
+        .list => |l| {
+            //if (std.mem.containsAtLeast(u8, runtime_ctx.name, 1, "Enable")) {
+            //    //Enbale lists can only have one choice per condition, even if the list allows multiple choices
+            //    const new_val = ListItem{
+            //        .name = l.default_name orelse "null",
+            //        .semaphore = null,
+            //        .value = null,
+            //    };
+            //    const new_ctx = RuntimeRef{
+            //        .name = runtime_ctx.name,
+            //        .val = runtime_ctx.val,
+            //        .is_runtime = false,
+            //    };
+            //    try writer_list_item(writer, new_val, new_ctx, context, alloc);
+            //} else
+            try writer_list(writer, l, runtime_ctx, context, arena.allocator());
+        },
         else => {},
     }
 }
@@ -1405,7 +1649,7 @@ fn write_no_value(writer: *std.Io.Writer, runtime_ctx: RuntimeRef, context: *con
         const err_expr = try clear_string(runtime_ctx.val.expr orelse "Else", alloc);
         try writer.print(
             \\if({0s}.@"{1s}")|_|{{
-            \\try comptime_fail_or_error(error.InvalidConfig,
+            \\return comptime_fail_or_error(error.InvalidConfig,
             \\  \\
             \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
             \\  \\Value should be null.
@@ -1424,6 +1668,10 @@ fn write_no_value(writer: *std.Io.Writer, runtime_ctx: RuntimeRef, context: *con
 
 fn writer_fixed_float(writer: *std.Io.Writer, val: f32, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
     const ctx = runtime_ctx;
+    const ref = context.references.get(ctx.name).?;
+    const multi_t_list = is_list(ref, context);
+    const multi_list_prefix = if (multi_t_list) ".get()" else "";
+
     if (runtime_ctx.is_runtime) {
         const conf_prefix = if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) "config.extra" else "config";
         const pre_log = try clear_string(runtime_ctx.val.diagnostic orelse "No Extra Log", alloc);
@@ -1432,8 +1680,8 @@ fn writer_fixed_float(writer: *std.Io.Writer, val: f32, runtime_ctx: RuntimeRef,
 
         try writer.print(
             \\if({0s}.@"{1s}")|val| {{
-            \\if(val != {2e}){{
-            \\try comptime_fail_or_error(error.InvalidConfig,
+            \\if(val{5s} != {2e}){{
+            \\return comptime_fail_or_error(error.InvalidConfig,
             \\  \\
             \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
             \\  \\Expected Fixed Value: {{e}} found: {{e}}
@@ -1443,7 +1691,7 @@ fn writer_fixed_float(writer: *std.Io.Writer, val: f32, runtime_ctx: RuntimeRef,
             \\ ,.{{ "{1s}", "{3s}", "{4s}", {2e}, val, }});
             \\}}
             \\}}
-        , .{ conf_prefix, ctx.name, val, err_expr, err_log });
+        , .{ conf_prefix, ctx.name, val, err_expr, err_log, multi_list_prefix });
 
         if (!check_for_range(ctx.name, context)) {
             try writer.print(
@@ -1454,13 +1702,24 @@ fn writer_fixed_float(writer: *std.Io.Writer, val: f32, runtime_ctx: RuntimeRef,
             , .{ ctx.name, val, val });
         }
     }
-    try writer.print(
-        \\ break :blk {d};
-    , .{val});
+    if (multi_t_list) {
+        std.log.info("Traing do get name for ref {s} value{d}", .{ runtime_ctx.name, val });
+        const i_name = get_list_name(ref, val);
+        try writer.print(
+            \\ break :blk .{s};
+        , .{i_name});
+    } else {
+        try writer.print(
+            \\ break :blk {e};
+        , .{val});
+    }
 }
 
 fn writer_fixed_integer(writer: *std.Io.Writer, val: u32, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
     const ctx = runtime_ctx;
+    const ref = context.references.get(ctx.name).?;
+    const multi_t_list = is_list(ref, context);
+    const multi_list_prefix = if (multi_t_list) ".get()" else "";
     if (runtime_ctx.is_runtime) {
         const conf_prefix = if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) "config.extra" else "config";
         const pre_log = try clear_string(runtime_ctx.val.diagnostic orelse "No Extra Log", alloc);
@@ -1468,8 +1727,8 @@ fn writer_fixed_integer(writer: *std.Io.Writer, val: u32, runtime_ctx: RuntimeRe
         const err_expr = try clear_string(ctx.val.expr orelse "Else", alloc);
         try writer.print(
             \\if({0s}.@"{1s}")|val| {{
-            \\if(val != {2d}){{
-            \\try comptime_fail_or_error(error.InvalidConfig,
+            \\if(val{5s} != {2d}){{
+            \\return comptime_fail_or_error(error.InvalidConfig,
             \\  \\
             \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
             \\  \\Expected Fixed Value: {{d}} found: {{d}}
@@ -1478,7 +1737,7 @@ fn writer_fixed_integer(writer: *std.Io.Writer, val: u32, runtime_ctx: RuntimeRe
             \\ ,.{{ "{1s}", "{3s}", "{4s}", {2d}, val, }});
             \\}}
             \\}}
-        , .{ conf_prefix, ctx.name, val, err_expr, err_log });
+        , .{ conf_prefix, ctx.name, val, err_expr, err_log, multi_list_prefix });
         if (!check_for_range(ctx.name, context)) {
             try writer.print(
                 \\@"{s}Limit" = .{{
@@ -1488,9 +1747,17 @@ fn writer_fixed_integer(writer: *std.Io.Writer, val: u32, runtime_ctx: RuntimeRe
             , .{ ctx.name, val, val });
         }
     }
-    try writer.print(
-        \\ break :blk {d};
-    , .{val});
+    if (multi_t_list) {
+        std.log.info("Traing do get name for ref {s} value{d}", .{ runtime_ctx.name, val });
+        const i_name = get_list_name(ref, @floatFromInt(val));
+        try writer.print(
+            \\ break :blk .{s};
+        , .{i_name});
+    } else {
+        try writer.print(
+            \\ break :blk {d};
+        , .{val});
+    }
 }
 
 fn writer_fixed_expr(writer: *std.Io.Writer, val: []const u8, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
@@ -1523,15 +1790,15 @@ fn writer_float_range(writer: *std.Io.Writer, val: FloatRange, runtime_ctx: Runt
         const name = ctx.name;
         const conf_prefix = if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) "config.extra" else "config";
 
+        try writer.print(
+            \\const config_val = {s}.@"{s}";
+            \\
+        , .{ conf_prefix, name });
+
         if (check_for_range(name, context)) {
             const pre_log = try clear_string(runtime_ctx.val.diagnostic orelse "No Extra Log", alloc);
             const err_log: []const u8 = if (pre_log.len == 0) "No Extra Log" else pre_log;
             const err_expr = try clear_string(ctx.val.expr orelse "Else", alloc);
-
-            try writer.print(
-                \\const config_val = {s}.@"{s}";
-                \\
-            , .{ conf_prefix, name });
 
             if (((val.max != null) or (val.min != null))) {
                 try writer.writeAll(
@@ -1542,7 +1809,7 @@ fn writer_float_range(writer: *std.Io.Writer, val: FloatRange, runtime_ctx: Runt
                 if (val.min) |min| {
                     try writer.print(
                         \\  if(val < {0e}){{
-                        \\  try comptime_fail_or_error(error.InvalidConfig,
+                        \\  return comptime_fail_or_error(error.InvalidConfig,
                         \\  \\
                         \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
                         \\  \\Underflow Value - min: {{e}} found: {{e}}
@@ -1556,7 +1823,7 @@ fn writer_float_range(writer: *std.Io.Writer, val: FloatRange, runtime_ctx: Runt
                 if (val.max) |max| {
                     try writer.print(
                         \\  if(val > {0e}){{
-                        \\  try comptime_fail_or_error(error.InvalidConfig,
+                        \\  return comptime_fail_or_error(error.InvalidConfig,
                         \\  \\
                         \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
                         \\  \\Overflow Value - max: {{e}} found: {{e}}
@@ -1571,12 +1838,21 @@ fn writer_float_range(writer: *std.Io.Writer, val: FloatRange, runtime_ctx: Runt
                     \\
                 );
             }
-            try writer.writeAll(
-                \\break :blk config_val
-            );
-            if (val.default_value) |d| try writer.print(" orelse {d}", .{d});
-            try writer.writeAll(";\n");
+        } else {
+            if (((val.max != null) or (val.min != null))) {
+                try writer.print(
+                    \\@"{s}Limit" = .{{ 
+                , .{ctx.name});
+                if (val.min) |min| try writer.print(".min = {e},", .{min}) else try writer.print(".min = null,\n", .{});
+                if (val.max) |max| try writer.print(".max = {e},", .{max}) else try writer.print(".max = null,\n", .{});
+                try writer.writeAll("};\n\n");
+            }
         }
+        try writer.writeAll(
+            \\break :blk config_val
+        );
+        if (val.default_value) |d| try writer.print(" orelse {d}", .{d}) else try writer.print(" orelse null", .{});
+        try writer.writeAll(";\n");
     } else {
         if (((val.max != null) or (val.min != null))) {
             try writer.print(
@@ -1584,9 +1860,10 @@ fn writer_float_range(writer: *std.Io.Writer, val: FloatRange, runtime_ctx: Runt
             , .{ctx.name});
             if (val.min) |min| try writer.print(".min = {e},", .{min}) else try writer.print(".min = null,\n", .{});
             if (val.max) |max| try writer.print(".max = {e},", .{max}) else try writer.print(".max = null,\n", .{});
-            try writer.writeAll("};");
-            try writer.writeAll("break :blk null;");
+            try writer.writeAll("};\n\n");
         }
+
+        try writer.writeAll("break :blk null;");
     }
 }
 
@@ -1595,15 +1872,15 @@ fn writer_int_range(writer: *std.Io.Writer, val: IntegerRange, runtime_ctx: Runt
     const name = ctx.name;
     const conf_prefix = if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) "config.extra" else "config";
     if (ctx.is_runtime) {
+        try writer.print(
+            \\const config_val = {s}.@"{s}";
+            \\
+        , .{ conf_prefix, name });
+
         if (check_for_range(name, context)) {
             const pre_log = try clear_string(runtime_ctx.val.diagnostic orelse "No Extra Log", alloc);
             const err_log: []const u8 = if (pre_log.len == 0) "No Extra Log" else pre_log;
             const err_expr = try clear_string(ctx.val.expr orelse "Else", alloc);
-
-            try writer.print(
-                \\const config_val = {s}.@"{s}";
-                \\
-            , .{ conf_prefix, name });
 
             if (((val.max != null) or (val.min != null))) {
                 try writer.writeAll(
@@ -1614,7 +1891,7 @@ fn writer_int_range(writer: *std.Io.Writer, val: IntegerRange, runtime_ctx: Runt
                 if (val.min) |min| {
                     try writer.print(
                         \\  if(val < {0d}){{
-                        \\  try comptime_fail_or_error(error.InvalidConfig,
+                        \\  return comptime_fail_or_error(error.InvalidConfig,
                         \\  \\
                         \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
                         \\  \\Underflow Value - min: {{d}} found: {{d}}
@@ -1628,7 +1905,7 @@ fn writer_int_range(writer: *std.Io.Writer, val: IntegerRange, runtime_ctx: Runt
                 if (val.max) |max| {
                     try writer.print(
                         \\  if(val > {0d}){{
-                        \\  try comptime_fail_or_error(error.InvalidConfig,
+                        \\  return comptime_fail_or_error(error.InvalidConfig,
                         \\  \\
                         \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
                         \\  \\Overflow Value - max: {{d}} found: {{d}}
@@ -1643,12 +1920,27 @@ fn writer_int_range(writer: *std.Io.Writer, val: IntegerRange, runtime_ctx: Runt
                     \\
                 );
             }
+        } else {
+            if (((val.max != null) or (val.min != null))) {
+                try writer.print(
+                    \\@"{s}Limit" = .{{ 
+                , .{name});
+                if (val.min) |min| try writer.print(".min = {d},", .{min}) else try writer.print(".min = null,\n", .{});
+                if (val.max) |max| try writer.print(".max = {d},", .{max}) else try writer.print(".max = null,\n", .{});
+                try writer.writeAll("};\n\n");
+            }
+        }
+        if (is_major_int(context.references.get(runtime_ctx.name).?)) {
             try writer.writeAll(
                 \\break :blk if(config_val)|i| @as(f32,@floatFromInt(i))
             );
-            if (val.default_value) |d| try writer.print(" else {d}", .{d});
-            try writer.writeAll(";\n");
+        } else {
+            try writer.writeAll(
+                \\break :blk if(config_val)|i| i
+            );
         }
+        if (val.default_value) |d| try writer.print(" else {d}", .{d}) else try writer.print(" else null", .{});
+        try writer.writeAll(";\n");
     } else {
         if (((val.max != null) or (val.min != null))) {
             try writer.print(
@@ -1657,8 +1949,9 @@ fn writer_int_range(writer: *std.Io.Writer, val: IntegerRange, runtime_ctx: Runt
             if (val.min) |min| try writer.print(".min = {d},", .{min}) else try writer.print(".min = null,\n", .{});
             if (val.max) |max| try writer.print(".max = {d},", .{max}) else try writer.print(".max = null,\n", .{});
             try writer.writeAll("};");
-            try writer.writeAll("break :blk null;");
         }
+
+        try writer.writeAll("break :blk null;");
     }
 }
 
@@ -1680,7 +1973,7 @@ fn writer_dynamic_range(writer: *std.Io.Writer, val: DynamicRange, runtime_ctx: 
         try writer.print(
             \\if(max)|m|{{
             \\  if(actual > m){{
-            \\  try comptime_fail_or_error(error.InvalidConfig,
+            \\  return comptime_fail_or_error(error.InvalidConfig,
             \\  \\
             \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
             \\  \\Overflow Value - max: {3s}({{e}}) found: {{e}}
@@ -1694,7 +1987,7 @@ fn writer_dynamic_range(writer: *std.Io.Writer, val: DynamicRange, runtime_ctx: 
         try writer.print(
             \\if(min)|m|{{
             \\  if(actual < m){{
-            \\  try comptime_fail_or_error(error.InvalidConfig,
+            \\  return comptime_fail_or_error(error.InvalidConfig,
             \\  \\
             \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
             \\  \\Underflow Value - min: {3s}({{e}}) found: {{e}}
@@ -1731,10 +2024,12 @@ fn writer_dynamic_range(writer: *std.Io.Writer, val: DynamicRange, runtime_ctx: 
 
 fn writer_list_item(writer: *std.Io.Writer, val: ListItem, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
     if (val.semaphore) |s| {
-        try writer.print(
-            \\ @"{s}" = true; 
-            \\
-        , .{s});
+        if (context.semaphores.contains(s)) {
+            try writer.print(
+                \\ @"{s}" = true; 
+                \\
+            , .{s});
+        }
     }
 
     if ((val.name.len == 0) or std.mem.eql(u8, val.name, "null")) {
@@ -1760,7 +2055,7 @@ fn writer_list_item(writer: *std.Io.Writer, val: ListItem, runtime_ctx: RuntimeR
             \\ const conf_item =  {0s}.@"{1s}";
             \\ if(conf_item)|i|{{
             \\ if(item != i) {{
-            \\try comptime_fail_or_error(error.InvalidConfig,
+            \\return comptime_fail_or_error(error.InvalidConfig,
             \\  \\
             \\  \\Error on {{s}} | expr: {{s}} diagnostic: {{s}} 
             \\  \\Expected Fixed List Value: {{s}} found {{any}}
@@ -1782,7 +2077,7 @@ fn writer_list_item(writer: *std.Io.Writer, val: ListItem, runtime_ctx: RuntimeR
 
 fn writer_list(writer: *std.Io.Writer, val: List, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
     const conf_prefix = if (context.extra_configs.contains(runtime_ctx.name) or context.extra_references.contains(runtime_ctx.name)) "config.extra" else "config";
-
+    const real_list: []const ListItem = context.total_list_item.get(runtime_ctx.name) orelse &.{};
     try writer.print(
         \\ const conf_item = {0s}.@"{1s}";
         \\
@@ -1798,46 +2093,50 @@ fn writer_list(writer: *std.Io.Writer, val: List, runtime_ctx: RuntimeRef, conte
             \\switch(item){
             \\
         );
+        var total_inner: usize = 0;
         for (val.itens) |i| {
+            if (!is_in_list(i.name, real_list)) continue;
+            total_inner += 1;
             try writer.print(
                 \\.@"{s}" => 
             , .{i.name});
             if (i.semaphore) |s| {
-                try writer.print(
-                    \\@"{s}" = true,
-                    \\
-                , .{s});
-            } else {
-                try writer.writeAll(
-                    \\{},
-                    \\
-                );
+                if (context.semaphores.contains(s)) {
+                    try writer.print(
+                        \\@"{s}" = true,
+                        \\
+                    , .{s});
+                    continue;
+                }
             }
+            try writer.writeAll(
+                \\{},
+                \\
+            );
         }
 
-        if (context.total_list_item.get(runtime_ctx.name)) |total| {
-            if (val.itens.len < total) {
-                try writer.writeAll(
-                    \\else => {
-                    \\try comptime_fail_or_error(error.InvalidConfig,
-                    \\  \\
-                    \\  \\Error on {s} | expr: {s} diagnostic: {s} 
-                    \\  \\Option not available in this condition: {any}.
-                    \\  \\note: available options:
-                    \\
-                );
-                for (val.itens) |n| {
-                    try writer.print(
-                        \\ \\ - {s}
-                        \\
-                    , .{n.name});
-                }
+        if (total_inner < real_list.len) {
+            try writer.writeAll(
+                \\else => {
+                \\return comptime_fail_or_error(error.InvalidConfig,
+                \\  \\
+                \\  \\Error on {s} | expr: {s} diagnostic: {s} 
+                \\  \\Option not available in this condition: {any}.
+                \\  \\note: available options:
+                \\
+            );
+            for (val.itens) |n| {
+                if (!is_in_list(n.name, real_list)) continue;
                 try writer.print(
-                    \\ , .{{ "{s}", "{s}", "{s}", item}});
-                    \\}},
+                    \\ \\ - {s}
                     \\
-                , .{ runtime_ctx.name, err_expr, err_log });
+                , .{n.name});
             }
+            try writer.print(
+                \\ , .{{ "{s}", "{s}", "{s}", item}});
+                \\}},
+                \\
+            , .{ runtime_ctx.name, err_expr, err_log });
         }
 
         try writer.writeAll("\n}\n}\n");
@@ -1849,7 +2148,24 @@ fn writer_list(writer: *std.Io.Writer, val: List, runtime_ctx: RuntimeRef, conte
 
     if (val.default_name) |def| {
         if ((def.len != 0) and !(std.mem.eql(u8, def, "null"))) {
-            try writer.print(" orelse .@\"{s}\"", .{def});
+            if (check_item(def, real_list)) |item| {
+                blk: {
+                    if (item.semaphore) |sema| {
+                        if (context.semaphores.contains(sema)) {
+                            try writer.print(
+                                \\ orelse {{
+                                \\@"{s}" = true;
+                                \\break :blk .@"{s}";
+                                \\}}
+                            , .{ sema, def });
+                            break :blk;
+                        }
+                    }
+                    try writer.print(" orelse .@\"{s}\"", .{def});
+                }
+            } else {
+                try writer.print(" orelse null", .{});
+            }
         } else if (def.len != 0) {
             if (def[0] == '+') {
                 const ref = get_ref_from_ptr(def[1..], context) catch {
@@ -1866,7 +2182,11 @@ fn writer_list(writer: *std.Io.Writer, val: List, runtime_ctx: RuntimeRef, conte
                     };
                     if (to_def) |to| {
                         if ((to.len != 0) and !(std.mem.eql(u8, to, "null"))) {
-                            try writer.print(" orelse .@\"{s}\"", .{to});
+                            if (is_in_list(to, real_list)) {
+                                try writer.print(" orelse .@\"{s}\"", .{to});
+                            } else {
+                                try writer.print(" orelse null", .{});
+                            }
                             break;
                         }
                     }
@@ -1878,6 +2198,25 @@ fn writer_list(writer: *std.Io.Writer, val: List, runtime_ctx: RuntimeRef, conte
     try writer.writeAll(";\n");
 }
 
+fn get_semaphore_name(ref_name: []const u8, item_name: []const u8, context: *const Context) ?[]const u8 {
+    if (context.semaphore_item.get(ref_name)) |semaphore_map| {
+        return semaphore_map.get(item_name);
+    }
+
+    return null;
+}
+
+fn check_item(name: []const u8, list: []const ListItem) ?ListItem {
+    for (list) |i| {
+        if (std.mem.eql(u8, i.name, name)) return i;
+    }
+    return null;
+}
+
+fn is_in_list(val: []const u8, list: []const ListItem) bool {
+    return check_item(val, list) != null;
+}
+
 fn generate_clock(writer: *std.Io.Writer, context: *const Context, alloc: std.mem.Allocator) !void {
     try generate_clock_base(writer, context);
     for (context.nodes.values()) |nodes| {
@@ -1886,12 +2225,14 @@ fn generate_clock(writer: *std.Io.Writer, context: *const Context, alloc: std.me
         try generate_clock_values(writer, nodes, context, alloc);
     }
 
+    // Generate outputs in reverse order to help assemble the clock tree in case of an error,
+    // allowing viewing of the highest node in the dependency tree
+    var node_pass: std.StringArrayHashMap(void) = .init(alloc);
+    defer node_pass.deinit();
     for (context.nodes.values()) |nodes| {
-        if (!context.references.contains(get_node_reference(nodes))) continue;
-        try writer.print(
-            \\
-            \\out.@"{0s}" = try @"{0s}".get_output();
-        , .{nodes.name});
+        if (node_pass.contains(nodes.name)) continue;
+        try node_pass.put(nodes.name, {});
+        try generate_clocks_out(writer, nodes, &node_pass, context);
     }
 }
 
@@ -2008,7 +2349,7 @@ fn write_actual_clock_value(writer: *std.Io.Writer, node: ClockNode, node_var: C
     if (clk_t != .output) {
         try writer.print(
             \\
-            \\const @"{0s}_clk_value" = @"{1s}Value" orelse try comptime_fail_or_error(error.InvalidClockValue, 
+            \\const @"{0s}_clk_value" = @"{1s}Value" orelse return comptime_fail_or_error(error.InvalidClockValue, 
             \\  \\Error on Clock {{s}} | expr: {{s}} diagnostic: {{s}}
             \\  \\Clock is active but the reference value {{s}} is null
             \\  \\note: check the flags and configurations associated with this clock
@@ -2028,7 +2369,7 @@ fn write_actual_clock_value(writer: *std.Io.Writer, node: ClockNode, node_var: C
         , .{ref_name});
     }
     switch (clk_t) {
-        .source => try create_source(node, is_list(ref, context), writer),
+        .source => try create_source(node, ref, context, is_list(ref, context), writer),
         .divisor => try create_divisor(node, node_var, is_list(ref, context), writer),
         .multiplicator => try create_multiplicator(node, node_var, is_list(ref, context), writer),
         .multiplicatorFrac => try create_multiplicator_frac(node, node_var, is_list(ref, context), writer),
@@ -2064,7 +2405,18 @@ fn writer_flag(writer: *std.Io.Writer, sub_flag: []const u8, context: *const Con
     switch (ctx) {
         .reference => {
             const ref = context.references.get(sub_flag).?;
-            const cmp = if (is_list(ref, context)) ".@\"true\"" else "1";
+            var small_buf: [120]u8 = undefined;
+            const cmp = blk: {
+                if (is_list(ref, context)) {
+                    if (context.total_list_item.get(sub_flag)) |total| {
+                        if (!is_in_list("true", total)) {
+                            const ret = try std.fmt.bufPrint(&small_buf, ".@\"{s}\"", .{total[0].name});
+                            break :blk ret;
+                        }
+                    }
+                    break :blk ".@\"true\"";
+                } else break :blk "1";
+            };
 
             try writer.print(
                 \\check_ref(@TypeOf(@"{0s}Value"), @"{0s}Value", {1s}, .@"=")
@@ -2116,7 +2468,39 @@ fn get_first_frac(name: []const u8, inputs: []const ClockNodeInput) ![]const u8 
     return error.InvalidInputSource;
 }
 
-fn create_source(node: ClockNode, list: bool, writer: *std.Io.Writer) anyerror!void {
+fn get_list_name(ref: Reference, val: f32) []const u8 {
+    for (ref.variants) |vars| {
+        switch (vars.ref) {
+            .list => |l| {
+                for (l.itens) |i| {
+                    if (i.value) |i_val| {
+                        if (val == i_val) {
+                            return i.name;
+                        }
+                    }
+                }
+            },
+            .single_item => |i| {
+                if (i.value) |i_val| {
+                    if (val == i_val) {
+                        return i.name;
+                    }
+                }
+            },
+            else => {},
+        }
+    }
+    unreachable;
+}
+
+fn create_source(node: ClockNode, ref: Reference, ctx: *const Context, list: bool, writer: *std.Io.Writer) anyerror!void {
+    const ref_name = ref.ref_name;
+    if (!check_for_range(ref_name, ctx) and !is_ref_static(ref.variants) and !is_list(ref, ctx)) {
+        try writer.print(
+            \\@"{s}".limit = @"{s}Limit";
+            \\
+        , .{ node.name, ref_name });
+    }
     const postfix = if (list) ".get()" else "";
     try writer.print(
         \\@"{0s}".nodetype = .source;
@@ -2203,4 +2587,22 @@ fn generate_reference_out(writer: *std.Io.Writer, context: *const Context, alloc
             \\ref_out.@"{0s}" = @"{0s}Value";
         , .{r.ref_name});
     }
+}
+
+fn generate_clocks_out(writer: *std.Io.Writer, node: ClockNode, node_pass: *std.StringArrayHashMap(void), context: *const Context) anyerror!void {
+    if (!context.references.contains(get_node_reference(node))) return;
+    const get_method = if (context.extra_nodes.contains(node.name)) "get_extra_output" else "get_output";
+
+    for (node.variants) |vars| {
+        for (vars.outputs) |outs| {
+            if (node_pass.contains(outs)) continue;
+            try node_pass.put(outs, {});
+            const child_node = context.nodes.get(outs) orelse continue;
+            try generate_clocks_out(writer, child_node, node_pass, context);
+        }
+    }
+    try writer.print(
+        \\
+        \\out.@"{0s}" = try @"{0s}".{1s}();
+    , .{ node.name, get_method });
 }

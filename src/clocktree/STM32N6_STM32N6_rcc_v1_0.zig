@@ -2325,6 +2325,15 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             RTCClkSource: f32 = 0,
             RTCOutput: f32 = 0,
             IWDGOutput: f32 = 0,
+            MSI: f32 = 0,
+            VCOInput: f32 = 0,
+            VCO2Input: f32 = 0,
+            VCO3Input: f32 = 0,
+            VCO4Input: f32 = 0,
+            VCO1Output: f32 = 0,
+            VCO2Output: f32 = 0,
+            VCO3Output: f32 = 0,
+            VCO4Output: f32 = 0,
         };
         /// Configuration output after processing the clock tree.
         /// Values marked as null indicate that the RCC configuration should remain at its reset value.
@@ -2588,7 +2597,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             //Semaphores flags
 
-            var HSIDiv1: bool = false;
             var IC1_PLL1: bool = false;
             var IC1_PLL2: bool = false;
             var IC1_PLL3: bool = false;
@@ -2869,14 +2877,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var SYSBCLKSOURCE_MSI: bool = false;
             var SYSBCLKSOURCE_HSE: bool = false;
             var SYSBCLKSOURCE_IC2_IC6_IC11: bool = false;
-            var SYSCCLKSOURCE_HSI: bool = false;
-            var SYSCCLKSOURCE_MSI: bool = false;
-            var SYSCCLKSOURCE_HSE: bool = false;
-            var SYSCCLKSOURCE_IC2_IC6_IC11: bool = false;
-            var SYSDCLKSOURCE_HSI: bool = false;
-            var SYSDCLKSOURCE_MSI: bool = false;
-            var SYSDCLKSOURCE_HSE: bool = false;
-            var SYSDCLKSOURCE_IC2_IC6_IC11: bool = false;
             var CPUCLKSOURCE_HSI: bool = false;
             var CPUCLKSOURCE_MSI: bool = false;
             var CPUCLKSOURCE_HSE: bool = false;
@@ -2900,6 +2900,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var RTCCLKSOURCE_HSE_DIV: bool = false;
             var RTCCLKSOURCE_LSE: bool = false;
             var RTCCLKSOURCE_LSI: bool = false;
+            var HSIDiv1: bool = false;
             var TimG1PrescalerEnabled: bool = false;
             var TimG2PrescalerEnabled: bool = false;
             var scale0: bool = false;
@@ -2966,15 +2967,27 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             var AHB1234Freq_ValueLimit: Limit = .{};
             var APB1Freq_ValueLimit: Limit = .{};
             var APB2Freq_ValueLimit: Limit = .{};
+            var PLL1FRACVLimit: Limit = .{};
             var FOUTPOSTDIV1Freq_ValueLimit: Limit = .{};
+            var PLL2FRACVLimit: Limit = .{};
             var FOUTPOSTDIV2Freq_ValueLimit: Limit = .{};
+            var PLL3FRACVLimit: Limit = .{};
             var FOUTPOSTDIV3Freq_ValueLimit: Limit = .{};
+            var PLL4FRACVLimit: Limit = .{};
             var FOUTPOSTDIV4Freq_ValueLimit: Limit = .{};
             var RTCFreq_ValueLimit: Limit = .{};
+            var VCOInput1Freq_ValueLimit: Limit = .{};
+            var VCOInput2Freq_ValueLimit: Limit = .{};
+            var VCOInput3Freq_ValueLimit: Limit = .{};
+            var VCOInput4Freq_ValueLimit: Limit = .{};
+            var VCO1OutputFreq_ValueLimit: Limit = .{};
+            var VCO2OutputFreq_ValueLimit: Limit = .{};
+            var VCO3OutputFreq_ValueLimit: Limit = .{};
+            var VCO4OutputFreq_ValueLimit: Limit = .{};
             //Ref Values
 
             const HSI_VALUEValue: ?f32 = blk: {
-                break :blk 64000000;
+                break :blk 6.4e7;
             };
             const HSIDivValue: ?HSIDivList = blk: {
                 const conf_item = config.HSIDiv;
@@ -2987,10 +3000,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_HSI_DIV1;
+                break :blk conf_item orelse {
+                    HSIDiv1 = true;
+                    break :blk .RCC_HSI_DIV1;
+                };
             };
             const HSIDiv_VALUEValue: ?f32 = blk: {
-                break :blk 64000000;
+                break :blk 6.4e7;
             };
             const HSIDiv4Value: ?HSIDiv4List = blk: {
                 const item: HSIDiv4List = .@"4";
@@ -3001,6 +3017,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2.5e7,
                 };
+
                 break :blk null;
             };
             const HSE_VALUEValue: ?f32 = blk: {
@@ -3008,7 +3025,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.HSE_VALUE;
                     if (config_val) |val| {
                         if (val < 8e6) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {e} found: {e}
@@ -3023,7 +3040,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 4.8e7) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {e} found: {e}
@@ -3043,7 +3060,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.HSE_VALUE;
                 if (config_val) |val| {
                     if (val < 8e6) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {e} found: {e}
@@ -3058,7 +3075,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 4.8e7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {e} found: {e}
@@ -3091,13 +3108,13 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk item;
             };
             const LSI_VALUEValue: ?f32 = blk: {
-                break :blk 32000;
+                break :blk 3.2e4;
             };
             const LSE_VALUEValue: ?f32 = blk: {
                 if (config.flags.LSEOscillator) {
                     if (config.LSE_VALUE) |val| {
                         if (val != 3.2768e4) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed Value: {e} found: {e}
@@ -3113,12 +3130,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                     }
-                    break :blk 32768;
+                    break :blk 3.2768e4;
                 }
                 const config_val = config.LSE_VALUE;
                 if (config_val) |val| {
                     if (val < 0e0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {e} found: {e}
@@ -3133,7 +3150,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 1e6) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {e} found: {e}
@@ -3162,7 +3179,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_MSI_FREQ_16MHZ;
             };
             const EXTERNAL_CLOCK_VALUEValue: ?f32 = blk: {
-                break :blk 12288000;
+                break :blk 1.2288e7;
             };
             const IC1CLKSourceValue: ?IC1CLKSourceList = blk: {
                 const conf_item = config.IC1CLKSource;
@@ -3175,13 +3192,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL1;
+                break :blk conf_item orelse {
+                    IC1_PLL1 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL1;
+                };
             };
             const IC1DivValue: ?f32 = blk: {
                 const config_val = config.IC1Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3196,7 +3216,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3218,6 +3238,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC2CLKSourceValue: ?IC2CLKSourceList = blk: {
@@ -3231,13 +3252,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL1;
+                break :blk conf_item orelse {
+                    IC2_PLL1 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL1;
+                };
             };
             const IC2DivValue: ?f32 = blk: {
                 const config_val = config.IC2Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3252,7 +3276,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3274,6 +3298,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC3CLKSourceValue: ?IC3CLKSourceList = blk: {
@@ -3287,13 +3312,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL1;
+                break :blk conf_item orelse {
+                    IC3_PLL1 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL1;
+                };
             };
             const IC3DivValue: ?f32 = blk: {
                 const config_val = config.IC3Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3308,7 +3336,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3330,6 +3358,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC4CLKSourceValue: ?IC4CLKSourceList = blk: {
@@ -3343,13 +3372,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL1;
+                break :blk conf_item orelse {
+                    IC4_PLL1 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL1;
+                };
             };
             const IC4DivValue: ?f32 = blk: {
                 const config_val = config.IC4Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3364,7 +3396,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3386,6 +3418,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC5CLKSourceValue: ?IC5CLKSourceList = blk: {
@@ -3399,13 +3432,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL1;
+                break :blk conf_item orelse {
+                    IC5_PLL1 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL1;
+                };
             };
             const IC5DivValue: ?f32 = blk: {
                 const config_val = config.IC5Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3420,7 +3456,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3442,6 +3478,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC6CLKSourceValue: ?IC6CLKSourceList = blk: {
@@ -3455,13 +3492,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL1;
+                break :blk conf_item orelse {
+                    IC6_PLL1 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL1;
+                };
             };
             const IC6DivValue: ?f32 = blk: {
                 const config_val = config.IC6Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3476,7 +3516,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3498,6 +3538,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC7CLKSourceValue: ?IC7CLKSourceList = blk: {
@@ -3511,13 +3552,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL2;
+                break :blk conf_item orelse {
+                    IC7_PLL2 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL2;
+                };
             };
             const IC7DivValue: ?f32 = blk: {
                 const config_val = config.IC7Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3532,7 +3576,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3554,6 +3598,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC8CLKSourceValue: ?IC8CLKSourceList = blk: {
@@ -3567,13 +3612,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL2;
+                break :blk conf_item orelse {
+                    IC8_PLL2 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL2;
+                };
             };
             const IC8DivValue: ?f32 = blk: {
                 const config_val = config.IC8Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3588,7 +3636,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3610,6 +3658,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC9CLKSourceValue: ?IC9CLKSourceList = blk: {
@@ -3623,13 +3672,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL2;
+                break :blk conf_item orelse {
+                    IC9_PLL2 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL2;
+                };
             };
             const IC9DivValue: ?f32 = blk: {
                 const config_val = config.IC9Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3644,7 +3696,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3666,6 +3718,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC10CLKSourceValue: ?IC10CLKSourceList = blk: {
@@ -3679,13 +3732,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL2;
+                break :blk conf_item orelse {
+                    IC10_PLL2 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL2;
+                };
             };
             const IC10DivValue: ?f32 = blk: {
                 const config_val = config.IC10Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3700,7 +3756,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3722,6 +3778,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC11CLKSourceValue: ?IC11CLKSourceList = blk: {
@@ -3735,13 +3792,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL1;
+                break :blk conf_item orelse {
+                    IC11_PLL1 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL1;
+                };
             };
             const IC11DivValue: ?f32 = blk: {
                 const config_val = config.IC11Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3756,7 +3816,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3778,6 +3838,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC12CLKSourceValue: ?IC12CLKSourceList = blk: {
@@ -3791,13 +3852,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL3;
+                break :blk conf_item orelse {
+                    IC12_PLL3 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL3;
+                };
             };
             const IC12DivValue: ?f32 = blk: {
                 const config_val = config.IC12Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3812,7 +3876,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3834,6 +3898,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC13CLKSourceValue: ?IC13CLKSourceList = blk: {
@@ -3847,13 +3912,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL3;
+                break :blk conf_item orelse {
+                    IC13_PLL3 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL3;
+                };
             };
             const IC13DivValue: ?f32 = blk: {
                 const config_val = config.IC13Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3868,7 +3936,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3890,6 +3958,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC14CLKSourceValue: ?IC14CLKSourceList = blk: {
@@ -3903,13 +3972,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL3;
+                break :blk conf_item orelse {
+                    IC14_PLL3 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL3;
+                };
             };
             const IC14DivValue: ?f32 = blk: {
                 const config_val = config.IC14Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3924,7 +3996,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -3946,6 +4018,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC15CLKSourceValue: ?IC15CLKSourceList = blk: {
@@ -3959,13 +4032,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL3;
+                break :blk conf_item orelse {
+                    IC15_PLL3 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL3;
+                };
             };
             const IC15DivValue: ?f32 = blk: {
                 const config_val = config.IC15Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -3980,7 +4056,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -4002,6 +4078,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC16CLKSourceValue: ?IC16CLKSourceList = blk: {
@@ -4015,13 +4092,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL4;
+                break :blk conf_item orelse {
+                    IC16_PLL4 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL4;
+                };
             };
             const IC16DivValue: ?f32 = blk: {
                 const config_val = config.IC16Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -4036,7 +4116,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -4058,6 +4138,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC17CLKSourceValue: ?IC17CLKSourceList = blk: {
@@ -4071,13 +4152,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL4;
+                break :blk conf_item orelse {
+                    IC17_PLL4 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL4;
+                };
             };
             const IC17DivValue: ?f32 = blk: {
                 const config_val = config.IC17Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -4092,7 +4176,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -4114,6 +4198,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC18CLKSourceValue: ?IC18CLKSourceList = blk: {
@@ -4127,13 +4212,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL4;
+                break :blk conf_item orelse {
+                    IC18_PLL4 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL4;
+                };
             };
             const IC18DivValue: ?f32 = blk: {
                 const config_val = config.IC18Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -4148,7 +4236,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -4170,6 +4258,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC19CLKSourceValue: ?IC19CLKSourceList = blk: {
@@ -4183,13 +4272,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL4;
+                break :blk conf_item orelse {
+                    IC19_PLL4 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL4;
+                };
             };
             const IC19DivValue: ?f32 = blk: {
                 const config_val = config.IC19Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -4204,7 +4296,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -4226,6 +4318,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const IC20CLKSourceValue: ?IC20CLKSourceList = blk: {
@@ -4239,13 +4332,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_ICCLKSOURCE_PLL4;
+                break :blk conf_item orelse {
+                    IC20_PLL4 = true;
+                    break :blk .RCC_ICCLKSOURCE_PLL4;
+                };
             };
             const IC20DivValue: ?f32 = blk: {
                 const config_val = config.IC20Div;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -4260,7 +4356,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -4282,6 +4378,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.6e9,
                 };
+
                 break :blk null;
             };
             const RCC_MCO1SourceValue: ?RCC_MCO1SourceList = blk: {
@@ -4299,7 +4396,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_MCO1SOURCE_HSI;
+                break :blk conf_item orelse {
+                    MCO1SOURCE_HSI = true;
+                    break :blk .RCC_MCO1SOURCE_HSI;
+                };
             };
             const RCC_MCODiv1Value: ?RCC_MCODiv1List = blk: {
                 const conf_item = config.RCC_MCODiv1;
@@ -4327,7 +4427,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_MCODIV_1;
             };
             const MCO1PinFreq_ValueValue: ?f32 = blk: {
-                break :blk 4000000;
+                break :blk 4e6;
             };
             const RCC_MCO2SourceValue: ?RCC_MCO2SourceList = blk: {
                 const conf_item = config.RCC_MCO2Source;
@@ -4344,7 +4444,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_MCO2SOURCE_HSI;
+                break :blk conf_item orelse {
+                    MCO2SOURCE_HSI = true;
+                    break :blk .RCC_MCO2SOURCE_HSI;
+                };
             };
             const RCC_MCODiv2Value: ?RCC_MCODiv2List = blk: {
                 const conf_item = config.RCC_MCODiv2;
@@ -4372,7 +4475,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_MCODIV_1;
             };
             const MCO2PinFreq_ValueValue: ?f32 = blk: {
-                break :blk 4000000;
+                break :blk 4e6;
             };
             const CKPERSourceSelectionValue: ?CKPERSourceSelectionList = blk: {
                 const conf_item = config.CKPERSourceSelection;
@@ -4389,10 +4492,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_CLKPSOURCE_HSI;
+                break :blk conf_item orelse null;
             };
             const CKPERFreq_ValueValue: ?f32 = blk: {
-                break :blk 12288000;
+                break :blk 1.2288e7;
             };
             const ADCCLockSelectionValue: ?ADCCLockSelectionList = blk: {
                 const conf_item = config.ADCCLockSelection;
@@ -4415,7 +4518,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.ADCDIV;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -4430,7 +4533,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 256) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -4452,6 +4555,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.33e8,
                 };
+
                 break :blk null;
             };
             const ADF1ClockSelectionValue: ?ADF1ClockSelectionList = blk: {
@@ -4472,7 +4576,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_ADF1CLKSOURCE_HCLK;
             };
             const ADFFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const MDF1ClockSelectionValue: ?MDF1ClockSelectionList = blk: {
                 const conf_item = config.MDF1ClockSelection;
@@ -4492,7 +4596,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_MDF1CLKSOURCE_HCLK;
             };
             const MDFFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const PSSIClockSelectionValue: ?PSSIClockSelectionList = blk: {
                 const conf_item = config.PSSIClockSelection;
@@ -4508,7 +4612,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_PSSICLKSOURCE_HCLK;
             };
             const PSSIFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const FDCANClockSelectionValue: ?FDCANClockSelectionList = blk: {
                 const conf_item = config.FDCANClockSelection;
@@ -4524,7 +4628,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_FDCANCLKSOURCE_PCLK1;
             };
             const FDCANFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const I2C1CLockSelectionValue: ?I2C1CLockSelectionList = blk: {
                 const conf_item = config.I2C1CLockSelection;
@@ -4542,7 +4646,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_I2C1CLKSOURCE_PCLK1;
             };
             const I2C1Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const I2C2CLockSelectionValue: ?I2C2CLockSelectionList = blk: {
                 const conf_item = config.I2C2CLockSelection;
@@ -4560,7 +4664,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_I2C2CLKSOURCE_PCLK1;
             };
             const I2C2Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const I2C3CLockSelectionValue: ?I2C3CLockSelectionList = blk: {
                 const conf_item = config.I2C3CLockSelection;
@@ -4578,7 +4682,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_I2C3CLKSOURCE_PCLK1;
             };
             const I2C3Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const I2C4CLockSelectionValue: ?I2C4CLockSelectionList = blk: {
                 const conf_item = config.I2C4CLockSelection;
@@ -4596,7 +4700,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_I2C4CLKSOURCE_PCLK1;
             };
             const I2C4Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const I3C1CLockSelectionValue: ?I3C1CLockSelectionList = blk: {
                 const conf_item = config.I3C1CLockSelection;
@@ -4614,7 +4718,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_I3C1CLKSOURCE_PCLK1;
             };
             const I3C1Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const I3C2CLockSelectionValue: ?I3C2CLockSelectionList = blk: {
                 const conf_item = config.I3C2CLockSelection;
@@ -4632,7 +4736,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_I3C2CLKSOURCE_PCLK1;
             };
             const I3C2Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const LPTIM1CLockSelectionValue: ?LPTIM1CLockSelectionList = blk: {
                 const conf_item = config.LPTIM1CLockSelection;
@@ -4654,6 +4758,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const LPTIM3CLockSelectionValue: ?LPTIM3CLockSelectionList = blk: {
@@ -4676,6 +4781,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const LPTIM2CLockSelectionValue: ?LPTIM2CLockSelectionList = blk: {
@@ -4698,6 +4804,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const LPTIM4CLockSelectionValue: ?LPTIM4CLockSelectionList = blk: {
@@ -4720,6 +4827,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const LPTIM5CLockSelectionValue: ?LPTIM5CLockSelectionList = blk: {
@@ -4742,6 +4850,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const LTDCClockSelectionValue: ?LTDCClockSelectionList = blk: {
@@ -4758,7 +4867,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_LTDCCLKSOURCE_PCLK5;
             };
             const LTDCFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const DCMIPPClockSelectionValue: ?DCMIPPClockSelectionList = blk: {
                 const conf_item = config.DCMIPPClockSelection;
@@ -4774,7 +4883,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_DCMIPPCLKSOURCE_PCLK5;
             };
             const DCMIPPFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const FMCClockSelectionValue: ?FMCClockSelectionList = blk: {
                 const conf_item = config.FMCClockSelection;
@@ -4790,7 +4899,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_FMCCLKSOURCE_HCLK;
             };
             const FMCFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const SAI1ClockSelectionValue: ?SAI1ClockSelectionList = blk: {
                 const conf_item = config.SAI1ClockSelection;
@@ -4814,6 +4923,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const SAI2ClockSelectionValue: ?SAI2ClockSelectionList = blk: {
@@ -4838,6 +4948,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const USART1ClockSelectionValue: ?USART1ClockSelectionList = blk: {
@@ -4861,6 +4972,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const USART2ClockSelectionValue: ?USART2ClockSelectionList = blk: {
@@ -4884,6 +4996,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const USART3ClockSelectionValue: ?USART3ClockSelectionList = blk: {
@@ -4907,6 +5020,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const UART4ClockSelectionValue: ?UART4ClockSelectionList = blk: {
@@ -4930,6 +5044,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const UART5ClockSelectionValue: ?UART5ClockSelectionList = blk: {
@@ -4953,6 +5068,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const USART6ClockSelectionValue: ?USART6ClockSelectionList = blk: {
@@ -4976,6 +5092,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const UART7ClockSelectionValue: ?UART7ClockSelectionList = blk: {
@@ -4999,6 +5116,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const UART8ClockSelectionValue: ?UART8ClockSelectionList = blk: {
@@ -5022,6 +5140,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const UART9ClockSelectionValue: ?UART9ClockSelectionList = blk: {
@@ -5045,6 +5164,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const LPUART1ClockSelectionValue: ?LPUART1ClockSelectionList = blk: {
@@ -5061,13 +5181,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_LPUART1CLKSOURCE_PCLK2;
+                break :blk conf_item orelse null;
             };
             const LPUART1Freq_ValueValue: ?f32 = blk: {
                 LPUART1Freq_ValueLimit = .{
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const USART10ClockSelectionValue: ?USART10ClockSelectionList = blk: {
@@ -5091,6 +5212,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1e8,
                 };
+
                 break :blk null;
             };
             const SPI1ClockSelectionValue: ?SPI1ClockSelectionList = blk: {
@@ -5114,6 +5236,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const SPI2ClockSelectionValue: ?SPI2ClockSelectionList = blk: {
@@ -5137,6 +5260,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const SPI3ClockSelectionValue: ?SPI3ClockSelectionList = blk: {
@@ -5160,6 +5284,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const SPI4ClockSelectionValue: ?SPI4ClockSelectionList = blk: {
@@ -5183,6 +5308,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.33e8,
                 };
+
                 break :blk null;
             };
             const SPI5ClockSelectionValue: ?SPI5ClockSelectionList = blk: {
@@ -5206,6 +5332,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 1.33e8,
                 };
+
                 break :blk null;
             };
             const SPI6ClockSelectionValue: ?SPI6ClockSelectionList = blk: {
@@ -5229,6 +5356,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const XSPI1ClockSelectionValue: ?XSPI1ClockSelectionList = blk: {
@@ -5245,7 +5373,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_XSPI1CLKSOURCE_HCLK;
             };
             const XSPI1Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const XSPI2ClockSelectionValue: ?XSPI2ClockSelectionList = blk: {
                 const conf_item = config.XSPI2ClockSelection;
@@ -5261,7 +5389,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_XSPI2CLKSOURCE_HCLK;
             };
             const XSPI2Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const OTGHS1ClockSelectionValue: ?OTGHS1ClockSelectionList = blk: {
                 const conf_item = config.OTGHS1ClockSelection;
@@ -5272,13 +5400,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_USBPHY1REFCLKSOURCE_OTGPHY1;
+                break :blk conf_item orelse {
+                    OTGHS1CLKSOURCE_PHY = true;
+                    break :blk .RCC_USBPHY1REFCLKSOURCE_OTGPHY1;
+                };
             };
             const OTGHS1Freq_ValueValue: ?f32 = blk: {
                 OTGHS1Freq_ValueLimit = .{
                     .min = null,
                     .max = 6e7,
                 };
+
                 break :blk null;
             };
             const OTGHS2ClockSelectionValue: ?OTGHS2ClockSelectionList = blk: {
@@ -5290,13 +5422,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_USBPHY2REFCLKSOURCE_OTGPHY2;
+                break :blk conf_item orelse {
+                    OTGHS2CLKSOURCE_PHY = true;
+                    break :blk .RCC_USBPHY2REFCLKSOURCE_OTGPHY2;
+                };
             };
             const OTGHS2Freq_ValueValue: ?f32 = blk: {
                 OTGHS2Freq_ValueLimit = .{
                     .min = null,
                     .max = 6e7,
                 };
+
                 break :blk null;
             };
             const XSPI3ClockSelectionValue: ?XSPI3ClockSelectionList = blk: {
@@ -5313,7 +5449,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_XSPI3CLKSOURCE_HCLK;
             };
             const XSPI3Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const OTGPHY1ClockSelectionValue: ?OTGPHY1ClockSelectionList = blk: {
                 const conf_item = config.OTGPHY1ClockSelection;
@@ -5326,7 +5462,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_USBOTGHS1CLKSOURCE_HSE_DIV2;
+                break :blk conf_item orelse {
+                    OTGPHY1CLKSOURCE_HSE_OSC = true;
+                    break :blk .RCC_USBOTGHS1CLKSOURCE_HSE_DIV2;
+                };
             };
             const OTGPHY1Freq_ValueValue: ?OTGPHY1Freq_ValueList = blk: {
                 const conf_item = config.OTGPHY1Freq_Value;
@@ -5344,7 +5483,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_USBOTGHS2CLKSOURCE_HSE_DIV2;
+                break :blk conf_item orelse {
+                    OTGPHY2CLKSOURCE_HSE_OSC = true;
+                    break :blk .RCC_USBOTGHS2CLKSOURCE_HSE_DIV2;
+                };
             };
             const OTGPHY2Freq_ValueValue: ?OTGPHY2Freq_ValueList = blk: {
                 const conf_item = config.OTGPHY2Freq_Value;
@@ -5369,6 +5511,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2.08e8,
                 };
+
                 break :blk null;
             };
             const SDMMC2ClockSelectionValue: ?SDMMC2ClockSelectionList = blk: {
@@ -5389,6 +5532,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2.08e8,
                 };
+
                 break :blk null;
             };
             const ETH1ClockSelectionValue: ?ETH1ClockSelectionList = blk: {
@@ -5405,7 +5549,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk conf_item orelse .RCC_ETH1CLKSOURCE_HCLK;
             };
             const ETH1Freq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const SPDIFRX1ClockSelectionValue: ?SPDIFRX1ClockSelectionList = blk: {
                 const conf_item = config.SPDIFRX1ClockSelection;
@@ -5428,6 +5572,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const SYSBCLKSourceValue: ?SYSBCLKSourceList = blk: {
@@ -5441,7 +5586,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_SYSCLKSOURCE_HSI;
+                break :blk conf_item orelse {
+                    SYSBCLKSOURCE_HSI = true;
+                    break :blk .RCC_SYSCLKSOURCE_HSI;
+                };
             };
             const SYSCCLKSourceValue: ?SYSCCLKSourceList = blk: {
                 if (SYSBCLKSOURCE_HSI) {
@@ -5449,7 +5597,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const conf_item = config.SYSCCLKSource;
                     if (conf_item) |i| {
                         if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed List Value: {s} found {any}
@@ -5465,7 +5613,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const conf_item = config.SYSCCLKSource;
                     if (conf_item) |i| {
                         if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed List Value: {s} found {any}
@@ -5481,7 +5629,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const conf_item = config.SYSCCLKSource;
                     if (conf_item) |i| {
                         if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed List Value: {s} found {any}
@@ -5497,7 +5645,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const conf_item = config.SYSCCLKSource;
                     if (conf_item) |i| {
                         if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed List Value: {s} found {any}
@@ -5512,10 +5660,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const conf_item = config.SYSCCLKSource;
                 if (conf_item) |item| {
                     switch (item) {
-                        .RCC_SYSCLKSOURCE_HSI => SYSCCLKSOURCE_HSI = true,
-                        .RCC_SYSCLKSOURCE_MSI => SYSCCLKSOURCE_MSI = true,
-                        .RCC_SYSCLKSOURCE_HSE => SYSCCLKSOURCE_HSE = true,
-                        .RCC_SYSCLKSOURCE_IC2_IC6_IC11 => SYSCCLKSOURCE_IC2_IC6_IC11 = true,
+                        .RCC_SYSCLKSOURCE_HSI => {},
+                        .RCC_SYSCLKSOURCE_MSI => {},
+                        .RCC_SYSCLKSOURCE_HSE => {},
+                        .RCC_SYSCLKSOURCE_IC2_IC6_IC11 => {},
                     }
                 }
 
@@ -5527,7 +5675,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const conf_item = config.SYSDCLKSource;
                     if (conf_item) |i| {
                         if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed List Value: {s} found {any}
@@ -5543,7 +5691,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const conf_item = config.SYSDCLKSource;
                     if (conf_item) |i| {
                         if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed List Value: {s} found {any}
@@ -5559,7 +5707,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const conf_item = config.SYSDCLKSource;
                     if (conf_item) |i| {
                         if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed List Value: {s} found {any}
@@ -5575,7 +5723,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const conf_item = config.SYSDCLKSource;
                     if (conf_item) |i| {
                         if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed List Value: {s} found {any}
@@ -5590,10 +5738,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const conf_item = config.SYSDCLKSource;
                 if (conf_item) |item| {
                     switch (item) {
-                        .RCC_SYSCLKSOURCE_HSI => SYSDCLKSOURCE_HSI = true,
-                        .RCC_SYSCLKSOURCE_MSI => SYSDCLKSOURCE_MSI = true,
-                        .RCC_SYSCLKSOURCE_HSE => SYSDCLKSOURCE_HSE = true,
-                        .RCC_SYSCLKSOURCE_IC2_IC6_IC11 => SYSDCLKSOURCE_IC2_IC6_IC11 = true,
+                        .RCC_SYSCLKSOURCE_HSI => {},
+                        .RCC_SYSCLKSOURCE_MSI => {},
+                        .RCC_SYSCLKSOURCE_HSE => {},
+                        .RCC_SYSCLKSOURCE_IC2_IC6_IC11 => {},
                     }
                 }
 
@@ -5604,6 +5752,74 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 4e8,
                 };
+
+                break :blk null;
+            };
+            const CpuClockFreq_ValueValue: ?f32 = blk: {
+                if (scale0) {
+                    CpuClockFreq_ValueLimit = .{
+                        .min = null,
+                        .max = 8e8,
+                    };
+
+                    break :blk null;
+                }
+                CpuClockFreq_ValueLimit = .{
+                    .min = null,
+                    .max = 6e8,
+                };
+
+                break :blk null;
+            };
+            const PWR_Regulator_Voltage_ScaleValue: ?PWR_Regulator_Voltage_ScaleList = blk: {
+                if (((check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 600000000, .@"<")) or (check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 600000000, .@"=")))) {
+                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
+                    if (conf_item) |item| {
+                        switch (item) {
+                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
+                            .PWR_REGULATOR_VOLTAGE_SCALE1 => scale1 = true,
+                        }
+                    }
+
+                    break :blk conf_item orelse {
+                        scale1 = true;
+                        break :blk .PWR_REGULATOR_VOLTAGE_SCALE1;
+                    };
+                } else if (((check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 800000000, .@"<")) or (check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 800000000, .@"="))) and (check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 600000000, .@">"))) {
+                    scale0 = true;
+                    const item: PWR_Regulator_Voltage_ScaleList = .PWR_REGULATOR_VOLTAGE_SCALE0;
+                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
+                    if (conf_item) |i| {
+                        if (item != i) {
+                            return comptime_fail_or_error(error.InvalidConfig,
+                                \\
+                                \\Error on {s} | expr: {s} diagnostic: {s} 
+                                \\Expected Fixed List Value: {s} found {any}
+                                \\note: the current condition limits the choice to only one list item,
+                                \\select the expected option or leave the value as null.
+                                \\
+                            , .{ "PWR_Regulator_Voltage_Scale", "((CpuClockFreq_Value < 800000000)|(CpuClockFreq_Value = 800000000)) & (CpuClockFreq_Value > 600000000)", "No Extra Log", "PWR_REGULATOR_VOLTAGE_SCALE0", i });
+                        }
+                    }
+                    break :blk item;
+                } else if ((check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 800000000, .@">"))) {
+                    scale0 = true;
+                    const item: PWR_Regulator_Voltage_ScaleList = .PWR_REGULATOR_VOLTAGE_SCALE0;
+                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
+                    if (conf_item) |i| {
+                        if (item != i) {
+                            return comptime_fail_or_error(error.InvalidConfig,
+                                \\
+                                \\Error on {s} | expr: {s} diagnostic: {s} 
+                                \\Expected Fixed List Value: {s} found {any}
+                                \\note: the current condition limits the choice to only one list item,
+                                \\select the expected option or leave the value as null.
+                                \\
+                            , .{ "PWR_Regulator_Voltage_Scale", "(CpuClockFreq_Value > 800000000)", "No Extra Log", "PWR_REGULATOR_VOLTAGE_SCALE0", i });
+                        }
+                    }
+                    break :blk item;
+                }
                 break :blk null;
             };
             const SYSCCLKFreq_VALUEValue: ?f32 = blk: {
@@ -5612,12 +5828,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 1e9,
                     };
+
                     break :blk null;
                 }
                 SYSCCLKFreq_VALUELimit = .{
                     .min = null,
                     .max = 8e8,
                 };
+
                 break :blk null;
             };
             const SYSDCLKFreq_VALUEValue: ?f32 = blk: {
@@ -5626,12 +5844,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         .min = null,
                         .max = 9e8,
                     };
+
                     break :blk null;
                 }
                 SYSDCLKFreq_VALUELimit = .{
                     .min = null,
                     .max = 8e8,
                 };
+
                 break :blk null;
             };
             const CPUCLKSourceValue: ?CPUCLKSourceList = blk: {
@@ -5645,41 +5865,31 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_CPUCLKSOURCE_HSI;
+                break :blk conf_item orelse {
+                    CPUCLKSOURCE_HSI = true;
+                    break :blk .RCC_CPUCLKSOURCE_HSI;
+                };
             };
             const TPIUPrescalerValue: ?TPIUPrescalerList = blk: {
                 const item: TPIUPrescalerList = .@"8";
                 break :blk item;
             };
             const AHBFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
+                break :blk 9.6e7;
             };
             const Cortex_DivValue: ?Cortex_DivList = blk: {
                 const item: Cortex_DivList = .@"8";
                 break :blk item;
             };
             const CortexFreq_ValueValue: ?f32 = blk: {
-                break :blk 96000000;
-            };
-            const CpuClockFreq_ValueValue: ?f32 = blk: {
-                if (scale0) {
-                    CpuClockFreq_ValueLimit = .{
-                        .min = null,
-                        .max = 8e8,
-                    };
-                    break :blk null;
-                }
-                CpuClockFreq_ValueLimit = .{
-                    .min = null,
-                    .max = 6e8,
-                };
-                break :blk null;
+                break :blk 9.6e7;
             };
             const AXIClockFreq_ValueValue: ?f32 = blk: {
                 AXIClockFreq_ValueLimit = .{
                     .min = null,
                     .max = 4e8,
                 };
+
                 break :blk null;
             };
             const HPRE_DivValue: ?HPRE_DivList = blk: {
@@ -5708,6 +5918,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 4e8,
                 };
+
                 break :blk null;
             };
             const APB5DIVValue: ?APB5DIVList = blk: {
@@ -5719,6 +5930,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 4e8,
                 };
+
                 break :blk null;
             };
             const TIMGDIVValue: ?TIMGDIVList = blk: {
@@ -5739,6 +5951,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 4e8,
                 };
+
                 break :blk null;
             };
             const APB1DIVValue: ?APB1DIVList = blk: {
@@ -5750,6 +5963,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 2e8,
                 };
+
                 break :blk null;
             };
             const APB1Freq_ValueValue: ?f32 = blk: {
@@ -5757,6 +5971,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 4e8,
                 };
+
                 break :blk null;
             };
             const APB2DIVValue: ?APB2DIVList = blk: {
@@ -5768,6 +5983,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = null,
                     .max = 4e8,
                 };
+
                 break :blk null;
             };
             const PLL1SourceValue: ?PLL1SourceList = blk: {
@@ -5781,13 +5997,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_PLLSOURCE_HSI;
+                break :blk conf_item orelse {
+                    PLL1SOURCE_HSI = true;
+                    break :blk .RCC_PLLSOURCE_HSI;
+                };
             };
             const FREFDIV1Value: ?f32 = blk: {
                 const config_val = config.FREFDIV1;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5802,7 +6021,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 63) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -5830,13 +6049,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_PLLSOURCE_HSI;
+                break :blk conf_item orelse {
+                    PLL2SOURCE_HSI = true;
+                    break :blk .RCC_PLLSOURCE_HSI;
+                };
             };
             const FREFDIV2Value: ?f32 = blk: {
                 const config_val = config.FREFDIV2;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5851,7 +6073,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 63) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -5879,13 +6101,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_PLLSOURCE_HSI;
+                break :blk conf_item orelse {
+                    PLL3SOURCE_HSI = true;
+                    break :blk .RCC_PLLSOURCE_HSI;
+                };
             };
             const FREFDIV3Value: ?f32 = blk: {
                 const config_val = config.FREFDIV3;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5900,7 +6125,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 63) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -5928,13 +6153,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_PLLSOURCE_HSI;
+                break :blk conf_item orelse {
+                    PLL4SOURCE_HSI = true;
+                    break :blk .RCC_PLLSOURCE_HSI;
+                };
             };
             const FREFDIV4Value: ?f32 = blk: {
                 const config_val = config.FREFDIV4;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5949,7 +6177,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 63) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -5970,7 +6198,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.FBDIV1;
                 if (config_val) |val| {
                     if (val < 10) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -5985,7 +6213,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 2500) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6028,7 +6256,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 if (check_ref(@TypeOf(PLL1MODEValue), PLL1MODEValue, .RCC_PLL_SPREAD_SPECTRUM, .@"=")) {
                     if (config.PLL1FRACV) |val| {
                         if (val != 0) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed Value: {d} found: {d}
@@ -6043,48 +6271,25 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                     }
+                    PLL1FRACVLimit = .{
+                        .min = 0,
+                        .max = 0,
+                    };
                     break :blk 0;
                 }
                 const config_val = config.PLL1FRACV;
-                if (config_val) |val| {
-                    if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Underflow Value - min: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL1FRACV",
-                            "Else",
-                            "No Extra Log",
-                            0,
-                            val,
-                        });
-                    }
-                    if (val > 16777215) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Overflow Value - max: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL1FRACV",
-                            "Else",
-                            "No Extra Log",
-                            16777215,
-                            val,
-                        });
-                    }
-                }
+                PLL1FRACVLimit = .{
+                    .min = 0,
+                    .max = 16777215,
+                };
+
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 0;
             };
             const POSTDIV1_1Value: ?f32 = blk: {
                 const config_val = config.POSTDIV1_1;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6099,7 +6304,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6120,7 +6325,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.POSTDIV2_1;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6135,7 +6340,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6157,6 +6362,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = 1.6e7,
                     .max = 3.2e9,
                 };
+
                 break :blk null;
             };
             const PLL2CSGValue: ?PLL2CSGList = blk: {
@@ -6174,7 +6380,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 if (check_ref(@TypeOf(PLL2MODEValue), PLL2MODEValue, .RCC_PLL_SPREAD_SPECTRUM, .@"=")) {
                     if (config.PLL2FRACV) |val| {
                         if (val != 0) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed Value: {d} found: {d}
@@ -6189,41 +6395,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                     }
+                    PLL2FRACVLimit = .{
+                        .min = 0,
+                        .max = 0,
+                    };
                     break :blk 0;
                 }
                 const config_val = config.PLL2FRACV;
-                if (config_val) |val| {
-                    if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Underflow Value - min: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL2FRACV",
-                            "Else",
-                            "No Extra Log",
-                            0,
-                            val,
-                        });
-                    }
-                    if (val > 16777215) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Overflow Value - max: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL2FRACV",
-                            "Else",
-                            "No Extra Log",
-                            16777215,
-                            val,
-                        });
-                    }
-                }
+                PLL2FRACVLimit = .{
+                    .min = 0,
+                    .max = 16777215,
+                };
+
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 0;
             };
             const PLL2MODEValue: ?PLL2MODEList = blk: {
@@ -6242,7 +6425,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.FBDIV2;
                     if (config_val) |val| {
                         if (val < 10) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -6257,7 +6440,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 2500) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -6277,7 +6460,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.FBDIV2;
                     if (config_val) |val| {
                         if (val < 20) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -6292,7 +6475,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 500) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -6312,7 +6495,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.FBDIV2;
                 if (config_val) |val| {
                     if (val < 20) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6327,7 +6510,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 500) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6348,7 +6531,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.POSTDIV1_2;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6363,7 +6546,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6384,7 +6567,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.POSTDIV2_2;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6399,7 +6582,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6421,6 +6604,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = 1.6e7,
                     .max = 3.2e9,
                 };
+
                 break :blk null;
             };
             const PLL3CSGValue: ?PLL3CSGList = blk: {
@@ -6438,7 +6622,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 if (check_ref(@TypeOf(PLL3MODEValue), PLL3MODEValue, .RCC_PLL_SPREAD_SPECTRUM, .@"=")) {
                     if (config.PLL3FRACV) |val| {
                         if (val != 0) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed Value: {d} found: {d}
@@ -6453,41 +6637,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                     }
+                    PLL3FRACVLimit = .{
+                        .min = 0,
+                        .max = 0,
+                    };
                     break :blk 0;
                 }
                 const config_val = config.PLL3FRACV;
-                if (config_val) |val| {
-                    if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Underflow Value - min: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL3FRACV",
-                            "Else",
-                            "No Extra Log",
-                            0,
-                            val,
-                        });
-                    }
-                    if (val > 16777215) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Overflow Value - max: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL3FRACV",
-                            "Else",
-                            "No Extra Log",
-                            16777215,
-                            val,
-                        });
-                    }
-                }
+                PLL3FRACVLimit = .{
+                    .min = 0,
+                    .max = 16777215,
+                };
+
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 0;
             };
             const PLL3MODEValue: ?PLL3MODEList = blk: {
@@ -6506,7 +6667,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.FBDIV3;
                     if (config_val) |val| {
                         if (val < 10) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -6521,7 +6682,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 2500) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -6541,7 +6702,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.FBDIV3;
                     if (config_val) |val| {
                         if (val < 20) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -6556,7 +6717,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 500) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -6576,7 +6737,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.FBDIV3;
                 if (config_val) |val| {
                     if (val < 20) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6591,7 +6752,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 500) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6612,7 +6773,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.POSTDIV1_3;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6627,7 +6788,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6648,7 +6809,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.POSTDIV2_3;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6663,7 +6824,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6685,6 +6846,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = 1.6e7,
                     .max = 3.2e9,
                 };
+
                 break :blk null;
             };
             const PLL4CSGValue: ?PLL4CSGList = blk: {
@@ -6702,7 +6864,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 if (check_ref(@TypeOf(PLL4MODEValue), PLL4MODEValue, .RCC_PLL_SPREAD_SPECTRUM, .@"=")) {
                     if (config.PLL4FRACV) |val| {
                         if (val != 0) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Expected Fixed Value: {d} found: {d}
@@ -6717,41 +6879,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                     }
+                    PLL4FRACVLimit = .{
+                        .min = 0,
+                        .max = 0,
+                    };
                     break :blk 0;
                 }
                 const config_val = config.PLL4FRACV;
-                if (config_val) |val| {
-                    if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Underflow Value - min: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL4FRACV",
-                            "Else",
-                            "No Extra Log",
-                            0,
-                            val,
-                        });
-                    }
-                    if (val > 16777215) {
-                        try comptime_fail_or_error(error.InvalidConfig,
-                            \\
-                            \\Error on {s} | expr: {s} diagnostic: {s} 
-                            \\Overflow Value - max: {d} found: {d}
-                            \\note: ranges values may change depending on the configuration
-                            \\
-                        , .{
-                            "PLL4FRACV",
-                            "Else",
-                            "No Extra Log",
-                            16777215,
-                            val,
-                        });
-                    }
-                }
+                PLL4FRACVLimit = .{
+                    .min = 0,
+                    .max = 16777215,
+                };
+
                 break :blk if (config_val) |i| @as(f32, @floatFromInt(i)) else 0;
             };
             const PLL4MODEValue: ?PLL4MODEList = blk: {
@@ -6770,7 +6909,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.FBDIV4;
                     if (config_val) |val| {
                         if (val < 10) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -6785,7 +6924,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 2500) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -6805,7 +6944,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     const config_val = config.FBDIV4;
                     if (config_val) |val| {
                         if (val < 20) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Underflow Value - min: {d} found: {d}
@@ -6820,7 +6959,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                             });
                         }
                         if (val > 500) {
-                            try comptime_fail_or_error(error.InvalidConfig,
+                            return comptime_fail_or_error(error.InvalidConfig,
                                 \\
                                 \\Error on {s} | expr: {s} diagnostic: {s} 
                                 \\Overflow Value - max: {d} found: {d}
@@ -6840,7 +6979,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.FBDIV4;
                 if (config_val) |val| {
                     if (val < 20) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6855,7 +6994,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 500) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6876,7 +7015,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.POSTDIV1_4;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6891,7 +7030,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6912,7 +7051,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.POSTDIV2_4;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6927,7 +7066,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 7) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6949,13 +7088,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .min = 1.6e7,
                     .max = 3.2e9,
                 };
+
                 break :blk null;
             };
             const RCC_RTC_Clock_Source_FROM_HSEValue: ?f32 = blk: {
                 const config_val = config.RCC_RTC_Clock_Source_FROM_HSE;
                 if (config_val) |val| {
                     if (val < 2) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -6970,7 +7110,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 63) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -6997,23 +7137,94 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     }
                 }
 
-                break :blk conf_item orelse .RCC_RTCCLKSOURCE_LSI;
+                break :blk conf_item orelse {
+                    RTCCLKSOURCE_LSI = true;
+                    break :blk .RCC_RTCCLKSOURCE_LSI;
+                };
             };
             const RTCFreq_ValueValue: ?f32 = blk: {
                 RTCFreq_ValueLimit = .{
                     .min = null,
                     .max = 4e6,
                 };
+
                 break :blk null;
             };
             const WatchDogFreq_ValueValue: ?f32 = blk: {
-                break :blk 32000;
+                break :blk 3.2e4;
+            };
+            const MSI_VALUEValue: ?f32 = blk: {
+                break :blk 1.6e7;
+            };
+            const VCOInput1Freq_ValueValue: ?f32 = blk: {
+                VCOInput1Freq_ValueLimit = .{
+                    .min = 5e6,
+                    .max = 1.2e9,
+                };
+
+                break :blk null;
+            };
+            const VCOInput2Freq_ValueValue: ?f32 = blk: {
+                VCOInput2Freq_ValueLimit = .{
+                    .min = 5e6,
+                    .max = 1.2e9,
+                };
+
+                break :blk null;
+            };
+            const VCOInput3Freq_ValueValue: ?f32 = blk: {
+                VCOInput3Freq_ValueLimit = .{
+                    .min = 5e6,
+                    .max = 1.2e9,
+                };
+
+                break :blk null;
+            };
+            const VCOInput4Freq_ValueValue: ?f32 = blk: {
+                VCOInput4Freq_ValueLimit = .{
+                    .min = 5e6,
+                    .max = 1.2e9,
+                };
+
+                break :blk null;
+            };
+            const VCO1OutputFreq_ValueValue: ?f32 = blk: {
+                VCO1OutputFreq_ValueLimit = .{
+                    .min = 8e8,
+                    .max = 3.2e9,
+                };
+
+                break :blk null;
+            };
+            const VCO2OutputFreq_ValueValue: ?f32 = blk: {
+                VCO2OutputFreq_ValueLimit = .{
+                    .min = 8e8,
+                    .max = 3.2e9,
+                };
+
+                break :blk null;
+            };
+            const VCO3OutputFreq_ValueValue: ?f32 = blk: {
+                VCO3OutputFreq_ValueLimit = .{
+                    .min = 8e8,
+                    .max = 3.2e9,
+                };
+
+                break :blk null;
+            };
+            const VCO4OutputFreq_ValueValue: ?f32 = blk: {
+                VCO4OutputFreq_ValueLimit = .{
+                    .min = 8e8,
+                    .max = 3.2e9,
+                };
+
+                break :blk null;
             };
             const HSICalibrationValueValue: ?f32 = blk: {
                 const config_val = config.extra.HSICalibrationValue;
                 if (config_val) |val| {
                     if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -7028,7 +7239,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 127) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -7049,7 +7260,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.extra.MSICalibrationValue;
                 if (config_val) |val| {
                     if (val < 0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -7064,7 +7275,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 31) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -7107,7 +7318,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.extra.VDD_VALUE;
                 if (config_val) |val| {
                     if (val < 1.71e0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {e} found: {e}
@@ -7122,7 +7333,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 3.6e0) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {e} found: {e}
@@ -7139,59 +7350,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 }
                 break :blk config_val orelse 3.3;
             };
-            const PWR_Regulator_Voltage_ScaleValue: ?PWR_Regulator_Voltage_ScaleList = blk: {
-                if (((check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 600000000, .@"<")) or (check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 600000000, .@"=")))) {
-                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
-                    if (conf_item) |item| {
-                        switch (item) {
-                            .PWR_REGULATOR_VOLTAGE_SCALE0 => scale0 = true,
-                            .PWR_REGULATOR_VOLTAGE_SCALE1 => scale1 = true,
-                        }
-                    }
-
-                    break :blk conf_item orelse .PWR_REGULATOR_VOLTAGE_SCALE1;
-                } else if (((check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 800000000, .@"<")) or (check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 800000000, .@"="))) and (check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 600000000, .@">"))) {
-                    scale0 = true;
-                    const item: PWR_Regulator_Voltage_ScaleList = .PWR_REGULATOR_VOLTAGE_SCALE0;
-                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
-                    if (conf_item) |i| {
-                        if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
-                                \\
-                                \\Error on {s} | expr: {s} diagnostic: {s} 
-                                \\Expected Fixed List Value: {s} found {any}
-                                \\note: the current condition limits the choice to only one list item,
-                                \\select the expected option or leave the value as null.
-                                \\
-                            , .{ "PWR_Regulator_Voltage_Scale", "((CpuClockFreq_Value < 800000000)|(CpuClockFreq_Value = 800000000)) & (CpuClockFreq_Value > 600000000)", "No Extra Log", "PWR_REGULATOR_VOLTAGE_SCALE0", i });
-                        }
-                    }
-                    break :blk item;
-                } else if ((check_ref(@TypeOf(CpuClockFreq_ValueValue), CpuClockFreq_ValueValue, 800000000, .@">"))) {
-                    scale0 = true;
-                    const item: PWR_Regulator_Voltage_ScaleList = .PWR_REGULATOR_VOLTAGE_SCALE0;
-                    const conf_item = config.extra.PWR_Regulator_Voltage_Scale;
-                    if (conf_item) |i| {
-                        if (item != i) {
-                            try comptime_fail_or_error(error.InvalidConfig,
-                                \\
-                                \\Error on {s} | expr: {s} diagnostic: {s} 
-                                \\Expected Fixed List Value: {s} found {any}
-                                \\note: the current condition limits the choice to only one list item,
-                                \\select the expected option or leave the value as null.
-                                \\
-                            , .{ "PWR_Regulator_Voltage_Scale", "(CpuClockFreq_Value > 800000000)", "No Extra Log", "PWR_REGULATOR_VOLTAGE_SCALE0", i });
-                        }
-                    }
-                    break :blk item;
-                }
-                break :blk null;
-            };
             const HSE_TimoutValue: ?f32 = blk: {
                 const config_val = config.extra.HSE_Timout;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -7206,7 +7369,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 1073741823) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -7227,7 +7390,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 const config_val = config.extra.LSE_Timout;
                 if (config_val) |val| {
                     if (val < 1) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Underflow Value - min: {d} found: {d}
@@ -7242,7 +7405,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                         });
                     }
                     if (val > 1073741823) {
-                        try comptime_fail_or_error(error.InvalidConfig,
+                        return comptime_fail_or_error(error.InvalidConfig,
                             \\
                             \\Error on {s} | expr: {s} diagnostic: {s} 
                             \\Overflow Value - max: {d} found: {d}
@@ -7280,7 +7443,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     break :blk conf_item orelse .RCC_LSEDRIVE_MEDIUMHIGH;
                 }
                 if (config.extra.LSE_Drive_Capability) |_| {
-                    try comptime_fail_or_error(error.InvalidConfig,
+                    return comptime_fail_or_error(error.InvalidConfig,
                         \\
                         \\Error on {s} | expr: {s} diagnostic: {s} 
                         \\Value should be null.
@@ -7789,7 +7952,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk 0;
             };
             const IC6UsedValue: ?f32 = blk: {
-                if ((SYSCCLKSOURCE_IC2_IC6_IC11)) {
+                if ((check_MCU("SYSCCLKSOURCE_IC2_IC6_IC11"))) {
                     break :blk 1;
                 }
                 break :blk 0;
@@ -7819,7 +7982,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk 0;
             };
             const IC11UsedValue: ?f32 = blk: {
-                if ((SYSDCLKSOURCE_IC2_IC6_IC11)) {
+                if ((check_MCU("SYSDCLKSOURCE_IC2_IC6_IC11"))) {
                     break :blk 1;
                 }
                 break :blk 0;
@@ -9321,7 +9484,61 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 .parents = &.{},
             };
 
-            const HSIRC_clk_value = HSI_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            var MSI = ClockNode{
+                .name = "MSI",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCOInput = ClockNode{
+                .name = "VCOInput",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO2Input = ClockNode{
+                .name = "VCO2Input",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO3Input = ClockNode{
+                .name = "VCO3Input",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO4Input = ClockNode{
+                .name = "VCO4Input",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO1Output = ClockNode{
+                .name = "VCO1Output",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO2Output = ClockNode{
+                .name = "VCO2Output",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO3Output = ClockNode{
+                .name = "VCO3Output",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            var VCO4Output = ClockNode{
+                .name = "VCO4Output",
+                .nodetype = .off,
+                .parents = &.{},
+            };
+
+            const HSIRC_clk_value = HSI_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9335,7 +9552,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSIRC.nodetype = .source;
             HSIRC.value = HSIRC_clk_value;
 
-            const HSIDiv_clk_value = HSIDivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const HSIDiv_clk_value = HSIDivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9354,7 +9571,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSIDivOutput.nodetype = .output;
             HSIDivOutput.parents = &.{&HSIDiv};
 
-            const HSIDiv4_clk_value = HSIDiv4Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const HSIDiv4_clk_value = HSIDiv4Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9375,7 +9592,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 UCPDOutput.parents = &.{&HSIDiv4};
             }
             if (check_ref(@TypeOf(EnableHSEValue), EnableHSEValue, .true, .@"=")) {
-                const HSEOSC_clk_value = HSE_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const HSEOSC_clk_value = HSE_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9393,7 +9610,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(OTG2EnableValue), OTG2EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(EnableHSEValue), EnableHSEValue, .true, .@"="))
             {
-                const HSEOSCDIV_clk_value = HSE_DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const HSEOSCDIV_clk_value = HSE_DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9412,7 +9629,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(OTG2EnableValue), OTG2EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(EnableHSEValue), EnableHSEValue, .true, .@"="))
             {
-                const HSEDIV_clk_value = HSE_Div2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const HSEDIV_clk_value = HSE_Div2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9428,7 +9645,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 HSEDIV.parents = &.{&HSEOSC};
             }
 
-            const LSIRC_clk_value = LSI_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const LSIRC_clk_value = LSI_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9442,7 +9659,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             LSIRC.nodetype = .source;
             LSIRC.value = LSIRC_clk_value;
             if (check_ref(@TypeOf(EnableLSEValue), EnableLSEValue, .true, .@"=")) {
-                const LSEOSC_clk_value = LSE_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LSEOSC_clk_value = LSE_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9457,7 +9674,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LSEOSC.value = LSEOSC_clk_value;
             }
 
-            const MSIRC_clk_value = MSIClockRangeValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const MSIRC_clk_value = MSIClockRangeValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9471,7 +9688,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             MSIRC.nodetype = .source;
             MSIRC.value = MSIRC_clk_value.get();
             if (check_ref(@TypeOf(ExtClockEnableValue), ExtClockEnableValue, .true, .@"=")) {
-                const I2S_CKIN_clk_value = EXTERNAL_CLOCK_VALUEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I2S_CKIN_clk_value = EXTERNAL_CLOCK_VALUEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9486,7 +9703,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I2S_CKIN.value = I2S_CKIN_clk_value;
             }
 
-            const IC1_clk_value = IC1CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const IC1_clk_value = IC1CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9506,7 +9723,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             IC1.nodetype = .multi;
             IC1.parents = &.{IC1parents[IC1_clk_value.get()]};
 
-            const IC1Div_clk_value = IC1DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const IC1Div_clk_value = IC1DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9526,7 +9743,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             IC1Output.nodetype = .output;
             IC1Output.parents = &.{&IC1Div};
 
-            const IC2_clk_value = IC2CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const IC2_clk_value = IC2CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9546,7 +9763,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             IC2.nodetype = .multi;
             IC2.parents = &.{IC2parents[IC2_clk_value.get()]};
 
-            const IC2Div_clk_value = IC2DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const IC2Div_clk_value = IC2DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9570,7 +9787,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(XSPI3EnableValue), XSPI3EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(FMCEnableValue), FMCEnableValue, .true, .@"="))
             {
-                const IC3_clk_value = IC3CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC3_clk_value = IC3CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9595,7 +9812,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(XSPI3EnableValue), XSPI3EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(FMCEnableValue), FMCEnableValue, .true, .@"="))
             {
-                const IC3Div_clk_value = IC3DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC3Div_clk_value = IC3DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9627,7 +9844,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(SDMMC1EnableValue), SDMMC1EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SDMMC2EnableValue), SDMMC2EnableValue, .true, .@"="))
             {
-                const IC4_clk_value = IC4CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC4_clk_value = IC4CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9654,7 +9871,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(SDMMC1EnableValue), SDMMC1EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SDMMC2EnableValue), SDMMC2EnableValue, .true, .@"="))
             {
-                const IC4Div_clk_value = IC4DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC4Div_clk_value = IC4DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9686,7 +9903,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(SDMMC1EnableValue), SDMMC1EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SDMMC2EnableValue), SDMMC2EnableValue, .true, .@"="))
             {
-                const IC5_clk_value = IC5CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC5_clk_value = IC5CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9711,7 +9928,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(SDMMC1EnableValue), SDMMC1EnableValue, .true, .@"=") or
                 check_ref(@TypeOf(SDMMC2EnableValue), SDMMC2EnableValue, .true, .@"="))
             {
-                const IC5Div_clk_value = IC5DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC5Div_clk_value = IC5DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9737,7 +9954,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC5Output.parents = &.{&IC5Div};
             }
 
-            const IC6_clk_value = IC6CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const IC6_clk_value = IC6CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9757,7 +9974,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             IC6.nodetype = .multi;
             IC6.parents = &.{IC6parents[IC6_clk_value.get()]};
 
-            const IC6Div_clk_value = IC6DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const IC6Div_clk_value = IC6DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -9783,7 +10000,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableSAI2Value), EnableSAI2Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableSPDIFRXValue), EnableSPDIFRXValue, .true, .@"="))
             {
-                const IC7_clk_value = IC7CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC7_clk_value = IC7CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9810,7 +10027,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableSAI2Value), EnableSAI2Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableSPDIFRXValue), EnableSPDIFRXValue, .true, .@"="))
             {
-                const IC7Div_clk_value = IC7DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC7Div_clk_value = IC7DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9848,7 +10065,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableSPI3Value), EnableSPI3Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableSPI6Value), EnableSPI6Value, .true, .@"="))
             {
-                const IC8_clk_value = IC8CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC8_clk_value = IC8CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9879,7 +10096,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableSPI3Value), EnableSPI3Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableSPI6Value), EnableSPI6Value, .true, .@"="))
             {
-                const IC8Div_clk_value = IC8DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC8Div_clk_value = IC8DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9928,7 +10145,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableUART8Value), EnableUART8Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableUART9Value), EnableUART9Value, .true, .@"="))
             {
-                const IC9_clk_value = IC9CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC9_clk_value = IC9CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -9966,7 +10183,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableUART8Value), EnableUART8Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableUART9Value), EnableUART9Value, .true, .@"="))
             {
-                const IC9Div_clk_value = IC9DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC9Div_clk_value = IC9DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10014,7 +10231,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableI3C1Value), EnableI3C1Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableI3C2Value), EnableI3C2Value, .true, .@"="))
             {
-                const IC10_clk_value = IC10CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC10_clk_value = IC10CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10044,7 +10261,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableI3C1Value), EnableI3C1Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableI3C2Value), EnableI3C2Value, .true, .@"="))
             {
-                const IC10Div_clk_value = IC10DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC10Div_clk_value = IC10DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10075,7 +10292,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC10Output.parents = &.{&IC10Div};
             }
 
-            const IC11_clk_value = IC11CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const IC11_clk_value = IC11CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -10095,7 +10312,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             IC11.nodetype = .multi;
             IC11.parents = &.{IC11parents[IC11_clk_value.get()]};
 
-            const IC11Div_clk_value = IC11DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const IC11Div_clk_value = IC11DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -10115,7 +10332,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             IC11Output.nodetype = .output;
             IC11Output.parents = &.{&IC11Div};
             if (check_ref(@TypeOf(ETH1EnableValue), ETH1EnableValue, .true, .@"=")) {
-                const IC12_clk_value = IC12CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC12_clk_value = IC12CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10136,7 +10353,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC12.parents = &.{IC12parents[IC12_clk_value.get()]};
             }
             if (check_ref(@TypeOf(ETH1EnableValue), ETH1EnableValue, .true, .@"=")) {
-                const IC12Div_clk_value = IC12DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC12Div_clk_value = IC12DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10158,7 +10375,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC12Output.parents = &.{&IC12Div};
             }
             if (false) {
-                const IC13_clk_value = IC13CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC13_clk_value = IC13CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10179,7 +10396,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC13.parents = &.{IC13parents[IC13_clk_value.get()]};
             }
             if (false) {
-                const IC13Div_clk_value = IC13DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC13Div_clk_value = IC13DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10214,7 +10431,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableSPI4Value), EnableSPI4Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableSPI5Value), EnableSPI5Value, .true, .@"="))
             {
-                const IC14_clk_value = IC14CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC14_clk_value = IC14CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10248,7 +10465,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableSPI4Value), EnableSPI4Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableSPI5Value), EnableSPI5Value, .true, .@"="))
             {
-                const IC14Div_clk_value = IC14DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC14Div_clk_value = IC14DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10298,7 +10515,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableLPTIM4Value), EnableLPTIM4Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableLPTIM5Value), EnableLPTIM5Value, .true, .@"="))
             {
-                const IC15_clk_value = IC15CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC15_clk_value = IC15CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10334,7 +10551,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(EnableLPTIM4Value), EnableLPTIM4Value, .true, .@"=") or
                 check_ref(@TypeOf(EnableLPTIM5Value), EnableLPTIM5Value, .true, .@"="))
             {
-                const IC15Div_clk_value = IC15DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC15Div_clk_value = IC15DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10371,7 +10588,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC15Output.parents = &.{&IC15Div};
             }
             if (check_ref(@TypeOf(EnableLTDCValue), EnableLTDCValue, .true, .@"=")) {
-                const IC16_clk_value = IC16CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC16_clk_value = IC16CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10392,7 +10609,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC16.parents = &.{IC16parents[IC16_clk_value.get()]};
             }
             if (check_ref(@TypeOf(EnableLTDCValue), EnableLTDCValue, .true, .@"=")) {
-                const IC16Div_clk_value = IC16DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC16Div_clk_value = IC16DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10414,7 +10631,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC16Output.parents = &.{&IC16Div};
             }
             if (check_ref(@TypeOf(EnableDCMIValue), EnableDCMIValue, .true, .@"=")) {
-                const IC17_clk_value = IC17CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC17_clk_value = IC17CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10435,7 +10652,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC17.parents = &.{IC17parents[IC17_clk_value.get()]};
             }
             if (check_ref(@TypeOf(EnableDCMIValue), EnableDCMIValue, .true, .@"=")) {
-                const IC17Div_clk_value = IC17DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC17Div_clk_value = IC17DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10457,7 +10674,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC17Output.parents = &.{&IC17Div};
             }
             if (check_ref(@TypeOf(EnableCSIValue), EnableCSIValue, .true, .@"=")) {
-                const IC18_clk_value = IC18CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC18_clk_value = IC18CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10478,7 +10695,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC18.parents = &.{IC18parents[IC18_clk_value.get()]};
             }
             if (check_ref(@TypeOf(EnableCSIValue), EnableCSIValue, .true, .@"=")) {
-                const IC18Div_clk_value = IC18DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC18Div_clk_value = IC18DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10502,7 +10719,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             if (check_ref(@TypeOf(CKPEREnableValue), CKPEREnableValue, .true, .@"=") or
                 check_ref(@TypeOf(EnableFDCAN123Value), EnableFDCAN123Value, .true, .@"="))
             {
-                const IC19_clk_value = IC19CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC19_clk_value = IC19CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10525,7 +10742,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             if (check_ref(@TypeOf(CKPEREnableValue), CKPEREnableValue, .true, .@"=") or
                 check_ref(@TypeOf(EnableFDCAN123Value), EnableFDCAN123Value, .true, .@"="))
             {
-                const IC19Div_clk_value = IC19DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC19Div_clk_value = IC19DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10552,7 +10769,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(MCO2OutPutEnableValue), MCO2OutPutEnableValue, .true, .@"=") or
                 check_ref(@TypeOf(PSSIEnableValue), PSSIEnableValue, .true, .@"="))
             {
-                const IC20_clk_value = IC20CLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC20_clk_value = IC20CLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10576,7 +10793,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 check_ref(@TypeOf(MCO2OutPutEnableValue), MCO2OutPutEnableValue, .true, .@"=") or
                 check_ref(@TypeOf(PSSIEnableValue), PSSIEnableValue, .true, .@"="))
             {
-                const IC20Div_clk_value = IC20DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const IC20Div_clk_value = IC20DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10601,7 +10818,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IC20Output.parents = &.{&IC20Div};
             }
             if (check_ref(@TypeOf(MCO1OutPutEnableValue), MCO1OutPutEnableValue, .true, .@"=")) {
-                const MCOMult_clk_value = RCC_MCO1SourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const MCOMult_clk_value = RCC_MCO1SourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10626,7 +10843,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MCOMult.parents = &.{MCOMultparents[MCOMult_clk_value.get()]};
             }
             if (check_ref(@TypeOf(MCO1OutPutEnableValue), MCO1OutPutEnableValue, .true, .@"=")) {
-                const MCODiv_clk_value = RCC_MCODiv1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const MCODiv_clk_value = RCC_MCODiv1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10647,7 +10864,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MCOPin.parents = &.{&MCODiv};
             }
             if (check_ref(@TypeOf(MCO2OutPutEnableValue), MCO2OutPutEnableValue, .true, .@"=")) {
-                const MCO2Mult_clk_value = RCC_MCO2SourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const MCO2Mult_clk_value = RCC_MCO2SourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10672,7 +10889,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MCO2Mult.parents = &.{MCO2Multparents[MCO2Mult_clk_value.get()]};
             }
             if (check_ref(@TypeOf(MCO2OutPutEnableValue), MCO2OutPutEnableValue, .true, .@"=")) {
-                const MCO2Div_clk_value = RCC_MCODiv2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const MCO2Div_clk_value = RCC_MCODiv2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10693,7 +10910,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MCO2Pin.parents = &.{&MCO2Div};
             }
             if (check_ref(@TypeOf(CKPEREnableValue), CKPEREnableValue, .true, .@"=")) {
-                const CKPERSource_clk_value = CKPERSourceSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const CKPERSource_clk_value = CKPERSourceSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10723,7 +10940,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 CKPERoutput.parents = &.{&CKPERSource};
             }
             if (check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"=")) {
-                const ADCMult_clk_value = ADCCLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const ADCMult_clk_value = ADCCLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10748,7 +10965,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 ADCMult.parents = &.{ADCMultparents[ADCMult_clk_value.get()]};
             }
             if (check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"=")) {
-                const ADCDIV_clk_value = ADCDIVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const ADCDIV_clk_value = ADCDIVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10770,7 +10987,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 ADCoutput.parents = &.{&ADCDIV};
             }
             if (check_ref(@TypeOf(EnableADF1Value), EnableADF1Value, .true, .@"=")) {
-                const ADFMult_clk_value = ADF1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const ADFMult_clk_value = ADF1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10800,7 +11017,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 ADFoutput.parents = &.{&ADFMult};
             }
             if (check_ref(@TypeOf(EnableMDF1Value), EnableMDF1Value, .true, .@"=")) {
-                const MDF1Mult_clk_value = MDF1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const MDF1Mult_clk_value = MDF1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10830,7 +11047,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 MDFoutput.parents = &.{&MDF1Mult};
             }
             if (check_ref(@TypeOf(PSSIEnableValue), PSSIEnableValue, .true, .@"=")) {
-                const PSSIMult_clk_value = PSSIClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const PSSIMult_clk_value = PSSIClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10856,7 +11073,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 PSSIoutput.parents = &.{&PSSIMult};
             }
             if (check_ref(@TypeOf(EnableFDCAN123Value), EnableFDCAN123Value, .true, .@"=")) {
-                const FDCANMult_clk_value = FDCANClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const FDCANMult_clk_value = FDCANClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10882,7 +11099,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 FDCANoutput.parents = &.{&FDCANMult};
             }
             if (check_ref(@TypeOf(EnableI2C1Value), EnableI2C1Value, .true, .@"=")) {
-                const I2C1Mult_clk_value = I2C1CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I2C1Mult_clk_value = I2C1CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10910,7 +11127,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I2C1output.parents = &.{&I2C1Mult};
             }
             if (check_ref(@TypeOf(EnableI2C2Value), EnableI2C2Value, .true, .@"=")) {
-                const I2C2Mult_clk_value = I2C2CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I2C2Mult_clk_value = I2C2CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10938,7 +11155,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I2C2output.parents = &.{&I2C2Mult};
             }
             if (check_ref(@TypeOf(EnableI2C3Value), EnableI2C3Value, .true, .@"=")) {
-                const I2C3Mult_clk_value = I2C3CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I2C3Mult_clk_value = I2C3CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10966,7 +11183,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I2C3output.parents = &.{&I2C3Mult};
             }
             if (check_ref(@TypeOf(EnableI2C4Value), EnableI2C4Value, .true, .@"=")) {
-                const I2C4Mult_clk_value = I2C4CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I2C4Mult_clk_value = I2C4CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -10994,7 +11211,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I2C4output.parents = &.{&I2C4Mult};
             }
             if (check_ref(@TypeOf(EnableI3C1Value), EnableI3C1Value, .true, .@"=")) {
-                const I3C1Mult_clk_value = I3C1CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I3C1Mult_clk_value = I3C1CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11022,7 +11239,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I3C1output.parents = &.{&I3C1Mult};
             }
             if (check_ref(@TypeOf(EnableI3C2Value), EnableI3C2Value, .true, .@"=")) {
-                const I3C2Mult_clk_value = I3C2CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const I3C2Mult_clk_value = I3C2CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11050,7 +11267,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 I3C2output.parents = &.{&I3C2Mult};
             }
             if (check_ref(@TypeOf(EnableLPTIM1Value), EnableLPTIM1Value, .true, .@"=")) {
-                const LPTIM1Mult_clk_value = LPTIM1CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPTIM1Mult_clk_value = LPTIM1CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11079,7 +11296,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPTIM1output.parents = &.{&LPTIM1Mult};
             }
             if (check_ref(@TypeOf(EnableLPTIM3Value), EnableLPTIM3Value, .true, .@"=")) {
-                const LPTIM3Mult_clk_value = LPTIM3CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPTIM3Mult_clk_value = LPTIM3CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11108,7 +11325,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPTIM3output.parents = &.{&LPTIM3Mult};
             }
             if (check_ref(@TypeOf(EnableLPTIM2Value), EnableLPTIM2Value, .true, .@"=")) {
-                const LPTIM2Mult_clk_value = LPTIM2CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPTIM2Mult_clk_value = LPTIM2CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11137,7 +11354,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPTIM2output.parents = &.{&LPTIM2Mult};
             }
             if (check_ref(@TypeOf(EnableLPTIM4Value), EnableLPTIM4Value, .true, .@"=")) {
-                const LPTIM4Mult_clk_value = LPTIM4CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPTIM4Mult_clk_value = LPTIM4CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11166,7 +11383,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPTIM4output.parents = &.{&LPTIM4Mult};
             }
             if (check_ref(@TypeOf(EnableLPTIM5Value), EnableLPTIM5Value, .true, .@"=")) {
-                const LPTIM5Mult_clk_value = LPTIM5CLockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPTIM5Mult_clk_value = LPTIM5CLockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11195,7 +11412,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPTIM5output.parents = &.{&LPTIM5Mult};
             }
             if (check_ref(@TypeOf(EnableLTDCValue), EnableLTDCValue, .true, .@"=")) {
-                const LTDCMult_clk_value = LTDCClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LTDCMult_clk_value = LTDCClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11221,7 +11438,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LTDCoutput.parents = &.{&LTDCMult};
             }
             if (check_ref(@TypeOf(EnableDCMIValue), EnableDCMIValue, .true, .@"=")) {
-                const DCMIPPMult_clk_value = DCMIPPClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const DCMIPPMult_clk_value = DCMIPPClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11247,7 +11464,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 DCMIPPoutput.parents = &.{&DCMIPPMult};
             }
             if (check_ref(@TypeOf(FMCEnableValue), FMCEnableValue, .true, .@"=")) {
-                const FMCMult_clk_value = FMCClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const FMCMult_clk_value = FMCClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11273,7 +11490,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 FMCoutput.parents = &.{&FMCMult};
             }
             if (check_ref(@TypeOf(EnableSAI1Value), EnableSAI1Value, .true, .@"=")) {
-                const SAI1Mult_clk_value = SAI1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SAI1Mult_clk_value = SAI1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11304,7 +11521,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SAI1output.parents = &.{&SAI1Mult};
             }
             if (check_ref(@TypeOf(EnableSAI2Value), EnableSAI2Value, .true, .@"=")) {
-                const SAI2Mult_clk_value = SAI2ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SAI2Mult_clk_value = SAI2ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11335,7 +11552,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SAI2output.parents = &.{&SAI2Mult};
             }
             if (check_ref(@TypeOf(EnableUSART1Value), EnableUSART1Value, .true, .@"=")) {
-                const USART1Mult_clk_value = USART1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const USART1Mult_clk_value = USART1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11365,7 +11582,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 USART1output.parents = &.{&USART1Mult};
             }
             if (check_ref(@TypeOf(EnableUSART2Value), EnableUSART2Value, .true, .@"=")) {
-                const USART2Mult_clk_value = USART2ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const USART2Mult_clk_value = USART2ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11395,7 +11612,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 USART2output.parents = &.{&USART2Mult};
             }
             if (check_ref(@TypeOf(EnableUSART3Value), EnableUSART3Value, .true, .@"=")) {
-                const USART3Mult_clk_value = USART3ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const USART3Mult_clk_value = USART3ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11425,7 +11642,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 USART3output.parents = &.{&USART3Mult};
             }
             if (check_ref(@TypeOf(EnableUART4Value), EnableUART4Value, .true, .@"=")) {
-                const UART4Mult_clk_value = UART4ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const UART4Mult_clk_value = UART4ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11455,7 +11672,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 UART4output.parents = &.{&UART4Mult};
             }
             if (check_ref(@TypeOf(EnableUART5Value), EnableUART5Value, .true, .@"=")) {
-                const UART5Mult_clk_value = UART5ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const UART5Mult_clk_value = UART5ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11485,7 +11702,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 UART5output.parents = &.{&UART5Mult};
             }
             if (check_ref(@TypeOf(EnableUSART6Value), EnableUSART6Value, .true, .@"=")) {
-                const USART6Mult_clk_value = USART6ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const USART6Mult_clk_value = USART6ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11515,7 +11732,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 USART6output.parents = &.{&USART6Mult};
             }
             if (check_ref(@TypeOf(EnableUART7Value), EnableUART7Value, .true, .@"=")) {
-                const UART7Mult_clk_value = UART7ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const UART7Mult_clk_value = UART7ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11545,7 +11762,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 UART7output.parents = &.{&UART7Mult};
             }
             if (check_ref(@TypeOf(EnableUART8Value), EnableUART8Value, .true, .@"=")) {
-                const UART8Mult_clk_value = UART8ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const UART8Mult_clk_value = UART8ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11575,7 +11792,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 UART8output.parents = &.{&UART8Mult};
             }
             if (check_ref(@TypeOf(EnableUART9Value), EnableUART9Value, .true, .@"=")) {
-                const UART9Mult_clk_value = UART9ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const UART9Mult_clk_value = UART9ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11605,7 +11822,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 UART9output.parents = &.{&UART9Mult};
             }
             if (check_ref(@TypeOf(EnableLPUART1Value), EnableLPUART1Value, .true, .@"=")) {
-                const LPUART1Mult_clk_value = LPUART1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const LPUART1Mult_clk_value = LPUART1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11635,7 +11852,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LPUART1output.parents = &.{&LPUART1Mult};
             }
             if (check_ref(@TypeOf(EnableUSART10Value), EnableUSART10Value, .true, .@"=")) {
-                const USART10Mult_clk_value = USART10ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const USART10Mult_clk_value = USART10ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11665,7 +11882,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 USART10output.parents = &.{&USART10Mult};
             }
             if (check_ref(@TypeOf(EnableSPI1Value), EnableSPI1Value, .true, .@"=")) {
-                const SPI1Mult_clk_value = SPI1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPI1Mult_clk_value = SPI1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11695,7 +11912,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPI1output.parents = &.{&SPI1Mult};
             }
             if (check_ref(@TypeOf(EnableSPI2Value), EnableSPI2Value, .true, .@"=")) {
-                const SPI2Mult_clk_value = SPI2ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPI2Mult_clk_value = SPI2ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11725,7 +11942,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPI2output.parents = &.{&SPI2Mult};
             }
             if (check_ref(@TypeOf(EnableSPI3Value), EnableSPI3Value, .true, .@"=")) {
-                const SPI3Mult_clk_value = SPI3ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPI3Mult_clk_value = SPI3ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11755,7 +11972,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPI3output.parents = &.{&SPI3Mult};
             }
             if (check_ref(@TypeOf(EnableSPI4Value), EnableSPI4Value, .true, .@"=")) {
-                const SPI4Mult_clk_value = SPI4ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPI4Mult_clk_value = SPI4ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11785,7 +12002,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPI4output.parents = &.{&SPI4Mult};
             }
             if (check_ref(@TypeOf(EnableSPI5Value), EnableSPI5Value, .true, .@"=")) {
-                const SPI5Mult_clk_value = SPI5ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPI5Mult_clk_value = SPI5ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11815,7 +12032,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPI5output.parents = &.{&SPI5Mult};
             }
             if (check_ref(@TypeOf(EnableSPI6Value), EnableSPI6Value, .true, .@"=")) {
-                const SPI6Mult_clk_value = SPI6ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPI6Mult_clk_value = SPI6ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11845,7 +12062,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPI6output.parents = &.{&SPI6Mult};
             }
             if (check_ref(@TypeOf(XSPI1EnableValue), XSPI1EnableValue, .true, .@"=")) {
-                const XSPI1Mult_clk_value = XSPI1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const XSPI1Mult_clk_value = XSPI1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11871,7 +12088,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 XSPI1output.parents = &.{&XSPI1Mult};
             }
             if (check_ref(@TypeOf(XSPI2EnableValue), XSPI2EnableValue, .true, .@"=")) {
-                const XSPI2Mult_clk_value = XSPI2ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const XSPI2Mult_clk_value = XSPI2ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11897,7 +12114,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 XSPI2output.parents = &.{&XSPI2Mult};
             }
             if (check_ref(@TypeOf(OTG1EnableValue), OTG1EnableValue, .true, .@"=")) {
-                const OTGHS1Mult_clk_value = OTGHS1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const OTGHS1Mult_clk_value = OTGHS1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11922,7 +12139,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 OTGHS1output.parents = &.{&OTGHS1Mult};
             }
             if (check_ref(@TypeOf(OTG2EnableValue), OTG2EnableValue, .true, .@"=")) {
-                const OTGHS2Mult_clk_value = OTGHS2ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const OTGHS2Mult_clk_value = OTGHS2ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11947,7 +12164,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 OTGHS2output.parents = &.{&OTGHS2Mult};
             }
             if (check_ref(@TypeOf(XSPI3EnableValue), XSPI3EnableValue, .true, .@"=")) {
-                const XSPI3Mult_clk_value = XSPI3ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const XSPI3Mult_clk_value = XSPI3ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11973,7 +12190,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 XSPI3output.parents = &.{&XSPI3Mult};
             }
             if (check_ref(@TypeOf(OTG1EnableValue), OTG1EnableValue, .true, .@"=")) {
-                const OTGPHY1Mult_clk_value = OTGPHY1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const OTGPHY1Mult_clk_value = OTGPHY1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -11999,7 +12216,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 OTGPHY1output.parents = &.{&OTGPHY1Mult};
             }
             if (check_ref(@TypeOf(OTG2EnableValue), OTG2EnableValue, .true, .@"=")) {
-                const OTGPHY2Mult_clk_value = OTGPHY2ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const OTGPHY2Mult_clk_value = OTGPHY2ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -12025,7 +12242,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 OTGPHY2output.parents = &.{&OTGPHY2Mult};
             }
             if (check_ref(@TypeOf(SDMMC1EnableValue), SDMMC1EnableValue, .true, .@"=")) {
-                const SDMMC1Mult_clk_value = SDMMC1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SDMMC1Mult_clk_value = SDMMC1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -12052,7 +12269,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SDMMC1output.parents = &.{&SDMMC1Mult};
             }
             if (check_ref(@TypeOf(SDMMC2EnableValue), SDMMC2EnableValue, .true, .@"=")) {
-                const SDMMC2Mult_clk_value = SDMMC2ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SDMMC2Mult_clk_value = SDMMC2ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -12079,7 +12296,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SDMMC2output.parents = &.{&SDMMC2Mult};
             }
             if (check_ref(@TypeOf(ETH1EnableValue), ETH1EnableValue, .true, .@"=")) {
-                const ETH1Mult_clk_value = ETH1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const ETH1Mult_clk_value = ETH1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -12105,7 +12322,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 ETH1output.parents = &.{&ETH1Mult};
             }
             if (check_ref(@TypeOf(EnableSPDIFRXValue), EnableSPDIFRXValue, .true, .@"=")) {
-                const SPDIFRX1Mult_clk_value = SPDIFRX1ClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const SPDIFRX1Mult_clk_value = SPDIFRX1ClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -12135,7 +12352,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 SPDIFRX1output.parents = &.{&SPDIFRX1Mult};
             }
 
-            const SYSBClkSource_clk_value = SYSBCLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const SYSBClkSource_clk_value = SYSBCLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12155,7 +12372,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             SYSBClkSource.nodetype = .multi;
             SYSBClkSource.parents = &.{SYSBClkSourceparents[SYSBClkSource_clk_value.get()]};
 
-            const SYSCClkSource_clk_value = SYSCCLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const SYSCClkSource_clk_value = SYSCCLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12175,7 +12392,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             SYSCClkSource.nodetype = .multi;
             SYSCClkSource.parents = &.{SYSCClkSourceparents[SYSCClkSource_clk_value.get()]};
 
-            const SYSDClkSource_clk_value = SYSDCLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const SYSDClkSource_clk_value = SYSDCLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12210,7 +12427,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             SYSDCLKOutput.nodetype = .output;
             SYSDCLKOutput.parents = &.{&SYSDClkSource};
 
-            const SYSAClkSource_clk_value = CPUCLKSourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const SYSAClkSource_clk_value = CPUCLKSourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12230,7 +12447,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             SYSAClkSource.nodetype = .multi;
             SYSAClkSource.parents = &.{SYSAClkSourceparents[SYSAClkSource_clk_value.get()]};
 
-            const TPIUPrescaler_clk_value = TPIUPrescalerValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const TPIUPrescaler_clk_value = TPIUPrescalerValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12249,7 +12466,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             TPIUOutput.nodetype = .output;
             TPIUOutput.parents = &.{&TPIUPrescaler};
 
-            const CortexPrescaler_clk_value = Cortex_DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const CortexPrescaler_clk_value = Cortex_DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12278,7 +12495,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             AXIClockOutput.nodetype = .output;
             AXIClockOutput.parents = &.{&SYSBClkSource};
 
-            const HPREDiv_clk_value = HPRE_DivValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const HPREDiv_clk_value = HPRE_DivValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12293,7 +12510,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HPREDiv.value = HPREDiv_clk_value.get();
             HPREDiv.parents = &.{&SYSBCLKOutput};
 
-            const APB4DIV_clk_value = APB4DIVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const APB4DIV_clk_value = APB4DIVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12313,7 +12530,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB4Output.nodetype = .output;
             APB4Output.parents = &.{&APB4DIV};
 
-            const APB5DIV_clk_value = APB5DIVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const APB5DIV_clk_value = APB5DIVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12333,7 +12550,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB5Output.nodetype = .output;
             APB5Output.parents = &.{&APB5DIV};
 
-            const TIMGDIV_clk_value = TIMGDIVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const TIMGDIV_clk_value = TIMGDIVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12353,7 +12570,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             TIMGOutput.nodetype = .output;
             TIMGOutput.parents = &.{&TIMGDIV};
 
-            const APB1DIV_clk_value = APB1DIVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const APB1DIV_clk_value = APB1DIVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12378,7 +12595,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB1Output.nodetype = .output;
             APB1Output.parents = &.{&APB1DIV};
 
-            const APB2DIV_clk_value = APB2DIVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const APB2DIV_clk_value = APB2DIVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12398,7 +12615,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APB2Output.nodetype = .output;
             APB2Output.parents = &.{&APB2DIV};
 
-            const PLL1Source_clk_value = PLL1SourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL1Source_clk_value = PLL1SourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12418,7 +12635,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PLL1Source.nodetype = .multi;
             PLL1Source.parents = &.{PLL1Sourceparents[PLL1Source_clk_value.get()]};
 
-            const FREFDIV1_clk_value = FREFDIV1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const FREFDIV1_clk_value = FREFDIV1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12433,7 +12650,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FREFDIV1.value = FREFDIV1_clk_value;
             FREFDIV1.parents = &.{&PLL1Source};
 
-            const PLL2Source_clk_value = PLL2SourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL2Source_clk_value = PLL2SourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12453,7 +12670,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PLL2Source.nodetype = .multi;
             PLL2Source.parents = &.{PLL2Sourceparents[PLL2Source_clk_value.get()]};
 
-            const FREFDIV2_clk_value = FREFDIV2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const FREFDIV2_clk_value = FREFDIV2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12468,7 +12685,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FREFDIV2.value = FREFDIV2_clk_value;
             FREFDIV2.parents = &.{&PLL2Source};
 
-            const PLL3Source_clk_value = PLL3SourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL3Source_clk_value = PLL3SourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12488,7 +12705,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PLL3Source.nodetype = .multi;
             PLL3Source.parents = &.{PLL3Sourceparents[PLL3Source_clk_value.get()]};
 
-            const FREFDIV3_clk_value = FREFDIV3Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const FREFDIV3_clk_value = FREFDIV3Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12503,7 +12720,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FREFDIV3.value = FREFDIV3_clk_value;
             FREFDIV3.parents = &.{&PLL3Source};
 
-            const PLL4Source_clk_value = PLL4SourceValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL4Source_clk_value = PLL4SourceValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12523,7 +12740,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PLL4Source.nodetype = .multi;
             PLL4Source.parents = &.{PLL4Sourceparents[PLL4Source_clk_value.get()]};
 
-            const FREFDIV4_clk_value = FREFDIV4Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const FREFDIV4_clk_value = FREFDIV4Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12538,7 +12755,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FREFDIV4.value = FREFDIV4_clk_value;
             FREFDIV4.parents = &.{&PLL4Source};
 
-            const FBDIV1_clk_value = FBDIV1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const FBDIV1_clk_value = FBDIV1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12553,7 +12770,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FBDIV1.value = FBDIV1_clk_value;
             FBDIV1.parents = &.{&FREFDIV1};
 
-            const PLL1FRACV_clk_value = PLL1FRACVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL1FRACV_clk_value = PLL1FRACVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12564,10 +12781,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 "No Extra Log",
                 "PLL1FRACV",
             });
+            PLL1FRACV.limit = PLL1FRACVLimit;
             PLL1FRACV.nodetype = .source;
             PLL1FRACV.value = PLL1FRACV_clk_value;
 
-            const POSTDIV1_1_clk_value = POSTDIV1_1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const POSTDIV1_1_clk_value = POSTDIV1_1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12582,7 +12800,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             POSTDIV1_1.value = POSTDIV1_1_clk_value;
             POSTDIV1_1.parents = &.{&FBDIV1};
 
-            const POSTDIV2_1_clk_value = POSTDIV2_1Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const POSTDIV2_1_clk_value = POSTDIV2_1Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12602,7 +12820,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FOUTPOSTDIV1.nodetype = .output;
             FOUTPOSTDIV1.parents = &.{&POSTDIV2_1};
 
-            const FBDIV2_clk_value = FBDIV2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const FBDIV2_clk_value = FBDIV2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12617,7 +12835,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FBDIV2.value = FBDIV2_clk_value;
             FBDIV2.parents = &.{ &FREFDIV2, &PLL2FRACV };
 
-            const PLL2FRACV_clk_value = PLL2FRACVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL2FRACV_clk_value = PLL2FRACVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12628,10 +12846,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 "No Extra Log",
                 "PLL2FRACV",
             });
+            PLL2FRACV.limit = PLL2FRACVLimit;
             PLL2FRACV.nodetype = .source;
             PLL2FRACV.value = PLL2FRACV_clk_value;
 
-            const POSTDIV1_2_clk_value = POSTDIV1_2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const POSTDIV1_2_clk_value = POSTDIV1_2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12646,7 +12865,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             POSTDIV1_2.value = POSTDIV1_2_clk_value;
             POSTDIV1_2.parents = &.{&FBDIV2};
 
-            const POSTDIV2_2_clk_value = POSTDIV2_2Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const POSTDIV2_2_clk_value = POSTDIV2_2Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12666,7 +12885,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FOUTPOSTDIV2.nodetype = .output;
             FOUTPOSTDIV2.parents = &.{&POSTDIV2_2};
 
-            const FBDIV3_clk_value = FBDIV3Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const FBDIV3_clk_value = FBDIV3Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12681,7 +12900,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FBDIV3.value = FBDIV3_clk_value;
             FBDIV3.parents = &.{ &FREFDIV3, &PLL3FRACV };
 
-            const PLL3FRACV_clk_value = PLL3FRACVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL3FRACV_clk_value = PLL3FRACVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12692,10 +12911,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 "No Extra Log",
                 "PLL3FRACV",
             });
+            PLL3FRACV.limit = PLL3FRACVLimit;
             PLL3FRACV.nodetype = .source;
             PLL3FRACV.value = PLL3FRACV_clk_value;
 
-            const POSTDIV1_3_clk_value = POSTDIV1_3Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const POSTDIV1_3_clk_value = POSTDIV1_3Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12710,7 +12930,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             POSTDIV1_3.value = POSTDIV1_3_clk_value;
             POSTDIV1_3.parents = &.{&FBDIV3};
 
-            const POSTDIV2_3_clk_value = POSTDIV2_3Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const POSTDIV2_3_clk_value = POSTDIV2_3Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12730,7 +12950,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FOUTPOSTDIV3.nodetype = .output;
             FOUTPOSTDIV3.parents = &.{&POSTDIV2_3};
 
-            const FBDIV4_clk_value = FBDIV4Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const FBDIV4_clk_value = FBDIV4Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12745,7 +12965,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FBDIV4.value = FBDIV4_clk_value;
             FBDIV4.parents = &.{ &FREFDIV4, &PLL4FRACV };
 
-            const PLL4FRACV_clk_value = PLL4FRACVValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const PLL4FRACV_clk_value = PLL4FRACVValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12756,10 +12976,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 "No Extra Log",
                 "PLL4FRACV",
             });
+            PLL4FRACV.limit = PLL4FRACVLimit;
             PLL4FRACV.nodetype = .source;
             PLL4FRACV.value = PLL4FRACV_clk_value;
 
-            const POSTDIV1_4_clk_value = POSTDIV1_4Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const POSTDIV1_4_clk_value = POSTDIV1_4Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12774,7 +12995,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             POSTDIV1_4.value = POSTDIV1_4_clk_value;
             POSTDIV1_4.parents = &.{&FBDIV4};
 
-            const POSTDIV2_4_clk_value = POSTDIV2_4Value orelse try comptime_fail_or_error(error.InvalidClockValue,
+            const POSTDIV2_4_clk_value = POSTDIV2_4Value orelse return comptime_fail_or_error(error.InvalidClockValue,
                 \\Error on Clock {s} | expr: {s} diagnostic: {s}
                 \\Clock is active but the reference value {s} is null
                 \\note: check the flags and configurations associated with this clock
@@ -12794,7 +13015,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FOUTPOSTDIV4.nodetype = .output;
             FOUTPOSTDIV4.parents = &.{&POSTDIV2_4};
             if (check_ref(@TypeOf(EnableHSERTCDevisorValue), EnableHSERTCDevisorValue, .true, .@"=")) {
-                const HSERTCDevisor_clk_value = RCC_RTC_Clock_Source_FROM_HSEValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const HSERTCDevisor_clk_value = RCC_RTC_Clock_Source_FROM_HSEValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -12810,7 +13031,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 HSERTCDevisor.parents = &.{&HSEOSC};
             }
             if (check_ref(@TypeOf(RTCEnableValue), RTCEnableValue, .true, .@"=")) {
-                const RTCClkSource_clk_value = RTCClockSelectionValue orelse try comptime_fail_or_error(error.InvalidClockValue,
+                const RTCClkSource_clk_value = RTCClockSelectionValue orelse return comptime_fail_or_error(error.InvalidClockValue,
                     \\Error on Clock {s} | expr: {s} diagnostic: {s}
                     \\Clock is active but the reference value {s} is null
                     \\note: check the flags and configurations associated with this clock
@@ -12841,242 +13062,295 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 IWDGOutput.parents = &.{&LSIRC};
             }
 
+            std.mem.doNotOptimizeAway(MSI_VALUEValue);
+            MSI.nodetype = .output;
+            MSI.parents = &.{&MSIRC};
+
+            std.mem.doNotOptimizeAway(VCOInput1Freq_ValueValue);
+            VCOInput.limit = VCOInput1Freq_ValueLimit;
+            VCOInput.nodetype = .output;
+            VCOInput.parents = &.{&FREFDIV1};
+
+            std.mem.doNotOptimizeAway(VCOInput2Freq_ValueValue);
+            VCO2Input.limit = VCOInput2Freq_ValueLimit;
+            VCO2Input.nodetype = .output;
+            VCO2Input.parents = &.{&FREFDIV2};
+
+            std.mem.doNotOptimizeAway(VCOInput3Freq_ValueValue);
+            VCO3Input.limit = VCOInput3Freq_ValueLimit;
+            VCO3Input.nodetype = .output;
+            VCO3Input.parents = &.{&FREFDIV3};
+
+            std.mem.doNotOptimizeAway(VCOInput4Freq_ValueValue);
+            VCO4Input.limit = VCOInput4Freq_ValueLimit;
+            VCO4Input.nodetype = .output;
+            VCO4Input.parents = &.{&FREFDIV4};
+
+            std.mem.doNotOptimizeAway(VCO1OutputFreq_ValueValue);
+            VCO1Output.limit = VCO1OutputFreq_ValueLimit;
+            VCO1Output.nodetype = .output;
+            VCO1Output.parents = &.{&FBDIV1};
+
+            std.mem.doNotOptimizeAway(VCO2OutputFreq_ValueValue);
+            VCO2Output.limit = VCO2OutputFreq_ValueLimit;
+            VCO2Output.nodetype = .output;
+            VCO2Output.parents = &.{&FBDIV2};
+
+            std.mem.doNotOptimizeAway(VCO3OutputFreq_ValueValue);
+            VCO3Output.limit = VCO3OutputFreq_ValueLimit;
+            VCO3Output.nodetype = .output;
+            VCO3Output.parents = &.{&FBDIV3};
+
+            std.mem.doNotOptimizeAway(VCO4OutputFreq_ValueValue);
+            VCO4Output.limit = VCO4OutputFreq_ValueLimit;
+            VCO4Output.nodetype = .output;
+            VCO4Output.parents = &.{&FBDIV4};
+
+            out.LPTIM2output = try LPTIM2output.get_output();
+            out.LPTIM2Mult = try LPTIM2Mult.get_output();
+            out.LPTIM3output = try LPTIM3output.get_output();
+            out.LPTIM3Mult = try LPTIM3Mult.get_output();
+            out.LPTIM4output = try LPTIM4output.get_output();
+            out.LPTIM4Mult = try LPTIM4Mult.get_output();
+            out.LPTIM5output = try LPTIM5output.get_output();
+            out.LPTIM5Mult = try LPTIM5Mult.get_output();
+            out.SPI6output = try SPI6output.get_output();
+            out.SPI6Mult = try SPI6Mult.get_output();
+            out.LPUART1output = try LPUART1output.get_output();
+            out.LPUART1Mult = try LPUART1Mult.get_output();
+            out.APB4Output = try APB4Output.get_output();
+            out.APB4DIV = try APB4DIV.get_output();
+            out.I2C1output = try I2C1output.get_output();
+            out.I2C1Mult = try I2C1Mult.get_output();
+            out.I2C2output = try I2C2output.get_output();
+            out.I2C2Mult = try I2C2Mult.get_output();
+            out.I2C3output = try I2C3output.get_output();
+            out.I2C3Mult = try I2C3Mult.get_output();
+            out.I2C4output = try I2C4output.get_output();
+            out.I2C4Mult = try I2C4Mult.get_output();
+            out.I3C1output = try I3C1output.get_output();
+            out.I3C1Mult = try I3C1Mult.get_output();
+            out.I3C2output = try I3C2output.get_output();
+            out.I3C2Mult = try I3C2Mult.get_output();
+            out.LPTIM1output = try LPTIM1output.get_output();
+            out.LPTIM1Mult = try LPTIM1Mult.get_output();
+            out.FDCANoutput = try FDCANoutput.get_output();
+            out.FDCANMult = try FDCANMult.get_output();
+            out.SPDIFRX1output = try SPDIFRX1output.get_output();
+            out.SPDIFRX1Mult = try SPDIFRX1Mult.get_output();
+            out.USART2output = try USART2output.get_output();
+            out.USART2Mult = try USART2Mult.get_output();
+            out.USART3output = try USART3output.get_output();
+            out.USART3Mult = try USART3Mult.get_output();
+            out.UART4output = try UART4output.get_output();
+            out.UART4Mult = try UART4Mult.get_output();
+            out.UART5output = try UART5output.get_output();
+            out.UART5Mult = try UART5Mult.get_output();
+            out.UART7output = try UART7output.get_output();
+            out.UART7Mult = try UART7Mult.get_output();
+            out.UART8output = try UART8output.get_output();
+            out.UART8Mult = try UART8Mult.get_output();
+            out.SPI2output = try SPI2output.get_output();
+            out.SPI2Mult = try SPI2Mult.get_output();
+            out.SPI3output = try SPI3output.get_output();
+            out.SPI3Mult = try SPI3Mult.get_output();
+            out.APB1Output = try APB1Output.get_output();
+            out.APB1DIV = try APB1DIV.get_output();
+            out.SAI1output = try SAI1output.get_output();
+            out.SAI1Mult = try SAI1Mult.get_output();
+            out.SAI2output = try SAI2output.get_output();
+            out.SAI2Mult = try SAI2Mult.get_output();
+            out.USART1output = try USART1output.get_output();
+            out.USART1Mult = try USART1Mult.get_output();
+            out.USART6output = try USART6output.get_output();
+            out.USART6Mult = try USART6Mult.get_output();
+            out.UART9output = try UART9output.get_output();
+            out.UART9Mult = try UART9Mult.get_output();
+            out.USART10output = try USART10output.get_output();
+            out.USART10Mult = try USART10Mult.get_output();
+            out.SPI1output = try SPI1output.get_output();
+            out.SPI1Mult = try SPI1Mult.get_output();
+            out.SPI4output = try SPI4output.get_output();
+            out.SPI4Mult = try SPI4Mult.get_output();
+            out.SPI5output = try SPI5output.get_output();
+            out.SPI5Mult = try SPI5Mult.get_output();
+            out.APB2Output = try APB2Output.get_output();
+            out.APB2DIV = try APB2DIV.get_output();
+            out.LTDCoutput = try LTDCoutput.get_output();
+            out.LTDCMult = try LTDCMult.get_output();
+            out.DCMIPPoutput = try DCMIPPoutput.get_output();
+            out.DCMIPPMult = try DCMIPPMult.get_output();
+            out.APB5Output = try APB5Output.get_output();
+            out.APB5DIV = try APB5DIV.get_output();
+            out.ADCoutput = try ADCoutput.get_output();
+            out.ADCDIV = try ADCDIV.get_output();
+            out.ADCMult = try ADCMult.get_output();
+            out.ADFoutput = try ADFoutput.get_output();
+            out.ADFMult = try ADFMult.get_output();
+            out.MDFoutput = try MDFoutput.get_output();
+            out.MDF1Mult = try MDF1Mult.get_output();
+            out.PSSIoutput = try PSSIoutput.get_output();
+            out.PSSIMult = try PSSIMult.get_output();
+            out.FMCoutput = try FMCoutput.get_output();
+            out.FMCMult = try FMCMult.get_output();
+            out.XSPI1output = try XSPI1output.get_output();
+            out.XSPI1Mult = try XSPI1Mult.get_output();
+            out.XSPI2output = try XSPI2output.get_output();
+            out.XSPI2Mult = try XSPI2Mult.get_output();
+            out.XSPI3output = try XSPI3output.get_output();
+            out.XSPI3Mult = try XSPI3Mult.get_output();
+            out.SDMMC1output = try SDMMC1output.get_output();
+            out.SDMMC1Mult = try SDMMC1Mult.get_output();
+            out.SDMMC2output = try SDMMC2output.get_output();
+            out.SDMMC2Mult = try SDMMC2Mult.get_output();
+            out.ETH1output = try ETH1output.get_output();
+            out.ETH1Mult = try ETH1Mult.get_output();
+            out.AHBOutput = try AHBOutput.get_output();
+            out.HPREDiv = try HPREDiv.get_output();
+            out.SYSBCLKOutput = try SYSBCLKOutput.get_output();
+            out.MCO2Pin = try MCO2Pin.get_output();
+            out.MCO2Div = try MCO2Div.get_output();
+            out.MCO2Mult = try MCO2Mult.get_output();
+            out.SYSBClkSource = try SYSBClkSource.get_output();
+            out.CortexSysOutput = try CortexSysOutput.get_output();
+            out.TPIUOutput = try TPIUOutput.get_output();
+            out.TPIUPrescaler = try TPIUPrescaler.get_output();
+            out.CpuClockOutput = try CpuClockOutput.get_output();
+            out.SYSAClkSource = try SYSAClkSource.get_output();
+            out.IC1Output = try IC1Output.get_output();
+            out.IC1Div = try IC1Div.get_output();
+            out.FOUTPOSTDIV3 = try FOUTPOSTDIV3.get_output();
+            out.POSTDIV2_3 = try POSTDIV2_3.get_output();
+            out.POSTDIV1_3 = try POSTDIV1_3.get_output();
+            out.FBDIV3 = try FBDIV3.get_output();
+            out.FREFDIV3 = try FREFDIV3.get_output();
+            out.PLL3Source = try PLL3Source.get_output();
+            out.FOUTPOSTDIV4 = try FOUTPOSTDIV4.get_output();
+            out.POSTDIV2_4 = try POSTDIV2_4.get_output();
+            out.POSTDIV1_4 = try POSTDIV1_4.get_output();
+            out.FBDIV4 = try FBDIV4.get_output();
+            out.FREFDIV4 = try FREFDIV4.get_output();
+            out.PLL4Source = try PLL4Source.get_output();
+            out.FOUTPOSTDIV1 = try FOUTPOSTDIV1.get_output();
+            out.POSTDIV2_1 = try POSTDIV2_1.get_output();
+            out.POSTDIV1_1 = try POSTDIV1_1.get_output();
+            out.FBDIV1 = try FBDIV1.get_output();
+            out.FREFDIV1 = try FREFDIV1.get_output();
+            out.PLL1Source = try PLL1Source.get_output();
+            out.FOUTPOSTDIV2 = try FOUTPOSTDIV2.get_output();
+            out.POSTDIV2_2 = try POSTDIV2_2.get_output();
+            out.POSTDIV1_2 = try POSTDIV1_2.get_output();
+            out.FBDIV2 = try FBDIV2.get_output();
+            out.FREFDIV2 = try FREFDIV2.get_output();
+            out.PLL2Source = try PLL2Source.get_output();
             out.HSIRC = try HSIRC.get_output();
-            out.HSIDiv = try HSIDiv.get_output();
             out.HSIDivOutput = try HSIDivOutput.get_output();
-            out.HSIDiv4 = try HSIDiv4.get_output();
+            out.HSIDiv = try HSIDiv.get_output();
             out.UCPDOutput = try UCPDOutput.get_output();
+            out.HSIDiv4 = try HSIDiv4.get_output();
+            out.RTCOutput = try RTCOutput.get_output();
+            out.RTCClkSource = try RTCClkSource.get_output();
+            out.HSERTCDevisor = try HSERTCDevisor.get_output();
             out.HSEOSC = try HSEOSC.get_output();
+            out.OTGHS1output = try OTGHS1output.get_output();
+            out.OTGHS1Mult = try OTGHS1Mult.get_output();
+            out.OTGPHY1output = try OTGPHY1output.get_output();
+            out.OTGPHY1Mult = try OTGPHY1Mult.get_output();
+            out.OTGHS2output = try OTGHS2output.get_output();
+            out.OTGHS2Mult = try OTGHS2Mult.get_output();
+            out.OTGPHY2output = try OTGPHY2output.get_output();
+            out.OTGPHY2Mult = try OTGPHY2Mult.get_output();
             out.HSEOSCDIV = try HSEOSCDIV.get_output();
             out.HSEDIV = try HSEDIV.get_output();
+            out.IWDGOutput = try IWDGOutput.get_output();
             out.LSIRC = try LSIRC.get_output();
             out.LSEOSC = try LSEOSC.get_output();
             out.MSIRC = try MSIRC.get_output();
             out.I2S_CKIN = try I2S_CKIN.get_output();
             out.IC1 = try IC1.get_output();
-            out.IC1Div = try IC1Div.get_output();
-            out.IC1Output = try IC1Output.get_output();
-            out.IC2 = try IC2.get_output();
-            out.IC2Div = try IC2Div.get_output();
             out.IC2Output = try IC2Output.get_output();
-            out.IC3 = try IC3.get_output();
-            out.IC3Div = try IC3Div.get_output();
+            out.IC2Div = try IC2Div.get_output();
+            out.IC2 = try IC2.get_output();
             out.IC3Output = try IC3Output.get_output();
-            out.IC4 = try IC4.get_output();
-            out.IC4Div = try IC4Div.get_output();
+            out.IC3Div = try IC3Div.get_output();
+            out.IC3 = try IC3.get_output();
             out.IC4Output = try IC4Output.get_output();
-            out.IC5 = try IC5.get_output();
-            out.IC5Div = try IC5Div.get_output();
-            out.IC5Output = try IC5Output.get_output();
-            out.IC6 = try IC6.get_output();
-            out.IC6Div = try IC6Div.get_output();
-            out.IC6Output = try IC6Output.get_output();
-            out.IC7 = try IC7.get_output();
-            out.IC7Div = try IC7Div.get_output();
-            out.IC7Output = try IC7Output.get_output();
-            out.IC8 = try IC8.get_output();
-            out.IC8Div = try IC8Div.get_output();
-            out.IC8Output = try IC8Output.get_output();
-            out.IC9 = try IC9.get_output();
-            out.IC9Div = try IC9Div.get_output();
-            out.IC9Output = try IC9Output.get_output();
-            out.IC10 = try IC10.get_output();
-            out.IC10Div = try IC10Div.get_output();
-            out.IC10Output = try IC10Output.get_output();
-            out.IC11 = try IC11.get_output();
-            out.IC11Div = try IC11Div.get_output();
-            out.IC11Output = try IC11Output.get_output();
-            out.IC12 = try IC12.get_output();
-            out.IC12Div = try IC12Div.get_output();
-            out.IC12Output = try IC12Output.get_output();
-            out.IC13 = try IC13.get_output();
-            out.IC13Div = try IC13Div.get_output();
-            out.IC13Output = try IC13Output.get_output();
-            out.IC14 = try IC14.get_output();
-            out.IC14Div = try IC14Div.get_output();
-            out.IC14Output = try IC14Output.get_output();
-            out.IC15 = try IC15.get_output();
-            out.IC15Div = try IC15Div.get_output();
-            out.IC15Output = try IC15Output.get_output();
-            out.IC16 = try IC16.get_output();
-            out.IC16Div = try IC16Div.get_output();
-            out.IC16Output = try IC16Output.get_output();
-            out.IC17 = try IC17.get_output();
-            out.IC17Div = try IC17Div.get_output();
-            out.IC17Output = try IC17Output.get_output();
-            out.IC18 = try IC18.get_output();
-            out.IC18Div = try IC18Div.get_output();
-            out.IC18Output = try IC18Output.get_output();
-            out.IC19 = try IC19.get_output();
-            out.IC19Div = try IC19Div.get_output();
-            out.IC19Output = try IC19Output.get_output();
-            out.IC20 = try IC20.get_output();
-            out.IC20Div = try IC20Div.get_output();
-            out.IC20Output = try IC20Output.get_output();
-            out.MCOMult = try MCOMult.get_output();
-            out.MCODiv = try MCODiv.get_output();
-            out.MCOPin = try MCOPin.get_output();
-            out.MCO2Mult = try MCO2Mult.get_output();
-            out.MCO2Div = try MCO2Div.get_output();
-            out.MCO2Pin = try MCO2Pin.get_output();
-            out.CKPERSource = try CKPERSource.get_output();
+            out.IC4Div = try IC4Div.get_output();
+            out.IC4 = try IC4.get_output();
             out.CKPERoutput = try CKPERoutput.get_output();
-            out.ADCMult = try ADCMult.get_output();
-            out.ADCDIV = try ADCDIV.get_output();
-            out.ADCoutput = try ADCoutput.get_output();
-            out.ADFMult = try ADFMult.get_output();
-            out.ADFoutput = try ADFoutput.get_output();
-            out.MDF1Mult = try MDF1Mult.get_output();
-            out.MDFoutput = try MDFoutput.get_output();
-            out.PSSIMult = try PSSIMult.get_output();
-            out.PSSIoutput = try PSSIoutput.get_output();
-            out.FDCANMult = try FDCANMult.get_output();
-            out.FDCANoutput = try FDCANoutput.get_output();
-            out.I2C1Mult = try I2C1Mult.get_output();
-            out.I2C1output = try I2C1output.get_output();
-            out.I2C2Mult = try I2C2Mult.get_output();
-            out.I2C2output = try I2C2output.get_output();
-            out.I2C3Mult = try I2C3Mult.get_output();
-            out.I2C3output = try I2C3output.get_output();
-            out.I2C4Mult = try I2C4Mult.get_output();
-            out.I2C4output = try I2C4output.get_output();
-            out.I3C1Mult = try I3C1Mult.get_output();
-            out.I3C1output = try I3C1output.get_output();
-            out.I3C2Mult = try I3C2Mult.get_output();
-            out.I3C2output = try I3C2output.get_output();
-            out.LPTIM1Mult = try LPTIM1Mult.get_output();
-            out.LPTIM1output = try LPTIM1output.get_output();
-            out.LPTIM3Mult = try LPTIM3Mult.get_output();
-            out.LPTIM3output = try LPTIM3output.get_output();
-            out.LPTIM2Mult = try LPTIM2Mult.get_output();
-            out.LPTIM2output = try LPTIM2output.get_output();
-            out.LPTIM4Mult = try LPTIM4Mult.get_output();
-            out.LPTIM4output = try LPTIM4output.get_output();
-            out.LPTIM5Mult = try LPTIM5Mult.get_output();
-            out.LPTIM5output = try LPTIM5output.get_output();
-            out.LTDCMult = try LTDCMult.get_output();
-            out.LTDCoutput = try LTDCoutput.get_output();
-            out.DCMIPPMult = try DCMIPPMult.get_output();
-            out.DCMIPPoutput = try DCMIPPoutput.get_output();
-            out.FMCMult = try FMCMult.get_output();
-            out.FMCoutput = try FMCoutput.get_output();
-            out.SAI1Mult = try SAI1Mult.get_output();
-            out.SAI1output = try SAI1output.get_output();
-            out.SAI2Mult = try SAI2Mult.get_output();
-            out.SAI2output = try SAI2output.get_output();
-            out.USART1Mult = try USART1Mult.get_output();
-            out.USART1output = try USART1output.get_output();
-            out.USART2Mult = try USART2Mult.get_output();
-            out.USART2output = try USART2output.get_output();
-            out.USART3Mult = try USART3Mult.get_output();
-            out.USART3output = try USART3output.get_output();
-            out.UART4Mult = try UART4Mult.get_output();
-            out.UART4output = try UART4output.get_output();
-            out.UART5Mult = try UART5Mult.get_output();
-            out.UART5output = try UART5output.get_output();
-            out.USART6Mult = try USART6Mult.get_output();
-            out.USART6output = try USART6output.get_output();
-            out.UART7Mult = try UART7Mult.get_output();
-            out.UART7output = try UART7output.get_output();
-            out.UART8Mult = try UART8Mult.get_output();
-            out.UART8output = try UART8output.get_output();
-            out.UART9Mult = try UART9Mult.get_output();
-            out.UART9output = try UART9output.get_output();
-            out.LPUART1Mult = try LPUART1Mult.get_output();
-            out.LPUART1output = try LPUART1output.get_output();
-            out.USART10Mult = try USART10Mult.get_output();
-            out.USART10output = try USART10output.get_output();
-            out.SPI1Mult = try SPI1Mult.get_output();
-            out.SPI1output = try SPI1output.get_output();
-            out.SPI2Mult = try SPI2Mult.get_output();
-            out.SPI2output = try SPI2output.get_output();
-            out.SPI3Mult = try SPI3Mult.get_output();
-            out.SPI3output = try SPI3output.get_output();
-            out.SPI4Mult = try SPI4Mult.get_output();
-            out.SPI4output = try SPI4output.get_output();
-            out.SPI5Mult = try SPI5Mult.get_output();
-            out.SPI5output = try SPI5output.get_output();
-            out.SPI6Mult = try SPI6Mult.get_output();
-            out.SPI6output = try SPI6output.get_output();
-            out.XSPI1Mult = try XSPI1Mult.get_output();
-            out.XSPI1output = try XSPI1output.get_output();
-            out.XSPI2Mult = try XSPI2Mult.get_output();
-            out.XSPI2output = try XSPI2output.get_output();
-            out.OTGHS1Mult = try OTGHS1Mult.get_output();
-            out.OTGHS1output = try OTGHS1output.get_output();
-            out.OTGHS2Mult = try OTGHS2Mult.get_output();
-            out.OTGHS2output = try OTGHS2output.get_output();
-            out.XSPI3Mult = try XSPI3Mult.get_output();
-            out.XSPI3output = try XSPI3output.get_output();
-            out.OTGPHY1Mult = try OTGPHY1Mult.get_output();
-            out.OTGPHY1output = try OTGPHY1output.get_output();
-            out.OTGPHY2Mult = try OTGPHY2Mult.get_output();
-            out.OTGPHY2output = try OTGPHY2output.get_output();
-            out.SDMMC1Mult = try SDMMC1Mult.get_output();
-            out.SDMMC1output = try SDMMC1output.get_output();
-            out.SDMMC2Mult = try SDMMC2Mult.get_output();
-            out.SDMMC2output = try SDMMC2output.get_output();
-            out.ETH1Mult = try ETH1Mult.get_output();
-            out.ETH1output = try ETH1output.get_output();
-            out.SPDIFRX1Mult = try SPDIFRX1Mult.get_output();
-            out.SPDIFRX1output = try SPDIFRX1output.get_output();
-            out.SYSBClkSource = try SYSBClkSource.get_output();
-            out.SYSCClkSource = try SYSCClkSource.get_output();
-            out.SYSDClkSource = try SYSDClkSource.get_output();
-            out.SYSBCLKOutput = try SYSBCLKOutput.get_output();
+            out.CKPERSource = try CKPERSource.get_output();
+            out.MCOPin = try MCOPin.get_output();
+            out.MCODiv = try MCODiv.get_output();
+            out.MCOMult = try MCOMult.get_output();
+            out.IC5Output = try IC5Output.get_output();
+            out.IC5Div = try IC5Div.get_output();
+            out.IC5 = try IC5.get_output();
             out.SYSCCLKOutput = try SYSCCLKOutput.get_output();
+            out.SYSCClkSource = try SYSCClkSource.get_output();
+            out.IC6Output = try IC6Output.get_output();
+            out.IC6Div = try IC6Div.get_output();
+            out.IC6 = try IC6.get_output();
+            out.IC7Output = try IC7Output.get_output();
+            out.IC7Div = try IC7Div.get_output();
+            out.IC7 = try IC7.get_output();
+            out.IC8Output = try IC8Output.get_output();
+            out.IC8Div = try IC8Div.get_output();
+            out.IC8 = try IC8.get_output();
+            out.IC9Output = try IC9Output.get_output();
+            out.IC9Div = try IC9Div.get_output();
+            out.IC9 = try IC9.get_output();
+            out.IC10Output = try IC10Output.get_output();
+            out.IC10Div = try IC10Div.get_output();
+            out.IC10 = try IC10.get_output();
             out.SYSDCLKOutput = try SYSDCLKOutput.get_output();
-            out.SYSAClkSource = try SYSAClkSource.get_output();
-            out.TPIUPrescaler = try TPIUPrescaler.get_output();
-            out.TPIUOutput = try TPIUOutput.get_output();
+            out.SYSDClkSource = try SYSDClkSource.get_output();
+            out.IC11Output = try IC11Output.get_output();
+            out.IC11Div = try IC11Div.get_output();
+            out.IC11 = try IC11.get_output();
+            out.IC12Output = try IC12Output.get_output();
+            out.IC12Div = try IC12Div.get_output();
+            out.IC12 = try IC12.get_output();
+            out.IC13Output = try IC13Output.get_output();
+            out.IC13Div = try IC13Div.get_output();
+            out.IC13 = try IC13.get_output();
+            out.IC14Output = try IC14Output.get_output();
+            out.IC14Div = try IC14Div.get_output();
+            out.IC14 = try IC14.get_output();
+            out.IC15Output = try IC15Output.get_output();
+            out.IC15Div = try IC15Div.get_output();
+            out.IC15 = try IC15.get_output();
+            out.IC16Output = try IC16Output.get_output();
+            out.IC16Div = try IC16Div.get_output();
+            out.IC16 = try IC16.get_output();
+            out.IC17Output = try IC17Output.get_output();
+            out.IC17Div = try IC17Div.get_output();
+            out.IC17 = try IC17.get_output();
+            out.IC18Output = try IC18Output.get_output();
+            out.IC18Div = try IC18Div.get_output();
+            out.IC18 = try IC18.get_output();
+            out.IC19Output = try IC19Output.get_output();
+            out.IC19Div = try IC19Div.get_output();
+            out.IC19 = try IC19.get_output();
+            out.IC20Output = try IC20Output.get_output();
+            out.IC20Div = try IC20Div.get_output();
+            out.IC20 = try IC20.get_output();
             out.CortexPrescaler = try CortexPrescaler.get_output();
-            out.CortexSysOutput = try CortexSysOutput.get_output();
-            out.CpuClockOutput = try CpuClockOutput.get_output();
             out.AXIClockOutput = try AXIClockOutput.get_output();
-            out.HPREDiv = try HPREDiv.get_output();
-            out.APB4DIV = try APB4DIV.get_output();
-            out.APB4Output = try APB4Output.get_output();
-            out.APB5DIV = try APB5DIV.get_output();
-            out.APB5Output = try APB5Output.get_output();
-            out.TIMGDIV = try TIMGDIV.get_output();
             out.TIMGOutput = try TIMGOutput.get_output();
-            out.APB1DIV = try APB1DIV.get_output();
-            out.AHBOutput = try AHBOutput.get_output();
-            out.APB1Output = try APB1Output.get_output();
-            out.APB2DIV = try APB2DIV.get_output();
-            out.APB2Output = try APB2Output.get_output();
-            out.PLL1Source = try PLL1Source.get_output();
-            out.FREFDIV1 = try FREFDIV1.get_output();
-            out.PLL2Source = try PLL2Source.get_output();
-            out.FREFDIV2 = try FREFDIV2.get_output();
-            out.PLL3Source = try PLL3Source.get_output();
-            out.FREFDIV3 = try FREFDIV3.get_output();
-            out.PLL4Source = try PLL4Source.get_output();
-            out.FREFDIV4 = try FREFDIV4.get_output();
-            out.FBDIV1 = try FBDIV1.get_output();
+            out.TIMGDIV = try TIMGDIV.get_output();
             out.PLL1FRACV = try PLL1FRACV.get_output();
-            out.POSTDIV1_1 = try POSTDIV1_1.get_output();
-            out.POSTDIV2_1 = try POSTDIV2_1.get_output();
-            out.FOUTPOSTDIV1 = try FOUTPOSTDIV1.get_output();
-            out.FBDIV2 = try FBDIV2.get_output();
             out.PLL2FRACV = try PLL2FRACV.get_output();
-            out.POSTDIV1_2 = try POSTDIV1_2.get_output();
-            out.POSTDIV2_2 = try POSTDIV2_2.get_output();
-            out.FOUTPOSTDIV2 = try FOUTPOSTDIV2.get_output();
-            out.FBDIV3 = try FBDIV3.get_output();
             out.PLL3FRACV = try PLL3FRACV.get_output();
-            out.POSTDIV1_3 = try POSTDIV1_3.get_output();
-            out.POSTDIV2_3 = try POSTDIV2_3.get_output();
-            out.FOUTPOSTDIV3 = try FOUTPOSTDIV3.get_output();
-            out.FBDIV4 = try FBDIV4.get_output();
             out.PLL4FRACV = try PLL4FRACV.get_output();
-            out.POSTDIV1_4 = try POSTDIV1_4.get_output();
-            out.POSTDIV2_4 = try POSTDIV2_4.get_output();
-            out.FOUTPOSTDIV4 = try FOUTPOSTDIV4.get_output();
-            out.HSERTCDevisor = try HSERTCDevisor.get_output();
-            out.RTCClkSource = try RTCClkSource.get_output();
-            out.RTCOutput = try RTCOutput.get_output();
-            out.IWDGOutput = try IWDGOutput.get_output();
+            out.MSI = try MSI.get_extra_output();
+            out.VCOInput = try VCOInput.get_extra_output();
+            out.VCO2Input = try VCO2Input.get_extra_output();
+            out.VCO3Input = try VCO3Input.get_extra_output();
+            out.VCO4Input = try VCO4Input.get_extra_output();
+            out.VCO1Output = try VCO1Output.get_extra_output();
+            out.VCO2Output = try VCO2Output.get_extra_output();
+            out.VCO3Output = try VCO3Output.get_extra_output();
+            out.VCO4Output = try VCO4Output.get_extra_output();
             ref_out.HSIDiv = HSIDivValue;
             ref_out.HSIDiv4 = HSIDiv4Value;
             ref_out.HSE_VALUE = HSE_VALUEValue;

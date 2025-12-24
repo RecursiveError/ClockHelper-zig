@@ -15,12 +15,20 @@ const RefType = McuInfo.Ref_type;
 const IntegerRange = McuInfo.Integrer_Range;
 const FloatRange = McuInfo.Float_Range;
 const DynamicRange = McuInfo.Dynamic_Range;
+const FixedExpr = McuInfo.Fixed_Expr;
 const List = McuInfo.List;
 const ListItem = McuInfo.List_Item;
 const RuntimeRef = struct {
     name: []const u8,
     val: RefVariant,
     is_runtime: bool,
+};
+
+const Flag_Type = enum {
+    Numeric,
+    List,
+    Numeric_List,
+    skip_flag,
 };
 
 // Used to keep track of various mappings during generation
@@ -75,6 +83,10 @@ const Context = struct {
     //count the total items of a reference list
     total_list_item: std.StringHashMap([]const ListItem),
 
+    postponed_references: std.StringArrayHashMap(Reference),
+
+    out_flags: std.StringArrayHashMap(Flag_Type),
+
     pub fn init(allocator: std.mem.Allocator) Context {
         return Context{
             .semaphores = .init(allocator),
@@ -90,6 +102,8 @@ const Context = struct {
             .extra_configs = .init(allocator),
             .multi_type_ref = .init(allocator),
             .total_list_item = .init(allocator),
+            .postponed_references = .init(allocator),
+            .out_flags = .init(allocator),
         };
     }
 
@@ -106,6 +120,8 @@ const Context = struct {
         self.extra_flags.deinit();
         self.extra_configs.deinit();
         self.total_list_item.deinit();
+        self.postponed_references.deinit();
+        self.out_flags.deinit();
 
         for (self.semaphore_item.values()) |map| {
             const to_free: *std.StringArrayHashMap([]const u8) = @constCast(&map);
@@ -131,15 +147,16 @@ const MCU_OUTPUT_PATH = "src/mcus/";
 
 const CLOCK_TREE_DATA_PATH = "clock_ref_data/";
 const CLOCK_TREE_OUTPUT_PATH = "src/clocktree/";
-//const CLOCK_TREE_OUTPUT_PATH = "/home/guilherme/Área de trabalho/microzig/port/stmicro/stm32/stm32-clocks/clocktree/";
 
 const hal_folder_path = "/home/guilherme/.cache/zig/p/N-V-__8AAFi8WBlOh-NikHFVBjzQE0F1KixgKjVWYnlijPNm/data/chips/";
 
 var global_ref_name: []const u8 = undefined;
+var global_mcu_ref_map: std.StringArrayHashMap(usize) = undefined;
 pub fn main() !void {
     const allocator = std.heap.page_allocator;
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
+    global_mcu_ref_map = .init(arena.allocator());
 
     //store the formal chip name as a key and the hal chip name as value
     var hal_chip_names = std.StringArrayHashMap([]const u8).init(arena.allocator());
@@ -153,6 +170,15 @@ pub fn main() !void {
         std.heap.page_allocator.free(i);
     }
     std.heap.page_allocator.free(list);
+
+    std.log.info("\n\n MCU data log: ", .{});
+    for (global_mcu_ref_map.keys()) |to_free| {
+        const val = global_mcu_ref_map.get(to_free).?;
+        if (val == 0) {
+            std.log.info("Reference {s} is not part of the additional information for any MCU!", .{to_free});
+        }
+        std.heap.page_allocator.free(to_free);
+    }
 }
 
 fn get_chip_hal_names(alloc: std.mem.Allocator, map: *std.StringArrayHashMap([]const u8)) !void {
@@ -233,10 +259,13 @@ fn generate_mcu_data(clk_tree_list: []const []const u8, hal_names: *std.StringAr
             \\
         , .{ mcu_inst.name, mcu_inst.clock_ref_file_union });
         for (mcu_inst.extra_data) |data| {
-            try temp_writer.print(
-                \\.{{ "{s}", {{}} }},
-                \\
-            , .{data});
+            if (global_mcu_ref_map.getEntry(data)) |entry| {
+                try temp_writer.print(
+                    \\.{{ "{s}", {{}} }},
+                    \\
+                , .{data});
+                entry.value_ptr.* += 1;
+            }
         }
 
         try temp_writer.writeAll("\n}));\n");
@@ -384,7 +413,9 @@ fn init_clocktree_context(clock_tree: *const ClockTree, context: *Context, alloc
         if (check_multi_type(&ref)) |val| {
             try context.multi_type_ref.put(ref_name, val);
         }
-        if (std.mem.containsAtLeast(u8, ref_name, 1, "Enable")) {
+        if (std.mem.containsAtLeast(u8, ref_name, 1, "Enable") or
+            std.mem.containsAtLeast(u8, ref_name, 1, "State"))
+        {
             if (!is_ref_static(ref.variants)) {
                 try context.extra_configs.put(ref_name, {});
             }
@@ -535,6 +566,7 @@ fn generate_prelude(writer: *std.Io.Writer) !void {
         \\const math_op = clock.math_op;
         \\const check_ref = clock.check_ref;
         \\const Limit = clock.Limit;
+        \\const round = clock.round;
         \\
         \\
     );
@@ -751,6 +783,7 @@ fn generate_multi_types(ctx: *const Context, writer: *std.Io.Writer) !void {
 }
 
 fn generate_types(tree: *const ClockTree, writer: *std.Io.Writer, context: *const Context, alloc: std.mem.Allocator) !void {
+    const ctx: *Context = @constCast(context);
     //=========Flags==========
     try writer.writeAll(
         \\pub const Flags = struct {
@@ -845,16 +878,47 @@ fn generate_types(tree: *const ClockTree, writer: *std.Io.Writer, context: *cons
     );
 
     try writer.writeAll(
+        \\/// Flag Configuration output after processing the clock tree.
+        \\pub const Flag_Output = struct {
+        \\
+        \\ 
+    );
+
+    for (tree.extra_flags) |f| {
+        try writer.print(
+            \\@"{s}":bool = false,
+            \\
+        , .{f});
+    }
+
+    for (tree.references) |ref| {
+        if (is_ref_flag(ref, context)) |t| {
+            try ctx.out_flags.put(ref.ref_name, t);
+            if (t == .skip_flag) continue;
+            try writer.print(
+                \\@"{s}":bool = false,
+                \\
+            , .{ref.ref_name});
+        }
+    }
+
+    try writer.writeAll(
+        \\};
+        \\
+    );
+
+    try writer.writeAll(
         \\/// Configuration output after processing the clock tree.
         \\/// Values marked as null indicate that the RCC configuration should remain at its reset value.
         \\pub const Config_Output = struct {
-        \\flags: Flags = .{},
+        \\flags: Flag_Output = .{},
         \\ 
     );
 
     var imp_map = std.StringArrayHashMap(void).init(alloc);
     for (context.references.values()) |f| {
         if (imp_map.contains(f.ref_name)) continue;
+        if (context.out_flags.contains(f.ref_name)) continue;
         try imp_map.put(f.ref_name, {});
         if (is_ref_output(f, context)) continue;
 
@@ -918,21 +982,66 @@ fn get_ref_from_ptr(name: []const u8, ctx: *const Context) !Reference {
     return ref;
 }
 
+fn is_ref_flag(ref: Reference, context: *const Context) ?Flag_Type {
+    const name = ref.ref_name;
+
+    if (std.mem.containsAtLeast(u8, name, 1, "Used") or
+        std.mem.containsAtLeast(u8, name, 1, "used") or
+        std.mem.containsAtLeast(u8, name, 1, "Enbale") or
+        std.mem.containsAtLeast(u8, name, 1, "Enable") or
+        std.mem.containsAtLeast(u8, name, 1, "enable") or
+        std.mem.containsAtLeast(u8, name, 1, "ENABLE"))
+    {
+        //check if have a list and if this list have true
+        if (context.total_list_item.get(name)) |ls| {
+            if (ls.len <= 2 and ls.len > 0) {
+                if (have_true(ls)) |t| {
+                    return t;
+                } else if (ls.len == 1) {
+                    return Flag_Type.skip_flag;
+                } else {
+                    return null;
+                }
+            }
+        }
+        return Flag_Type.Numeric;
+    }
+    return null;
+}
+
+fn have_true(item: []const ListItem) ?Flag_Type {
+    for (item) |i| {
+        if (std.mem.eql(u8, i.name, "true")) return Flag_Type.List;
+        if (std.mem.eql(u8, i.name, "1")) return Flag_Type.Numeric_List;
+    }
+    return null;
+}
+
 fn is_ref_config(ref: Reference, ctx: *const Context) bool {
     return !is_ref_output(ref, ctx) and !is_ref_static(ref.variants);
 }
 
+fn is_ref_name_output(ref_name: []const u8, ctx: *const Context) bool {
+    if (ctx.node_ref.get(ref_name)) |node_name| {
+        if (ctx.nodes.get(node_name)) |node| {
+            return (ClockType.get(node.node_type) catch return false) == .output;
+        }
+    }
+    return false;
+}
+
 fn is_ref_output(ref: Reference, ctx: *const Context) bool {
+    return is_ref_string(ref.variants) or is_ref_name_output(ref.ref_name, ctx);
+}
+
+fn is_variable_source(ref: Reference, ctx: *const Context) bool {
     if (ctx.node_ref.get(ref.ref_name)) |node_name| {
         if (ctx.nodes.get(node_name)) |node| {
-            return (std.mem.eql(u8, node.node_type, "output") or
-                std.mem.eql(u8, node.node_type, "activeOutput") or
-                std.mem.eql(u8, node.node_type, "fixedSource") or
-                std.mem.eql(u8, node.node_type, "pixelClockSource"));
+            return (std.mem.eql(u8, node.node_type, "variedSource"));
         }
     }
 
-    return is_ref_string(ref.variants);
+    return false;
 }
 
 fn is_ref_string(rev: []const RefVariant) bool {
@@ -981,16 +1090,19 @@ fn generate_get_clocks(tree: *const ClockTree, writer: *std.Io.Writer, context: 
     _ = tree;
     try writer.writeAll(
         \\pub fn get_clocks(config: Config) anyerror!Tree_Output {
+        \\
+        \\if (@inComptime()) @setEvalBranchQuota(10000);
         \\var out = Clock_Output{};
         \\var ref_out = Config_Output{};
-        \\ref_out.flags = config.flags;
         \\
         \\
     );
     try generate_semaphores(writer, context);
-    try generate_limits(writer, context);
-    try generate_ref_values(writer, context, alloc);
+    try generate_clock_base(writer, context);
+    try generate_pre_ref_values(writer, context, alloc);
     try generate_clock(writer, context, alloc);
+    try generate_post_ref_values(writer, context, alloc);
+    try generate_clk_outputs(writer, context, alloc);
     try generate_reference_out(writer, context, alloc);
     try writer.writeAll(
         \\
@@ -1028,9 +1140,10 @@ fn generate_limits(writer: *std.Io.Writer, context: *const Context) !void {
     }
 }
 
-fn generate_ref_values(writer: *std.Io.Writer, context: *const Context, alloc: std.mem.Allocator) !void {
+fn generate_pre_ref_values(writer: *std.Io.Writer, context: *const Context, alloc: std.mem.Allocator) !void {
     try writer.writeAll(
-        \\//Ref Values
+        \\//Pre clock reference values
+        \\//the following references can and/or should be validated before defining the clocks
         \\
         \\
     );
@@ -1045,37 +1158,43 @@ fn generate_ref_values(writer: *std.Io.Writer, context: *const Context, alloc: s
 }
 
 fn write_ref_value(writer: *std.Io.Writer, context: *const Context, ref: Reference, alloc: std.mem.Allocator, done: *std.StringArrayHashMap(void)) !void {
-    //try implement all base values before the corrent ref
+    if (try postpone_ref("", ref, context, writer)) return;
     if (ref.variants.len == 1) {
         switch (ref.variants[0].ref) {
             .string => return,
             else => {},
         }
     }
+
     for (ref.variants) |vars| {
         if (vars.expr) |expr| {
+            if (try postpone_ref(expr, ref, context, writer)) return;
             var expr_tokens = std.mem.splitAny(u8, expr, "()+-,.|&%*<>!=\\/? ");
             try write_parent_ref_value(writer, context, ref, alloc, done, &expr_tokens);
         }
         switch (vars.ref) {
             .dynamic_range => |range| {
                 if (range.default_value) |expr| {
+                    if (try postpone_ref(expr, ref, context, writer)) return;
                     var expr_tokens = std.mem.splitAny(u8, expr, "()+-,.|&%*<>!=\\/? ");
                     try write_parent_ref_value(writer, context, ref, alloc, done, &expr_tokens);
                 }
 
                 if (range.max) |expr| {
+                    if (try postpone_ref(expr, ref, context, writer)) return;
                     var expr_tokens = std.mem.splitAny(u8, expr, "()+-,.|&%*<>!=\\/? ");
                     try write_parent_ref_value(writer, context, ref, alloc, done, &expr_tokens);
                 }
 
                 if (range.min) |expr| {
+                    if (try postpone_ref(expr, ref, context, writer)) return;
                     var expr_tokens = std.mem.splitAny(u8, expr, "()+-,.|&%*<>!=\\/? ");
                     try write_parent_ref_value(writer, context, ref, alloc, done, &expr_tokens);
                 }
             },
             .fixed_expr => |expr| {
-                var expr_tokens = std.mem.splitAny(u8, expr, "()+-,.|&%*<>!=\\/? ");
+                if (try postpone_ref(expr.value, ref, context, writer)) return;
+                var expr_tokens = std.mem.splitAny(u8, expr.value, "()+-,.|&%*<>!=\\/? ");
                 try write_parent_ref_value(writer, context, ref, alloc, done, &expr_tokens);
             },
             else => {},
@@ -1084,7 +1203,49 @@ fn write_ref_value(writer: *std.Io.Writer, context: *const Context, ref: Referen
 
     //actual node write
     //std.log.debug("Creating ref {s}", .{ref.ref_name});
-    try write_actual_node(writer, context, ref, alloc);
+    try write_actual_node(writer, context, ref, null, alloc);
+}
+
+// skip output references and postpone references that depend on output values
+pub fn postpone_ref(expr: []const u8, ref: Reference, context: *const Context, writer: *std.Io.Writer) !bool {
+    const ctx: *Context = @constCast(context);
+    const runtime = is_ref_config(ref, context);
+
+    if (is_ref_output(ref, context)) {
+        if (is_variable_number(ref, context)) {
+            try ctx.postponed_references.put(ref.ref_name, ref);
+        }
+        return true;
+    }
+
+    const ret = blk: {
+        if (std.mem.containsAtLeast(u8, expr, 1, "Freq_Value") or
+            std.mem.containsAtLeast(u8, expr, 1, "Freq_VALUE") or
+            std.mem.containsAtLeast(u8, expr, 1, "FREQ_VALUE") or
+            std.mem.containsAtLeast(u8, expr, 1, "freq_value"))
+        {
+            try ctx.postponed_references.put(ref.ref_name, ref);
+            break :blk true;
+        }
+        var expr_tokens = std.mem.splitAny(u8, expr, "()+-,.|&%*<>!=\\/? ");
+        while (expr_tokens.next()) |to_check| {
+            if (context.postponed_references.contains(to_check)) {
+                try ctx.postponed_references.put(ref.ref_name, ref);
+                break :blk true;
+            }
+        }
+        break :blk false;
+    };
+
+    // no need to postpone ranges without conditionals
+
+    if (is_variable_number(ref, context) and has_expr(ref)) {
+        try write_postpone_limit(writer, ref, context, runtime);
+        try ctx.postponed_references.put(ref.ref_name, ref);
+        return true;
+    }
+
+    return ret;
 }
 
 fn write_parent_ref_value(writer: *std.Io.Writer, context: *const Context, _: Reference, alloc: std.mem.Allocator, done: *std.StringArrayHashMap(void), tokens: *std.mem.SplitIterator(u8, .any)) anyerror!void {
@@ -1103,11 +1264,11 @@ fn write_parent_ref_value(writer: *std.Io.Writer, context: *const Context, _: Re
     }
 }
 
-fn write_actual_node(writer: *std.Io.Writer, context: *const Context, ref: Reference, alloc: std.mem.Allocator) !void {
+fn write_actual_node(writer: *std.Io.Writer, context: *const Context, ref: Reference, recursive: ?[]const u8, alloc: std.mem.Allocator) !void {
     const runtime = is_ref_config(ref, context);
+    const postpone = (context.postponed_references.contains(ref.ref_name) and is_variable_number(ref, context)) and (has_expr(ref) or is_ref_output(ref, context));
     var default_var: ?RefVariant = null;
     var extra_var = try std.ArrayList(RefVariant).initCapacity(alloc, 0);
-
     // organize variants before the final write to the file
     for (ref.variants) |vars| {
         if (vars.expr) |_| {
@@ -1116,16 +1277,25 @@ fn write_actual_node(writer: *std.Io.Writer, context: *const Context, ref: Refer
             default_var = vars;
         }
     }
-    var prefix_buf: [150]u8 = undefined;
-    try writer.print(
-        \\const @"{s}Value": ?{s} = blk: {{
-        \\
-        \\
-    , .{ ref.ref_name, get_type_prefix(ref, &prefix_buf, context) });
-
+    if (postpone) {
+        try writer.print(
+            \\
+            \\//POST CLOCK REF {s} VALUE 
+            \\_ = blk: {{
+            \\
+            \\
+        , .{ref.ref_name});
+    } else {
+        var prefix_buf: [150]u8 = undefined;
+        try writer.print(
+            \\const @"{s}Value": ?{s} = blk: {{
+            \\
+            \\
+        , .{ ref.ref_name, get_type_prefix(ref, &prefix_buf, context) });
+    }
     var fisrt = false;
     for (extra_var.items) |i| {
-        const zig_expr = translate_expr(i.expr.?, ref.ref_name, context, alloc) catch {
+        const zig_expr = translate_expr(i.expr.?, ref.ref_name, recursive, context, alloc) catch {
             //std.log.info("got {any} on expr {s} skipping expr", .{ err, i.expr.? });
             continue;
         };
@@ -1163,7 +1333,7 @@ fn write_actual_node(writer: *std.Io.Writer, context: *const Context, ref: Refer
             runtime,
             alloc,
         );
-    } else {
+    } else if (!postpone) {
         try writer.writeAll("break :blk null;");
     }
 
@@ -1175,7 +1345,8 @@ fn write_actual_node(writer: *std.Io.Writer, context: *const Context, ref: Refer
     //, .{ref.ref_name});
 }
 
-fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, alloc: std.mem.Allocator) ![]const u8 {
+fn translate_expr(expr: []const u8, name: []const u8, recursive: ?[]const u8, context: *const Context, alloc: std.mem.Allocator) ![]const u8 {
+    const recursive_name = recursive orelse "";
     //std.log.info("start EXPR translate {s}", .{expr});
     var inner = try alloc.alloc(u8, expr.len * 10);
     defer alloc.free(inner);
@@ -1258,33 +1429,46 @@ fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, a
                         },
                         .reference => {
                             var prefix: []const u8 = "";
-                            var posfix: []const u8 = "Value";
+                            var posfix: []const u8 = "Value\"";
+                            var ref_name: []const u8 = str;
 
                             // if a reference refers to itself in an expression, use the config value
                             // if no configuration is found, the expression is invalid
                             const ref = context.references.get(name).?;
 
-                            if (std.mem.eql(u8, name, str)) {
+                            if (std.mem.eql(u8, name, str) or std.mem.eql(u8, str, recursive_name)) {
                                 if (is_ref_config(ref, context)) {
                                     prefix = if (context.extra_configs.contains(name)) "config.extra." else "config.";
-                                    posfix = "";
+                                    posfix = "\"";
                                 } else {
                                     return error.InvalidFlag;
                                 }
                             }
+                            var output = false;
+                            const str_ref = context.references.get(str) orelse unreachable;
+                            if (is_ref_output(str_ref, context)) {
+                                ref_name = context.node_ref.get(str_ref.ref_name) orelse unreachable;
+                                prefix = "";
+                                posfix = "\".get_as_ref()";
+                                output = true;
+                            }
                             const op = try next_op(expr[idx..], &idx);
 
                             if (op.len != 0) {
-                                const next_str = get_cur_str(expr[idx..]);
+                                var next_str = get_cur_str(expr[idx..]);
                                 idx += next_str.len;
 
                                 if (next_str.len == 0) {
                                     std.log.info("not found next str on pre: {s} op: {s} expr: {s}", .{ str, op, expr[idx..] });
                                     return error.MalformedExpr;
                                 }
-
                                 const next_prefix = blk: {
-                                    if (!is_numeric(next_str)) {
+                                    if (context.references.contains(next_str)) {
+                                        if (is_ref_name_output(next_str, context)) {
+                                            next_str = context.node_ref.get(next_str).?;
+                                        }
+                                        break :blk "@\"";
+                                    } else if (!is_numeric(next_str)) {
                                         if (context.total_list_item.get(str)) |total| {
                                             if (!is_in_list(next_str, total)) {
                                                 const ret = std.fmt.bufPrint(inner[inner_idx..], "false", .{}) catch unreachable;
@@ -1296,14 +1480,37 @@ fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, a
                                     }
                                     break :blk "";
                                 };
-                                const next_posfix = if (!is_numeric(next_str)) "\"" else "";
+                                const next_posfix = blk: {
+                                    if (is_ref_name_output(next_str, context)) {
+                                        break :blk "\".get_as_ref()";
+                                    } else if (context.references.contains(next_str)) {
+                                        break :blk "Value\"";
+                                    } else if (!is_numeric(next_str)) break :blk "\"";
+                                    break :blk "";
+                                };
 
                                 if (!is_math_oprator(op)) {
+                                    if (output) {
+                                        const pre = std.fmt.bufPrint(inner[inner_idx..],
+                                            \\ check_ref(?f32
+                                        , .{}) catch unreachable;
+                                        inner_idx += pre.len;
+                                    } else {
+                                        const pre = std.fmt.bufPrint(inner[inner_idx..],
+                                            \\ check_ref(@TypeOf({0s}@"{1s}{2s})
+                                        , .{
+                                            prefix,
+                                            ref_name,
+                                            posfix,
+                                        }) catch unreachable;
+                                        inner_idx += pre.len;
+                                    }
+
                                     const ret = std.fmt.bufPrint(inner[inner_idx..],
-                                        \\ check_ref(@TypeOf({0s}@"{1s}{2s}"), {0s}@"{1s}{2s}", {3s}{4s}{5s}, .@"{6s}") 
+                                        \\, {0s}@"{1s}{2s}, {3s}{4s}{5s}, .@"{6s}") 
                                     , .{
                                         prefix,
-                                        str,
+                                        ref_name,
                                         posfix,
                                         next_prefix,
                                         next_str,
@@ -1313,11 +1520,27 @@ fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, a
 
                                     inner_idx += ret.len;
                                 } else {
+                                    if (output) {
+                                        const pre = std.fmt.bufPrint(inner[inner_idx..],
+                                            \\ try math_op(?f32
+                                        , .{}) catch unreachable;
+                                        inner_idx += pre.len;
+                                    } else {
+                                        const pre = std.fmt.bufPrint(inner[inner_idx..],
+                                            \\ try math_op(@TypeOf({0s}@"{1s}{2s})
+                                        , .{
+                                            prefix,
+                                            ref_name,
+                                            posfix,
+                                        }) catch unreachable;
+                                        inner_idx += pre.len;
+                                    }
+
                                     const ret = std.fmt.bufPrint(inner[inner_idx..],
-                                        \\ try math_op(@TypeOf({0s}@"{1s}{2s}"), {0s}@"{1s}{2s}", {6s}{3s}{7s}, .@"{4s}", "{5s}", "{1s}", "{3s}") 
+                                        \\, {0s}@"{1s}{2s}, {6s}{3s}{7s}, .@"{4s}", "{5s}", "{1s}", "{3s}") 
                                     , .{
                                         prefix,
-                                        str,
+                                        ref_name,
                                         posfix,
                                         next_str,
                                         op,
@@ -1344,14 +1567,21 @@ fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, a
                                         } else break :blk "1";
                                     };
                                     const ret = std.fmt.bufPrint(inner[inner_idx..],
-                                        \\ check_ref(@TypeOf({0s}@"{1s}{2s}"), {0s}@"{1s}{2s}", {3s}, .@"=") 
+                                        \\ check_ref(@TypeOf({0s}@"{1s}{2s}), {0s}@"{1s}{2s}, {3s}, .@"=") 
                                     , .{ prefix, str, posfix, line }) catch unreachable;
                                     inner_idx += ret.len;
                                 } else {
-                                    const ret = std.fmt.bufPrint(inner[inner_idx..],
-                                        \\@"{s}Value" 
-                                    , .{str}) catch unreachable;
-                                    inner_idx += ret.len;
+                                    if (context.node_ref.get(str)) |clk| {
+                                        const ret = std.fmt.bufPrint(inner[inner_idx..],
+                                            \\@"{s}".get_as_ref() 
+                                        , .{clk}) catch unreachable;
+                                        inner_idx += ret.len;
+                                    } else {
+                                        const ret = std.fmt.bufPrint(inner[inner_idx..],
+                                            \\@"{s}Value" 
+                                        , .{str}) catch unreachable;
+                                        inner_idx += ret.len;
+                                    }
                                 }
                             }
                         },
@@ -1376,6 +1606,7 @@ fn translate_expr(expr: []const u8, name: []const u8, context: *const Context, a
                         } else {
                             const ret = std.fmt.bufPrint(inner[inner_idx..], "check_MCU(\"{s}\")", .{str}) catch unreachable;
                             inner_idx += ret.len;
+                            try global_mcu_ref_map.put(try std.heap.page_allocator.dupe(u8, str), 0);
                         }
                     }
                 }
@@ -1488,11 +1719,21 @@ fn is_variable_number(ref: Reference, context: *const Context) bool {
     if (context.multi_type_ref.contains(ref.ref_name)) return false;
     for (ref.variants) |vars| {
         switch (vars.ref) {
-            .dynamic_range, .float_range, .integer_range => return true,
+            .dynamic_range,
+            .float_range,
+            .integer_range,
+            => return true,
             else => {},
         }
     }
     return false;
+}
+
+fn has_expr(ref: Reference) bool {
+    if (ref.variants.len == 1) {
+        return ref.variants[0].expr != null;
+    }
+    return true;
 }
 fn get_type_prefix(ref: Reference, buf: []u8, context: *const Context) []const u8 {
     if (is_list(ref, context)) {
@@ -1573,15 +1814,25 @@ fn write__ref_expr(writer: *std.Io.Writer, val: []const u8, name: []const u8, ru
             return err;
         };
 
-        try writer.print(
-            \\const {4s}: ?f32 = @"{0s}Value" orelse comptime_fail_or_error(error.NullReference,
-            \\ \\Error on {{s}} | expr: {{s}} diagnostic: {{s}}
-            \\ \\Expected value from: {{s}}, but it is undefined
-            \\ \\note: some configurations are only valid if another configuration is applied.
-            \\ , .{{ "{1s}", "{2s}" , "{3s}" , "{0s}" }});
-        , .{ ref.ref_name, ctx.name, err_expr, err_log, name });
+        if (context.node_ref.get(ref.ref_name)) |clk| {
+            try writer.print(
+                \\const {4s}: ?f32 = @"{0s}".get_as_ref() orelse comptime_fail_or_error(error.NullReference,
+                \\ \\Error on {{s}} | expr: {{s}} diagnostic: {{s}}
+                \\ \\Expected value from: {{s}}, but it is undefined
+                \\ \\note: some configurations are only valid if another configuration is applied.
+                \\ , .{{ "{1s}", "{2s}" , "{3s}" , "{0s}" }});
+            , .{ clk, ctx.name, err_expr, err_log, name });
+        } else {
+            try writer.print(
+                \\const {4s}: ?f32 = @"{0s}Value" orelse comptime_fail_or_error(error.NullReference,
+                \\ \\Error on {{s}} | expr: {{s}} diagnostic: {{s}}
+                \\ \\Expected value from: {{s}}, but it is undefined
+                \\ \\note: some configurations are only valid if another configuration is applied.
+                \\ , .{{ "{1s}", "{2s}" , "{3s}" , "{0s}" }});
+            , .{ ref.ref_name, ctx.name, err_expr, err_log, name });
+        }
     } else if (val[0] == '=') {
-        const expr = try translate_expr(val[1..], ctx.name, context, alloc);
+        const expr = try translate_expr(val[1..], ctx.name, null, context, alloc);
         try writer.print(
             \\const {s}: ?f32 = {s};
             \\
@@ -1593,6 +1844,55 @@ fn write__ref_expr(writer: *std.Io.Writer, val: []const u8, name: []const u8, ru
     } else {
         std.log.info("expr not found on: {s},{s}", .{ ctx.name, val });
     }
+}
+
+fn write_postpone_limit(writer: *std.Io.Writer, ref: Reference, context: *const Context, has_config: bool) !void {
+    const name = ref.ref_name;
+    if (has_config) {
+        var vari: []const u8 = "const";
+        var conf_prefix: []const u8 = "config";
+
+        if (context.extra_configs.contains(name) or
+            context.extra_references.contains(name))
+        {
+            vari = "var";
+            conf_prefix = "config.extra";
+        }
+
+        if (is_major_int(context.references.get(name).?)) {
+            try writer.print(
+                \\{2s} @"{0s}Value":?f32 = if({1s}.@"{0s}")|i| @as(f32,@floatFromInt(i))
+            , .{ name, conf_prefix, vari });
+        } else {
+            try writer.print(
+                \\{2s} @"{0s}Value":?f32 = if({1s}.@"{0s}")|i| i
+            , .{ name, conf_prefix, vari });
+        }
+
+        if (find_first_range_default(ref.variants)) |d| try writer.print(" else {d}", .{d}) else try writer.print(" else null", .{});
+        try writer.writeAll(";\n");
+    } else {
+        if (find_first_range_default(ref.variants)) |d| {
+            try writer.print(
+                \\const @"{s}Value":?f32 = {d};
+                \\
+            , .{ name, d });
+        }
+    }
+}
+
+fn find_first_range_default(ref: []const RefVariant) ?f32 {
+    for (ref) |vras| {
+        switch (vras.ref) {
+            .float_range => |f| return f.default_value orelse continue,
+            .integer_range => |i| return @as(f32, @floatFromInt(i.default_value orelse continue)),
+            .fixed_float => |f| return f,
+            .fixed_integer => |i| return @as(f32, @floatFromInt(i)),
+            else => {},
+        }
+    }
+
+    return null;
 }
 
 //Actual reference writting :D
@@ -1694,24 +1994,39 @@ fn writer_fixed_float(writer: *std.Io.Writer, val: f32, runtime_ctx: RuntimeRef,
         , .{ conf_prefix, ctx.name, val, err_expr, err_log, multi_list_prefix });
 
         if (!check_for_range(ctx.name, context)) {
-            try writer.print(
-                \\@"{s}Limit" = .{{
-                \\  .min = {e},
-                \\  .max = {e},
-                \\}};
-            , .{ ctx.name, val, val });
+            if (context.node_ref.get(ctx.name)) |clk| {
+                try writer.print(
+                    \\@"{s}".limit = .{{
+                    \\  .min = {e},
+                    \\  .max = {e},
+                    \\}};
+                , .{ clk, val, val });
+            }
         }
     }
-    if (multi_t_list) {
-        std.log.info("Traing do get name for ref {s} value{d}", .{ runtime_ctx.name, val });
-        const i_name = get_list_name(ref, val);
-        try writer.print(
-            \\ break :blk .{s};
-        , .{i_name});
+
+    if (context.postponed_references.contains(ctx.name) or is_variable_number(context.references.get(ctx.name).?, context)) {
+        if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) {
+            try writer.print(
+                \\@"{s}Value" = {d};
+            , .{ ctx.name, val });
+        } else if (context.node_ref.get(ctx.name)) |node| {
+            try writer.print(
+                \\@"{s}".value = {d};
+            , .{ node, val });
+        }
+        try writer.writeAll("break :blk null;");
     } else {
-        try writer.print(
-            \\ break :blk {e};
-        , .{val});
+        if (multi_t_list) {
+            const i_name = get_list_name(ref, val);
+            try writer.print(
+                \\ break :blk .{s};
+            , .{i_name});
+        } else {
+            try writer.print(
+                \\ break :blk {e};
+            , .{val});
+        }
     }
 }
 
@@ -1739,12 +2054,14 @@ fn writer_fixed_integer(writer: *std.Io.Writer, val: u32, runtime_ctx: RuntimeRe
             \\}}
         , .{ conf_prefix, ctx.name, val, err_expr, err_log, multi_list_prefix });
         if (!check_for_range(ctx.name, context)) {
-            try writer.print(
-                \\@"{s}Limit" = .{{
-                \\  .min = {d},
-                \\  .max = {d},
-                \\}};
-            , .{ ctx.name, val, val });
+            if (context.node_ref.get(ctx.name)) |clk| {
+                try writer.print(
+                    \\@"{s}".limit = .{{
+                    \\  .min = {d},
+                    \\  .max = {d},
+                    \\}};
+                , .{ clk, val, val });
+            }
         }
     }
     if (multi_t_list) {
@@ -1754,38 +2071,77 @@ fn writer_fixed_integer(writer: *std.Io.Writer, val: u32, runtime_ctx: RuntimeRe
             \\ break :blk .{s};
         , .{i_name});
     } else {
-        try writer.print(
-            \\ break :blk {d};
-        , .{val});
+        if (context.postponed_references.contains(ctx.name)) {
+            if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) {
+                try writer.print(
+                    \\@"{s}Value" = {d};
+                , .{ ctx.name, val });
+            } else if (context.node_ref.get(ctx.name)) |node| {
+                try writer.print(
+                    \\@"{s}".value = {d};
+                , .{ node, val });
+            }
+            try writer.writeAll("break :blk null;");
+        } else {
+            if (multi_t_list) {
+                const i_name = get_list_name(ref, @floatFromInt(val));
+                try writer.print(
+                    \\ break :blk .{s};
+                , .{i_name});
+            } else {
+                try writer.print(
+                    \\ break :blk {d};
+                , .{val});
+            }
+        }
     }
 }
 
-fn writer_fixed_expr(writer: *std.Io.Writer, val: []const u8, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
+fn writer_fixed_expr(writer: *std.Io.Writer, val: FixedExpr, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
     const ctx = runtime_ctx;
-    try write__ref_expr(writer, val, "val", runtime_ctx, context, alloc);
+    try write__ref_expr(writer, val.value, "val", runtime_ctx, context, alloc);
 
     if (runtime_ctx.is_runtime) {
         if (!check_for_range(ctx.name, context)) {
-            try writer.print(
-                \\@"{0s}Limit" = .{{
-                \\  .min = val,
-                \\  .max = val,
-                \\  .min_expr = {1s},
-                \\  .max_expr = {1s},
-                \\}};
-            , .{
-                ctx.name,
-                if (is_numeric(val)) "null" else val,
-            });
+            if (context.node_ref.get(ctx.name)) |clk| {
+                try writer.print(
+                    \\@"{0s}".limit = .{{
+                    \\  .min = val,
+                    \\  .max = val,
+                    \\  .min_expr = {1s},
+                    \\  .max_expr = {1s},
+                    \\}};
+                , .{
+                    clk,
+                    if (is_numeric(val.value)) "null" else val.value,
+                });
+            }
         }
     }
-    try writer.print(
-        \\ break :blk val;
-    , .{});
+
+    const value_string = if (val.integer) "round(val)" else "val";
+    if (context.postponed_references.contains(ctx.name) and is_variable_number(context.references.get(ctx.name).?, context)) {
+        if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) {
+            try writer.print(
+                \\@"{s}Value" = {s};
+            , .{ ctx.name, value_string });
+        } else if (context.node_ref.get(ctx.name)) |node| {
+            try writer.print(
+                \\@"{s}".value = {s} orelse 0;
+            , .{ node, value_string });
+        }
+        try writer.writeAll("break :blk null;");
+    } else {
+        try writer.print(
+            \\ break :blk {s};
+        , .{value_string});
+    }
 }
 
 fn writer_float_range(writer: *std.Io.Writer, val: FloatRange, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
     const ctx = runtime_ctx;
+
+    const postpone = context.postponed_references.contains(ctx.name) and ((context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) or context.node_ref.contains(ctx.name));
     if (runtime_ctx.is_runtime) {
         const name = ctx.name;
         const conf_prefix = if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) "config.extra" else "config";
@@ -1840,35 +2196,51 @@ fn writer_float_range(writer: *std.Io.Writer, val: FloatRange, runtime_ctx: Runt
             }
         } else {
             if (((val.max != null) or (val.min != null))) {
-                try writer.print(
-                    \\@"{s}Limit" = .{{ 
-                , .{ctx.name});
-                if (val.min) |min| try writer.print(".min = {e},", .{min}) else try writer.print(".min = null,\n", .{});
-                if (val.max) |max| try writer.print(".max = {e},", .{max}) else try writer.print(".max = null,\n", .{});
-                try writer.writeAll("};\n\n");
+                if (context.node_ref.get(ctx.name)) |clk| {
+                    try writer.print(
+                        \\@"{s}".limit = .{{ 
+                    , .{clk});
+                    if (val.min) |min| try writer.print(".min = {e},", .{min}) else try writer.print(".min = null,\n", .{});
+                    if (val.max) |max| try writer.print(".max = {e},", .{max}) else try writer.print(".max = null,\n", .{});
+                    try writer.writeAll("};\n\n");
+                }
             }
         }
-        try writer.writeAll(
-            \\break :blk config_val
-        );
-        if (val.default_value) |d| try writer.print(" orelse {d}", .{d}) else try writer.print(" orelse null", .{});
+        if (postpone) {
+            if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) {
+                try writer.print(
+                    \\@"{s}Value" = config_val
+                , .{ctx.name});
+            } else if (context.node_ref.get(ctx.name)) |node| {
+                try writer.print(
+                    \\@"{s}".value = config_val
+                , .{node});
+            }
+        } else {
+            try writer.writeAll(
+                \\break :blk config_val
+            );
+        }
+        if (val.default_value) |d| try writer.print(" orelse {d}", .{d});
         try writer.writeAll(";\n");
     } else {
         if (((val.max != null) or (val.min != null))) {
+            const clock = context.node_ref.get(ctx.name) orelse return;
             try writer.print(
-                \\@"{s}Limit" = .{{ 
-            , .{ctx.name});
+                \\@"{s}".limit = .{{ 
+            , .{clock});
             if (val.min) |min| try writer.print(".min = {e},", .{min}) else try writer.print(".min = null,\n", .{});
             if (val.max) |max| try writer.print(".max = {e},", .{max}) else try writer.print(".max = null,\n", .{});
             try writer.writeAll("};\n\n");
         }
-
-        try writer.writeAll("break :blk null;");
     }
+
+    if (postpone) try writer.writeAll("\nbreak :blk null;");
 }
 
 fn writer_int_range(writer: *std.Io.Writer, val: IntegerRange, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
     const ctx = runtime_ctx;
+    const postpone = context.postponed_references.contains(ctx.name) and ((context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) or context.node_ref.contains(ctx.name));
     const name = ctx.name;
     const conf_prefix = if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) "config.extra" else "config";
     if (ctx.is_runtime) {
@@ -1922,41 +2294,52 @@ fn writer_int_range(writer: *std.Io.Writer, val: IntegerRange, runtime_ctx: Runt
             }
         } else {
             if (((val.max != null) or (val.min != null))) {
-                try writer.print(
-                    \\@"{s}Limit" = .{{ 
-                , .{name});
-                if (val.min) |min| try writer.print(".min = {d},", .{min}) else try writer.print(".min = null,\n", .{});
-                if (val.max) |max| try writer.print(".max = {d},", .{max}) else try writer.print(".max = null,\n", .{});
-                try writer.writeAll("};\n\n");
+                if (context.node_ref.get(ctx.name)) |clk| {
+                    try writer.print(
+                        \\@"{s}".limit = .{{ 
+                    , .{clk});
+                    if (val.min) |min| try writer.print(".min = {d},", .{min}) else try writer.print(".min = null,\n", .{});
+                    if (val.max) |max| try writer.print(".max = {d},", .{max}) else try writer.print(".max = null,\n", .{});
+                    try writer.writeAll("};\n\n");
+                }
             }
         }
-        if (is_major_int(context.references.get(runtime_ctx.name).?)) {
-            try writer.writeAll(
-                \\break :blk if(config_val)|i| @as(f32,@floatFromInt(i))
-            );
+        const main_msg = if (is_major_int(context.references.get(runtime_ctx.name).?)) "if(config_val)|i| @as(f32,@floatFromInt(i))" else "if(config_val)|i| i";
+        if (context.postponed_references.contains(ctx.name)) {
+            if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) {
+                try writer.print(
+                    \\@"{s}Value" = {s}
+                , .{ ctx.name, main_msg });
+            } else if (context.node_ref.get(ctx.name)) |node| {
+                try writer.print(
+                    \\@"{s}".value = {s}
+                , .{ node, main_msg });
+            }
         } else {
-            try writer.writeAll(
-                \\break :blk if(config_val)|i| i
-            );
+            try writer.print(
+                \\break :blk {s}
+            , .{main_msg});
         }
         if (val.default_value) |d| try writer.print(" else {d}", .{d}) else try writer.print(" else null", .{});
         try writer.writeAll(";\n");
     } else {
+        const clk = context.node_ref.get(ctx.name) orelse return;
         if (((val.max != null) or (val.min != null))) {
             try writer.print(
-                \\@"{s}Limit" = .{{ 
-            , .{name});
+                \\@"{s}".limit = .{{ 
+            , .{clk});
             if (val.min) |min| try writer.print(".min = {d},", .{min}) else try writer.print(".min = null,\n", .{});
             if (val.max) |max| try writer.print(".max = {d},", .{max}) else try writer.print(".max = null,\n", .{});
             try writer.writeAll("};");
         }
-
-        try writer.writeAll("break :blk null;");
     }
+
+    if (postpone) try writer.writeAll("\nbreak :blk null;");
 }
 
 fn writer_dynamic_range(writer: *std.Io.Writer, val: DynamicRange, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
     const ctx = runtime_ctx;
+    const postpone = context.postponed_references.contains(ctx.name) and ((context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name)) or context.node_ref.contains(ctx.name));
     const def_str = val.default_value orelse "null";
     const min_str = val.min orelse "null";
     const max_str = val.max orelse "null";
@@ -1997,29 +2380,47 @@ fn writer_dynamic_range(writer: *std.Io.Writer, val: DynamicRange, runtime_ctx: 
             \\  }}
             \\}}
         , .{ ctx.name, err_expr, err_log, if (is_numeric(min_str)) "" else max_str });
+
+        const value_string = if (val.integer) "round(val)" else "val";
         try writer.writeAll("}\n");
-        try writer.print(
-            \\ break :blk val;
-        , .{});
+        if (context.postponed_references.contains(ctx.name)) {
+            const ref = context.references.get(ctx.name).?;
+            if (context.extra_configs.contains(ctx.name) or context.extra_references.contains(ctx.name) and has_expr(ref)) {
+                try writer.print(
+                    \\@"{s}Value" = {s};
+                , .{ ctx.name, value_string });
+            } else if (context.node_ref.get(ctx.name)) |node| {
+                try writer.print(
+                    \\@"{s}".value = {s} orelse 0;
+                , .{ node, value_string });
+            } else {
+                try writer.print(
+                    \\break :blk {s};
+                , .{value_string});
+            }
+        } else {
+            try writer.print(
+                \\break :blk {s};
+            , .{value_string});
+        }
     } else {
         if (!check_for_range(ctx.name, context)) {
+            const clk = context.node_ref.get(ctx.name) orelse return;
             try writer.print(
-                \\@"{s}Limit" = .{{
+                \\@"{s}".limit = .{{
                 \\  .min = min,
                 \\  .max = max,
                 \\  .min_expr = "{s}",
                 \\  .max_expr = "{s}",
                 \\}};
             , .{
-                ctx.name,
+                clk,
                 if (is_numeric(min_str)) "null" else min_str,
                 if (is_numeric(max_str)) "null" else max_str,
             });
         }
-        try writer.print(
-            \\ break :blk null;
-        , .{});
     }
+    if (postpone) try writer.writeAll("\nbreak :blk null;");
 }
 
 fn writer_list_item(writer: *std.Io.Writer, val: ListItem, runtime_ctx: RuntimeRef, context: *const Context, alloc: std.mem.Allocator) !void {
@@ -2218,13 +2619,14 @@ fn is_in_list(val: []const u8, list: []const ListItem) bool {
 }
 
 fn generate_clock(writer: *std.Io.Writer, context: *const Context, alloc: std.mem.Allocator) !void {
-    try generate_clock_base(writer, context);
     for (context.nodes.values()) |nodes| {
         if (!context.references.contains(get_node_reference(nodes))) continue;
 
         try generate_clock_values(writer, nodes, context, alloc);
     }
+}
 
+fn generate_clk_outputs(writer: *std.Io.Writer, context: *const Context, alloc: std.mem.Allocator) !void {
     // Generate outputs in reverse order to help assemble the clock tree in case of an error,
     // allowing viewing of the highest node in the dependency tree
     var node_pass: std.StringArrayHashMap(void) = .init(alloc);
@@ -2235,8 +2637,19 @@ fn generate_clock(writer: *std.Io.Writer, context: *const Context, alloc: std.me
         try generate_clocks_out(writer, nodes, &node_pass, context);
     }
 }
-
 fn generate_clock_base(writer: *std.Io.Writer, context: *const Context) !void {
+    try writer.print(
+        \\
+        \\//Clock node bases
+        \\
+        \\const dummy = ClockNode{{
+        \\.name = "dummy_clock",
+        \\.nodetype = .off,
+        \\.parents = &.{{}},
+        \\}};
+        \\std.mem.doNotOptimizeAway(dummy);
+        \\
+    , .{});
     for (context.nodes.values()) |clk| {
         if (!context.references.contains(get_node_reference(clk))) {
             std.log.info("Not found ref for node {s} skipping", .{clk.name});
@@ -2266,10 +2679,24 @@ fn generate_clock_values(writer: *std.Io.Writer, node: ClockNode, context: *cons
             default_var = vars;
         }
     }
+    const ref_name = get_node_reference(node);
+    if (try ClockType.get(node.node_type) != .output) {
+        const ctx: *Context = @constCast(context);
+        if (context.postponed_references.contains(ref_name)) {
+            var pass: std.StringArrayHashMap(void) = .init(alloc);
+            try pass.put(ref_name, {});
+            try write_post_ref_value(writer, context.references.get(ref_name).?, &pass, context, alloc);
+
+            for (pass.keys()) |to_remove| {
+                _ = ctx.postponed_references.orderedRemove(to_remove);
+            }
+            pass.deinit();
+        }
+    }
 
     var fisrt = false;
     for (extra_var.items) |i| {
-        const zig_expr = translate_expr(i.expr.?, node.name, context, alloc) catch {
+        const zig_expr = translate_expr(i.expr.?, node.name, null, context, alloc) catch {
             //std.log.info("got {any} on expr {s} skipping expr", .{ err, i.expr.? });
             continue;
         };
@@ -2331,7 +2758,10 @@ const ClockType = enum {
 
 fn write_actual_clock_value(writer: *std.Io.Writer, node: ClockNode, node_var: ClockNodeVariant, context: *const Context, alloc: std.mem.Allocator) !void {
     const ref_name = get_node_reference(node);
+    const clk_t = try ClockType.get(node.node_type);
+
     const ref = context.references.get(ref_name).?;
+
     if (node.enable_flag) |enable| {
         try writer.writeAll(
             \\if( 
@@ -2345,7 +2775,6 @@ fn write_actual_clock_value(writer: *std.Io.Writer, node: ClockNode, node_var: C
     const pre_log = try clear_string(node_var.diagnostic orelse "No Extra Log", alloc);
     const err_log: []const u8 = if (pre_log.len == 0) "No Extra Log" else pre_log;
     const err_expr = try clear_string(node_var.expr orelse "Else", alloc);
-    const clk_t = try ClockType.get(node.node_type);
     if (clk_t != .output) {
         try writer.print(
             \\
@@ -2361,19 +2790,13 @@ fn write_actual_clock_value(writer: *std.Io.Writer, node: ClockNode, node_var: C
             \\  "{1s}",
             \\}});
         , .{ node.name, ref_name, err_expr, err_log });
-    } else {
-        try writer.print(
-            \\
-            \\std.mem.doNotOptimizeAway(@"{s}Value");
-            \\
-        , .{ref_name});
     }
     switch (clk_t) {
         .source => try create_source(node, ref, context, is_list(ref, context), writer),
         .divisor => try create_divisor(node, node_var, is_list(ref, context), writer),
         .multiplicator => try create_multiplicator(node, node_var, is_list(ref, context), writer),
         .multiplicatorFrac => try create_multiplicator_frac(node, node_var, is_list(ref, context), writer),
-        .multiplexor => try create_multiplexor(node, node_var, writer),
+        .multiplexor => try create_multiplexor(node, node_var, writer, context),
         .output => try create_output(node, node_var, ref, context, writer),
     }
 
@@ -2493,14 +2916,7 @@ fn get_list_name(ref: Reference, val: f32) []const u8 {
     unreachable;
 }
 
-fn create_source(node: ClockNode, ref: Reference, ctx: *const Context, list: bool, writer: *std.Io.Writer) anyerror!void {
-    const ref_name = ref.ref_name;
-    if (!check_for_range(ref_name, ctx) and !is_ref_static(ref.variants) and !is_list(ref, ctx)) {
-        try writer.print(
-            \\@"{s}".limit = @"{s}Limit";
-            \\
-        , .{ node.name, ref_name });
-    }
+fn create_source(node: ClockNode, _: Reference, _: *const Context, list: bool, writer: *std.Io.Writer) anyerror!void {
     const postfix = if (list) ".get()" else "";
     try writer.print(
         \\@"{0s}".nodetype = .source;
@@ -2540,17 +2956,24 @@ fn create_multiplicator_frac(node: ClockNode, node_var: ClockNodeVariant, list: 
     , .{ node.name, postfix, try get_first_input(node.name, node_var.inputs), try get_first_frac(node.name, node_var.inputs) });
 }
 
-fn create_multiplexor(node: ClockNode, node_var: ClockNodeVariant, writer: *std.Io.Writer) anyerror!void {
+fn create_multiplexor(node: ClockNode, node_var: ClockNodeVariant, writer: *std.Io.Writer, context: *const Context) anyerror!void {
     try writer.print(
         \\const @"{s}parents" = [_]*const ClockNode{{
         \\
     , .{node.name});
 
     for (node_var.inputs) |in| {
-        try writer.print(
-            \\ &@"{s}",
-            \\
-        , .{in.source});
+        if (context.nodes.contains(in.source)) {
+            try writer.print(
+                \\ &@"{s}",
+                \\
+            , .{in.source});
+        } else {
+            try writer.print(
+                \\ &dummy,
+                \\
+            , .{});
+        }
     }
     try writer.writeAll("};\n");
     try writer.print(
@@ -2560,14 +2983,7 @@ fn create_multiplexor(node: ClockNode, node_var: ClockNodeVariant, writer: *std.
     , .{node.name});
 }
 
-fn create_output(node: ClockNode, node_var: ClockNodeVariant, ref: Reference, ctx: *const Context, writer: *std.Io.Writer) anyerror!void {
-    const ref_name = ref.ref_name;
-    if (!check_for_range(ref_name, ctx) and !is_ref_static(ref.variants) and !is_list(ref, ctx)) {
-        try writer.print(
-            \\@"{s}".limit = @"{s}Limit";
-            \\
-        , .{ node.name, ref_name });
-    }
+fn create_output(node: ClockNode, node_var: ClockNodeVariant, _: Reference, _: *const Context, writer: *std.Io.Writer) anyerror!void {
     try writer.print(
         \\@"{0s}".nodetype = .output;
         \\@"{0s}".parents = &.{{&@"{1s}"}};
@@ -2575,17 +2991,94 @@ fn create_output(node: ClockNode, node_var: ClockNodeVariant, ref: Reference, ct
     , .{ node.name, get_first_input(node.name, node_var.inputs) catch node.name });
 }
 
+fn generate_post_ref_values(writer: *std.Io.Writer, context: *const Context, alloc: std.mem.Allocator) !void {
+    var pass: std.StringArrayHashMap(void) = .init(alloc);
+    defer pass.deinit();
+
+    // write all postponed values (those that are not of the range type)
+    for (context.postponed_references.values()) |refs| {
+        if (pass.contains(refs.ref_name)) continue;
+        try pass.put(refs.ref_name, {});
+        try write_post_ref_value(writer, refs, &pass, context, alloc);
+    }
+}
+
+fn write_post_ref_value(writer: *std.Io.Writer, ref: Reference, pass: *std.StringArrayHashMap(void), context: *const Context, alloc: std.mem.Allocator) anyerror!void {
+    var recursive_param: ?[]const u8 = null;
+    for (ref.variants) |vars| {
+        var expr_split = std.mem.splitAny(u8, vars.expr orelse continue, "()=+-/\\ ");
+        while (expr_split.next()) |val| {
+            if (context.postponed_references.contains(val)) {
+                if (pass.contains(val)) continue;
+                const to_create = context.references.get(val) orelse unreachable;
+                if (is_recursive(ref.ref_name, to_create)) {
+                    recursive_param = to_create.ref_name;
+                    continue;
+                }
+
+                try pass.put(val, {});
+
+                try write_post_ref_value(writer, to_create, pass, context, alloc);
+            }
+        }
+    }
+
+    try write_actual_node(writer, context, ref, recursive_param, alloc);
+}
+
+fn is_recursive(actual_name: []const u8, next_ref: Reference) bool {
+    for (next_ref.variants) |vars| {
+        if (std.mem.containsAtLeast(u8, vars.expr orelse continue, 1, actual_name)) return true;
+    }
+    return false;
+}
+
 fn generate_reference_out(writer: *std.Io.Writer, context: *const Context, alloc: std.mem.Allocator) !void {
     var imp_map = std.StringArrayHashMap(void).init(alloc);
     defer imp_map.deinit();
     for (context.references.values()) |r| {
         if (imp_map.contains(r.ref_name)) continue;
+        if (context.out_flags.contains(r.ref_name)) continue;
         try imp_map.put(r.ref_name, {});
+
         if (is_ref_output(r, context)) continue;
 
         try writer.print(
             \\ref_out.@"{0s}" = @"{0s}Value";
         , .{r.ref_name});
+    }
+
+    for (context.extra_flags.keys()) |flag| {
+        try writer.print(
+            \\ref_out.flags.@"{0s}" = config.flags.@"{0s}";
+        , .{flag});
+    }
+
+    for (context.out_flags.keys()) |k| {
+        const t = context.out_flags.get(k) orelse unreachable;
+
+        switch (t) {
+            .List => {
+                try writer.print(
+                    \\ref_out.flags.@"{0s}" = check_ref(?@"{0s}List", @"{0s}Value", .@"true", .@"=");
+                , .{k});
+            },
+            .Numeric_List => {
+                try writer.print(
+                    \\ref_out.flags.@"{0s}" = check_ref(?@"{0s}List", @"{0s}Value", .@"1", .@"=");
+                , .{k});
+            },
+            .Numeric => {
+                try writer.print(
+                    \\ref_out.flags.@"{0s}" = check_ref(?f32, @"{0s}Value", 1, .@"=");
+                , .{k});
+            },
+            .skip_flag => {
+                try writer.print(
+                    \\std.mem.doNotOptimizeAway(@"{0s}Value");
+                , .{k});
+            },
+        }
     }
 }
 

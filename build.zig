@@ -49,8 +49,7 @@ pub fn build(b: *std.Build) void {
     });
     generic_example.root_module.addImport("ClockHelper", ClockHelper);
 
-    const generic_artifact = b.addInstallArtifact(generic_example, .{});
-
+    const run_example = b.addRunArtifact(generic_example);
     const example_step = b.step("example", "Build clock tree examples");
-    example_step.dependOn(&generic_artifact.step);
+    example_step.dependOn(&run_example.step);
 }

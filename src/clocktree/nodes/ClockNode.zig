@@ -70,9 +70,16 @@ pub const ClockNode = struct {
         }
     }
 
+    pub fn get_as_ref(self: Self) ?f32 {
+        const ret = self.get();
+        return switch (ret) {
+            .Ok => |ok| ok,
+            else => 0,
+        };
+    }
+
     pub fn get_output(self: Self) !f32 {
         if (self.nodetype == .off) return 0;
-        if (@inComptime()) @setEvalBranchQuota(10000);
         return self.get_value();
     }
     /// Extra output are additional nodes created arbitrarily based on orphan signals.
@@ -106,6 +113,9 @@ pub const ClockNode = struct {
                 return val;
             },
             else => |err| {
+                if (err == .ClockOff) {
+                    if (self.nodetype == .output or self.parents[0].nodetype == .output) return 0;
+                }
                 if (@inComptime()) {
                     print_comptime_error(err);
                 }
@@ -422,8 +432,8 @@ pub fn math_op(comptime T: type, val: T, val2: T, comptime op: MathOpration, com
 
     return switch (op) {
         .@"+" => {
-            const ret = @addWithOverflow(n1, n2);
-            if (ret.@"1" == 1) {
+            const ret = n1 + n2;
+            if (!std.math.isFinite(ret)) {
                 return comptime_fail_or_error(error.Overflow,
                     \\Error trying to evaluate the expression {s}({d}){s}{s}({d}) on reference: {s}
                     \\Overflow.
@@ -434,8 +444,8 @@ pub fn math_op(comptime T: type, val: T, val2: T, comptime op: MathOpration, com
             return ret.@"0";
         },
         .@"-" => {
-            const ret = @subWithOverflow(n1, n2);
-            if (ret.@"1" == 1) {
+            const ret = n1 - n2;
+            if (!std.math.isFinite(ret)) {
                 return comptime_fail_or_error(error.Overflow,
                     \\Error trying to evaluate the expression {s}({d}){s}{s}({d}) on reference: {s}
                     \\Underflow.
@@ -443,11 +453,11 @@ pub fn math_op(comptime T: type, val: T, val2: T, comptime op: MathOpration, com
                     \\
                 , .{ op1_s, n1, @tagName(op), op2_s, n2, owner });
             }
-            return ret.@"0";
+            return ret;
         },
         .@"*" => {
-            const ret = @mulWithOverflow(n1, n2);
-            if (ret.@"1" == 1) {
+            const ret = n1 * n2;
+            if (!std.math.isFinite(ret)) {
                 return comptime_fail_or_error(error.Overflow,
                     \\Error trying to evaluate the expression {s}({d}){s}{s}({d}) on reference: {s}
                     \\Overflow.
@@ -455,7 +465,7 @@ pub fn math_op(comptime T: type, val: T, val2: T, comptime op: MathOpration, com
                     \\
                 , .{ op1_s, n1, @tagName(op), op2_s, n2, owner });
             }
-            return ret.@"0";
+            return ret;
         },
         .@"/" => {
             if (op2 == 0) {
@@ -466,8 +476,13 @@ pub fn math_op(comptime T: type, val: T, val2: T, comptime op: MathOpration, com
                     \\
                 , .{ op1_s, n1, @tagName(op), op2_s, n2, owner });
             }
-            const ret = @divExact(n1, n2);
+            const ret = n1 / n2;
             return ret;
         },
     };
+}
+
+pub fn round(value: ?f32) ?f32 {
+    const val = value orelse return null;
+    return @round(val);
 }

@@ -15,7 +15,7 @@ const out = STM32F103x.get_clocks(config) catch unreachable;
 const Clock = out.clock;
 
 pub fn main() !void {
-    @compileLog(std.fmt.comptimePrint(
+    std.log.info(
         \\Corrent OutClocks:
         \\SysClock: {d}Mhz
         \\AHB Clock: {d}Mhz
@@ -33,5 +33,5 @@ pub fn main() !void {
         (Clock.APB2Output / 1_000_000),
         (Clock.TimPrescOut2 / 1_000_000),
         (Clock.USBoutput / 1_000_000),
-    }));
+    });
 }

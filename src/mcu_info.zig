@@ -49,7 +49,7 @@ pub const Ref_variant = struct {
 pub const Ref_type = union(enum) {
     fixed_integer: u32,
     fixed_float: f32,
-    fixed_expr: []const u8,
+    fixed_expr: Fixed_Expr,
     integer_range: Integrer_Range,
     float_range: Float_Range,
     dynamic_range: Dynamic_Range,
@@ -76,6 +76,12 @@ pub const Dynamic_Range = struct {
     default_value: ?[]const u8 = null,
     min: ?[]const u8,
     max: ?[]const u8,
+    integer: bool,
+};
+
+pub const Fixed_Expr = struct {
+    value: []const u8,
+    integer: bool,
 };
 
 pub const List = struct {

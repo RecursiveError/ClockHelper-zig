@@ -1,10 +1,15 @@
 const std = @import("std");
-const McuInfo = @import("src/mcu_info.zig");
-const hal_data = @import("src/microzig_data.zig");
+const gen_types = @import("data_types");
+
+const McuInfo = gen_types.cubeMX_data;
+const hal_data = gen_types.microzig_data;
 
 const ChipData = hal_data.ChipFile;
 
 const Mcu = McuInfo.MCU_Info;
+
+// --------tree data types---------
+
 const ClockTree = McuInfo.Clock_Tree;
 const ClockNode = McuInfo.Clock_Node;
 const ClockNodeVariant = McuInfo.Clock_Node_Variant;
@@ -18,13 +23,49 @@ const DynamicRange = McuInfo.Dynamic_Range;
 const FixedExpr = McuInfo.Fixed_Expr;
 const List = McuInfo.List;
 const ListItem = McuInfo.List_Item;
+
+// --------Types used in generation---------
+
 const RuntimeRef = struct {
     name: []const u8,
     val: RefVariant,
     is_runtime: bool,
 };
 
+const HAL_INFO = struct {
+    hal_name: []const u8,
+    rcc_version: ?[]const u8,
+    crs_version: ?[]const u8,
+    pwr_version: ?[]const u8,
+    flash_version: ?[]const u8,
+};
+
+const TreeVerMap = struct {
+    gpa: std.mem.Allocator,
+    rcc_vers: std.StringArrayHashMap(void),
+    csr_vers: std.StringArrayHashMap(void),
+    pwr_vers: std.StringArrayHashMap(void),
+    flash_vers: std.StringArrayHashMap(void),
+
+    pub fn init(alloc: std.mem.Allocator) TreeVerMap {
+        return TreeVerMap{
+            .gpa = alloc,
+            .rcc_vers = std.StringArrayHashMap(void).init(alloc),
+            .csr_vers = std.StringArrayHashMap(void).init(alloc),
+            .pwr_vers = std.StringArrayHashMap(void).init(alloc),
+            .flash_vers = std.StringArrayHashMap(void).init(alloc),
+        };
+    }
+};
+
+const GEN_INFO = struct {
+    cpu_name: []const u8,
+    clock_ref_file_union: []const u8,
+    reg_version: HAL_INFO,
+};
+
 const Flag_Type = enum {
+    Node,
     Numeric,
     List,
     Numeric_List,
@@ -146,12 +187,13 @@ const MCU_DATA_PATH = "mcu_data/";
 const MCU_OUTPUT_PATH = "src/mcus/";
 
 const CLOCK_TREE_DATA_PATH = "clock_ref_data/";
-const CLOCK_TREE_OUTPUT_PATH = "src/clocktree/";
+const CLOCK_TREE_OUTPUT_PATH = "/home/guilherme/Área de trabalho/mz-clockhelper/ClockHelper/src/clocktree/";
 
 const hal_folder_path = "/home/guilherme/.cache/zig/p/N-V-__8AAFi8WBlOh-NikHFVBjzQE0F1KixgKjVWYnlijPNm/data/chips/";
 
 var global_ref_name: []const u8 = undefined;
 var global_mcu_ref_map: std.StringArrayHashMap(usize) = undefined;
+
 pub fn main() !void {
     const allocator = std.heap.page_allocator;
     var arena = std.heap.ArenaAllocator.init(allocator);
@@ -159,7 +201,7 @@ pub fn main() !void {
     global_mcu_ref_map = .init(arena.allocator());
 
     //store the formal chip name as a key and the hal chip name as value
-    var hal_chip_names = std.StringArrayHashMap([]const u8).init(arena.allocator());
+    var hal_chip_names = std.StringArrayHashMap(HAL_INFO).init(arena.allocator());
     defer hal_chip_names.deinit();
 
     try get_chip_hal_names(arena.allocator(), &hal_chip_names);
@@ -181,7 +223,7 @@ pub fn main() !void {
     }
 }
 
-fn get_chip_hal_names(alloc: std.mem.Allocator, map: *std.StringArrayHashMap([]const u8)) !void {
+fn get_chip_hal_names(alloc: std.mem.Allocator, map: *std.StringArrayHashMap(HAL_INFO)) !void {
     var hal_dir = try std.fs.cwd().openDir(hal_folder_path, .{ .iterate = true });
     defer hal_dir.close();
 
@@ -201,16 +243,49 @@ fn get_chip_hal_names(alloc: std.mem.Allocator, map: *std.StringArrayHashMap([]c
         const hal_name = try alloc.dupe(u8, chip_inst.name);
         const formal_name = try alloc.dupe(u8, chip_inst.packages[0].name);
         std.log.info("got HAL entry:  {s} formal MCU name {s}", .{ hal_name, formal_name });
-        try map.put(formal_name, hal_name);
+        try map.put(formal_name, try get_regs_version(&chip_inst, hal_name, alloc));
         file.close();
     }
 }
 
+fn get_regs_version(data: *const ChipData, hal_name: []const u8, alloc: std.mem.Allocator) !HAL_INFO {
+    var rcc_version: ?[]const u8 = null;
+    var pwr_version: ?[]const u8 = null;
+    var crs_version: ?[]const u8 = null;
+    var flash_version: ?[]const u8 = null;
+
+    for (data.cores) |core| {
+        for (core.peripherals) |peri| {
+            if (peri.registers) |regs| {
+                if (std.mem.eql(u8, "rcc", regs.kind)) {
+                    rcc_version = try alloc.dupe(u8, regs.version);
+                } else if (std.mem.eql(u8, "pwr", regs.kind)) {
+                    pwr_version = try alloc.dupe(u8, regs.version);
+                } else if (std.mem.eql(u8, "crs", regs.kind)) {
+                    crs_version = try alloc.dupe(u8, regs.version);
+                } else if (std.mem.eql(u8, "flash", regs.kind)) {
+                    flash_version = try alloc.dupe(u8, regs.version);
+                }
+            }
+        }
+    }
+    return HAL_INFO{
+        .hal_name = hal_name,
+        .rcc_version = rcc_version,
+        .pwr_version = pwr_version,
+        .crs_version = crs_version,
+        .flash_version = flash_version,
+    };
+}
+
 //mcu data generation
 
-fn generate_mcu_data(clk_tree_list: []const []const u8, hal_names: *std.StringArrayHashMap([]const u8), alloc: std.mem.Allocator) !void {
-    var hal_clk_name_map = std.StringArrayHashMap([]const u8).init(alloc);
+fn generate_mcu_data(clk_tree_list: []const []const u8, hal_names: *std.StringArrayHashMap(HAL_INFO), alloc: std.mem.Allocator) !void {
+    var hal_clk_name_map = std.StringArrayHashMap(GEN_INFO).init(alloc);
     defer hal_clk_name_map.deinit();
+
+    var tree_ver = std.StringArrayHashMap(TreeVerMap).init(alloc);
+    defer tree_ver.deinit();
 
     var temp_buf: [4086]u8 = undefined;
     var root_buf: [4096]u8 = undefined;
@@ -255,7 +330,7 @@ fn generate_mcu_data(clk_tree_list: []const []const u8, hal_names: *std.StringAr
         defer json.deinit();
         const mcu_inst: Mcu = json.value;
         try temp_writer.print(
-            \\pub const @"{s}" = @"{s}".ClockTree(std.StaticStringMap(void).initComptime(.{{
+            \\pub const @"{s}" = @"{s}".ClockTree(EnumField(void).initComptime(.{{
             \\
         , .{ mcu_inst.name, mcu_inst.clock_ref_file_union });
         for (mcu_inst.extra_data) |data| {
@@ -271,7 +346,7 @@ fn generate_mcu_data(clk_tree_list: []const []const u8, hal_names: *std.StringAr
         try temp_writer.writeAll("\n}));\n");
 
         try interface.writeAll(temp_writer.buffered());
-        if (try check_hal_name(mcu_inst.name, hal_names, &hal_clk_name_map, alloc)) {
+        if (try check_hal_name(mcu_inst.name, mcu_inst.clock_ref_file_union, hal_names, &hal_clk_name_map, alloc)) {
             try hal_interface.writeAll(temp_writer.buffered());
         }
 
@@ -288,7 +363,7 @@ fn generate_mcu_data(clk_tree_list: []const []const u8, hal_names: *std.StringAr
         try hal_interface.print(
             \\pub const @"{s}" = @"{s}";
             \\
-        , .{ k, hal_clk_name_map.get(k).? });
+        , .{ k, hal_clk_name_map.get(k).?.cpu_name });
     }
 
     try hal_interface.writeAll(
@@ -310,20 +385,63 @@ fn generate_mcu_data(clk_tree_list: []const []const u8, hal_names: *std.StringAr
 
     _ = try ch.spawnAndWait();
     _ = try ch2.spawnAndWait();
+
+    for (hal_clk_name_map.values()) |v| {
+        const tree = v.clock_ref_file_union;
+        if (tree_ver.contains(tree)) {
+            const map = tree_ver.getPtr(tree).?;
+            try map.rcc_vers.put(v.reg_version.rcc_version orelse "", {});
+            try map.pwr_vers.put(v.reg_version.pwr_version orelse "", {});
+            try map.csr_vers.put(v.reg_version.crs_version orelse "", {});
+            try map.flash_vers.put(v.reg_version.flash_version orelse "", {});
+        } else {
+            var new_map = TreeVerMap.init(alloc);
+            try new_map.rcc_vers.put(v.reg_version.rcc_version orelse "", {});
+            try new_map.pwr_vers.put(v.reg_version.pwr_version orelse "", {});
+            try new_map.csr_vers.put(v.reg_version.crs_version orelse "", {});
+            try new_map.flash_vers.put(v.reg_version.flash_version orelse "", {});
+            try tree_ver.put(tree, new_map);
+        }
+    }
+    var tree_iter = tree_ver.iterator();
+    while (tree_iter.next()) |entry| {
+        std.log.info("TREE: {s} REGISTERS versions:", .{entry.key_ptr.*});
+        const value = entry.value_ptr.*;
+        for (value.rcc_vers.keys()) |k| {
+            if (k.len == 0) continue;
+            std.log.info("- rcc_{s}", .{k});
+        }
+        for (value.pwr_vers.keys()) |k| {
+            if (k.len == 0) continue;
+            std.log.info("- pwr_{s}", .{k});
+        }
+        for (value.csr_vers.keys()) |k| {
+            if (k.len == 0) continue;
+            std.log.info("- csr_{s}", .{k});
+        }
+        for (value.flash_vers.keys()) |k| {
+            if (k.len == 0) continue;
+            std.log.info("- flash_{s}", .{k});
+        }
+    }
 }
 
 fn check_hal_name(
     cpu_name: []const u8,
-    hal_names: *const std.StringArrayHashMap([]const u8),
-    hal_clk: *std.StringArrayHashMap([]const u8),
+    tree: []const u8,
+    hal_names: *const std.StringArrayHashMap(HAL_INFO),
+    hal_clk: *std.StringArrayHashMap(GEN_INFO),
     alloc: std.mem.Allocator,
 ) !bool {
     var name_buf: [256]u8 = undefined;
     var copy_clocktree: bool = false;
 
     //check if the name exists directly
-    if (hal_names.get(cpu_name)) |formal_name| {
-        try hal_clk.put(formal_name, try alloc.dupe(u8, cpu_name));
+    if (hal_names.get(cpu_name)) |info| {
+        try hal_clk.put(
+            info.hal_name,
+            GEN_INFO{ .cpu_name = try alloc.dupe(u8, cpu_name), .clock_ref_file_union = try alloc.dupe(u8, tree), .reg_version = info },
+        );
         return true;
     }
     //check if is a variant with parenthesis
@@ -339,8 +457,15 @@ fn check_hal_name(
                     .{ st_slice, var_name, end_slice },
                 ) catch continue;
 
-                if (hal_names.get(full_name)) |formal_name| {
-                    try hal_clk.put(formal_name, try alloc.dupe(u8, cpu_name));
+                if (hal_names.get(full_name)) |info| {
+                    try hal_clk.put(
+                        info.hal_name,
+                        GEN_INFO{
+                            .cpu_name = try alloc.dupe(u8, cpu_name),
+                            .clock_ref_file_union = try alloc.dupe(u8, tree),
+                            .reg_version = info,
+                        },
+                    );
                     copy_clocktree = true;
                 }
             }
@@ -782,6 +907,18 @@ fn generate_multi_types(ctx: *const Context, writer: *std.Io.Writer) !void {
     }
 }
 
+fn is_node_optional(node: *const ClockNode) bool {
+    if (node.enable_flag) |_| {
+        return true;
+    }
+    for (node.variants) |v| {
+        if (v.expr) |_| {
+            return true;
+        }
+    }
+    return false;
+}
+
 fn generate_types(tree: *const ClockTree, writer: *std.Io.Writer, context: *const Context, alloc: std.mem.Allocator) !void {
     const ctx: *Context = @constCast(context);
     //=========Flags==========
@@ -901,6 +1038,20 @@ fn generate_types(tree: *const ClockTree, writer: *std.Io.Writer, context: *cons
             , .{ref.ref_name});
         }
     }
+    var name_buf: [256]u8 = undefined;
+    for (tree.nodes) |node| {
+        if (!context.references.contains(get_node_reference(node))) continue;
+        if (is_node_optional(&node)) {
+            const name = try std.fmt.bufPrint(&name_buf, "{s}Enable", .{node.name});
+
+            if (ctx.out_flags.contains(name)) continue;
+            try ctx.out_flags.put(node.name, .Node);
+            try writer.print(
+                \\@"{s}":bool = false, //clock node enable flag
+                \\
+            , .{name});
+        }
+    }
 
     try writer.writeAll(
         \\};
@@ -918,9 +1069,12 @@ fn generate_types(tree: *const ClockTree, writer: *std.Io.Writer, context: *cons
     var imp_map = std.StringArrayHashMap(void).init(alloc);
     for (context.references.values()) |f| {
         if (imp_map.contains(f.ref_name)) continue;
-        if (context.out_flags.contains(f.ref_name)) continue;
-        try imp_map.put(f.ref_name, {});
+
+        if (is_ref_flag(f, context)) |_| continue;
+
         if (is_ref_output(f, context)) continue;
+
+        try imp_map.put(f.ref_name, {});
 
         const comment = blk: {
             if (context.extra_configs.contains(f.ref_name)) {
@@ -962,7 +1116,7 @@ fn generate_types(tree: *const ClockTree, writer: *std.Io.Writer, context: *cons
     //aux function
     try writer.writeAll(
         \\
-        \\fn check_MCU(comptime to_check: []const u8) bool {
+        \\pub fn check_MCU(comptime to_check: []const u8) bool {
         \\    return mcu_data.get(to_check) != null;
         \\}
     );
@@ -3038,7 +3192,7 @@ fn generate_reference_out(writer: *std.Io.Writer, context: *const Context, alloc
     defer imp_map.deinit();
     for (context.references.values()) |r| {
         if (imp_map.contains(r.ref_name)) continue;
-        if (context.out_flags.contains(r.ref_name)) continue;
+        if (is_ref_flag(r, context)) |_| continue;
         try imp_map.put(r.ref_name, {});
 
         if (is_ref_output(r, context)) continue;
@@ -3058,6 +3212,11 @@ fn generate_reference_out(writer: *std.Io.Writer, context: *const Context, alloc
         const t = context.out_flags.get(k) orelse unreachable;
 
         switch (t) {
+            .Node => {
+                try writer.print(
+                    \\ref_out.flags.@"{0s}Enable" = @"{0s}".is_enabled();
+                , .{k});
+            },
             .List => {
                 try writer.print(
                     \\ref_out.flags.@"{0s}" = check_ref(?@"{0s}List", @"{0s}Value", .@"true", .@"=");

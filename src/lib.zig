@@ -64,7 +64,7 @@ const STM32H5_128_STM32H5_rcc_v1_128_0 = @import("clocktree/STM32H5_128_STM32H5_
 const STM32F102_STM32F102_rcc_v1_0 = @import("clocktree/STM32F102_STM32F102_rcc_v1_0.zig");
 const @"STM32F413_STM32F413-rcc_v1_0" = @import("clocktree/STM32F413_STM32F413-rcc_v1_0.zig");
 const STM32F303_STM32F303E_rcc_v1_0 = @import("clocktree/STM32F303_STM32F303E_rcc_v1_0.zig");
-pub const STM32U073RBIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073RBIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -81,7 +81,7 @@ pub const STM32U073RBIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H743VGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743VGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -115,7 +115,7 @@ pub const STM32H743VGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32H742A(G-I)Ix" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H742A(G-I)Ix" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -150,13 +150,13 @@ pub const @"STM32H742A(G-I)Ix" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32H742", {} },
 }));
-pub const STM32WL30K8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL30K8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "LPUART1_Exist", {} },
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const @"STM32L475R(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L475R(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -179,7 +179,7 @@ pub const @"STM32L475R(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.Static
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F101Z(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101Z(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -193,7 +193,7 @@ pub const @"STM32F101Z(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.St
     .{ "USART3_Exist", {} },
     .{ "STM32F101", {} },
 }));
-pub const STM32WB09TEFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB09TEFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2S3_Exist", {} },
@@ -202,7 +202,7 @@ pub const STM32WB09TEFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32L552CETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552CETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -225,7 +225,7 @@ pub const STM32L552CETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H743IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -260,7 +260,7 @@ pub const STM32H743IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U385KGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385KGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -278,7 +278,7 @@ pub const STM32U385KGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "UQFN32", {} },
 }));
-pub const STM32U083RCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U083RCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -295,7 +295,7 @@ pub const STM32U083RCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H7B3IITxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3IITxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -329,7 +329,7 @@ pub const STM32H7B3IITxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L081KZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L081KZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -342,7 +342,7 @@ pub const STM32L081KZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32F479N(G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F479N(G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -369,7 +369,7 @@ pub const @"STM32F479N(G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H563AIIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563AIIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -405,7 +405,7 @@ pub const STM32H563AIIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L552MEYxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552MEYxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -429,7 +429,7 @@ pub const STM32L552MEYxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F423ZHTx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F423ZHTx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -455,7 +455,7 @@ pub const STM32F423ZHTx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32WBA64CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA64CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -473,7 +473,7 @@ pub const STM32WBA64CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32WBAx4", {} },
 }));
-pub const STM32U535VCTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535VCTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -494,7 +494,7 @@ pub const STM32U535VCTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32MP215FAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215FAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -526,7 +526,7 @@ pub const STM32MP215FAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L412CBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412CBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -543,7 +543,7 @@ pub const STM32L412CBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32L452R(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L452R(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -563,7 +563,7 @@ pub const @"STM32L452R(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L471V(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L471V(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -584,7 +584,7 @@ pub const @"STM32L471V(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32WB1MMCHx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB1MMCHx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -595,7 +595,7 @@ pub const STM32WB1MMCHx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "STM32WB1MMCHx", {} },
 }));
-pub const @"STM32F413C(G-H)Ux" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F413C(G-H)Ux" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -618,7 +618,7 @@ pub const @"STM32F413C(G-H)Ux" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32WB5MMGHx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB5MMGHx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -633,7 +633,7 @@ pub const STM32WB5MMGHx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USB_Exist", {} },
     .{ "STM32WB5MMGHx", {} },
 }));
-pub const STM32C071GBUxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071GBUxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -643,7 +643,7 @@ pub const STM32C071GBUxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G484MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G484MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -669,7 +669,7 @@ pub const STM32G484MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4A6QGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6QGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -692,7 +692,7 @@ pub const STM32L4A6QGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32F030R8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F030R8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -704,7 +704,7 @@ pub const STM32F030R8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x0_Value_Line", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G441KBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G441KBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -724,7 +724,7 @@ pub const STM32G441KBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32F051R8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051R8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -736,7 +736,7 @@ pub const STM32F051R8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F767I(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F767I(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -767,7 +767,7 @@ pub const @"STM32F767I(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F417Z(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F417Z(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -789,7 +789,7 @@ pub const @"STM32F417Z(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F030K6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F030K6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -797,7 +797,7 @@ pub const STM32F030K6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x0_Value_Line", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32MP215FALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215FALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -830,7 +830,7 @@ pub const STM32MP215FALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F101C(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101C(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -842,7 +842,7 @@ pub const @"STM32F101C(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F101", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U599ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -870,7 +870,7 @@ pub const STM32U599ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L562MEYxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562MEYxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -894,7 +894,7 @@ pub const STM32L562MEYxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L433R(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L433R(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -913,7 +913,7 @@ pub const @"STM32L433R(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP131AAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131AAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -940,7 +940,7 @@ pub const STM32MP131AAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L462VEIx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L462VEIx = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -960,7 +960,7 @@ pub const STM32L462VEIx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP211AANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211AANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -988,7 +988,7 @@ pub const STM32MP211AANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WL5MOCHx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL5MOCHx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1005,7 +1005,7 @@ pub const STM32WL5MOCHx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32WL5x", {} },
     .{ "STM32WL5MOCHx", {} },
 }));
-pub const STM32MP235DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -1038,7 +1038,7 @@ pub const STM32MP235DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const @"STM32F103V(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103V(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1050,7 +1050,7 @@ pub const @"STM32F103V(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const STM32MP231CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -1079,7 +1079,7 @@ pub const STM32MP231CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32G030C(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G030C(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1090,7 +1090,7 @@ pub const @"STM32G030C(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.St
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L412TBYx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412TBYx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -1104,7 +1104,7 @@ pub const STM32L412TBYx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32U375RGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375RGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1124,7 +1124,7 @@ pub const STM32U375RGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP157AADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157AADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -1160,7 +1160,7 @@ pub const STM32MP157AADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP157AADx", {} },
 }));
-pub const @"STM32F072V(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F072V(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -1174,7 +1174,7 @@ pub const @"STM32F072V(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U5A5ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1202,14 +1202,14 @@ pub const STM32U5A5ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F031F(4-6)Px" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F031F(4-6)Px" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const @"STM32L072K(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072K(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1223,7 +1223,7 @@ pub const @"STM32L072K(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32MP133FAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133FAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -1256,7 +1256,7 @@ pub const STM32MP133FAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP133FAGx", {} },
 }));
-pub const STM32N657I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N657I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -1287,7 +1287,7 @@ pub const STM32N657I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32H7A3R(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3R(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -1315,7 +1315,7 @@ pub const @"STM32H7A3R(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L063C8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L063C8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1330,7 +1330,7 @@ pub const STM32L063C8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F051K6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051K6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -1340,7 +1340,7 @@ pub const STM32F051K6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32L082K(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L082K(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1354,7 +1354,7 @@ pub const @"STM32L082K(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32MP211CALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211CALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1383,7 +1383,7 @@ pub const STM32MP211CALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C071KBTx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071KBTx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1393,7 +1393,7 @@ pub const STM32C071KBTx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L072R(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072R(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1409,7 +1409,7 @@ pub const @"STM32L072R(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L151V(8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151V(8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1421,7 +1421,7 @@ pub const @"STM32L151V(8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WLE4J8Ix = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE4J8Ix = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1436,7 +1436,7 @@ pub const STM32WLE4J8Ix = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const @"STM32F373R(8-B-C)Tx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F373R(8-B-C)Tx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1451,7 +1451,7 @@ pub const @"STM32F373R(8-B-C)Tx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32C092CCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092CCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1463,7 +1463,7 @@ pub const STM32C092CCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F098VCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F098VCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1476,7 +1476,7 @@ pub const STM32F098VCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "STM32F0x8", {} },
 }));
-pub const STM32L4S5ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S5ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1498,7 +1498,7 @@ pub const STM32L4S5ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32WB55REVx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55REVx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -1512,7 +1512,7 @@ pub const STM32WB55REVx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L072V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1528,7 +1528,7 @@ pub const @"STM32L072V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U385CGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385CGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1548,7 +1548,7 @@ pub const STM32U385CGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F769NGHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F769NGHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -1580,7 +1580,7 @@ pub const STM32F769NGHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L063R8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L063R8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1595,7 +1595,7 @@ pub const STM32L063R8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F303VCYx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F303VCYx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -1612,7 +1612,7 @@ pub const STM32F303VCYx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G411MBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411MBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1628,7 +1628,7 @@ pub const STM32G411MBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "STM32G411MBTx", {} },
 }));
-pub const @"STM32F091R(B-C)Tx" = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F091R(B-C)Tx" = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1641,7 +1641,7 @@ pub const @"STM32F091R(B-C)Tx" = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32G0C1K(C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1K(C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -1663,7 +1663,7 @@ pub const @"STM32G0C1K(C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32G441CBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G441CBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1685,7 +1685,7 @@ pub const STM32G441CBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP151DABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151DABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1717,7 +1717,7 @@ pub const STM32MP151DABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WL33CCVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33CCVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1727,7 +1727,7 @@ pub const STM32WL33CCVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStr
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32F767ZGTx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F767ZGTx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -1758,7 +1758,7 @@ pub const STM32F767ZGTx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L496A(E-G)Ix" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L496A(E-G)Ix" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1781,7 +1781,7 @@ pub const @"STM32L496A(E-G)Ix" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32G081RBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081RBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1798,7 +1798,7 @@ pub const STM32G081RBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H7R3V8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3V8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -1824,7 +1824,7 @@ pub const STM32H7R3V8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP257DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -1862,7 +1862,7 @@ pub const STM32MP257DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F101R(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101R(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -1876,7 +1876,7 @@ pub const @"STM32F101R(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.St
     .{ "STM32F101", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F101Z(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101Z(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE430", {} },
     .{ "ADC1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -1891,7 +1891,7 @@ pub const @"STM32F101Z(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "STM32F101", {} },
 }));
-pub const STM32H533ZEJx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H533ZEJx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -1918,7 +1918,7 @@ pub const STM32H533ZEJx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U575VITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575VITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1943,7 +1943,7 @@ pub const STM32U575VITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32G431CBYx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G431CBYx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -1964,7 +1964,7 @@ pub const STM32G431CBYx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const @"STM32H7A3I(G-I)TxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3I(G-I)TxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -1998,7 +1998,7 @@ pub const @"STM32H7A3I(G-I)TxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Sta
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G0C1M(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1M(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -2019,7 +2019,7 @@ pub const @"STM32G0C1M(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(s
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32H755IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H755IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -2054,7 +2054,7 @@ pub const STM32H755IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073MBTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073MBTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -2071,7 +2071,7 @@ pub const STM32U073MBTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G484QETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G484QETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -2097,7 +2097,7 @@ pub const STM32G484QETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32N655B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N655B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -2130,7 +2130,7 @@ pub const STM32N655B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U535CCTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CCTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2150,7 +2150,7 @@ pub const STM32U535CCTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L151RCYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151RCYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2164,7 +2164,7 @@ pub const STM32L151RCYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G0B1R(B-C-E)IxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1R(B-C-E)IxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -2184,7 +2184,7 @@ pub const @"STM32G0B1R(B-C-E)IxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTre
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const @"STM32F411C(C-E)Ux" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F411C(C-E)Ux" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -2201,7 +2201,7 @@ pub const @"STM32F411C(C-E)Ux" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F423RHTx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F423RHTx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -2226,7 +2226,7 @@ pub const STM32F423RHTx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32N647X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N647X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -2260,7 +2260,7 @@ pub const STM32N647X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USART10_Exist", {} },
 }));
-pub const STM32F733VEYx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F733VEYx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2286,7 +2286,7 @@ pub const STM32F733VEYx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32MP215CAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215CAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -2318,7 +2318,7 @@ pub const STM32MP215CAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L031G(4-6)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L031G(4-6)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2329,7 +2329,7 @@ pub const @"STM32L031G(4-6)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32U535RBIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RBIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2350,7 +2350,7 @@ pub const STM32U535RBIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32L476ZGTxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L476ZGTxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2372,7 +2372,7 @@ pub const STM32L476ZGTxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F410T(8-B)Yx" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F410T(8-B)Yx" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2384,7 +2384,7 @@ pub const @"STM32F410T(8-B)Yx" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.S
     .{ "USART2_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32C051K6Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051K6Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -2394,7 +2394,7 @@ pub const STM32C051K6Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32WBA54CEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA54CEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -2409,7 +2409,7 @@ pub const STM32WBA54CEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "STM32WBAx4", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32G411R8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411R8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2426,7 +2426,7 @@ pub const STM32G411R8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "LQFP64", {} },
     .{ "STM32G411R8Tx", {} },
 }));
-pub const STM32MP233FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -2458,7 +2458,7 @@ pub const STM32MP233FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H725IEKx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725IEKx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -2494,7 +2494,7 @@ pub const STM32H725IEKx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H723VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H723VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -2529,7 +2529,7 @@ pub const STM32H723VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WLE5CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE5CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -2545,7 +2545,7 @@ pub const STM32WLE5CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F358CCTx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F358CCTx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -2561,7 +2561,7 @@ pub const STM32F358CCTx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32F3x8", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U535CBUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CBUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2581,7 +2581,7 @@ pub const STM32U535CBUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP213CAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213CAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -2612,7 +2612,7 @@ pub const STM32MP213CAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F413V(G-H)Hx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F413V(G-H)Hx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -2638,7 +2638,7 @@ pub const @"STM32F413V(G-H)Hx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32G4A1VETx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G4A1VETx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -2662,7 +2662,7 @@ pub const STM32G4A1VETx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H523VCIx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523VCIx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -2688,7 +2688,7 @@ pub const STM32H523VCIx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H7S7L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S7L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -2724,7 +2724,7 @@ pub const STM32H7S7L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U575CIUx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575CIUx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2746,7 +2746,7 @@ pub const STM32U575CIUx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U5A9ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A9ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -2776,7 +2776,7 @@ pub const STM32U5A9ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G030K(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G030K(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -2787,7 +2787,7 @@ pub const @"STM32G030K(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.St
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32L4A6RGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6RGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2811,7 +2811,7 @@ pub const STM32L4A6RGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F446Z(C-E)Hx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F446Z(C-E)Hx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
@@ -2835,7 +2835,7 @@ pub const @"STM32F446Z(C-E)Hx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA65PIIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA65PIIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -2853,7 +2853,7 @@ pub const STM32WBA65PIIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP151AACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151AACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2886,7 +2886,7 @@ pub const STM32MP151AACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP151AACx", {} },
 }));
-pub const STM32L4P5QGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4P5QGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -2910,7 +2910,7 @@ pub const STM32L4P5QGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP153AAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153AAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -2945,7 +2945,7 @@ pub const STM32MP153AAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP153AAAx", {} },
 }));
-pub const STM32WBA65MGFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA65MGFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -2964,7 +2964,7 @@ pub const STM32WBA65MGFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const STM32F733IEKx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F733IEKx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -2992,7 +2992,7 @@ pub const STM32F733IEKx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32H563ZITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563ZITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -3027,7 +3027,7 @@ pub const STM32H563ZITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WBA55UEIx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA55UEIx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -3041,7 +3041,7 @@ pub const STM32WBA55UEIx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const STM32L476JGYxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L476JGYxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -3063,7 +3063,7 @@ pub const STM32L476JGYxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U5G9ZJJxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5G9ZJJxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -3094,7 +3094,7 @@ pub const STM32U5G9ZJJxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F105R(8-B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F105R(8-B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3110,7 +3110,7 @@ pub const @"STM32F105R(8-B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.St
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L412TBYxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412TBYxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -3124,7 +3124,7 @@ pub const STM32L412TBYxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32MP131FAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131FAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -3153,7 +3153,7 @@ pub const STM32MP131FAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP131FAGx", {} },
 }));
-pub const STM32WBA65RGVx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA65RGVx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -3172,7 +3172,7 @@ pub const STM32WBA65RGVx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const @"STM32F765Z(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F765Z(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -3202,14 +3202,14 @@ pub const @"STM32F765Z(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WL31KBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL31KBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPUART1_Exist", {} },
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32MP233CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -3241,7 +3241,7 @@ pub const STM32MP233CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F303C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F303C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -3251,7 +3251,7 @@ pub const STM32F303C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32H562RITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562RITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -3279,7 +3279,7 @@ pub const STM32H562RITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32L051C(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L051C(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3293,7 +3293,7 @@ pub const @"STM32L051C(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F756IGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F756IGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -3323,7 +3323,7 @@ pub const STM32F756IGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G474C(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G474C(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -3347,7 +3347,7 @@ pub const @"STM32G474C(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F072RBIx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F072RBIx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -3361,7 +3361,7 @@ pub const STM32F072RBIx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H723ZGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H723ZGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -3397,7 +3397,7 @@ pub const STM32H723ZGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP235CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -3431,7 +3431,7 @@ pub const STM32MP235CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const STM32F051C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -3441,7 +3441,7 @@ pub const STM32F051C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H743ZGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743ZGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -3476,7 +3476,7 @@ pub const STM32H743ZGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA55CGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA55CGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -3491,7 +3491,7 @@ pub const STM32WBA55CGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "STM32WBAx5", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L476Z(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L476Z(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -3513,7 +3513,7 @@ pub const @"STM32L476Z(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP253FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -3550,7 +3550,7 @@ pub const STM32MP253FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32C031F(4-6)Px" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32C031F(4-6)Px" = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -3558,7 +3558,7 @@ pub const @"STM32C031F(4-6)Px" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const @"STM32L152R(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152R(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3570,7 +3570,7 @@ pub const @"STM32L152R(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Stati
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32C091CBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091CBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3581,7 +3581,7 @@ pub const STM32C091CBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32WL55JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL55JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3597,7 +3597,7 @@ pub const STM32WL55JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "STM32WL5x", {} },
 }));
-pub const STM32U5F9ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F9ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "HSPI1_Exist", {} },
@@ -3626,7 +3626,7 @@ pub const STM32U5F9ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L4S9AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S9AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -3650,7 +3650,7 @@ pub const STM32L4S9AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F417I(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F417I(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -3672,7 +3672,7 @@ pub const @"STM32F417I(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L151VCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151VCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3685,7 +3685,7 @@ pub const STM32L151VCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WLE4JBIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE4JBIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3700,7 +3700,7 @@ pub const STM32WLE4JBIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32L162RCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162RCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3715,7 +3715,7 @@ pub const STM32L162RCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32L162", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U535JEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535JEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -3735,7 +3735,7 @@ pub const STM32U535JEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const @"STM32H7A3L(G-I)HxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3L(G-I)HxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -3769,7 +3769,7 @@ pub const @"STM32H7A3L(G-I)HxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Sta
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP251FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -3803,7 +3803,7 @@ pub const STM32MP251FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H725VETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725VETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -3836,7 +3836,7 @@ pub const STM32H725VETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C091RCIx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091RCIx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3846,7 +3846,7 @@ pub const STM32C091RCIx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32L431C(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L431C(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3863,7 +3863,7 @@ pub const @"STM32L431C(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U385VGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385VGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -3884,7 +3884,7 @@ pub const STM32U385VGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F777NIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F777NIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -3915,7 +3915,7 @@ pub const STM32F777NIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H523CCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523CCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -3941,7 +3941,7 @@ pub const STM32H523CCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F401V(B-C)Hx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401V(B-C)Hx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3956,7 +3956,7 @@ pub const @"STM32F401V(B-C)Hx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USART2_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L412CBUxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412CBUxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -3973,7 +3973,7 @@ pub const STM32L412CBUxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L052K(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L052K(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -3984,7 +3984,7 @@ pub const @"STM32L052K(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32U575VITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575VITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4009,7 +4009,7 @@ pub const STM32U575VITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F745Z(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F745Z(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -4038,7 +4038,7 @@ pub const @"STM32F745Z(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L162VCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162VCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4053,7 +4053,7 @@ pub const STM32L162VCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const @"STM32F437I(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F437I(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -4078,7 +4078,7 @@ pub const @"STM32F437I(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F407V(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F407V(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -4100,7 +4100,7 @@ pub const @"STM32F407V(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L051K(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L051K(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -4110,7 +4110,7 @@ pub const @"STM32L051K(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32MP255AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -4148,7 +4148,7 @@ pub const STM32MP255AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L486VGTx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L486VGTx = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4170,7 +4170,7 @@ pub const STM32L486VGTx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L152ZETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152ZETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4185,7 +4185,7 @@ pub const STM32L152ZETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U535REIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535REIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4206,7 +4206,7 @@ pub const STM32U535REIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const @"STM32F100R(4-6)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100R(4-6)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4215,7 +4215,7 @@ pub const @"STM32F100R(4-6)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G414MCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414MCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4232,7 +4232,7 @@ pub const STM32G414MCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F103R(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103R(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4251,7 +4251,7 @@ pub const @"STM32F103R(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.St
     .{ "STM32F103", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP131CAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131CAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -4279,7 +4279,7 @@ pub const STM32MP131CAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G051G(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G051G(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4293,7 +4293,7 @@ pub const @"STM32G051G(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32U5F7VITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F7VITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4320,7 +4320,7 @@ pub const STM32U5F7VITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L021F4Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L021F4Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4331,7 +4331,7 @@ pub const STM32L021F4Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32L476VGYxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L476VGYxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4353,7 +4353,7 @@ pub const STM32L476VGYxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32H7A3V(G-I)TxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3V(G-I)TxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -4385,7 +4385,7 @@ pub const @"STM32H7A3V(G-I)TxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Sta
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L031K(4-6)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L031K(4-6)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4396,7 +4396,7 @@ pub const @"STM32L031K(4-6)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32F412C(E-G)Ux" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F412C(E-G)Ux" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4416,7 +4416,7 @@ pub const @"STM32F412C(E-G)Ux" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32N647L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N647L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -4450,7 +4450,7 @@ pub const STM32N647L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USART10_Exist", {} },
 }));
-pub const STM32F051C8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051C8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -4462,7 +4462,7 @@ pub const STM32F051C8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32G411CBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411CBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4479,7 +4479,7 @@ pub const STM32G411CBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "UFQFPN48", {} },
     .{ "STM32G411CBUx", {} },
 }));
-pub const @"STM32L052K(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L052K(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -4490,7 +4490,7 @@ pub const @"STM32L052K(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32H7S7I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S7I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -4523,7 +4523,7 @@ pub const STM32H7S7I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32G070RBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G070RBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4535,7 +4535,7 @@ pub const STM32G070RBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U073HCYx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073HCYx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4552,7 +4552,7 @@ pub const STM32U073HCYx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F058C8Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F058C8Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -4565,7 +4565,7 @@ pub const STM32F058C8Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7S3Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -4600,7 +4600,7 @@ pub const STM32H7S3Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L462VETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L462VETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4620,7 +4620,7 @@ pub const STM32L462VETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L422RBIx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L422RBIx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4636,7 +4636,7 @@ pub const STM32L422RBIx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L412RBIx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412RBIx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4652,7 +4652,7 @@ pub const STM32L412RBIx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G471V(C-E)Hx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G471V(C-E)Hx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -4678,7 +4678,7 @@ pub const @"STM32G471V(C-E)Hx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32H742I(G-I)Kx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H742I(G-I)Kx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -4713,7 +4713,7 @@ pub const @"STM32H742I(G-I)Kx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32H742", {} },
 }));
-pub const @"STM32G474V(B-C-E)Hx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G474V(B-C-E)Hx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -4739,7 +4739,7 @@ pub const @"STM32G474V(B-C-E)Hx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L073V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L073V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4755,7 +4755,7 @@ pub const @"STM32L073V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F303R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4765,7 +4765,7 @@ pub const @"STM32F303R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP157AACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157AACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -4801,7 +4801,7 @@ pub const STM32MP157AACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP157AACx", {} },
 }));
-pub const @"STM32L431C(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L431C(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4818,7 +4818,7 @@ pub const @"STM32L431C(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L151C(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151C(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4830,7 +4830,7 @@ pub const @"STM32L151C(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Stati
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F100V(C-D-E)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100V(C-D-E)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -4844,7 +4844,7 @@ pub const @"STM32F100V(C-D-E)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.St
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H733VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H733VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -4879,7 +4879,7 @@ pub const STM32H733VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H743ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -4914,7 +4914,7 @@ pub const STM32H743ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F100Z(C-D-E)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100Z(C-D-E)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -4928,7 +4928,7 @@ pub const @"STM32F100Z(C-D-E)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.St
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32WB07KCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB07KCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -4940,7 +4940,7 @@ pub const STM32WB07KCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "SPI2_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32G411K6Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411K6Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4957,7 +4957,7 @@ pub const STM32G411K6Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "UFQFPN32", {} },
     .{ "STM32G411K6Ux", {} },
 }));
-pub const STM32L496VGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L496VGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4980,7 +4980,7 @@ pub const STM32L496VGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L152CCUx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152CCUx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -4995,7 +4995,7 @@ pub const STM32L152CCUx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F765I(G-I)Kx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F765I(G-I)Kx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -5025,7 +5025,7 @@ pub const @"STM32F765I(G-I)Kx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G431C(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G431C(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5046,7 +5046,7 @@ pub const @"STM32G431C(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32H7A3V(G-I)Hx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3V(G-I)Hx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -5079,7 +5079,7 @@ pub const @"STM32H7A3V(G-I)Hx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Stat
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G484RETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G484RETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -5105,7 +5105,7 @@ pub const STM32G484RETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP213FALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213FALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -5137,7 +5137,7 @@ pub const STM32MP213FALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G071C(6-8-B)Ux" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G071C(6-8-B)Ux" = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5153,7 +5153,7 @@ pub const @"STM32G071C(6-8-B)Ux" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.Stati
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U535CETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5173,7 +5173,7 @@ pub const STM32U535CETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L562ZETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562ZETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5197,7 +5197,7 @@ pub const STM32L562ZETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP235DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -5230,7 +5230,7 @@ pub const STM32MP235DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const STM32G0C1NEYx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G0C1NEYx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -5251,7 +5251,7 @@ pub const STM32G0C1NEYx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32U5A5VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5279,7 +5279,7 @@ pub const STM32U5A5VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L072K(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072K(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5293,7 +5293,7 @@ pub const @"STM32L072K(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32L071K(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L071K(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5306,7 +5306,7 @@ pub const @"STM32L071K(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U599VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5334,7 +5334,7 @@ pub const STM32U599VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G0B1C(B-C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1C(B-C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -5355,7 +5355,7 @@ pub const @"STM32G0B1C(B-C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTre
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32G0C1R(C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1R(C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -5377,7 +5377,7 @@ pub const @"STM32G0C1R(C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U535RCIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RCIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5398,7 +5398,7 @@ pub const STM32U535RCIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const @"STM32L152R(6-8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152R(6-8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -5409,7 +5409,7 @@ pub const @"STM32L152R(6-8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Stati
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L432K(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L432K(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -5424,7 +5424,7 @@ pub const @"STM32L432K(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32L443CCUx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L443CCUx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -5442,7 +5442,7 @@ pub const STM32L443CCUx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L072CZEx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L072CZEx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5458,7 +5458,7 @@ pub const STM32L072CZEx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WBA52KGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA52KGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -5471,7 +5471,7 @@ pub const STM32WBA52KGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32L4P5C(G-E)Ux" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4P5C(G-E)Ux" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -5494,7 +5494,7 @@ pub const @"STM32L4P5C(G-E)Ux" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7B0VBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B0VBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -5527,7 +5527,7 @@ pub const STM32H7B0VBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G081KBUxN = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081KBUxN = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5544,7 +5544,7 @@ pub const STM32G081KBUxN = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32F415ZGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F415ZGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -5565,7 +5565,7 @@ pub const STM32F415ZGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".Cloc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F412Z(E-G)Tx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F412Z(E-G)Tx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -5585,7 +5585,7 @@ pub const @"STM32F412Z(E-G)Tx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F765V(G-I)Hx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F765V(G-I)Hx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -5614,7 +5614,7 @@ pub const @"STM32F765V(G-I)Hx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375VETx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375VETx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5634,7 +5634,7 @@ pub const STM32U375VETx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U385RGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385RGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5656,7 +5656,7 @@ pub const STM32U385RGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G441CBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G441CBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5677,7 +5677,7 @@ pub const STM32G441CBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F412R(E-G)Yx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F412R(E-G)Yx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -5697,7 +5697,7 @@ pub const @"STM32F412R(E-G)Yx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L162ZCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162ZCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -5711,7 +5711,7 @@ pub const STM32L162ZCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const STM32H533HEYx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H533HEYx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -5732,7 +5732,7 @@ pub const STM32H533HEYx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F058R8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F058R8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -5745,7 +5745,7 @@ pub const STM32F058R8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H7S7Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S7Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -5776,7 +5776,7 @@ pub const STM32H7S7Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP133FAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133FAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -5809,7 +5809,7 @@ pub const STM32MP133FAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP133FAEx", {} },
 }));
-pub const STM32MP153FACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153FACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -5843,7 +5843,7 @@ pub const STM32MP153FACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C051G8Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051G8Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -5853,7 +5853,7 @@ pub const STM32C051G8Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const @"STM32F746B(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F746B(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -5883,7 +5883,7 @@ pub const @"STM32F746B(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G041Y8Yx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G041Y8Yx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -5896,7 +5896,7 @@ pub const STM32G041Y8Yx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32G061F8Yx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G061F8Yx = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5910,7 +5910,7 @@ pub const STM32G061F8Yx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const @"STM32F100R(4-6)Hx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100R(4-6)Hx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5918,7 +5918,7 @@ pub const @"STM32F100R(4-6)Hx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.Stat
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32U545VETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545VETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5940,7 +5940,7 @@ pub const STM32U545VETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32L552QEIx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552QEIx = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5964,7 +5964,7 @@ pub const STM32L552QEIx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L496VGYxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L496VGYxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -5987,7 +5987,7 @@ pub const STM32L496VGYxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H523CETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523CETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -6013,7 +6013,7 @@ pub const STM32H523CETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F318K8Ux = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F318K8Ux = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -6027,7 +6027,7 @@ pub const STM32F318K8Ux = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32F3x8", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32L412C8Ux = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412C8Ux = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6044,7 +6044,7 @@ pub const STM32L412C8Ux = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F100R(8-B)Hx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100R(8-B)Hx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -6055,7 +6055,7 @@ pub const @"STM32F100R(8-B)Hx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP135FAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135FAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -6089,7 +6089,7 @@ pub const STM32MP135FAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F030CCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F030CCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6101,7 +6101,7 @@ pub const STM32F030CCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "STM32F0x0_Value_Line", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L4P5CGUxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4P5CGUxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6124,7 +6124,7 @@ pub const STM32L4P5CGUxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F103R(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103R(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE430", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -6144,7 +6144,7 @@ pub const @"STM32F103R(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F103", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F103Z(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103Z(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -6163,7 +6163,7 @@ pub const @"STM32F103Z(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const STM32WLE4CBUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE4CBUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6179,7 +6179,7 @@ pub const STM32WLE4CBUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP253CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -6216,7 +6216,7 @@ pub const STM32MP253CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F479V(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F479V(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -6240,7 +6240,7 @@ pub const @"STM32F479V(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F730I8Kx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F730I8Kx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -6267,7 +6267,7 @@ pub const STM32F730I8Kx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U585CITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585CITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -6290,7 +6290,7 @@ pub const STM32U585CITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32H7A3A(G-I)IxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3A(G-I)IxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -6324,7 +6324,7 @@ pub const @"STM32H7A3A(G-I)IxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Sta
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U5A5RJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5RJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -6350,7 +6350,7 @@ pub const STM32U5A5RJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F303V(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303V(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -6367,7 +6367,7 @@ pub const @"STM32F303V(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F205RGEx = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F205RGEx = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -6387,7 +6387,7 @@ pub const STM32F205RGEx = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".Cloc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U083KCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U083KCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6405,7 +6405,7 @@ pub const STM32U083KCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32H750IBKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H750IBKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -6440,7 +6440,7 @@ pub const STM32H750IBKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F413M(G-H)Yx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F413M(G-H)Yx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -6464,7 +6464,7 @@ pub const @"STM32F413M(G-H)Yx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32C071RBIxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071RBIxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6474,7 +6474,7 @@ pub const STM32C071RBIxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H733VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H733VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -6509,7 +6509,7 @@ pub const STM32H733VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C091KBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091KBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6520,7 +6520,7 @@ pub const STM32C091KBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32L053C(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L053C(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6535,7 +6535,7 @@ pub const @"STM32L053C(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP251AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -6568,7 +6568,7 @@ pub const STM32MP251AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32WB07CCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB07CCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6580,7 +6580,7 @@ pub const STM32WB07CCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "SPI2_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32H725VEHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725VEHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -6615,7 +6615,7 @@ pub const STM32H725VEHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7R3Z8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3Z8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -6649,7 +6649,7 @@ pub const STM32H7R3Z8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L051T(6-8)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L051T(6-8)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6661,7 +6661,7 @@ pub const @"STM32L051T(6-8)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32H523VEIx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523VEIx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -6687,7 +6687,7 @@ pub const STM32H523VEIx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP157DADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157DADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -6722,7 +6722,7 @@ pub const STM32MP157DADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073KBUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073KBUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6740,7 +6740,7 @@ pub const STM32U073KBUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32MP211FAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211FAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -6769,7 +6769,7 @@ pub const STM32MP211FAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7B3ZITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3ZITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -6803,7 +6803,7 @@ pub const STM32H7B3ZITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP133AAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133AAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -6834,7 +6834,7 @@ pub const STM32MP133AAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP253DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -6870,7 +6870,7 @@ pub const STM32MP253DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U073HBYx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073HBYx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6887,7 +6887,7 @@ pub const STM32U073HBYx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L4R5A(G-I)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R5A(G-I)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -6909,7 +6909,7 @@ pub const @"STM32L4R5A(G-I)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F446Z(C-E)Jx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F446Z(C-E)Jx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
@@ -6933,7 +6933,7 @@ pub const @"STM32F446Z(C-E)Jx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U599VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -6961,7 +6961,7 @@ pub const STM32U599VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F723I(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F723I(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -6989,7 +6989,7 @@ pub const @"STM32F723I(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32MP131DAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131DAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -7017,7 +7017,7 @@ pub const STM32MP131DAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP131DAEx", {} },
 }));
-pub const STM32L4P5VGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4P5VGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -7041,7 +7041,7 @@ pub const STM32L4P5VGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H563IIKxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563IIKxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -7077,7 +7077,7 @@ pub const STM32H563IIKxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G0B1V(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1V(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -7097,7 +7097,7 @@ pub const @"STM32G0B1V(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32WL54CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL54CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -7114,7 +7114,7 @@ pub const STM32WL54CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32WL5x", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L151RCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151RCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -7128,7 +7128,7 @@ pub const STM32L151RCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP213DALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213DALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -7159,7 +7159,7 @@ pub const STM32MP213DALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U385CGUxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385CGUxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7178,7 +7178,7 @@ pub const STM32U385CGUxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U5G7VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5G7VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7207,7 +7207,7 @@ pub const STM32U5G7VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H743BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -7242,7 +7242,7 @@ pub const STM32H743BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G483VEHx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G483VEHx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -7268,7 +7268,7 @@ pub const STM32G483VEHx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP251FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -7302,7 +7302,7 @@ pub const STM32MP251FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP211CANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211CANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7331,7 +7331,7 @@ pub const STM32MP211CANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H563ZGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563ZGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -7367,7 +7367,7 @@ pub const STM32H563ZGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP253AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -7403,7 +7403,7 @@ pub const STM32MP253AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U375VEIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375VEIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7423,7 +7423,7 @@ pub const STM32U375VEIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L562RETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562RETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7448,7 +7448,7 @@ pub const STM32L562RETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32C091RCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091RCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -7459,7 +7459,7 @@ pub const STM32C091RCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U599ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -7488,7 +7488,7 @@ pub const STM32U599ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L081KZTx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L081KZTx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7501,7 +7501,7 @@ pub const STM32L081KZTx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32U535RETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7523,7 +7523,7 @@ pub const STM32U535RETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U375KGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375KGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7540,7 +7540,7 @@ pub const STM32U375KGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "UQFN32", {} },
 }));
-pub const @"STM32G471M(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G471M(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -7566,7 +7566,7 @@ pub const @"STM32G471M(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G4A1REIx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G4A1REIx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -7590,7 +7590,7 @@ pub const STM32G4A1REIx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U575CGUxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575CGUxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7612,7 +7612,7 @@ pub const STM32U575CGUxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7B3VITxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3VITxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -7644,7 +7644,7 @@ pub const STM32H7B3VITxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F334C(4-6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F334C(4-6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7654,7 +7654,7 @@ pub const @"STM32F334C(4-6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U5F9NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F9NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "HSPI1_Exist", {} },
@@ -7683,7 +7683,7 @@ pub const STM32U5F9NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G081RBIx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081RBIx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -7699,7 +7699,7 @@ pub const STM32G081RBIx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP135CAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135CAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -7733,7 +7733,7 @@ pub const STM32MP135CAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H725IETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725IETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -7769,7 +7769,7 @@ pub const STM32H725IETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U5G9VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5G9VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -7799,7 +7799,7 @@ pub const STM32U5G9VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32H7A3I(G-I)KxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3I(G-I)KxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -7833,7 +7833,7 @@ pub const @"STM32H7A3I(G-I)KxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Sta
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H753AIIx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H753AIIx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -7868,7 +7868,7 @@ pub const STM32H753AIIx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L162VEYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162VEYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -7884,7 +7884,7 @@ pub const STM32L162VEYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const STM32F469IITx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F469IITx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -7911,7 +7911,7 @@ pub const STM32F469IITx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L152RDYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152RDYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -7927,7 +7927,7 @@ pub const STM32L152RDYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F439AIHx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F439AIHx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -7953,7 +7953,7 @@ pub const STM32F439AIHx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H753IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H753IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -7988,7 +7988,7 @@ pub const STM32H753IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L4R5Z(G-I)Yx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R5Z(G-I)Yx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -8010,7 +8010,7 @@ pub const @"STM32L4R5Z(G-I)Yx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32G0B1C(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1C(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -8031,7 +8031,7 @@ pub const @"STM32G0B1C(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U385VGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385VGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8052,7 +8052,7 @@ pub const STM32U385VGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L4R9Z(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R9Z(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8076,7 +8076,7 @@ pub const @"STM32L4R9Z(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F302R(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302R(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8093,7 +8093,7 @@ pub const @"STM32F302R(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L562CETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562CETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8116,7 +8116,7 @@ pub const STM32L562CETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32C071CBTxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071CBTxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -8126,7 +8126,7 @@ pub const STM32C071CBTxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F745V(E-G)Hx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F745V(E-G)Hx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -8154,7 +8154,7 @@ pub const @"STM32F745V(E-G)Hx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F103C6Ux = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F103C6Ux = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -8164,7 +8164,7 @@ pub const STM32F103C6Ux = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "STM32F103", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F051C4Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051C4Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -8173,7 +8173,7 @@ pub const STM32F051C4Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART1_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP211DANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211DANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8201,7 +8201,7 @@ pub const STM32MP211DANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F038C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F038C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -8209,7 +8209,7 @@ pub const STM32F038C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP255DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -8247,7 +8247,7 @@ pub const STM32MP255DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G081KBTxN = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081KBTxN = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8264,7 +8264,7 @@ pub const STM32G081KBTxN = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32L4A6RGTx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6RGTx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8288,7 +8288,7 @@ pub const STM32L4A6RGTx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L152VCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152VCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -8301,7 +8301,7 @@ pub const STM32L152VCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4Q5VGYxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5VGYxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -8325,7 +8325,7 @@ pub const STM32L4Q5VGYxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F410C(8-B)Ux" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F410C(8-B)Ux" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8340,7 +8340,7 @@ pub const @"STM32F410C(8-B)Ux" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.S
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L083R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L083R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8357,7 +8357,7 @@ pub const @"STM32L083R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L562VETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562VETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8381,7 +8381,7 @@ pub const STM32L562VETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G431V(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G431V(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8402,7 +8402,7 @@ pub const @"STM32G431V(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.St
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F303V(D-E)Hx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303V(D-E)Hx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8420,7 +8420,7 @@ pub const @"STM32F303V(D-E)Hx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.Sta
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L476R(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L476R(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8443,7 +8443,7 @@ pub const @"STM32L476R(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.Static
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U585RITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585RITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8469,7 +8469,7 @@ pub const STM32U585RITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G081EBYx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081EBYx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8486,7 +8486,7 @@ pub const STM32G081EBYx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "WLCSP25", {} },
 }));
-pub const STM32G484CETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G484CETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -8510,7 +8510,7 @@ pub const STM32G484CETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F107V(B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F107V(B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8525,7 +8525,7 @@ pub const @"STM32F107V(B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32F730Z8Tx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F730Z8Tx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8552,7 +8552,7 @@ pub const STM32F730Z8Tx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F427Z(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F427Z(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -8577,7 +8577,7 @@ pub const @"STM32F427Z(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7B3NIHx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3NIHx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -8611,7 +8611,7 @@ pub const STM32H7B3NIHx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L4R5Z(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R5Z(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -8633,7 +8633,7 @@ pub const @"STM32L4R5Z(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F217V(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F217V(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -8655,7 +8655,7 @@ pub const @"STM32F217V(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U083CCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U083CCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -8673,7 +8673,7 @@ pub const STM32U083CCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP157CAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157CAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -8709,7 +8709,7 @@ pub const STM32MP157CAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP157CAAx", {} },
 }));
-pub const @"STM32F479I(G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F479I(G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -8736,7 +8736,7 @@ pub const @"STM32F479I(G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP253AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -8772,7 +8772,7 @@ pub const STM32MP253AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L162VETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162VETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -8788,7 +8788,7 @@ pub const STM32L162VETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const @"STM32F103R(C-D-E)Yx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103R(C-D-E)Yx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8806,7 +8806,7 @@ pub const @"STM32F103R(C-D-E)Yx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const STM32L562CEUx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562CEUx = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8829,7 +8829,7 @@ pub const STM32L562CEUx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F302R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8844,7 +8844,7 @@ pub const @"STM32F302R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L562QEIxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562QEIxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8868,7 +8868,7 @@ pub const STM32L562QEIxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L552Z(C-E)TxQ" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L552Z(C-E)TxQ" = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8892,7 +8892,7 @@ pub const @"STM32L552Z(C-E)TxQ" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U585AIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585AIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8918,7 +8918,7 @@ pub const STM32U585AIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32C071RBTx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071RBTx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -8928,7 +8928,7 @@ pub const STM32C071RBTx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F100R(C-D-E)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100R(C-D-E)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8942,7 +8942,7 @@ pub const @"STM32F100R(C-D-E)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.St
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP151AABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151AABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -8975,7 +8975,7 @@ pub const STM32MP151AABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP151AABx", {} },
 }));
-pub const STM32H523VCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523VCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -9001,7 +9001,7 @@ pub const STM32H523VCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F103C(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103C(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -9014,7 +9014,7 @@ pub const @"STM32F103C(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F103", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP153DACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153DACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -9048,7 +9048,7 @@ pub const STM32MP153DACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G031J(4-6)Mx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G031J(4-6)Mx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -9060,7 +9060,7 @@ pub const @"STM32G031J(4-6)Mx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.St
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const @"STM32F207Z(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F207Z(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9082,7 +9082,7 @@ pub const @"STM32F207Z(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F318C8Tx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F318C8Tx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9097,7 +9097,7 @@ pub const STM32F318C8Tx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32F3x8", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32WB55CGUx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55CGUx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -9111,7 +9111,7 @@ pub const STM32WB55CGUx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F746IETx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F746IETx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9141,7 +9141,7 @@ pub const STM32F746IETx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L052R(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L052R(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -9156,7 +9156,7 @@ pub const @"STM32L052R(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G411K8Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411K8Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9173,7 +9173,7 @@ pub const STM32G411K8Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "UFQFPN32", {} },
     .{ "STM32G411K8Ux", {} },
 }));
-pub const STM32L162RDYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162RDYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -9190,7 +9190,7 @@ pub const STM32L162RDYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const @"STM32F439I(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F439I(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9216,7 +9216,7 @@ pub const @"STM32F439I(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP233FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -9248,7 +9248,7 @@ pub const STM32MP233FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F103V(8-B)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103V(8-B)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -9260,7 +9260,7 @@ pub const @"STM32F103V(8-B)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const @"STM32F439B(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F439B(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9286,7 +9286,7 @@ pub const @"STM32F439B(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375CGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9305,7 +9305,7 @@ pub const STM32U375CGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L4P5QGIxS = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4P5QGIxS = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -9329,7 +9329,7 @@ pub const STM32L4P5QGIxS = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H523HEYx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523HEYx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -9349,7 +9349,7 @@ pub const STM32H523HEYx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G483METx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G483METx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -9375,7 +9375,7 @@ pub const STM32G483METx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F429Z(E-G)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F429Z(E-G)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9401,7 +9401,7 @@ pub const @"STM32F429Z(E-G)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7R7I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R7I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9433,7 +9433,7 @@ pub const STM32H7R7I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H533ZETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H533ZETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -9460,7 +9460,7 @@ pub const STM32H533ZETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G4A1METx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G4A1METx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -9484,7 +9484,7 @@ pub const STM32G4A1METx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP251CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -9518,7 +9518,7 @@ pub const STM32MP251CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G473MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G473MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -9544,7 +9544,7 @@ pub const STM32G473MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H7R7L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R7L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9579,7 +9579,7 @@ pub const STM32H7R7L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7S3R8Vx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3R8Vx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -9604,7 +9604,7 @@ pub const STM32H7S3R8Vx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F417I(E-G)Hx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F417I(E-G)Hx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9626,7 +9626,7 @@ pub const @"STM32F417I(E-G)Hx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U595QJIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595QJIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9653,7 +9653,7 @@ pub const STM32U595QJIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F732IETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F732IETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9680,7 +9680,7 @@ pub const STM32F732IETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H723VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H723VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9715,7 +9715,7 @@ pub const STM32H723VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G411M6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411M6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9731,7 +9731,7 @@ pub const STM32G411M6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "STM32G411M6Tx", {} },
 }));
-pub const @"STM32F401C(B-C)Ux" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401C(B-C)Ux" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -9745,7 +9745,7 @@ pub const @"STM32F401C(B-C)Ux" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7R3R8Vx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3R8Vx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -9769,7 +9769,7 @@ pub const STM32H7R3R8Vx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L071C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L071C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9785,7 +9785,7 @@ pub const @"STM32L071C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F427A(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F427A(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9810,7 +9810,7 @@ pub const @"STM32F427A(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L451CETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L451CETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -9829,7 +9829,7 @@ pub const STM32L451CETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP255AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -9867,7 +9867,7 @@ pub const STM32MP255AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L073CZYx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L073CZYx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9884,7 +9884,7 @@ pub const STM32L073CZYx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32U5F7VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F7VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -9911,7 +9911,7 @@ pub const STM32U5F7VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32C092CBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092CBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9923,7 +9923,7 @@ pub const STM32C092CBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32H742V(G-I)Hx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H742V(G-I)Hx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -9957,7 +9957,7 @@ pub const @"STM32H742V(G-I)Hx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32H742", {} },
 }));
-pub const STM32F030F4Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F030F4Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -9965,7 +9965,7 @@ pub const STM32F030F4Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x0_Value_Line", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32F051K4Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051K4Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -9974,7 +9974,7 @@ pub const STM32F051K4Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART1_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32L151V(8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151V(8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -9986,7 +9986,7 @@ pub const @"STM32L151V(8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L052C(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L052C(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10001,7 +10001,7 @@ pub const @"STM32L052C(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F101C(8-B)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101C(8-B)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10013,14 +10013,14 @@ pub const @"STM32F101C(8-B)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F101", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32WL31K8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL31K8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPUART1_Exist", {} },
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32H747XGHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H747XGHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -10056,7 +10056,7 @@ pub const STM32H747XGHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F091C(B-C)Ux" = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F091C(B-C)Ux" = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10069,7 +10069,7 @@ pub const @"STM32F091C(B-C)Ux" = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U375RGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375RGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10090,7 +10090,7 @@ pub const STM32U375RGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F070RBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F070RBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10104,7 +10104,7 @@ pub const STM32F070RBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x0_Value_Line", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F318C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F318C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10119,7 +10119,7 @@ pub const STM32F318C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32F3x8", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32U575QGIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575QGIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10144,7 +10144,7 @@ pub const STM32U575QGIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L152QDHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152QDHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10161,7 +10161,7 @@ pub const STM32L152QDHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G471C(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G471C(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -10185,7 +10185,7 @@ pub const @"STM32G471C(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F469B(E-G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F469B(E-G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -10212,7 +10212,7 @@ pub const @"STM32F469B(E-G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".Clock
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C091GBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091GBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10223,7 +10223,7 @@ pub const STM32C091GBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32H755IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H755IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -10258,7 +10258,7 @@ pub const STM32H755IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073CBTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073CBTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10276,7 +10276,7 @@ pub const STM32U073CBTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L152RDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152RDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10293,7 +10293,7 @@ pub const STM32L152RDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32WBA5MMGHx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA5MMGHx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -10306,7 +10306,7 @@ pub const STM32WBA5MMGHx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32C092RCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092RCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10318,7 +10318,7 @@ pub const STM32C092RCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32WBA6MOIHx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA6MOIHx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -10336,7 +10336,7 @@ pub const STM32WBA6MOIHx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L071R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L071R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10351,7 +10351,7 @@ pub const @"STM32L071R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const STM32MP151DADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151DADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10383,7 +10383,7 @@ pub const STM32MP151DADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U575VGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575VGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10408,7 +10408,7 @@ pub const STM32U575VGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP131AAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131AAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -10435,7 +10435,7 @@ pub const STM32MP131AAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U031F6Px = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031F6Px = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10451,7 +10451,7 @@ pub const STM32U031F6Px = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32C051F6Px = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051F6Px = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10461,7 +10461,7 @@ pub const STM32C051F6Px = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const @"STM32L053R(6-8)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L053R(6-8)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10475,7 +10475,7 @@ pub const @"STM32L053R(6-8)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G050F6Px = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G050F6Px = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10487,7 +10487,7 @@ pub const STM32G050F6Px = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32G0x0_Value_line", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32WL33CBVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33CBVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10497,7 +10497,7 @@ pub const STM32WL33CBVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticSt
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32F038F6Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F038F6Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -10505,7 +10505,7 @@ pub const STM32F038F6Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32U5A5QJIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5QJIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10533,7 +10533,7 @@ pub const STM32U5A5QJIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F479B(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F479B(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -10560,7 +10560,7 @@ pub const @"STM32F479B(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F401C(D-E)Yx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401C(D-E)Yx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10574,7 +10574,7 @@ pub const @"STM32F401C(D-E)Yx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USB_OTG_FS_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const @"STM32F413Z(G-H)Tx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F413Z(G-H)Tx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -10600,7 +10600,7 @@ pub const @"STM32F413Z(G-H)Tx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L041E6Yx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L041E6Yx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10611,7 +10611,7 @@ pub const STM32L041E6Yx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "WLCSP25", {} },
 }));
-pub const STM32U031R6Ix = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031R6Ix = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10626,7 +10626,7 @@ pub const STM32U031R6Ix = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32WB06CCFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB06CCFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10639,7 +10639,7 @@ pub const STM32WB06CCFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32L496AGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L496AGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10662,7 +10662,7 @@ pub const STM32L496AGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U5A9NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A9NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -10693,7 +10693,7 @@ pub const STM32U5A9NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP157CABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157CABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -10729,7 +10729,7 @@ pub const STM32MP157CABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP157CABx", {} },
 }));
-pub const STM32WL33KBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33KBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10738,7 +10738,7 @@ pub const STM32WL33KBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStr
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const @"STM32F411V(C-E)Tx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F411V(C-E)Tx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10754,7 +10754,7 @@ pub const @"STM32F411V(C-E)Tx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.S
     .{ "USART2_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32G051C(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G051C(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10768,7 +10768,7 @@ pub const @"STM32G051C(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F769IITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F769IITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -10800,7 +10800,7 @@ pub const STM32F769IITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L073C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L073C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10817,7 +10817,7 @@ pub const @"STM32L073C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32WL31C8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL31C8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPUART1_Exist", {} },
@@ -10825,7 +10825,7 @@ pub const STM32WL31C8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStr
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32F071RBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F071RBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -10839,7 +10839,7 @@ pub const STM32F071RBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L151VCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151VCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10853,7 +10853,7 @@ pub const STM32L151VCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G0B1K(B-C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1K(B-C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -10874,7 +10874,7 @@ pub const @"STM32G0B1K(B-C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTre
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32G491M(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G491M(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -10898,7 +10898,7 @@ pub const @"STM32G491M(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(s
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32H7A3V(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3V(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -10931,7 +10931,7 @@ pub const @"STM32H7A3V(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Stat
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U585VITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585VITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -10957,7 +10957,7 @@ pub const STM32U585VITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L452V(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L452V(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10977,7 +10977,7 @@ pub const @"STM32L452V(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L151VDTxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151VDTxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -10992,7 +10992,7 @@ pub const STM32L151VDTxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F429NIHx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F429NIHx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -11018,7 +11018,7 @@ pub const STM32F429NIHx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G471R(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G471R(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -11044,7 +11044,7 @@ pub const @"STM32G471R(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U375REYxG = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375REYxG = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11062,7 +11062,7 @@ pub const STM32U375REYxG = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP233CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -11094,7 +11094,7 @@ pub const STM32MP233CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32G071C(6-8-B)Tx" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G071C(6-8-B)Tx" = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11110,7 +11110,7 @@ pub const @"STM32G071C(6-8-B)Tx" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.Stati
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U375CEYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CEYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11128,7 +11128,7 @@ pub const STM32U375CEYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L4P5R(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4P5R(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11152,7 +11152,7 @@ pub const @"STM32L4P5R(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F303R(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303R(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11170,7 +11170,7 @@ pub const @"STM32F303R(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.Sta
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP211AAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211AAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11197,7 +11197,7 @@ pub const STM32MP211AAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G030F6Px = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G030F6Px = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11208,7 +11208,7 @@ pub const STM32G030F6Px = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "STM32G0x0_Value_line", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32H563MIYxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563MIYxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -11239,7 +11239,7 @@ pub const STM32H563MIYxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G041G(6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G041G(6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11253,7 +11253,7 @@ pub const @"STM32G041G(6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.St
     .{ "USART2_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const @"STM32L051C(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L051C(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11267,7 +11267,7 @@ pub const @"STM32L051C(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U5A5ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11295,7 +11295,7 @@ pub const STM32U5A5ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L063C8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L063C8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11310,7 +11310,7 @@ pub const STM32L063C8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F411R(C-E)Tx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F411R(C-E)Tx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11327,7 +11327,7 @@ pub const @"STM32F411R(C-E)Tx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G411RCTx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411RCTx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -11344,7 +11344,7 @@ pub const STM32G411RCTx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32G491M(C-E)Sx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G491M(C-E)Sx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -11368,7 +11368,7 @@ pub const @"STM32G491M(C-E)Sx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(s
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G041F(6-8)Px" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G041F(6-8)Px" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11382,7 +11382,7 @@ pub const @"STM32G041F(6-8)Px" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.St
     .{ "USART2_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32U595VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11409,7 +11409,7 @@ pub const STM32U595VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G0C1V(C-E)Ix" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1V(C-E)Ix" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -11430,7 +11430,7 @@ pub const @"STM32G0C1V(C-E)Ix" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(s
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32L4S5ZIYx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S5ZIYx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11452,7 +11452,7 @@ pub const STM32L4S5ZIYx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP235CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -11486,7 +11486,7 @@ pub const STM32MP235CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const STM32U073R8Tx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073R8Tx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11504,7 +11504,7 @@ pub const STM32U073R8Tx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H7B3VITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3VITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -11537,7 +11537,7 @@ pub const STM32H7B3VITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F302V(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302V(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11554,7 +11554,7 @@ pub const @"STM32F302V(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.Sta
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP153CADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153CADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -11589,7 +11589,7 @@ pub const STM32MP153CADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP153CADx", {} },
 }));
-pub const @"STM32L071C(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L071C(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11605,7 +11605,7 @@ pub const @"STM32L071C(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7R3V8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3V8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -11632,7 +11632,7 @@ pub const STM32H7R3V8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP235FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -11666,7 +11666,7 @@ pub const STM32MP235FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const STM32U575OIYxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575OIYxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11690,7 +11690,7 @@ pub const STM32U575OIYxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L4S9ZIYx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S9ZIYx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11714,7 +11714,7 @@ pub const STM32L4S9ZIYx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L071K(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L071K(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11727,7 +11727,7 @@ pub const @"STM32L071K(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32U375RGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375RGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11747,7 +11747,7 @@ pub const STM32U375RGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H563IGKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563IGKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -11783,7 +11783,7 @@ pub const STM32H563IGKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F303K(6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303K(6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11792,7 +11792,7 @@ pub const @"STM32F303K(6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32H745BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -11827,7 +11827,7 @@ pub const STM32H745BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073CBUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073CBUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11845,7 +11845,7 @@ pub const STM32U073CBUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L072C(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072C(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11862,7 +11862,7 @@ pub const @"STM32L072C(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H733ZGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H733ZGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -11898,7 +11898,7 @@ pub const STM32H733ZGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G061K(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G061K(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -11913,7 +11913,7 @@ pub const @"STM32G061K(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32F302Z(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302Z(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11930,7 +11930,7 @@ pub const @"STM32F302Z(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.Sta
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP255AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -11968,7 +11968,7 @@ pub const STM32MP255AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32L4P5A(G-E)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4P5A(G-E)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -11992,7 +11992,7 @@ pub const @"STM32L4P5A(G-E)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32G473V(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G473V(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -12018,7 +12018,7 @@ pub const @"STM32G473V(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H7B3RITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3RITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -12046,7 +12046,7 @@ pub const STM32H7B3RITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32G061K(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G061K(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12061,7 +12061,7 @@ pub const @"STM32G061K(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32G471C(C-E)Ux" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G471C(C-E)Ux" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -12086,7 +12086,7 @@ pub const @"STM32G471C(C-E)Ux" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32WB35C(C-E)UxA" = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32WB35C(C-E)UxA" = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -12100,7 +12100,7 @@ pub const @"STM32WB35C(C-E)UxA" = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP131FAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131FAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -12129,7 +12129,7 @@ pub const STM32MP131FAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP131FAEx", {} },
 }));
-pub const STM32L442KCUx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L442KCUx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -12144,7 +12144,7 @@ pub const STM32L442KCUx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32L431C(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L431C(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12161,7 +12161,7 @@ pub const @"STM32L431C(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32C092KBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092KBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12173,7 +12173,7 @@ pub const STM32C092KBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32L082K(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L082K(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12187,7 +12187,7 @@ pub const @"STM32L082K(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32G484VEHx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G484VEHx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -12213,7 +12213,7 @@ pub const STM32G484VEHx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C091FBPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091FBPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12224,14 +12224,14 @@ pub const STM32C091FBPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const @"STM32C011F(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32C011F(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32U545RETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545RETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12254,7 +12254,7 @@ pub const STM32U545RETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G411KBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411KBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12271,7 +12271,7 @@ pub const STM32G411KBUx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "UFQFPN32", {} },
     .{ "STM32G411KBUx", {} },
 }));
-pub const STM32U595AIHx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595AIHx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12298,7 +12298,7 @@ pub const STM32U595AIHx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073RCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073RCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12315,7 +12315,7 @@ pub const STM32U073RCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L451R(C-E)Yx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L451R(C-E)Yx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12334,7 +12334,7 @@ pub const @"STM32L451R(C-E)Yx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32G031C(4-6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G031C(4-6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12347,7 +12347,7 @@ pub const @"STM32G031C(4-6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32G0C1K(C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1K(C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -12369,7 +12369,7 @@ pub const @"STM32G0C1K(C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(s
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32L053R(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L053R(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12384,7 +12384,7 @@ pub const @"STM32L053R(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G050K8Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G050K8Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12396,7 +12396,7 @@ pub const STM32G050K8Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32F412V(E-G)Hx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F412V(E-G)Hx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -12416,7 +12416,7 @@ pub const @"STM32F412V(E-G)Hx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L151C(6-8-B)UxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151C(6-8-B)UxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12428,7 +12428,7 @@ pub const @"STM32L151C(6-8-B)UxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Stati
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L152ZCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152ZCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12441,7 +12441,7 @@ pub const STM32L152ZCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP211AAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211AAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12469,7 +12469,7 @@ pub const STM32MP211AAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L151R(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151R(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12481,7 +12481,7 @@ pub const @"STM32L151R(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Stati
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F745I(E-G)Kx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F745I(E-G)Kx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -12510,7 +12510,7 @@ pub const @"STM32F745I(E-G)Kx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L062C8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L062C8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12525,7 +12525,7 @@ pub const STM32L062C8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H573AIIxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573AIIxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -12562,7 +12562,7 @@ pub const STM32H573AIIxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F030C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F030C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -12570,7 +12570,7 @@ pub const STM32F030C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x0_Value_Line", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F051R6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051R6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -12581,7 +12581,7 @@ pub const STM32F051R6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP253FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -12618,7 +12618,7 @@ pub const STM32MP253FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32WL54JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL54JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12634,7 +12634,7 @@ pub const STM32WL54JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "STM32WL5x", {} },
 }));
-pub const STM32U375VGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375VGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12654,7 +12654,7 @@ pub const STM32U375VGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U083HCYx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U083HCYx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12671,7 +12671,7 @@ pub const STM32U083HCYx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F303R(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303R(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -12689,7 +12689,7 @@ pub const @"STM32F303R(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP231FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -12718,7 +12718,7 @@ pub const STM32MP231FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32H742V(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H742V(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -12752,7 +12752,7 @@ pub const @"STM32H742V(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32H742", {} },
 }));
-pub const STM32F429VITx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F429VITx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -12777,7 +12777,7 @@ pub const STM32F429VITx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F334R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F334R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12787,7 +12787,7 @@ pub const @"STM32F334R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U535RBTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RBTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12809,7 +12809,7 @@ pub const STM32U535RBTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L4Q5RGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5RGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12833,7 +12833,7 @@ pub const STM32L4Q5RGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP131FAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131FAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -12862,7 +12862,7 @@ pub const STM32MP131FAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP131FAFx", {} },
 }));
-pub const STM32N655A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N655A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -12889,7 +12889,7 @@ pub const STM32N655A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L152VEYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152VEYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12904,7 +12904,7 @@ pub const STM32L152VEYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP211FAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211FAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12932,7 +12932,7 @@ pub const STM32MP211FAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L021K4Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L021K4Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -12943,7 +12943,7 @@ pub const STM32L021K4Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32WLE5JBIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE5JBIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12958,7 +12958,7 @@ pub const STM32WLE5JBIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32C051F8Px = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051F8Px = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -12968,7 +12968,7 @@ pub const STM32C051F8Px = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32MP135DAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135DAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -13002,7 +13002,7 @@ pub const STM32MP135DAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP135DAGx", {} },
 }));
-pub const STM32U375VGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375VGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13022,7 +13022,7 @@ pub const STM32U375VGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L062K8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L062K8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -13033,7 +13033,7 @@ pub const STM32L062K8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32C092KBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092KBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13045,7 +13045,7 @@ pub const STM32C092KBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32F427I(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F427I(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13070,7 +13070,7 @@ pub const @"STM32F427I(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G491REYx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G491REYx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -13094,7 +13094,7 @@ pub const STM32G491REYx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32N657B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N657B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -13127,7 +13127,7 @@ pub const STM32N657B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F429A(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F429A(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13153,7 +13153,7 @@ pub const @"STM32F429A(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G414CCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414CCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13171,7 +13171,7 @@ pub const STM32G414CCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H503EBYx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H503EBYx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13191,7 +13191,7 @@ pub const STM32H503EBYx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticS
     .{ "WLCSP25", {} },
     .{ "STM32H503EBYx", {} },
 }));
-pub const STM32L4R5AIIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4R5AIIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -13213,7 +13213,7 @@ pub const STM32L4R5AIIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H753IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H753IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13248,7 +13248,7 @@ pub const STM32H753IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP135FAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135FAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -13282,7 +13282,7 @@ pub const STM32MP135FAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U385RGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385RGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13303,7 +13303,7 @@ pub const STM32U385RGIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H730VBHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H730VBHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13338,7 +13338,7 @@ pub const STM32H730VBHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32N655I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N655I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -13369,7 +13369,7 @@ pub const STM32N655I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F746Z(E-G)Yx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F746Z(E-G)Yx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13399,7 +13399,7 @@ pub const @"STM32F746Z(E-G)Yx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7R3A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13433,7 +13433,7 @@ pub const STM32H7R3A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP235AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -13466,7 +13466,7 @@ pub const STM32MP235AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const STM32F429IITx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F429IITx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13492,7 +13492,7 @@ pub const STM32F429IITx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073K8Ux = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073K8Ux = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -13510,7 +13510,7 @@ pub const STM32U073K8Ux = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32H745IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13545,7 +13545,7 @@ pub const STM32H745IIKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L052T(6-8)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L052T(6-8)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -13558,7 +13558,7 @@ pub const @"STM32L052T(6-8)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32U595QIIx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595QIIx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13585,7 +13585,7 @@ pub const STM32U595QIIx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WB55VCYx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55VCYx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -13599,7 +13599,7 @@ pub const STM32WB55VCYx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H7S7L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S7L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13635,7 +13635,7 @@ pub const STM32H7S7L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L562VETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562VETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13659,7 +13659,7 @@ pub const STM32L562VETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L031G6UxS = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L031G6UxS = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13670,7 +13670,7 @@ pub const STM32L031G6UxS = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticString
     .{ "STM32L0x1", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32WBA55HEFx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA55HEFx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -13684,7 +13684,7 @@ pub const STM32WBA55HEFx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const STM32H7R3I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -13718,7 +13718,7 @@ pub const STM32H7R3I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP157FACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157FACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -13753,7 +13753,7 @@ pub const STM32MP157FACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H563IITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563IITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -13789,7 +13789,7 @@ pub const STM32H563IITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4R7AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4R7AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -13812,7 +13812,7 @@ pub const STM32L4R7AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U5F7VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F7VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -13839,7 +13839,7 @@ pub const STM32U5F7VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP133DAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133DAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -13871,7 +13871,7 @@ pub const STM32MP133DAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP133DAEx", {} },
 }));
-pub const STM32N657A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N657A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -13898,7 +13898,7 @@ pub const STM32N657A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U575CGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575CGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13920,7 +13920,7 @@ pub const STM32U575CGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32G414VBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414VBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -13937,7 +13937,7 @@ pub const STM32G414VBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F415OGYx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F415OGYx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -13958,7 +13958,7 @@ pub const STM32F415OGYx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".Cloc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C071C8Tx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071C8Tx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -13968,7 +13968,7 @@ pub const STM32C071C8Tx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP153CAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153CAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -14003,7 +14003,7 @@ pub const STM32MP153CAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP153CAAx", {} },
 }));
-pub const STM32H562RIVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562RIVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -14030,7 +14030,7 @@ pub const STM32H562RIVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F378VCTx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F378VCTx = STM32F373_STM32F3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14044,7 +14044,7 @@ pub const STM32F378VCTx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "STM32F3x8", {} },
 }));
-pub const @"STM32G041C(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G041C(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14058,7 +14058,7 @@ pub const @"STM32G041C(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.St
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32L031C(4-6)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L031C(4-6)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14069,7 +14069,7 @@ pub const @"STM32L031C(4-6)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP157DABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157DABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -14104,7 +14104,7 @@ pub const STM32MP157DABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WLE5J8Ix = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE5J8Ix = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14119,7 +14119,7 @@ pub const STM32WLE5J8Ix = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32L4A6AGIx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6AGIx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14142,7 +14142,7 @@ pub const STM32L4A6AGIx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP151CAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151CAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14175,7 +14175,7 @@ pub const STM32MP151CAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP151CAAx", {} },
 }));
-pub const @"STM32G0C1V(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1V(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -14196,7 +14196,7 @@ pub const @"STM32G0C1V(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(s
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32U575ZITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575ZITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14221,7 +14221,7 @@ pub const STM32U575ZITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F401V(B-C)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401V(B-C)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14236,7 +14236,7 @@ pub const @"STM32F401V(B-C)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USART2_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32WBA63CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA63CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -14249,7 +14249,7 @@ pub const STM32WBA63CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32H725VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -14284,7 +14284,7 @@ pub const STM32H725VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP157CADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157CADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -14320,7 +14320,7 @@ pub const STM32MP157CADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP157CADx", {} },
 }));
-pub const STM32G483QETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G483QETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -14346,7 +14346,7 @@ pub const STM32G483QETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP151FAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151FAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14378,7 +14378,7 @@ pub const STM32MP151FAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L051R(6-8)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L051R(6-8)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14391,7 +14391,7 @@ pub const @"STM32L051R(6-8)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const STM32WBA65PGIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA65PGIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -14409,7 +14409,7 @@ pub const STM32WBA65PGIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G081KBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081KBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14426,7 +14426,7 @@ pub const STM32G081KBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32H573RITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573RITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -14457,7 +14457,7 @@ pub const STM32H573RITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L443VCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L443VCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14475,7 +14475,7 @@ pub const STM32L443VCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U031R8Ix = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031R8Ix = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14490,7 +14490,7 @@ pub const STM32U031R8Ix = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP257AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -14528,7 +14528,7 @@ pub const STM32MP257AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G441VBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G441VBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14549,7 +14549,7 @@ pub const STM32G441VBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L011K(3-4)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L011K(3-4)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14560,7 +14560,7 @@ pub const @"STM32L011K(3-4)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32L4P5Z(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4P5Z(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14584,7 +14584,7 @@ pub const @"STM32L4P5Z(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H723ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H723ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -14620,7 +14620,7 @@ pub const STM32H723ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U535RBTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RBTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14642,7 +14642,7 @@ pub const STM32U535RBTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L4R5QGIxS = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4R5QGIxS = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14664,7 +14664,7 @@ pub const STM32L4R5QGIxS = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U545CETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545CETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14685,7 +14685,7 @@ pub const STM32U545CETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F768AIYx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F768AIYx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -14715,7 +14715,7 @@ pub const STM32F768AIYx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L433C(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L433C(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14733,7 +14733,7 @@ pub const @"STM32L433C(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32MP253CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -14770,7 +14770,7 @@ pub const STM32MP253CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F100V(8-B)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100V(8-B)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14781,7 +14781,7 @@ pub const @"STM32F100V(8-B)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32G071K(8-B)UxN" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G071K(8-B)UxN" = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14797,7 +14797,7 @@ pub const @"STM32G071K(8-B)UxN" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32MP257FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -14836,7 +14836,7 @@ pub const STM32MP257FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U031C6Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031C6Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14852,7 +14852,7 @@ pub const STM32U031C6Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP253CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -14889,7 +14889,7 @@ pub const STM32MP253CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L496QGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L496QGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14912,7 +14912,7 @@ pub const STM32L496QGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F302K(6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302K(6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14926,7 +14926,7 @@ pub const @"STM32F302K(6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U073KCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073KCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14944,7 +14944,7 @@ pub const STM32U073KCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32C071K8TxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071K8TxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -14954,7 +14954,7 @@ pub const STM32C071K8TxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP131DAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131DAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -14982,7 +14982,7 @@ pub const STM32MP131DAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP131DAGx", {} },
 }));
-pub const STM32L041F6Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L041F6Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -14993,7 +14993,7 @@ pub const STM32L041F6Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32H750IBTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H750IBTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -15028,7 +15028,7 @@ pub const STM32H750IBTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L4Q5VGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5VGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -15052,7 +15052,7 @@ pub const STM32L4Q5VGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L031C(4-6)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L031C(4-6)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15063,7 +15063,7 @@ pub const @"STM32L031C(4-6)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L4R9A(G-I)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R9A(G-I)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15087,7 +15087,7 @@ pub const @"STM32L4R9A(G-I)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L4P5VGYxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4P5VGYxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -15111,7 +15111,7 @@ pub const STM32L4P5VGYxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32G473RETxZ = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G473RETxZ = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -15137,7 +15137,7 @@ pub const STM32G473RETxZ = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32WBA62PIIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA62PIIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -15155,7 +15155,7 @@ pub const STM32WBA62PIIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP151AADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151AADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15188,7 +15188,7 @@ pub const STM32MP151AADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP151AADx", {} },
 }));
-pub const STM32G441KBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G441KBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15208,7 +15208,7 @@ pub const STM32G441KBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32G041K(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G041K(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -15222,7 +15222,7 @@ pub const @"STM32G041K(6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.St
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32H733ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H733ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -15258,7 +15258,7 @@ pub const STM32H733ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32N647Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N647Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -15282,7 +15282,7 @@ pub const STM32N647Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H563VITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563VITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -15316,7 +15316,7 @@ pub const STM32H563VITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F373V(8-B-C)Hx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F373V(8-B-C)Hx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15330,7 +15330,7 @@ pub const @"STM32F373V(8-B-C)Hx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H747BGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H747BGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -15366,7 +15366,7 @@ pub const STM32H747BGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L4P5RGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4P5RGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -15390,7 +15390,7 @@ pub const STM32L4P5RGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U385RGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385RGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15411,7 +15411,7 @@ pub const STM32U385RGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H7B0ABIxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B0ABIxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -15445,7 +15445,7 @@ pub const STM32H7B0ABIxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP133CAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133CAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -15477,7 +15477,7 @@ pub const STM32MP133CAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G411CCUx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411CCUx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -15494,7 +15494,7 @@ pub const STM32G411CCUx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F373C(8-B-C)Tx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F373C(8-B-C)Tx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15509,7 +15509,7 @@ pub const @"STM32F373C(8-B-C)Tx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H7R3I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -15543,7 +15543,7 @@ pub const STM32H7R3I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L151ZCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151ZCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -15556,7 +15556,7 @@ pub const STM32L151ZCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H747ZIYx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H747ZIYx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -15591,7 +15591,7 @@ pub const STM32H747ZIYx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U535VCTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535VCTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15612,7 +15612,7 @@ pub const STM32U535VCTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32L041K6Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L041K6Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15623,7 +15623,7 @@ pub const STM32L041K6Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32F413V(G-H)Tx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F413V(G-H)Tx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -15649,7 +15649,7 @@ pub const @"STM32F413V(G-H)Tx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F469I(E-G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F469I(E-G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -15676,7 +15676,7 @@ pub const @"STM32F469I(E-G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".Clock
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP213DANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213DANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -15707,7 +15707,7 @@ pub const STM32MP213DANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U575VGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575VGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15732,7 +15732,7 @@ pub const STM32U575VGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L443CCFx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L443CCFx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -15750,7 +15750,7 @@ pub const STM32L443CCFx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32U535VEIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535VEIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15771,7 +15771,7 @@ pub const STM32U535VEIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32H730ABIxQ = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H730ABIxQ = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -15807,7 +15807,7 @@ pub const STM32H730ABIxQ = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32C031K(4-6)Tx" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32C031K(4-6)Tx" = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -15815,7 +15815,7 @@ pub const @"STM32C031K(4-6)Tx" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32C091KCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091KCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -15826,7 +15826,7 @@ pub const STM32C091KCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32H743V(G-I)Hx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H743V(G-I)Hx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -15860,7 +15860,7 @@ pub const @"STM32H743V(G-I)Hx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32H743A(G-I)Ix" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H743A(G-I)Ix" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -15895,7 +15895,7 @@ pub const @"STM32H743A(G-I)Ix" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073C8Tx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073C8Tx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -15913,7 +15913,7 @@ pub const STM32U073C8Tx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32N645B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N645B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -15945,7 +15945,7 @@ pub const STM32N645B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H735ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H735ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -15981,7 +15981,7 @@ pub const STM32H735ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G411CBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411CBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -15998,7 +15998,7 @@ pub const STM32G411CBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "LQFP48", {} },
     .{ "STM32G411CBTx", {} },
 }));
-pub const STM32U545NEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545NEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16019,7 +16019,7 @@ pub const STM32U545NEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const @"STM32L433C(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L433C(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -16037,7 +16037,7 @@ pub const @"STM32L433C(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP215DAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215DAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -16068,7 +16068,7 @@ pub const STM32MP215DAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L151V(8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151V(8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -16079,7 +16079,7 @@ pub const @"STM32L151V(8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4A6VGTx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6VGTx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16102,7 +16102,7 @@ pub const STM32L4A6VGTx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F407I(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F407I(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -16124,7 +16124,7 @@ pub const @"STM32F407I(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F072CBYx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F072CBYx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -16139,7 +16139,7 @@ pub const STM32F072CBYx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32MP255FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -16178,7 +16178,7 @@ pub const STM32MP255FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F777VIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F777VIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -16208,7 +16208,7 @@ pub const STM32F777VIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H730VBTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H730VBTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -16243,7 +16243,7 @@ pub const STM32H730VBTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L162QCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162QCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -16257,7 +16257,7 @@ pub const STM32L162QCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const @"STM32G0B1K(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1K(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -16278,7 +16278,7 @@ pub const @"STM32G0B1K(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32G471MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G471MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -16304,7 +16304,7 @@ pub const STM32G471MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U031R8Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031R8Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -16320,7 +16320,7 @@ pub const STM32U031R8Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32WBA55HGFx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA55HGFx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -16334,7 +16334,7 @@ pub const STM32WBA55HGFx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const @"STM32L452C(C-E)Ux" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L452C(C-E)Ux" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -16354,7 +16354,7 @@ pub const @"STM32L452C(C-E)Ux" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP215AANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215AANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -16386,7 +16386,7 @@ pub const STM32MP215AANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G483CEUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G483CEUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -16411,7 +16411,7 @@ pub const STM32G483CEUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP231FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -16440,7 +16440,7 @@ pub const STM32MP231FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F401CCFx = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F401CCFx = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -16454,7 +16454,7 @@ pub const STM32F401CCFx = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.Stati
     .{ "USB_OTG_FS_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const @"STM32F071C(8-B)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F071C(8-B)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -16468,7 +16468,7 @@ pub const @"STM32F071C(8-B)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7B0IBKxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B0IBKxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -16502,7 +16502,7 @@ pub const STM32H7B0IBKxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375REYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375REYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16522,7 +16522,7 @@ pub const STM32U375REYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G031F(4-6-8)Px" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G031F(4-6-8)Px" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -16535,7 +16535,7 @@ pub const @"STM32G031F(4-6-8)Px" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.
     .{ "USART2_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32F750Z8Tx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F750Z8Tx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -16565,7 +16565,7 @@ pub const STM32F750Z8Tx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F756ZGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F756ZGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -16595,7 +16595,7 @@ pub const STM32F756ZGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L552QEIxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552QEIxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16619,7 +16619,7 @@ pub const STM32L552QEIxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP157FAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157FAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -16654,7 +16654,7 @@ pub const STM32MP157FAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F730R8Tx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F730R8Tx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16677,7 +16677,7 @@ pub const STM32F730R8Tx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F107VCHx = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F107VCHx = STM32F105_STM32F105_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16692,7 +16692,7 @@ pub const STM32F107VCHx = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F103R(8-B)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103R(8-B)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -16704,7 +16704,7 @@ pub const @"STM32F103R(8-B)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const @"STM32F769A(G-I)Yx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F769A(G-I)Yx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -16734,7 +16734,7 @@ pub const @"STM32F769A(G-I)Yx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L151CCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151CCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16749,7 +16749,7 @@ pub const STM32L151CCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F412R(E-G)Tx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F412R(E-G)Tx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -16770,7 +16770,7 @@ pub const @"STM32F412R(E-G)Tx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H747IGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H747IGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -16806,7 +16806,7 @@ pub const STM32H747IGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F042K(4-6)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F042K(4-6)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -16817,7 +16817,7 @@ pub const @"STM32F042K(4-6)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32G431K(6-8-B)Ux" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G431K(6-8-B)Ux" = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16837,7 +16837,7 @@ pub const @"STM32G431K(6-8-B)Ux" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U5F7VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F7VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -16864,7 +16864,7 @@ pub const STM32U5F7VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP257AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -16902,7 +16902,7 @@ pub const STM32MP257AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F051R4Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051R4Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -16912,7 +16912,7 @@ pub const STM32F051R4Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART1_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L4A6ZGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6ZGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16935,7 +16935,7 @@ pub const STM32L4A6ZGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L071K8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L071K8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16948,7 +16948,7 @@ pub const STM32L071K8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U595ZITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595ZITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16975,7 +16975,7 @@ pub const STM32U595ZITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G061C(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G061C(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -16990,7 +16990,7 @@ pub const @"STM32G061C(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32WB55CEUx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55CEUx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -17004,7 +17004,7 @@ pub const STM32WB55CEUx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F410C(8-B)Tx" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F410C(8-B)Tx" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17019,7 +17019,7 @@ pub const @"STM32F410C(8-B)Tx" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.S
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U585CIUxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585CIUxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17042,7 +17042,7 @@ pub const STM32U585CIUxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP233AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -17073,7 +17073,7 @@ pub const STM32MP233AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H7B3IIKxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3IIKxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -17107,7 +17107,7 @@ pub const STM32H7B3IIKxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F439I(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F439I(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -17133,7 +17133,7 @@ pub const @"STM32F439I(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L151RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17148,7 +17148,7 @@ pub const STM32L151RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U5F9ZJJxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F9ZJJxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "HSPI1_Exist", {} },
@@ -17177,7 +17177,7 @@ pub const STM32U5F9ZJJxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F071V(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F071V(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -17190,7 +17190,7 @@ pub const @"STM32F071V(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32WLE4CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE4CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -17206,7 +17206,7 @@ pub const STM32WLE4CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7B3ZITxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3ZITxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -17240,7 +17240,7 @@ pub const STM32H7B3ZITxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375CETx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CETx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17259,7 +17259,7 @@ pub const STM32U375CETx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U575CIUxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575CIUxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17281,7 +17281,7 @@ pub const STM32U575CIUxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U5F9ZITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F9ZITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "HSPI1_Exist", {} },
@@ -17310,7 +17310,7 @@ pub const STM32U5F9ZITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32G031K(4-6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G031K(4-6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -17323,7 +17323,7 @@ pub const @"STM32G031K(4-6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32MP153DABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153DABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -17357,7 +17357,7 @@ pub const STM32MP153DABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F469N(E-G)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F469N(E-G)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -17384,7 +17384,7 @@ pub const @"STM32F469N(E-G)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP257DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -17422,7 +17422,7 @@ pub const STM32MP257DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F765I(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F765I(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -17452,7 +17452,7 @@ pub const @"STM32F765I(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U599NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -17482,7 +17482,7 @@ pub const STM32U599NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F103Z(C-D-E)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103Z(C-D-E)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -17501,7 +17501,7 @@ pub const @"STM32F103Z(C-D-E)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const STM32MP215CALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215CALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -17534,7 +17534,7 @@ pub const STM32MP215CALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G473M(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G473M(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -17560,7 +17560,7 @@ pub const @"STM32G473M(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L100C6Ux = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L100C6Ux = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17574,7 +17574,7 @@ pub const STM32L100C6Ux = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32L100_Value_Line", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32C051C6Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051C6Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -17584,7 +17584,7 @@ pub const STM32C051C6Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F723Z(C-E)Ix" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F723Z(C-E)Ix" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17612,7 +17612,7 @@ pub const @"STM32F723Z(C-E)Ix" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const @"STM32L552R(C-E)Tx" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L552R(C-E)Tx" = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17637,7 +17637,7 @@ pub const @"STM32L552R(C-E)Tx" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP231CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -17666,7 +17666,7 @@ pub const STM32MP231CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F746VGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F746VGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -17695,7 +17695,7 @@ pub const STM32F746VGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L151CCUx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151CCUx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17710,7 +17710,7 @@ pub const STM32L151CCUx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H503CBUx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H503CBUx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17729,7 +17729,7 @@ pub const STM32H503CBUx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32C031C(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32C031C(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -17737,7 +17737,7 @@ pub const @"STM32C031C(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32G0C1R(C-E)IxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1R(C-E)IxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -17758,7 +17758,7 @@ pub const @"STM32G0C1R(C-E)IxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32C091KCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091KCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -17769,7 +17769,7 @@ pub const STM32C091KCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32L162ZDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162ZDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17787,7 +17787,7 @@ pub const STM32L162ZDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const STM32U535CCUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CCUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17807,7 +17807,7 @@ pub const STM32U535CCUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F413R(G-H)Tx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F413R(G-H)Tx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -17832,7 +17832,7 @@ pub const @"STM32F413R(G-H)Tx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32L071C(B-Z)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L071C(B-Z)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17848,7 +17848,7 @@ pub const @"STM32L071C(B-Z)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32G431RBTxZ = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G431RBTxZ = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17870,7 +17870,7 @@ pub const STM32G431RBTxZ = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP157AAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157AAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -17906,7 +17906,7 @@ pub const STM32MP157AAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP157AAAx", {} },
 }));
-pub const STM32F779AIYx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F779AIYx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -17936,7 +17936,7 @@ pub const STM32F779AIYx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G411C8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411C8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -17953,7 +17953,7 @@ pub const STM32G411C8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "LQFP48", {} },
     .{ "STM32G411C8Tx", {} },
 }));
-pub const STM32MP135AAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135AAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -17986,7 +17986,7 @@ pub const STM32MP135AAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U031R6Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031R6Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18002,7 +18002,7 @@ pub const STM32U031R6Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F091RCYx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F091RCYx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18014,7 +18014,7 @@ pub const STM32F091RCYx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L552VETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552VETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18038,7 +18038,7 @@ pub const STM32L552VETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H735RGVx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H735RGVx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -18066,7 +18066,7 @@ pub const STM32H735RGVx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32C031G(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32C031G(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -18074,7 +18074,7 @@ pub const @"STM32C031G(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32H757ZIYx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H757ZIYx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -18109,7 +18109,7 @@ pub const STM32H757ZIYx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F072RBHx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F072RBHx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -18123,7 +18123,7 @@ pub const STM32F072RBHx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U073MBIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073MBIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18140,7 +18140,7 @@ pub const STM32U073MBIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L073R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L073R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18157,7 +18157,7 @@ pub const @"STM32L073R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U535RCTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RCTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18179,7 +18179,7 @@ pub const STM32U535RCTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F042K(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F042K(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -18190,7 +18190,7 @@ pub const @"STM32F042K(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32MP213FAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213FAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -18221,7 +18221,7 @@ pub const STM32MP213FAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L073V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L073V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18237,7 +18237,7 @@ pub const STM32L073V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F105V(8-B)Hx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F105V(8-B)Hx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18252,7 +18252,7 @@ pub const @"STM32F105V(8-B)Hx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U585CITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585CITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18275,7 +18275,7 @@ pub const STM32U585CITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F405VGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F405VGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -18296,7 +18296,7 @@ pub const STM32F405VGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".Cloc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073CCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073CCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18314,7 +18314,7 @@ pub const STM32U073CCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP213FANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213FANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -18346,7 +18346,7 @@ pub const STM32MP213FANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F415RGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F415RGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18367,7 +18367,7 @@ pub const STM32F415RGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".Cloc
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G4A1CEUx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G4A1CEUx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -18390,7 +18390,7 @@ pub const STM32G4A1CEUx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U599ZITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599ZITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18418,7 +18418,7 @@ pub const STM32U599ZITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F722R(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F722R(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18441,7 +18441,7 @@ pub const @"STM32F722R(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32L151R(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151R(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18454,7 +18454,7 @@ pub const @"STM32L151R(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F756BGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F756BGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -18484,7 +18484,7 @@ pub const STM32F756BGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F051R8Hx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051R8Hx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -18495,7 +18495,7 @@ pub const STM32F051R8Hx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32L4Q5VGYx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5VGYx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18519,7 +18519,7 @@ pub const STM32L4Q5VGYx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F103Z(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103Z(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE430", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -18539,7 +18539,7 @@ pub const @"STM32F103Z(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const STM32C071KBUxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071KBUxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18549,7 +18549,7 @@ pub const STM32C071KBUxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L072V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L072V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18565,7 +18565,7 @@ pub const STM32L072V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L072C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18582,7 +18582,7 @@ pub const @"STM32L072C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F411V(C-E)Hx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F411V(C-E)Hx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18598,7 +18598,7 @@ pub const @"STM32F411V(C-E)Hx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.S
     .{ "USART2_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H725ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -18634,7 +18634,7 @@ pub const STM32H725ZGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WB07CCFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB07CCFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18647,7 +18647,7 @@ pub const STM32WB07CCFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32F733IETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F733IETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18675,7 +18675,7 @@ pub const STM32F733IETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32C051C8Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051C8Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18685,7 +18685,7 @@ pub const STM32C051C8Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L031K(4-6)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L031K(4-6)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18696,7 +18696,7 @@ pub const @"STM32L031K(4-6)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32L151RETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151RETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18712,7 +18712,7 @@ pub const STM32L151RETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U535REIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535REIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18733,7 +18733,7 @@ pub const STM32U535REIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32MP153AADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153AADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -18768,7 +18768,7 @@ pub const STM32MP153AADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP153AADx", {} },
 }));
-pub const STM32L010RBTx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L010RBTx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18779,7 +18779,7 @@ pub const STM32L010RBTx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x0_Value_Line", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP231FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -18808,7 +18808,7 @@ pub const STM32MP231FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U385RGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385RGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18830,7 +18830,7 @@ pub const STM32U385RGTxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L462REIx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L462REIx = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -18850,7 +18850,7 @@ pub const STM32L462REIx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WB55VGYx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55VGYx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -18864,7 +18864,7 @@ pub const STM32WB55VGYx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP135AAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135AAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -18897,7 +18897,7 @@ pub const STM32MP135AAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C092RCIx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092RCIx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18908,7 +18908,7 @@ pub const STM32C092RCIx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U545VEIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545VEIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -18930,7 +18930,7 @@ pub const STM32U545VEIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32MP251DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -18963,7 +18963,7 @@ pub const STM32MP251DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H757IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H757IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -18999,7 +18999,7 @@ pub const STM32H757IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U535CEUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CEUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19019,7 +19019,7 @@ pub const STM32U535CEUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32G483PEIx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G483PEIx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -19045,7 +19045,7 @@ pub const STM32G483PEIx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H523CCUx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523CCUx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -19071,7 +19071,7 @@ pub const STM32H523CCUx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U375KEUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375KEUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19088,7 +19088,7 @@ pub const STM32U375KEUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "UQFN32", {} },
 }));
-pub const STM32C071KBUx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071KBUx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19098,7 +19098,7 @@ pub const STM32C071KBUx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F048G6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F048G6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -19110,7 +19110,7 @@ pub const STM32F048G6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32L162QDHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162QDHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19128,7 +19128,7 @@ pub const STM32L162QDHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const STM32H562AIIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562AIIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -19161,7 +19161,7 @@ pub const STM32H562AIIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L562RETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562RETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19186,7 +19186,7 @@ pub const STM32L562RETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP135CAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135CAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -19220,7 +19220,7 @@ pub const STM32MP135CAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F401V(D-E)Hx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401V(D-E)Hx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19235,7 +19235,7 @@ pub const @"STM32F401V(D-E)Hx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USART2_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L451C(C-E)Ux" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L451C(C-E)Ux" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19254,7 +19254,7 @@ pub const @"STM32L451C(C-E)Ux" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L100R(8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L100R(8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19267,7 +19267,7 @@ pub const @"STM32L100R(8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticS
     .{ "STM32L100_Value_Line", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F205Z(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F205Z(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -19288,7 +19288,7 @@ pub const @"STM32F205Z(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F469Z(E-G)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F469Z(E-G)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -19313,7 +19313,7 @@ pub const @"STM32F469Z(E-G)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C091FCPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091FCPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19324,7 +19324,7 @@ pub const STM32C091FCPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const @"STM32G051F(6-8)Px" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G051F(6-8)Px" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19338,7 +19338,7 @@ pub const @"STM32G051F(6-8)Px" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32U535CEUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CEUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19358,7 +19358,7 @@ pub const STM32U535CEUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP153AACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153AACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -19393,7 +19393,7 @@ pub const STM32MP153AACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP153AACx", {} },
 }));
-pub const STM32U5F9VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F9VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "HSPI1_Exist", {} },
@@ -19421,7 +19421,7 @@ pub const STM32U5F9VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32G0B1M(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1M(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -19441,7 +19441,7 @@ pub const @"STM32G0B1M(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32H7R7Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R7Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -19471,7 +19471,7 @@ pub const STM32H7R7Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F401C(D-E)Ux" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401C(D-E)Ux" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19485,7 +19485,7 @@ pub const @"STM32F401C(D-E)Ux" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F051K8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051K8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -19495,7 +19495,7 @@ pub const STM32F051K8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32F722I(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F722I(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19522,7 +19522,7 @@ pub const @"STM32F722I(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H757BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H757BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -19558,7 +19558,7 @@ pub const STM32H757BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L412T8Yx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412T8Yx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -19572,7 +19572,7 @@ pub const STM32L412T8Yx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32L443RCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L443RCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19591,7 +19591,7 @@ pub const STM32L443RCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP253AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -19627,7 +19627,7 @@ pub const STM32MP253AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP211DALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211DALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19655,7 +19655,7 @@ pub const STM32MP211DALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L433VCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L433VCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19673,7 +19673,7 @@ pub const STM32L433VCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G0B0VETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G0B0VETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19687,7 +19687,7 @@ pub const STM32G0B0VETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.Stat
     .{ "USB_DRD_FS_Exist", {} },
     .{ "STM32G0x0_Value_line", {} },
 }));
-pub const STM32F756VGHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F756VGHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -19716,7 +19716,7 @@ pub const STM32F756VGHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32N657Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N657Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -19741,7 +19741,7 @@ pub const STM32N657Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L151VETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151VETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19756,7 +19756,7 @@ pub const STM32L151VETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U595AJHx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595AJHx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19783,7 +19783,7 @@ pub const STM32U595AJHx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WL55CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL55CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19800,7 +19800,7 @@ pub const STM32WL55CCUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32WL5x", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L4S7AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S7AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19823,7 +19823,7 @@ pub const STM32L4S7AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L052C(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L052C(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -19838,7 +19838,7 @@ pub const @"STM32L052C(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L496ZGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L496ZGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19861,7 +19861,7 @@ pub const STM32L496ZGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32G0B1C(B-C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1C(B-C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -19882,7 +19882,7 @@ pub const @"STM32G0B1C(B-C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP213AAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213AAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -19912,7 +19912,7 @@ pub const STM32MP213AAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F746IGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F746IGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -19942,7 +19942,7 @@ pub const STM32F746IGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G061C(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G061C(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -19957,7 +19957,7 @@ pub const @"STM32G061C(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H573IITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573IITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -19994,7 +19994,7 @@ pub const STM32H573IITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C071FBYx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071FBYx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -20004,7 +20004,7 @@ pub const STM32C071FBYx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H730ZBTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H730ZBTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -20040,7 +20040,7 @@ pub const STM32H730ZBTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H725ZETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725ZETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -20076,7 +20076,7 @@ pub const STM32H725ZETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F215R(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F215R(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20097,7 +20097,7 @@ pub const @"STM32F215R(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32WBA62MGFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA62MGFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -20115,7 +20115,7 @@ pub const STM32WBA62MGFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G474Q(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G474Q(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -20141,7 +20141,7 @@ pub const @"STM32G474Q(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4R5QIIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4R5QIIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -20163,7 +20163,7 @@ pub const STM32L4R5QIIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U385VGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385VGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20184,7 +20184,7 @@ pub const STM32U385VGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WBA62CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA62CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -20201,7 +20201,7 @@ pub const STM32WBA62CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F769NIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F769NIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -20233,7 +20233,7 @@ pub const STM32F769NIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32N655L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N655L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -20268,7 +20268,7 @@ pub const STM32N655L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USART10_Exist", {} },
 }));
-pub const @"STM32F207I(C-E-F-G)Hx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F207I(C-E-F-G)Hx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -20290,7 +20290,7 @@ pub const @"STM32F207I(C-E-F-G)Hx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U083RCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U083RCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -20308,7 +20308,7 @@ pub const STM32U083RCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F750V8Tx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F750V8Tx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -20337,7 +20337,7 @@ pub const STM32F750V8Tx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP251CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -20371,7 +20371,7 @@ pub const STM32MP251CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H725VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -20404,7 +20404,7 @@ pub const STM32H725VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G030J6Mx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G030J6Mx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -20414,7 +20414,7 @@ pub const STM32G030J6Mx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART2_Exist", {} },
     .{ "STM32G0x0_Value_line", {} },
 }));
-pub const STM32L021F4Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L021F4Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20424,7 +20424,7 @@ pub const STM32L021F4Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const STM32U535VETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535VETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20445,7 +20445,7 @@ pub const STM32U535VETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32G031Y8Yx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G031Y8Yx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -20457,7 +20457,7 @@ pub const STM32G031Y8Yx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32MP251CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -20491,7 +20491,7 @@ pub const STM32MP251CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L4R5ZITxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4R5ZITxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -20513,7 +20513,7 @@ pub const STM32L4R5ZITxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP255DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -20551,7 +20551,7 @@ pub const STM32MP255DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U585QIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585QIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20577,7 +20577,7 @@ pub const STM32U585QIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP255CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -20616,7 +20616,7 @@ pub const STM32MP255CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H743VITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743VITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -20650,7 +20650,7 @@ pub const STM32H743VITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U083CCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U083CCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -20668,7 +20668,7 @@ pub const STM32U083CCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H743IGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743IGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -20703,7 +20703,7 @@ pub const STM32H743IGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F378RCTx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F378RCTx = STM32F373_STM32F3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20718,7 +20718,7 @@ pub const STM32F378RCTx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32F3x8", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U535CBTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CBTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20738,7 +20738,7 @@ pub const STM32U535CBTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U575AIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575AIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20763,7 +20763,7 @@ pub const STM32U575AIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32WBA65MIFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA65MIFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -20782,7 +20782,7 @@ pub const STM32WBA65MIFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const STM32L152RETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152RETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -20798,7 +20798,7 @@ pub const STM32L152RETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H573VITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573VITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -20832,7 +20832,7 @@ pub const STM32H573VITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F072C(8-B)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F072C(8-B)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -20847,7 +20847,7 @@ pub const @"STM32F072C(8-B)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H725AEIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725AEIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -20883,7 +20883,7 @@ pub const STM32H725AEIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H523CEUx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523CEUx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -20909,7 +20909,7 @@ pub const STM32H523CEUx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U585OIYxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585OIYxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20934,7 +20934,7 @@ pub const STM32U585OIYxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F373V(8-B-C)Tx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F373V(8-B-C)Tx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20948,7 +20948,7 @@ pub const @"STM32F373V(8-B-C)Tx" = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U5A5AJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5AJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -20976,7 +20976,7 @@ pub const STM32U5A5AJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP213CANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213CANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -21008,7 +21008,7 @@ pub const STM32MP213CANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U5A9BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A9BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -21039,7 +21039,7 @@ pub const STM32U5A9BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U595VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21066,7 +21066,7 @@ pub const STM32U595VJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32N645L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N645L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -21100,7 +21100,7 @@ pub const STM32N645L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USART10_Exist", {} },
 }));
-pub const STM32L422CBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L422CBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -21117,7 +21117,7 @@ pub const STM32L422CBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F051C6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051C6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -21127,7 +21127,7 @@ pub const STM32F051C6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F765N(G-I)Hx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F765N(G-I)Hx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -21157,7 +21157,7 @@ pub const @"STM32F765N(G-I)Hx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP255FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -21196,7 +21196,7 @@ pub const STM32MP255FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP213CALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213CALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -21228,7 +21228,7 @@ pub const STM32MP213CALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F412Z(E-G)Jx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F412Z(E-G)Jx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -21248,7 +21248,7 @@ pub const @"STM32F412Z(E-G)Jx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U073MCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073MCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -21265,7 +21265,7 @@ pub const STM32U073MCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C071KBTxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071KBTxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -21275,7 +21275,7 @@ pub const STM32C071KBTxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L552C(C-E)Ux" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L552C(C-E)Ux" = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21298,7 +21298,7 @@ pub const @"STM32L552C(C-E)Ux" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP255CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -21337,7 +21337,7 @@ pub const STM32MP255CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G441CBYx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G441CBYx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21358,7 +21358,7 @@ pub const STM32G441CBYx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const @"STM32L152C(6-8-B)UxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152C(6-8-B)UxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -21370,7 +21370,7 @@ pub const @"STM32L152C(6-8-B)UxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Stati
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H562IITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562IITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -21403,7 +21403,7 @@ pub const STM32H562IITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L073R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L073R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21419,7 +21419,7 @@ pub const @"STM32L073R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G0C1C(C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1C(C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -21441,7 +21441,7 @@ pub const @"STM32G0C1C(C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP153DAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153DAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -21475,7 +21475,7 @@ pub const STM32MP153DAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U5F9ZIJxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F9ZIJxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "HSPI1_Exist", {} },
@@ -21504,7 +21504,7 @@ pub const STM32U5F9ZIJxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP257DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -21542,7 +21542,7 @@ pub const STM32MP257DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP251FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -21576,7 +21576,7 @@ pub const STM32MP251FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32G431R(6-8-B)Ix" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G431R(6-8-B)Ix" = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21597,7 +21597,7 @@ pub const @"STM32G431R(6-8-B)Ix" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.St
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H533RETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H533RETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -21625,7 +21625,7 @@ pub const STM32H533RETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G483MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G483MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -21651,7 +21651,7 @@ pub const STM32G483MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F103T(8-B)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103T(8-B)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -21661,7 +21661,7 @@ pub const @"STM32F103T(8-B)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F103", {} },
     .{ "VFQFPN36", {} },
 }));
-pub const STM32L151VDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151VDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21678,7 +21678,7 @@ pub const STM32L151VDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U375REIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375REIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21698,7 +21698,7 @@ pub const STM32U375REIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WBA62MIFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA62MIFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -21716,7 +21716,7 @@ pub const STM32WBA62MIFx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L431VCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L431VCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -21733,7 +21733,7 @@ pub const STM32L431VCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H757AIIx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H757AIIx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -21769,7 +21769,7 @@ pub const STM32H757AIIx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F205V(B-C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F205V(B-C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -21790,7 +21790,7 @@ pub const @"STM32F205V(B-C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-r
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H562AGIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562AGIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -21823,7 +21823,7 @@ pub const STM32H562AGIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L011E(3-4)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L011E(3-4)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21834,7 +21834,7 @@ pub const @"STM32L011E(3-4)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "WLCSP25", {} },
 }));
-pub const STM32U5G9BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5G9BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "HSPI1_Exist", {} },
@@ -21864,7 +21864,7 @@ pub const STM32U5G9BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F103R(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103R(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -21874,7 +21874,7 @@ pub const @"STM32F103R(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F103", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L496QGIxS = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L496QGIxS = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21897,7 +21897,7 @@ pub const STM32L496QGIxS = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H533CEUx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H533CEUx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -21924,7 +21924,7 @@ pub const STM32H533CEUx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32G473Q(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G473Q(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -21950,7 +21950,7 @@ pub const @"STM32G473Q(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F091RCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F091RCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21962,7 +21962,7 @@ pub const STM32F091RCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F098CCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F098CCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21976,7 +21976,7 @@ pub const STM32F098CCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "STM32F0x8", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32G411M8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411M8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -21992,7 +21992,7 @@ pub const STM32G411M8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "STM32G411M8Tx", {} },
 }));
-pub const STM32G0B0KETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G0B0KETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -22007,7 +22007,7 @@ pub const STM32G0B0KETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.Stat
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32G484CEUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G484CEUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -22032,7 +22032,7 @@ pub const STM32G484CEUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F769IGTx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F769IGTx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -22064,7 +22064,7 @@ pub const STM32F769IGTx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP235FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -22098,7 +22098,7 @@ pub const STM32MP235FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const STM32H563VITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563VITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -22131,7 +22131,7 @@ pub const STM32H563VITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L152CCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152CCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22146,7 +22146,7 @@ pub const STM32L152CCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F091V(B-C)Tx" = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F091V(B-C)Tx" = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22158,7 +22158,7 @@ pub const @"STM32F091V(B-C)Tx" = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F098CCUx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F098CCUx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22172,7 +22172,7 @@ pub const STM32F098CCUx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "STM32F0x8", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32G051C(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G051C(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22186,7 +22186,7 @@ pub const @"STM32G051C(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H725RGVx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725RGVx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -22214,7 +22214,7 @@ pub const STM32H725RGVx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L552CEUxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552CEUxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22237,7 +22237,7 @@ pub const STM32L552CEUxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U599ZIYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599ZIYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -22266,7 +22266,7 @@ pub const STM32U599ZIYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G071EBYx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G071EBYx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22282,7 +22282,7 @@ pub const STM32G071EBYx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "WLCSP25", {} },
 }));
-pub const STM32H562VGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562VGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -22314,7 +22314,7 @@ pub const STM32H562VGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F767N(G-I)Hx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F767N(G-I)Hx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -22345,7 +22345,7 @@ pub const @"STM32F767N(G-I)Hx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U535CCTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CCTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22365,7 +22365,7 @@ pub const STM32U535CCTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32L011F(3-4)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L011F(3-4)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22375,7 +22375,7 @@ pub const @"STM32L011F(3-4)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const STM32WBA54KEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA54KEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -22390,7 +22390,7 @@ pub const STM32WBA54KEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "STM32WBAx4", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32L071V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L071V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22405,7 +22405,7 @@ pub const STM32L071V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const STM32F732ZETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F732ZETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22432,7 +22432,7 @@ pub const STM32F732ZETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L100RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L100RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22448,7 +22448,7 @@ pub const STM32L100RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32L100_Value_Line", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP211FALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211FALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22477,7 +22477,7 @@ pub const STM32MP211FALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L152V(8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152V(8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -22488,7 +22488,7 @@ pub const @"STM32L152V(8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F303Z(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303Z(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22506,7 +22506,7 @@ pub const @"STM32F303Z(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.Sta
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L072V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22522,7 +22522,7 @@ pub const @"STM32L072V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G431CBTxZ = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G431CBTxZ = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22544,7 +22544,7 @@ pub const STM32G431CBTxZ = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F401R(B-C)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401R(B-C)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -22559,7 +22559,7 @@ pub const @"STM32F401R(B-C)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L462CETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L462CETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -22579,7 +22579,7 @@ pub const STM32L462CETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H745XGHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745XGHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -22614,7 +22614,7 @@ pub const STM32H745XGHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L072V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L072V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22630,7 +22630,7 @@ pub const STM32L072V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP251DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -22663,7 +22663,7 @@ pub const STM32MP251DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G070CBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G070CBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -22675,7 +22675,7 @@ pub const STM32G070CBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F101R(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101R(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE430", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22690,7 +22690,7 @@ pub const @"STM32F101R(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F101", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U575QGIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575QGIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22715,7 +22715,7 @@ pub const STM32U575QGIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H573IITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573IITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -22752,7 +22752,7 @@ pub const STM32H573IITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G0C1C(C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1C(C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -22774,7 +22774,7 @@ pub const @"STM32G0C1C(C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(s
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F746VETx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F746VETx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -22803,7 +22803,7 @@ pub const STM32F746VETx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G471V(C-E)Ix" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G471V(C-E)Ix" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -22829,7 +22829,7 @@ pub const @"STM32G471V(C-E)Ix" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L083V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L083V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22845,7 +22845,7 @@ pub const @"STM32L083V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U545CETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545CETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22866,7 +22866,7 @@ pub const STM32U545CETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F423VHTx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F423VHTx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -22892,7 +22892,7 @@ pub const STM32F423VHTx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U5G7VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5G7VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -22921,7 +22921,7 @@ pub const STM32U5G7VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L152VDTxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152VDTxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -22936,7 +22936,7 @@ pub const STM32L152VDTxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP233DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -22967,7 +22967,7 @@ pub const STM32MP233DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U031F8Px = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031F8Px = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -22983,7 +22983,7 @@ pub const STM32U031F8Px = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32H563AGIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563AGIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -23019,7 +23019,7 @@ pub const STM32H563AGIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L011F(3-4)Px" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L011F(3-4)Px" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23030,7 +23030,7 @@ pub const @"STM32L011F(3-4)Px" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32L486RGTx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L486RGTx = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23053,7 +23053,7 @@ pub const STM32L486RGTx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP151CACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151CACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23086,7 +23086,7 @@ pub const STM32MP151CACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP151CACx", {} },
 }));
-pub const STM32WLE5CBUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE5CBUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -23102,7 +23102,7 @@ pub const STM32WLE5CBUx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U385CGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385CGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23121,7 +23121,7 @@ pub const STM32U385CGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L412K8Ux = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412K8Ux = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -23135,7 +23135,7 @@ pub const STM32L412K8Ux = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32F042C(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F042C(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -23147,7 +23147,7 @@ pub const @"STM32F042C(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32WB05KZVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB05KZVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2S3_Exist", {} },
@@ -23155,7 +23155,7 @@ pub const STM32WB05KZVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32L4S5QIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S5QIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -23177,7 +23177,7 @@ pub const STM32L4S5QIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP231DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -23205,7 +23205,7 @@ pub const STM32MP231DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U5A5QJIx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5QJIx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23233,7 +23233,7 @@ pub const STM32U5A5QJIx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C051D8Yx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051D8Yx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -23242,7 +23242,7 @@ pub const STM32C051D8Yx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32G4A1KEUx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G4A1KEUx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -23264,7 +23264,7 @@ pub const STM32G4A1KEUx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32G041C(6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G041C(6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -23278,7 +23278,7 @@ pub const @"STM32G041C(6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.St
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F429I(E-G)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F429I(E-G)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -23304,7 +23304,7 @@ pub const @"STM32F429I(E-G)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U595AIHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595AIHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23331,7 +23331,7 @@ pub const STM32U595AIHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C071F8Px = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071F8Px = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -23341,7 +23341,7 @@ pub const STM32C071F8Px = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP255CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -23380,7 +23380,7 @@ pub const STM32MP255CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G411C6Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411C6Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23397,7 +23397,7 @@ pub const STM32G411C6Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "UFQFPN48", {} },
     .{ "STM32G411C6Ux", {} },
 }));
-pub const STM32L4A6VGYxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6VGYxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23420,7 +23420,7 @@ pub const STM32L4A6VGYxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H563RITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563RITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -23450,7 +23450,7 @@ pub const STM32H563RITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F302VCYx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F302VCYx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23466,7 +23466,7 @@ pub const STM32F302VCYx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WBA55CEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA55CEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -23481,7 +23481,7 @@ pub const STM32WBA55CEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "STM32WBAx5", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L4A6VGYx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6VGYx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23504,7 +23504,7 @@ pub const STM32L4A6VGYx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32C071FBPx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071FBPx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -23514,7 +23514,7 @@ pub const STM32C071FBPx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L471Q(E-G)Ix" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L471Q(E-G)Ix" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23535,7 +23535,7 @@ pub const @"STM32L471Q(E-G)Ix" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F098RCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F098RCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23549,7 +23549,7 @@ pub const STM32F098RCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "STM32F0x8", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H735VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H735VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -23582,7 +23582,7 @@ pub const STM32H735VGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U535RETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23604,7 +23604,7 @@ pub const STM32U535RETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F207V(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F207V(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -23626,7 +23626,7 @@ pub const @"STM32F207V(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7S3I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -23661,7 +23661,7 @@ pub const STM32H7S3I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F098VCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F098VCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23674,7 +23674,7 @@ pub const STM32F098VCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "STM32F0x8", {} },
 }));
-pub const STM32H7B0ZBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B0ZBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -23708,7 +23708,7 @@ pub const STM32H7B0ZBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP215DALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215DALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -23740,7 +23740,7 @@ pub const STM32MP215DALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F078CBYx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F078CBYx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -23756,7 +23756,7 @@ pub const STM32F078CBYx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32C092ECYx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092ECYx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23767,7 +23767,7 @@ pub const STM32C092ECYx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L041G6Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L041G6Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23778,7 +23778,7 @@ pub const STM32L041G6Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const @"STM32L4P5Q(G-E)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4P5Q(G-E)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -23802,7 +23802,7 @@ pub const @"STM32L4P5Q(G-E)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L051R(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L051R(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -23816,7 +23816,7 @@ pub const @"STM32L051R(6-8)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F429V(E-G)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F429V(E-G)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -23841,7 +23841,7 @@ pub const @"STM32F429V(E-G)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H563IITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563IITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -23877,7 +23877,7 @@ pub const STM32H563IITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L152ZDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152ZDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23894,7 +23894,7 @@ pub const STM32L152ZDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP235AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -23927,7 +23927,7 @@ pub const STM32MP235AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const @"STM32G061F(6-8)Px" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G061F(6-8)Px" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23942,7 +23942,7 @@ pub const @"STM32G061F(6-8)Px" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32U595ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -23969,7 +23969,7 @@ pub const STM32U595ZJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U031C8Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031C8Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -23985,7 +23985,7 @@ pub const STM32U031C8Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L552ZETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552ZETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24009,7 +24009,7 @@ pub const STM32L552ZETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L4R5V(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R5V(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -24031,7 +24031,7 @@ pub const @"STM32L4R5V(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U595VITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595VITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24058,7 +24058,7 @@ pub const STM32U595VITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U585AIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585AIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24084,7 +24084,7 @@ pub const STM32U585AIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32G473V(B-C-E)Hx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G473V(B-C-E)Hx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -24110,7 +24110,7 @@ pub const @"STM32G473V(B-C-E)Hx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L462REYx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L462REYx = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -24130,7 +24130,7 @@ pub const STM32L462REYx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F413Z(G-H)Jx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F413Z(G-H)Jx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -24156,7 +24156,7 @@ pub const @"STM32F413Z(G-H)Jx" = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F412R(E-G)YxP" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F412R(E-G)YxP" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -24176,7 +24176,7 @@ pub const @"STM32F412R(E-G)YxP" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L552C(C-E)Tx" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L552C(C-E)Tx" = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24199,7 +24199,7 @@ pub const @"STM32L552C(C-E)Tx" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F733ZETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F733ZETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24227,7 +24227,7 @@ pub const STM32F733ZETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32H563ZITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563ZITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -24263,7 +24263,7 @@ pub const STM32H563ZITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G0B1K(B-C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1K(B-C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -24284,7 +24284,7 @@ pub const @"STM32G0B1K(B-C-E)Ux" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32L071V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L071V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24299,7 +24299,7 @@ pub const @"STM32L071V(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const STM32U535VCIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535VCIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24320,7 +24320,7 @@ pub const STM32U535VCIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32U535CCUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CCUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24340,7 +24340,7 @@ pub const STM32U535CCUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U545JEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545JEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24361,7 +24361,7 @@ pub const STM32U545JEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32H573VITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573VITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -24396,7 +24396,7 @@ pub const STM32H573VITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G474R(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G474R(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -24422,7 +24422,7 @@ pub const @"STM32G474R(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G411RBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411RBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24439,7 +24439,7 @@ pub const STM32G411RBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "LQFP64", {} },
     .{ "STM32G411RBTx", {} },
 }));
-pub const STM32WB15CCYx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB15CCYx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -24450,7 +24450,7 @@ pub const STM32WB15CCYx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32MP151FACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151FACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24482,7 +24482,7 @@ pub const STM32MP151FACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA55UGIx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA55UGIx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -24496,7 +24496,7 @@ pub const STM32WBA55UGIx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const STM32G071RBIx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G071RBIx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24511,7 +24511,7 @@ pub const STM32G071RBIx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G483CETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G483CETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -24535,7 +24535,7 @@ pub const STM32G483CETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32L451V(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L451V(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -24554,7 +24554,7 @@ pub const @"STM32L451V(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32C051K8Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051K8Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -24564,7 +24564,7 @@ pub const STM32C051K8Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32L4Q5CGUxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5CGUxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -24587,7 +24587,7 @@ pub const STM32L4Q5CGUxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L100R(8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L100R(8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24601,7 +24601,7 @@ pub const @"STM32L100R(8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticSt
     .{ "STM32L100_Value_Line", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L062K8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L062K8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -24612,7 +24612,7 @@ pub const STM32L062K8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32F103VBIx = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F103VBIx = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -24624,7 +24624,7 @@ pub const STM32F103VBIx = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const @"STM32F302V(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302V(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24640,7 +24640,7 @@ pub const @"STM32F302V(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4R7ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4R7ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -24663,7 +24663,7 @@ pub const STM32L4R7ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H745IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -24698,7 +24698,7 @@ pub const STM32H745IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP157AABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157AABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -24734,7 +24734,7 @@ pub const STM32MP157AABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP157AABx", {} },
 }));
-pub const STM32L4A6AGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6AGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24757,7 +24757,7 @@ pub const STM32L4A6AGIxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32C071K8Tx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071K8Tx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -24767,7 +24767,7 @@ pub const STM32C071K8Tx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32N645X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N645X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -24801,7 +24801,7 @@ pub const STM32N645X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USART10_Exist", {} },
 }));
-pub const @"STM32F103R(4-6)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103R(4-6)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -24810,7 +24810,7 @@ pub const @"STM32F103R(4-6)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const @"STM32G0B1C(B-C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1C(B-C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -24831,7 +24831,7 @@ pub const @"STM32G0B1C(B-C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTre
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F301K(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F301K(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24844,7 +24844,7 @@ pub const @"STM32F301K(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32G411K6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411K6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24861,7 +24861,7 @@ pub const STM32G411K6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "LQFP32", {} },
     .{ "STM32G411K6Tx", {} },
 }));
-pub const STM32F732VETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F732VETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24887,7 +24887,7 @@ pub const STM32F732VETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP151DAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151DAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24919,7 +24919,7 @@ pub const STM32MP151DAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H523ZCJx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523ZCJx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -24945,7 +24945,7 @@ pub const STM32H523ZCJx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U375RGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375RGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -24966,7 +24966,7 @@ pub const STM32U375RGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32G0C1C(C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1C(C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -24988,7 +24988,7 @@ pub const @"STM32G0C1C(C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F301R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F301R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25002,7 +25002,7 @@ pub const @"STM32F301R(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32H747A(G-I)Ix" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H747A(G-I)Ix" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -25038,7 +25038,7 @@ pub const @"STM32H747A(G-I)Ix" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375CGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25056,7 +25056,7 @@ pub const STM32U375CGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP231AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -25084,7 +25084,7 @@ pub const STM32MP231AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32WB55VEYx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55VEYx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -25098,7 +25098,7 @@ pub const STM32WB55VEYx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U535VETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535VETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25119,7 +25119,7 @@ pub const STM32U535VETxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const @"STM32G031C(4-6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G031C(4-6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -25132,7 +25132,7 @@ pub const @"STM32G031C(4-6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP153AABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153AABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -25167,7 +25167,7 @@ pub const STM32MP153AABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP153AABx", {} },
 }));
-pub const @"STM32L081C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L081C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25183,7 +25183,7 @@ pub const @"STM32L081C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L4S9VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S9VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25207,7 +25207,7 @@ pub const STM32L4S9VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32F730V8Tx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F730V8Tx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25233,7 +25233,7 @@ pub const STM32F730V8Tx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F767B(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F767B(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -25264,7 +25264,7 @@ pub const @"STM32F767B(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U5G9ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5G9ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -25295,7 +25295,7 @@ pub const STM32U5G9ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP135DAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135DAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -25329,7 +25329,7 @@ pub const STM32MP135DAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP135DAFx", {} },
 }));
-pub const STM32WL33C8VxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33C8VxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -25339,7 +25339,7 @@ pub const STM32WL33C8VxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticSt
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32F429ZIYx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F429ZIYx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -25365,7 +25365,7 @@ pub const STM32F429ZIYx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP215AALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215AALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -25397,7 +25397,7 @@ pub const STM32MP215AALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WLE5JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE5JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -25412,7 +25412,7 @@ pub const STM32WLE5JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32H7S3A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -25447,7 +25447,7 @@ pub const STM32H7S3A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375CGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25465,7 +25465,7 @@ pub const STM32U375CGUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L4P5V(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4P5V(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -25489,7 +25489,7 @@ pub const @"STM32L4P5V(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L162VDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162VDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25507,7 +25507,7 @@ pub const STM32L162VDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const STM32L041C6Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L041C6Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25518,7 +25518,7 @@ pub const STM32L041C6Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U031G8Yx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031G8Yx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -25533,7 +25533,7 @@ pub const STM32U031G8Yx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F429I(E-G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F429I(E-G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -25559,7 +25559,7 @@ pub const @"STM32F429I(E-G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".Clock
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L443RCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L443RCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -25577,7 +25577,7 @@ pub const STM32L443RCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C051C8Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051C8Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -25587,7 +25587,7 @@ pub const STM32C051C8Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32WB10CCUx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB10CCUx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -25598,7 +25598,7 @@ pub const STM32WB10CCUx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32WBx0_Value_Line", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L071C8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L071C8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25614,7 +25614,7 @@ pub const STM32L071C8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H563IGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563IGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -25650,7 +25650,7 @@ pub const STM32H563IGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP153FABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153FABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -25684,7 +25684,7 @@ pub const STM32MP153FABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G474V(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G474V(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -25710,7 +25710,7 @@ pub const @"STM32G474V(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G411R6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411R6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25727,7 +25727,7 @@ pub const STM32G411R6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "LQFP64", {} },
     .{ "STM32G411R6Tx", {} },
 }));
-pub const STM32WBA54CGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA54CGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -25742,7 +25742,7 @@ pub const STM32WBA54CGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "STM32WBAx4", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L151C(6-8-B)Ux" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151C(6-8-B)Ux" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25755,7 +25755,7 @@ pub const @"STM32L151C(6-8-B)Ux" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L4Q5VGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5VGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -25779,7 +25779,7 @@ pub const STM32L4Q5VGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32G061G(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G061G(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25794,7 +25794,7 @@ pub const @"STM32G061G(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32N647A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N647A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -25820,7 +25820,7 @@ pub const STM32N647A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F723V(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F723V(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25846,7 +25846,7 @@ pub const @"STM32F723V(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32L496WGYxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L496WGYxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25869,7 +25869,7 @@ pub const STM32L496WGYxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H735VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H735VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -25904,7 +25904,7 @@ pub const STM32H735VGHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U595ZIYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595ZIYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25931,7 +25931,7 @@ pub const STM32U595ZIYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H735VGYx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H735VGYx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -25963,7 +25963,7 @@ pub const STM32H735VGYx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L083V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L083V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -25979,7 +25979,7 @@ pub const STM32L083V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H562ZITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562ZITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -26012,7 +26012,7 @@ pub const STM32H562ZITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L152V(8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152V(8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26024,7 +26024,7 @@ pub const @"STM32L152V(8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F767I(G-I)Kx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F767I(G-I)Kx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -26055,7 +26055,7 @@ pub const @"STM32F767I(G-I)Kx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F427V(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F427V(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -26079,7 +26079,7 @@ pub const @"STM32F427V(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C071G8Ux = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071G8Ux = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26089,7 +26089,7 @@ pub const STM32C071G8Ux = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U031K4Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031K4Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26105,7 +26105,7 @@ pub const STM32U031K4Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32H742Z(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H742Z(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -26140,7 +26140,7 @@ pub const @"STM32H742Z(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32H742", {} },
 }));
-pub const STM32MP231AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -26168,7 +26168,7 @@ pub const STM32MP231AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F412V(E-G)Tx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F412V(E-G)Tx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -26188,7 +26188,7 @@ pub const @"STM32F412V(E-G)Tx" = @"STM32F412_STM32F412-rcc_v1_0".ClockTree(std.S
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U545RETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545RETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26211,7 +26211,7 @@ pub const STM32U545RETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP157DACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157DACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -26246,7 +26246,7 @@ pub const STM32MP157DACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H753XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H753XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -26281,7 +26281,7 @@ pub const STM32H753XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F042G(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F042G(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -26292,7 +26292,7 @@ pub const @"STM32F042G(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32MP135DAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135DAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -26326,7 +26326,7 @@ pub const STM32MP135DAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP135DAEx", {} },
 }));
-pub const @"STM32F446Z(C-E)Tx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F446Z(C-E)Tx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
@@ -26350,7 +26350,7 @@ pub const @"STM32F446Z(C-E)Tx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F746V(E-G)Hx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F746V(E-G)Hx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -26379,7 +26379,7 @@ pub const @"STM32F746V(E-G)Hx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WB06CCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB06CCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26391,7 +26391,7 @@ pub const STM32WB06CCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "SPI2_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32WL33K8VxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33K8VxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26400,7 +26400,7 @@ pub const STM32WL33K8VxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticSt
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const @"STM32L451R(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L451R(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26420,7 +26420,7 @@ pub const @"STM32L451R(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G070KBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G070KBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26432,7 +26432,7 @@ pub const STM32G070KBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32F217I(E-G)Hx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F217I(E-G)Hx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -26454,7 +26454,7 @@ pub const @"STM32F217I(E-G)Hx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C051C6Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051C6Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26464,7 +26464,7 @@ pub const STM32C051C6Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32L431R(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L431R(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26482,7 +26482,7 @@ pub const @"STM32L431R(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G414MBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414MBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26499,7 +26499,7 @@ pub const STM32G414MBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H753VITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H753VITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -26533,7 +26533,7 @@ pub const STM32H753VITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F051K6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051K6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -26543,7 +26543,7 @@ pub const STM32F051K6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32F078CBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F078CBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -26559,7 +26559,7 @@ pub const STM32F078CBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U575ZITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575ZITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26584,7 +26584,7 @@ pub const STM32U575ZITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32F058R8Hx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F058R8Hx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -26596,7 +26596,7 @@ pub const STM32F058R8Hx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "STM32F0x8", {} },
 }));
-pub const STM32L152QEHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152QEHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26611,7 +26611,7 @@ pub const STM32L152QEHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F101R(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101R(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26623,7 +26623,7 @@ pub const @"STM32F101R(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F101", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32WL33K8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33K8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26632,7 +26632,7 @@ pub const STM32WL33K8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStr
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32G414RCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414RCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26650,7 +26650,7 @@ pub const STM32G414RCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U031K6Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031K6Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26666,7 +26666,7 @@ pub const STM32U031K6Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32L152VCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152VCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26680,7 +26680,7 @@ pub const STM32L152VCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U385RGYxG = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385RGYxG = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26699,7 +26699,7 @@ pub const STM32U385RGYxG = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP231AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -26727,7 +26727,7 @@ pub const STM32MP231AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U5F9BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F9BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "HSPI1_Exist", {} },
@@ -26756,7 +26756,7 @@ pub const STM32U5F9BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F378CCTx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F378CCTx = STM32F373_STM32F3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26771,7 +26771,7 @@ pub const STM32F378CCTx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32F3x8", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP235AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -26804,7 +26804,7 @@ pub const STM32MP235AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const @"STM32F072V(8-B)Hx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F072V(8-B)Hx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -26818,7 +26818,7 @@ pub const @"STM32F072V(8-B)Hx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G071R(6-8-B)Tx" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G071R(6-8-B)Tx" = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26834,7 +26834,7 @@ pub const @"STM32G071R(6-8-B)Tx" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.Stati
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32WBA52CEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA52CEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -26847,7 +26847,7 @@ pub const STM32WBA52CEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F769B(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F769B(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -26879,7 +26879,7 @@ pub const @"STM32F769B(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L010C6Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L010C6Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26890,7 +26890,7 @@ pub const STM32L010C6Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x0_Value_Line", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP251CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -26924,7 +26924,7 @@ pub const STM32MP251CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U083MCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U083MCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -26941,7 +26941,7 @@ pub const STM32U083MCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L496RGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L496RGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -26964,7 +26964,7 @@ pub const STM32L496RGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F746I(E-G)Kx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F746I(E-G)Kx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -26994,7 +26994,7 @@ pub const @"STM32F746I(E-G)Kx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G081KBUx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081KBUx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27011,7 +27011,7 @@ pub const STM32G081KBUx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U545VEIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545VEIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27033,7 +27033,7 @@ pub const STM32U545VEIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32U535RCTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RCTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27055,7 +27055,7 @@ pub const STM32U535RCTx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32G473P(B-C-E)Ix" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G473P(B-C-E)Ix" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -27081,7 +27081,7 @@ pub const @"STM32G473P(B-C-E)Ix" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F732IEKx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F732IEKx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27108,7 +27108,7 @@ pub const STM32F732IEKx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32H7A3N(G-I)Hx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3N(G-I)Hx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -27142,7 +27142,7 @@ pub const @"STM32H7A3N(G-I)Hx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Stat
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L476J(E-G)Yx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L476J(E-G)Yx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27164,7 +27164,7 @@ pub const @"STM32L476J(E-G)Yx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U585ZITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585ZITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27190,7 +27190,7 @@ pub const STM32U585ZITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP233DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -27221,7 +27221,7 @@ pub const STM32MP233DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP255DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -27259,7 +27259,7 @@ pub const STM32MP255DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F437I(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F437I(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -27284,7 +27284,7 @@ pub const @"STM32F437I(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C092CCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092CCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27296,7 +27296,7 @@ pub const STM32C092CCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32G471V(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G471V(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -27322,7 +27322,7 @@ pub const @"STM32G471V(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L010R8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L010R8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -27332,7 +27332,7 @@ pub const STM32L010R8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x0_Value_Line", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L433RCTxP = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L433RCTxP = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -27350,7 +27350,7 @@ pub const STM32L433RCTxP = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticString
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32C071CBUx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071CBUx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -27360,7 +27360,7 @@ pub const STM32C071CBUx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L152QCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152QCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -27373,7 +27373,7 @@ pub const STM32L152QCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L083V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L083V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27389,7 +27389,7 @@ pub const @"STM32L083V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U545REIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545REIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27411,7 +27411,7 @@ pub const STM32U545REIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32G081CBUx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081CBUx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27428,7 +27428,7 @@ pub const STM32G081CBUx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F051C8Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051C8Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -27440,7 +27440,7 @@ pub const STM32F051C8Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H735IGKx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H735IGKx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -27476,7 +27476,7 @@ pub const STM32H735IGKx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WLE4C8Ux = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE4C8Ux = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -27492,7 +27492,7 @@ pub const STM32WLE4C8Ux = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U535VEIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535VEIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27513,7 +27513,7 @@ pub const STM32U535VEIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const @"STM32L083R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L083R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27529,7 +27529,7 @@ pub const @"STM32L083R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP151FABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151FABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27561,7 +27561,7 @@ pub const STM32MP151FABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L151RDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151RDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -27578,7 +27578,7 @@ pub const STM32L151RDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G0B0CETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G0B0CETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -27593,7 +27593,7 @@ pub const STM32G0B0CETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.Stat
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F469I(E-G)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F469I(E-G)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -27620,7 +27620,7 @@ pub const @"STM32F469I(E-G)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U585CIUx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585CIUx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27643,7 +27643,7 @@ pub const STM32U585CIUx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32C092KCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092KCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27655,7 +27655,7 @@ pub const STM32C092KCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32F437AIHx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F437AIHx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -27680,7 +27680,7 @@ pub const STM32F437AIHx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H730IBTxQ = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H730IBTxQ = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -27716,7 +27716,7 @@ pub const STM32H730IBTxQ = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP153FAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153FAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -27750,7 +27750,7 @@ pub const STM32MP153FAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U5A5ZJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5ZJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27778,7 +27778,7 @@ pub const STM32U5A5ZJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L4R9Z(G-I)Yx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R9Z(G-I)Yx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27802,7 +27802,7 @@ pub const @"STM32L4R9Z(G-I)Yx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32WBA62PGIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA62PGIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -27820,7 +27820,7 @@ pub const STM32WBA62PGIx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G081CBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081CBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27837,7 +27837,7 @@ pub const STM32G081CBTx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32G474P(B-C-E)Ix" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G474P(B-C-E)Ix" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -27863,7 +27863,7 @@ pub const @"STM32G474P(B-C-E)Ix" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L431K(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L431K(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -27877,7 +27877,7 @@ pub const @"STM32L431K(B-C)Ux" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32MP215CANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215CANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -27910,7 +27910,7 @@ pub const STM32MP215CANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L4P5C(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4P5C(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -27933,7 +27933,7 @@ pub const @"STM32L4P5C(G-E)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32L031F(4-6)Px" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L031F(4-6)Px" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -27944,7 +27944,7 @@ pub const @"STM32L031F(4-6)Px" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32MP255FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -27983,7 +27983,7 @@ pub const STM32MP255FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP213AANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213AANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -28014,7 +28014,7 @@ pub const STM32MP213AANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C071F8PxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071F8PxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28024,7 +28024,7 @@ pub const STM32C071F8PxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F479A(G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F479A(G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -28049,7 +28049,7 @@ pub const @"STM32F479A(G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C092RBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092RBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28061,7 +28061,7 @@ pub const STM32C092RBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H563VGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563VGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -28095,7 +28095,7 @@ pub const STM32H563VGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U575RGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575RGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28120,7 +28120,7 @@ pub const STM32U575RGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H753ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H753ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -28155,7 +28155,7 @@ pub const STM32H753ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H573RIVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573RIVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -28185,7 +28185,7 @@ pub const STM32H573RIVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L443CCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L443CCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28203,7 +28203,7 @@ pub const STM32L443CCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F401C(B-C)Yx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401C(B-C)Yx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28217,7 +28217,7 @@ pub const @"STM32F401C(B-C)Yx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USB_OTG_FS_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const @"STM32L431R(B-C)Ix" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L431R(B-C)Ix" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28234,7 +28234,7 @@ pub const @"STM32L431R(B-C)Ix" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP253CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -28271,7 +28271,7 @@ pub const STM32MP253CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F410R(8-B)Ix" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F410R(8-B)Ix" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28285,7 +28285,7 @@ pub const @"STM32F410R(8-B)Ix" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.S
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32F779NIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F779NIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -28317,7 +28317,7 @@ pub const STM32F779NIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L562ZETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562ZETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28341,7 +28341,7 @@ pub const STM32L562ZETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP253DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -28377,7 +28377,7 @@ pub const STM32MP253DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L151VEYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151VEYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28392,7 +28392,7 @@ pub const STM32L151VEYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L152R(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152R(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28405,7 +28405,7 @@ pub const @"STM32L152R(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L462CEUx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L462CEUx = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28425,7 +28425,7 @@ pub const STM32L462CEUx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U5A9ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A9ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28454,7 +28454,7 @@ pub const STM32U5A9ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U5A5VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28482,7 +28482,7 @@ pub const STM32U5A5VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L562QEIx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562QEIx = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28506,7 +28506,7 @@ pub const STM32L562QEIx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U595VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28533,7 +28533,7 @@ pub const STM32U595VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U031F4Px = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031F4Px = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28549,7 +28549,7 @@ pub const STM32U031F4Px = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32H745IGKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745IGKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -28584,7 +28584,7 @@ pub const STM32H745IGKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7S3L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -28619,7 +28619,7 @@ pub const STM32H7S3L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP215CAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215CAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -28652,7 +28652,7 @@ pub const STM32MP215CAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F051K4Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051K4Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -28661,7 +28661,7 @@ pub const STM32F051K4Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART1_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32F756NGHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F756NGHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -28691,7 +28691,7 @@ pub const STM32F756NGHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L051K(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L051K(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -28701,7 +28701,7 @@ pub const @"STM32L051K(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U535RCIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RCIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28722,7 +28722,7 @@ pub const STM32U535RCIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32L412RBIxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412RBIxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28738,7 +28738,7 @@ pub const STM32L412RBIxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L412R8Ix = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412R8Ix = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28754,7 +28754,7 @@ pub const STM32L412R8Ix = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H533VETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H533VETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -28781,7 +28781,7 @@ pub const STM32H533VETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L431VCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L431VCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28798,13 +28798,13 @@ pub const STM32L431VCIx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32WL30KBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL30KBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "LPUART1_Exist", {} },
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32F042T6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F042T6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -28815,7 +28815,7 @@ pub const STM32F042T6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32C092GBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092GBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28827,7 +28827,7 @@ pub const STM32C092GBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32MP151DACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151DACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28859,7 +28859,7 @@ pub const STM32MP151DACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H503KBUx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H503KBUx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28879,7 +28879,7 @@ pub const STM32H503KBUx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticS
     .{ "UFQFPN32", {} },
     .{ "STM32H503KBUx", {} },
 }));
-pub const STM32G441MBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G441MBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28900,7 +28900,7 @@ pub const STM32G441MBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F423ZHJx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F423ZHJx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -28926,7 +28926,7 @@ pub const STM32F423ZHJx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H7S3Z8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3Z8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -28961,7 +28961,7 @@ pub const STM32H7S3Z8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L151QDHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151QDHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -28978,7 +28978,7 @@ pub const STM32L151QDHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C091GCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091GCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -28989,7 +28989,7 @@ pub const STM32C091GCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const @"STM32F407I(E-G)Hx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F407I(E-G)Hx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -29011,7 +29011,7 @@ pub const @"STM32F407I(E-G)Hx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G474C(B-C-E)Ux" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G474C(B-C-E)Ux" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -29036,7 +29036,7 @@ pub const @"STM32G474C(B-C-E)Ux" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U031G6Yx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031G6Yx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -29051,7 +29051,7 @@ pub const STM32U031G6Yx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F217Z(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F217Z(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -29073,7 +29073,7 @@ pub const @"STM32F217Z(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U5G9NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5G9NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -29104,7 +29104,7 @@ pub const STM32U5G9NJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L4A6QGIx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6QGIx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29127,7 +29127,7 @@ pub const STM32L4A6QGIx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L151C(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151C(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29140,7 +29140,7 @@ pub const @"STM32L151C(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F078CBUx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F078CBUx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -29156,7 +29156,7 @@ pub const STM32F078CBUx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32G0C1R(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1R(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -29178,7 +29178,7 @@ pub const @"STM32G0C1R(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(s
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F765V(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F765V(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -29207,7 +29207,7 @@ pub const @"STM32F765V(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7B3LIHxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3LIHxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -29241,7 +29241,7 @@ pub const STM32H7B3LIHxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F051C4Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051C4Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -29250,7 +29250,7 @@ pub const STM32F051C4Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART1_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32WL33KCVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33KCVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -29259,7 +29259,7 @@ pub const STM32WL33KCVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStr
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32H562ZGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562ZGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -29292,7 +29292,7 @@ pub const STM32H562ZGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L422RBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L422RBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -29309,7 +29309,7 @@ pub const STM32L422RBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F070F6Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F070F6Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29320,7 +29320,7 @@ pub const STM32F070F6Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x0_Value_Line", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32L486QGIx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L486QGIx = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29342,7 +29342,7 @@ pub const STM32L486QGIx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32G0B1K(B-C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1K(B-C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -29363,7 +29363,7 @@ pub const @"STM32G0B1K(B-C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTre
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32U073CCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073CCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -29381,7 +29381,7 @@ pub const STM32U073CCUx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L151ZETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151ZETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -29396,7 +29396,7 @@ pub const STM32L151ZETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F328C8Tx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F328C8Tx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29407,7 +29407,7 @@ pub const STM32F328C8Tx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32F3x8", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32G0B1V(B-C-E)Ix" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1V(B-C-E)Ix" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -29427,7 +29427,7 @@ pub const @"STM32G0B1V(B-C-E)Ix" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const @"STM32L452V(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L452V(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -29447,7 +29447,7 @@ pub const @"STM32L452V(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G050C8Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G050C8Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29459,7 +29459,7 @@ pub const STM32G050C8Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L010F4Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L010F4Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29470,7 +29470,7 @@ pub const STM32L010F4Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x0_Value_Line", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32MP253DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -29506,7 +29506,7 @@ pub const STM32MP253DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L152VDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152VDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29523,7 +29523,7 @@ pub const STM32L152VDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F102C(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F102C(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -29536,7 +29536,7 @@ pub const @"STM32F102C(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F102", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32L476M(E-G)Yx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L476M(E-G)Yx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29558,7 +29558,7 @@ pub const @"STM32L476M(E-G)Yx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32F042F4Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F042F4Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -29569,7 +29569,7 @@ pub const STM32F042F4Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32U375RETx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375RETx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29590,7 +29590,7 @@ pub const STM32U375RETx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H750XBHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H750XBHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -29625,7 +29625,7 @@ pub const STM32H750XBHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F439Z(G-I)Yx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F439Z(G-I)Yx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -29651,7 +29651,7 @@ pub const @"STM32F439Z(G-I)Yx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L4Q5RGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5RGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -29675,7 +29675,7 @@ pub const STM32L4Q5RGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP257FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -29714,7 +29714,7 @@ pub const STM32MP257FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H7B3VIHxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3VIHxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -29747,7 +29747,7 @@ pub const STM32H7B3VIHxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F723I(C-E)Kx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F723I(C-E)Kx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29775,7 +29775,7 @@ pub const @"STM32F723I(C-E)Kx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32G051F8Yx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G051F8Yx = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29788,7 +29788,7 @@ pub const STM32G051F8Yx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32WBA54KGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA54KGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -29803,14 +29803,14 @@ pub const STM32WBA54KGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "STM32WBAx4", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32F031G(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F031G(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32MP251DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -29843,7 +29843,7 @@ pub const STM32MP251DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H747XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H747XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -29879,7 +29879,7 @@ pub const STM32H747XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F746ZGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F746ZGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -29909,7 +29909,7 @@ pub const STM32F746ZGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F102C(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F102C(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -29919,7 +29919,7 @@ pub const @"STM32F102C(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F102", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L010K8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L010K8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -29928,7 +29928,7 @@ pub const STM32L010K8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x0_Value_Line", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32MP211DAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211DAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29956,7 +29956,7 @@ pub const STM32MP211DAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA65CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA65CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -29972,7 +29972,7 @@ pub const STM32WBA65CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const STM32F070C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F070C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -29983,7 +29983,7 @@ pub const STM32F070C6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x0_Value_Line", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F038E6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F038E6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -29991,7 +29991,7 @@ pub const STM32F038E6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "WLCSP25", {} },
 }));
-pub const STM32L4Q5ZGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5ZGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30015,7 +30015,7 @@ pub const STM32L4Q5ZGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U575CITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575CITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30037,7 +30037,7 @@ pub const STM32U575CITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32H7A3I(G-I)Kx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3I(G-I)Kx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -30071,7 +30071,7 @@ pub const @"STM32H7A3I(G-I)Kx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Stat
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L021G4Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L021G4Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30082,7 +30082,7 @@ pub const STM32L021G4Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32H7R7I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R7I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -30114,7 +30114,7 @@ pub const STM32H7R7I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F437Z(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F437Z(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -30139,7 +30139,7 @@ pub const @"STM32F437Z(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L452R(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L452R(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30160,7 +30160,7 @@ pub const @"STM32L452R(C-E)Tx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32C071K8Ux = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071K8Ux = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30170,7 +30170,7 @@ pub const STM32C071K8Ux = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP133DAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133DAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -30202,7 +30202,7 @@ pub const STM32MP133DAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP133DAFx", {} },
 }));
-pub const STM32L4Q5AGIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5AGIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30226,7 +30226,7 @@ pub const STM32L4Q5AGIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U575CITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575CITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30248,7 +30248,7 @@ pub const STM32U575CITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L422KBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L422KBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -30262,7 +30262,7 @@ pub const STM32L422KBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32H562IGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562IGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -30295,7 +30295,7 @@ pub const STM32H562IGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4S9ZIJx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S9ZIJx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30319,7 +30319,7 @@ pub const STM32L4S9ZIJx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U073RBTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073RBTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30337,7 +30337,7 @@ pub const STM32U073RBTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F334C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F334C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30347,7 +30347,7 @@ pub const STM32F334C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32F423VHHx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F423VHHx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -30373,7 +30373,7 @@ pub const STM32F423VHHx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U073H8Yx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073H8Yx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30390,7 +30390,7 @@ pub const STM32U073H8Yx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F777VITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F777VITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -30420,7 +30420,7 @@ pub const STM32F777VITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G071K(8-B)TxN" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G071K(8-B)TxN" = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30436,7 +30436,7 @@ pub const @"STM32G071K(8-B)TxN" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32U595QIIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595QIIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30463,7 +30463,7 @@ pub const STM32U595QIIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F301K(6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F301K(6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30476,7 +30476,7 @@ pub const @"STM32F301K(6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U5A5QIIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5QIIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30504,7 +30504,7 @@ pub const STM32U5A5QIIxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WB55VGQx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55VGQx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -30518,7 +30518,7 @@ pub const STM32WB55VGQx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F302C(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302C(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30533,7 +30533,7 @@ pub const @"STM32F302C(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L083CZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L083CZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30550,7 +30550,7 @@ pub const STM32L083CZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F777IIKx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F777IIKx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -30581,7 +30581,7 @@ pub const STM32F777IIKx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C091KBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091KBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30592,7 +30592,7 @@ pub const STM32C091KBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32L162VCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162VCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30606,7 +30606,7 @@ pub const STM32L162VCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const @"STM32F072C(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F072C(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -30621,7 +30621,7 @@ pub const @"STM32F072C(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H743XGHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743XGHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -30656,7 +30656,7 @@ pub const STM32H743XGHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L562MEYxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562MEYxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30680,7 +30680,7 @@ pub const STM32L562MEYxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L452CETxP = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L452CETxP = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30700,7 +30700,7 @@ pub const STM32L452CETxP = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticString
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L4S9ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S9ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30724,14 +30724,14 @@ pub const STM32L4S9ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32C011J(4-6)Mx" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32C011J(4-6)Mx" = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32MP257CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -30770,7 +30770,7 @@ pub const STM32MP257CAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F415VGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F415VGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -30791,7 +30791,7 @@ pub const STM32F415VGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".Cloc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L486ZGTx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L486ZGTx = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30813,7 +30813,7 @@ pub const STM32L486ZGTx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32C031C(4-6)Tx" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32C031C(4-6)Tx" = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -30821,7 +30821,7 @@ pub const @"STM32C031C(4-6)Tx" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F439N(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F439N(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -30847,7 +30847,7 @@ pub const @"STM32F439N(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L073V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L073V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30863,7 +30863,7 @@ pub const @"STM32L073V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L452R(C-E)Yx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L452R(C-E)Yx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -30883,7 +30883,7 @@ pub const @"STM32L452R(C-E)Yx" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H730ZBIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H730ZBIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -30919,7 +30919,7 @@ pub const STM32H730ZBIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U535RBIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535RBIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -30940,7 +30940,7 @@ pub const STM32U535RBIx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32H7S7I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S7I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -30973,7 +30973,7 @@ pub const STM32H7S7I8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32N655Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N655Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -30998,7 +30998,7 @@ pub const STM32N655Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP215FANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215FANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -31031,7 +31031,7 @@ pub const STM32MP215FANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L052R(6-8)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L052R(6-8)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -31045,7 +31045,7 @@ pub const @"STM32L052R(6-8)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F767ZITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F767ZITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -31076,7 +31076,7 @@ pub const STM32F767ZITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7A3QIYxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7A3QIYxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -31109,7 +31109,7 @@ pub const STM32H7A3QIYxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP233DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -31140,7 +31140,7 @@ pub const STM32MP233DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32H742X(G-I)Hx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H742X(G-I)Hx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -31175,7 +31175,7 @@ pub const @"STM32H742X(G-I)Hx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32H742", {} },
 }));
-pub const STM32MP255AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -31213,7 +31213,7 @@ pub const STM32MP255AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U031C8Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031C8Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -31229,7 +31229,7 @@ pub const STM32U031C8Tx = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32H7A3Z(G-I)TxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3Z(G-I)TxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -31263,7 +31263,7 @@ pub const @"STM32H7A3Z(G-I)TxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Sta
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L486JGYx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L486JGYx = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31285,7 +31285,7 @@ pub const STM32L486JGYx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L071V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L071V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31300,7 +31300,7 @@ pub const @"STM32L071V(B-Z)Ix" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const @"STM32F071C(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F071C(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -31314,7 +31314,7 @@ pub const @"STM32F071C(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32C071RBTxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071RBTxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -31324,7 +31324,7 @@ pub const STM32C071RBTxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F469A(E-G-I)Yx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F469A(E-G-I)Yx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -31349,7 +31349,7 @@ pub const @"STM32F469A(E-G-I)Yx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".Clock
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U385CGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385CGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31369,7 +31369,7 @@ pub const STM32U385CGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32G483RETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G483RETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -31395,7 +31395,7 @@ pub const STM32G483RETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U535VCIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535VCIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31416,7 +31416,7 @@ pub const STM32U535VCIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32L152RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31431,7 +31431,7 @@ pub const STM32L152RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L151VCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151VCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31445,7 +31445,7 @@ pub const STM32L151VCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WB05TZFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB05TZFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2S3_Exist", {} },
@@ -31454,7 +31454,7 @@ pub const STM32WB05TZFx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const @"STM32F429N(E-G)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F429N(E-G)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -31480,7 +31480,7 @@ pub const @"STM32F429N(E-G)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP251AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -31513,7 +31513,7 @@ pub const STM32MP251AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H745ZGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745ZGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -31548,7 +31548,7 @@ pub const STM32H745ZGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L562RETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562RETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31572,7 +31572,7 @@ pub const STM32L562RETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L4S7ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S7ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -31595,7 +31595,7 @@ pub const STM32L4S7ZITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32F778AIYx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F778AIYx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -31625,7 +31625,7 @@ pub const STM32F778AIYx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375CGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31644,7 +31644,7 @@ pub const STM32U375CGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32G041K(6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G041K(6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -31658,7 +31658,7 @@ pub const @"STM32G041K(6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.St
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32F767VITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F767VITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -31688,7 +31688,7 @@ pub const STM32F767VITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U575RGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575RGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31713,7 +31713,7 @@ pub const STM32U575RGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L082CZYx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L082CZYx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31730,7 +31730,7 @@ pub const STM32L082CZYx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32H755XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H755XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -31765,7 +31765,7 @@ pub const STM32H755XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F767VGTx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F767VGTx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -31795,7 +31795,7 @@ pub const STM32F767VGTx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP215DANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215DANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -31827,7 +31827,7 @@ pub const STM32MP215DANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375CEUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CEUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31845,7 +31845,7 @@ pub const STM32U375CEUx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L433VCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L433VCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -31863,7 +31863,7 @@ pub const STM32L433VCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F401V(D-E)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401V(D-E)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -31878,7 +31878,7 @@ pub const @"STM32F401V(D-E)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USART2_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H562IGKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562IGKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -31911,7 +31911,7 @@ pub const STM32H562IGKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G0B1R(B-C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1R(B-C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -31932,7 +31932,7 @@ pub const @"STM32G0B1R(B-C-E)TxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTre
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U575CGUx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575CGUx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -31954,7 +31954,7 @@ pub const STM32U575CGUx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H533CETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H533CETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -31981,7 +31981,7 @@ pub const STM32H533CETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H753VIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H753VIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -32015,7 +32015,7 @@ pub const STM32H753VIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375VGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375VGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32035,7 +32035,7 @@ pub const STM32U375VGTx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F042F6Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F042F6Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -32046,7 +32046,7 @@ pub const STM32F042F6Px = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const @"STM32L011D(3-4)Px" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L011D(3-4)Px" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32056,7 +32056,7 @@ pub const @"STM32L011D(3-4)Px" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const STM32U595AJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595AJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32083,7 +32083,7 @@ pub const STM32U595AJHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA52CGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA52CGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -32096,7 +32096,7 @@ pub const STM32WBA52CGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP251AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -32129,7 +32129,7 @@ pub const STM32MP251AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F723Z(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F723Z(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32157,7 +32157,7 @@ pub const @"STM32F723Z(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32U073M8Tx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073M8Tx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -32174,7 +32174,7 @@ pub const STM32U073M8Tx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L152VCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152VCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32188,7 +32188,7 @@ pub const STM32L152VCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F756ZGYx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F756ZGYx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -32218,7 +32218,7 @@ pub const STM32F756ZGYx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F048T6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F048T6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -32230,7 +32230,7 @@ pub const STM32F048T6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32H7R3L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -32264,7 +32264,7 @@ pub const STM32H7R3L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L081CZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L081CZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32280,7 +32280,7 @@ pub const STM32L081CZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32G0C1K(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1K(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -32302,7 +32302,7 @@ pub const @"STM32G0C1K(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(s
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32U031K8Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031K8Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -32318,7 +32318,7 @@ pub const STM32U031K8Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32L4Q5CGUx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5CGUx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -32341,7 +32341,7 @@ pub const STM32L4Q5CGUx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L011K(3-4)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L011K(3-4)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32352,7 +32352,7 @@ pub const @"STM32L011K(3-4)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32G411C6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411C6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32369,7 +32369,7 @@ pub const STM32G411C6Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "LQFP48", {} },
     .{ "STM32G411C6Tx", {} },
 }));
-pub const STM32MP257FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -32408,14 +32408,14 @@ pub const STM32MP257FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32C011D6Yx = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C011D6Yx = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32MP253AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -32451,7 +32451,7 @@ pub const STM32MP253AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32L152V(8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152V(8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32463,7 +32463,7 @@ pub const @"STM32L152V(8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G4A1RETx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G4A1RETx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -32488,7 +32488,7 @@ pub const STM32G4A1RETx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP255FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -32527,7 +32527,7 @@ pub const STM32MP255FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F733VETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F733VETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32553,7 +32553,7 @@ pub const STM32F733VETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32N657L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N657L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -32588,7 +32588,7 @@ pub const STM32N657L0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USART10_Exist", {} },
 }));
-pub const STM32H573IIKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573IIKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -32625,7 +32625,7 @@ pub const STM32H573IIKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F058T8Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F058T8Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -32636,7 +32636,7 @@ pub const STM32F058T8Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32MP133AAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133AAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -32667,7 +32667,7 @@ pub const STM32MP133AAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F303K(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303K(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32676,7 +32676,7 @@ pub const @"STM32F303K(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32U595RITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595RITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32701,7 +32701,7 @@ pub const STM32U595RITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32G491C(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G491C(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -32724,7 +32724,7 @@ pub const @"STM32G491C(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(s
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F479Z(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F479Z(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -32749,7 +32749,7 @@ pub const @"STM32F479Z(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L152RCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152RCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -32763,7 +32763,7 @@ pub const STM32L152RCTxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L071V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L071V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32778,7 +32778,7 @@ pub const STM32L071V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const STM32MP233FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -32810,7 +32810,7 @@ pub const STM32MP233FAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F746NGHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F746NGHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -32840,7 +32840,7 @@ pub const STM32F746NGHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L412KBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412KBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -32854,7 +32854,7 @@ pub const STM32L412KBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32F103CBUx = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F103CBUx = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -32867,7 +32867,7 @@ pub const STM32F103CBUx = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "STM32F103", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP233AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -32898,7 +32898,7 @@ pub const STM32MP233AAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32G0C1C(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1C(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -32920,7 +32920,7 @@ pub const @"STM32G0C1C(C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(s
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32G0B1R(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0B1R(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -32941,7 +32941,7 @@ pub const @"STM32G0B1R(B-C-E)Tx" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32C071R8TxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071R8TxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -32951,7 +32951,7 @@ pub const STM32C071R8TxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L433C(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L433C(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -32969,7 +32969,7 @@ pub const @"STM32L433C(B-C)Tx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U575RITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575RITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -32994,7 +32994,7 @@ pub const STM32U575RITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32L496R(E-G)Tx" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L496R(E-G)Tx" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33018,7 +33018,7 @@ pub const @"STM32L496R(E-G)Tx" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F745I(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F745I(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -33047,7 +33047,7 @@ pub const @"STM32F745I(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U575QIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575QIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33072,7 +33072,7 @@ pub const STM32U575QIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32G411CCTx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411CCTx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -33089,7 +33089,7 @@ pub const STM32G411CCTx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H725VGYx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725VGYx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -33121,7 +33121,7 @@ pub const STM32H725VGYx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375VETxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375VETxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33141,7 +33141,7 @@ pub const STM32U375VETxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F779IITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F779IITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -33173,7 +33173,7 @@ pub const STM32F779IITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L4R9Z(G-I)Jx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R9Z(G-I)Jx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33197,7 +33197,7 @@ pub const @"STM32L4R9Z(G-I)Jx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L151ZDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151ZDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33214,7 +33214,7 @@ pub const STM32L151ZDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F446M(C-E)Yx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F446M(C-E)Yx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
@@ -33238,7 +33238,7 @@ pub const @"STM32F446M(C-E)Yx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L552Q(C-E)IxQ" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L552Q(C-E)IxQ" = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33262,7 +33262,7 @@ pub const @"STM32L552Q(C-E)IxQ" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F439V(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F439V(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -33287,7 +33287,7 @@ pub const @"STM32F439V(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C092CBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092CBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33299,7 +33299,7 @@ pub const STM32C092CBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F078RBHx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F078RBHx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -33314,7 +33314,7 @@ pub const STM32F078RBHx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32F0x8", {} },
 }));
-pub const STM32MP233AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -33345,7 +33345,7 @@ pub const STM32MP233AAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32G491R(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G491R(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -33370,7 +33370,7 @@ pub const @"STM32G491R(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(s
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G414CBUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414CBUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33388,7 +33388,7 @@ pub const STM32G414CBUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F423MHYx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F423MHYx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -33412,7 +33412,7 @@ pub const STM32F423MHYx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32WL33KBVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33KBVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -33421,7 +33421,7 @@ pub const STM32WL33KBVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticSt
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32H750VBTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H750VBTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -33455,7 +33455,7 @@ pub const STM32H750VBTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L412C8Tx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412C8Tx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -33472,7 +33472,7 @@ pub const STM32L412C8Tx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H523ZETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523ZETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -33498,7 +33498,7 @@ pub const STM32H523ZETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C071G8UxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071G8UxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -33508,7 +33508,7 @@ pub const STM32C071G8UxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP135FAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135FAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -33542,7 +33542,7 @@ pub const STM32MP135FAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L552V(C-E)TxQ" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L552V(C-E)TxQ" = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33566,7 +33566,7 @@ pub const @"STM32L552V(C-E)TxQ" = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H503CBTx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H503CBTx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33585,7 +33585,7 @@ pub const STM32H503CBTx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H723VEHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H723VEHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -33620,7 +33620,7 @@ pub const STM32H723VEHx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F098RCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F098RCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33633,7 +33633,7 @@ pub const STM32F098RCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "STM32F0x8", {} },
 }));
-pub const @"STM32G431K(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G431K(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33653,7 +33653,7 @@ pub const @"STM32G431K(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32F334K(4-6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F334K(4-6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33662,7 +33662,7 @@ pub const @"STM32F334K(4-6-8)Ux" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32G474M(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G474M(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -33688,7 +33688,7 @@ pub const @"STM32G474M(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U595ZJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595ZJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33715,7 +33715,7 @@ pub const STM32U595ZJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L471R(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L471R(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33737,7 +33737,7 @@ pub const @"STM32L471R(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F070CBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F070CBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33751,7 +33751,7 @@ pub const STM32F070CBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x0_Value_Line", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32G431C(6-8-B)Ux" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G431C(6-8-B)Ux" = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33773,7 +33773,7 @@ pub const @"STM32G431C(6-8-B)Ux" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H725IGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725IGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -33809,7 +33809,7 @@ pub const STM32H725IGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U575AIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575AIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33834,7 +33834,7 @@ pub const STM32U575AIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U595RJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595RJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33859,7 +33859,7 @@ pub const STM32U595RJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32G491K(C-E)Ux" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G491K(C-E)Ux" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -33881,7 +33881,7 @@ pub const @"STM32G491K(C-E)Ux" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(s
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U073RCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073RCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -33899,7 +33899,7 @@ pub const STM32U073RCTx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32H7A3I(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3I(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -33933,7 +33933,7 @@ pub const @"STM32H7A3I(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Stat
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G414VCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414VCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33950,7 +33950,7 @@ pub const STM32G414VCTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L041G6UxS = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L041G6UxS = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -33961,7 +33961,7 @@ pub const STM32L041G6UxS = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticString
     .{ "STM32L0x1", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32G491RETxZ = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G491RETxZ = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -33986,7 +33986,7 @@ pub const STM32G491RETxZ = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Sta
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F722V(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F722V(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34012,7 +34012,7 @@ pub const @"STM32F722V(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WL31CBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL31CBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPUART1_Exist", {} },
@@ -34020,7 +34020,7 @@ pub const STM32WL31CBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStr
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32MP257AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -34058,7 +34058,7 @@ pub const STM32MP257AALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP151CABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151CABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34091,7 +34091,7 @@ pub const STM32MP151CABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP151CABx", {} },
 }));
-pub const STM32U031C6Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U031C6Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -34107,7 +34107,7 @@ pub const STM32U031C6Ux = STM32U0_64_STM32U0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U585RITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585RITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34133,7 +34133,7 @@ pub const STM32U585RITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U575ZGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575ZGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34158,7 +34158,7 @@ pub const STM32U575ZGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP211CAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211CAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34186,7 +34186,7 @@ pub const STM32MP211CAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP131CAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131CAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -34214,7 +34214,7 @@ pub const STM32MP131CAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP157CACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157CACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -34250,14 +34250,14 @@ pub const STM32MP157CACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP157CACx", {} },
 }));
-pub const STM32F031E6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F031E6Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
     .{ "WLCSP25", {} },
 }));
-pub const STM32L452RETxP = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L452RETxP = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -34277,7 +34277,7 @@ pub const STM32L452RETxP = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticString
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F301C(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F301C(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34291,7 +34291,7 @@ pub const @"STM32F301C(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F302V(D-E)Hx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302V(D-E)Hx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -34308,7 +34308,7 @@ pub const @"STM32F302V(D-E)Hx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.Sta
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H723ZETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H723ZETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -34344,7 +34344,7 @@ pub const STM32H723ZETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7B0RBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B0RBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -34372,7 +34372,7 @@ pub const STM32H7B0RBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP255DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -34410,7 +34410,7 @@ pub const STM32MP255DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32WL33C8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33C8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -34420,7 +34420,7 @@ pub const STM32WL33C8Vx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStr
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32H755ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H755ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -34455,7 +34455,7 @@ pub const STM32H755ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F103Z(F-G)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103Z(F-G)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE430", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -34475,7 +34475,7 @@ pub const @"STM32F103Z(F-G)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const STM32L052T8Fx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L052T8Fx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -34488,7 +34488,7 @@ pub const STM32L052T8Fx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32F071CBYx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F071CBYx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -34502,7 +34502,7 @@ pub const STM32F071CBYx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32G4A1CETx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G4A1CETx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -34525,7 +34525,7 @@ pub const STM32G4A1CETx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F103V(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103V(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -34544,7 +34544,7 @@ pub const @"STM32F103V(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const @"STM32H742I(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H742I(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -34579,7 +34579,7 @@ pub const @"STM32H742I(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32H742", {} },
 }));
-pub const STM32MP253DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -34615,7 +34615,7 @@ pub const STM32MP253DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L151QEHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151QEHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -34630,7 +34630,7 @@ pub const STM32L151QEHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L476V(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L476V(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34652,7 +34652,7 @@ pub const @"STM32L476V(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F469A(E-G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F469A(E-G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -34677,7 +34677,7 @@ pub const @"STM32F469A(E-G-I)Hx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".Clock
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U385RGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385RGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34698,7 +34698,7 @@ pub const STM32U385RGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F217I(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F217I(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -34720,7 +34720,7 @@ pub const @"STM32F217I(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WB55RCVx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55RCVx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -34734,7 +34734,7 @@ pub const STM32WB55RCVx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F732RETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F732RETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34757,7 +34757,7 @@ pub const STM32F732RETx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP251DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -34790,7 +34790,7 @@ pub const STM32MP251DAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F205R(B-C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F205R(B-C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34811,7 +34811,7 @@ pub const @"STM32F205R(B-C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-r
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H7R3V8Yx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3V8Yx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -34838,7 +34838,7 @@ pub const STM32H7R3V8Yx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32H742B(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H742B(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -34873,7 +34873,7 @@ pub const @"STM32H742B(G-I)Tx" = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32H742", {} },
 }));
-pub const STM32MP153DADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153DADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -34907,7 +34907,7 @@ pub const STM32MP153DADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L083C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L083C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34924,7 +34924,7 @@ pub const @"STM32L083C(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32L4R9V(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R9V(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34948,7 +34948,7 @@ pub const @"STM32L4R9V(G-I)Tx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L082CZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L082CZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -34965,7 +34965,7 @@ pub const STM32L082CZUx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP135CAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135CAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -34999,7 +34999,7 @@ pub const STM32MP135CAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H725REVx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725REVx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -35027,7 +35027,7 @@ pub const STM32H725REVx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H562RGVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562RGVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -35054,7 +35054,7 @@ pub const STM32H562RGVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP135AAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP135AAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -35087,7 +35087,7 @@ pub const STM32MP135AAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F479I(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F479I(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -35114,7 +35114,7 @@ pub const @"STM32F479I(G-I)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L4P5CGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4P5CGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35137,7 +35137,7 @@ pub const STM32L4P5CGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H562RGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562RGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -35165,7 +35165,7 @@ pub const STM32H562RGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F078VBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F078VBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -35180,7 +35180,7 @@ pub const STM32F078VBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32F0x8", {} },
 }));
-pub const STM32H747BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H747BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -35216,7 +35216,7 @@ pub const STM32H747BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L151R(6-8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151R(6-8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -35228,7 +35228,7 @@ pub const @"STM32L151R(6-8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G031K(4-6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G031K(4-6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35241,7 +35241,7 @@ pub const @"STM32G031K(4-6-8)Tx" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32G411MCTx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411MCTx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -35257,7 +35257,7 @@ pub const STM32G411MCTx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32C091ECYx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091ECYx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35267,7 +35267,7 @@ pub const STM32C091ECYx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F103R(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103R(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35280,7 +35280,7 @@ pub const @"STM32F103R(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F103", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H723VETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H723VETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -35315,7 +35315,7 @@ pub const STM32H723VETx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F479A(G-I)Yx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F479A(G-I)Yx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -35340,7 +35340,7 @@ pub const @"STM32F479A(G-I)Yx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H562IIKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562IIKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -35373,7 +35373,7 @@ pub const STM32H562IIKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L431R(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L431R(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35390,7 +35390,7 @@ pub const @"STM32L431R(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H743IGKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743IGKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -35425,7 +35425,7 @@ pub const STM32H743IGKx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP151AAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151AAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -35458,7 +35458,7 @@ pub const STM32MP151AAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP151AAAx", {} },
 }));
-pub const @"STM32G031G(4-6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G031G(4-6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35471,7 +35471,7 @@ pub const @"STM32G031G(4-6-8)Ux" = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.
     .{ "USART2_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32L443CCYx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L443CCYx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35489,7 +35489,7 @@ pub const STM32L443CCYx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32H523RCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523RCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -35516,7 +35516,7 @@ pub const STM32H523RCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F102R(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F102R(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -35526,7 +35526,7 @@ pub const @"STM32F102R(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F102", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32WBA65CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA65CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -35542,7 +35542,7 @@ pub const STM32WBA65CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const STM32WB55RGVx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55RGVx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -35556,7 +35556,7 @@ pub const STM32WB55RGVx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F051K8Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051K8Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -35566,7 +35566,7 @@ pub const STM32F051K8Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32H7A3V(G-I)HxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3V(G-I)HxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -35599,7 +35599,7 @@ pub const @"STM32H7A3V(G-I)HxQ" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Sta
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP153CABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153CABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -35634,7 +35634,7 @@ pub const STM32MP153CABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP153CABx", {} },
 }));
-pub const STM32H7R7A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R7A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -35666,7 +35666,7 @@ pub const STM32H7R7A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP231DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -35694,7 +35694,7 @@ pub const STM32MP231DAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32C071C8UxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071C8UxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35704,7 +35704,7 @@ pub const STM32C071C8UxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H7S3V8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3V8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -35731,7 +35731,7 @@ pub const STM32H7S3V8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H503RBTx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H503RBTx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -35751,7 +35751,7 @@ pub const STM32H503RBTx = STM32H5_128_STM32H5_rcc_v1_128_0.ClockTree(std.StaticS
     .{ "LQFP64", {} },
     .{ "STM32H503RBTx", {} },
 }));
-pub const @"STM32G071G(8-B)UxN" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G071G(8-B)UxN" = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -35767,7 +35767,7 @@ pub const @"STM32G071G(8-B)UxN" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32MP257CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -35806,7 +35806,7 @@ pub const STM32MP257CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H743IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -35841,7 +35841,7 @@ pub const STM32H743IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073R8Ix = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073R8Ix = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35858,7 +35858,7 @@ pub const STM32U073R8Ix = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C092FBPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092FBPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -35870,7 +35870,7 @@ pub const STM32C092FBPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const @"STM32G071K(6-8-B)Ux" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G071K(6-8-B)Ux" = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -35886,7 +35886,7 @@ pub const @"STM32G071K(6-8-B)Ux" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.Stati
     .{ "USART3_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32L151RDYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151RDYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -35902,7 +35902,7 @@ pub const STM32L151RDYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP157DAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157DAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -35937,7 +35937,7 @@ pub const STM32MP157DAAx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F777ZITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F777ZITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -35968,7 +35968,7 @@ pub const STM32F777ZITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F405ZGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F405ZGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -35989,7 +35989,7 @@ pub const STM32F405ZGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".Cloc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP131DAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131DAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -36017,7 +36017,7 @@ pub const STM32MP131DAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP131DAFx", {} },
 }));
-pub const @"STM32L496V(E-G)Tx" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L496V(E-G)Tx" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36040,7 +36040,7 @@ pub const @"STM32L496V(E-G)Tx" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32G473QETxZ = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G473QETxZ = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -36066,7 +36066,7 @@ pub const STM32G473QETxZ = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4A6VGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6VGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36089,7 +36089,7 @@ pub const STM32L4A6VGTxP = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U575RITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575RITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36114,7 +36114,7 @@ pub const STM32U575RITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32H7A3Z(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32H7A3Z(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -36148,7 +36148,7 @@ pub const @"STM32H7A3Z(G-I)Tx" = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.Stat
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U599VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36176,7 +36176,7 @@ pub const STM32U599VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H745BGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745BGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -36211,7 +36211,7 @@ pub const STM32H745BGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WB50CGUx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB50CGUx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -36222,7 +36222,7 @@ pub const STM32WB50CGUx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "STM32WBx0_Value_Line", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L562CETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562CETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36245,7 +36245,7 @@ pub const STM32L562CETx = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F101RBHx = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F101RBHx = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -36256,7 +36256,7 @@ pub const STM32F101RBHx = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "STM32F101", {} },
 }));
-pub const @"STM32L152C(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152C(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36269,7 +36269,7 @@ pub const @"STM32L152C(6-8-B)Tx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U599BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -36299,7 +36299,7 @@ pub const STM32U599BJYxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32N645A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N645A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -36325,7 +36325,7 @@ pub const STM32N645A0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F103V(C-D-E)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103V(C-D-E)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -36344,7 +36344,7 @@ pub const @"STM32F103V(C-D-E)Hx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const STM32L412CBTxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412CBTxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -36361,7 +36361,7 @@ pub const STM32L412CBTxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H745XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -36396,7 +36396,7 @@ pub const STM32H745XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F303C(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303C(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36406,7 +36406,7 @@ pub const @"STM32F303C(6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L162ZETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162ZETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -36422,7 +36422,7 @@ pub const STM32L162ZETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const @"STM32L451V(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L451V(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -36441,7 +36441,7 @@ pub const @"STM32L451V(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F030RCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F030RCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -36453,7 +36453,7 @@ pub const STM32F030RCTx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "STM32F0x0_Value_Line", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32L152C(6-8-B)Ux" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152C(6-8-B)Ux" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36466,7 +36466,7 @@ pub const @"STM32L152C(6-8-B)Ux" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L152C(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152C(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -36478,7 +36478,7 @@ pub const @"STM32L152C(6-8-B)TxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Stati
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32C011F(4-6)Px" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32C011F(4-6)Px" = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -36486,7 +36486,7 @@ pub const @"STM32C011F(4-6)Px" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const STM32F358RCTx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F358RCTx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -36504,7 +36504,7 @@ pub const STM32F358RCTx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32F3x8", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32C091CCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091CCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -36515,7 +36515,7 @@ pub const STM32C091CCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H7B0IBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B0IBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -36549,7 +36549,7 @@ pub const STM32H7B0IBTx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G411C8Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411C8Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36566,7 +36566,7 @@ pub const STM32G411C8Ux = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "UFQFPN48", {} },
     .{ "STM32G411C8Ux", {} },
 }));
-pub const STM32MP215DAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215DAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -36598,7 +36598,7 @@ pub const STM32MP215DAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H523ZCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523ZCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -36624,7 +36624,7 @@ pub const STM32H523ZCTx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP213DAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213DAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -36654,7 +36654,7 @@ pub const STM32MP213DAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L496Z(E-G)Tx" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L496Z(E-G)Tx" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36677,7 +36677,7 @@ pub const @"STM32L496Z(E-G)Tx" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP233CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP233CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -36709,7 +36709,7 @@ pub const STM32MP233CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32C071K8UxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071K8UxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -36719,7 +36719,7 @@ pub const STM32C071K8UxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP211CAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211CAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36748,7 +36748,7 @@ pub const STM32MP211CAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP211DAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211DAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36775,7 +36775,7 @@ pub const STM32MP211DAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP215AAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215AAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -36806,7 +36806,7 @@ pub const STM32MP215AAOx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F756VGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F756VGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -36835,7 +36835,7 @@ pub const STM32F756VGTx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L162VCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162VCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36850,7 +36850,7 @@ pub const STM32L162VCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const STM32L073RZIx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L073RZIx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36866,7 +36866,7 @@ pub const STM32L073RZIx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L151QCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151QCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -36879,7 +36879,7 @@ pub const STM32L151QCHx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H730IBKxQ = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H730IBKxQ = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -36915,7 +36915,7 @@ pub const STM32H730IBKxQ = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G431R(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G431R(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36937,7 +36937,7 @@ pub const @"STM32G431R(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.St
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F101C(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101C(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -36946,7 +36946,7 @@ pub const @"STM32F101C(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F101", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP231DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -36974,7 +36974,7 @@ pub const STM32MP231DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F100C(4-6)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100C(4-6)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -36983,7 +36983,7 @@ pub const @"STM32F100C(4-6)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U375RGYxG = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375RGYxG = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37001,7 +37001,7 @@ pub const STM32U375RGYxG = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H743BGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743BGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -37036,7 +37036,7 @@ pub const STM32H743BGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP133FAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133FAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -37069,7 +37069,7 @@ pub const STM32MP133FAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP133FAFx", {} },
 }));
-pub const STM32L4Q5CGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5CGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37092,7 +37092,7 @@ pub const STM32L4Q5CGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F469VITx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F469VITx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -37116,7 +37116,7 @@ pub const STM32F469VITx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G071K(6-8-B)Tx" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G071K(6-8-B)Tx" = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37132,7 +37132,7 @@ pub const @"STM32G071K(6-8-B)Tx" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.Stati
     .{ "USART3_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32F207I(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F207I(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -37154,7 +37154,7 @@ pub const @"STM32F207I(C-E-F-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F302R(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302R(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37171,7 +37171,7 @@ pub const @"STM32F302R(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.Sta
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G050K6Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G050K6Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37183,7 +37183,7 @@ pub const STM32G050K6Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32MP235DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -37216,7 +37216,7 @@ pub const STM32MP235DALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const @"STM32F215Z(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F215Z(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -37237,7 +37237,7 @@ pub const @"STM32F215Z(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA62CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA62CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -37254,7 +37254,7 @@ pub const STM32WBA62CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C071CBTx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071CBTx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37264,7 +37264,7 @@ pub const STM32C071CBTx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L412R8Tx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412R8Tx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37281,7 +37281,7 @@ pub const STM32L412R8Tx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F378RCYx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F378RCYx = STM32F373_STM32F3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37295,7 +37295,7 @@ pub const STM32F378RCYx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "STM32F3x8", {} },
 }));
-pub const @"STM32L031E(4-6)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L031E(4-6)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37306,7 +37306,7 @@ pub const @"STM32L031E(4-6)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "WLCSP25", {} },
 }));
-pub const @"STM32F722I(C-E)Kx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F722I(C-E)Kx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37333,7 +37333,7 @@ pub const @"STM32F722I(C-E)Kx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7R3Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -37367,7 +37367,7 @@ pub const STM32H7R3Z8Jx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L152VETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152VETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37382,7 +37382,7 @@ pub const STM32L152VETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WB06KCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB06KCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37394,7 +37394,7 @@ pub const STM32WB06KCVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "SPI2_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const @"STM32F215V(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F215V(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -37415,7 +37415,7 @@ pub const @"STM32F215V(E-G)Tx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U595ZITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595ZITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37442,7 +37442,7 @@ pub const STM32U595ZITx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U575AGIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575AGIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37467,7 +37467,7 @@ pub const STM32U575AGIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32G414CCUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414CCUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37485,7 +37485,7 @@ pub const STM32G414CCUx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32WB15CCUxE = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB15CCUxE = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -37496,7 +37496,7 @@ pub const STM32WB15CCUxE = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART1_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L083V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L083V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37512,7 +37512,7 @@ pub const STM32L083V8Ix = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U595QJIx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595QJIx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37539,7 +37539,7 @@ pub const STM32U595QJIx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA52KEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA52KEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -37552,7 +37552,7 @@ pub const STM32WBA52KEUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32F071V(8-B)Hx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F071V(8-B)Hx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -37565,7 +37565,7 @@ pub const @"STM32F071V(8-B)Hx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F100C(8-B)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100C(8-B)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37577,7 +37577,7 @@ pub const @"STM32F100C(8-B)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U575ZGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575ZGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37602,7 +37602,7 @@ pub const STM32U575ZGTxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U595ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37629,7 +37629,7 @@ pub const STM32U595ZJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H725AGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725AGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -37665,7 +37665,7 @@ pub const STM32H725AGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WB55VCQx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55VCQx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -37679,7 +37679,7 @@ pub const STM32WB55VCQx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G474MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G474MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -37705,7 +37705,7 @@ pub const STM32G474MEYx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U575OGYxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575OGYxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37729,7 +37729,7 @@ pub const STM32U575OGYxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32F048C6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F048C6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -37742,7 +37742,7 @@ pub const STM32F048C6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F072R(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F072R(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -37757,7 +37757,7 @@ pub const @"STM32F072R(8-B)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32WB30CEUxA = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB30CEUxA = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -37768,7 +37768,7 @@ pub const STM32WB30CEUxA = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(
     .{ "STM32WBx0_Value_Line", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U375VEIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375VEIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37788,7 +37788,7 @@ pub const STM32U375VEIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C091RBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091RBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37799,7 +37799,7 @@ pub const STM32C091RBTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F469V(E-G)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F469V(E-G)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -37823,7 +37823,7 @@ pub const @"STM32F469V(E-G)Tx" = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L4Q5ZGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5ZGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37847,7 +37847,7 @@ pub const STM32L4Q5ZGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32G051K(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G051K(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37861,7 +37861,7 @@ pub const @"STM32G051K(6-8)Ux" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32F378VCHx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F378VCHx = STM32F373_STM32F3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37875,7 +37875,7 @@ pub const STM32F378VCHx = STM32F373_STM32F3_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "STM32F3x8", {} },
 }));
-pub const @"STM32L433R(B-C)Ix" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L433R(B-C)Ix" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37893,7 +37893,7 @@ pub const @"STM32L433R(B-C)Ix" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP213DAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213DAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -37924,7 +37924,7 @@ pub const STM32MP213DAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U545REIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545REIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -37946,7 +37946,7 @@ pub const STM32U545REIxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32L443RCYx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L443RCYx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -37964,14 +37964,14 @@ pub const STM32L443RCYx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F031K6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F031K6Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32U5A9VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A9VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38000,7 +38000,7 @@ pub const STM32U5A9VJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G491R(C-E)Ix" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G491R(C-E)Ix" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -38024,7 +38024,7 @@ pub const @"STM32G491R(C-E)Ix" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(s
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G0B0RETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G0B0RETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -38039,7 +38039,7 @@ pub const STM32G0B0RETx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.Stat
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L151UCYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151UCYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38053,7 +38053,7 @@ pub const STM32L151UCYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L072R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38069,7 +38069,7 @@ pub const @"STM32L072R(B-Z)Hx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U575QIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575QIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38094,7 +38094,7 @@ pub const STM32U575QIIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F101V(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101V(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -38105,7 +38105,7 @@ pub const @"STM32F101V(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "STM32F101", {} },
 }));
-pub const STM32MP131AAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131AAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -38132,7 +38132,7 @@ pub const STM32MP131AAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WB55CCUx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55CCUx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -38146,7 +38146,7 @@ pub const STM32WB55CCUx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F405O(E-G)Yx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F405O(E-G)Yx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -38167,7 +38167,7 @@ pub const @"STM32F405O(E-G)Yx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G484VETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G484VETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -38193,7 +38193,7 @@ pub const STM32G484VETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WBA64CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA64CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -38211,7 +38211,7 @@ pub const STM32WBA64CIUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32WBAx4", {} },
 }));
-pub const STM32U375RGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375RGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38231,7 +38231,7 @@ pub const STM32U375RGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L162RETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162RETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -38248,7 +38248,7 @@ pub const STM32L162RETx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32L162", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L496VGYx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L496VGYx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38271,7 +38271,7 @@ pub const STM32L496VGYx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32C031K(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32C031K(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -38279,7 +38279,7 @@ pub const @"STM32C031K(4-6)Ux" = STM32C0_STM32C0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U5A5RJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5RJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38305,7 +38305,7 @@ pub const STM32U5A5RJTxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U545CEUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545CEUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38326,7 +38326,7 @@ pub const STM32U545CEUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H563AIIxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563AIIxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -38362,7 +38362,7 @@ pub const STM32H563AIIxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L476QGIxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L476QGIxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38384,7 +38384,7 @@ pub const STM32L476QGIxP = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H523ZEJx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523ZEJx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -38410,7 +38410,7 @@ pub const STM32H523ZEJx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H563RIVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563RIVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -38439,7 +38439,7 @@ pub const STM32H563RIVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U375CEUxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CEUxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38457,7 +38457,7 @@ pub const STM32U375CEUxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C071FBPxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071FBPxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -38467,7 +38467,7 @@ pub const STM32C071FBPxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L152R(6-8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152R(6-8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE416", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38479,7 +38479,7 @@ pub const @"STM32L152R(6-8-B)Hx" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L162VDYxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162VDYxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -38495,7 +38495,7 @@ pub const STM32L162VDYxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "STM32L162", {} },
 }));
-pub const STM32L162RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38511,7 +38511,7 @@ pub const STM32L162RCTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32L162", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP251FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -38545,7 +38545,7 @@ pub const STM32MP251FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L412RBTxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412RBTxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -38562,7 +38562,7 @@ pub const STM32L412RBTxP = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G441RBIx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G441RBIx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38583,7 +38583,7 @@ pub const STM32G441RBIx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F423CHUx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F423CHUx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38606,7 +38606,7 @@ pub const STM32F423CHUx = @"STM32F413_STM32F413-rcc_v1_0".ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F102R(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F102R(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -38619,7 +38619,7 @@ pub const @"STM32F102R(8-B)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F102", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP133DAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133DAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -38651,7 +38651,7 @@ pub const STM32MP133DAGx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP133DAGx", {} },
 }));
-pub const STM32H563RGVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563RGVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -38680,7 +38680,7 @@ pub const STM32H563RGVx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F439Z(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F439Z(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -38706,7 +38706,7 @@ pub const @"STM32F439Z(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L4S5AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S5AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -38728,7 +38728,7 @@ pub const STM32L4S5AIIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L476ZGJx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L476ZGJx = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38750,7 +38750,7 @@ pub const STM32L476ZGJx = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L412RBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412RBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -38767,7 +38767,7 @@ pub const STM32L412RBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP257CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -38806,7 +38806,7 @@ pub const STM32MP257CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F722Z(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F722Z(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38833,7 +38833,7 @@ pub const @"STM32F722Z(C-E)Tx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F723V(C-E)Yx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F723V(C-E)Yx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38859,7 +38859,7 @@ pub const @"STM32F723V(C-E)Yx" = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32G081GBUx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081GBUx = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -38876,7 +38876,7 @@ pub const STM32G081GBUx = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const @"STM32F417V(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F417V(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -38898,7 +38898,7 @@ pub const @"STM32F417V(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H745IGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745IGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -38933,7 +38933,7 @@ pub const STM32H745IGTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G471Q(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G471Q(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -38959,7 +38959,7 @@ pub const @"STM32G471Q(C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP231CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP231CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -38988,7 +38988,7 @@ pub const STM32MP231CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F101V(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101V(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FSMC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39002,7 +39002,7 @@ pub const @"STM32F101V(C-D-E)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.St
     .{ "USART3_Exist", {} },
     .{ "STM32F101", {} },
 }));
-pub const STM32U375CETxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CETxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39021,7 +39021,7 @@ pub const STM32U375CETxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U073M8Ix = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073M8Ix = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39038,7 +39038,7 @@ pub const STM32U073M8Ix = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WL33KCVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33KCVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39047,7 +39047,7 @@ pub const STM32WL33KCVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticSt
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32H7B3IIKx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3IIKx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -39081,7 +39081,7 @@ pub const STM32H7B3IIKx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F746NEHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F746NEHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -39111,7 +39111,7 @@ pub const STM32F746NEHx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA65RIVx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA65RIVx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -39130,7 +39130,7 @@ pub const STM32WBA65RIVx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32WBAx5", {} },
 }));
-pub const STM32MP157FABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157FABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -39165,7 +39165,7 @@ pub const STM32MP157FABx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F410R(8-B)Tx" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F410R(8-B)Tx" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39180,7 +39180,7 @@ pub const @"STM32F410R(8-B)Tx" = @"STM32F410_STM32F410-rcc_v1_0".ClockTree(std.S
     .{ "USART2_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32G0C1K(C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G0C1K(C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -39202,7 +39202,7 @@ pub const @"STM32G0C1K(C-E)UxN" = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32MP213AAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213AAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -39233,7 +39233,7 @@ pub const STM32MP213AAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U5F9VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5F9VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "HSPI1_Exist", {} },
@@ -39261,7 +39261,7 @@ pub const STM32U5F9VITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F042C(4-6)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F042C(4-6)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE445", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -39273,7 +39273,7 @@ pub const @"STM32F042C(4-6)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U535NEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535NEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39293,7 +39293,7 @@ pub const STM32U535NEYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32H7S3V8Yx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3V8Yx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -39321,7 +39321,7 @@ pub const STM32H7S3V8Yx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L4Q5QGIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5QGIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39345,7 +39345,7 @@ pub const STM32L4Q5QGIx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U535CBTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CBTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39365,7 +39365,7 @@ pub const STM32U535CBTxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U599NIHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U599NIHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -39395,7 +39395,7 @@ pub const STM32U599NIHxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WLE4JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE4JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39410,7 +39410,7 @@ pub const STM32WLE4JCIx = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const @"STM32L471Z(E-G)Jx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L471Z(E-G)Jx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39431,7 +39431,7 @@ pub const @"STM32L471Z(E-G)Jx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L452CETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L452CETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39451,7 +39451,7 @@ pub const STM32L452CETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32G411KBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411KBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39468,7 +39468,7 @@ pub const STM32G411KBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "LQFP32", {} },
     .{ "STM32G411KBTx", {} },
 }));
-pub const STM32L452REYxP = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L452REYxP = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39488,7 +39488,7 @@ pub const STM32L452REYxP = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U385VGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385VGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39509,7 +39509,7 @@ pub const STM32U385VGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F098RCYx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F098RCYx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39522,7 +39522,7 @@ pub const STM32F098RCYx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "STM32F0x8", {} },
 }));
-pub const STM32G483VETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G483VETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -39548,7 +39548,7 @@ pub const STM32G483VETx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4S5VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S5VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39570,7 +39570,7 @@ pub const STM32L4S5VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP213FAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213FAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -39602,7 +39602,7 @@ pub const STM32MP213FAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F446R(C-E)Tx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F446R(C-E)Tx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
@@ -39625,7 +39625,7 @@ pub const @"STM32F446R(C-E)Tx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP235FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -39659,7 +39659,7 @@ pub const STM32MP235FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const @"STM32G473R(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G473R(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -39685,7 +39685,7 @@ pub const @"STM32G473R(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F103C(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103C(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -39695,7 +39695,7 @@ pub const @"STM32F103C(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F103", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U585QIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585QIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39721,7 +39721,7 @@ pub const STM32U585QIIxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U083MCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U083MCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39738,7 +39738,7 @@ pub const STM32U083MCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F429B(E-G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F429B(E-G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -39764,7 +39764,7 @@ pub const @"STM32F429B(E-G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".Clock
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L422TBYx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L422TBYx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -39778,7 +39778,7 @@ pub const STM32L422TBYx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const STM32G414RBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414RBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39796,7 +39796,7 @@ pub const STM32G414RBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32L072R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39813,7 +39813,7 @@ pub const @"STM32L072R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L412K8Tx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412K8Tx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -39827,7 +39827,7 @@ pub const STM32L412K8Tx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32C051G6Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051G6Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39837,7 +39837,7 @@ pub const STM32C051G6Ux = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32C071GBUx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071GBUx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39847,7 +39847,7 @@ pub const STM32C071GBUx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H750ZBTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H750ZBTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -39882,7 +39882,7 @@ pub const STM32H750ZBTx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F401R(D-E)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F401R(D-E)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -39897,7 +39897,7 @@ pub const @"STM32F401R(D-E)Tx" = @"STM32F4_F401_STM32F417-rcc_v1_0".ClockTree(st
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP151FADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151FADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39929,7 +39929,7 @@ pub const STM32MP151FADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32G4A1MESx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G4A1MESx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -39953,7 +39953,7 @@ pub const STM32G4A1MESx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L071R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L071R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -39969,7 +39969,7 @@ pub const @"STM32L071R(B-Z)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP257CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -40008,7 +40008,7 @@ pub const STM32MP257CALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32U585ZITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585ZITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40034,7 +40034,7 @@ pub const STM32U585ZITxQ = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F334K(4-6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F334K(4-6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE438", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40043,7 +40043,7 @@ pub const @"STM32F334K(4-6-8)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Stat
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32F767VGHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F767VGHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -40073,7 +40073,7 @@ pub const STM32F767VGHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H523VETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523VETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -40099,7 +40099,7 @@ pub const STM32H523VETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U535CETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40119,7 +40119,7 @@ pub const STM32U535CETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F733ZEIx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F733ZEIx = STM32F722_STM32F722_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40147,7 +40147,7 @@ pub const STM32F733ZEIx = STM32F722_STM32F722_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32F7x3", {} },
 }));
-pub const STM32MP213CAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213CAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -40179,7 +40179,7 @@ pub const STM32MP213CAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C071C8TxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071C8TxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -40189,7 +40189,7 @@ pub const STM32C071C8TxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WL33CBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33CBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -40199,7 +40199,7 @@ pub const STM32WL33CBVx = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStr
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32L071C8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L071C8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40215,7 +40215,7 @@ pub const STM32L071C8Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F301C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F301C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40229,7 +40229,7 @@ pub const STM32F301C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32G411K8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G411K8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40246,7 +40246,7 @@ pub const STM32G411K8Tx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "LQFP32", {} },
     .{ "STM32G411K8Tx", {} },
 }));
-pub const STM32L422CBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L422CBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -40263,7 +40263,7 @@ pub const STM32L422CBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32C092KCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092KCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40275,7 +40275,7 @@ pub const STM32C092KCTx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32WB15CCUx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB15CCUx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -40286,7 +40286,7 @@ pub const STM32WB15CCUx = STM32WB1_STM32WB1_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART1_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7R7L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R7L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -40321,7 +40321,7 @@ pub const STM32H7R7L8Hx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G473C(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G473C(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -40345,7 +40345,7 @@ pub const @"STM32G473C(B-C-E)Tx" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32WLE5C8Ux = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WLE5C8Ux = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -40361,7 +40361,7 @@ pub const STM32WLE5C8Ux = STM32WL_STM32WLxx_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F051T8Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F051T8Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -40371,7 +40371,7 @@ pub const STM32F051T8Yx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART2_Exist", {} },
     .{ "WLCSP36", {} },
 }));
-pub const @"STM32F205R(E-G)Yx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F205R(E-G)Yx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40391,7 +40391,7 @@ pub const @"STM32F205R(E-G)Yx" = @"STM32F2_F205-F207-F215-F217_STM32F217-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L471Z(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L471Z(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40412,7 +40412,7 @@ pub const @"STM32L471Z(E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L552RETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552RETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40436,7 +40436,7 @@ pub const STM32L552RETxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H7S7A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S7A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -40469,7 +40469,7 @@ pub const STM32H7S7A8Ix = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L412KBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412KBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -40483,7 +40483,7 @@ pub const STM32L412KBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32H573AIIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573AIIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -40520,7 +40520,7 @@ pub const STM32H573AIIx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L451R(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L451R(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -40539,7 +40539,7 @@ pub const @"STM32L451R(C-E)Ix" = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.Static
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G4A1REYx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G4A1REYx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -40563,7 +40563,7 @@ pub const STM32G4A1REYx = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H563IIKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563IIKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -40599,7 +40599,7 @@ pub const STM32H563IIKx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WB55VEQx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55VEQx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -40613,7 +40613,7 @@ pub const STM32WB55VEQx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L462RETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L462RETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -40634,7 +40634,7 @@ pub const STM32L462RETx = STM32L46_STM32L46_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F091C(B-C)Tx" = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F091C(B-C)Tx" = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40647,7 +40647,7 @@ pub const @"STM32F091C(B-C)Tx" = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32L475V(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L475V(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40669,7 +40669,7 @@ pub const @"STM32L475V(C-E-G)Tx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L4P5ZGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4P5ZGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -40693,7 +40693,7 @@ pub const STM32L4P5ZGTxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H725IGKx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H725IGKx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -40729,7 +40729,7 @@ pub const STM32H725IGKx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP153CACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153CACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -40764,7 +40764,7 @@ pub const STM32MP153CACx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP153CACx", {} },
 }));
-pub const STM32C092FCPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092FCPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40776,7 +40776,7 @@ pub const STM32C092FCPx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "TSSOP20", {} },
 }));
-pub const @"STM32F411C(C-E)Yx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F411C(C-E)Yx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -40793,7 +40793,7 @@ pub const @"STM32F411C(C-E)Yx" = @"STM32F411_STM32F411-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32L4A6ZGTx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4A6ZGTx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40816,7 +40816,7 @@ pub const STM32L4A6ZGTx = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U073C8Ux = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073C8Ux = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -40834,7 +40834,7 @@ pub const STM32U073C8Ux = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H743XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H743XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -40869,7 +40869,7 @@ pub const STM32H743XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32G473C(B-C-E)Ux" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G473C(B-C-E)Ux" = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -40894,7 +40894,7 @@ pub const @"STM32G473C(B-C-E)Ux" = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F038K6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F038K6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -40902,7 +40902,7 @@ pub const STM32F038K6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U545VETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545VETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -40924,7 +40924,7 @@ pub const STM32U545VETx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const @"STM32F446V(C-E)Tx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F446V(C-E)Tx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FMPI2C1_Exist", {} },
@@ -40948,7 +40948,7 @@ pub const @"STM32F446V(C-E)Tx" = @"STM32F446_STM32F446-rcc_v1_0".ClockTree(std.S
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F777BITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F777BITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -40979,7 +40979,7 @@ pub const STM32F777BITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H562VITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H562VITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -41011,7 +41011,7 @@ pub const STM32H562VITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C051K6Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C051K6Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -41021,7 +41021,7 @@ pub const STM32C051K6Tx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32U585VITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U585VITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41047,7 +41047,7 @@ pub const STM32U585VITx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H7B3QIYxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3QIYxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -41080,7 +41080,7 @@ pub const STM32H7B3QIYxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L552MEYxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552MEYxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41104,7 +41104,7 @@ pub const STM32L552MEYxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP257AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -41142,7 +41142,7 @@ pub const STM32MP257AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F469ZITx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F469ZITx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -41167,7 +41167,7 @@ pub const STM32F469ZITx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F101T(8-B)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101T(8-B)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -41176,7 +41176,7 @@ pub const @"STM32F101T(8-B)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F101", {} },
     .{ "VFQFPN36", {} },
 }));
-pub const STM32MP235CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP235CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -41210,7 +41210,7 @@ pub const STM32MP235CAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "STM32MP235", {} },
 }));
-pub const @"STM32L152V(8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L152V(8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -41221,7 +41221,7 @@ pub const @"STM32L152V(8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G071G(6-8-B)Ux" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G071G(6-8-B)Ux" = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41237,7 +41237,7 @@ pub const @"STM32G071G(6-8-B)Ux" = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.Stati
     .{ "USART3_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const @"STM32L476Q(E-G)Ix" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L476Q(E-G)Ix" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41259,7 +41259,7 @@ pub const @"STM32L476Q(E-G)Ix" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32L4R7VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4R7VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -41282,7 +41282,7 @@ pub const STM32L4R7VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32N645Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N645Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -41306,7 +41306,7 @@ pub const STM32N645Z0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART1_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32L4S7VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4S7VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -41329,7 +41329,7 @@ pub const STM32L4S7VITx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32U385CGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U385CGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41348,7 +41348,7 @@ pub const STM32U385CGYxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G484PEIx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G484PEIx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -41374,7 +41374,7 @@ pub const STM32G484PEIx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F765B(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F765B(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -41404,7 +41404,7 @@ pub const @"STM32F765B(G-I)Tx" = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F107R(B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F107R(B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41420,7 +41420,7 @@ pub const @"STM32F107R(B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32L011G(3-4)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L011G(3-4)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41431,7 +41431,7 @@ pub const @"STM32L011G(3-4)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32U375CGUxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375CGUxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41449,7 +41449,7 @@ pub const STM32U375CGUxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32N647B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N647B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -41481,7 +41481,7 @@ pub const STM32N647B0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP133CAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133CAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -41513,7 +41513,7 @@ pub const STM32MP133CAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7S3V8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3V8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -41541,7 +41541,7 @@ pub const STM32H7S3V8Tx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L433R(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L433R(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -41559,7 +41559,7 @@ pub const @"STM32L433R(B-C)Yx" = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.Static
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G484METx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G484METx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -41585,7 +41585,7 @@ pub const STM32G484METx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F030C8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F030C8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE440", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41597,7 +41597,7 @@ pub const STM32F030C8Tx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x0_Value_Line", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F038G6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F038G6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -41605,7 +41605,7 @@ pub const STM32F038G6Ux = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const @"STM32F407Z(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F407Z(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -41627,7 +41627,7 @@ pub const @"STM32F407Z(E-G)Tx" = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H755BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H755BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -41662,7 +41662,7 @@ pub const STM32H755BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H723ZEIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H723ZEIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -41698,7 +41698,7 @@ pub const STM32H723ZEIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U073MCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U073MCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -41715,7 +41715,7 @@ pub const STM32U073MCIx = STM32U0_256_STM32U0_256_rcc_v1_2.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F429ZGYx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F429ZGYx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -41741,7 +41741,7 @@ pub const STM32F429ZGYx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32N657X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N657X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -41776,7 +41776,7 @@ pub const STM32N657X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USART10_Exist", {} },
 }));
-pub const STM32F469NIHx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F469NIHx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -41803,7 +41803,7 @@ pub const STM32F469NIHx = @"STM32F4_F469-F479_STM32F469-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L152UCYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L152UCYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE427", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41817,7 +41817,7 @@ pub const STM32L152UCYx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H523RETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H523RETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -41844,7 +41844,7 @@ pub const STM32H523RETx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32G050C6Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G050C6Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41856,7 +41856,7 @@ pub const STM32G050C6Tx = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32G0x0_Value_line", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32U535CBUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535CBUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41876,7 +41876,7 @@ pub const STM32U535CBUx = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32L010K4Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L010K4Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41887,7 +41887,7 @@ pub const STM32L010K4Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x0_Value_Line", {} },
     .{ "LQFP32", {} },
 }));
-pub const STM32G041J6Mx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G041J6Mx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -41900,7 +41900,7 @@ pub const STM32G041J6Mx = STM32G0_64_STM32G0_64_rcc_v1_0.ClockTree(std.StaticStr
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32U535NCYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U535NCYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -41920,7 +41920,7 @@ pub const STM32U535NCYxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32H573ZITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573ZITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -41956,7 +41956,7 @@ pub const STM32H573ZITxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F101R(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101R(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -41965,7 +41965,7 @@ pub const @"STM32F101R(4-6)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F101", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32F105V(8-B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F105V(8-B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -41980,7 +41980,7 @@ pub const @"STM32F105V(8-B-C)Tx" = STM32F105_STM32F105_rcc_v1_0.ClockTree(std.St
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32N655X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N655X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -42015,7 +42015,7 @@ pub const STM32N655X0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USART10_Exist", {} },
 }));
-pub const STM32L4Q5CGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5CGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42038,7 +42038,7 @@ pub const STM32L4Q5CGTx = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const @"STM32F303V(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303V(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42056,7 +42056,7 @@ pub const @"STM32F303V(D-E)Tx" = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.Sta
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F302C(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F302C(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42071,7 +42071,7 @@ pub const @"STM32F302C(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32L562CEUxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562CEUxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42094,7 +42094,7 @@ pub const STM32L562CEUxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32L151V(8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151V(8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42105,7 +42105,7 @@ pub const @"STM32L151V(8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32WB09KEVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB09KEVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2S3_Exist", {} },
@@ -42113,7 +42113,7 @@ pub const STM32WB09KEVx = STM32WB0_STM32WB0_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "RNG_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const @"STM32G491V(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G491V(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -42137,7 +42137,7 @@ pub const @"STM32G491V(C-E)Tx" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(s
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L151VDYxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L151VDYxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42152,7 +42152,7 @@ pub const STM32L151VDYxX = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32C071C8Ux = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071C8Ux = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42162,7 +42162,7 @@ pub const STM32C071C8Ux = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L485J(C-E)Yx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L485J(C-E)Yx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42184,7 +42184,7 @@ pub const @"STM32L485J(C-E)Yx" = STM32L4_STM32L4_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP251AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP251AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -42217,7 +42217,7 @@ pub const STM32MP251AAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F078VBHx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F078VBHx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -42232,7 +42232,7 @@ pub const STM32F078VBHx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "STM32F0x8", {} },
 }));
-pub const @"STM32F103T(4-6)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103T(4-6)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -42242,7 +42242,7 @@ pub const @"STM32F103T(4-6)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F103", {} },
     .{ "VFQFPN36", {} },
 }));
-pub const STM32L552RETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L552RETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42267,7 +42267,7 @@ pub const STM32L552RETxQ = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L4Q5AGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5AGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42291,7 +42291,7 @@ pub const STM32L4Q5AGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32F750N8Hx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F750N8Hx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -42321,7 +42321,7 @@ pub const STM32F750N8Hx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L443VCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L443VCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42339,7 +42339,7 @@ pub const STM32L443VCTx = STM32L43_STM32L43_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F303VEYx = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F303VEYx = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42357,7 +42357,7 @@ pub const STM32F303VEYx = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32U5A5AJHx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U5A5AJHx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42385,7 +42385,7 @@ pub const STM32U5A5AJHx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H735IGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H735IGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -42421,7 +42421,7 @@ pub const STM32H735IGTx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L100C6UxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L100C6UxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42434,7 +42434,7 @@ pub const STM32L100C6UxA = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "STM32L100_Value_Line", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const @"STM32F745V(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F745V(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -42462,7 +42462,7 @@ pub const @"STM32F745V(E-G)Tx" = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticSt
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L4P5V(G-E)Yx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4P5V(G-E)Yx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42486,7 +42486,7 @@ pub const @"STM32L4P5V(G-E)Yx" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32F101T(4-6)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101T(4-6)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
@@ -42495,7 +42495,7 @@ pub const @"STM32F101T(4-6)Ux" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "STM32F101", {} },
     .{ "VFQFPN36", {} },
 }));
-pub const @"STM32F101V(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F101V(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE430", {} },
     .{ "ADC1_Exist", {} },
     .{ "FSMC_Exist", {} },
@@ -42510,7 +42510,7 @@ pub const @"STM32F101V(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "STM32F101", {} },
 }));
-pub const STM32L162RDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L162RDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42528,7 +42528,7 @@ pub const STM32L162RDTx = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32L162", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32L4R9ZIYxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4R9ZIYxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42552,7 +42552,7 @@ pub const STM32L4R9ZIYxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP133AAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133AAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -42583,7 +42583,7 @@ pub const STM32MP133AAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H757XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H757XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -42619,7 +42619,7 @@ pub const STM32H757XIHx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F746ZETx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F746ZETx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -42649,7 +42649,7 @@ pub const STM32F746ZETx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L4P5AGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4P5AGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42673,7 +42673,7 @@ pub const STM32L4P5AGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32MP253FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -42710,7 +42710,7 @@ pub const STM32MP253FALx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32C071R8Tx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071R8Tx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -42720,7 +42720,7 @@ pub const STM32C071R8Tx = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G414CBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G414CBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42738,7 +42738,7 @@ pub const STM32G414CBTx = STM32G4_STM32G4_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32MP133CAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP133CAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH2_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -42770,7 +42770,7 @@ pub const STM32MP133CAEx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F777IITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F777IITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -42801,7 +42801,7 @@ pub const STM32F777IITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32N647I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N647I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -42831,7 +42831,7 @@ pub const STM32N647I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP211FANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211FANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42860,7 +42860,7 @@ pub const STM32MP211FANx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F303C(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F303C(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -42876,7 +42876,7 @@ pub const @"STM32F303C(B-C)Tx" = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32N645I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32N645I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -42906,14 +42906,14 @@ pub const STM32N645I0HxQ = STM32N6_STM32N6_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const @"STM32F031K(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F031K(4-6)Ux" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32U375VGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375VGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42933,7 +42933,7 @@ pub const STM32U375VGIxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F103V(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F103V(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE430", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -42953,7 +42953,7 @@ pub const @"STM32F103V(F-G)Tx" = STM32F102_STM32F102_rcc_v1_0.ClockTree(std.Stat
     .{ "USB_Exist", {} },
     .{ "STM32F103", {} },
 }));
-pub const @"STM32G431M(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G431M(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -42974,14 +42974,14 @@ pub const @"STM32G431M(6-8-B)Tx" = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.St
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32F031C(4-6)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F031C(4-6)Tx" = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32H533VEIx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H533VEIx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -43008,7 +43008,7 @@ pub const STM32H533VEIx = STM32H5_512_STM32H5_rcc_v1_512_0.ClockTree(std.StaticS
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F091VCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F091VCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43020,7 +43020,7 @@ pub const STM32F091VCHx = STM32F091_STM32F091_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32H745ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H745ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -43055,7 +43055,7 @@ pub const STM32H745ZITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F437V(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F437V(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -43079,7 +43079,7 @@ pub const @"STM32F437V(G-I)Tx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L053C(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L053C(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -43094,7 +43094,7 @@ pub const @"STM32L053C(6-8)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7S3I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -43129,7 +43129,7 @@ pub const STM32H7S3I8Kx = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U545CEUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U545CEUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43150,7 +43150,7 @@ pub const STM32U545CEUxQ = STM32U5_STM32U5_rcc_v1_2.ClockTree(std.StaticStringMa
     .{ "USB_DRD_FS_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32WB55VYYx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WB55VYYx = STM32W_STM32W_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -43164,7 +43164,7 @@ pub const STM32WB55VYYx = STM32W_STM32W_rcc_v1_0.ClockTree(std.StaticStringMap(v
     .{ "USART1_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32G441RBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G441RBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43186,7 +43186,7 @@ pub const STM32G441RBTx = STM32G454_STM32G454_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const @"STM32L151R(6-8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L151R(6-8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -43197,7 +43197,7 @@ pub const @"STM32L151R(6-8-B)HxA" = STM32L1_STM32L1_rcc_v1_0.ClockTree(std.Stati
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP213AALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP213AALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -43228,7 +43228,7 @@ pub const STM32MP213AALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7S3L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7S3L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -43263,7 +43263,7 @@ pub const STM32H7S3L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32MP157FADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP157FADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DSIHOST_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -43298,7 +43298,7 @@ pub const STM32MP157FADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U595RJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595RJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43323,7 +43323,7 @@ pub const STM32U595RJTx = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U595RITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U595RITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43348,7 +43348,7 @@ pub const STM32U595RITxQ = STM32U5_9_A_STM32U5_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32H7B3VIHx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3VIHx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -43381,7 +43381,7 @@ pub const STM32H7B3VIHx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375RETxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375RETxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43402,7 +43402,7 @@ pub const STM32U375RETxQ = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32F405RGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F405RGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43423,7 +43423,7 @@ pub const STM32F405RGTx = @"STM32F4_F405-F407-F415-F417_STM32F417-rcc_v1_0".Cloc
     .{ "USB_OTG_HS_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP215AAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215AAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -43455,7 +43455,7 @@ pub const STM32MP215AAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L021K4Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L021K4Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43466,7 +43466,7 @@ pub const STM32L021K4Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32H563RGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H563RGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -43496,7 +43496,7 @@ pub const STM32H563RGTx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32U575CGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575CGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43518,7 +43518,7 @@ pub const STM32U575CGTx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F429ZITx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F429ZITx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -43544,7 +43544,7 @@ pub const STM32F429ZITx = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H747IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H747IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -43580,7 +43580,7 @@ pub const STM32H747IITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32U375REIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U375REIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43600,7 +43600,7 @@ pub const STM32U375REIx = STM32U3_STM32U3_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32G051K(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G051K(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE456", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43614,7 +43614,7 @@ pub const @"STM32G051K(6-8)Tx" = STM32G0_STM32G06_rcc_v1_0.ClockTree(std.StaticS
     .{ "USART2_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32L072C(B-Z)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L072C(B-Z)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43631,7 +43631,7 @@ pub const @"STM32L072C(B-Z)Yx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32H735AGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H735AGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -43667,7 +43667,7 @@ pub const STM32H735AGIx = STM32H723_STM32H723_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C091CBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091CBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -43678,7 +43678,7 @@ pub const STM32C091CBUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32H7B3AIIxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3AIIxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -43712,7 +43712,7 @@ pub const STM32H7B3AIIxQ = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32L4R5Q(G-I)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L4R5Q(G-I)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -43734,7 +43734,7 @@ pub const @"STM32L4R5Q(G-I)Ix" = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32H753BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H753BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -43769,7 +43769,7 @@ pub const STM32H753BITx = STM32H7_STM32H7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32C071CBUxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C071CBUxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -43779,7 +43779,7 @@ pub const STM32C071CBUxN = STM32C0_128_STM32C0_rcc_v1_1.ClockTree(std.StaticStri
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H573ZITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573ZITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -43816,7 +43816,7 @@ pub const STM32H573ZITx = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const @"STM32L496Q(E-G)Ix" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L496Q(E-G)Ix" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43839,7 +43839,7 @@ pub const @"STM32L496Q(E-G)Ix" = STM32L4x6_STM32L4x6_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const STM32F779BITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F779BITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DSIHOST_Exist", {} },
@@ -43871,7 +43871,7 @@ pub const STM32F779BITx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L041K6Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L041K6Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43882,7 +43882,7 @@ pub const STM32L041K6Ux = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "STM32L0x1", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const STM32L412CBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L412CBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -43899,7 +43899,7 @@ pub const STM32L412CBUx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32MP211AALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP211AALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43927,7 +43927,7 @@ pub const STM32MP211AALx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA63CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA63CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
@@ -43940,7 +43940,7 @@ pub const STM32WBA63CGUx = STM32WBA6_STM32WBA6_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART1_Exist", {} },
     .{ "USART2_Exist", {} },
 }));
-pub const STM32C092GCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C092GCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -43952,7 +43952,7 @@ pub const STM32C092GCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32H573MIYxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573MIYxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -43984,7 +43984,7 @@ pub const STM32H573MIYxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32F358VCTx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F358VCTx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE422", {} },
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
@@ -44001,7 +44001,7 @@ pub const STM32F358VCTx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "STM32F3x8", {} },
 }));
-pub const STM32MP153FADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP153FADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -44035,7 +44035,7 @@ pub const STM32MP153FADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const @"STM32F427I(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F427I(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -44060,7 +44060,7 @@ pub const @"STM32F427I(G-I)Hx" = @"STM32F4_F427-F437_STM32F427-rcc_v1_0".ClockTr
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H573IIKxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H573IIKxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ETH_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -44097,7 +44097,7 @@ pub const STM32H573IIKxQ = STM32H5_STM32H5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART10_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32L4Q5QGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L4Q5QGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -44121,7 +44121,7 @@ pub const STM32L4Q5QGIxP = STM32L4RS_STM32L4RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_FS_Exist", {} },
 }));
-pub const @"STM32L073C(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L073C(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44138,7 +44138,7 @@ pub const @"STM32L073C(B-Z)Ux" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32G081GBUxN = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G081GBUxN = STM32G0_STM32G05_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44155,7 +44155,7 @@ pub const STM32G081GBUxN = STM32G0_STM32G05_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART3_Exist", {} },
     .{ "UFQFPN28", {} },
 }));
-pub const STM32MP257FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -44194,7 +44194,7 @@ pub const STM32MP257FAIx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32F767VIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F767VIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -44224,7 +44224,7 @@ pub const STM32F767VIHx = STM32F777_STM32F777_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F756IGKx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F756IGKx = STM32F7_STM32F7_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -44254,7 +44254,7 @@ pub const STM32F756IGKx = STM32F7_STM32F7_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32H7R3L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7R3L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH_Exist", {} },
@@ -44288,7 +44288,7 @@ pub const STM32H7R3L8HxH = STM32H7RS_STM32H7RS_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USB_OTG_FS_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WL33CCVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WL33CCVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -44298,7 +44298,7 @@ pub const STM32WL33CCVxX = STM32WL33_STM32WL33xx_rcc_v1_0.ClockTree(std.StaticSt
     .{ "SPI1_Exist", {} },
     .{ "USART1_Exist", {} },
 }));
-pub const STM32L562QEIxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L562QEIxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44322,7 +44322,7 @@ pub const STM32L562QEIxP = STM32L5_STM32L5_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USART3_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32MP253FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP253FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -44359,7 +44359,7 @@ pub const STM32MP253FAJx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32G0B1NEYx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32G0B1NEYx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -44379,7 +44379,7 @@ pub const STM32G0B1NEYx = @"STM32G0-512_STM32G0-512_rcc_v1_0".ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "USB_DRD_FS_Exist", {} },
 }));
-pub const STM32L073V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L073V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE447", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44395,7 +44395,7 @@ pub const STM32L073V8Tx = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "USB_Exist", {} },
 }));
-pub const STM32H7B3IITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32H7B3IITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "FDCAN2_Exist", {} },
@@ -44429,7 +44429,7 @@ pub const STM32H7B3IITx = STM32H7AB_STM32H7AB_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USART10_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32F398VETx = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F398VETx = STM32F303_STM32F303E_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44447,7 +44447,7 @@ pub const STM32F398VETx = STM32F303_STM32F303E_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "STM32F3x8", {} },
 }));
-pub const STM32MP131CAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP131CAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -44475,7 +44475,7 @@ pub const STM32MP131CAFx = STM32MP13_STM32MP13_rcc_v1_0.ClockTree(std.StaticStri
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32WBA50KGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32WBA50KGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "I2C3_Exist", {} },
     .{ "LPTIM1_Exist", {} },
     .{ "LPUART1_Exist", {} },
@@ -44484,7 +44484,7 @@ pub const STM32WBA50KGUx = STM32WBA_STM32WBA_rcc_v1_0.ClockTree(std.StaticString
     .{ "STM32WBAx0", {} },
     .{ "UFQFPN32", {} },
 }));
-pub const @"STM32F100R(8-B)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32F100R(8-B)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44496,7 +44496,7 @@ pub const @"STM32F100R(8-B)Tx" = STM32F100_STM32F100_rcc_v1_0.ClockTree(std.Stat
     .{ "USART3_Exist", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP151CADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP151CADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44529,7 +44529,7 @@ pub const STM32MP151CADx = STM32MP_STM32MP_rcc_v1_0.ClockTree(std.StaticStringMa
     .{ "USB_OTG_HS_Exist", {} },
     .{ "STM32MP151CADx", {} },
 }));
-pub const STM32L021D4Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L021D4Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE457", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44539,7 +44539,7 @@ pub const STM32L021D4Px = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USART2_Exist", {} },
     .{ "STM32L0x1", {} },
 }));
-pub const @"STM32L041C(4-6)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32L041C(4-6)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE425", {} },
     .{ "ADC_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44550,7 +44550,7 @@ pub const @"STM32L041C(4-6)Tx" = STM32L0_STM32L051_rcc_v1_0.ClockTree(std.Static
     .{ "STM32L0x1", {} },
     .{ "LQFP48", {} },
 }));
-pub const STM32F078RBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F078RBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE448", {} },
     .{ "ADC_Exist", {} },
     .{ "HDMI_CEC_Exist", {} },
@@ -44566,7 +44566,7 @@ pub const STM32F078RBTx = STM32F0_STM32F0_rcc_v1_0.ClockTree(std.StaticStringMap
     .{ "STM32F0x8", {} },
     .{ "LQFP64", {} },
 }));
-pub const STM32MP255CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP255CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -44605,7 +44605,7 @@ pub const STM32MP255CAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32C091CCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32C091CCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C2_Exist", {} },
@@ -44616,7 +44616,7 @@ pub const STM32C091CCUx = STM32C0_64_STM32C0_rcc_v1_2.ClockTree(std.StaticString
     .{ "USART3_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32F302C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32F302C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "DIE439", {} },
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
@@ -44631,7 +44631,7 @@ pub const STM32F302C8Yx = STM32F3_STM32F303_rcc_v1_0.ClockTree(std.StaticStringM
     .{ "USB_Exist", {} },
     .{ "WLCSP49", {} },
 }));
-pub const STM32MP257DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP257DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "DCMIPP_Exist", {} },
@@ -44669,7 +44669,7 @@ pub const STM32MP257DAKx = STM32MP2_STM32MP2_rcc_v1_0.ClockTree(std.StaticString
     .{ "USART2_Exist", {} },
     .{ "USART3_Exist", {} },
 }));
-pub const STM32MP215FAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32MP215FAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "DCMIPP_Exist", {} },
     .{ "ETH2_Exist", {} },
@@ -44702,7 +44702,7 @@ pub const STM32MP215FAMx = STM32MP21_STM32MP2_rcc_v1_1.ClockTree(std.StaticStrin
     .{ "USART3_Exist", {} },
     .{ "USB_OTG_HS_Exist", {} },
 }));
-pub const STM32L422KBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32L422KBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "I2C1_Exist", {} },
     .{ "I2C3_Exist", {} },
@@ -44716,7 +44716,7 @@ pub const STM32L422KBTx = STM32L4x2_STM32L4x2_rcc_v1_0.ClockTree(std.StaticStrin
     .{ "USB_Exist", {} },
     .{ "LQFP32", {} },
 }));
-pub const @"STM32G491C(C-E)Ux" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const @"STM32G491C(C-E)Ux" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "ADC3_Exist", {} },
     .{ "FDCAN1_Exist", {} },
@@ -44740,7 +44740,7 @@ pub const @"STM32G491C(C-E)Ux" = @"STM32G4-479_STM32G4-479_rcc_v1_0".ClockTree(s
     .{ "USB_Exist", {} },
     .{ "UFQFPN48", {} },
 }));
-pub const STM32U575AGIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(std.StaticStringMap(void).initComptime(.{
+pub const STM32U575AGIx = STM32U5_STM32U5_rcc_v1_0.ClockTree(EnumField(void).initComptime(.{
     .{ "ADC1_Exist", {} },
     .{ "FDCAN1_Exist", {} },
     .{ "I2C1_Exist", {} },

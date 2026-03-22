@@ -1,5 +1,11 @@
 .zig-cache/*
+.venv/*
+embassy-patchs/__pycache__/*
 zig-out/*
 ClockTreesTemp/*
 src/hal_data.zig
 src/microzig_data.zig
+logs/*
+
+embassy_registers/*
+patch_tree_data/*

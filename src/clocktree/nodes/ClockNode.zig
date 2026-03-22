@@ -41,6 +41,10 @@ pub const ClockNode = struct {
     value: f32 = 0,
     limit: Limit = .{},
 
+    pub fn is_enabled(self: Self) bool {
+        return self.nodetype != .off;
+    }
+
     pub fn get(self: Self) ClockState {
         switch (self.nodetype) {
             .source => {

@@ -1,0 +1,598 @@
+block/SYSCFG:
+  description: System configuration controller
+  items:
+  - name: CFGR1
+    description: configuration register 1
+    byte_offset: 0
+    fieldset: CFGR1
+  - name: RCR
+    description: CCM SRAM protection register
+    byte_offset: 4
+    fieldset: RCR
+  - name: EXTICR
+    description: external interrupt configuration register
+    array:
+      len: 4
+      stride: 4
+    byte_offset: 8
+    fieldset: EXTICR
+  - name: CFGR2
+    description: configuration register 2
+    byte_offset: 24
+    fieldset: CFGR2
+  - name: CFGR4
+    description: configuration register 4
+    byte_offset: 72
+    fieldset: CFGR4
+  - name: CFGR3
+    description: configuration register 3
+    byte_offset: 80
+    fieldset: CFGR3
+fieldset/CFGR1:
+  description: configuration register 1
+  fields:
+  - name: MEM_MODE
+    description: Memory mapping selection bits
+    bit_offset: 0
+    bit_size: 2
+    enum: MEM_MODE
+  - name: USB_IT_RMP
+    description: |-
+      USB interrupt remap
+      0: USB_HP, USB_LP and USB_WAKEUP interrupts are mapped on interrupt lines 19, 20 and 42 respectively
+      1: USB_HP, USB_LP and USB_WAKEUP interrupts are mapped on interrupt lines 74, 75 and 76 respectively
+    bit_offset: 5
+    bit_size: 1
+  - name: TIM1_ITR3_RMP
+    description: |-
+      Timer 1 ITR3 selection
+      0: Not remapped
+      1: TIM1_ITR3 = TIM17_OC
+    bit_offset: 6
+    bit_size: 1
+  - name: DAC1_TRIG_RMP
+    description: |-
+      DAC trigger remap (when TSEL = 001)
+      0: DAC trigger is TIM8_TRGO in STM32F303xB/C and STM32F358xC devices
+      1: DAC trigger is TIM3_TRGO
+    bit_offset: 7
+    bit_size: 1
+  - name: DAC_TRIG_RMP
+    description: |-
+      DAC trigger remap (when TSEL = 001)
+      0: Not remapped
+      1: DAC trigger is TIM3_TRGO
+    bit_offset: 7
+    bit_size: 1
+  - name: ADC2_DMA_RMP
+    description: |-
+      ADC24 DMA remapping bit
+      0: ADC24 DMA requests mapped on DMA2 channels 1 and 2
+      1: ADC24 DMA requests mapped on DMA2 channels 3 and 4
+    bit_offset: 8
+    bit_size: 1
+  - name: TIM16_DMA_RMP
+    description: |-
+      TIM16 DMA request remapping bit
+      0: TIM16_CH1 and TIM16_UP DMA requests mapped on DMA channel 3
+      1: TIM16_CH1 and TIM16_UP DMA requests mapped on DMA channel 4
+    bit_offset: 11
+    bit_size: 1
+  - name: TIM17_DMA_RMP
+    description: |-
+      TIM17 DMA request remapping bit
+      0: TIM17_CH1 and TIM17_UP DMA requests mapped on DMA channel 1
+      1: TIM17_CH1 and TIM17_UP DMA requests mapped on DMA channel 2
+    bit_offset: 12
+    bit_size: 1
+  - name: TIM6_DAC1_CH1_DMA_RMP
+    description: |-
+      TIM6 and DAC1 DMA request remapping bit
+      0: TIM6_UP and DAC_CH1 DMA requests mapped on DMA2 channel 3
+      1: TIM6_UP and DAC_CH1 DMA requests mapped on DMA1 channel 3
+    bit_offset: 13
+    bit_size: 1
+  - name: TIM6_DAC1_DMA_RMP
+    description: |-
+      TIM6 and DAC1 DMA request remapping bit
+      0: TIM6_UP and DAC_CH1 DMA requests mapped on DMA2 channel 3
+      1: TIM6_UP and DAC_CH1 DMA requests mapped on DMA1 channel 3
+    bit_offset: 13
+    bit_size: 1
+  - name: TIM6_DAC1_OUT1_DMA_RMP
+    description: |-
+      TIM6 and DAC1 DMA request remapping bit
+      0: TIM7 and DAC1_OUT1 DMA requests mapped on DMA2 channel 3
+      1: TIM7 and DAC1_OUT1 DMA requests mapped on DMA1 channel 3
+    bit_offset: 13
+    bit_size: 1
+  - name: TIM7_DAC1_CH2_DMA_RMP
+    description: |-
+      TIM7 and DAC2 DMA request remapping bit
+      0: Not remapped
+      1: TIM7_UP and DAC_CH2 DMA requests mapped on DMA1 channel 4
+    bit_offset: 14
+    bit_size: 1
+  - name: TIM7_DAC1_OUT2_DMA_RMP
+    description: |-
+      TIM7 and DAC2 DMA request remapping bit
+      0: TIM7 and DAC1_OUT2 DMA requests mapped on DMA2 channel 4
+      1: TIM7 and DAC1_OUT2 DMA requests mapped on DMA1 channel 4
+    bit_offset: 14
+    bit_size: 1
+  - name: DAC2_CH1_DMA_RMP
+    description: |-
+      DAC2 channel1 DMA remap
+      0: Not remapped
+      1: DAC2_CH1 DMA requests mapped on DMA1 channel 5
+    bit_offset: 15
+    bit_size: 1
+  - name: TIM18_DAC2_OUT1_DMA_RMP
+    description: |-
+      TIM18 and DAC2_OUT1 DMA request remapping bit
+      0: TIM18 and DAC2_OUT1 DMA requests mapped on DMA2 channel 5
+      1: TIM18 and DAC2_OUT1 DMA requests mapped on DMA1 channel 5
+    bit_offset: 15
+    bit_size: 1
+  - name: I2C_PB6_FMP
+    description: |-
+      Fast Mode Plus (FM+) driving capability activation bits.
+      0: PB6 pin operate in standard mode
+      1: I2C FM+ mode enabled on PB6 and the Speed control is bypassed
+    bit_offset: 16
+    bit_size: 1
+    enum: FMP
+  - name: I2C_PB7_FMP
+    description: |-
+      Fast Mode Plus (FM+) driving capability activation bits.
+      0: PB7 pin operate in standard mode
+      1: I2C FM+ mode enabled on PB7 and the Speed control is bypassed
+    bit_offset: 17
+    bit_size: 1
+    enum: FMP
+  - name: I2C_PB8_FMP
+    description: |-
+      Fast Mode Plus (FM+) driving capability activation bits.
+      0: PB8 pin operate in standard mode
+      1: I2C FM+ mode enabled on PB8 and the Speed control is bypassed
+    bit_offset: 18
+    bit_size: 1
+    enum: FMP
+  - name: I2C_PB9_FMP
+    description: |-
+      Fast Mode Plus (FM+) driving capability activation bits.
+      0: PB9 pin operate in standard mode
+      1: I2C FM+ mode enabled on PB9 and the Speed control is bypassed
+    bit_offset: 19
+    bit_size: 1
+    enum: FMP
+  - name: I2C1_FMP
+    description: |-
+      I2C1 Fast Mode Plus
+      0: FM+ mode is controlled by I2C_Pxx_FMP bits only
+      1: FM+ mode is enabled on all I2C1 pins selected through selection through IOPORT control registers AF selection bits
+    bit_offset: 20
+    bit_size: 1
+    enum: FMP
+  - name: I2C2_FMP
+    description: |-
+      I2C2 Fast Mode Plus
+      0: FM+ mode is controlled by I2C_Pxx_FMP bits only
+      1: FM+ mode is enabled on all I2C2 pins selected through selection through IOPORT control registers AF selection bits
+    bit_offset: 21
+    bit_size: 1
+    enum: FMP
+  - name: ENCODER_MODE
+    description: Encoder mode
+    bit_offset: 22
+    bit_size: 2
+    enum: ENCODER_MODE
+  - name: I2C3_FMP
+    description: |-
+      I2C3 Fast Mode Plus
+      0: FM+ mode is controlled by I2C_Pxx_FMP bits only
+      1: FM+ mode is enabled on all I2C3 pins selected through selection trhough IOPORT control registers AF selection bits
+    bit_offset: 24
+    bit_size: 1
+    enum: FMP
+  - name: VBAT_MON
+    description: Enable the power switch to deliver VBAT voltage on ADC channel 18 input
+    bit_offset: 24
+    bit_size: 1
+  - name: FPU_IE
+    description: |-
+      Idx 0: Invalid operation interrupt enable;
+      Idx 1: Devide-by-zero interrupt enable;
+      Idx 2: Underflow interrupt enable;
+      Idx 3: Overflow interrupt enable;
+      Idx 4: Input denormal interrupt enable;
+      Idx 5: Inexact interrupt enable
+    bit_offset: 26
+    bit_size: 1
+    array:
+      len: 6
+      stride: 1
+fieldset/CFGR2:
+  description: configuration register 2
+  fields:
+  - name: LOCKUP_LOCK
+    description: Cortex-M0 LOCKUP bit enable bit
+    bit_offset: 0
+    bit_size: 1
+  - name: SRAM_PARITY_LOCK
+    description: SRAM parity lock bit
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD_LOCK
+    description: PVD lock enable bit
+    bit_offset: 2
+    bit_size: 1
+  - name: BYP_ADDR_PAR
+    description: Bypass address bit 29 in parity calculation
+    bit_offset: 4
+    bit_size: 1
+  - name: SRAM_PEF
+    description: SRAM parity flag
+    bit_offset: 8
+    bit_size: 1
+fieldset/CFGR3:
+  description: configuration register 3
+  fields:
+  - name: SPI1_RX_DMA_RMP
+    description: SPI1_RX DMA remapping bit
+    bit_offset: 0
+    bit_size: 2
+    enum: SPI1_RX_DMA_RMP
+  - name: SPI1_TX_DMA_RMP
+    description: SPI1_TX DMA remapping bit
+    bit_offset: 2
+    bit_size: 2
+    enum: SPI1_TX_DMA_RMP
+  - name: I2C1_RX_DMA_RMP
+    description: I2C1_RX DMA remapping bit
+    bit_offset: 4
+    bit_size: 2
+    enum: I2C1_RX_DMA_RMP
+  - name: I2C1_TX_DMA_RMP
+    description: I2C1_TX DMA remapping bit
+    bit_offset: 6
+    bit_size: 2
+    enum: I2C1_TX_DMA_RMP
+  - name: ADC2_DMA_RMP
+    description: ADC2 DMA remapping bit
+    bit_offset: 8
+    bit_size: 2
+    enum: ADC2_DMA_RMP_CFGR3
+  - name: DAC1_TRIG3_RMP
+    description: DAC1_CH1 / DAC1_CH2 Trigger remap
+    bit_offset: 16
+    bit_size: 1
+    enum: DAC1_TRIG3_RMP
+  - name: DAC1_TRIG5_RMP
+    description: |-
+      DAC1_CH1 / DAC1_CH2 Trigger remap
+      0: Not remapped
+      1: DAC trigger is HRTIM1_DAC1_TRIG2
+    bit_offset: 17
+    bit_size: 1
+fieldset/CFGR4:
+  description: configuration register 4
+  fields:
+  - name: ADC12_EXT2_RMP
+    description: Controls the Input trigger of ADC12 regular channel EXT2
+    bit_offset: 0
+    bit_size: 1
+    enum: ADC12_EXT2_RMP
+  - name: ADC12_EXT3_RMP
+    description: Controls the Input trigger of ADC12 regular channel EXT3
+    bit_offset: 1
+    bit_size: 1
+    enum: ADC12_EXT3_RMP
+  - name: ADC12_EXT5_RMP
+    description: Controls the Input trigger of ADC12 regular channel EXT5
+    bit_offset: 2
+    bit_size: 1
+    enum: ADC12_EXT5_RMP
+  - name: ADC12_EXT13_RMP
+    description: Controls the Input trigger of ADC12 regular channel EXT13
+    bit_offset: 3
+    bit_size: 1
+    enum: ADC12_EXT13_RMP
+  - name: ADC12_EXT15_RMP
+    description: Controls the Input trigger of ADC12 regular channel EXT15
+    bit_offset: 4
+    bit_size: 1
+    enum: ADC12_EXT15_RMP
+  - name: ADC12_JEXT3_RMP
+    description: Controls the Input trigger of ADC12 injected channel JEXT3
+    bit_offset: 5
+    bit_size: 1
+    enum: ADC12_JEXT3_RMP
+  - name: ADC12_JEXT6_RMP
+    description: Controls the Input trigger of ADC12 injected channel JEXT6
+    bit_offset: 6
+    bit_size: 1
+    enum: ADC12_JEXT6_RMP
+  - name: ADC12_JEXT13_RMP
+    description: Controls the Input trigger of ADC12 injected channel JEXT13
+    bit_offset: 7
+    bit_size: 1
+    enum: ADC12_JEXT13_RMP
+  - name: ADC34_EXT5_RMP
+    description: Controls the Input trigger of ADC34 regular channel EXT5
+    bit_offset: 8
+    bit_size: 1
+    enum: ADC34_EXT5_RMP
+  - name: ADC34_EXT6_RMP
+    description: Controls the Input trigger of ADC34 regular channel EXT6
+    bit_offset: 9
+    bit_size: 1
+    enum: ADC34_EXT6_RMP
+  - name: ADC34_EXT15_RMP
+    description: Controls the Input trigger of ADC34 regular channel EXT15
+    bit_offset: 10
+    bit_size: 1
+    enum: ADC34_EXT15_RMP
+  - name: ADC34_JEXT5_RMP
+    description: Controls the Input trigger of ADC34 injected channel JEXT5
+    bit_offset: 11
+    bit_size: 1
+    enum: ADC34_JEXT5_RMP
+  - name: ADC34_JEXT11_RMP
+    description: Controls the Input trigger of ADC34 injected channel JEXT11
+    bit_offset: 12
+    bit_size: 1
+    enum: ADC34_JEXT11_RMP
+  - name: ADC34_JEXT14_RMP
+    description: Controls the Input trigger of ADC34 injected channel JEXT14
+    bit_offset: 13
+    bit_size: 1
+    enum: ADC34_JEXT14_RMP
+fieldset/EXTICR:
+  description: external interrupt configuration register
+  fields:
+  - name: EXTI
+    description: EXTI x configuration
+    bit_offset: 0
+    bit_size: 4
+    array:
+      len: 4
+      stride: 4
+fieldset/RCR:
+  description: CCM SRAM protection register
+  fields:
+  - name: PAGE_WP
+    description: CCM SRAM page x write protection enabled
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+enum/ADC12_EXT13_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim6
+    description: Trigger source is TIM6_TRGO
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_CC2
+    value: 1
+enum/ADC12_EXT15_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim3
+    description: Trigger source is TIM3_CC4
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_CC3
+    value: 1
+enum/ADC12_EXT2_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim1
+    description: Trigger source is TIM3_CC3
+    value: 0
+  - name: Tim20
+    description: rigger source is TIM20_TRGO
+    value: 1
+enum/ADC12_EXT3_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim2
+    description: Trigger source is TIM2_CC2
+    value: 0
+  - name: Tim20
+    description: rigger source is TIM20_TRGO2
+    value: 1
+enum/ADC12_EXT5_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim4
+    description: Trigger source is TIM4_CC4
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_CC1
+    value: 1
+enum/ADC12_JEXT13_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim3
+    description: Trigger source is TIM3_CC1
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_CC4
+    value: 1
+enum/ADC12_JEXT3_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim2
+    description: Trigger source is TIM2_CC1
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_TRGO
+    value: 1
+enum/ADC12_JEXT6_RMP:
+  bit_size: 1
+  variants:
+  - name: Exti15
+    description: Trigger source is EXTI line 15
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_TRGO2
+    value: 1
+enum/ADC2_DMA_RMP_CFGR3:
+  bit_size: 2
+  variants:
+  - name: MapDma1Ch2
+    description: ADC2 mapped on DMA1 channel 2
+    value: 2
+  - name: MapDma1Ch4
+    description: ADC2 mapped on DMA1 channel 4
+    value: 3
+enum/ADC34_EXT15_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim2
+    description: Trigger source is TIM2_CC1
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_CC1
+    value: 1
+enum/ADC34_EXT5_RMP:
+  bit_size: 1
+  variants:
+  - name: Exti2
+    description: Trigger source is EXTI line 2 when reset at 0
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_TRGO
+    value: 1
+enum/ADC34_EXT6_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim4
+    description: Trigger source is TIM4_CC1
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_TRGO2
+    value: 1
+enum/ADC34_JEXT11_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim1
+    description: Trigger source is TIM1_CC3
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_TRGO2
+    value: 1
+enum/ADC34_JEXT14_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim7
+    description: Trigger source is TIM7_TRGO
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_CC2
+    value: 1
+enum/ADC34_JEXT5_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim4
+    description: Trigger source is TIM4_CC3
+    value: 0
+  - name: Tim20
+    description: Trigger source is TIM20_TRGO
+    value: 1
+enum/DAC1_TRIG3_RMP:
+  bit_size: 1
+  variants:
+  - name: Tim15
+    description: DAC trigger is TIM15_TRGO
+    value: 0
+  - name: HrTim1
+    description: DAC trigger is HRTIM1_DAC1_TRIG1
+    value: 1
+enum/ENCODER_MODE:
+  bit_size: 2
+  variants:
+  - name: NoRedirection
+    description: No redirection
+    value: 0
+  - name: MapTim2Tim15
+    description: TIM2 IC1 and TIM2 IC2 are connected to TIM15 IC1 and TIM15 IC2 respectively
+    value: 1
+  - name: MapTim3Tim15
+    description: TIM3 IC1 and TIM3 IC2 are connected to TIM15 IC1 and TIM15 IC2 respectively
+    value: 2
+enum/FMP:
+  bit_size: 1
+  variants:
+  - name: Standard
+    description: Standard
+    value: 0
+  - name: FMP
+    description: FM+
+    value: 1
+enum/I2C1_RX_DMA_RMP:
+  bit_size: 2
+  variants:
+  - name: MapDma1Ch7
+    description: I2C1_RX mapped on DMA1 CH7
+    value: 0
+  - name: MapDma1Ch3
+    description: I2C1_RX mapped on DMA1 CH3
+    value: 1
+  - name: MapDma1Ch5
+    description: I2C1_RX mapped on DMA1 CH5
+    value: 2
+enum/I2C1_TX_DMA_RMP:
+  bit_size: 2
+  variants:
+  - name: MapDma1Ch6
+    description: I2C1_TX mapped on DMA1 CH6
+    value: 0
+  - name: MapDma1Ch2
+    description: I2C1_TX mapped on DMA1 CH2
+    value: 1
+  - name: MapDma1Ch4
+    description: I2C1_TX mapped on DMA1 CH4
+    value: 2
+enum/MEM_MODE:
+  bit_size: 2
+  variants:
+  - name: MainFlash
+    description: Main Flash memory mapped at 0x0000_0000
+    value: 0
+  - name: SystemFlash
+    description: System Flash memory mapped at 0x0000_0000
+    value: 1
+  - name: MainFlash2
+    description: Main Flash memory mapped at 0x0000_0000
+    value: 2
+  - name: SRAM
+    description: Embedded SRAM mapped at 0x0000_0000
+    value: 3
+enum/SPI1_RX_DMA_RMP:
+  bit_size: 2
+  variants:
+  - name: MapDma1Ch3
+    description: SPI1_RX mapped on DMA1 CH2
+    value: 0
+  - name: MapDma1Ch5
+    description: SPI1_RX mapped on DMA1 CH4
+    value: 1
+  - name: MapDma1Ch7
+    description: SPI1_RX mapped on DMA1 CH6
+    value: 2
+enum/SPI1_TX_DMA_RMP:
+  bit_size: 2
+  variants:
+  - name: MapDma1Ch3
+    description: SPI1_TX mapped on DMA1 CH3
+    value: 0
+  - name: MapDma1Ch5
+    description: SPI1_TX mapped on DMA1 CH5
+    value: 1
+  - name: MapDma1Ch7
+    description: SPI1_TX mapped on DMA1 CH7
+    value: 2

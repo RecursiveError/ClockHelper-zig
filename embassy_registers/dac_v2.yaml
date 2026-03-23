@@ -1,0 +1,207 @@
+block/DAC:
+  description: Digital-to-analog converter
+  items:
+  - name: CR
+    description: control register
+    byte_offset: 0
+    fieldset: CR
+  - name: SWTRIGR
+    description: software trigger register
+    byte_offset: 4
+    access: Write
+    fieldset: SWTRIGR
+  - name: DHR12R
+    description: channel 12-bit right-aligned data holding register
+    array:
+      len: 2
+      stride: 12
+    byte_offset: 8
+    fieldset: DHR12R
+  - name: DHR12L
+    description: channel 12-bit left-aligned data holding register
+    array:
+      len: 2
+      stride: 12
+    byte_offset: 12
+    fieldset: DHR12L
+  - name: DHR8R
+    description: channel 8-bit right-aligned data holding register
+    array:
+      len: 2
+      stride: 12
+    byte_offset: 16
+    fieldset: DHR8R
+  - name: DHR12RD
+    description: dual 12-bit right-aligned data holding register
+    byte_offset: 32
+    fieldset: DHR12RD
+  - name: DHR12LD
+    description: dual 12-bit left aligned data holding register
+    byte_offset: 36
+    fieldset: DHR12LD
+  - name: DHR8RD
+    description: dual 8-bit right aligned data holding register
+    byte_offset: 40
+    fieldset: DHR8RD
+  - name: DOR
+    description: channel data output register
+    array:
+      len: 2
+      stride: 4
+    byte_offset: 44
+    access: Read
+    fieldset: DOR
+  - name: SR
+    description: status register
+    byte_offset: 52
+    fieldset: SR
+fieldset/CR:
+  description: control register
+  fields:
+  - name: EN
+    description: channel enable
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 2
+      stride: 16
+  - name: BOFF
+    description: channel output buffer disable
+    bit_offset: 1
+    bit_size: 1
+    array:
+      len: 2
+      stride: 16
+  - name: TEN
+    description: channel trigger enable
+    bit_offset: 2
+    bit_size: 1
+    array:
+      len: 2
+      stride: 16
+  - name: TSEL
+    description: channel trigger selection
+    bit_offset: 3
+    bit_size: 3
+    array:
+      len: 2
+      stride: 16
+  - name: WAVE
+    description: channel noise/triangle wave generation enable
+    bit_offset: 6
+    bit_size: 2
+    array:
+      len: 2
+      stride: 16
+    enum: WAVE
+  - name: MAMP
+    description: channel mask/amplitude selector
+    bit_offset: 8
+    bit_size: 4
+    array:
+      len: 2
+      stride: 16
+  - name: DMAEN
+    description: channel DMA enable
+    bit_offset: 12
+    bit_size: 1
+    array:
+      len: 2
+      stride: 16
+  - name: DMAUDRIE
+    description: channel DMA Underrun Interrupt enable
+    bit_offset: 13
+    bit_size: 1
+    array:
+      len: 2
+      stride: 16
+fieldset/DHR12L:
+  description: channel 12-bit left-aligned data holding register
+  fields:
+  - name: DHR
+    description: channel 12-bit left-aligned data
+    bit_offset: 4
+    bit_size: 12
+fieldset/DHR12LD:
+  description: dual 12-bit left aligned data holding register
+  fields:
+  - name: DHR
+    description: channel 12-bit left-aligned data
+    bit_offset: 4
+    bit_size: 12
+    array:
+      len: 2
+      stride: 16
+fieldset/DHR12R:
+  description: channel 12-bit right-aligned data holding register
+  fields:
+  - name: DHR
+    description: channel 12-bit right-aligned data
+    bit_offset: 0
+    bit_size: 12
+fieldset/DHR12RD:
+  description: dual 12-bit right-aligned data holding register
+  fields:
+  - name: DHR
+    description: channel 12-bit right-aligned data
+    bit_offset: 0
+    bit_size: 12
+    array:
+      len: 2
+      stride: 16
+fieldset/DHR8R:
+  description: channel 8-bit right-aligned data holding register
+  fields:
+  - name: DHR
+    description: channel 8-bit right-aligned data
+    bit_offset: 0
+    bit_size: 8
+fieldset/DHR8RD:
+  description: dual 8-bit right aligned data holding register
+  fields:
+  - name: DHR
+    description: channel 8-bit right-aligned data
+    bit_offset: 0
+    bit_size: 8
+    array:
+      len: 2
+      stride: 8
+fieldset/DOR:
+  description: channel data output register
+  fields:
+  - name: DOR
+    description: channel data output
+    bit_offset: 0
+    bit_size: 12
+fieldset/SR:
+  description: status register
+  fields:
+  - name: DMAUDR
+    description: channel DMA underrun flag
+    bit_offset: 13
+    bit_size: 1
+    array:
+      len: 2
+      stride: 16
+fieldset/SWTRIGR:
+  description: software trigger register
+  fields:
+  - name: SWTRIG
+    description: channel software trigger
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 2
+      stride: 1
+enum/WAVE:
+  bit_size: 2
+  variants:
+  - name: Disabled
+    description: Wave generation disabled
+    value: 0
+  - name: Noise
+    description: Noise wave generation enabled
+    value: 1
+  - name: Triangle
+    description: Triangle wave generation enabled
+    value: 2

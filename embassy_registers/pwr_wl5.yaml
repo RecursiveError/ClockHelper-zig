@@ -1,0 +1,550 @@
+block/PWR:
+  description: Power control
+  items:
+  - name: CR1
+    description: Power control register 1
+    byte_offset: 0
+    fieldset: CR1
+  - name: CR2
+    description: Power control register 2
+    byte_offset: 4
+    fieldset: CR2
+  - name: CR3
+    description: Power control register 3
+    byte_offset: 8
+    fieldset: CR3
+  - name: CR4
+    description: Power control register 4
+    byte_offset: 12
+    fieldset: CR4
+  - name: SR1
+    description: Power status register 1
+    byte_offset: 16
+    access: Read
+    fieldset: SR1
+  - name: SR2
+    description: Power status register 2
+    byte_offset: 20
+    access: Read
+    fieldset: SR2
+  - name: SCR
+    description: Power status clear register
+    byte_offset: 24
+    access: Write
+    fieldset: SCR
+  - name: CR5
+    description: Power control register 5
+    byte_offset: 28
+    fieldset: CR5
+  - name: PUCR
+    description: Power Port pull-up control register
+    array:
+      len: 8
+      stride: 8
+    byte_offset: 32
+    fieldset: PCR
+  - name: PDCR
+    description: Power Port pull-down control register
+    array:
+      len: 8
+      stride: 8
+    byte_offset: 36
+    fieldset: PCR
+  - name: C2CR1
+    description: Power CPU2 control register 1 [dual core device only]
+    byte_offset: 128
+    fieldset: C2CR1
+  - name: C2CR3
+    description: Power CPU2 control register 3 [dual core device only]
+    byte_offset: 132
+    fieldset: C2CR3
+  - name: EXTSCR
+    description: Power extended status and status clear register
+    byte_offset: 136
+    fieldset: EXTSCR
+  - name: SECCFGR
+    description: Power security configuration register [dual core device only]
+    byte_offset: 140
+    fieldset: SECCFGR
+  - name: SUBGHZSPICR
+    description: Power SPI3 control register
+    byte_offset: 144
+    fieldset: SUBGHZSPICR
+  - name: RSSCMDR
+    description: RSS Command register [dual core device only]
+    byte_offset: 152
+    fieldset: RSSCMDR
+fieldset/C2CR1:
+  description: Power CPU2 control register 1 [dual core device only]
+  fields:
+  - name: LPMS
+    description: Low-power mode selection for CPU2
+    bit_offset: 0
+    bit_size: 3
+  - name: FPDR
+    description: Flash memory power down mode during LPRun for CPU2
+    bit_offset: 4
+    bit_size: 1
+  - name: FPDS
+    description: Flash memory power down mode during LPSleep for CPU2
+    bit_offset: 5
+    bit_size: 1
+fieldset/C2CR3:
+  description: Power CPU2 control register 3 [dual core device only]
+  fields:
+  - name: EWUP
+    description: Enable Wakeup pin WKUP1 for CPU2
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 3
+      stride: 1
+  - name: EWPVD
+    description: Enable wakeup PVD for CPU2
+    bit_offset: 8
+    bit_size: 1
+  - name: APC
+    description: Apply pull-up and pull-down configuration for CPU2
+    bit_offset: 10
+    bit_size: 1
+  - name: EWRFBUSY
+    description: EWRFBUSY
+    bit_offset: 11
+    bit_size: 1
+  - name: EWRFIRQ
+    description: akeup for CPU2
+    bit_offset: 13
+    bit_size: 1
+  - name: EIWUL
+    description: Enable internal wakeup line for CPU2
+    bit_offset: 15
+    bit_size: 1
+fieldset/CR1:
+  description: Power control register 1
+  fields:
+  - name: LPMS
+    description: Low-power mode selection for CPU1
+    bit_offset: 0
+    bit_size: 3
+    enum: LPMS
+  - name: SUBGHZSPINSSSEL
+    description: sub-GHz SPI NSS source select
+    bit_offset: 3
+    bit_size: 1
+    enum: SUBGHZSPINSSSEL
+  - name: FPDR
+    description: Flash memory power down mode during LPRun for CPU1
+    bit_offset: 4
+    bit_size: 1
+    enum: FPDR
+  - name: FPDS
+    description: Flash memory power down mode during LPSleep for CPU1
+    bit_offset: 5
+    bit_size: 1
+    enum: FPDS
+  - name: DBP
+    description: Disable backup domain write protection
+    bit_offset: 8
+    bit_size: 1
+  - name: VOS
+    description: Voltage scaling range selection
+    bit_offset: 9
+    bit_size: 2
+    enum: VOS
+  - name: LPR
+    description: Low-power run
+    bit_offset: 14
+    bit_size: 1
+    enum: LPR
+fieldset/CR2:
+  description: Power control register 2
+  fields:
+  - name: PVDE
+    description: Power voltage detector enable
+    bit_offset: 0
+    bit_size: 1
+  - name: PLS
+    description: Power voltage detector level selection.
+    bit_offset: 1
+    bit_size: 3
+    enum: PLS
+  - name: PVME
+    description: 'Peripheral voltage monitoring 3 enable: VDDA vs. 1.62V'
+    bit_offset: 6
+    bit_size: 1
+fieldset/CR3:
+  description: Power control register 3
+  fields:
+  - name: EWUP
+    description: Enable Wakeup pin WKUP1 for CPU1
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 3
+      stride: 1
+  - name: EULPEN
+    description: Ultra-low-power enable
+    bit_offset: 7
+    bit_size: 1
+  - name: EWPVD
+    description: Enable wakeup PVD for CPU1
+    bit_offset: 8
+    bit_size: 1
+  - name: RRS
+    description: SRAM2 retention in Standby mode
+    bit_offset: 9
+    bit_size: 1
+  - name: APC
+    description: Apply pull-up and pull-down configuration from CPU1
+    bit_offset: 10
+    bit_size: 1
+  - name: EWRFBUSY
+    description: Enable Radio BUSY Wakeup from Standby for CPU1
+    bit_offset: 11
+    bit_size: 1
+  - name: EWRFIRQ
+    description: Wakeup for CPU1
+    bit_offset: 13
+    bit_size: 1
+  - name: EC2H
+    description: nable CPU2 Hold interrupt for CPU1
+    bit_offset: 14
+    bit_size: 1
+  - name: EIWUL
+    description: Enable internal wakeup line for CPU1
+    bit_offset: 15
+    bit_size: 1
+fieldset/CR4:
+  description: Power control register 4
+  fields:
+  - name: WP
+    description: Wakeup pin WKUP1 polarity
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 3
+      stride: 1
+    enum: WP
+  - name: VBE
+    description: VBAT battery charging enable
+    bit_offset: 8
+    bit_size: 1
+  - name: VBRS
+    description: VBAT battery charging resistor selection
+    bit_offset: 9
+    bit_size: 1
+    enum: VBRS
+  - name: WRFBUSYP
+    description: Wakeup Radio BUSY polarity
+    bit_offset: 11
+    bit_size: 1
+  - name: C2BOOT
+    description: oot CPU2 after reset or wakeup from Stop or Standby modes.
+    bit_offset: 15
+    bit_size: 1
+fieldset/CR5:
+  description: Power control register 5
+  fields:
+  - name: RFEOLEN
+    description: Enable Radio End Of Life detector enabled
+    bit_offset: 14
+    bit_size: 1
+  - name: SMPSEN
+    description: Enable SMPS Step Down converter SMPS mode enabled.
+    bit_offset: 15
+    bit_size: 1
+fieldset/EXTSCR:
+  description: Power extended status and status clear register
+  fields:
+  - name: C1CSSF
+    description: Clear CPU1 Stop Standby flags
+    bit_offset: 0
+    bit_size: 1
+  - name: C2CSSF
+    description: lear CPU2 Stop Standby flags
+    bit_offset: 1
+    bit_size: 1
+  - name: C1SBF
+    description: System Standby flag for CPU1. (no core states retained)
+    bit_offset: 8
+    bit_size: 1
+  - name: C1STOP2F
+    description: System Stop2 flag for CPU1. (partial core states retained)
+    bit_offset: 9
+    bit_size: 1
+  - name: C1STOPF
+    description: System Stop0, 1 flag for CPU1. (All core states retained)
+    bit_offset: 10
+    bit_size: 1
+  - name: C2SBF
+    description: ystem Standby flag for CPU2. (no core states retained)
+    bit_offset: 11
+    bit_size: 1
+  - name: C2STOP2F
+    description: ystem Stop2 flag for CPU2. (partial core states retained)
+    bit_offset: 12
+    bit_size: 1
+  - name: C2STOPF
+    description: ystem Stop0, 1 flag for CPU2. (All core states retained)
+    bit_offset: 13
+    bit_size: 1
+  - name: C1DS
+    description: CPU1 deepsleep mode
+    bit_offset: 14
+    bit_size: 1
+    enum: CDS
+  - name: C2DS
+    description: PU2 deepsleep mode
+    bit_offset: 15
+    bit_size: 1
+fieldset/PCR:
+  description: Power Port pull control register
+  fields:
+  - name: P
+    description: Port pull bit y (y=0..15)
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+fieldset/RSSCMDR:
+  description: RSS Command register [dual core device only]
+  fields:
+  - name: RSSCMD
+    description: RSS command
+    bit_offset: 0
+    bit_size: 8
+fieldset/SCR:
+  description: Power status clear register
+  fields:
+  - name: CWUF
+    description: Clear wakeup flag 1
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 3
+      stride: 1
+  - name: CWPVDF
+    description: Clear wakeup PVD interrupt flag
+    bit_offset: 8
+    bit_size: 1
+  - name: CWRFBUSYF
+    description: Clear wakeup Radio BUSY flag
+    bit_offset: 11
+    bit_size: 1
+  - name: CC2HF
+    description: lear CPU2 Hold interrupt flag
+    bit_offset: 14
+    bit_size: 1
+fieldset/SECCFGR:
+  description: Power security configuration register [dual core device only]
+  fields:
+  - name: C2EWILA
+    description: wakeup on CPU2 illegal access interrupt enable
+    bit_offset: 15
+    bit_size: 1
+fieldset/SR1:
+  description: Power status register 1
+  fields:
+  - name: WUF
+    description: Wakeup flag 1
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 3
+      stride: 1
+  - name: WPVDF
+    description: Wakeup PVD flag
+    bit_offset: 8
+    bit_size: 1
+  - name: WRFBUSYF
+    description: Radio BUSY wakeup flag
+    bit_offset: 11
+    bit_size: 1
+  - name: C2HF
+    description: PU2 Hold interrupt flag
+    bit_offset: 14
+    bit_size: 1
+  - name: WUFI
+    description: Internal wakeup interrupt flag
+    bit_offset: 15
+    bit_size: 1
+fieldset/SR2:
+  description: Power status register 2
+  fields:
+  - name: C2BOOTS
+    description: PU2 boot/wakeup request source information
+    bit_offset: 0
+    bit_size: 1
+  - name: RFBUSYS
+    description: Radio BUSY signal status
+    bit_offset: 1
+    bit_size: 1
+  - name: RFBUSYMS
+    description: Radio BUSY masked signal status
+    bit_offset: 2
+    bit_size: 1
+  - name: SMPSRDY
+    description: SMPS ready flag
+    bit_offset: 3
+    bit_size: 1
+  - name: LDORDY
+    description: LDO ready flag
+    bit_offset: 4
+    bit_size: 1
+  - name: RFEOLF
+    description: Radio end of life flag
+    bit_offset: 5
+    bit_size: 1
+  - name: REGMRS
+    description: regulator2 low power flag
+    bit_offset: 6
+    bit_size: 1
+  - name: FLASHRDY
+    description: Flash ready
+    bit_offset: 7
+    bit_size: 1
+  - name: REGLPS
+    description: regulator1 started
+    bit_offset: 8
+    bit_size: 1
+  - name: REGLPF
+    description: regulator1 low power flag
+    bit_offset: 9
+    bit_size: 1
+  - name: VOSF
+    description: Voltage scaling flag
+    bit_offset: 10
+    bit_size: 1
+  - name: PVDO
+    description: Power voltage detector output
+    bit_offset: 11
+    bit_size: 1
+  - name: PVMO
+    description: 'Peripheral voltage monitoring output: VDDA vs. 1.62 V'
+    bit_offset: 14
+    bit_size: 1
+fieldset/SUBGHZSPICR:
+  description: Power SPI3 control register
+  fields:
+  - name: NSS
+    description: sub-GHz SPI NSS control
+    bit_offset: 15
+    bit_size: 1
+enum/CDS:
+  bit_size: 1
+  variants:
+  - name: RunningOrSleep
+    description: CPU is running or in sleep
+    value: 0
+  - name: DeepSleep
+    description: CPU is in Deep-Sleep
+    value: 1
+enum/FPDR:
+  bit_size: 1
+  variants:
+  - name: Idle
+    description: Flash memory in Idle mode when system is in LPRun mode
+    value: 0
+  - name: PowerDown
+    description: Flash memory in Power-down mode when system is in LPRun mode
+    value: 1
+enum/FPDS:
+  bit_size: 1
+  variants:
+  - name: Idle
+    description: Flash memory in Idle mode when system is in LPSleep mode
+    value: 0
+  - name: PowerDown
+    description: Flash memory in Power-down mode when system is in LPSleep mode
+    value: 1
+enum/LPMS:
+  bit_size: 3
+  variants:
+  - name: Stop0
+    description: Stop 0 mode
+    value: 0
+  - name: Stop1
+    description: Stop 1 mode
+    value: 1
+  - name: Stop2
+    description: Stop 2 mode
+    value: 2
+  - name: Standby
+    description: Standby mode
+    value: 3
+  - name: Shutdown
+    description: Shutdown mode
+    value: 4
+enum/LPR:
+  bit_size: 1
+  variants:
+  - name: MainMode
+    description: Voltage regulator in Main mode in Low-power run mode
+    value: 0
+  - name: LowPowerMode
+    description: Voltage regulator in low-power mode in Low-power run mode
+    value: 1
+enum/PLS:
+  bit_size: 3
+  variants:
+  - name: V2_0
+    description: 2.0V
+    value: 0
+  - name: V2_2
+    description: 2.2V
+    value: 1
+  - name: V2_4
+    description: 2.4V
+    value: 2
+  - name: V2_5
+    description: 2.5V
+    value: 3
+  - name: V2_6
+    description: 2.6V
+    value: 4
+  - name: V2_8
+    description: 2.8V
+    value: 5
+  - name: V2_9
+    description: 2.9V
+    value: 6
+  - name: External
+    description: External input analog voltage PVD_IN (compared internally to VREFINT)
+    value: 7
+enum/SUBGHZSPINSSSEL:
+  bit_size: 1
+  variants:
+  - name: SUBGHZSPICR
+    description: sub-GHz SPI NSS signal driven from PWR_SUBGHZSPICR.NSS (RFBUSYMS functionality enabled)
+    value: 0
+  - name: LPTIM3
+    description: sub-GHz SPI NSS signal driven from LPTIM3_OUT (RFBUSYMS functionality disabled)
+    value: 1
+enum/VBRS:
+  bit_size: 1
+  variants:
+  - name: R5k
+    description: VBAT charging through a 5 kΩ resistor
+    value: 0
+  - name: R1_5k
+    description: VBAT charging through a 1.5 kΩ resistor
+    value: 1
+enum/VOS:
+  bit_size: 2
+  variants:
+  - name: Range1
+    description: 1.2 V (range 1)
+    value: 1
+  - name: Range2
+    description: 1.0 V (range 2)
+    value: 2
+enum/WP:
+  bit_size: 1
+  variants:
+  - name: RisingEdge
+    description: Detection on high level (rising edge)
+    value: 0
+  - name: FallingEdge
+    description: Detection on low level (falling edge)
+    value: 1

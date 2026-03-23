@@ -6,6 +6,3 @@ ClockTreesTemp/*
 src/hal_data.zig
 src/microzig_data.zig
 logs/*
-
-
-patch_tree_data/*

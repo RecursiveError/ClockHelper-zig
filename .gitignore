@@ -1,6 +1,8 @@
 .zig-cache/*
 .venv/*
 src/embassy-patchs/__pycache__/*
+zig-pkg/*
+pre_patch_jsons/*
 zig-out/*
 ClockTreesTemp/*
 src/hal_data.zig

@@ -1,6 +1,6 @@
 .{
     .name = .ClockHelper_zig,
-    .version = "0.0.0",
+    .version = "0.2.1",
     .fingerprint = 0x29b8b14989a8bd09,
     .minimum_zig_version = "0.15.0",
     .dependencies = .{
@@ -8,9 +8,9 @@
             .url = "https://github.com/Hejsil/zig-clap/archive/refs/tags/0.11.0.tar.gz",
             .hash = "clap-0.11.0-oBajB-HnAQDPCKYzwF7rO3qDFwRcD39Q0DALlTSz5H7e",
         },
-        .zig_yaml = .{
-            .url = "https://github.com/kubkon/zig-yaml/archive/refs/tags/0.2.0.tar.gz",
-            .hash = "zig_yaml-0.2.0-C1161pmrAgC_rL9WzjvgNg7HnmyAMwHsG3Sre0F4haPI",
+        .@"stm32-data-generated" = .{
+            .url = "git+https://github.com/embassy-rs/stm32-data-generated.git#5198a6e36b24f6d79c4ac91af5e61e8d54667d88",
+            .hash = "N-V-__8AAFi8WBlOh-NikHFVBjzQE0F1KixgKjVWYnlijPNm",
         },
     },
 

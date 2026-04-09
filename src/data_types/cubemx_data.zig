@@ -15,6 +15,7 @@ pub const Clock_Tree = struct {
     config_ref_names: []const []const u8, // names of references that are part of the main configuration
     extra_flags: []const []const u8,
 
+    fixed_multiplexors: ?[]const FixedMultiplexor = null,
     ///this patches are used as a reference for the code gen to alter small details of the generated code,
     ///like renaming nodes & references and type layouts.
     ///this allows the same code gen to be used by different HALs that may have different naming conventions and code styles.
@@ -102,8 +103,15 @@ pub const List = struct {
 
 pub const List_Item = struct {
     name: []const u8,
-    value: ?f32, //not all list items have asscoiated values
-    semaphore: ?[]const u8, //not all list items have asscoiated semaphores
+    value: ?f32 = null, //not all list items have asscoiated values
+    semaphore: ?[]const u8 = null, //not all list items have asscoiated semaphores
+    description: ?[]const u8 = null, //not all list items have asscoiated descriptions
+};
+
+pub const FixedMultiplexor = struct {
+    reference: []const u8,
+    removed_items: []const []const u8,
+    add_item: []const u8,
 };
 
 //gen patches types
@@ -121,9 +129,9 @@ pub const EnumField = struct {
 
 pub const Enum_Patch = struct {
     //if null, no bit-width will be applied, and as consequence, tags cannot have asscoiated values.
-    bit_width: ?u32 = null,
     name: []const u8,
     fields: []const EnumField,
+    bit_size: ?u32 = null,
 };
 
 pub const Rename_Node_Patch = struct {
@@ -133,9 +141,9 @@ pub const Rename_Node_Patch = struct {
 
 pub const Match_Ref_To_Enum_Patch = struct {
     ref_name: []const u8,
-    enum_name: []const u8,
+    @"enum": []const u8,
     items: []const Rename_Ref_Item_Patch,
-    incomplete_match: bool, //if true, not all enum fields will have a matching reference item, and as consequence, some enum fields will not have asscoiated values.
+    incomplete: bool, //if true, not all enum fields will have a matching reference item, and as consequence, some enum fields will not have asscoiated values.
     enum_or_ref: []const u8, //if incomplete is true, this field indicate if the missing options are in the enum or in the ListRef, so that the user know where to look for the missing options.
 
 };

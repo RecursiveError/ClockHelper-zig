@@ -64,12 +64,24 @@ class NumberRef:
     max: int
     numbers: list
 
+@dataclass
+class ListOptions:
+    name: str
+    semaphore:   None | str
+    description: None | str
+
+    def __hash__(self):
+        return hash(self.name)
+    
+    def __eq__(self, other):
+        if not isinstance(other, ListOptions):
+            return NotImplemented
+        return self.name == other.name
 
 @dataclass
 class ListRef:
     name: str
-    options: list[str]
-    semaphores: dict[str, str]
+    options: list[ListOptions]
 
 
 @dataclass
@@ -139,7 +151,7 @@ def calc_anchor_bonus(score: float) -> float:
 
 def load_context(cubemx_name: str, embassy_names: list[str]) -> Context:
     embassy_data: dict[str, dict] = {}
-    with open(f"patch_tree_data/{cubemx_name}.json", "r") as cube_file:
+    with open(f"pre_patch_jsons/{cubemx_name}.json", "r") as cube_file:
         cube_json = json.load(cube_file)
     for version in embassy_names:
         with open(f"embassy_registers/{version}.yaml", "r") as embassy_file:
@@ -246,13 +258,13 @@ def get_link_data(ctx: Context, model: SentenceTransformer, top_k=3) -> LinkData
             if c_enum is not None:
                 c_enum.name = mapping.enum
                 enums_used.add(c_enum)
-            print(
-                f"perfect match found for {ref['ref_name']} - {ref['disc']}: {mapping.register_name} with score: {score:.4f}"
-            )
-            print(f" - field mapping:\n")
-            for item in mapping.items:
-                print(f"    - {item[0]} -> {item[1]}")
-            print("\n")
+            #print(
+            #    f"perfect match found for {ref['ref_name']} - {ref['disc']}: {mapping.register_name} with score: {score:.4f}"
+            #)
+            #print(f" - field mapping:\n")
+            #for item in mapping.items:
+            #    print(f"    - {item[0]} -> {item[1]}")
+            #print("\n")
 
     print(
         f"average perfect match score: {(score_sum / score_count) if score_count > 0 else 0:.4f}"
@@ -329,30 +341,78 @@ def match_list_to_register(
         }  # in this case we cant provide a field mapping, since we have no enum to match the ListRef options to.
 
     if is_ref_divisor(ref_list):
-        enum_doc = model.encode(
-            [f"{variant.name.lower()}" for variant in type_enum.variants],
-            convert_to_tensor=True,
+        divisor_keywords = ["div", "mul", "psc"]
+        enum_is_div = all(
+            any(k in v.name.lower() for k in divisor_keywords)
+            for v in type_enum.variants
         )
-        ref_query = model.encode(
-            [f"{ref_div_normalize(option)}" for option in ref_list.options],
-            convert_to_tensor=True,
-        )
-        coverage = intersect_ref_enum(ref_list, type_enum)
-        if coverage == 1:
-            anchor_bonus += ANCHOR_BUNUS * FIELD_MATCH_BUNUS_MULTIPLIER
-        else:
-            coverage_penalty = coverage**COVERAGE_LOW__PENALTY_MULTIPLIER
+        if not enum_is_div:
+            # enum isn't a divisor -> invalid match
+            return {"final_score": 0}
 
+        number_regx = re.compile(r"(\d+)(?!.*\d)")
+        ref_nums = []
+        for opt in ref_list.options:
+            m = number_regx.search(opt.name)
+            if not m:
+                return {"final_score": 0}
+            ref_nums.append(int(m.group()))
+
+        enum_nums = []
+        for variant in type_enum.variants:
+            m = number_regx.search(variant.name)
+            if m:
+                enum_nums.append(int(m.group()))
+
+        # ensure all ref numbers are in enum numbers
+        if not set(ref_nums).issubset(set(enum_nums)):
+            return {"final_score": 0}
+
+        field_mapping = []
+        for opt in ref_list.options:
+            num = int(number_regx.search(opt.name).group())
+            # find the first enum variant that contains this number
+            matched_variant = next((v for v in type_enum.variants if number_regx.search(v.name) and int(number_regx.search(v.name).group()) == num), None)
+            if matched_variant is None:
+                # shouldn't happen because of the subset check above, but guard anyway
+                return {"final_score": 0}
+            field_mapping.append([opt.name, matched_variant.name])
+
+        # incomplete logic: compare counts
         if len(ref_list.options) > len(type_enum.variants):
             incomplete = True
             enum_or_ref = "enum"
         elif len(ref_list.options) < len(type_enum.variants):
             incomplete = True
             enum_or_ref = "ref"
+
+        # compute a deterministic score without semantic analysis
+        coverage = 1.0  # by construction all ref numbers are present
+        if coverage == 1:
+            anchor_bonus += ANCHOR_BUNUS * FIELD_MATCH_BUNUS_MULTIPLIER
+        field_score = 1.0
+        coverage_penalty = 1.0
+
+        final_score = (
+            (scr * NAME_MULTIPLIER)
+            + ((field_score * coverage_penalty) * COVERAGE_MULTIPLIER)
+            + (anchor_bonus * ANCHOR_MULTIPLIER)
+        )
+
+        return {
+            "final_score": final_score,
+            "field_mapping": ListPatch(
+                register_name=ref_list.name,
+                enum=reg.enum_name,
+                items=field_mapping,
+                incomplete=incomplete,
+                enum_or_ref=enum_or_ref,
+            ),
+        }
     else:
         ref_query = model.encode(
             [
-                f"{ref_enum_filter(option)} - {ref_list.semaphores.get(option, '')}"
+                f"{ref_enum_filter(option.name)} - {option.description if option.description is not None else ''}"
                 for option in ref_list.options
             ],
             convert_to_tensor=True,
@@ -388,7 +448,7 @@ def match_list_to_register(
         field_score
     )  # check if the field score is good enough to be considered an anchor.
     field_mapping = [
-        list([ref_list.options[r], type_enum.variants[c].name])
+        list([ref_list.options[r].name, type_enum.variants[c].name])
         for r, c in zip(row_ind, col_ind)
     ]
 
@@ -413,7 +473,7 @@ def match_list_to_register(
     return {
         "final_score": final_score,
         "field_mapping": ListPatch(
-            register_name=reg.name,
+            register_name=ref_list.name,
             enum=reg.enum_name,
             items=field_mapping,
             incomplete=incomplete,
@@ -431,11 +491,11 @@ def match_number_to_register(
 def type_ref(ref: dict) -> Value:
     variants: list[dict] = ref.get("variants", [])
     numbers = set()
-    itens = set()
-    i_semaphores = dict()  # this is used to store the options of a ListRef that are used as anchors, so that we can give a bonus to registers that have these options in their associated enum.
+    itens: set[ListOptions] = set()
+
     for v in variants:
         v_type = list(v["ref"].keys())[0].lower()
-        v_val = v["ref"][v_type]
+        v_val: dict = v["ref"][v_type]
         if v_type in ["fixed_integer", "fixed_float"]:
             numbers.add(v_val)
         elif v_type in ["integer_range", "float_range"]:
@@ -451,16 +511,17 @@ def type_ref(ref: dict) -> Value:
             for val in v_val.get("itens", []):
                 name = val.get("name", "")
                 semaphore = val.get("semaphore", None)
-                itens.add(name)
-                if semaphore is not None:
-                    i_semaphores[name] = semaphore
+                description = val.get("description", None)
+                itens.add(ListOptions(name=name, semaphore=semaphore, description=description))
         elif v_type == "single_item":
-            itens.add(v_val.get("name", ""))
+            name = v_val.get("name", "")
+            semaphore = v_val.get("semaphore", None)
+            description = v_val.get("description", None)
+            itens.add(ListOptions(name=name, semaphore=semaphore, description=description))
 
     if len(itens) > 0 and len(numbers) == 0:
         return ListRef(
-            name=ref.get("ref_name", ""), options=list(itens), semaphores=i_semaphores
-        )
+            name=ref.get("ref_name", ""), options=list(itens))
     elif len(numbers) > 0 and len(itens) == 0:
         numbers = list(numbers)
         numbers.sort()
@@ -485,7 +546,7 @@ def intersect_ref_enum(ref: ListRef, enum: EmbassyEnum) -> float:
         [
             int(num.group())
             for option in ref.options
-            if (num := number_regx.search(option))
+            if (num := number_regx.search(option.name))
         ]
     )
 
@@ -509,17 +570,22 @@ def is_enum_divisor(enum: EmbassyEnum) -> bool:
 
 def is_ref_divisor(ref: ListRef) -> bool:
     divisor_keywords = ["div", "mul", "psc"]
-    name_div = False
-    first_state = False
-    last_state = False
-    for keyword in divisor_keywords:
-        if keyword in ref.name.lower():
-            name_div = True
-        if keyword in ref.options[0].lower():
-            first_state = True
-        if keyword in ref.options[-1].lower():
-            last_state = True
-    return name_div or (first_state and last_state)
+    if ref is None:
+        return False
+
+    opts = ref.options
+    if not opts:
+        return False
+
+    for opt in opts:
+        opt_name = opt.name.lower()
+        if any(k in opt_name for k in divisor_keywords):
+            continue
+        if opt_name.isnumeric():
+            continue
+        return False
+
+    return True
 
 
 # based in the ref name, we can add a postfix to the query that will help to find the correct register in the embassy data.
@@ -564,7 +630,7 @@ def ref_postfix(ref_name: str) -> str:
 # just a basic space cleaner for the ref name, to help the model to focus on the most relevant part of the name for the matching.
 def ref_enum_filter(txt: str) -> str:
     full_txt = txt.lower().split("_")
-    lower = full_txt[-1]
+    lower: str = full_txt[-1][:]
     to_space = ["pll1", "pll2", "pll3", "vco", "vci"]
     to_remove = ["div", "mul", "psc"]
     for keyword in to_space:
@@ -577,6 +643,10 @@ def ref_enum_filter(txt: str) -> str:
             lower = lower.replace("desactivated", "defaultx2").replace(
                 "activated", "defaultx4"
             )
+        if("vco_" in txt.lower()):
+            lower = lower.replace("low", "medium").replace("high", "wide")
+    if(("pll" in full_txt[-1]) and len(full_txt[-1]) > 5 and  full_txt[-1][-1].isnumeric()):
+        lower = " ".join([lower, f"(pll{full_txt[-1][-1]})"])
     return lower
 
 
@@ -603,8 +673,7 @@ def skip_ref(ref: dict) -> bool:
         "type",
         "timout",
         "output",
-        "cortex_div",
-        "cortex2_div",
+        "cortex",
         "trace",
     ]
     disc_to_skip = ["startup", "systick", "crs"]

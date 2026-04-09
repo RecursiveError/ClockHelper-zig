@@ -16,6 +16,7 @@ from data_link import data_link
 from dataclasses import dataclass
 from typing import Union
 import json
+from pathlib import Path
 
 @dataclass
 class NodeInput:
@@ -29,15 +30,20 @@ class NodeInput:
         return self.name
 
 def main():
-    for tree_name, _ in data_link.items():
+    ref_dir = Path("pre_patch_jsons")
+    out_dir = Path("pre_patch_jsons")
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    for json_path in sorted(ref_dir.glob("*.json")):
+        tree_name = json_path.stem
         print(f"Checking tree: {tree_name}")
-        with open(f"clock_ref_data/{tree_name}.json", "r") as f:
+        with json_path.open("r") as f:
             tree = json.load(f)
-            refs_map = load_refs_items(tree)
-            new_tree = check_nodes(tree, refs_map)
-            with open(f"patch_tree_data/{tree_name}.json", "w") as patch_file:
-                json.dump(new_tree, patch_file, indent=4)
-        
+        refs_map = load_refs_items(tree)
+        new_tree = check_nodes(tree, refs_map)
+        out_path = out_dir / f"{tree_name}.json"
+        with out_path.open("w") as patch_file:
+            json.dump(new_tree, patch_file, indent=4)
         
 
 def load_refs_items(tree:dict) -> dict[str, set[str]]:
@@ -59,18 +65,19 @@ def load_refs_items(tree:dict) -> dict[str, set[str]]:
 
 def check_nodes(tree:dict, refs_map:dict[str, set[str]]) -> dict:
     tree_cpy = tree.copy()
+    rename_sets: list[dict] = list()
     for idx, node in enumerate(tree["nodes"]):
         if node["node_type"] in ["multiplexor", "xbar"]:
             sources = list_node_inputs(node["variants"])
             none_null_refs = [src.name for src in sources if src.ref is None] 
             has_none_ref = len(none_null_refs) > 0
             node_set = set([src.ref for src in sources if src.ref is not None])
-            references: list[str] = node["reference"].split(",")
+            references: list[str] = list(set([  ref_name for ref_name in node["reference"].split(",")]))
             actual_set = set()
             for ref in references:
-                ref_name = ref.removesuffix("Virtual")
-                if ref_name in refs_map:
-                    actual_set.update(refs_map[ref_name])
+                
+                if ref in refs_map:
+                    actual_set.update(refs_map[ref])
             if len(actual_set) == 0:
                 continue
             elif len(node_set) > len(actual_set) and has_none_ref:
@@ -79,8 +86,15 @@ def check_nodes(tree:dict, refs_map:dict[str, set[str]]) -> dict:
                 print(f"Node {node['name']} has more inputs than the actual reference items")
             elif len(node_set) < len(actual_set) and has_none_ref:
                print(f"Node {node['name']} has a null reference and less inputs than the actual reference items")
+               unused_names = actual_set.difference(node_set)
+               if (len(none_null_refs) == 1) and (len(references) == 1):
+                   new_dict: dict = {"reference": references[0],
+                        "removed_items": list(unused_names),
+                        "add_item": none_null_refs[0],
+                    }
+                   rename_sets.append(new_dict.copy())
+                   
                for names in references:
-                   unused_names = actual_set.difference(node_set)
                    swap_null_references(tree_cpy, names, none_null_refs, unused_names)
                    for v_idx, v in enumerate(node["variants"]):
                        for src_idx, src in enumerate(v["inputs"]):
@@ -90,7 +104,8 @@ def check_nodes(tree:dict, refs_map:dict[str, set[str]]) -> dict:
                 
             elif len(node_set) < len(actual_set):
                 print(f"Node {node['name']} has less inputs than the actual reference items")
-            
+    
+    tree_cpy["fixed_multiplexors"] = rename_sets if len(rename_sets) > 0 else None
     return tree_cpy
 
 def list_node_inputs(node_vars: list[dict]) -> set[NodeInput]:
@@ -114,7 +129,7 @@ def swap_null_references(tree:dict, ref_name: str, to_add: list, to_remove:list[
                             has_item_to_add = True
                     if has_item_to_add:
                         for add in to_add:
-                            tree["references"][idx]["variants"][v_idx]["ref"][var_t]["itens"].append({"name": add, "value": None, "semaphore": None})
+                            tree["references"][idx]["variants"][v_idx]["ref"][var_t]["itens"].append({"name": add, "value": None, "semaphore": None, "description": None})
                 elif var_t == "single_item":
                     if(var_v["name"] in to_remove):
                         tree["references"][idx]["variants"][v_idx]["ref"][var_t]["name"] = to_add[0]

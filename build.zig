@@ -5,12 +5,7 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{ .preferred_optimize_mode = .ReleaseSafe });
 
     //imports
-    const yaml = b.dependency("zig_yaml", .{
-        .target = target,
-        .optimize = optimize,
-    });
-
-    yaml.builder.debug_log_scopes = &.{"info"};
+    const stm32_data_generated = b.lazyDependency("stm32-data-generated", .{}) orelse return;
 
     //local data-type module
     const data_types = b.createModule(.{
@@ -52,16 +47,21 @@ pub fn build(b: *std.Build) void {
             .{
                 .target = target,
                 .optimize = optimize,
-                .root_source_file = b.path("src/code_gen/main.zig"),
+                .root_source_file = b.path("src/code_gen/gen.zig"),
             },
         ),
     });
 
     generate_source.root_module.addImport("data_types", data_types);
     const run_code_gen = b.addRunArtifact(generate_source);
+    run_code_gen.addFileArg(stm32_data_generated.path("data/chips"));
     const code_gen_step = b.step("code_gen", "Generate clock tree source code");
     code_gen_step.dependOn(&run_code_gen.step);
 
+    const run_virtual_marge = b.addSystemCommand(&.{
+        "python3",
+        "src/embassy-patchs/marge_virtual.py",
+    });
     const run_mplx_fix = b.addSystemCommand(&.{
         "python3",
         "src/embassy-patchs/multiplexor_fix.py",
@@ -70,7 +70,7 @@ pub fn build(b: *std.Build) void {
         "python3",
         "src/embassy-patchs/cubemx_to_embassy.py",
     });
-
+    run_mplx_fix.step.dependOn(&run_virtual_marge.step);
     run_match_patch.step.dependOn(&run_mplx_fix.step);
 
     const patch_step = b.step("patch", "Run patch scripts to fix CubeMX data");

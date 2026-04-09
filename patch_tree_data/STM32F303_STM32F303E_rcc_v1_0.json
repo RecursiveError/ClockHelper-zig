@@ -2071,12 +2071,14 @@
                                 {
                                     "name": "RCC_USBCLKSOURCE_PLL",
                                     "value": 1.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "1"
                                 },
                                 {
                                     "name": "RCC_USBCLKSOURCE_PLL_DIV1_5",
                                     "value": 1.5,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "1.5"
                                 }
                             ]
                         }
@@ -2102,7 +2104,7 @@
             ]
         },
         {
-            "ref_name": "SYSCLKSource",
+            "ref_name": "SYSCLKSourceVirtual",
             "disc": "SYSCLK Source",
             "variants": [
                 {
@@ -2112,7 +2114,8 @@
                         "single_item": {
                             "name": "RCC_SYSCLKSOURCE_PLLCLK",
                             "value": null,
-                            "semaphore": "SysSourcePLL"
+                            "semaphore": "SysSourcePLL",
+                            "description": "Sysclksource Pllclk"
                         }
                     }
                 },
@@ -2126,60 +2129,20 @@
                                 {
                                     "name": "RCC_SYSCLKSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": "SysSourceHSI"
+                                    "semaphore": "SysSourceHSI",
+                                    "description": "Sysclksource Hsi"
                                 },
                                 {
                                     "name": "RCC_SYSCLKSOURCE_HSE",
                                     "value": null,
-                                    "semaphore": "SysSourceHSE"
+                                    "semaphore": "SysSourceHSE",
+                                    "description": "Sysclksource Hse"
                                 },
                                 {
                                     "name": "RCC_SYSCLKSOURCE_PLLCLK",
                                     "value": null,
-                                    "semaphore": "SysSourcePLL"
-                                }
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "ref_name": "SYSCLKSource",
-            "disc": "SYSCLK Source",
-            "variants": [
-                {
-                    "expr": "(TIM2SourcePLL &TIM2)|(TIM34SourcePLL &(TIM3|TIM4))|(TIM1SourcePLL &TIM1)|(TIM8SourcePLL &TIM8)|(TIM15SourcePLL &TIM15)|(TIM16SourcePLL &TIM16)|(TIM17SourcePLL &TIM17)|(TIM20SourcePLL &TIM20)",
-                    "diagnostic": "PLL Clock must be selected",
-                    "ref": {
-                        "single_item": {
-                            "name": "RCC_SYSCLKSOURCE_PLLCLK",
-                            "value": null,
-                            "semaphore": "SysSourcePLL"
-                        }
-                    }
-                },
-                {
-                    "expr": null,
-                    "diagnostic": null,
-                    "ref": {
-                        "list": {
-                            "default_name": "RCC_SYSCLKSOURCE_HSI",
-                            "itens": [
-                                {
-                                    "name": "RCC_SYSCLKSOURCE_HSI",
-                                    "value": null,
-                                    "semaphore": "SysSourceHSI"
-                                },
-                                {
-                                    "name": "RCC_SYSCLKSOURCE_HSE",
-                                    "value": null,
-                                    "semaphore": "SysSourceHSE"
-                                },
-                                {
-                                    "name": "RCC_SYSCLKSOURCE_PLLCLK",
-                                    "value": null,
-                                    "semaphore": "SysSourcePLL"
+                                    "semaphore": "SysSourcePLL",
+                                    "description": "Sysclksource Pllclk"
                                 }
                             ]
                         }
@@ -2275,17 +2238,20 @@
                                 {
                                     "name": "RCC_RTCCLKSOURCE_LSE",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Rtcclksource Lse"
                                 },
                                 {
                                     "name": "RCC_RTCCLKSOURCE_LSI",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Rtcclksource Lsi"
                                 },
                                 {
                                     "name": "RCC_RTCCLKSOURCE_HSE_DIV32",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Rtcclksource Hse Div32"
                                 }
                             ]
                         }
@@ -2344,12 +2310,14 @@
                                 {
                                     "name": "RCC_MCO1SOURCE_PLLCLK",
                                     "value": 1.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "1"
                                 },
                                 {
                                     "name": "RCC_MCO1SOURCE_PLLCLK_DIV2",
                                     "value": 2.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "2"
                                 }
                             ]
                         }
@@ -2371,32 +2339,38 @@
                                 {
                                     "name": "RCC_MCO1SOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "MCO1SRC SYSCLK"
                                 },
                                 {
                                     "name": "RCC_MCO1SOURCE_HSI",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "MCO1SRC HSI"
                                 },
                                 {
                                     "name": "RCC_MCO1SOURCE_HSE",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "MCO1SRC HSE"
                                 },
                                 {
                                     "name": "RCC_MCO1SOURCE_LSI",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "MCO1SRC LSI"
                                 },
                                 {
                                     "name": "RCC_MCO1SOURCE_LSE",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "MCO1SRC LSE"
                                 },
                                 {
                                     "name": "MCOMultDivisor",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": null
                                 }
                             ]
                         }
@@ -2418,42 +2392,50 @@
                                 {
                                     "name": "RCC_MCODIV_1",
                                     "value": 1.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "1"
                                 },
                                 {
                                     "name": "RCC_MCODIV_2",
                                     "value": 2.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "2"
                                 },
                                 {
                                     "name": "RCC_MCODIV_4",
                                     "value": 4.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "4"
                                 },
                                 {
                                     "name": "RCC_MCODIV_8",
                                     "value": 8.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "8"
                                 },
                                 {
                                     "name": "RCC_MCODIV_16",
                                     "value": 16.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "16"
                                 },
                                 {
                                     "name": "RCC_MCODIV_32",
                                     "value": 32.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "32"
                                 },
                                 {
                                     "name": "RCC_MCODIV_64",
                                     "value": 64.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "64"
                                 },
                                 {
                                     "name": "RCC_MCODIV_128",
                                     "value": 128.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "128"
                                 }
                             ]
                         }
@@ -2488,47 +2470,56 @@
                                 {
                                     "name": "RCC_SYSCLK_DIV1",
                                     "value": 1.0,
-                                    "semaphore": "AHBCLKDivider1"
+                                    "semaphore": "AHBCLKDivider1",
+                                    "description": "1"
                                 },
                                 {
                                     "name": "RCC_SYSCLK_DIV2",
                                     "value": 2.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "2"
                                 },
                                 {
                                     "name": "RCC_SYSCLK_DIV4",
                                     "value": 4.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "4"
                                 },
                                 {
                                     "name": "RCC_SYSCLK_DIV8",
                                     "value": 8.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "8"
                                 },
                                 {
                                     "name": "RCC_SYSCLK_DIV16",
                                     "value": 16.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "16"
                                 },
                                 {
                                     "name": "RCC_SYSCLK_DIV64",
                                     "value": 64.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "64"
                                 },
                                 {
                                     "name": "RCC_SYSCLK_DIV128",
                                     "value": 128.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "128"
                                 },
                                 {
                                     "name": "RCC_SYSCLK_DIV256",
                                     "value": 256.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "256"
                                 },
                                 {
                                     "name": "RCC_SYSCLK_DIV512",
                                     "value": 512.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "512"
                                 }
                             ]
                         }
@@ -2593,12 +2584,14 @@
                                 {
                                     "name": "SYSTICK_CLKSOURCE_HCLK",
                                     "value": 1.0,
-                                    "semaphore": "HCLKDiv1"
+                                    "semaphore": "HCLKDiv1",
+                                    "description": "1"
                                 },
                                 {
                                     "name": "SYSTICK_CLKSOURCE_HCLK_DIV8",
                                     "value": 8.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "8"
                                 }
                             ]
                         }
@@ -2633,62 +2626,74 @@
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV1",
                                     "value": 1.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "1"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV2",
                                     "value": 2.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "2"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV4",
                                     "value": 4.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "4"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV6",
                                     "value": 6.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "6"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV8",
                                     "value": 8.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "8"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV10",
                                     "value": 10.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "10"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV12",
                                     "value": 12.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "12"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV16",
                                     "value": 16.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "16"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV32",
                                     "value": 32.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "32"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV64",
                                     "value": 64.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "64"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV128",
                                     "value": 128.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "128"
                                 },
                                 {
                                     "name": "RCC_ADC12PLLCLK_DIV256",
                                     "value": 256.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "256"
                                 }
                             ]
                         }
@@ -2730,62 +2735,74 @@
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV1",
                                     "value": 1.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "1"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV2",
                                     "value": 2.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "2"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV4",
                                     "value": 4.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "4"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV6",
                                     "value": 6.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "6"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV8",
                                     "value": 8.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "8"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV10",
                                     "value": 10.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "10"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV12",
                                     "value": 12.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "12"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV16",
                                     "value": 16.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "16"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV32",
                                     "value": 32.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "32"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV64",
                                     "value": 64.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "64"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV128",
                                     "value": 128.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "128"
                                 },
                                 {
                                     "name": "RCC_ADC34PLLCLK_DIV256",
                                     "value": 256.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "256"
                                 }
                             ]
                         }
@@ -2827,27 +2844,32 @@
                                 {
                                     "name": "RCC_HCLK_DIV1",
                                     "value": 1.0,
-                                    "semaphore": "APB1DIV1"
+                                    "semaphore": "APB1DIV1",
+                                    "description": "1"
                                 },
                                 {
                                     "name": "RCC_HCLK_DIV2",
                                     "value": 2.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "2"
                                 },
                                 {
                                     "name": "RCC_HCLK_DIV4",
                                     "value": 4.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "4"
                                 },
                                 {
                                     "name": "RCC_HCLK_DIV8",
                                     "value": 8.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "8"
                                 },
                                 {
                                     "name": "RCC_HCLK_DIV16",
                                     "value": 16.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "16"
                                 }
                             ]
                         }
@@ -2977,27 +2999,32 @@
                                 {
                                     "name": "RCC_HCLK_DIV1",
                                     "value": 1.0,
-                                    "semaphore": "APB2DIV1"
+                                    "semaphore": "APB2DIV1",
+                                    "description": "1"
                                 },
                                 {
                                     "name": "RCC_HCLK_DIV2",
                                     "value": 2.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "2"
                                 },
                                 {
                                     "name": "RCC_HCLK_DIV4",
                                     "value": 4.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "4"
                                 },
                                 {
                                     "name": "RCC_HCLK_DIV8",
                                     "value": 8.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "8"
                                 },
                                 {
                                     "name": "RCC_HCLK_DIV16",
                                     "value": 16.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "16"
                                 }
                             ]
                         }
@@ -3094,12 +3121,14 @@
                                 {
                                     "name": "RCC_TIM2CLK_HCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "TIMER2 Clksource HCLK"
                                 },
                                 {
                                     "name": "RCC_TIM2CLK_PLLCLK",
                                     "value": null,
-                                    "semaphore": "TIM2SourcePLL"
+                                    "semaphore": "TIM2SourcePLL",
+                                    "description": "TIMER2 Clksource PLL"
                                 }
                             ]
                         }
@@ -3134,12 +3163,14 @@
                                 {
                                     "name": "RCC_TIM34CLK_HCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "TIMER3 Clksource HCLK"
                                 },
                                 {
                                     "name": "RCC_TIM34CLK_PLLCLK",
                                     "value": null,
-                                    "semaphore": "TIM34SourcePLL"
+                                    "semaphore": "TIM34SourcePLL",
+                                    "description": "TIMER3 Clksource PLL"
                                 }
                             ]
                         }
@@ -3174,12 +3205,14 @@
                                 {
                                     "name": "RCC_TIM1CLK_HCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "TIMER1 Clksource HCLK"
                                 },
                                 {
                                     "name": "RCC_TIM1CLK_PLLCLK",
                                     "value": null,
-                                    "semaphore": "TIM1SourcePLL"
+                                    "semaphore": "TIM1SourcePLL",
+                                    "description": "TIMER1 Clksource PLL"
                                 }
                             ]
                         }
@@ -3214,12 +3247,14 @@
                                 {
                                     "name": "RCC_TIM8CLK_HCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "TIMER8 Clksource HCLK"
                                 },
                                 {
                                     "name": "RCC_TIM8CLK_PLLCLK",
                                     "value": null,
-                                    "semaphore": "TIM8SourcePLL"
+                                    "semaphore": "TIM8SourcePLL",
+                                    "description": "TIMER8 Clksource PLL"
                                 }
                             ]
                         }
@@ -3254,12 +3289,14 @@
                                 {
                                     "name": "RCC_TIM15CLK_HCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "TIMER15 Clksource HCLK"
                                 },
                                 {
                                     "name": "RCC_TIM15CLK_PLLCLK",
                                     "value": null,
-                                    "semaphore": "TIM15SourcePLL"
+                                    "semaphore": "TIM15SourcePLL",
+                                    "description": "TIMER15 Clksource PLL"
                                 }
                             ]
                         }
@@ -3294,12 +3331,14 @@
                                 {
                                     "name": "RCC_TIM16CLK_HCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "TIMER16 Clksource HCLK"
                                 },
                                 {
                                     "name": "RCC_TIM16CLK_PLLCLK",
                                     "value": null,
-                                    "semaphore": "TIM16SourcePLL"
+                                    "semaphore": "TIM16SourcePLL",
+                                    "description": "TIMER16 Clksource PLL"
                                 }
                             ]
                         }
@@ -3334,12 +3373,14 @@
                                 {
                                     "name": "RCC_TIM17CLK_HCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "TIMER17 Clksource HCLK"
                                 },
                                 {
                                     "name": "RCC_TIM17CLK_PLLCLK",
                                     "value": null,
-                                    "semaphore": "TIM17SourcePLL"
+                                    "semaphore": "TIM17SourcePLL",
+                                    "description": "TIMER17 Clksource PLL"
                                 }
                             ]
                         }
@@ -3374,12 +3415,14 @@
                                 {
                                     "name": "RCC_TIM20CLK_HCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "TIMER20 Clksource HCLK"
                                 },
                                 {
                                     "name": "RCC_TIM20CLK_PLLCLK",
                                     "value": null,
-                                    "semaphore": "TIM20SourcePLL"
+                                    "semaphore": "TIM20SourcePLL",
+                                    "description": "TIMER20 Clksource PLL"
                                 }
                             ]
                         }
@@ -3414,12 +3457,14 @@
                                 {
                                     "name": "RCC_I2C1CLKSOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "I2C1 Clksource Sysclk"
                                 },
                                 {
                                     "name": "RCC_I2C1CLKSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": "I2C1SourceHSI"
+                                    "semaphore": "I2C1SourceHSI",
+                                    "description": "I2C1 Clksource Hsi"
                                 }
                             ]
                         }
@@ -3454,12 +3499,14 @@
                                 {
                                     "name": "RCC_I2C2CLKSOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "I2C2 Clksource Sysclk"
                                 },
                                 {
                                     "name": "RCC_I2C2CLKSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": "I2C2SourceHSI"
+                                    "semaphore": "I2C2SourceHSI",
+                                    "description": "I2C2 Clksource Hsi"
                                 }
                             ]
                         }
@@ -3494,12 +3541,14 @@
                                 {
                                     "name": "RCC_I2C3CLKSOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "I2C3 Clksource Sysclk"
                                 },
                                 {
                                     "name": "RCC_I2C3CLKSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": "I2C3SourceHSI"
+                                    "semaphore": "I2C3SourceHSI",
+                                    "description": "I2C3 Clksource Hsi"
                                 }
                             ]
                         }
@@ -3547,12 +3596,14 @@
                                 {
                                     "name": "RCC_I2SCLKSOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": "I2SSourceIsSys"
+                                    "semaphore": "I2SSourceIsSys",
+                                    "description": "Clk Source SYS"
                                 },
                                 {
                                     "name": "RCC_I2SCLKSOURCE_EXT",
                                     "value": null,
-                                    "semaphore": "I2SSourceIsExt"
+                                    "semaphore": "I2SSourceIsExt",
+                                    "description": "Clk Source  Ext"
                                 }
                             ]
                         }
@@ -3587,22 +3638,26 @@
                                 {
                                     "name": "RCC_USART1CLKSOURCE_PCLK2",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart1 Clksource Pclk2"
                                 },
                                 {
                                     "name": "RCC_USART1CLKSOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart1 Clksource Sysclk"
                                 },
                                 {
                                     "name": "RCC_USART1CLKSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart1 Clksource Hsi"
                                 },
                                 {
                                     "name": "RCC_USART1CLKSOURCE_LSE",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart1 Clksource Lse"
                                 }
                             ]
                         }
@@ -3637,22 +3692,26 @@
                                 {
                                     "name": "RCC_USART2CLKSOURCE_PCLK1",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart2 Clksource Pclk1"
                                 },
                                 {
                                     "name": "RCC_USART2CLKSOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart2 Clksource Sysclk"
                                 },
                                 {
                                     "name": "RCC_USART2CLKSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart2 Clksource Hsi"
                                 },
                                 {
                                     "name": "RCC_USART2CLKSOURCE_LSE",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart2 Clksource Lse"
                                 }
                             ]
                         }
@@ -3687,22 +3746,26 @@
                                 {
                                     "name": "RCC_USART3CLKSOURCE_PCLK1",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart3 Clksource Pclk2"
                                 },
                                 {
                                     "name": "RCC_USART3CLKSOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart3 Clksource Sysclk"
                                 },
                                 {
                                     "name": "RCC_USART3CLKSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart3 Clksource Hsi"
                                 },
                                 {
                                     "name": "RCC_USART3CLKSOURCE_LSE",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Usart3 Clksource Lse"
                                 }
                             ]
                         }
@@ -3737,22 +3800,26 @@
                                 {
                                     "name": "RCC_UART4CLKSOURCE_PCLK1",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "UART4 Clksource Pclk1"
                                 },
                                 {
                                     "name": "RCC_UART4CLKSOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "UART4 Clksource Sysclk"
                                 },
                                 {
                                     "name": "RCC_UART4CLKSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "UART4 Clksource Hsi"
                                 },
                                 {
                                     "name": "RCC_UART4CLKSOURCE_LSE",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "UART4 Clksource Lse"
                                 }
                             ]
                         }
@@ -3787,22 +3854,26 @@
                                 {
                                     "name": "RCC_UART5CLKSOURCE_PCLK1",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "UART5 Clksource Pclk1"
                                 },
                                 {
                                     "name": "RCC_UART5CLKSOURCE_SYSCLK",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "UART5 Clksource Sysclk"
                                 },
                                 {
                                     "name": "RCC_UART5CLKSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "UART5 Clksource Hsi"
                                 },
                                 {
                                     "name": "RCC_UART5CLKSOURCE_LSE",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "UART5 Clksource Lse"
                                 }
                             ]
                         }
@@ -3824,7 +3895,7 @@
             ]
         },
         {
-            "ref_name": "PLLSource",
+            "ref_name": "PLLSourceVirtual",
             "disc": "PLL Source",
             "variants": [
                 {
@@ -3834,7 +3905,8 @@
                         "single_item": {
                             "name": "RCC_PLLSOURCE_HSE",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "Pllsource Hse"
                         }
                     }
                 },
@@ -3848,60 +3920,20 @@
                                 {
                                     "name": "RCC_PLLSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Pllsource Hsi/2"
                                 },
                                 {
                                     "name": "RCC_PLLSOURCE_HSE",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Pllsource Hse"
                                 },
                                 {
                                     "name": "RCC_PLLSOURCE_HSI",
                                     "value": null,
-                                    "semaphore": null
-                                }
-                            ]
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "ref_name": "PLLSource",
-            "disc": "PLL Source",
-            "variants": [
-                {
-                    "expr": "(USBUsed_ForRCC) ",
-                    "diagnostic": "PLL Mux should have HSE as input",
-                    "ref": {
-                        "single_item": {
-                            "name": "RCC_PLLSOURCE_HSE",
-                            "value": null,
-                            "semaphore": null
-                        }
-                    }
-                },
-                {
-                    "expr": null,
-                    "diagnostic": null,
-                    "ref": {
-                        "list": {
-                            "default_name": "RCC_PLLSOURCE_HSI",
-                            "itens": [
-                                {
-                                    "name": "RCC_PLLSOURCE_HSI",
-                                    "value": null,
-                                    "semaphore": null
-                                },
-                                {
-                                    "name": "RCC_PLLSOURCE_HSE",
-                                    "value": null,
-                                    "semaphore": null
-                                },
-                                {
-                                    "name": "RCC_PLLSOURCE_HSI",
-                                    "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Pllsource Hsi"
                                 }
                             ]
                         }
@@ -3923,82 +3955,98 @@
                                 {
                                     "name": "RCC_PREDIV_DIV1",
                                     "value": 1.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "1"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV2",
                                     "value": 2.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "2"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV3",
                                     "value": 3.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "3"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV4",
                                     "value": 4.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "4"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV5",
                                     "value": 5.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "5"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV6",
                                     "value": 6.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "6"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV7",
                                     "value": 7.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "7"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV8",
                                     "value": 8.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "8"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV9",
                                     "value": 9.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "9"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV10",
                                     "value": 10.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "10"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV11",
                                     "value": 11.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "11"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV12",
                                     "value": 12.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "12"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV13",
                                     "value": 13.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "13"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV14",
                                     "value": 14.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "14"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV15",
                                     "value": 15.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "15"
                                 },
                                 {
                                     "name": "RCC_PREDIV_DIV16",
                                     "value": 16.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "16"
                                 }
                             ]
                         }
@@ -4044,77 +4092,92 @@
                                 {
                                     "name": "RCC_PLL_MUL2",
                                     "value": 2.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "2"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL3",
                                     "value": 3.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "3"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL4",
                                     "value": 4.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "4"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL5",
                                     "value": 5.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "5"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL6",
                                     "value": 6.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "6"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL7",
                                     "value": 7.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "7"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL8",
                                     "value": 8.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "8"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL9",
                                     "value": 9.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "9"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL10",
                                     "value": 10.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "10"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL11",
                                     "value": 11.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "11"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL12",
                                     "value": 12.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "12"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL13",
                                     "value": 13.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "13"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL14",
                                     "value": 14.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "14"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL15",
                                     "value": 15.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "15"
                                 },
                                 {
                                     "name": "RCC_PLL_MUL16",
                                     "value": 16.0,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "16"
                                 }
                             ]
                         }
@@ -4213,7 +4276,8 @@
                         "single_item": {
                             "name": "1",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "Enabled"
                         }
                     }
                 },
@@ -4227,12 +4291,14 @@
                                 {
                                     "name": "1",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Enabled"
                                 },
                                 {
                                     "name": "0",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Disabled"
                                 }
                             ]
                         }
@@ -4251,7 +4317,8 @@
                         "single_item": {
                             "name": "FLASH_LATENCY_0",
                             "value": null,
-                            "semaphore": "FLASH_LATENCY0"
+                            "semaphore": "FLASH_LATENCY0",
+                            "description": "0 WS (1 CPU cycle)"
                         }
                     }
                 },
@@ -4262,7 +4329,8 @@
                         "single_item": {
                             "name": "FLASH_LATENCY_1",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "1 WS (2 CPU cycle)"
                         }
                     }
                 },
@@ -4273,7 +4341,8 @@
                         "single_item": {
                             "name": "FLASH_LATENCY_2",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "2 WS (3 CPU cycle)"
                         }
                     }
                 }
@@ -4344,22 +4413,26 @@
                                 {
                                     "name": "RCC_LSEDRIVE_LOW",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "LSE oscillator low drive capability"
                                 },
                                 {
                                     "name": "RCC_LSEDRIVE_MEDIUMLOW",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "LSE oscillator medium low drive capability"
                                 },
                                 {
                                     "name": "RCC_LSEDRIVE_MEDIUMHIGH",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "LSE oscillator medium high drive capability"
                                 },
                                 {
                                     "name": "RCC_LSEDRIVE_HIGH",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "LSE oscillator high drive capability"
                                 }
                             ]
                         }
@@ -4425,7 +4498,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4436,7 +4510,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4453,7 +4528,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4464,7 +4540,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4481,7 +4558,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4492,7 +4570,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4509,7 +4588,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4520,7 +4600,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 },
@@ -4531,7 +4612,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4542,7 +4624,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4559,7 +4642,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4570,7 +4654,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4587,7 +4672,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4598,7 +4684,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4615,7 +4702,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4626,7 +4714,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4643,7 +4732,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4654,7 +4744,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4671,7 +4762,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4682,7 +4774,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4699,7 +4792,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4710,7 +4804,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4727,7 +4822,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4738,7 +4834,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4755,7 +4852,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4766,7 +4864,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4783,7 +4882,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4794,7 +4894,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4811,7 +4912,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4822,7 +4924,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4839,7 +4942,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4850,7 +4954,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4867,7 +4972,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4878,7 +4984,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4895,7 +5002,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4906,7 +5014,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4923,7 +5032,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4934,7 +5044,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4951,7 +5062,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4962,7 +5074,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -4979,7 +5092,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -4990,7 +5104,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5007,7 +5122,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5018,7 +5134,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5035,7 +5152,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5046,7 +5164,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5063,7 +5182,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5074,7 +5194,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5091,7 +5212,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5102,7 +5224,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5119,7 +5242,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 },
@@ -5130,7 +5254,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5144,12 +5269,14 @@
                                 {
                                     "name": "true",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "true"
                                 },
                                 {
                                     "name": "false",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "false"
                                 }
                             ]
                         }
@@ -5168,7 +5295,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5179,7 +5307,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5196,7 +5325,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5207,7 +5337,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5224,7 +5355,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5235,7 +5367,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5252,7 +5385,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5263,7 +5397,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5280,7 +5415,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5291,8 +5427,35 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
+                    }
+                }
+            ]
+        },
+        {
+            "ref_name": "SYSCLKSourceVirtualString",
+            "disc": "SYSCLK Source",
+            "variants": [
+                {
+                    "expr": null,
+                    "diagnostic": null,
+                    "ref": {
+                        "string": "+SYSCLKSourceVirtual"
+                    }
+                }
+            ]
+        },
+        {
+            "ref_name": "PLLSourceVirtualString",
+            "disc": "PLL Source",
+            "variants": [
+                {
+                    "expr": null,
+                    "diagnostic": null,
+                    "ref": {
+                        "string": "+PLLSourceVirtual"
                     }
                 }
             ]
@@ -5308,7 +5471,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5319,7 +5483,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5336,7 +5501,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5347,7 +5513,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5364,7 +5531,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5375,7 +5543,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5392,7 +5561,8 @@
                         "single_item": {
                             "name": "true",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "true"
                         }
                     }
                 },
@@ -5403,7 +5573,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "false"
                         }
                     }
                 }
@@ -5483,12 +5654,14 @@
                                 {
                                     "name": "true",
                                     "value": null,
-                                    "semaphore": "CSSEnabled"
+                                    "semaphore": "CSSEnabled",
+                                    "description": "Enabled"
                                 },
                                 {
                                     "name": "false",
                                     "value": null,
-                                    "semaphore": null
+                                    "semaphore": null,
+                                    "description": "Disabled"
                                 }
                             ]
                         }
@@ -5501,7 +5674,8 @@
                         "single_item": {
                             "name": "false",
                             "value": null,
-                            "semaphore": null
+                            "semaphore": null,
+                            "description": "Disabled"
                         }
                     }
                 }
@@ -5510,21 +5684,22 @@
     ],
     "extra_reference": [
         "RCC_USART3CLKSOURCE_HSI",
-        "RCC_UART5CLKSOURCE_LSE",
+        "RCC_MCO1SOURCE_PLLCLK_DIV2",
         "RCC_USART2CLKSOURCE_HSI",
-        "RCC_TIM34CLK_PLLCLK",
-        "RCC_USART1CLKSOURCE_HSI",
         "RCC_UART4CLKSOURCE_LSE",
+        "RCC_USART1CLKSOURCE_HSI",
+        "SEM2RCC_HSE_REQUIRED_TIM16",
         "RCC_MCO1SOURCE_HSI",
         "RCC_SYSCLKSOURCE_HSI",
         "RCC_PLLSOURCE_HSI",
-        "SEM2RCC_HSE_REQUIRED_TIM16",
         "RCC_MCO1SOURCE_LSI",
-        "RCC_MCO1SOURCE_HSE",
-        "RCC_USART1CLKSOURCE_LSE",
+        "RCC_USART3CLKSOURCE_LSE",
+        "RCC_PLLSOURCE_HSE",
+        "RCC_USART2CLKSOURCE_LSE",
+        "RCC_TIM2CLK_PLLCLK",
         "RCC_UART4CLKSOURCE_HSI",
         "RCC_TIM20CLK_PLLCLK",
-        "RCC_SYSCLKSOURCE_HSE",
+        "RCC_MCO1SOURCE_HSE",
         "RCC_TIM17CLK_PLLCLK",
         "RCC_UART5CLKSOURCE_HSI",
         "RCC_TIM15CLK_PLLCLK",
@@ -5533,12 +5708,11 @@
         "I2C2SourceHSI",
         "RCC_TIM1CLK_PLLCLK",
         "I2C3SourceHSI",
-        "RCC_USART2CLKSOURCE_LSE",
-        "RCC_PLLSOURCE_HSE",
-        "RCC_TIM2CLK_PLLCLK",
+        "RCC_USART1CLKSOURCE_LSE",
+        "RCC_SYSCLKSOURCE_HSE",
+        "RCC_TIM34CLK_PLLCLK",
         "Semaphore_input_Channel1TIM16",
         "SEM2RCC_MCO_REQUIRED_TIM16",
-        "RCC_MCO1SOURCE_LSE",
         "TIM2SourcePLL",
         "TIM2",
         "TIM34SourcePLL",
@@ -5556,6 +5730,7 @@
         "TIM17",
         "TIM20SourcePLL",
         "TIM20",
+        "RCC_MCO1SOURCE_LSE",
         "DIE422",
         "DIE438",
         "DIE439",
@@ -5567,12 +5742,11 @@
         "channelSelectedADC3",
         "channelSelectedADC4",
         "SYSCLKFreq_VALUE/2",
-        "RCC_MCO1SOURCE_PLLCLK",
-        "RCC_HCLK_DIV1",
-        "RCC_MCO1SOURCE_PLLCLK_DIV2",
-        "AHBCLKDivider1",
         "RCC_SYSCLKSOURCE_PLLCLK",
-        "RCC_USART3CLKSOURCE_LSE"
+        "RCC_HCLK_DIV1",
+        "RCC_MCO1SOURCE_PLLCLK",
+        "RCC_UART5CLKSOURCE_LSE",
+        "AHBCLKDivider1"
     ],
     "config_ref_names": [
         "VDD_VALUE",
@@ -5616,73 +5790,7 @@
     "gen_patches": {
         "enums": [
             {
-                "name": "RCC_MCOSEL",
-                "fields": [
-                    {
-                        "name": "LSI",
-                        "value": 2
-                    },
-                    {
-                        "name": "LSE",
-                        "value": 3
-                    },
-                    {
-                        "name": "SYS",
-                        "value": 4
-                    },
-                    {
-                        "name": "HSI",
-                        "value": 5
-                    },
-                    {
-                        "name": "HSE",
-                        "value": 6
-                    },
-                    {
-                        "name": "PLL",
-                        "value": 7
-                    }
-                ],
-                "bit_size": 3
-            },
-            {
-                "name": "RCC_USART1SW",
-                "fields": [
-                    {
-                        "name": "PCLK2",
-                        "value": 0
-                    },
-                    {
-                        "name": "SYS",
-                        "value": 1
-                    },
-                    {
-                        "name": "LSE",
-                        "value": 2
-                    },
-                    {
-                        "name": "HSI",
-                        "value": 3
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_ICSW",
-                "fields": [
-                    {
-                        "name": "HSI",
-                        "value": 0
-                    },
-                    {
-                        "name": "SYS",
-                        "value": 1
-                    }
-                ],
-                "bit_size": 1
-            },
-            {
-                "name": "RCC_MCOPRE",
+                "name": "RCC_HPRE",
                 "fields": [
                     {
                         "name": "Div1",
@@ -5690,34 +5798,38 @@
                     },
                     {
                         "name": "Div2",
-                        "value": 1
+                        "value": 8
                     },
                     {
                         "name": "Div4",
-                        "value": 2
+                        "value": 9
                     },
                     {
                         "name": "Div8",
-                        "value": 3
+                        "value": 10
                     },
                     {
                         "name": "Div16",
-                        "value": 4
-                    },
-                    {
-                        "name": "Div32",
-                        "value": 5
+                        "value": 11
                     },
                     {
                         "name": "Div64",
-                        "value": 6
+                        "value": 12
                     },
                     {
                         "name": "Div128",
-                        "value": 7
+                        "value": 13
+                    },
+                    {
+                        "name": "Div256",
+                        "value": 14
+                    },
+                    {
+                        "name": "Div512",
+                        "value": 15
                     }
                 ],
-                "bit_size": 3
+                "bit_size": 4
             },
             {
                 "name": "RCC_PLLMUL",
@@ -5786,10 +5898,10 @@
                 "bit_size": 4
             },
             {
-                "name": "RCC_TIMSW",
+                "name": "RCC_TIM2SW",
                 "fields": [
                     {
-                        "name": "PCLK2_TIM",
+                        "name": "PCLK1_TIM",
                         "value": 0
                     },
                     {
@@ -5818,61 +5930,21 @@
                 "bit_size": 2
             },
             {
-                "name": "RCC_RTCSEL",
+                "name": "RCC_ISSRC",
                 "fields": [
-                    {
-                        "name": "LSE",
-                        "value": 1
-                    },
-                    {
-                        "name": "LSI",
-                        "value": 2
-                    },
-                    {
-                        "name": "HSE",
-                        "value": 3
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_USARTSW",
-                "fields": [
-                    {
-                        "name": "PCLK1",
-                        "value": 0
-                    },
                     {
                         "name": "SYS",
-                        "value": 1
-                    },
-                    {
-                        "name": "LSE",
-                        "value": 2
-                    },
-                    {
-                        "name": "HSI",
-                        "value": 3
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_TIM2SW",
-                "fields": [
-                    {
-                        "name": "PCLK1_TIM",
                         "value": 0
                     },
                     {
-                        "name": "PLL1_P_MUL_2",
+                        "name": "CKIN",
                         "value": 1
                     }
                 ],
                 "bit_size": 1
             },
             {
-                "name": "RCC_PLLXTPRE",
+                "name": "RCC_MCOPRE",
                 "fields": [
                     {
                         "name": "Div1",
@@ -5881,50 +5953,30 @@
                     {
                         "name": "Div2",
                         "value": 1
-                    }
-                ],
-                "bit_size": 1
-            },
-            {
-                "name": "RCC_PPRE",
-                "fields": [
-                    {
-                        "name": "Div1",
-                        "value": 0
-                    },
-                    {
-                        "name": "Div2",
-                        "value": 4
                     },
                     {
                         "name": "Div4",
-                        "value": 5
+                        "value": 2
                     },
                     {
                         "name": "Div8",
-                        "value": 6
+                        "value": 3
                     },
                     {
                         "name": "Div16",
+                        "value": 4
+                    },
+                    {
+                        "name": "Div32",
+                        "value": 5
+                    },
+                    {
+                        "name": "Div64",
+                        "value": 6
+                    },
+                    {
+                        "name": "Div128",
                         "value": 7
-                    }
-                ],
-                "bit_size": 3
-            },
-            {
-                "name": "FLASH_LATENCY",
-                "fields": [
-                    {
-                        "name": "WS0",
-                        "value": 0
-                    },
-                    {
-                        "name": "WS1",
-                        "value": 1
-                    },
-                    {
-                        "name": "WS2",
-                        "value": 2
                     }
                 ],
                 "bit_size": 3
@@ -6022,6 +6074,148 @@
                 "bit_size": 4
             },
             {
+                "name": "RCC_MCOSEL",
+                "fields": [
+                    {
+                        "name": "LSI",
+                        "value": 2
+                    },
+                    {
+                        "name": "LSE",
+                        "value": 3
+                    },
+                    {
+                        "name": "SYS",
+                        "value": 4
+                    },
+                    {
+                        "name": "HSI",
+                        "value": 5
+                    },
+                    {
+                        "name": "HSE",
+                        "value": 6
+                    },
+                    {
+                        "name": "PLL",
+                        "value": 7
+                    }
+                ],
+                "bit_size": 3
+            },
+            {
+                "name": "RCC_ICSW",
+                "fields": [
+                    {
+                        "name": "HSI",
+                        "value": 0
+                    },
+                    {
+                        "name": "SYS",
+                        "value": 1
+                    }
+                ],
+                "bit_size": 1
+            },
+            {
+                "name": "RCC_USART1SW",
+                "fields": [
+                    {
+                        "name": "PCLK2",
+                        "value": 0
+                    },
+                    {
+                        "name": "SYS",
+                        "value": 1
+                    },
+                    {
+                        "name": "LSE",
+                        "value": 2
+                    },
+                    {
+                        "name": "HSI",
+                        "value": 3
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "RCC_PLLXTPRE",
+                "fields": [
+                    {
+                        "name": "Div1",
+                        "value": 0
+                    },
+                    {
+                        "name": "Div2",
+                        "value": 1
+                    }
+                ],
+                "bit_size": 1
+            },
+            {
+                "name": "RCC_PPRE",
+                "fields": [
+                    {
+                        "name": "Div1",
+                        "value": 0
+                    },
+                    {
+                        "name": "Div2",
+                        "value": 4
+                    },
+                    {
+                        "name": "Div4",
+                        "value": 5
+                    },
+                    {
+                        "name": "Div8",
+                        "value": 6
+                    },
+                    {
+                        "name": "Div16",
+                        "value": 7
+                    }
+                ],
+                "bit_size": 3
+            },
+            {
+                "name": "RCC_USARTSW",
+                "fields": [
+                    {
+                        "name": "PCLK1",
+                        "value": 0
+                    },
+                    {
+                        "name": "SYS",
+                        "value": 1
+                    },
+                    {
+                        "name": "LSE",
+                        "value": 2
+                    },
+                    {
+                        "name": "HSI",
+                        "value": 3
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "RCC_TIMSW",
+                "fields": [
+                    {
+                        "name": "PCLK2_TIM",
+                        "value": 0
+                    },
+                    {
+                        "name": "PLL1_P_MUL_2",
+                        "value": 1
+                    }
+                ],
+                "bit_size": 1
+            },
+            {
                 "name": "RCC_ADCPRES",
                 "fields": [
                     {
@@ -6076,52 +6270,76 @@
                 "bit_size": 5
             },
             {
-                "name": "RCC_HPRE",
+                "name": "RCC_RTCSEL",
                 "fields": [
                     {
-                        "name": "Div1",
+                        "name": "LSE",
+                        "value": 1
+                    },
+                    {
+                        "name": "LSI",
+                        "value": 2
+                    },
+                    {
+                        "name": "HSE",
+                        "value": 3
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "RCC_USBPRE",
+                "fields": [
+                    {
+                        "name": "Div1_5",
                         "value": 0
                     },
                     {
-                        "name": "Div2",
-                        "value": 8
-                    },
-                    {
-                        "name": "Div4",
-                        "value": 9
-                    },
-                    {
-                        "name": "Div8",
-                        "value": 10
-                    },
-                    {
-                        "name": "Div16",
-                        "value": 11
-                    },
-                    {
-                        "name": "Div64",
-                        "value": 12
-                    },
-                    {
-                        "name": "Div128",
-                        "value": 13
-                    },
-                    {
-                        "name": "Div256",
-                        "value": 14
-                    },
-                    {
-                        "name": "Div512",
-                        "value": 15
+                        "name": "Div1",
+                        "value": 1
                     }
                 ],
-                "bit_size": 4
+                "bit_size": 1
+            },
+            {
+                "name": "FLASH_LATENCY",
+                "fields": [
+                    {
+                        "name": "WS0",
+                        "value": 0
+                    },
+                    {
+                        "name": "WS1",
+                        "value": 1
+                    },
+                    {
+                        "name": "WS2",
+                        "value": 2
+                    }
+                ],
+                "bit_size": 3
             }
         ],
         "rename_nodes": [],
         "match_ref_to_enum": [
             {
-                "ref_name": "SW",
+                "ref_name": "PRESCALERUSB",
+                "enum": "RCC_USBPRE",
+                "items": [
+                    {
+                        "ref_item_name": "RCC_USBCLKSOURCE_PLL",
+                        "enum_item_name": "Div1"
+                    },
+                    {
+                        "ref_item_name": "RCC_USBCLKSOURCE_PLL_DIV1_5",
+                        "enum_item_name": "Div1_5"
+                    }
+                ],
+                "incomplete": false,
+                "enum_or_ref": ""
+            },
+            {
+                "ref_name": "SYSCLKSourceVirtual",
                 "enum": "RCC_SW",
                 "items": [
                     {
@@ -6129,39 +6347,19 @@
                         "enum_item_name": "PLL1_P"
                     },
                     {
-                        "ref_item_name": "RCC_SYSCLKSOURCE_HSE",
-                        "enum_item_name": "HSE"
-                    },
-                    {
                         "ref_item_name": "RCC_SYSCLKSOURCE_HSI",
                         "enum_item_name": "HSI"
+                    },
+                    {
+                        "ref_item_name": "RCC_SYSCLKSOURCE_HSE",
+                        "enum_item_name": "HSE"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "SW",
-                "enum": "RCC_SW",
-                "items": [
-                    {
-                        "ref_item_name": "RCC_SYSCLKSOURCE_PLLCLK",
-                        "enum_item_name": "PLL1_P"
-                    },
-                    {
-                        "ref_item_name": "RCC_SYSCLKSOURCE_HSE",
-                        "enum_item_name": "HSE"
-                    },
-                    {
-                        "ref_item_name": "RCC_SYSCLKSOURCE_HSI",
-                        "enum_item_name": "HSI"
-                    }
-                ],
-                "incomplete": false,
-                "enum_or_ref": ""
-            },
-            {
-                "ref_name": "RTCSEL",
+                "ref_name": "RTCClockSelection",
                 "enum": "RCC_RTCSEL",
                 "items": [
                     {
@@ -6169,19 +6367,19 @@
                         "enum_item_name": "LSE"
                     },
                     {
-                        "ref_item_name": "RCC_RTCCLKSOURCE_HSE_DIV32",
-                        "enum_item_name": "HSE"
-                    },
-                    {
                         "ref_item_name": "RCC_RTCCLKSOURCE_LSI",
                         "enum_item_name": "LSI"
+                    },
+                    {
+                        "ref_item_name": "RCC_RTCCLKSOURCE_HSE_DIV32",
+                        "enum_item_name": "HSE"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "MCOSEL",
+                "ref_name": "RCC_MCOSource",
                 "enum": "RCC_MCOSEL",
                 "items": [
                     {
@@ -6189,48 +6387,56 @@
                         "enum_item_name": "LSI"
                     },
                     {
-                        "ref_item_name": "RCC_MCO1SOURCE_SYSCLK",
-                        "enum_item_name": "SYS"
-                    },
-                    {
-                        "ref_item_name": "RCC_MCO1SOURCE_HSI",
-                        "enum_item_name": "HSI"
+                        "ref_item_name": "MCOMultDivisor",
+                        "enum_item_name": "PLL"
                     },
                     {
                         "ref_item_name": "RCC_MCO1SOURCE_HSE",
                         "enum_item_name": "HSE"
                     },
                     {
+                        "ref_item_name": "RCC_MCO1SOURCE_HSI",
+                        "enum_item_name": "HSI"
+                    },
+                    {
                         "ref_item_name": "RCC_MCO1SOURCE_LSE",
                         "enum_item_name": "LSE"
                     },
                     {
-                        "ref_item_name": "MCOMultDivisor",
-                        "enum_item_name": "PLL"
+                        "ref_item_name": "RCC_MCO1SOURCE_SYSCLK",
+                        "enum_item_name": "SYS"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "MCOPRE",
+                "ref_name": "RCC_MCODiv",
                 "enum": "RCC_MCOPRE",
                 "items": [
                     {
-                        "ref_item_name": "RCC_MCODIV_4",
-                        "enum_item_name": "Div4"
+                        "ref_item_name": "RCC_MCODIV_128",
+                        "enum_item_name": "Div128"
                     },
                     {
                         "ref_item_name": "RCC_MCODIV_16",
                         "enum_item_name": "Div16"
                     },
                     {
+                        "ref_item_name": "RCC_MCODIV_8",
+                        "enum_item_name": "Div8"
+                    },
+                    {
                         "ref_item_name": "RCC_MCODIV_32",
                         "enum_item_name": "Div32"
                     },
                     {
-                        "ref_item_name": "RCC_MCODIV_8",
-                        "enum_item_name": "Div8"
+                        "ref_item_name": "RCC_MCODIV_4",
+                        "enum_item_name": "Div4"
+                    },
+                    {
+                        "ref_item_name": "RCC_MCODIV_1",
+                        "enum_item_name": "Div1"
                     },
                     {
                         "ref_item_name": "RCC_MCODIV_2",
@@ -6239,21 +6445,13 @@
                     {
                         "ref_item_name": "RCC_MCODIV_64",
                         "enum_item_name": "Div64"
-                    },
-                    {
-                        "ref_item_name": "RCC_MCODIV_128",
-                        "enum_item_name": "Div128"
-                    },
-                    {
-                        "ref_item_name": "RCC_MCODIV_1",
-                        "enum_item_name": "Div1"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "HPRE",
+                "ref_name": "AHBCLKDivider",
                 "enum": "RCC_HPRE",
                 "items": [
                     {
@@ -6261,8 +6459,8 @@
                         "enum_item_name": "Div16"
                     },
                     {
-                        "ref_item_name": "RCC_SYSCLK_DIV1",
-                        "enum_item_name": "Div1"
+                        "ref_item_name": "RCC_SYSCLK_DIV256",
+                        "enum_item_name": "Div256"
                     },
                     {
                         "ref_item_name": "RCC_SYSCLK_DIV4",
@@ -6273,24 +6471,24 @@
                         "enum_item_name": "Div2"
                     },
                     {
-                        "ref_item_name": "RCC_SYSCLK_DIV64",
-                        "enum_item_name": "Div64"
-                    },
-                    {
                         "ref_item_name": "RCC_SYSCLK_DIV8",
                         "enum_item_name": "Div8"
+                    },
+                    {
+                        "ref_item_name": "RCC_SYSCLK_DIV64",
+                        "enum_item_name": "Div64"
                     },
                     {
                         "ref_item_name": "RCC_SYSCLK_DIV128",
                         "enum_item_name": "Div128"
                     },
                     {
-                        "ref_item_name": "RCC_SYSCLK_DIV512",
-                        "enum_item_name": "Div512"
+                        "ref_item_name": "RCC_SYSCLK_DIV1",
+                        "enum_item_name": "Div1"
                     },
                     {
-                        "ref_item_name": "RCC_SYSCLK_DIV256",
-                        "enum_item_name": "Div256"
+                        "ref_item_name": "RCC_SYSCLK_DIV512",
+                        "enum_item_name": "Div512"
                     }
                 ],
                 "incomplete": false,
@@ -6301,16 +6499,20 @@
                 "enum": "RCC_ADCPRES",
                 "items": [
                     {
+                        "ref_item_name": "RCC_ADC12PLLCLK_DIV2",
+                        "enum_item_name": "Div2"
+                    },
+                    {
                         "ref_item_name": "RCC_ADC12PLLCLK_DIV10",
                         "enum_item_name": "Div10"
                     },
                     {
-                        "ref_item_name": "RCC_ADC12PLLCLK_DIV12",
-                        "enum_item_name": "Div12"
+                        "ref_item_name": "RCC_ADC12PLLCLK_DIV64",
+                        "enum_item_name": "Div64"
                     },
                     {
-                        "ref_item_name": "RCC_ADC12PLLCLK_DIV256",
-                        "enum_item_name": "Div256"
+                        "ref_item_name": "RCC_ADC12PLLCLK_DIV128",
+                        "enum_item_name": "Div128"
                     },
                     {
                         "ref_item_name": "RCC_ADC12PLLCLK_DIV8",
@@ -6321,32 +6523,28 @@
                         "enum_item_name": "Div16"
                     },
                     {
-                        "ref_item_name": "RCC_ADC12PLLCLK_DIV2",
-                        "enum_item_name": "Div2"
-                    },
-                    {
-                        "ref_item_name": "RCC_ADC12PLLCLK_DIV1",
-                        "enum_item_name": "Div1"
-                    },
-                    {
-                        "ref_item_name": "RCC_ADC12PLLCLK_DIV128",
-                        "enum_item_name": "Div128"
-                    },
-                    {
-                        "ref_item_name": "RCC_ADC12PLLCLK_DIV6",
-                        "enum_item_name": "Div6"
+                        "ref_item_name": "RCC_ADC12PLLCLK_DIV12",
+                        "enum_item_name": "Div12"
                     },
                     {
                         "ref_item_name": "RCC_ADC12PLLCLK_DIV32",
                         "enum_item_name": "Div32"
                     },
                     {
+                        "ref_item_name": "RCC_ADC12PLLCLK_DIV256",
+                        "enum_item_name": "Div256"
+                    },
+                    {
                         "ref_item_name": "RCC_ADC12PLLCLK_DIV4",
                         "enum_item_name": "Div4"
                     },
                     {
-                        "ref_item_name": "RCC_ADC12PLLCLK_DIV64",
-                        "enum_item_name": "Div64"
+                        "ref_item_name": "RCC_ADC12PLLCLK_DIV1",
+                        "enum_item_name": "Div1"
+                    },
+                    {
+                        "ref_item_name": "RCC_ADC12PLLCLK_DIV6",
+                        "enum_item_name": "Div6"
                     }
                 ],
                 "incomplete": false,
@@ -6357,6 +6555,10 @@
                 "enum": "RCC_ADCPRES",
                 "items": [
                     {
+                        "ref_item_name": "RCC_ADC34PLLCLK_DIV4",
+                        "enum_item_name": "Div4"
+                    },
+                    {
                         "ref_item_name": "RCC_ADC34PLLCLK_DIV12",
                         "enum_item_name": "Div12"
                     },
@@ -6365,32 +6567,20 @@
                         "enum_item_name": "Div8"
                     },
                     {
-                        "ref_item_name": "RCC_ADC34PLLCLK_DIV64",
-                        "enum_item_name": "Div64"
+                        "ref_item_name": "RCC_ADC34PLLCLK_DIV1",
+                        "enum_item_name": "Div1"
                     },
                     {
-                        "ref_item_name": "RCC_ADC34PLLCLK_DIV10",
-                        "enum_item_name": "Div10"
+                        "ref_item_name": "RCC_ADC34PLLCLK_DIV6",
+                        "enum_item_name": "Div6"
                     },
                     {
                         "ref_item_name": "RCC_ADC34PLLCLK_DIV16",
                         "enum_item_name": "Div16"
                     },
                     {
-                        "ref_item_name": "RCC_ADC34PLLCLK_DIV4",
-                        "enum_item_name": "Div4"
-                    },
-                    {
-                        "ref_item_name": "RCC_ADC34PLLCLK_DIV1",
-                        "enum_item_name": "Div1"
-                    },
-                    {
-                        "ref_item_name": "RCC_ADC34PLLCLK_DIV2",
-                        "enum_item_name": "Div2"
-                    },
-                    {
-                        "ref_item_name": "RCC_ADC34PLLCLK_DIV6",
-                        "enum_item_name": "Div6"
+                        "ref_item_name": "RCC_ADC34PLLCLK_DIV32",
+                        "enum_item_name": "Div32"
                     },
                     {
                         "ref_item_name": "RCC_ADC34PLLCLK_DIV128",
@@ -6401,20 +6591,36 @@
                         "enum_item_name": "Div256"
                     },
                     {
-                        "ref_item_name": "RCC_ADC34PLLCLK_DIV32",
-                        "enum_item_name": "Div32"
+                        "ref_item_name": "RCC_ADC34PLLCLK_DIV64",
+                        "enum_item_name": "Div64"
+                    },
+                    {
+                        "ref_item_name": "RCC_ADC34PLLCLK_DIV10",
+                        "enum_item_name": "Div10"
+                    },
+                    {
+                        "ref_item_name": "RCC_ADC34PLLCLK_DIV2",
+                        "enum_item_name": "Div2"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "PPRE1",
+                "ref_name": "APB1CLKDivider",
                 "enum": "RCC_PPRE",
                 "items": [
                     {
+                        "ref_item_name": "RCC_HCLK_DIV2",
+                        "enum_item_name": "Div2"
+                    },
+                    {
                         "ref_item_name": "RCC_HCLK_DIV4",
                         "enum_item_name": "Div4"
+                    },
+                    {
+                        "ref_item_name": "RCC_HCLK_DIV16",
+                        "enum_item_name": "Div16"
                     },
                     {
                         "ref_item_name": "RCC_HCLK_DIV8",
@@ -6423,26 +6629,26 @@
                     {
                         "ref_item_name": "RCC_HCLK_DIV1",
                         "enum_item_name": "Div1"
-                    },
-                    {
-                        "ref_item_name": "RCC_HCLK_DIV16",
-                        "enum_item_name": "Div16"
-                    },
-                    {
-                        "ref_item_name": "RCC_HCLK_DIV2",
-                        "enum_item_name": "Div2"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "PPRE2",
+                "ref_name": "APB2CLKDivider",
                 "enum": "RCC_PPRE",
                 "items": [
                     {
+                        "ref_item_name": "RCC_HCLK_DIV2",
+                        "enum_item_name": "Div2"
+                    },
+                    {
                         "ref_item_name": "RCC_HCLK_DIV4",
                         "enum_item_name": "Div4"
+                    },
+                    {
+                        "ref_item_name": "RCC_HCLK_DIV16",
+                        "enum_item_name": "Div16"
                     },
                     {
                         "ref_item_name": "RCC_HCLK_DIV8",
@@ -6451,101 +6657,93 @@
                     {
                         "ref_item_name": "RCC_HCLK_DIV1",
                         "enum_item_name": "Div1"
-                    },
-                    {
-                        "ref_item_name": "RCC_HCLK_DIV16",
-                        "enum_item_name": "Div16"
-                    },
-                    {
-                        "ref_item_name": "RCC_HCLK_DIV2",
-                        "enum_item_name": "Div2"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "TIM2SW",
+                "ref_name": "TIM2Selection",
                 "enum": "RCC_TIM2SW",
                 "items": [
                     {
-                        "ref_item_name": "RCC_TIM2CLK_HCLK",
-                        "enum_item_name": "PCLK1_TIM"
-                    },
-                    {
                         "ref_item_name": "RCC_TIM2CLK_PLLCLK",
                         "enum_item_name": "PLL1_P_MUL_2"
+                    },
+                    {
+                        "ref_item_name": "RCC_TIM2CLK_HCLK",
+                        "enum_item_name": "PCLK1_TIM"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "TIM34SW",
+                "ref_name": "TIM34Selection",
                 "enum": "RCC_TIMSW",
                 "items": [
-                    {
-                        "ref_item_name": "RCC_TIM34CLK_HCLK",
-                        "enum_item_name": "PCLK2_TIM"
-                    },
                     {
                         "ref_item_name": "RCC_TIM34CLK_PLLCLK",
                         "enum_item_name": "PLL1_P_MUL_2"
+                    },
+                    {
+                        "ref_item_name": "RCC_TIM34CLK_HCLK",
+                        "enum_item_name": "PCLK2_TIM"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "TIM1SW",
+                "ref_name": "TIM1Selection",
                 "enum": "RCC_TIMSW",
                 "items": [
-                    {
-                        "ref_item_name": "RCC_TIM1CLK_HCLK",
-                        "enum_item_name": "PCLK2_TIM"
-                    },
                     {
                         "ref_item_name": "RCC_TIM1CLK_PLLCLK",
                         "enum_item_name": "PLL1_P_MUL_2"
+                    },
+                    {
+                        "ref_item_name": "RCC_TIM1CLK_HCLK",
+                        "enum_item_name": "PCLK2_TIM"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "TIM8SW",
+                "ref_name": "TIM8Selection",
                 "enum": "RCC_TIMSW",
                 "items": [
-                    {
-                        "ref_item_name": "RCC_TIM8CLK_HCLK",
-                        "enum_item_name": "PCLK2_TIM"
-                    },
                     {
                         "ref_item_name": "RCC_TIM8CLK_PLLCLK",
                         "enum_item_name": "PLL1_P_MUL_2"
+                    },
+                    {
+                        "ref_item_name": "RCC_TIM8CLK_HCLK",
+                        "enum_item_name": "PCLK2_TIM"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "TIM15SW",
+                "ref_name": "TIM15Selection",
                 "enum": "RCC_TIMSW",
                 "items": [
                     {
-                        "ref_item_name": "RCC_TIM15CLK_HCLK",
-                        "enum_item_name": "PCLK2_TIM"
-                    },
-                    {
                         "ref_item_name": "RCC_TIM15CLK_PLLCLK",
                         "enum_item_name": "PLL1_P_MUL_2"
+                    },
+                    {
+                        "ref_item_name": "RCC_TIM15CLK_HCLK",
+                        "enum_item_name": "PCLK2_TIM"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "TIM16SW",
+                "ref_name": "TIM16Selection",
                 "enum": "RCC_TIMSW",
                 "items": [
                     {
@@ -6561,23 +6759,23 @@
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "TIM17SW",
+                "ref_name": "TIM17Selection",
                 "enum": "RCC_TIMSW",
                 "items": [
                     {
-                        "ref_item_name": "RCC_TIM17CLK_PLLCLK",
-                        "enum_item_name": "PLL1_P_MUL_2"
-                    },
-                    {
                         "ref_item_name": "RCC_TIM17CLK_HCLK",
                         "enum_item_name": "PCLK2_TIM"
+                    },
+                    {
+                        "ref_item_name": "RCC_TIM17CLK_PLLCLK",
+                        "enum_item_name": "PLL1_P_MUL_2"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "TIM20SW",
+                "ref_name": "TIM20Selection",
                 "enum": "RCC_TIMSW",
                 "items": [
                     {
@@ -6593,23 +6791,23 @@
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "I2C1SW",
+                "ref_name": "I2c1ClockSelection",
                 "enum": "RCC_ICSW",
                 "items": [
                     {
-                        "ref_item_name": "RCC_I2C1CLKSOURCE_HSI",
-                        "enum_item_name": "HSI"
-                    },
-                    {
                         "ref_item_name": "RCC_I2C1CLKSOURCE_SYSCLK",
                         "enum_item_name": "SYS"
+                    },
+                    {
+                        "ref_item_name": "RCC_I2C1CLKSOURCE_HSI",
+                        "enum_item_name": "HSI"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "I2C2SW",
+                "ref_name": "I2c2ClockSelection",
                 "enum": "RCC_ICSW",
                 "items": [
                     {
@@ -6625,24 +6823,24 @@
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "I2C3SW",
+                "ref_name": "I2c3ClockSelection",
                 "enum": "RCC_ICSW",
                 "items": [
                     {
-                        "ref_item_name": "RCC_I2C3CLKSOURCE_SYSCLK",
-                        "enum_item_name": "SYS"
-                    },
-                    {
                         "ref_item_name": "RCC_I2C3CLKSOURCE_HSI",
                         "enum_item_name": "HSI"
+                    },
+                    {
+                        "ref_item_name": "RCC_I2C3CLKSOURCE_SYSCLK",
+                        "enum_item_name": "SYS"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "I2C2SW",
-                "enum": "RCC_ICSW",
+                "ref_name": "I2SClockSource",
+                "enum": "RCC_ISSRC",
                 "items": [
                     {
                         "ref_item_name": "RCC_I2SCLKSOURCE_SYSCLK",
@@ -6650,112 +6848,116 @@
                     },
                     {
                         "ref_item_name": "RCC_I2SCLKSOURCE_EXT",
-                        "enum_item_name": "HSI"
+                        "enum_item_name": "CKIN"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "USART1SW",
+                "ref_name": "Usart1ClockSelection",
                 "enum": "RCC_USART1SW",
                 "items": [
                     {
-                        "ref_item_name": "RCC_USART1CLKSOURCE_LSE",
-                        "enum_item_name": "LSE"
+                        "ref_item_name": "RCC_USART1CLKSOURCE_HSI",
+                        "enum_item_name": "HSI"
                     },
                     {
                         "ref_item_name": "RCC_USART1CLKSOURCE_SYSCLK",
                         "enum_item_name": "SYS"
                     },
                     {
-                        "ref_item_name": "RCC_USART1CLKSOURCE_PCLK2",
-                        "enum_item_name": "PCLK2"
+                        "ref_item_name": "RCC_USART1CLKSOURCE_LSE",
+                        "enum_item_name": "LSE"
                     },
                     {
-                        "ref_item_name": "RCC_USART1CLKSOURCE_HSI",
-                        "enum_item_name": "HSI"
+                        "ref_item_name": "RCC_USART1CLKSOURCE_PCLK2",
+                        "enum_item_name": "PCLK2"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "USART2SW",
+                "ref_name": "Usart2ClockSelection",
                 "enum": "RCC_USARTSW",
                 "items": [
                     {
-                        "ref_item_name": "RCC_USART2CLKSOURCE_PCLK1",
-                        "enum_item_name": "PCLK1"
-                    },
-                    {
-                        "ref_item_name": "RCC_USART2CLKSOURCE_LSE",
-                        "enum_item_name": "LSE"
+                        "ref_item_name": "RCC_USART2CLKSOURCE_SYSCLK",
+                        "enum_item_name": "SYS"
                     },
                     {
                         "ref_item_name": "RCC_USART2CLKSOURCE_HSI",
                         "enum_item_name": "HSI"
                     },
                     {
-                        "ref_item_name": "RCC_USART2CLKSOURCE_SYSCLK",
-                        "enum_item_name": "SYS"
+                        "ref_item_name": "RCC_USART2CLKSOURCE_LSE",
+                        "enum_item_name": "LSE"
+                    },
+                    {
+                        "ref_item_name": "RCC_USART2CLKSOURCE_PCLK1",
+                        "enum_item_name": "PCLK1"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "USART3SW",
+                "ref_name": "Usart3ClockSelection",
                 "enum": "RCC_USARTSW",
                 "items": [
                     {
-                        "ref_item_name": "RCC_USART3CLKSOURCE_HSI",
-                        "enum_item_name": "HSI"
+                        "ref_item_name": "RCC_USART3CLKSOURCE_PCLK1",
+                        "enum_item_name": "PCLK1"
                     },
                     {
                         "ref_item_name": "RCC_USART3CLKSOURCE_SYSCLK",
                         "enum_item_name": "SYS"
                     },
                     {
-                        "ref_item_name": "RCC_USART3CLKSOURCE_LSE",
-                        "enum_item_name": "LSE"
+                        "ref_item_name": "RCC_USART3CLKSOURCE_HSI",
+                        "enum_item_name": "HSI"
                     },
                     {
-                        "ref_item_name": "RCC_USART3CLKSOURCE_PCLK1",
-                        "enum_item_name": "PCLK1"
+                        "ref_item_name": "RCC_USART3CLKSOURCE_LSE",
+                        "enum_item_name": "LSE"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "UART4SW",
+                "ref_name": "Uart4ClockSelection",
                 "enum": "RCC_USARTSW",
                 "items": [
                     {
-                        "ref_item_name": "RCC_UART4CLKSOURCE_HSI",
-                        "enum_item_name": "HSI"
+                        "ref_item_name": "RCC_UART4CLKSOURCE_PCLK1",
+                        "enum_item_name": "PCLK1"
                     },
                     {
-                        "ref_item_name": "RCC_UART4CLKSOURCE_LSE",
-                        "enum_item_name": "LSE"
+                        "ref_item_name": "RCC_UART4CLKSOURCE_HSI",
+                        "enum_item_name": "HSI"
                     },
                     {
                         "ref_item_name": "RCC_UART4CLKSOURCE_SYSCLK",
                         "enum_item_name": "SYS"
                     },
                     {
-                        "ref_item_name": "RCC_UART4CLKSOURCE_PCLK1",
-                        "enum_item_name": "PCLK1"
+                        "ref_item_name": "RCC_UART4CLKSOURCE_LSE",
+                        "enum_item_name": "LSE"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "UART5SW",
+                "ref_name": "Uart5ClockSelection",
                 "enum": "RCC_USARTSW",
                 "items": [
+                    {
+                        "ref_item_name": "RCC_UART5CLKSOURCE_LSE",
+                        "enum_item_name": "LSE"
+                    },
                     {
                         "ref_item_name": "RCC_UART5CLKSOURCE_HSI",
                         "enum_item_name": "HSI"
@@ -6767,58 +6969,58 @@
                     {
                         "ref_item_name": "RCC_UART5CLKSOURCE_PCLK1",
                         "enum_item_name": "PCLK1"
-                    },
-                    {
-                        "ref_item_name": "RCC_UART5CLKSOURCE_LSE",
-                        "enum_item_name": "LSE"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "PLLXTPRE",
+                "ref_name": "PLLSourceVirtual",
                 "enum": "RCC_PLLXTPRE",
                 "items": [
                     {
                         "ref_item_name": "RCC_PLLSOURCE_HSE",
-                        "enum_item_name": "Div2"
+                        "enum_item_name": "Div1"
                     },
                     {
                         "ref_item_name": "RCC_PLLSOURCE_HSI",
-                        "enum_item_name": "Div1"
+                        "enum_item_name": "Div2"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "PLLXTPRE",
-                "enum": "RCC_PLLXTPRE",
-                "items": [
-                    {
-                        "ref_item_name": "RCC_PLLSOURCE_HSE",
-                        "enum_item_name": "Div2"
-                    },
-                    {
-                        "ref_item_name": "RCC_PLLSOURCE_HSI",
-                        "enum_item_name": "Div1"
-                    }
-                ],
-                "incomplete": false,
-                "enum_or_ref": ""
-            },
-            {
-                "ref_name": "PREDIV",
+                "ref_name": "PLLDivider",
                 "enum": "RCC_PREDIV",
                 "items": [
                     {
-                        "ref_item_name": "RCC_PREDIV_DIV10",
-                        "enum_item_name": "Div10"
+                        "ref_item_name": "RCC_PREDIV_DIV9",
+                        "enum_item_name": "Div9"
+                    },
+                    {
+                        "ref_item_name": "RCC_PREDIV_DIV2",
+                        "enum_item_name": "Div2"
+                    },
+                    {
+                        "ref_item_name": "RCC_PREDIV_DIV8",
+                        "enum_item_name": "Div8"
                     },
                     {
                         "ref_item_name": "RCC_PREDIV_DIV11",
                         "enum_item_name": "Div11"
+                    },
+                    {
+                        "ref_item_name": "RCC_PREDIV_DIV13",
+                        "enum_item_name": "Div13"
+                    },
+                    {
+                        "ref_item_name": "RCC_PREDIV_DIV5",
+                        "enum_item_name": "Div5"
+                    },
+                    {
+                        "ref_item_name": "RCC_PREDIV_DIV15",
+                        "enum_item_name": "Div15"
                     },
                     {
                         "ref_item_name": "RCC_PREDIV_DIV1",
@@ -6829,30 +7031,6 @@
                         "enum_item_name": "Div3"
                     },
                     {
-                        "ref_item_name": "RCC_PREDIV_DIV6",
-                        "enum_item_name": "Div6"
-                    },
-                    {
-                        "ref_item_name": "RCC_PREDIV_DIV4",
-                        "enum_item_name": "Div4"
-                    },
-                    {
-                        "ref_item_name": "RCC_PREDIV_DIV5",
-                        "enum_item_name": "Div5"
-                    },
-                    {
-                        "ref_item_name": "RCC_PREDIV_DIV8",
-                        "enum_item_name": "Div8"
-                    },
-                    {
-                        "ref_item_name": "RCC_PREDIV_DIV9",
-                        "enum_item_name": "Div9"
-                    },
-                    {
-                        "ref_item_name": "RCC_PREDIV_DIV7",
-                        "enum_item_name": "Div7"
-                    },
-                    {
                         "ref_item_name": "RCC_PREDIV_DIV12",
                         "enum_item_name": "Div12"
                     },
@@ -6861,20 +7039,24 @@
                         "enum_item_name": "Div14"
                     },
                     {
-                        "ref_item_name": "RCC_PREDIV_DIV15",
-                        "enum_item_name": "Div15"
-                    },
-                    {
-                        "ref_item_name": "RCC_PREDIV_DIV13",
-                        "enum_item_name": "Div13"
-                    },
-                    {
                         "ref_item_name": "RCC_PREDIV_DIV16",
                         "enum_item_name": "Div16"
                     },
                     {
-                        "ref_item_name": "RCC_PREDIV_DIV2",
-                        "enum_item_name": "Div2"
+                        "ref_item_name": "RCC_PREDIV_DIV4",
+                        "enum_item_name": "Div4"
+                    },
+                    {
+                        "ref_item_name": "RCC_PREDIV_DIV10",
+                        "enum_item_name": "Div10"
+                    },
+                    {
+                        "ref_item_name": "RCC_PREDIV_DIV6",
+                        "enum_item_name": "Div6"
+                    },
+                    {
+                        "ref_item_name": "RCC_PREDIV_DIV7",
+                        "enum_item_name": "Div7"
                     }
                 ],
                 "incomplete": false,
@@ -6885,40 +7067,28 @@
                 "enum": "RCC_PLLMUL",
                 "items": [
                     {
-                        "ref_item_name": "RCC_PLL_MUL3",
-                        "enum_item_name": "Mul3"
+                        "ref_item_name": "RCC_PLL_MUL14",
+                        "enum_item_name": "Mul14"
                     },
                     {
-                        "ref_item_name": "RCC_PLL_MUL8",
-                        "enum_item_name": "Mul8"
+                        "ref_item_name": "RCC_PLL_MUL12",
+                        "enum_item_name": "Mul12"
                     },
                     {
-                        "ref_item_name": "RCC_PLL_MUL6",
-                        "enum_item_name": "Mul6"
+                        "ref_item_name": "RCC_PLL_MUL5",
+                        "enum_item_name": "Mul5"
                     },
                     {
                         "ref_item_name": "RCC_PLL_MUL13",
                         "enum_item_name": "Mul13"
                     },
                     {
-                        "ref_item_name": "RCC_PLL_MUL2",
-                        "enum_item_name": "Mul2"
-                    },
-                    {
                         "ref_item_name": "RCC_PLL_MUL7",
                         "enum_item_name": "Mul7"
                     },
                     {
-                        "ref_item_name": "RCC_PLL_MUL15",
-                        "enum_item_name": "Mul15"
-                    },
-                    {
-                        "ref_item_name": "RCC_PLL_MUL10",
-                        "enum_item_name": "Mul10"
-                    },
-                    {
-                        "ref_item_name": "RCC_PLL_MUL4",
-                        "enum_item_name": "Mul4"
+                        "ref_item_name": "RCC_PLL_MUL3",
+                        "enum_item_name": "Mul3"
                     },
                     {
                         "ref_item_name": "RCC_PLL_MUL9",
@@ -6929,27 +7099,39 @@
                         "enum_item_name": "Mul16"
                     },
                     {
-                        "ref_item_name": "RCC_PLL_MUL12",
-                        "enum_item_name": "Mul12"
+                        "ref_item_name": "RCC_PLL_MUL10",
+                        "enum_item_name": "Mul10"
                     },
                     {
-                        "ref_item_name": "RCC_PLL_MUL14",
-                        "enum_item_name": "Mul14"
+                        "ref_item_name": "RCC_PLL_MUL2",
+                        "enum_item_name": "Mul2"
+                    },
+                    {
+                        "ref_item_name": "RCC_PLL_MUL8",
+                        "enum_item_name": "Mul8"
+                    },
+                    {
+                        "ref_item_name": "RCC_PLL_MUL4",
+                        "enum_item_name": "Mul4"
+                    },
+                    {
+                        "ref_item_name": "RCC_PLL_MUL6",
+                        "enum_item_name": "Mul6"
+                    },
+                    {
+                        "ref_item_name": "RCC_PLL_MUL15",
+                        "enum_item_name": "Mul15"
                     },
                     {
                         "ref_item_name": "RCC_PLL_MUL11",
                         "enum_item_name": "Mul11"
-                    },
-                    {
-                        "ref_item_name": "RCC_PLL_MUL5",
-                        "enum_item_name": "Mul5"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "LATENCY",
+                "ref_name": "FLatency",
                 "enum": "FLASH_LATENCY",
                 "items": [
                     {
@@ -6957,19 +7139,19 @@
                         "enum_item_name": "WS2"
                     },
                     {
-                        "ref_item_name": "FLASH_LATENCY_1",
-                        "enum_item_name": "WS1"
-                    },
-                    {
                         "ref_item_name": "FLASH_LATENCY_0",
                         "enum_item_name": "WS0"
+                    },
+                    {
+                        "ref_item_name": "FLASH_LATENCY_1",
+                        "enum_item_name": "WS1"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             },
             {
-                "ref_name": "LSEDRV",
+                "ref_name": "LSE_Drive_Capability",
                 "enum": "RCC_LSEDRV",
                 "items": [
                     {
@@ -6977,21 +7159,31 @@
                         "enum_item_name": "MediumHigh"
                     },
                     {
-                        "ref_item_name": "RCC_LSEDRIVE_LOW",
-                        "enum_item_name": "Low"
+                        "ref_item_name": "RCC_LSEDRIVE_MEDIUMLOW",
+                        "enum_item_name": "MediumLow"
                     },
                     {
                         "ref_item_name": "RCC_LSEDRIVE_HIGH",
                         "enum_item_name": "High"
                     },
                     {
-                        "ref_item_name": "RCC_LSEDRIVE_MEDIUMLOW",
-                        "enum_item_name": "MediumLow"
+                        "ref_item_name": "RCC_LSEDRIVE_LOW",
+                        "enum_item_name": "Low"
                     }
                 ],
                 "incomplete": false,
                 "enum_or_ref": ""
             }
         ]
-    }
+    },
+    "fixed_multiplexors": [
+        {
+            "reference": "RCC_MCOSource",
+            "removed_items": [
+                "RCC_MCO1SOURCE_PLLCLK",
+                "RCC_MCO1SOURCE_PLLCLK_DIV2"
+            ],
+            "add_item": "MCOMultDivisor"
+        }
+    ]
 }

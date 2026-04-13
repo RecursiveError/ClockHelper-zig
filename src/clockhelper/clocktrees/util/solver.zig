@@ -6,6 +6,8 @@ pub const Limit = struct {
     max: ?f32 = null,
     min_expr: ?[]const u8 = null,
     max_expr: ?[]const u8 = null,
+    main_expr: []const u8 = "Else",
+    main_dialog: []const u8 = "No additional information",
 };
 
 pub const ClockNodesTypes = enum {
@@ -40,33 +42,34 @@ pub const ClockNode = struct {
     parents: []const *const ClockNode,
     value: f32 = 0,
     limit: Limit = .{},
+    is_auto: bool = false, //Automatic types need to skip Limit checks for now
 
     pub fn is_enabled(self: Self) bool {
         return self.nodetype != .off;
     }
 
-    pub fn get(self: Self) ClockState {
+    pub fn get(self: Self, enable_limit: bool) ClockState {
         switch (self.nodetype) {
             .source => {
-                return self.source();
+                return self.source(enable_limit);
             },
             .multi => {
-                return self.multi();
+                return self.multi(enable_limit);
             },
             .mul => {
-                return self.mul();
+                return self.mul(enable_limit);
             },
             .mulfrac => {
-                return self.mulfrac();
+                return self.mulfrac(enable_limit);
             },
             .div => {
-                return self.div();
+                return self.div(enable_limit);
             },
             .frac => {
-                return self.output();
+                return self.output(enable_limit);
             },
             .output => {
-                return self.output();
+                return self.output(enable_limit);
             },
             .off => {
                 return .{ .ClockOff = .{ .node = self } };
@@ -75,7 +78,7 @@ pub const ClockNode = struct {
     }
 
     pub fn get_as_ref(self: Self) f32 {
-        const ret = self.get();
+        const ret = self.get(false);
         return switch (ret) {
             .Ok => |ok| ok,
             else => 0,
@@ -91,7 +94,7 @@ pub const ClockNode = struct {
     /// Therefore ClockOff errors are ignored.
     pub fn get_extra_output(self: Self) !u32 {
         if (self.nodetype == .off) return 0;
-        switch (self.get()) {
+        switch (self.get(true)) {
             .Ok => |val| {
                 return @as(u32, @intFromFloat(val));
             },
@@ -112,13 +115,13 @@ pub const ClockNode = struct {
     }
 
     pub fn get_value(self: Self) !u32 {
-        switch (self.get()) {
+        switch (self.get(true)) {
             .Ok => |val| {
                 return @as(u32, @intFromFloat(val));
             },
             else => |err| {
                 if (err == .ClockOff) {
-                    if (self.nodetype == .output or self.parents[0].nodetype == .output) return 0;
+                    return 0;
                 }
                 if (@inComptime()) {
                     print_comptime_error(err);
@@ -132,14 +135,6 @@ pub const ClockNode = struct {
                     else => unreachable,
                 };
             },
-        }
-    }
-
-    pub fn get_comptime(comptime self: Self) f32 {
-        const ret = comptime self.get();
-        switch (ret) {
-            .Ok => |val| return val,
-            else => |err| print_comptime_error(err),
         }
     }
 
@@ -162,21 +157,33 @@ pub const ClockNode = struct {
                     .NoParent => break :blk "No Parent list!",
                     .Overflow => |data| {
                         const max_str = if (data.node.limit.max_expr) |expr| expr else "";
-                        break :blk comptimePrint("Overflow | Recive: {d} max: {s}({d})", .{ data.recive, max_str, data.limit });
+                        break :blk comptimePrint("Overflow | Recive: {d} max: {s}({d})\n Limit by: expr: {s} - diagnostic: {s}\n", .{
+                            data.recive,
+                            max_str,
+                            data.limit,
+                            data.node.limit.main_expr,
+                            data.node.limit.main_dialog,
+                        });
                     },
                     .Underflow => |data| {
                         const min_str = if (data.node.limit.min_expr) |expr| expr else "";
-                        break :blk comptimePrint("Underflow | Recive: {d} min: {s}({d})", .{ data.recive, min_str, data.limit });
+                        break :blk comptimePrint("Underflow | Recive: {d} min: {s}({d}) | Limit by: expr: {s} - diagnostic: {s}", .{
+                            data.recive,
+                            min_str,
+                            data.limit,
+                            data.node.limit.main_expr,
+                            data.node.limit.main_dialog,
+                        });
                     },
                     else => unreachable,
                 }
             };
-            const main_msg = comptimePrint("Error on node {s} => {s}\n", .{ name, error_msg });
+            const main_msg = comptimePrint("\n\rError on node {s} => {s}", .{ name, error_msg });
             switch (err) {
                 .NoParent => @compileError(main_msg),
                 .Overflow, .Underflow, .ClockOff => |node| {
                     const parent = get_parent(node.node) orelse @compileError(main_msg);
-                    const tree = comptimePrint("TREE TRACE: {s} -> {s}: {d} <- ERROR\n\n", .{ print_tree(parent), node.node.name, node.recive });
+                    const tree = comptimePrint("\n\rTREE TRACE: {s} -> {s}: {d} <- ERROR\n", .{ print_tree(parent), node.node.name, node.recive });
                     @compileError(comptimePrint("{s}{s}", .{ main_msg, tree }));
                 },
                 else => unreachable,
@@ -227,52 +234,54 @@ pub const ClockNode = struct {
         return comptimePrint("{d} + ({d}/{d})", .{ mul_val, frac_val, frac_max });
     }
 
-    fn limit_check(self: Self, value: f32, node_limit: Limit) ClockState {
-        if (node_limit.max) |max| {
-            if (value > max) {
-                return .{
-                    .Overflow = .{
-                        .node = self,
-                        .limit = max,
-                        .recive = value,
-                    },
-                };
+    fn limit_check(self: Self, value: f32, enable_limit: bool, node_limit: Limit) ClockState {
+        if (!self.is_auto and enable_limit) {
+            if (node_limit.max) |max| {
+                if (value > max) {
+                    return .{
+                        .Overflow = .{
+                            .node = self,
+                            .limit = max,
+                            .recive = value,
+                        },
+                    };
+                }
             }
-        }
 
-        if (node_limit.min) |min| {
-            if (value < min) {
-                return .{
-                    .Underflow = .{
-                        .node = self,
-                        .limit = min,
-                        .recive = value,
-                    },
-                };
+            if (node_limit.min) |min| {
+                if (value < min) {
+                    return .{
+                        .Underflow = .{
+                            .node = self,
+                            .limit = min,
+                            .recive = value,
+                        },
+                    };
+                }
             }
         }
 
         return .{ .Ok = value };
     }
 
-    fn source(self: Self) ClockState {
-        return self.limit_check(self.value, self.limit);
+    fn source(self: Self, enable_limit: bool) ClockState {
+        return self.limit_check(self.value, enable_limit, self.limit);
     }
 
-    fn multi(self: Self) ClockState {
+    fn multi(self: Self, enable_limit: bool) ClockState {
         if (self.parents.len != 0) {
-            return self.parents[0].get();
+            return self.parents[0].get(enable_limit);
         }
         return .{ .NoParent = .{ .node = self } };
     }
 
-    fn mul(self: Self) ClockState {
+    fn mul(self: Self, enable_limit: bool) ClockState {
         if (self.parents.len != 0) {
             const value = self.value;
-            const limit = self.limit_check(value, self.limit);
+            const limit = self.limit_check(value, enable_limit, self.limit);
             switch (limit) {
                 .Ok => {
-                    const input = self.parents[0].get();
+                    const input = self.parents[0].get(enable_limit);
                     switch (input) {
                         .Ok => |from_input| {
                             return .{ .Ok = from_input * value };
@@ -291,14 +300,14 @@ pub const ClockNode = struct {
         return .{ .NoParent = .{ .node = self } };
     }
 
-    fn mulfrac(self: Self) ClockState {
+    fn mulfrac(self: Self, enable_limit: bool) ClockState {
         if (self.parents.len >= 2) {
             const value = self.value;
-            const limit = self.limit_check(value, self.limit);
+            const limit = self.limit_check(value, enable_limit, self.limit);
             switch (limit) {
                 .Ok => {
-                    const input = self.parents[0].get();
-                    const frac = self.parents[1].get();
+                    const input = self.parents[0].get(enable_limit);
+                    const frac = self.parents[1].get(false);
 
                     switch (frac) {
                         .Ok => |from_frac| {
@@ -321,13 +330,13 @@ pub const ClockNode = struct {
         return .{ .NoParent = .{ .node = self } };
     }
 
-    fn div(self: Self) ClockState {
+    fn div(self: Self, enable_limit: bool) ClockState {
         if (self.parents.len != 0) {
             const value = self.value;
-            const limit = self.limit_check(value, self.limit);
+            const limit = self.limit_check(value, enable_limit, self.limit);
             switch (limit) {
                 .Ok => {
-                    const input = self.parents[0].get();
+                    const input = self.parents[0].get(enable_limit);
                     switch (input) {
                         .Ok => |from_input| {
                             return .{ .Ok = from_input / value };
@@ -346,12 +355,12 @@ pub const ClockNode = struct {
         return .{ .NoParent = .{ .node = self } };
     }
 
-    fn output(self: Self) ClockState {
+    fn output(self: Self, enable_limit: bool) ClockState {
         if (self.parents.len != 0) {
-            const value = self.parents[0].get();
+            const value = self.parents[0].get(enable_limit);
             switch (value) {
                 .Ok => |ret| {
-                    return self.limit_check(ret, self.limit);
+                    return self.limit_check(ret, enable_limit, self.limit);
                 },
                 else => return value,
             }

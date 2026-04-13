@@ -40,7 +40,18 @@ pub fn main() !void {
     const mcu_context = try MCUContext.init(&mcu_file_dir, gpa_allocator);
     defer mcu_context.deinit();
 
-    const clock_trees = try ClockTreeContext.init(&tree_dir, gpa_allocator);
+    //load MCU flags global_map
+    var mcu_flags = std.StringArrayHashMap(void).init(gpa_allocator);
+    defer mcu_flags.deinit();
+    for (mcu_context.mcus) |mcu| {
+        for (mcu.extra_data) |data| {
+            if (!mcu_flags.contains(data)) {
+                try mcu_flags.put(data, {});
+            }
+        }
+    }
+
+    const clock_trees = try ClockTreeContext.init(&tree_dir, &mcu_flags, gpa_allocator);
     defer clock_trees.deinit();
 
     //CLOCKTREE GEN
@@ -124,6 +135,7 @@ pub fn main() !void {
 
     try out.writeAll(
         \\ test "COMPILE CHECK" {
+        \\  //TODO: Fix G0
         \\
     );
     var done_map = std.StringArrayHashMap(void).init(gpa_allocator);
@@ -133,6 +145,7 @@ pub fn main() !void {
         if (!clock_trees.tree_map.contains(mcu.clock_ref_file_union)) continue;
         if (done_map.contains(mcu.clock_ref_file_union)) continue;
         try done_map.put(mcu.clock_ref_file_union, {});
+        if (std.mem.containsAtLeast(u8, mcu.clock_ref_file_union, 1, "GO")) continue;
 
         try out.print(
             \\

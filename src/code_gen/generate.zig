@@ -1,6 +1,8 @@
 const std = @import("std");
 const data_types = @import("data_types");
 const Context = @import("clocktree_context.zig");
+const Defaults = @import("defaults.zig");
+
 const TreeContext = Context.TreeContext;
 const EnumPatch = data_types.cubeMX_data.Enum_Patch;
 const RefTpEnumPatch = data_types.cubeMX_data.Match_Ref_To_Enum_Patch;
@@ -9,6 +11,9 @@ const PreProcessRefVariant = Context.PreProcessRefVariant;
 const PreProcessedNode = Context.PreProcessedNode;
 const PreProcessedNodeVariant = Context.PreProcessedNodeVariant;
 const parser_expr = @import("parser_expr.zig").parser;
+
+const DefaultToTrue = Defaults.DefaultToTrue;
+const DefaultToFalse = Defaults.DefaultToFalse;
 
 const DefaultBy = union(enum) {
     value: []const u8,
@@ -263,11 +268,12 @@ pub fn generate_flags(writer: *std.Io.Writer, tree: *const TreeContext, alloc: s
         \\
     );
 
-    for (tree.raw.extra_flags) |flag| {
+    for (tree.base.extra_flags.keys()) |flag| {
+        const default_state = if (DefaultToTrue.get(flag)) |_| "true" else "false";
         try writer.print(
-            \\    @"{s}": bool = false,
+            \\    @"{s}": bool = {s},
             \\
-        , .{flag});
+        , .{ flag, default_state });
     }
 
     try writer.writeAll(
@@ -289,22 +295,25 @@ pub fn generate_flags(writer: *std.Io.Writer, tree: *const TreeContext, alloc: s
         \\
     );
 
-    for (tree.raw.extra_flags) |flag| {
+    for (tree.base.extra_flags.keys()) |flag| {
         if (already_generated.contains(flag)) continue;
         try already_generated.put(flag, {});
+        const default_state = if (DefaultToTrue.get(flag)) |_| "true" else "false";
         try writer.print(
-            \\    @"{s}": bool = false,
+            \\    @"{s}": bool = {s},
             \\
-        , .{flag});
+        , .{ flag, default_state });
     }
 
     for (tree.pre.processedrefs) |ref| {
         if (ref.is_flag() and !already_generated.contains(ref.name)) {
             try already_generated.put(ref.name, {});
+            const default_state = if (DefaultToTrue.get(ref.name)) |_| "true" else "false";
+
             try writer.print(
-                \\    @"{s}": bool = false, //Reference flag
+                \\    @"{s}": bool = {s}, //Reference flag
                 \\
-            , .{ref.name});
+            , .{ ref.name, default_state });
         }
     }
 
@@ -314,10 +323,11 @@ pub fn generate_flags(writer: *std.Io.Writer, tree: *const TreeContext, alloc: s
                 if (flag.len == 0) continue; //skip empty flags
                 if (already_generated.contains(flag)) continue;
                 try already_generated.put(flag, {});
+                const default_state = if (DefaultToTrue.get(flag)) |_| "true" else "false";
                 try writer.print(
-                    \\    @"{s}": bool = false, //Node enable flag
+                    \\    @"{s}": bool = {s}, //Node enable flag
                     \\
-                , .{flag});
+                , .{ flag, default_state });
             }
         }
     }
@@ -671,7 +681,7 @@ pub fn generate_get_clocktree(writer: *std.Io.Writer, tree: *const TreeContext, 
         \\pub fn get_cubemx_clocks(config: CubeMXConfig, comptime patch_logs: bool) anyerror!CubemxTreeOutput {
         \\std.mem.doNotOptimizeAway(patch_logs);
         \\
-        \\if (@inComptime()) @setEvalBranchQuota(30000);
+        \\if (@inComptime()) @setEvalBranchQuota(1000000);
         \\var out = ClockOutput{};
         \\var ref_out: CubeMXOutputConfig = undefined;
         \\
@@ -685,6 +695,7 @@ pub fn generate_get_clocktree(writer: *std.Io.Writer, tree: *const TreeContext, 
     defer postproned_refs.deinit();
     try generate_nodes(writer, tree, &postproned_refs);
     try generate_post_refs(writer, tree, &postproned_refs, alloc);
+    try generate_clock_enable(writer, tree);
     try generate_out_values(writer, tree);
 
     try writer.writeAll(
@@ -699,10 +710,12 @@ pub fn generate_get_clocktree(writer: *std.Io.Writer, tree: *const TreeContext, 
 
 pub fn generate_semaphores(writer: *std.Io.Writer, semaphores: []const []const u8) !void {
     for (semaphores) |sem| {
+        const default_state = if (DefaultToTrue.get(sem)) |_| "true" else "false";
+
         try writer.print(
-            \\ var @"{s}": bool = false; //semaphore for processing, not an actual flag in the output;
+            \\ var @"{s}": bool = {s}; //semaphore for processing, not an actual flag in the output;
             \\
-        , .{sem});
+        , .{ sem, default_state });
     }
 }
 
@@ -939,8 +952,10 @@ pub fn write_fixed_float(writer: *std.Io.Writer, ref: *const PreProcessedRef, va
                 \\@"{0s}".limit = .{{
                 \\  .min = {1e},
                 \\  .max = {1e},
+                \\  .main_expr = "{2s}",
+                \\  .main_dialog = "{3s}",
                 \\}};
-            , .{ node, value });
+            , .{ node, value, expr, diagnostic });
         }
     }
 
@@ -979,8 +994,10 @@ pub fn write_fixed_int(writer: *std.Io.Writer, ref: *const PreProcessedRef, vari
                 \\@"{0s}".limit = .{{
                 \\  .min = {1d},
                 \\  .max = {1d},
+                \\  .main_expr = "{2s}",
+                \\  .main_dialog = "{3s}",
                 \\}};
-            , .{ node, value });
+            , .{ node, value, expr, diagnostic });
         }
     }
 
@@ -1102,9 +1119,11 @@ pub fn write_fixed_expr(writer: *std.Io.Writer, ref: *const PreProcessedRef, var
                 \\  .min = value,
                 \\  .max = value,
                 \\  .min_expr = "{1s}",
-                \\  .max_expr = "{1s}"
+                \\  .max_expr = "{1s}",
+                \\  .main_expr = "{2s}"
+                \\  .main_dialog = "{3s}",
                 \\}};
-            , .{ node, variant.ref.fixed_expr.value });
+            , .{ node, variant.ref.fixed_expr.value, expr, diagnostic });
         }
     }
 
@@ -1182,7 +1201,13 @@ pub fn write_range_float(writer: *std.Io.Writer, ref: *const PreProcessedRef, va
                     , .{clk});
                     if (min) |min_v| try writer.print(".min = {e},", .{min_v}) else try writer.print(".min = null,\n", .{});
                     if (max) |max_v| try writer.print(".max = {e},", .{max_v}) else try writer.print(".max = null,\n", .{});
-                    try writer.writeAll("};\n\n");
+                    try writer.print(
+                        \\
+                        \\  .main_expr = "{s}",
+                        \\  .main_dialog = "{s}",
+                        \\}};
+                        \\
+                    , .{ expr, diagnostic });
                 }
             }
         }
@@ -1206,7 +1231,13 @@ pub fn write_range_float(writer: *std.Io.Writer, ref: *const PreProcessedRef, va
                 , .{clk});
                 if (min) |min_v| try writer.print(".min = {e},", .{min_v}) else try writer.print(".min = null,\n", .{});
                 if (max) |max_v| try writer.print(".max = {e},", .{max_v}) else try writer.print(".max = null,\n", .{});
-                try writer.writeAll("};\n\n");
+                try writer.print(
+                    \\
+                    \\  .main_expr = "{s}",
+                    \\  .main_dialog = "{s}",
+                    \\}};
+                    \\
+                , .{ expr, diagnostic });
             }
         }
 
@@ -1281,7 +1312,13 @@ pub fn write_range_int(writer: *std.Io.Writer, ref: *const PreProcessedRef, vari
                     , .{clk});
                     if (min) |min_v| try writer.print(".min = {d},", .{min_v}) else try writer.print(".min = null,\n", .{});
                     if (max) |max_v| try writer.print(".max = {d},", .{max_v}) else try writer.print(".max = null,\n", .{});
-                    try writer.writeAll("};\n\n");
+                    try writer.print(
+                        \\
+                        \\  .main_expr = "{s}",
+                        \\  .main_dialog = "{s}",
+                        \\}};
+                        \\
+                    , .{ expr, diagnostic });
                 }
             }
         }
@@ -1305,7 +1342,13 @@ pub fn write_range_int(writer: *std.Io.Writer, ref: *const PreProcessedRef, vari
                 , .{clk});
                 if (min) |min_v| try writer.print(".min = {d},", .{min_v}) else try writer.print(".min = null,\n", .{});
                 if (max) |max_v| try writer.print(".max = {d},", .{max_v}) else try writer.print(".max = null,\n", .{});
-                try writer.writeAll("};\n\n");
+                try writer.print(
+                    \\
+                    \\  .main_expr = "{s}",
+                    \\  .main_dialog = "{s}",
+                    \\}};
+                    \\
+                , .{ expr, diagnostic });
             }
         }
 
@@ -1549,16 +1592,19 @@ pub fn write_nodes(writer: *std.Io.Writer, tree: *const TreeContext, node: *cons
         \\
     , .{node.name});
 
-    if (node.enable_flags.len > 0) {
-        try writer.writeAll(
-            \\if( 
-        );
-        try parser_expr(writer, node.enable_tokens.?, tree, null);
-        try writer.writeAll(
-            \\){
-            \\ 
-        );
+    for (node.enable_flags) |flag| {
+        if (tree.pre.ref_process_map.get(flag)) |ref| {
+            if (ref.type_helper == .tag_flag) {
+                try writer.print(
+                    \\
+                    \\ @"{s}".is_auto = true;
+                    \\
+                , .{node.name});
+                break;
+            }
+        }
     }
+
     for (node.variants) |*node_var| {
         if (node_var.expr == null) {
             default_expr = node_var;
@@ -1592,12 +1638,6 @@ pub fn write_nodes(writer: *std.Io.Writer, tree: *const TreeContext, node: *cons
 
     if (default_expr) |val| {
         try write_node_value(writer, tree, node, val);
-    }
-
-    if (node.enable_flags.len > 0) {
-        try writer.writeAll(
-            \\}
-        );
     }
 }
 
@@ -1726,6 +1766,7 @@ pub fn write_multiplexor(
             logger.err("Multiplexor {s} has null ref for {s}", .{ name, in.source });
             return error.InvalidMulti;
         }
+        if (!total_item.contains(in.source_ref.?)) continue;
         total_write_items += 1;
         try writer.print(
             \\ .@"{s}" => &.{{&@"{s}"}},
@@ -1734,8 +1775,7 @@ pub fn write_multiplexor(
     }
 
     //reference shuld
-    if (total_write_items > total_item.keys().len) {
-        total_write_items += 1;
+    if (total_write_items < total_item.keys().len) {
         try writer.print(
             \\else => return comptime_fail_or_error(
             \\  error.InvalidClockSelection,
@@ -1743,12 +1783,47 @@ pub fn write_multiplexor(
             \\  \\current expr: {{s}}
             \\  \\diagnostic: {{s}}
             \\  \\reference {{s}} - .{{s}} cannot be selected as a clock source in the current configurations.
+            \\  \\ Available source options:
+            \\
+        , .{});
+
+        for (variant.inputs) |in| {
+            if (std.mem.eql(u8, in.source, name)) continue;
+            if (in.source_ref == null) continue;
+            if (!total_item.contains(in.source_ref.?)) continue;
+            try writer.writeAll(
+                \\  \\  - {s}
+                \\  \\
+                \\
+            );
+        }
+
+        try writer.print(
             \\  , .{{
-            \\  "{0s}", "{1s}", "{2s}", "{3s}", if(patch_logs) @tagName(@"{3s}Value".to_enum()) else @tagName(@"{3s}Value"),
+            \\  "{0s}", 
+            \\  "{1s}", 
+            \\  "{2s}", 
+            \\  "{3s}", 
+            \\  if(patch_logs) @tagName(try @"{3s}Value".to_enum()) else @tagName(@"{3s}Value"),
+            \\
+        , .{ name, expr, dialog, reference.name });
+
+        for (variant.inputs) |in| {
+            if (std.mem.eql(u8, in.source, name)) continue;
+            if (in.source_ref == null) continue;
+            if (!total_item.contains(in.source_ref.?)) continue;
+
+            try writer.print(
+                \\  if(patch_logs) @tagName(try @"{0s}List".to_enum(.@"{1s}")) else @tagName(@"{0s}List".@"{1s}"),
+                \\
+            , .{ reference.name, in.source_ref.? });
+        }
+
+        try writer.print(
             \\}}
             \\),
             \\
-        , .{ name, expr, dialog, reference.name });
+        , .{});
     }
 
     try writer.writeAll("};\n");
@@ -1820,7 +1895,7 @@ pub fn post_write_ref(
     //post node are all non-output node that have a post ref
     if (ref.is_node_ref) |node_ref| {
         if (node_ref != .output) {
-            const name = tree.base.node_ref.get(ref.name) orelse unreachable;
+            const name = tree.base.node_ref.get(ref.name) orelse tree.base.node_ref.get(ref.name[0..(ref.name.len - 7)]) orelse unreachable;
             const node = tree.pre.node_process_map.get(name) orelse unreachable;
             try write_nodes(writer, tree, node);
         }
@@ -1934,6 +2009,8 @@ fn write_freq_value(
 ) !void {
     var min_aux_buffer: [256]u8 = undefined;
     var max_aux_buffer: [256]u8 = undefined;
+    const expr = variant.raw_expr orelse "Else";
+    const diagnostic = variant.diagnostic orelse "No additional information";
     switch (variant.ref) {
         .float_range => |val| {
             const min: []const u8 = if (val.min) |m| try std.fmt.bufPrint(&min_aux_buffer, "{e}", .{m}) else "null";
@@ -1943,9 +2020,11 @@ fn write_freq_value(
                 \\@"{s}".limit = .{{
                 \\  .min = {s},
                 \\  .max = {s},
+                \\  .main_expr = "{s}",
+                \\  .main_dialog = "{s}",
                 \\}};
                 \\
-            , .{ node, min, max });
+            , .{ node, min, max, expr, diagnostic });
         },
 
         .integer_range => |val| {
@@ -1956,29 +2035,32 @@ fn write_freq_value(
                 \\@"{s}".limit = .{{
                 \\  .min = {s},
                 \\  .max = {s},
+                \\.main_expr = "{s}",
+                \\.main_dialog = "{s}",
+                \\
                 \\}};
                 \\
-            , .{ node, min, max });
+            , .{ node, min, max, expr, diagnostic });
         },
         .dynamic_range => |din| {
             const pre_round = if (din.integer) "round( " else "";
             const pos_round = if (din.integer) ").?" else "";
-            if (variant.max_expr) |expr| {
+            if (variant.max_expr) |v_expr| {
                 try writer.print(
                     \\const @"max_{s}" = {s}
                 , .{ node, pre_round });
-                try parser_expr(writer, expr, tree, null);
+                try parser_expr(writer, v_expr, tree, null);
                 try writer.print(
                     \\{s};
                     \\
                 , .{pos_round});
             }
 
-            if (variant.min_expr) |expr| {
+            if (variant.min_expr) |v_expr| {
                 try writer.print(
                     \\const @"min_{s}" = {s}
                 , .{ node, pre_round });
-                try parser_expr(writer, expr, tree, null);
+                try parser_expr(writer, v_expr, tree, null);
                 try writer.print(
                     \\{s};
                     \\
@@ -1992,20 +2074,40 @@ fn write_freq_value(
                 \\  .max = {s},
                 \\  .min_expr = "{s}",
                 \\  .max_expr = "{s}",
+                \\  .main_expr = "{s}",
+                \\  .main_dialog = "{s}",
                 \\}};
                 \\
             , .{
                 node,
                 if (din.min) |_| try std.fmt.bufPrint(&min_aux_buffer, "@\"min_{s}\"", .{node}) else "null",
                 if (din.max) |_| try std.fmt.bufPrint(&max_aux_buffer, "@\"max_{s}\"", .{node}) else "null",
-                din.min orelse "null",
-                din.max orelse "null",
+                din.min orelse "",
+                din.max orelse "",
+                expr,
+                diagnostic,
             });
         },
         else => {},
     }
 }
-
+fn generate_clock_enable(writer: *std.Io.Writer, tree: *const TreeContext) !void {
+    for (tree.pre.processednodes) |node| {
+        if (!tree.pre.ref_process_map.contains(node.references[0])) continue;
+        if (node.enable_flags.len > 0) {
+            try writer.writeAll(
+                \\if(!( 
+            );
+            try parser_expr(writer, node.enable_tokens.?, tree, null);
+            try writer.print(
+                \\ )){{
+                \\  @"{s}".nodetype = .off;
+                \\}}
+                \\
+            , .{node.name});
+        }
+    }
+}
 fn generate_out_values(writer: *std.Io.Writer, tree: *const TreeContext) !void {
     for (tree.pre.processednodes) |node| {
         const get_func = if (tree.base.extra_nodes.contains(node.name)) ".get_extra_output()" else ".get_output()";

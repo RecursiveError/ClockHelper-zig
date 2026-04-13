@@ -1,22 +1,16 @@
 const std = @import("std");
 const Token = @import("clocktree_context.zig").Token;
 const ClockTreeContext = @import("clocktree_context.zig");
+const Defaults = @import("defaults.zig");
+
 const TreeContext = ClockTreeContext.TreeContext;
 const PreprocessedRef = ClockTreeContext.PreProcessedRef;
 const PreProcessedNode = ClockTreeContext.PreProcessedNode;
 
+const DefaultToTrue = Defaults.DefaultToTrue;
+const DefaultToFalse = Defaults.DefaultToFalse;
+
 const logger = std.log.scoped(.parser);
-
-const DefaultToTrue = std.StaticStringMap(void).initComptime(.{
-    .{ "CodegenConfigPeriph", {} },
-    .{ "TIM1", {} },
-    .{ "TIM15", {} },
-});
-
-const DefaultToFalse = std.StaticStringMap(void).initComptime(.{
-    .{ "notUsed", {} },
-    .{ "false", {} },
-});
 
 pub fn parser(
     writer: *std.io.Writer,
@@ -51,7 +45,6 @@ pub fn parser(
                         \\ {s} 
                     , .{name});
                 } else {
-                    //TODO: filter out the non-MCU references
                     try writer.print(
                         \\ check_MCU("{s}") 
                     , .{name});
@@ -65,15 +58,34 @@ pub fn parser(
                     else => unreachable,
                 };
 
+                const op_str: [:0]const u8 = switch (token) {
+                    .eq => "==",
+                    .bt => ">",
+                    .lt => "<",
+                    else => unreachable,
+                };
+
                 if (tree.pre.ref_process_map.get(op.op1)) |ref| {
                     const recursive = if (recursive_expr) |d| d.contains(op.op1) else false;
                     try write_ref_logic_op(writer, ref, tree, op_char, op.op2, recursive);
                 } else if (tree.pre.node_process_map.get(op.op1)) |node| {
-                    _ = node;
+                    logger.debug("Unsupported Logic: Node:{s} {s} {s}", .{ node.name, op_str, op.op2 });
+                } else if (tree.base.extra_flags.contains(op.op1)) {
+                    if (std.mem.eql(u8, op.op2, "true") or std.mem.eql(u8, op.op2, "false")) {
+                        try writer.print(
+                            \\config.flags.@"{s}" {s} {s}
+                        , .{ op.op1, op_str, op.op2 });
+                    } else {
+                        try writer.print(
+                            \\config.flags.@"{s}"
+                        , .{
+                            op.op1,
+                        });
+                    }
                 } else if (DefaultToTrue.has(op.op1)) {
                     try writer.writeAll("true");
                 } else {
-                    logger.debug("Unknown Equal: {s} == {s}, defaulting to false", .{ op.op1, op.op2 });
+                    logger.debug("Unknown Op: {s} {s} {s}, defaulting to false", .{ op.op1, op_str, op.op2 });
                     try writer.writeAll("false");
                 }
             },

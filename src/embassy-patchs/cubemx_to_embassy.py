@@ -191,7 +191,7 @@ def load_embassy_data(embassy_ver_list: dict[str, dict]) -> EmbassyData:
                             )
 
             elif f_list[0] == "enum":
-                data.enums[f"{prefix}_{f_list[1]}"] = EmbassyEnum(
+                new_enum = EmbassyEnum(
                     name=f_list[1],
                     size=f_data.get("bit_size", None),
                     variants=[
@@ -204,6 +204,17 @@ def load_embassy_data(embassy_ver_list: dict[str, dict]) -> EmbassyData:
                         if variant.get("name", "").lower() != "disable"
                     ],
                 )
+                enum_full_name = f"{prefix}_{f_list[1]}" 
+                
+                if(enum_full_name in data.enums):
+                    to_compare = data.enums[enum_full_name]
+                    if(len(to_compare.variants) < len(new_enum.variants)):
+                        data.enums[enum_full_name] = new_enum 
+                    else:
+                        continue
+                else:
+                    data.enums[enum_full_name] = new_enum 
+
     return data
 
 

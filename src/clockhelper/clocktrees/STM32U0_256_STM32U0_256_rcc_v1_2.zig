@@ -18,36 +18,26 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
     return struct {
 
         //=======Embassy Enum Types========
-        pub const RCC_HPRE = enum(u4) {
-            Div1 = 0,
-            Div2 = 8,
-            Div4 = 9,
-            Div8 = 10,
-            Div16 = 11,
-            Div64 = 12,
-            Div128 = 13,
-            Div256 = 14,
-            Div512 = 15,
-        };
-        pub const RCC_TIM1SEL = enum(u1) {
-            PCLK1_TIM = 0,
-            PLL1_Q = 1,
-        };
         pub const RCC_LPTIM1SEL = enum(u2) {
             PCLK1 = 0,
             LSI = 1,
             HSI = 2,
             LSE = 3,
         };
-        pub const RCC_PLLSRC = enum(u2) {
-            MSI = 1,
-            HSI = 2,
-            HSE = 3,
+        pub const RCC_LSEDRV = enum(u2) {
+            Low = 0,
+            MediumLow = 1,
+            MediumHigh = 2,
+            High = 3,
         };
-        pub const RCC_I2C1SEL = enum(u2) {
-            PCLK1 = 0,
-            SYS = 1,
-            HSI = 2,
+        pub const RCC_PLLQ = enum(u3) {
+            Div2 = 1,
+            Div3 = 2,
+            Div4 = 3,
+            Div5 = 4,
+            Div6 = 5,
+            Div7 = 6,
+            Div8 = 7,
         };
         pub const RCC_PLLR = enum(u3) {
             Div2 = 1,
@@ -58,33 +48,24 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             Div7 = 6,
             Div8 = 7,
         };
-        pub const RCC_SW = enum(u3) {
-            MSI = 0,
-            HSI = 1,
-            HSE = 2,
-            PLL1_R = 3,
-            LSI = 4,
-            LSE = 5,
-        };
-        pub const RCC_USART1SEL = enum(u2) {
+        pub const RCC_LPUART2SEL = enum(u2) {
             PCLK1 = 0,
             SYS = 1,
             HSI = 2,
             LSE = 3,
         };
-        pub const RCC_TIM15SEL = enum(u1) {
-            PCLK1_TIM = 0,
-            PLL1_Q = 1,
+        pub const RCC_LPTIM2SEL = enum(u2) {
+            PCLK1 = 0,
+            LSI = 1,
+            HSI = 2,
+            LSE = 3,
         };
-        pub const RCC_PLLM = enum(u3) {
+        pub const RCC_PPRE = enum(u3) {
             Div1 = 0,
-            Div2 = 1,
-            Div3 = 2,
-            Div4 = 3,
-            Div5 = 4,
-            Div6 = 5,
-            Div7 = 6,
-            Div8 = 7,
+            Div2 = 4,
+            Div4 = 5,
+            Div8 = 6,
+            Div16 = 7,
         };
         pub const RCC_MCOPRE = enum(u4) {
             Div1 = 0,
@@ -99,59 +80,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             Div512 = 9,
             Div1024 = 10,
         };
-        pub const RCC_I2C3SEL = enum(u2) {
-            PCLK1 = 0,
-            SYS = 1,
-            HSI = 2,
+        pub const RCC_SW = enum(u3) {
+            MSI = 0,
+            HSI = 1,
+            HSE = 2,
+            PLL1_R = 3,
+            LSI = 4,
+            LSE = 5,
         };
-        pub const RCC_LSEDRV = enum(u2) {
-            Low = 0,
-            MediumLow = 1,
-            MediumHigh = 2,
-            High = 3,
-        };
-        pub const RCC_LPUART2SEL = enum(u2) {
-            PCLK1 = 0,
-            SYS = 1,
-            HSI = 2,
-            LSE = 3,
-        };
-        pub const RCC_PLLQ = enum(u3) {
-            Div2 = 1,
-            Div3 = 2,
-            Div4 = 3,
-            Div5 = 4,
-            Div6 = 5,
-            Div7 = 6,
-            Div8 = 7,
-        };
-        pub const RCC_MCOSEL = enum(u4) {
-            SYS = 1,
-            MSI = 2,
-            HSI = 3,
-            HSE = 4,
-            PLL1_R = 5,
-            LSI = 6,
-            LSE = 7,
-            HSI48 = 8,
-            RTC = 9,
-            RTC_WKUP = 10,
-        };
-        pub const RCC_CLK48SEL = enum(u2) {
-            MSI = 1,
-            PLL1_Q = 2,
-            HSI48 = 3,
-        };
-        pub const RCC_LPUART3SEL = enum(u2) {
-            PCLK1 = 0,
-            SYS = 1,
-            HSI = 2,
-            LSE = 3,
-        };
-        pub const CRS_SYNCSRC = enum(u2) {
-            GPIO = 0,
-            LSE = 1,
-            USB = 2,
+        pub const RCC_TIM15SEL = enum(u1) {
+            PCLK1_TIM = 0,
+            PLL1_Q = 1,
         };
         pub const RCC_LSCOSEL = enum(u1) {
             LSI = 0,
@@ -163,18 +102,10 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSI = 2,
             LSE = 3,
         };
-        pub const RCC_PPRE = enum(u3) {
-            Div1 = 0,
-            Div2 = 4,
-            Div4 = 5,
-            Div8 = 6,
-            Div16 = 7,
-        };
-        pub const RCC_LPTIM3SEL = enum(u2) {
-            PCLK1 = 0,
-            LSI = 1,
-            HSI = 2,
-            LSE = 3,
+        pub const CRS_SYNCSRC = enum(u2) {
+            GPIO = 0,
+            LSE = 1,
+            USB = 2,
         };
         pub const RCC_MSIRANGE = enum(u4) {
             Range100K = 0,
@@ -189,10 +120,6 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             Range24M = 9,
             Range32M = 10,
             Range48M = 11,
-        };
-        pub const PWR_VOS = enum(u2) {
-            Range1 = 1,
-            Range2 = 2,
         };
         pub const RCC_PLLP = enum(u5) {
             Div2 = 1,
@@ -227,16 +154,84 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             Div31 = 30,
             Div32 = 31,
         };
-        pub const RCC_LPTIM2SEL = enum(u2) {
+        pub const RCC_RTCSEL = enum(u2) {
+            LSE = 1,
+            LSI = 2,
+            HSE = 3,
+        };
+        pub const PWR_VOS = enum(u2) {
+            Range1 = 1,
+            Range2 = 2,
+        };
+        pub const RCC_USART1SEL = enum(u2) {
+            PCLK1 = 0,
+            SYS = 1,
+            HSI = 2,
+            LSE = 3,
+        };
+        pub const RCC_HPRE = enum(u4) {
+            Div1 = 0,
+            Div2 = 8,
+            Div4 = 9,
+            Div8 = 10,
+            Div16 = 11,
+            Div64 = 12,
+            Div128 = 13,
+            Div256 = 14,
+            Div512 = 15,
+        };
+        pub const RCC_CLK48SEL = enum(u2) {
+            MSI = 1,
+            PLL1_Q = 2,
+            HSI48 = 3,
+        };
+        pub const RCC_MCOSEL = enum(u4) {
+            SYS = 1,
+            MSI = 2,
+            HSI = 3,
+            HSE = 4,
+            PLL1_R = 5,
+            LSI = 6,
+            LSE = 7,
+            HSI48 = 8,
+            RTC = 9,
+            RTC_WKUP = 10,
+        };
+        pub const RCC_LPTIM3SEL = enum(u2) {
             PCLK1 = 0,
             LSI = 1,
             HSI = 2,
             LSE = 3,
         };
-        pub const RCC_RTCSEL = enum(u2) {
-            LSE = 1,
-            LSI = 2,
+        pub const RCC_PLLSRC = enum(u2) {
+            MSI = 1,
+            HSI = 2,
             HSE = 3,
+        };
+        pub const RCC_I2C3SEL = enum(u2) {
+            PCLK1 = 0,
+            SYS = 1,
+            HSI = 2,
+        };
+        pub const RCC_TIM1SEL = enum(u1) {
+            PCLK1_TIM = 0,
+            PLL1_Q = 1,
+        };
+        pub const RCC_LPUART3SEL = enum(u2) {
+            PCLK1 = 0,
+            SYS = 1,
+            HSI = 2,
+            LSE = 3,
+        };
+        pub const RCC_PLLM = enum(u3) {
+            Div1 = 0,
+            Div2 = 1,
+            Div3 = 2,
+            Div4 = 3,
+            Div5 = 4,
+            Div6 = 5,
+            Div7 = 6,
+            Div8 = 7,
         };
         pub const RCC_USART2SEL = enum(u2) {
             PCLK1 = 0,
@@ -247,6 +242,11 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
         pub const RCC_ADCSEL = enum(u2) {
             SYS = 0,
             PLL1_P = 1,
+            HSI = 2,
+        };
+        pub const RCC_I2C1SEL = enum(u2) {
+            PCLK1 = 0,
+            SYS = 1,
             HSI = 2,
         };
 
@@ -266,34 +266,34 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_MSIRANGE {
                 return switch (self) {
-                    .RCC_MSIRANGE_11 => .Range48M,
-                    .RCC_MSIRANGE_5 => .Range2M,
-                    .RCC_MSIRANGE_8 => .Range16M,
-                    .RCC_MSIRANGE_1 => .Range200K,
-                    .RCC_MSIRANGE_0 => .Range100K,
                     .RCC_MSIRANGE_10 => .Range32M,
-                    .RCC_MSIRANGE_9 => .Range24M,
-                    .RCC_MSIRANGE_2 => .Range400K,
+                    .RCC_MSIRANGE_1 => .Range200K,
                     .RCC_MSIRANGE_6 => .Range4M,
+                    .RCC_MSIRANGE_9 => .Range24M,
+                    .RCC_MSIRANGE_5 => .Range2M,
                     .RCC_MSIRANGE_4 => .Range1M,
-                    .RCC_MSIRANGE_7 => .Range8M,
                     .RCC_MSIRANGE_3 => .Range800K,
+                    .RCC_MSIRANGE_0 => .Range100K,
+                    .RCC_MSIRANGE_7 => .Range8M,
+                    .RCC_MSIRANGE_8 => .Range16M,
+                    .RCC_MSIRANGE_11 => .Range48M,
+                    .RCC_MSIRANGE_2 => .Range400K,
                 };
             }
             pub fn from_enum(item: RCC_MSIRANGE) anyerror!@This() {
                 return switch (item) {
-                    .Range48M => .RCC_MSIRANGE_11,
-                    .Range2M => .RCC_MSIRANGE_5,
-                    .Range16M => .RCC_MSIRANGE_8,
-                    .Range200K => .RCC_MSIRANGE_1,
-                    .Range100K => .RCC_MSIRANGE_0,
                     .Range32M => .RCC_MSIRANGE_10,
-                    .Range24M => .RCC_MSIRANGE_9,
-                    .Range400K => .RCC_MSIRANGE_2,
+                    .Range200K => .RCC_MSIRANGE_1,
                     .Range4M => .RCC_MSIRANGE_6,
+                    .Range24M => .RCC_MSIRANGE_9,
+                    .Range2M => .RCC_MSIRANGE_5,
                     .Range1M => .RCC_MSIRANGE_4,
-                    .Range8M => .RCC_MSIRANGE_7,
                     .Range800K => .RCC_MSIRANGE_3,
+                    .Range100K => .RCC_MSIRANGE_0,
+                    .Range8M => .RCC_MSIRANGE_7,
+                    .Range16M => .RCC_MSIRANGE_8,
+                    .Range48M => .RCC_MSIRANGE_11,
+                    .Range400K => .RCC_MSIRANGE_2,
                 };
             }
             pub fn get(self: @This()) !f32 {
@@ -324,22 +324,22 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_SW {
                 return switch (self) {
+                    .RCC_SYSCLKSOURCE_HSE => .HSE,
+                    .RCC_SYSCLKSOURCE_MSI => .MSI,
                     .RCC_SYSCLKSOURCE_LSE => .LSE,
                     .RCC_SYSCLKSOURCE_HSI => .HSI,
-                    .RCC_SYSCLKSOURCE_PLLCLK => .PLL1_R,
-                    .RCC_SYSCLKSOURCE_MSI => .MSI,
                     .RCC_SYSCLKSOURCE_LSI => .LSI,
-                    .RCC_SYSCLKSOURCE_HSE => .HSE,
+                    .RCC_SYSCLKSOURCE_PLLCLK => .PLL1_R,
                 };
             }
             pub fn from_enum(item: RCC_SW) anyerror!@This() {
                 return switch (item) {
+                    .HSE => .RCC_SYSCLKSOURCE_HSE,
+                    .MSI => .RCC_SYSCLKSOURCE_MSI,
                     .LSE => .RCC_SYSCLKSOURCE_LSE,
                     .HSI => .RCC_SYSCLKSOURCE_HSI,
-                    .PLL1_R => .RCC_SYSCLKSOURCE_PLLCLK,
-                    .MSI => .RCC_SYSCLKSOURCE_MSI,
                     .LSI => .RCC_SYSCLKSOURCE_LSI,
-                    .HSE => .RCC_SYSCLKSOURCE_HSE,
+                    .PLL1_R => .RCC_SYSCLKSOURCE_PLLCLK,
                 };
             }
         };
@@ -351,16 +351,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_PLLSRC {
                 return switch (self) {
-                    .RCC_PLLSOURCE_HSE => .HSE,
-                    .RCC_PLLSOURCE_MSI => .MSI,
                     .RCC_PLLSOURCE_HSI => .HSI,
+                    .RCC_PLLSOURCE_MSI => .MSI,
+                    .RCC_PLLSOURCE_HSE => .HSE,
                 };
             }
             pub fn from_enum(item: RCC_PLLSRC) anyerror!@This() {
                 return switch (item) {
-                    .HSE => .RCC_PLLSOURCE_HSE,
-                    .MSI => .RCC_PLLSOURCE_MSI,
                     .HSI => .RCC_PLLSOURCE_HSI,
+                    .MSI => .RCC_PLLSOURCE_MSI,
+                    .HSE => .RCC_PLLSOURCE_HSE,
                 };
             }
         };
@@ -378,25 +378,25 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             pub fn to_enum(self: @This()) anyerror!RCC_PLLM {
                 return switch (self) {
                     .RCC_PLLM_DIV5 => .Div5,
-                    .RCC_PLLM_DIV1 => .Div1,
-                    .RCC_PLLM_DIV3 => .Div3,
                     .RCC_PLLM_DIV6 => .Div6,
-                    .RCC_PLLM_DIV7 => .Div7,
+                    .RCC_PLLM_DIV2 => .Div2,
+                    .RCC_PLLM_DIV1 => .Div1,
                     .RCC_PLLM_DIV8 => .Div8,
                     .RCC_PLLM_DIV4 => .Div4,
-                    .RCC_PLLM_DIV2 => .Div2,
+                    .RCC_PLLM_DIV3 => .Div3,
+                    .RCC_PLLM_DIV7 => .Div7,
                 };
             }
             pub fn from_enum(item: RCC_PLLM) anyerror!@This() {
                 return switch (item) {
                     .Div5 => .RCC_PLLM_DIV5,
-                    .Div1 => .RCC_PLLM_DIV1,
-                    .Div3 => .RCC_PLLM_DIV3,
                     .Div6 => .RCC_PLLM_DIV6,
-                    .Div7 => .RCC_PLLM_DIV7,
+                    .Div2 => .RCC_PLLM_DIV2,
+                    .Div1 => .RCC_PLLM_DIV1,
                     .Div8 => .RCC_PLLM_DIV8,
                     .Div4 => .RCC_PLLM_DIV4,
-                    .Div2 => .RCC_PLLM_DIV2,
+                    .Div3 => .RCC_PLLM_DIV3,
+                    .Div7 => .RCC_PLLM_DIV7,
                 };
             }
             pub fn get(self: @This()) !f32 {
@@ -420,16 +420,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_RTCSEL {
                 return switch (self) {
-                    .RCC_RTCCLKSOURCE_LSE => .LSE,
                     .RCC_RTCCLKSOURCE_LSI => .LSI,
                     .RCC_RTCCLKSOURCE_HSE_DIV32 => .HSE,
+                    .RCC_RTCCLKSOURCE_LSE => .LSE,
                 };
             }
             pub fn from_enum(item: RCC_RTCSEL) anyerror!@This() {
                 return switch (item) {
-                    .LSE => .RCC_RTCCLKSOURCE_LSE,
                     .LSI => .RCC_RTCCLKSOURCE_LSI,
                     .HSE => .RCC_RTCCLKSOURCE_HSE_DIV32,
+                    .LSE => .RCC_RTCCLKSOURCE_LSE,
                 };
             }
         };
@@ -442,18 +442,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_USART1SEL {
                 return switch (self) {
+                    .RCC_USART1CLKSOURCE_SYSCLK => .SYS,
                     .RCC_USART1CLKSOURCE_PCLK1 => .PCLK1,
                     .RCC_USART1CLKSOURCE_HSI => .HSI,
                     .RCC_USART1CLKSOURCE_LSE => .LSE,
-                    .RCC_USART1CLKSOURCE_SYSCLK => .SYS,
                 };
             }
             pub fn from_enum(item: RCC_USART1SEL) anyerror!@This() {
                 return switch (item) {
+                    .SYS => .RCC_USART1CLKSOURCE_SYSCLK,
                     .PCLK1 => .RCC_USART1CLKSOURCE_PCLK1,
                     .HSI => .RCC_USART1CLKSOURCE_HSI,
                     .LSE => .RCC_USART1CLKSOURCE_LSE,
-                    .SYS => .RCC_USART1CLKSOURCE_SYSCLK,
                 };
             }
         };
@@ -468,16 +468,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 return switch (self) {
                     .RCC_USART2CLKSOURCE_SYSCLK => .SYS,
                     .RCC_USART2CLKSOURCE_HSI => .HSI,
-                    .RCC_USART2CLKSOURCE_LSE => .LSE,
                     .RCC_USART2CLKSOURCE_PCLK1 => .PCLK1,
+                    .RCC_USART2CLKSOURCE_LSE => .LSE,
                 };
             }
             pub fn from_enum(item: RCC_USART2SEL) anyerror!@This() {
                 return switch (item) {
                     .SYS => .RCC_USART2CLKSOURCE_SYSCLK,
                     .HSI => .RCC_USART2CLKSOURCE_HSI,
-                    .LSE => .RCC_USART2CLKSOURCE_LSE,
                     .PCLK1 => .RCC_USART2CLKSOURCE_PCLK1,
+                    .LSE => .RCC_USART2CLKSOURCE_LSE,
                 };
             }
         };
@@ -490,18 +490,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_LPUART1SEL {
                 return switch (self) {
-                    .RCC_LPUART1CLKSOURCE_HSI => .HSI,
-                    .RCC_LPUART1CLKSOURCE_LSE => .LSE,
-                    .RCC_LPUART1CLKSOURCE_PCLK1 => .PCLK1,
                     .RCC_LPUART1CLKSOURCE_SYSCLK => .SYS,
+                    .RCC_LPUART1CLKSOURCE_LSE => .LSE,
+                    .RCC_LPUART1CLKSOURCE_HSI => .HSI,
+                    .RCC_LPUART1CLKSOURCE_PCLK1 => .PCLK1,
                 };
             }
             pub fn from_enum(item: RCC_LPUART1SEL) anyerror!@This() {
                 return switch (item) {
-                    .HSI => .RCC_LPUART1CLKSOURCE_HSI,
-                    .LSE => .RCC_LPUART1CLKSOURCE_LSE,
-                    .PCLK1 => .RCC_LPUART1CLKSOURCE_PCLK1,
                     .SYS => .RCC_LPUART1CLKSOURCE_SYSCLK,
+                    .LSE => .RCC_LPUART1CLKSOURCE_LSE,
+                    .HSI => .RCC_LPUART1CLKSOURCE_HSI,
+                    .PCLK1 => .RCC_LPUART1CLKSOURCE_PCLK1,
                 };
             }
         };
@@ -515,17 +515,17 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             pub fn to_enum(self: @This()) anyerror!RCC_LPTIM1SEL {
                 return switch (self) {
                     .RCC_LPTIM1CLKSOURCE_LSE => .LSE,
-                    .RCC_LPTIM1CLKSOURCE_LSI => .LSI,
-                    .RCC_LPTIM1CLKSOURCE_HSI => .HSI,
                     .RCC_LPTIM1CLKSOURCE_PCLK1 => .PCLK1,
+                    .RCC_LPTIM1CLKSOURCE_HSI => .HSI,
+                    .RCC_LPTIM1CLKSOURCE_LSI => .LSI,
                 };
             }
             pub fn from_enum(item: RCC_LPTIM1SEL) anyerror!@This() {
                 return switch (item) {
                     .LSE => .RCC_LPTIM1CLKSOURCE_LSE,
-                    .LSI => .RCC_LPTIM1CLKSOURCE_LSI,
-                    .HSI => .RCC_LPTIM1CLKSOURCE_HSI,
                     .PCLK1 => .RCC_LPTIM1CLKSOURCE_PCLK1,
+                    .HSI => .RCC_LPTIM1CLKSOURCE_HSI,
+                    .LSI => .RCC_LPTIM1CLKSOURCE_LSI,
                 };
             }
         };
@@ -538,18 +538,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_LPTIM2SEL {
                 return switch (self) {
-                    .RCC_LPTIM2CLKSOURCE_PCLK1 => .PCLK1,
-                    .RCC_LPTIM2CLKSOURCE_LSE => .LSE,
                     .RCC_LPTIM2CLKSOURCE_LSI => .LSI,
+                    .RCC_LPTIM2CLKSOURCE_PCLK1 => .PCLK1,
                     .RCC_LPTIM2CLKSOURCE_HSI => .HSI,
+                    .RCC_LPTIM2CLKSOURCE_LSE => .LSE,
                 };
             }
             pub fn from_enum(item: RCC_LPTIM2SEL) anyerror!@This() {
                 return switch (item) {
-                    .PCLK1 => .RCC_LPTIM2CLKSOURCE_PCLK1,
-                    .LSE => .RCC_LPTIM2CLKSOURCE_LSE,
                     .LSI => .RCC_LPTIM2CLKSOURCE_LSI,
+                    .PCLK1 => .RCC_LPTIM2CLKSOURCE_PCLK1,
                     .HSI => .RCC_LPTIM2CLKSOURCE_HSI,
+                    .LSE => .RCC_LPTIM2CLKSOURCE_LSE,
                 };
             }
         };
@@ -562,18 +562,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_LPTIM3SEL {
                 return switch (self) {
-                    .RCC_LPTIM3CLKSOURCE_LSI => .LSI,
                     .RCC_LPTIM3CLKSOURCE_LSE => .LSE,
-                    .RCC_LPTIM3CLKSOURCE_HSI => .HSI,
                     .RCC_LPTIM3CLKSOURCE_PCLK1 => .PCLK1,
+                    .RCC_LPTIM3CLKSOURCE_HSI => .HSI,
+                    .RCC_LPTIM3CLKSOURCE_LSI => .LSI,
                 };
             }
             pub fn from_enum(item: RCC_LPTIM3SEL) anyerror!@This() {
                 return switch (item) {
-                    .LSI => .RCC_LPTIM3CLKSOURCE_LSI,
                     .LSE => .RCC_LPTIM3CLKSOURCE_LSE,
-                    .HSI => .RCC_LPTIM3CLKSOURCE_HSI,
                     .PCLK1 => .RCC_LPTIM3CLKSOURCE_PCLK1,
+                    .HSI => .RCC_LPTIM3CLKSOURCE_HSI,
+                    .LSI => .RCC_LPTIM3CLKSOURCE_LSI,
                 };
             }
         };
@@ -586,18 +586,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_LPUART2SEL {
                 return switch (self) {
-                    .RCC_LPUART2CLKSOURCE_HSI => .HSI,
-                    .RCC_LPUART2CLKSOURCE_LSE => .LSE,
                     .RCC_LPUART2CLKSOURCE_PCLK1 => .PCLK1,
+                    .RCC_LPUART2CLKSOURCE_HSI => .HSI,
                     .RCC_LPUART2CLKSOURCE_SYSCLK => .SYS,
+                    .RCC_LPUART2CLKSOURCE_LSE => .LSE,
                 };
             }
             pub fn from_enum(item: RCC_LPUART2SEL) anyerror!@This() {
                 return switch (item) {
-                    .HSI => .RCC_LPUART2CLKSOURCE_HSI,
-                    .LSE => .RCC_LPUART2CLKSOURCE_LSE,
                     .PCLK1 => .RCC_LPUART2CLKSOURCE_PCLK1,
+                    .HSI => .RCC_LPUART2CLKSOURCE_HSI,
                     .SYS => .RCC_LPUART2CLKSOURCE_SYSCLK,
+                    .LSE => .RCC_LPUART2CLKSOURCE_LSE,
                 };
             }
         };
@@ -610,18 +610,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_LPUART3SEL {
                 return switch (self) {
+                    .RCC_LPUART3CLKSOURCE_SYSCLK => .SYS,
+                    .RCC_LPUART3CLKSOURCE_LSE => .LSE,
                     .RCC_LPUART3CLKSOURCE_HSI => .HSI,
                     .RCC_LPUART3CLKSOURCE_PCLK1 => .PCLK1,
-                    .RCC_LPUART3CLKSOURCE_LSE => .LSE,
-                    .RCC_LPUART3CLKSOURCE_SYSCLK => .SYS,
                 };
             }
             pub fn from_enum(item: RCC_LPUART3SEL) anyerror!@This() {
                 return switch (item) {
+                    .SYS => .RCC_LPUART3CLKSOURCE_SYSCLK,
+                    .LSE => .RCC_LPUART3CLKSOURCE_LSE,
                     .HSI => .RCC_LPUART3CLKSOURCE_HSI,
                     .PCLK1 => .RCC_LPUART3CLKSOURCE_PCLK1,
-                    .LSE => .RCC_LPUART3CLKSOURCE_LSE,
-                    .SYS => .RCC_LPUART3CLKSOURCE_SYSCLK,
                 };
             }
         };
@@ -632,14 +632,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_TIM1SEL {
                 return switch (self) {
-                    .RCC_TIM1CLKSOURCE_PLLQ => .PLL1_Q,
                     .RCC_TIM1CLKSOURCE_PCLK1 => .PCLK1_TIM,
+                    .RCC_TIM1CLKSOURCE_PLLQ => .PLL1_Q,
                 };
             }
             pub fn from_enum(item: RCC_TIM1SEL) anyerror!@This() {
                 return switch (item) {
-                    .PLL1_Q => .RCC_TIM1CLKSOURCE_PLLQ,
                     .PCLK1_TIM => .RCC_TIM1CLKSOURCE_PCLK1,
+                    .PLL1_Q => .RCC_TIM1CLKSOURCE_PLLQ,
                 };
             }
         };
@@ -650,14 +650,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_TIM15SEL {
                 return switch (self) {
-                    .RCC_TIM15CLKSOURCE_PLLQ => .PLL1_Q,
                     .RCC_TIM15CLKSOURCE_PCLK1 => .PCLK1_TIM,
+                    .RCC_TIM15CLKSOURCE_PLLQ => .PLL1_Q,
                 };
             }
             pub fn from_enum(item: RCC_TIM15SEL) anyerror!@This() {
                 return switch (item) {
-                    .PLL1_Q => .RCC_TIM15CLKSOURCE_PLLQ,
                     .PCLK1_TIM => .RCC_TIM15CLKSOURCE_PCLK1,
+                    .PLL1_Q => .RCC_TIM15CLKSOURCE_PLLQ,
                 };
             }
         };
@@ -690,16 +690,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_I2C1SEL {
                 return switch (self) {
-                    .RCC_I2C1CLKSOURCE_PCLK1 => .PCLK1,
-                    .RCC_I2C1CLKSOURCE_SYSCLK => .SYS,
                     .RCC_I2C1CLKSOURCE_HSI => .HSI,
+                    .RCC_I2C1CLKSOURCE_SYSCLK => .SYS,
+                    .RCC_I2C1CLKSOURCE_PCLK1 => .PCLK1,
                 };
             }
             pub fn from_enum(item: RCC_I2C1SEL) anyerror!@This() {
                 return switch (item) {
-                    .PCLK1 => .RCC_I2C1CLKSOURCE_PCLK1,
-                    .SYS => .RCC_I2C1CLKSOURCE_SYSCLK,
                     .HSI => .RCC_I2C1CLKSOURCE_HSI,
+                    .SYS => .RCC_I2C1CLKSOURCE_SYSCLK,
+                    .PCLK1 => .RCC_I2C1CLKSOURCE_PCLK1,
                 };
             }
         };
@@ -732,15 +732,15 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_CLK48SEL {
                 return switch (self) {
-                    .RCC_USBCLKSOURCE_MSI => .MSI,
                     .RCC_USBCLKSOURCE_PLLQ => .PLL1_Q,
+                    .RCC_USBCLKSOURCE_MSI => .MSI,
                     .RCC_USBCLKSOURCE_HSI48 => .HSI48,
                 };
             }
             pub fn from_enum(item: RCC_CLK48SEL) anyerror!@This() {
                 return switch (item) {
-                    .MSI => .RCC_USBCLKSOURCE_MSI,
                     .PLL1_Q => .RCC_USBCLKSOURCE_PLLQ,
+                    .MSI => .RCC_USBCLKSOURCE_MSI,
                     .HSI48 => .RCC_USBCLKSOURCE_HSI48,
                 };
             }
@@ -753,15 +753,15 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_CLK48SEL {
                 return switch (self) {
-                    .RCC_RNGCLKSOURCE_PLLQ => .PLL1_Q,
                     .RCC_RNGCLKSOURCE_HSI48 => .HSI48,
+                    .RCC_RNGCLKSOURCE_PLLQ => .PLL1_Q,
                     .RCC_RNGCLKSOURCE_MSI => .MSI,
                 };
             }
             pub fn from_enum(item: RCC_CLK48SEL) anyerror!@This() {
                 return switch (item) {
-                    .PLL1_Q => .RCC_RNGCLKSOURCE_PLLQ,
                     .HSI48 => .RCC_RNGCLKSOURCE_HSI48,
+                    .PLL1_Q => .RCC_RNGCLKSOURCE_PLLQ,
                     .MSI => .RCC_RNGCLKSOURCE_MSI,
                 };
             }
@@ -781,30 +781,30 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_MCOSEL {
                 return switch (self) {
-                    .RCC_MCO1SOURCE_LSI => .LSI,
-                    .RCC_MCO1SOURCE_RTC_WAKEUP => .RTC_WKUP,
-                    .RCC_MCO1SOURCE_HSE => .HSE,
-                    .RCC_MCO1SOURCE_HSI => .HSI,
                     .RCC_MCO1SOURCE_MSI => .MSI,
+                    .RCC_MCO1SOURCE_HSI => .HSI,
+                    .RCC_MCO1SOURCE_LSI => .LSI,
                     .RCC_MCO1SOURCE_LSE => .LSE,
-                    .RCC_MCO1SOURCE_SYSCLK => .SYS,
-                    .RCC_MCO1SOURCE_RTC_ALT => .RTC,
+                    .RCC_MCO1SOURCE_RTC_WAKEUP => .RTC_WKUP,
                     .RCC_MCO1SOURCE_HSI48 => .HSI48,
                     .RCC_MCO1SOURCE_PLLR => .PLL1_R,
+                    .RCC_MCO1SOURCE_HSE => .HSE,
+                    .RCC_MCO1SOURCE_RTC_ALT => .RTC,
+                    .RCC_MCO1SOURCE_SYSCLK => .SYS,
                 };
             }
             pub fn from_enum(item: RCC_MCOSEL) anyerror!@This() {
                 return switch (item) {
-                    .LSI => .RCC_MCO1SOURCE_LSI,
-                    .RTC_WKUP => .RCC_MCO1SOURCE_RTC_WAKEUP,
-                    .HSE => .RCC_MCO1SOURCE_HSE,
-                    .HSI => .RCC_MCO1SOURCE_HSI,
                     .MSI => .RCC_MCO1SOURCE_MSI,
+                    .HSI => .RCC_MCO1SOURCE_HSI,
+                    .LSI => .RCC_MCO1SOURCE_LSI,
                     .LSE => .RCC_MCO1SOURCE_LSE,
-                    .SYS => .RCC_MCO1SOURCE_SYSCLK,
-                    .RTC => .RCC_MCO1SOURCE_RTC_ALT,
+                    .RTC_WKUP => .RCC_MCO1SOURCE_RTC_WAKEUP,
                     .HSI48 => .RCC_MCO1SOURCE_HSI48,
                     .PLL1_R => .RCC_MCO1SOURCE_PLLR,
+                    .HSE => .RCC_MCO1SOURCE_HSE,
+                    .RTC => .RCC_MCO1SOURCE_RTC_ALT,
+                    .SYS => .RCC_MCO1SOURCE_SYSCLK,
                 };
             }
         };
@@ -824,32 +824,32 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_MCOPRE {
                 return switch (self) {
+                    .RCC_MCO1DIV_32 => .Div32,
                     .RCC_MCO1DIV_16 => .Div16,
+                    .RCC_MCO1DIV_1 => .Div1,
+                    .RCC_MCO1DIV_2 => .Div2,
+                    .RCC_MCO1DIV_1024 => .Div1024,
+                    .RCC_MCO1DIV_64 => .Div64,
+                    .RCC_MCO1DIV_128 => .Div128,
                     .RCC_MCO1DIV_8 => .Div8,
                     .RCC_MCO1DIV_256 => .Div256,
                     .RCC_MCO1DIV_512 => .Div512,
-                    .RCC_MCO1DIV_2 => .Div2,
-                    .RCC_MCO1DIV_1 => .Div1,
-                    .RCC_MCO1DIV_64 => .Div64,
-                    .RCC_MCO1DIV_1024 => .Div1024,
-                    .RCC_MCO1DIV_32 => .Div32,
                     .RCC_MCO1DIV_4 => .Div4,
-                    .RCC_MCO1DIV_128 => .Div128,
                 };
             }
             pub fn from_enum(item: RCC_MCOPRE) anyerror!@This() {
                 return switch (item) {
+                    .Div32 => .RCC_MCO1DIV_32,
                     .Div16 => .RCC_MCO1DIV_16,
+                    .Div1 => .RCC_MCO1DIV_1,
+                    .Div2 => .RCC_MCO1DIV_2,
+                    .Div1024 => .RCC_MCO1DIV_1024,
+                    .Div64 => .RCC_MCO1DIV_64,
+                    .Div128 => .RCC_MCO1DIV_128,
                     .Div8 => .RCC_MCO1DIV_8,
                     .Div256 => .RCC_MCO1DIV_256,
                     .Div512 => .RCC_MCO1DIV_512,
-                    .Div2 => .RCC_MCO1DIV_2,
-                    .Div1 => .RCC_MCO1DIV_1,
-                    .Div64 => .RCC_MCO1DIV_64,
-                    .Div1024 => .RCC_MCO1DIV_1024,
-                    .Div32 => .RCC_MCO1DIV_32,
                     .Div4 => .RCC_MCO1DIV_4,
-                    .Div128 => .RCC_MCO1DIV_128,
                 };
             }
             pub fn get(self: @This()) !f32 {
@@ -883,29 +883,29 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_MCOSEL {
                 return switch (self) {
-                    .RCC_MCO2SOURCE_RTC_ALT => .RTC,
-                    .RCC_MCO2SOURCE_HSI => .HSI,
                     .RCC_MCO2SOURCE_LSI => .LSI,
+                    .RCC_MCO2SOURCE_LSE => .LSE,
+                    .RCC_MCO2SOURCE_HSI => .HSI,
                     .RCC_MCO2SOURCE_HSE => .HSE,
-                    .RCC_MCO2SOURCE_MSI => .MSI,
-                    .RCC_MCO2SOURCE_SYSCLK => .SYS,
                     .RCC_MCO2SOURCE_RTC_WAKEUP => .RTC_WKUP,
                     .RCC_MCO2SOURCE_PLLR => .PLL1_R,
-                    .RCC_MCO2SOURCE_LSE => .LSE,
+                    .RCC_MCO2SOURCE_RTC_ALT => .RTC,
+                    .RCC_MCO2SOURCE_MSI => .MSI,
+                    .RCC_MCO2SOURCE_SYSCLK => .SYS,
                     .RCC_MCO2SOURCE_HSI48 => .HSI48,
                 };
             }
             pub fn from_enum(item: RCC_MCOSEL) anyerror!@This() {
                 return switch (item) {
-                    .RTC => .RCC_MCO2SOURCE_RTC_ALT,
-                    .HSI => .RCC_MCO2SOURCE_HSI,
                     .LSI => .RCC_MCO2SOURCE_LSI,
+                    .LSE => .RCC_MCO2SOURCE_LSE,
+                    .HSI => .RCC_MCO2SOURCE_HSI,
                     .HSE => .RCC_MCO2SOURCE_HSE,
-                    .MSI => .RCC_MCO2SOURCE_MSI,
-                    .SYS => .RCC_MCO2SOURCE_SYSCLK,
                     .RTC_WKUP => .RCC_MCO2SOURCE_RTC_WAKEUP,
                     .PLL1_R => .RCC_MCO2SOURCE_PLLR,
-                    .LSE => .RCC_MCO2SOURCE_LSE,
+                    .RTC => .RCC_MCO2SOURCE_RTC_ALT,
+                    .MSI => .RCC_MCO2SOURCE_MSI,
+                    .SYS => .RCC_MCO2SOURCE_SYSCLK,
                     .HSI48 => .RCC_MCO2SOURCE_HSI48,
                 };
             }
@@ -927,31 +927,31 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             pub fn to_enum(self: @This()) anyerror!RCC_MCOPRE {
                 return switch (self) {
                     .RCC_MCO2DIV_1 => .Div1,
-                    .RCC_MCO2DIV_256 => .Div256,
-                    .RCC_MCO2DIV_8 => .Div8,
-                    .RCC_MCO2DIV_128 => .Div128,
-                    .RCC_MCO2DIV_64 => .Div64,
                     .RCC_MCO2DIV_2 => .Div2,
-                    .RCC_MCO2DIV_32 => .Div32,
-                    .RCC_MCO2DIV_1024 => .Div1024,
                     .RCC_MCO2DIV_4 => .Div4,
-                    .RCC_MCO2DIV_16 => .Div16,
                     .RCC_MCO2DIV_512 => .Div512,
+                    .RCC_MCO2DIV_8 => .Div8,
+                    .RCC_MCO2DIV_32 => .Div32,
+                    .RCC_MCO2DIV_64 => .Div64,
+                    .RCC_MCO2DIV_16 => .Div16,
+                    .RCC_MCO2DIV_128 => .Div128,
+                    .RCC_MCO2DIV_256 => .Div256,
+                    .RCC_MCO2DIV_1024 => .Div1024,
                 };
             }
             pub fn from_enum(item: RCC_MCOPRE) anyerror!@This() {
                 return switch (item) {
                     .Div1 => .RCC_MCO2DIV_1,
-                    .Div256 => .RCC_MCO2DIV_256,
-                    .Div8 => .RCC_MCO2DIV_8,
-                    .Div128 => .RCC_MCO2DIV_128,
-                    .Div64 => .RCC_MCO2DIV_64,
                     .Div2 => .RCC_MCO2DIV_2,
-                    .Div32 => .RCC_MCO2DIV_32,
-                    .Div1024 => .RCC_MCO2DIV_1024,
                     .Div4 => .RCC_MCO2DIV_4,
-                    .Div16 => .RCC_MCO2DIV_16,
                     .Div512 => .RCC_MCO2DIV_512,
+                    .Div8 => .RCC_MCO2DIV_8,
+                    .Div32 => .RCC_MCO2DIV_32,
+                    .Div64 => .RCC_MCO2DIV_64,
+                    .Div16 => .RCC_MCO2DIV_16,
+                    .Div128 => .RCC_MCO2DIV_128,
+                    .Div256 => .RCC_MCO2DIV_256,
+                    .Div1024 => .RCC_MCO2DIV_1024,
                 };
             }
             pub fn get(self: @This()) !f32 {
@@ -977,14 +977,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_LSCOSEL {
                 return switch (self) {
-                    .RCC_LSCOSOURCE_LSI => .LSI,
                     .RCC_LSCOSOURCE_LSE => .LSE,
+                    .RCC_LSCOSOURCE_LSI => .LSI,
                 };
             }
             pub fn from_enum(item: RCC_LSCOSEL) anyerror!@This() {
                 return switch (item) {
-                    .LSI => .RCC_LSCOSOURCE_LSI,
                     .LSE => .RCC_LSCOSOURCE_LSE,
+                    .LSI => .RCC_LSCOSOURCE_LSI,
                 };
             }
         };
@@ -1002,28 +1002,28 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_HPRE {
                 return switch (self) {
-                    .RCC_SYSCLK_DIV16 => .Div16,
-                    .RCC_SYSCLK_DIV256 => .Div256,
                     .RCC_SYSCLK_DIV4 => .Div4,
-                    .RCC_SYSCLK_DIV2 => .Div2,
-                    .RCC_SYSCLK_DIV8 => .Div8,
-                    .RCC_SYSCLK_DIV64 => .Div64,
-                    .RCC_SYSCLK_DIV128 => .Div128,
-                    .RCC_SYSCLK_DIV1 => .Div1,
                     .RCC_SYSCLK_DIV512 => .Div512,
+                    .RCC_SYSCLK_DIV16 => .Div16,
+                    .RCC_SYSCLK_DIV2 => .Div2,
+                    .RCC_SYSCLK_DIV1 => .Div1,
+                    .RCC_SYSCLK_DIV8 => .Div8,
+                    .RCC_SYSCLK_DIV128 => .Div128,
+                    .RCC_SYSCLK_DIV256 => .Div256,
+                    .RCC_SYSCLK_DIV64 => .Div64,
                 };
             }
             pub fn from_enum(item: RCC_HPRE) anyerror!@This() {
                 return switch (item) {
-                    .Div16 => .RCC_SYSCLK_DIV16,
-                    .Div256 => .RCC_SYSCLK_DIV256,
                     .Div4 => .RCC_SYSCLK_DIV4,
-                    .Div2 => .RCC_SYSCLK_DIV2,
-                    .Div8 => .RCC_SYSCLK_DIV8,
-                    .Div64 => .RCC_SYSCLK_DIV64,
-                    .Div128 => .RCC_SYSCLK_DIV128,
-                    .Div1 => .RCC_SYSCLK_DIV1,
                     .Div512 => .RCC_SYSCLK_DIV512,
+                    .Div16 => .RCC_SYSCLK_DIV16,
+                    .Div2 => .RCC_SYSCLK_DIV2,
+                    .Div1 => .RCC_SYSCLK_DIV1,
+                    .Div8 => .RCC_SYSCLK_DIV8,
+                    .Div128 => .RCC_SYSCLK_DIV128,
+                    .Div256 => .RCC_SYSCLK_DIV256,
+                    .Div64 => .RCC_SYSCLK_DIV64,
                 };
             }
             pub fn get(self: @This()) !f32 {
@@ -1062,20 +1062,20 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_PPRE {
                 return switch (self) {
-                    .RCC_HCLK_DIV2 => .Div2,
                     .RCC_HCLK_DIV4 => .Div4,
                     .RCC_HCLK_DIV16 => .Div16,
-                    .RCC_HCLK_DIV8 => .Div8,
+                    .RCC_HCLK_DIV2 => .Div2,
                     .RCC_HCLK_DIV1 => .Div1,
+                    .RCC_HCLK_DIV8 => .Div8,
                 };
             }
             pub fn from_enum(item: RCC_PPRE) anyerror!@This() {
                 return switch (item) {
-                    .Div2 => .RCC_HCLK_DIV2,
                     .Div4 => .RCC_HCLK_DIV4,
                     .Div16 => .RCC_HCLK_DIV16,
-                    .Div8 => .RCC_HCLK_DIV8,
+                    .Div2 => .RCC_HCLK_DIV2,
                     .Div1 => .RCC_HCLK_DIV1,
+                    .Div8 => .RCC_HCLK_DIV8,
                 };
             }
             pub fn get(self: @This()) !f32 {
@@ -1124,72 +1124,72 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_PLLP {
                 return switch (self) {
-                    .RCC_PLLP_DIV30 => .Div30,
-                    .RCC_PLLP_DIV25 => .Div25,
-                    .RCC_PLLP_DIV10 => .Div10,
-                    .RCC_PLLP_DIV11 => .Div11,
-                    .RCC_PLLP_DIV28 => .Div28,
-                    .RCC_PLLP_DIV20 => .Div20,
-                    .RCC_PLLP_DIV26 => .Div26,
-                    .RCC_PLLP_DIV17 => .Div17,
-                    .RCC_PLLP_DIV15 => .Div15,
-                    .RCC_PLLP_DIV14 => .Div14,
-                    .RCC_PLLP_DIV2 => .Div2,
-                    .RCC_PLLP_DIV5 => .Div5,
-                    .RCC_PLLP_DIV19 => .Div19,
-                    .RCC_PLLP_DIV24 => .Div24,
-                    .RCC_PLLP_DIV32 => .Div32,
-                    .RCC_PLLP_DIV22 => .Div22,
-                    .RCC_PLLP_DIV12 => .Div12,
-                    .RCC_PLLP_DIV21 => .Div21,
-                    .RCC_PLLP_DIV23 => .Div23,
-                    .RCC_PLLP_DIV18 => .Div18,
-                    .RCC_PLLP_DIV6 => .Div6,
-                    .RCC_PLLP_DIV31 => .Div31,
-                    .RCC_PLLP_DIV9 => .Div9,
                     .RCC_PLLP_DIV7 => .Div7,
-                    .RCC_PLLP_DIV4 => .Div4,
-                    .RCC_PLLP_DIV16 => .Div16,
+                    .RCC_PLLP_DIV24 => .Div24,
+                    .RCC_PLLP_DIV10 => .Div10,
                     .RCC_PLLP_DIV13 => .Div13,
+                    .RCC_PLLP_DIV9 => .Div9,
+                    .RCC_PLLP_DIV12 => .Div12,
+                    .RCC_PLLP_DIV22 => .Div22,
+                    .RCC_PLLP_DIV21 => .Div21,
+                    .RCC_PLLP_DIV26 => .Div26,
+                    .RCC_PLLP_DIV5 => .Div5,
+                    .RCC_PLLP_DIV11 => .Div11,
+                    .RCC_PLLP_DIV3 => .Div3,
+                    .RCC_PLLP_DIV16 => .Div16,
+                    .RCC_PLLP_DIV18 => .Div18,
+                    .RCC_PLLP_DIV2 => .Div2,
+                    .RCC_PLLP_DIV20 => .Div20,
+                    .RCC_PLLP_DIV14 => .Div14,
+                    .RCC_PLLP_DIV17 => .Div17,
+                    .RCC_PLLP_DIV19 => .Div19,
+                    .RCC_PLLP_DIV4 => .Div4,
                     .RCC_PLLP_DIV27 => .Div27,
+                    .RCC_PLLP_DIV15 => .Div15,
                     .RCC_PLLP_DIV8 => .Div8,
                     .RCC_PLLP_DIV29 => .Div29,
-                    .RCC_PLLP_DIV3 => .Div3,
+                    .RCC_PLLP_DIV28 => .Div28,
+                    .RCC_PLLP_DIV23 => .Div23,
+                    .RCC_PLLP_DIV25 => .Div25,
+                    .RCC_PLLP_DIV32 => .Div32,
+                    .RCC_PLLP_DIV31 => .Div31,
+                    .RCC_PLLP_DIV30 => .Div30,
+                    .RCC_PLLP_DIV6 => .Div6,
                 };
             }
             pub fn from_enum(item: RCC_PLLP) anyerror!@This() {
                 return switch (item) {
-                    .Div30 => .RCC_PLLP_DIV30,
-                    .Div25 => .RCC_PLLP_DIV25,
-                    .Div10 => .RCC_PLLP_DIV10,
-                    .Div11 => .RCC_PLLP_DIV11,
-                    .Div28 => .RCC_PLLP_DIV28,
-                    .Div20 => .RCC_PLLP_DIV20,
-                    .Div26 => .RCC_PLLP_DIV26,
-                    .Div17 => .RCC_PLLP_DIV17,
-                    .Div15 => .RCC_PLLP_DIV15,
-                    .Div14 => .RCC_PLLP_DIV14,
-                    .Div2 => .RCC_PLLP_DIV2,
-                    .Div5 => .RCC_PLLP_DIV5,
-                    .Div19 => .RCC_PLLP_DIV19,
-                    .Div24 => .RCC_PLLP_DIV24,
-                    .Div32 => .RCC_PLLP_DIV32,
-                    .Div22 => .RCC_PLLP_DIV22,
-                    .Div12 => .RCC_PLLP_DIV12,
-                    .Div21 => .RCC_PLLP_DIV21,
-                    .Div23 => .RCC_PLLP_DIV23,
-                    .Div18 => .RCC_PLLP_DIV18,
-                    .Div6 => .RCC_PLLP_DIV6,
-                    .Div31 => .RCC_PLLP_DIV31,
-                    .Div9 => .RCC_PLLP_DIV9,
                     .Div7 => .RCC_PLLP_DIV7,
-                    .Div4 => .RCC_PLLP_DIV4,
-                    .Div16 => .RCC_PLLP_DIV16,
+                    .Div24 => .RCC_PLLP_DIV24,
+                    .Div10 => .RCC_PLLP_DIV10,
                     .Div13 => .RCC_PLLP_DIV13,
+                    .Div9 => .RCC_PLLP_DIV9,
+                    .Div12 => .RCC_PLLP_DIV12,
+                    .Div22 => .RCC_PLLP_DIV22,
+                    .Div21 => .RCC_PLLP_DIV21,
+                    .Div26 => .RCC_PLLP_DIV26,
+                    .Div5 => .RCC_PLLP_DIV5,
+                    .Div11 => .RCC_PLLP_DIV11,
+                    .Div3 => .RCC_PLLP_DIV3,
+                    .Div16 => .RCC_PLLP_DIV16,
+                    .Div18 => .RCC_PLLP_DIV18,
+                    .Div2 => .RCC_PLLP_DIV2,
+                    .Div20 => .RCC_PLLP_DIV20,
+                    .Div14 => .RCC_PLLP_DIV14,
+                    .Div17 => .RCC_PLLP_DIV17,
+                    .Div19 => .RCC_PLLP_DIV19,
+                    .Div4 => .RCC_PLLP_DIV4,
                     .Div27 => .RCC_PLLP_DIV27,
+                    .Div15 => .RCC_PLLP_DIV15,
                     .Div8 => .RCC_PLLP_DIV8,
                     .Div29 => .RCC_PLLP_DIV29,
-                    .Div3 => .RCC_PLLP_DIV3,
+                    .Div28 => .RCC_PLLP_DIV28,
+                    .Div23 => .RCC_PLLP_DIV23,
+                    .Div25 => .RCC_PLLP_DIV25,
+                    .Div32 => .RCC_PLLP_DIV32,
+                    .Div31 => .RCC_PLLP_DIV31,
+                    .Div30 => .RCC_PLLP_DIV30,
+                    .Div6 => .RCC_PLLP_DIV6,
                 };
             }
             pub fn get(self: @This()) !f32 {
@@ -1241,22 +1241,22 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             pub fn to_enum(self: @This()) anyerror!RCC_PLLQ {
                 return switch (self) {
                     .RCC_PLLQ_DIV2 => .Div2,
-                    .RCC_PLLQ_DIV3 => .Div3,
-                    .RCC_PLLQ_DIV5 => .Div5,
                     .RCC_PLLQ_DIV7 => .Div7,
                     .RCC_PLLQ_DIV8 => .Div8,
+                    .RCC_PLLQ_DIV3 => .Div3,
                     .RCC_PLLQ_DIV6 => .Div6,
+                    .RCC_PLLQ_DIV5 => .Div5,
                     .RCC_PLLQ_DIV4 => .Div4,
                 };
             }
             pub fn from_enum(item: RCC_PLLQ) anyerror!@This() {
                 return switch (item) {
                     .Div2 => .RCC_PLLQ_DIV2,
-                    .Div3 => .RCC_PLLQ_DIV3,
-                    .Div5 => .RCC_PLLQ_DIV5,
                     .Div7 => .RCC_PLLQ_DIV7,
                     .Div8 => .RCC_PLLQ_DIV8,
+                    .Div3 => .RCC_PLLQ_DIV3,
                     .Div6 => .RCC_PLLQ_DIV6,
+                    .Div5 => .RCC_PLLQ_DIV5,
                     .Div4 => .RCC_PLLQ_DIV4,
                 };
             }
@@ -1284,24 +1284,24 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_PLLR {
                 return switch (self) {
-                    .RCC_PLLR_DIV2 => .Div2,
-                    .RCC_PLLR_DIV4 => .Div4,
-                    .RCC_PLLR_DIV7 => .Div7,
-                    .RCC_PLLR_DIV6 => .Div6,
                     .RCC_PLLR_DIV5 => .Div5,
-                    .RCC_PLLR_DIV3 => .Div3,
+                    .RCC_PLLR_DIV2 => .Div2,
+                    .RCC_PLLR_DIV7 => .Div7,
+                    .RCC_PLLR_DIV4 => .Div4,
                     .RCC_PLLR_DIV8 => .Div8,
+                    .RCC_PLLR_DIV3 => .Div3,
+                    .RCC_PLLR_DIV6 => .Div6,
                 };
             }
             pub fn from_enum(item: RCC_PLLR) anyerror!@This() {
                 return switch (item) {
-                    .Div2 => .RCC_PLLR_DIV2,
-                    .Div4 => .RCC_PLLR_DIV4,
-                    .Div7 => .RCC_PLLR_DIV7,
-                    .Div6 => .RCC_PLLR_DIV6,
                     .Div5 => .RCC_PLLR_DIV5,
-                    .Div3 => .RCC_PLLR_DIV3,
+                    .Div2 => .RCC_PLLR_DIV2,
+                    .Div7 => .RCC_PLLR_DIV7,
+                    .Div4 => .RCC_PLLR_DIV4,
                     .Div8 => .RCC_PLLR_DIV8,
+                    .Div3 => .RCC_PLLR_DIV3,
+                    .Div6 => .RCC_PLLR_DIV6,
                 };
             }
             pub fn get(self: @This()) !f32 {
@@ -1344,14 +1344,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!PWR_VOS {
                 return switch (self) {
-                    .PWR_REGULATOR_VOLTAGE_SCALE1 => .Range1,
                     .PWR_REGULATOR_VOLTAGE_SCALE2 => .Range2,
+                    .PWR_REGULATOR_VOLTAGE_SCALE1 => .Range1,
                 };
             }
             pub fn from_enum(item: PWR_VOS) anyerror!@This() {
                 return switch (item) {
-                    .Range1 => .PWR_REGULATOR_VOLTAGE_SCALE1,
                     .Range2 => .PWR_REGULATOR_VOLTAGE_SCALE2,
+                    .Range1 => .PWR_REGULATOR_VOLTAGE_SCALE1,
                 };
             }
         };
@@ -1374,16 +1374,16 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!CRS_SYNCSRC {
                 return switch (self) {
-                    .RCC_CRS_SYNC_SOURCE_LSE => .LSE,
-                    .RCC_CRS_SYNC_SOURCE_GPIO => .GPIO,
                     .RCC_CRS_SYNC_SOURCE_USB => .USB,
+                    .RCC_CRS_SYNC_SOURCE_GPIO => .GPIO,
+                    .RCC_CRS_SYNC_SOURCE_LSE => .LSE,
                 };
             }
             pub fn from_enum(item: CRS_SYNCSRC) anyerror!@This() {
                 return switch (item) {
-                    .LSE => .RCC_CRS_SYNC_SOURCE_LSE,
-                    .GPIO => .RCC_CRS_SYNC_SOURCE_GPIO,
                     .USB => .RCC_CRS_SYNC_SOURCE_USB,
+                    .GPIO => .RCC_CRS_SYNC_SOURCE_GPIO,
+                    .LSE => .RCC_CRS_SYNC_SOURCE_LSE,
                 };
             }
         };
@@ -1411,20 +1411,25 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
 
             pub fn to_enum(self: @This()) anyerror!RCC_LSEDRV {
                 return switch (self) {
-                    .RCC_LSEDRIVE_MEDIUMHIGH => .MediumHigh,
                     .RCC_LSEDRIVE_MEDIUMLOW => .MediumLow,
-                    .RCC_LSEDRIVE_HIGH => .High,
+                    .RCC_LSEDRIVE_MEDIUMHIGH => .MediumHigh,
                     .RCC_LSEDRIVE_LOW => .Low,
+                    .RCC_LSEDRIVE_HIGH => .High,
                 };
             }
             pub fn from_enum(item: RCC_LSEDRV) anyerror!@This() {
                 return switch (item) {
-                    .MediumHigh => .RCC_LSEDRIVE_MEDIUMHIGH,
                     .MediumLow => .RCC_LSEDRIVE_MEDIUMLOW,
-                    .High => .RCC_LSEDRIVE_HIGH,
+                    .MediumHigh => .RCC_LSEDRIVE_MEDIUMHIGH,
                     .Low => .RCC_LSEDRIVE_LOW,
+                    .High => .RCC_LSEDRIVE_HIGH,
                 };
             }
+        };
+
+        pub const CodegenConfigPeriphList = enum {
+            false,
+            true,
         };
 
         pub const EnableHSERTCDevisorList = enum {
@@ -1589,6 +1594,14 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             LPTIM2_Used: bool = false,
             LPTIM3_Used: bool = false,
             LPUART2_Used: bool = false,
+            MCOC2onfig: bool = false,
+            RTC_WAKEUP_INTERRUPT: bool = false,
+            RCC_RTCCLKSOURCE_LSE: bool = false,
+            RCC_RTCCLKSOURCE_LSI: bool = false,
+            RCC_HCLK_DIV1: bool = false,
+            TIM15: bool = true,
+            TIM1: bool = true,
+            USBCLKSOURCE_PLL: bool = false,
         };
 
         //=======ClockTree Output Flags========
@@ -1623,9 +1636,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             LPTIM2_Used: bool = false,
             LPTIM3_Used: bool = false,
             LPUART2_Used: bool = false,
+            MCOC2onfig: bool = false,
+            RTC_WAKEUP_INTERRUPT: bool = false,
+            RCC_RTCCLKSOURCE_LSE: bool = false,
+            RCC_RTCCLKSOURCE_LSI: bool = false,
+            RCC_HCLK_DIV1: bool = false,
+            TIM15: bool = true,
+            TIM1: bool = true,
+            USBCLKSOURCE_PLL: bool = false,
             INSTRUCTION_CACHE_ENABLE: bool = false, //Reference flag
             PREFETCH_ENABLE: bool = false, //Reference flag
             DATA_CACHE_ENABLE: bool = false, //Reference flag
+            CodegenConfigPeriph: bool = true, //Reference flag
             EnableHSERTCDevisor: bool = false, //Reference flag
             EnableHSELCDDevisor: bool = false, //Reference flag
             RTCEnable: bool = false, //Reference flag
@@ -1682,6 +1704,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSE_Timout: ?u32 = null,
             LSE_Timout: ?u32 = null,
             LSE_Drive_Capability: ?LSE_Drive_CapabilityList = null,
+            CodegenConfigPeriph: ?CodegenConfigPeriphList = null,
             SYSCLKFreq_VALUE1: ?f32 = null,
             SYSCLKFreq_VALUE2: ?u32 = null,
             EnableCSSLSE: ?EnableCSSLSEList = null,
@@ -1806,6 +1829,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HSE_Timout: ?u32 = null,
             LSE_Timout: ?u32 = null,
             LSE_Drive_Capability: ?RCC_LSEDRV = null,
+            CodegenConfigPeriph: ?CodegenConfigPeriphList = null,
             SYSCLKFreq_VALUE1: ?f32 = null,
             SYSCLKFreq_VALUE2: ?u32 = null,
             EnableCSSLSE: ?EnableCSSLSEList = null,
@@ -1832,6 +1856,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     .HSE_Timout = self.HSE_Timout,
                     .LSE_Timout = self.LSE_Timout,
                     .LSE_Drive_Capability = if (self.LSE_Drive_Capability) |val| try LSE_Drive_CapabilityList.from_enum(val) else null,
+                    .CodegenConfigPeriph = self.CodegenConfigPeriph,
                     .SYSCLKFreq_VALUE1 = self.SYSCLKFreq_VALUE1,
                     .SYSCLKFreq_VALUE2 = self.SYSCLKFreq_VALUE2,
                     .EnableCSSLSE = self.EnableCSSLSE,
@@ -2129,7 +2154,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
         pub fn get_cubemx_clocks(config: CubeMXConfig, comptime patch_logs: bool) anyerror!CubemxTreeOutput {
             std.mem.doNotOptimizeAway(patch_logs);
 
-            if (@inComptime()) @setEvalBranchQuota(30000);
+            if (@inComptime()) @setEvalBranchQuota(1000000);
             var out = ClockOutput{};
             var ref_out: CubeMXOutputConfig = undefined;
 
@@ -2715,8 +2740,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LSIRC.limit = .{
                     .min = 3.04e4,
                     .max = 3.36e4,
+                    .main_expr = "Else",
+                    .main_dialog = "No additional information",
                 };
-
                 break :blk user_val orelse 3.2e4;
             };
 
@@ -2765,6 +2791,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     LSEOSC.limit = .{
                         .min = 3.2768e4,
                         .max = 3.2768e4,
+                        .main_expr = "LSEOscillator",
+                        .main_dialog = "LSE In crystal Mode",
                     };
                     break :blk 3.2768e4;
                 }
@@ -2772,8 +2800,9 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 LSEOSC.limit = .{
                     .min = 1e3,
                     .max = 1e6,
+                    .main_expr = "Else",
+                    .main_dialog = "No additional information",
                 };
-
                 break :blk user_val orelse 3.2768e4;
             };
 
@@ -4381,6 +4410,18 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 break :blk null;
             };
 
+            const CodegenConfigPeriphValue: CodegenConfigPeriphList = blk: {
+                const user_val = config.extra_config.CodegenConfigPeriph;
+
+                if (user_val) |val| {
+                    switch (val) {
+                        .false => {},
+                        .true => {},
+                    }
+                }
+                break :blk user_val orelse .true;
+            };
+
             const EnableHSERTCDevisorValue: EnableHSERTCDevisorList = blk: {
                 if ((config.flags.RTC_Used and (config.flags.HSEOscillator or config.flags.HSEByPass))) {
                     break :blk .true;
@@ -4396,154 +4437,154 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             };
 
             const RTCEnableValue: RTCEnableList = blk: {
-                if (config.flags.RTC_Used and true) {
+                if (config.flags.RTC_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const LCDEnableValue: LCDEnableList = blk: {
-                if (config.flags.LCD_Used and true) {
+                if (config.flags.LCD_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const EnableRTCWKUPValue: EnableRTCWKUPList = blk: {
-                if (config.flags.RTC_Used and check_MCU("RTC_WAKEUP_INTERRUPT") and true) {
+                if (config.flags.RTC_Used and config.flags.RTC_WAKEUP_INTERRUPT and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const IWDGEnableValue: IWDGEnableList = blk: {
-                if (config.flags.IWDG_Used and true) {
+                if (config.flags.IWDG_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const USART1EnableValue: USART1EnableList = blk: {
-                if (config.flags.USART1_Used and true) {
+                if (config.flags.USART1_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const USART2EnableValue: USART2EnableList = blk: {
-                if (config.flags.USART2_Used and true) {
+                if (config.flags.USART2_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const LPUART1EnableValue: LPUART1EnableList = blk: {
-                if (config.flags.LPUART1_Used and true) {
+                if (config.flags.LPUART1_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const LPTIM1EnableValue: LPTIM1EnableList = blk: {
-                if (config.flags.LPTIM1_Used and true) {
+                if (config.flags.LPTIM1_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const LPTIM2EnableValue: LPTIM2EnableList = blk: {
-                if (config.flags.LPTIM2_Used and true) {
+                if (config.flags.LPTIM2_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const LPTIM3EnableValue: LPTIM3EnableList = blk: {
-                if (config.flags.LPTIM3_Used and true) {
+                if (config.flags.LPTIM3_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const LPUART2EnableValue: LPUART2EnableList = blk: {
-                if (config.flags.LPUART2_Used and true) {
+                if (config.flags.LPUART2_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const LPUART3EnableValue: LPUART3EnableList = blk: {
-                if (config.flags.LPUART3_Used and true) {
+                if (config.flags.LPUART3_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const TIM1EnableValue: TIM1EnableList = blk: {
-                if (true and true) {
+                if (config.flags.TIM1 and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const TIM15EnableValue: TIM15EnableList = blk: {
-                if (true and true) {
+                if (config.flags.TIM15 and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const ADCEnableValue: ADCEnableList = blk: {
-                if (config.flags.ADC1_Used and true) {
+                if (config.flags.ADC1_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const I2C1EnableValue: I2C1EnableList = blk: {
-                if (config.flags.I2C1_Used and true) {
+                if (config.flags.I2C1_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const I2C3EnableValue: I2C3EnableList = blk: {
-                if (config.flags.I2C3_Used and true) {
+                if (config.flags.I2C3_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const USBEnableValue: USBEnableList = blk: {
-                if (config.flags.USB_Used and true) {
+                if (config.flags.USB_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const RNGEnableValue: RNGEnableList = blk: {
-                if (config.flags.RNG_Used and true) {
+                if (config.flags.RNG_Used and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const MCOEnableValue: MCOEnableList = blk: {
-                if (config.flags.MCOConfig and true) {
+                if (config.flags.MCOConfig and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const MCO2EnableValue: MCO2EnableList = blk: {
-                if (config.flags.MCO2Config and true) {
+                if (config.flags.MCO2Config and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
             };
 
             const LSCOEnableValue: LSCOEnableList = blk: {
-                if (config.flags.LSCOConfig and true) {
+                if (config.flags.LSCOConfig and check_ref(@TypeOf(CodegenConfigPeriphValue), CodegenConfigPeriphValue, .true, .@"=")) {
                     break :blk .true;
                 }
                 break :blk .false;
@@ -4672,302 +4713,261 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PLLM.parents = &.{&PLLSource};
 
             // ======= NODE HSERTCDevisor ======
-            if (check_ref(@TypeOf(EnableHSERTCDevisorValue), EnableHSERTCDevisorValue, .true, .@"=") or check_ref(@TypeOf(EnableHSELCDDevisorValue), EnableHSELCDDevisorValue, .true, .@"=")) {
-                HSERTCDevisor.nodetype = .div;
-                HSERTCDevisor.value = @floatFromInt(RCC_RTC_Clock_Source_FROM_HSEValue);
-                HSERTCDevisor.parents = &.{&HSEOSC};
-            }
+            HSERTCDevisor.nodetype = .div;
+            HSERTCDevisor.value = @floatFromInt(RCC_RTC_Clock_Source_FROM_HSEValue);
+            HSERTCDevisor.parents = &.{&HSEOSC};
+
             // ======= NODE RTCClkSource ======
-            if (check_ref(@TypeOf(RTCEnableValue), RTCEnableValue, .true, .@"=") or check_ref(@TypeOf(LCDEnableValue), LCDEnableValue, .true, .@"=")) {
-                RTCClkSource.nodetype = .multi;
-                RTCClkSource.parents = switch (RTCClockSelectionValue) {
-                    .RCC_RTCCLKSOURCE_HSE_DIV32 => &.{&HSERTCDevisor},
-                    .RCC_RTCCLKSOURCE_LSE => &.{&LSEOSC},
-                    .RCC_RTCCLKSOURCE_LSI => &.{&LSIRC},
-                };
-            }
+            RTCClkSource.nodetype = .multi;
+            RTCClkSource.parents = switch (RTCClockSelectionValue) {
+                .RCC_RTCCLKSOURCE_HSE_DIV32 => &.{&HSERTCDevisor},
+                .RCC_RTCCLKSOURCE_LSE => &.{&LSEOSC},
+                .RCC_RTCCLKSOURCE_LSI => &.{&LSIRC},
+            };
+
             // ======= NODE RTCOutput ======
-            if (check_ref(@TypeOf(RTCEnableValue), RTCEnableValue, .true, .@"=") or check_ref(@TypeOf(LCDEnableValue), LCDEnableValue, .true, .@"=")) {
-                RTCOutput.nodetype = .output;
-                RTCOutput.parents = &.{&RTCClkSource};
-            }
+            RTCOutput.nodetype = .output;
+            RTCOutput.parents = &.{&RTCClkSource};
+
             // ======= NODE RTCWkupOutput ======
-            if (check_ref(@TypeOf(EnableRTCWKUPValue), EnableRTCWKUPValue, .true, .@"=")) {
-                RTCWkupOutput.nodetype = .output;
-                RTCWkupOutput.parents = &.{&RTCClkSource};
-            }
+            RTCWkupOutput.nodetype = .output;
+            RTCWkupOutput.parents = &.{&RTCClkSource};
+
             // ======= NODE IWDGOutput ======
-            if (check_ref(@TypeOf(IWDGEnableValue), IWDGEnableValue, .true, .@"=")) {
-                IWDGOutput.nodetype = .output;
-                IWDGOutput.parents = &.{&LSIRC};
-            }
+            IWDGOutput.nodetype = .output;
+            IWDGOutput.parents = &.{&LSIRC};
+
             // ======= NODE USART1Mult ======
-            if (check_ref(@TypeOf(USART1EnableValue), USART1EnableValue, .true, .@"=")) {
-                USART1Mult.nodetype = .multi;
-                USART1Mult.parents = switch (USART1CLockSelectionValue) {
-                    .RCC_USART1CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_USART1CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_USART1CLKSOURCE_HSI => &.{&HSIRC},
-                    .RCC_USART1CLKSOURCE_LSE => &.{&LSEOSC},
-                };
-            }
+            USART1Mult.nodetype = .multi;
+            USART1Mult.parents = switch (USART1CLockSelectionValue) {
+                .RCC_USART1CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_USART1CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_USART1CLKSOURCE_HSI => &.{&HSIRC},
+                .RCC_USART1CLKSOURCE_LSE => &.{&LSEOSC},
+            };
+
             // ======= NODE USART1output ======
-            if (check_ref(@TypeOf(USART1EnableValue), USART1EnableValue, .true, .@"=")) {
-                USART1output.nodetype = .output;
-                USART1output.parents = &.{&USART1Mult};
-            }
+            USART1output.nodetype = .output;
+            USART1output.parents = &.{&USART1Mult};
+
             // ======= NODE USART2Mult ======
-            if (check_ref(@TypeOf(USART2EnableValue), USART2EnableValue, .true, .@"=")) {
-                USART2Mult.nodetype = .multi;
-                USART2Mult.parents = switch (USART2CLockSelectionValue) {
-                    .RCC_USART2CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_USART2CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_USART2CLKSOURCE_HSI => &.{&HSIRC},
-                    .RCC_USART2CLKSOURCE_LSE => &.{&LSEOSC},
-                };
-            }
+            USART2Mult.nodetype = .multi;
+            USART2Mult.parents = switch (USART2CLockSelectionValue) {
+                .RCC_USART2CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_USART2CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_USART2CLKSOURCE_HSI => &.{&HSIRC},
+                .RCC_USART2CLKSOURCE_LSE => &.{&LSEOSC},
+            };
+
             // ======= NODE USART2output ======
-            if (check_ref(@TypeOf(USART2EnableValue), USART2EnableValue, .true, .@"=")) {
-                USART2output.nodetype = .output;
-                USART2output.parents = &.{&USART2Mult};
-            }
+            USART2output.nodetype = .output;
+            USART2output.parents = &.{&USART2Mult};
+
             // ======= NODE LPUART1Mult ======
-            if (check_ref(@TypeOf(LPUART1EnableValue), LPUART1EnableValue, .true, .@"=")) {
-                LPUART1Mult.nodetype = .multi;
-                LPUART1Mult.parents = switch (LPUART1CLockSelectionValue) {
-                    .RCC_LPUART1CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_LPUART1CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_LPUART1CLKSOURCE_HSI => &.{&HSIRC},
-                    .RCC_LPUART1CLKSOURCE_LSE => &.{&LSEOSC},
-                };
-            }
+            LPUART1Mult.nodetype = .multi;
+            LPUART1Mult.parents = switch (LPUART1CLockSelectionValue) {
+                .RCC_LPUART1CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_LPUART1CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_LPUART1CLKSOURCE_HSI => &.{&HSIRC},
+                .RCC_LPUART1CLKSOURCE_LSE => &.{&LSEOSC},
+            };
+
             // ======= NODE LPUART1output ======
-            if (check_ref(@TypeOf(LPUART1EnableValue), LPUART1EnableValue, .true, .@"=")) {
-                LPUART1output.nodetype = .output;
-                LPUART1output.parents = &.{&LPUART1Mult};
-            }
+            LPUART1output.nodetype = .output;
+            LPUART1output.parents = &.{&LPUART1Mult};
+
             // ======= NODE LPTIM1Mult ======
-            if (check_ref(@TypeOf(LPTIM1EnableValue), LPTIM1EnableValue, .true, .@"=")) {
-                LPTIM1Mult.nodetype = .multi;
-                LPTIM1Mult.parents = switch (LPTIM1CLockSelectionValue) {
-                    .RCC_LPTIM1CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_LPTIM1CLKSOURCE_LSI => &.{&LSIRC},
-                    .RCC_LPTIM1CLKSOURCE_LSE => &.{&LSEOSC},
-                    .RCC_LPTIM1CLKSOURCE_HSI => &.{&HSIRC},
-                };
-            }
+            LPTIM1Mult.nodetype = .multi;
+            LPTIM1Mult.parents = switch (LPTIM1CLockSelectionValue) {
+                .RCC_LPTIM1CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_LPTIM1CLKSOURCE_LSI => &.{&LSIRC},
+                .RCC_LPTIM1CLKSOURCE_LSE => &.{&LSEOSC},
+                .RCC_LPTIM1CLKSOURCE_HSI => &.{&HSIRC},
+            };
+
             // ======= NODE LPTIM1output ======
-            if (check_ref(@TypeOf(LPTIM1EnableValue), LPTIM1EnableValue, .true, .@"=")) {
-                LPTIM1output.nodetype = .output;
-                LPTIM1output.parents = &.{&LPTIM1Mult};
-            }
+            LPTIM1output.nodetype = .output;
+            LPTIM1output.parents = &.{&LPTIM1Mult};
+
             // ======= NODE LPTIM2Mult ======
-            if (check_ref(@TypeOf(LPTIM2EnableValue), LPTIM2EnableValue, .true, .@"=")) {
-                LPTIM2Mult.nodetype = .multi;
-                LPTIM2Mult.parents = switch (LPTIM2CLockSelectionValue) {
-                    .RCC_LPTIM2CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_LPTIM2CLKSOURCE_LSI => &.{&LSIRC},
-                    .RCC_LPTIM2CLKSOURCE_LSE => &.{&LSEOSC},
-                    .RCC_LPTIM2CLKSOURCE_HSI => &.{&HSIRC},
-                };
-            }
+            LPTIM2Mult.nodetype = .multi;
+            LPTIM2Mult.parents = switch (LPTIM2CLockSelectionValue) {
+                .RCC_LPTIM2CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_LPTIM2CLKSOURCE_LSI => &.{&LSIRC},
+                .RCC_LPTIM2CLKSOURCE_LSE => &.{&LSEOSC},
+                .RCC_LPTIM2CLKSOURCE_HSI => &.{&HSIRC},
+            };
+
             // ======= NODE LPTIM2output ======
-            if (check_ref(@TypeOf(LPTIM2EnableValue), LPTIM2EnableValue, .true, .@"=")) {
-                LPTIM2output.nodetype = .output;
-                LPTIM2output.parents = &.{&LPTIM2Mult};
-            }
+            LPTIM2output.nodetype = .output;
+            LPTIM2output.parents = &.{&LPTIM2Mult};
+
             // ======= NODE LPTIM3Mult ======
-            if (check_ref(@TypeOf(LPTIM3EnableValue), LPTIM3EnableValue, .true, .@"=")) {
-                LPTIM3Mult.nodetype = .multi;
-                LPTIM3Mult.parents = switch (LPTIM3CLockSelectionValue) {
-                    .RCC_LPTIM3CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_LPTIM3CLKSOURCE_LSI => &.{&LSIRC},
-                    .RCC_LPTIM3CLKSOURCE_LSE => &.{&LSEOSC},
-                    .RCC_LPTIM3CLKSOURCE_HSI => &.{&HSIRC},
-                };
-            }
+            LPTIM3Mult.nodetype = .multi;
+            LPTIM3Mult.parents = switch (LPTIM3CLockSelectionValue) {
+                .RCC_LPTIM3CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_LPTIM3CLKSOURCE_LSI => &.{&LSIRC},
+                .RCC_LPTIM3CLKSOURCE_LSE => &.{&LSEOSC},
+                .RCC_LPTIM3CLKSOURCE_HSI => &.{&HSIRC},
+            };
+
             // ======= NODE LPTIM3output ======
-            if (check_ref(@TypeOf(LPTIM3EnableValue), LPTIM3EnableValue, .true, .@"=")) {
-                LPTIM3output.nodetype = .output;
-                LPTIM3output.parents = &.{&LPTIM3Mult};
-            }
+            LPTIM3output.nodetype = .output;
+            LPTIM3output.parents = &.{&LPTIM3Mult};
+
             // ======= NODE LPUART2Mult ======
-            if (check_ref(@TypeOf(LPUART2EnableValue), LPUART2EnableValue, .true, .@"=")) {
-                LPUART2Mult.nodetype = .multi;
-                LPUART2Mult.parents = switch (LPUART2CLockSelectionValue) {
-                    .RCC_LPUART2CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_LPUART2CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_LPUART2CLKSOURCE_HSI => &.{&HSIRC},
-                    .RCC_LPUART2CLKSOURCE_LSE => &.{&LSEOSC},
-                };
-            }
+            LPUART2Mult.nodetype = .multi;
+            LPUART2Mult.parents = switch (LPUART2CLockSelectionValue) {
+                .RCC_LPUART2CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_LPUART2CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_LPUART2CLKSOURCE_HSI => &.{&HSIRC},
+                .RCC_LPUART2CLKSOURCE_LSE => &.{&LSEOSC},
+            };
+
             // ======= NODE LPUART2output ======
-            if (check_ref(@TypeOf(LPUART2EnableValue), LPUART2EnableValue, .true, .@"=")) {
-                LPUART2output.nodetype = .output;
-                LPUART2output.parents = &.{&LPUART2Mult};
-            }
+            LPUART2output.nodetype = .output;
+            LPUART2output.parents = &.{&LPUART2Mult};
+
             // ======= NODE LPUART3Mult ======
-            if (check_ref(@TypeOf(LPUART3EnableValue), LPUART3EnableValue, .true, .@"=")) {
-                LPUART3Mult.nodetype = .multi;
-                LPUART3Mult.parents = switch (LPUART3CLockSelectionValue) {
-                    .RCC_LPUART3CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_LPUART3CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_LPUART3CLKSOURCE_HSI => &.{&HSIRC},
-                    .RCC_LPUART3CLKSOURCE_LSE => &.{&LSEOSC},
-                };
-            }
+            LPUART3Mult.nodetype = .multi;
+            LPUART3Mult.parents = switch (LPUART3CLockSelectionValue) {
+                .RCC_LPUART3CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_LPUART3CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_LPUART3CLKSOURCE_HSI => &.{&HSIRC},
+                .RCC_LPUART3CLKSOURCE_LSE => &.{&LSEOSC},
+            };
+
             // ======= NODE LPUART3output ======
-            if (check_ref(@TypeOf(LPUART3EnableValue), LPUART3EnableValue, .true, .@"=")) {
-                LPUART3output.nodetype = .output;
-                LPUART3output.parents = &.{&LPUART3Mult};
-            }
+            LPUART3output.nodetype = .output;
+            LPUART3output.parents = &.{&LPUART3Mult};
+
             // ======= NODE TIM1output ======
-            if (check_ref(@TypeOf(TIM1EnableValue), TIM1EnableValue, .true, .@"=")) {
-                TIM1output.nodetype = .output;
-                TIM1output.parents = &.{&TIM1Mult};
-            }
+            TIM1output.nodetype = .output;
+            TIM1output.parents = &.{&TIM1Mult};
+
             // ======= NODE TIM15output ======
-            if (check_ref(@TypeOf(TIM15EnableValue), TIM15EnableValue, .true, .@"=")) {
-                TIM15output.nodetype = .output;
-                TIM15output.parents = &.{&TIM15Mult};
-            }
+            TIM15output.nodetype = .output;
+            TIM15output.parents = &.{&TIM15Mult};
+
             // ======= NODE ADCMult ======
-            if (check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"=")) {
-                ADCMult.nodetype = .multi;
-                ADCMult.parents = switch (ADCCLockSelectionValue) {
-                    .RCC_ADCCLKSOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_ADCCLKSOURCE_HSI => &.{&HSIRC},
-                    .RCC_ADCCLKSOURCE_PLLP => &.{&PLLP},
-                };
-            }
+            ADCMult.nodetype = .multi;
+            ADCMult.parents = switch (ADCCLockSelectionValue) {
+                .RCC_ADCCLKSOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_ADCCLKSOURCE_HSI => &.{&HSIRC},
+                .RCC_ADCCLKSOURCE_PLLP => &.{&PLLP},
+            };
+
             // ======= NODE ADCoutput ======
-            if (check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"=")) {
-                ADCoutput.nodetype = .output;
-                ADCoutput.parents = &.{&ADCMult};
-            }
+            ADCoutput.nodetype = .output;
+            ADCoutput.parents = &.{&ADCMult};
+
             // ======= NODE I2C1Mult ======
-            if (check_ref(@TypeOf(I2C1EnableValue), I2C1EnableValue, .true, .@"=")) {
-                I2C1Mult.nodetype = .multi;
-                I2C1Mult.parents = switch (I2C1CLockSelectionValue) {
-                    .RCC_I2C1CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_I2C1CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_I2C1CLKSOURCE_HSI => &.{&HSIRC},
-                };
-            }
+            I2C1Mult.nodetype = .multi;
+            I2C1Mult.parents = switch (I2C1CLockSelectionValue) {
+                .RCC_I2C1CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_I2C1CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_I2C1CLKSOURCE_HSI => &.{&HSIRC},
+            };
+
             // ======= NODE I2C1output ======
-            if (check_ref(@TypeOf(I2C1EnableValue), I2C1EnableValue, .true, .@"=")) {
-                I2C1output.nodetype = .output;
-                I2C1output.parents = &.{&I2C1Mult};
-            }
+            I2C1output.nodetype = .output;
+            I2C1output.parents = &.{&I2C1Mult};
+
             // ======= NODE I2C3Mult ======
-            if (check_ref(@TypeOf(I2C3EnableValue), I2C3EnableValue, .true, .@"=")) {
-                I2C3Mult.nodetype = .multi;
-                I2C3Mult.parents = switch (I2C3CLockSelectionValue) {
-                    .RCC_I2C3CLKSOURCE_PCLK1 => &.{&APBPrescaler},
-                    .RCC_I2C3CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_I2C3CLKSOURCE_HSI => &.{&HSIRC},
-                };
-            }
+            I2C3Mult.nodetype = .multi;
+            I2C3Mult.parents = switch (I2C3CLockSelectionValue) {
+                .RCC_I2C3CLKSOURCE_PCLK1 => &.{&APBPrescaler},
+                .RCC_I2C3CLKSOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_I2C3CLKSOURCE_HSI => &.{&HSIRC},
+            };
+
             // ======= NODE I2C3output ======
-            if (check_ref(@TypeOf(I2C3EnableValue), I2C3EnableValue, .true, .@"=")) {
-                I2C3output.nodetype = .output;
-                I2C3output.parents = &.{&I2C3Mult};
-            }
+            I2C3output.nodetype = .output;
+            I2C3output.parents = &.{&I2C3Mult};
+
             // ======= NODE USBMult ======
-            if (check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"=")) {
-                USBMult.nodetype = .multi;
-                USBMult.parents = switch (USBCLockSelectionValue) {
-                    .RCC_USBCLKSOURCE_MSI => &.{&MSIRC},
-                    .RCC_USBCLKSOURCE_HSI48 => &.{&HSI48RC},
-                    .RCC_USBCLKSOURCE_PLLQ => &.{&PLLQ},
-                };
-            }
+            USBMult.nodetype = .multi;
+            USBMult.parents = switch (USBCLockSelectionValue) {
+                .RCC_USBCLKSOURCE_MSI => &.{&MSIRC},
+                .RCC_USBCLKSOURCE_HSI48 => &.{&HSI48RC},
+                .RCC_USBCLKSOURCE_PLLQ => &.{&PLLQ},
+            };
+
             // ======= NODE USBoutput ======
-            if (check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"=")) {
-                USBoutput.nodetype = .output;
-                USBoutput.parents = &.{&USBMult};
-            }
+            USBoutput.nodetype = .output;
+            USBoutput.parents = &.{&USBMult};
+
             // ======= NODE RNGMult ======
-            if (check_ref(@TypeOf(RNGEnableValue), RNGEnableValue, .true, .@"=")) {
-                RNGMult.nodetype = .multi;
-                RNGMult.parents = switch (RNGCLockSelectionValue) {
-                    .RCC_RNGCLKSOURCE_MSI => &.{&MSIRC},
-                    .RCC_RNGCLKSOURCE_HSI48 => &.{&HSI48RC},
-                    .RCC_RNGCLKSOURCE_PLLQ => &.{&PLLQ},
-                };
-            }
+            RNGMult.nodetype = .multi;
+            RNGMult.parents = switch (RNGCLockSelectionValue) {
+                .RCC_RNGCLKSOURCE_MSI => &.{&MSIRC},
+                .RCC_RNGCLKSOURCE_HSI48 => &.{&HSI48RC},
+                .RCC_RNGCLKSOURCE_PLLQ => &.{&PLLQ},
+            };
+
             // ======= NODE RNGoutput ======
-            if (check_ref(@TypeOf(RNGEnableValue), RNGEnableValue, .true, .@"=")) {
-                RNGoutput.nodetype = .output;
-                RNGoutput.parents = &.{&RNGMult};
-            }
+            RNGoutput.nodetype = .output;
+            RNGoutput.parents = &.{&RNGMult};
+
             // ======= NODE MCOMult ======
-            if (check_ref(@TypeOf(MCOEnableValue), MCOEnableValue, .true, .@"=")) {
-                MCOMult.nodetype = .multi;
-                MCOMult.parents = switch (RCC_MCO1SourceValue) {
-                    .RCC_MCO1SOURCE_LSE => &.{&LSEOSC},
-                    .RCC_MCO1SOURCE_LSI => &.{&LSIRC},
-                    .RCC_MCO1SOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_MCO1SOURCE_HSE => &.{&HSEOSC},
-                    .RCC_MCO1SOURCE_HSI => &.{&HSIRC},
-                    .RCC_MCO1SOURCE_HSI48 => &.{&HSI48RC},
-                    .RCC_MCO1SOURCE_PLLR => &.{&PLLR},
-                    .RCC_MCO1SOURCE_MSI => &.{&MSIRC},
-                    .RCC_MCO1SOURCE_RTC_ALT => &.{&RTCClkSource},
-                    .RCC_MCO1SOURCE_RTC_WAKEUP => &.{&RTCWkupOutput},
-                };
-            }
+            MCOMult.nodetype = .multi;
+            MCOMult.parents = switch (RCC_MCO1SourceValue) {
+                .RCC_MCO1SOURCE_LSE => &.{&LSEOSC},
+                .RCC_MCO1SOURCE_LSI => &.{&LSIRC},
+                .RCC_MCO1SOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_MCO1SOURCE_HSE => &.{&HSEOSC},
+                .RCC_MCO1SOURCE_HSI => &.{&HSIRC},
+                .RCC_MCO1SOURCE_HSI48 => &.{&HSI48RC},
+                .RCC_MCO1SOURCE_PLLR => &.{&PLLR},
+                .RCC_MCO1SOURCE_MSI => &.{&MSIRC},
+                .RCC_MCO1SOURCE_RTC_ALT => &.{&RTCClkSource},
+                .RCC_MCO1SOURCE_RTC_WAKEUP => &.{&RTCWkupOutput},
+            };
+
             // ======= NODE MCODiv ======
-            if (check_ref(@TypeOf(MCOEnableValue), MCOEnableValue, .true, .@"=")) {
-                MCODiv.nodetype = .div;
-                MCODiv.value = try RCC_MCODivValue.get();
-                MCODiv.parents = &.{&MCOMult};
-            }
+            MCODiv.nodetype = .div;
+            MCODiv.value = try RCC_MCODivValue.get();
+            MCODiv.parents = &.{&MCOMult};
+
             // ======= NODE MCOPin ======
-            if (check_ref(@TypeOf(MCOEnableValue), MCOEnableValue, .true, .@"=")) {
-                MCOPin.nodetype = .output;
-                MCOPin.parents = &.{&MCODiv};
-            }
+            MCOPin.nodetype = .output;
+            MCOPin.parents = &.{&MCODiv};
+
             // ======= NODE MCO2Mult ======
-            if (check_ref(@TypeOf(MCO2EnableValue), MCO2EnableValue, .true, .@"=")) {
-                MCO2Mult.nodetype = .multi;
-                MCO2Mult.parents = switch (RCC_MCO2SourceValue) {
-                    .RCC_MCO2SOURCE_LSE => &.{&LSEOSC},
-                    .RCC_MCO2SOURCE_LSI => &.{&LSIRC},
-                    .RCC_MCO2SOURCE_SYSCLK => &.{&SysCLKOutput},
-                    .RCC_MCO2SOURCE_HSE => &.{&HSEOSC},
-                    .RCC_MCO2SOURCE_HSI => &.{&HSIRC},
-                    .RCC_MCO2SOURCE_HSI48 => &.{&HSI48RC},
-                    .RCC_MCO2SOURCE_PLLR => &.{&PLLR},
-                    .RCC_MCO2SOURCE_MSI => &.{&MSIRC},
-                    .RCC_MCO2SOURCE_RTC_ALT => &.{&RTCClkSource},
-                    .RCC_MCO2SOURCE_RTC_WAKEUP => &.{&RTCWkupOutput},
-                };
-            }
+            MCO2Mult.nodetype = .multi;
+            MCO2Mult.parents = switch (RCC_MCO2SourceValue) {
+                .RCC_MCO2SOURCE_LSE => &.{&LSEOSC},
+                .RCC_MCO2SOURCE_LSI => &.{&LSIRC},
+                .RCC_MCO2SOURCE_SYSCLK => &.{&SysCLKOutput},
+                .RCC_MCO2SOURCE_HSE => &.{&HSEOSC},
+                .RCC_MCO2SOURCE_HSI => &.{&HSIRC},
+                .RCC_MCO2SOURCE_HSI48 => &.{&HSI48RC},
+                .RCC_MCO2SOURCE_PLLR => &.{&PLLR},
+                .RCC_MCO2SOURCE_MSI => &.{&MSIRC},
+                .RCC_MCO2SOURCE_RTC_ALT => &.{&RTCClkSource},
+                .RCC_MCO2SOURCE_RTC_WAKEUP => &.{&RTCWkupOutput},
+            };
+
             // ======= NODE MCO2Div ======
-            if (check_ref(@TypeOf(MCO2EnableValue), MCO2EnableValue, .true, .@"=")) {
-                MCO2Div.nodetype = .div;
-                MCO2Div.value = try RCC_MCO2DivValue.get();
-                MCO2Div.parents = &.{&MCO2Mult};
-            }
+            MCO2Div.nodetype = .div;
+            MCO2Div.value = try RCC_MCO2DivValue.get();
+            MCO2Div.parents = &.{&MCO2Mult};
+
             // ======= NODE MCO2Pin ======
-            if (check_ref(@TypeOf(MCO2EnableValue), MCO2EnableValue, .true, .@"=")) {
-                MCO2Pin.nodetype = .output;
-                MCO2Pin.parents = &.{&MCO2Div};
-            }
+            MCO2Pin.nodetype = .output;
+            MCO2Pin.parents = &.{&MCO2Div};
+
             // ======= NODE LSCOMult ======
-            if (check_ref(@TypeOf(LSCOEnableValue), LSCOEnableValue, .true, .@"=")) {
-                LSCOMult.nodetype = .multi;
-                LSCOMult.parents = switch (LSCOSource1Value) {
-                    .RCC_LSCOSOURCE_LSI => &.{&LSIRC},
-                    .RCC_LSCOSOURCE_LSE => &.{&LSEOSC},
-                };
-            }
+            LSCOMult.nodetype = .multi;
+            LSCOMult.parents = switch (LSCOSource1Value) {
+                .RCC_LSCOSOURCE_LSI => &.{&LSIRC},
+                .RCC_LSCOSOURCE_LSE => &.{&LSEOSC},
+            };
+
             // ======= NODE LSCOOutput ======
-            if (check_ref(@TypeOf(LSCOEnableValue), LSCOEnableValue, .true, .@"=")) {
-                LSCOOutput.nodetype = .output;
-                LSCOOutput.parents = &.{&LSCOMult};
-            }
+            LSCOOutput.nodetype = .output;
+            LSCOOutput.parents = &.{&LSCOMult};
+
             // ======= NODE AHBPrescaler ======
             AHBPrescaler.nodetype = .div;
             AHBPrescaler.value = try AHBCLKDividerValue.get();
@@ -5022,27 +5022,23 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PLLN.parents = &.{&PLLM};
 
             // ======= NODE PLLP ======
-            if (check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"=")) {
-                PLLP.nodetype = .div;
-                PLLP.value = try PLLPValue.get();
-                PLLP.parents = &.{&PLLN};
-            }
+            PLLP.nodetype = .div;
+            PLLP.value = try PLLPValue.get();
+            PLLP.parents = &.{&PLLN};
+
             // ======= NODE PLLPoutput ======
-            if (check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"=")) {
-                PLLPoutput.nodetype = .output;
-                PLLPoutput.parents = &.{&PLLP};
-            }
+            PLLPoutput.nodetype = .output;
+            PLLPoutput.parents = &.{&PLLP};
+
             // ======= NODE PLLQ ======
-            if (check_ref(@TypeOf(RNGEnableValue), RNGEnableValue, .true, .@"=") or check_ref(@TypeOf(TIM1EnableValue), TIM1EnableValue, .true, .@"=") or check_ref(@TypeOf(TIM15EnableValue), TIM15EnableValue, .true, .@"=") or check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"=")) {
-                PLLQ.nodetype = .div;
-                PLLQ.value = try PLLQValue.get();
-                PLLQ.parents = &.{&PLLN};
-            }
+            PLLQ.nodetype = .div;
+            PLLQ.value = try PLLQValue.get();
+            PLLQ.parents = &.{&PLLN};
+
             // ======= NODE PLLQoutput ======
-            if (check_ref(@TypeOf(RNGEnableValue), RNGEnableValue, .true, .@"=") or check_ref(@TypeOf(TIM1EnableValue), TIM1EnableValue, .true, .@"=") or check_ref(@TypeOf(TIM15EnableValue), TIM15EnableValue, .true, .@"=") or check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"=")) {
-                PLLQoutput.nodetype = .output;
-                PLLQoutput.parents = &.{&PLLQ};
-            }
+            PLLQoutput.nodetype = .output;
+            PLLQoutput.parents = &.{&PLLQ};
+
             // ======= NODE PLLR ======
             PLLR.nodetype = .div;
             PLLR.value = try PLLRValue.get();
@@ -5073,6 +5069,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             AHBOutput.limit = .{
                 .min = null,
                 .max = 5.6e7,
+                .main_expr = "Else",
+                .main_dialog = "No additional information",
             };
 
             const PWR_Regulator_Voltage_ScaleValue: PWR_Regulator_Voltage_ScaleList = blk: {
@@ -5133,24 +5131,27 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                     HSEOSC.limit = .{
                         .min = 4e6,
                         .max = 4.8e7,
+                        .main_expr = "(HSEByPass|HSEOscillator) & scale1 ",
+                        .main_dialog = "HSE in bypass Mode",
                     };
-
                     break :blk user_val orelse 4e6;
                 } else if ((config.flags.HSEByPass or config.flags.HSEOscillator) and scale2) {
                     const user_val = config.HSE_VALUE;
                     HSEOSC.limit = .{
                         .min = 4e6,
                         .max = 1.9e7,
+                        .main_expr = "(HSEByPass|HSEOscillator) & scale2 ",
+                        .main_dialog = "HSE in bypass Mode",
                     };
-
                     break :blk user_val orelse 4e6;
                 }
                 const user_val = config.HSE_VALUE;
                 HSEOSC.limit = .{
                     .min = 4e6,
                     .max = 4.8e7,
+                    .main_expr = "Else",
+                    .main_dialog = "No additional information",
                 };
-
                 break :blk user_val orelse 4e6;
             };
 
@@ -5165,6 +5166,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             SysCLKOutput.limit = .{
                 .min = null,
                 .max = 5.6e7,
+                .main_expr = "Else",
+                .main_dialog = "No additional information",
             };
 
             //======= RTCFreq_Value ========
@@ -5174,6 +5177,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 RTCOutput.limit = .{
                     .min = 0e0,
                     .max = 1e6,
+                    .main_expr = "(!(RTCClockSelection=RCC_RTCCLKSOURCE_LSE)&!(RTCClockSelection=RCC_RTCCLKSOURCE_LSI)& (RTCEnable=true))",
+                    .main_dialog = "RTC Has HSE as source",
                 };
             }
 
@@ -5265,13 +5270,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             };
 
             // ======= NODE TIM1Mult ======
-            if (check_ref(@TypeOf(TIM1EnableValue), TIM1EnableValue, .true, .@"=")) {
-                TIM1Mult.nodetype = .multi;
-                TIM1Mult.parents = switch (TIM1CLockSelectionVirtualValue) {
-                    .RCC_TIM1CLKSOURCE_PCLK1 => &.{&TimPrescalerAPB},
-                    .RCC_TIM1CLKSOURCE_PLLQ => &.{&PLLQ},
-                };
-            }
+            TIM1Mult.nodetype = .multi;
+            TIM1Mult.parents = switch (TIM1CLockSelectionVirtualValue) {
+                .RCC_TIM1CLKSOURCE_PCLK1 => &.{&TimPrescalerAPB},
+                .RCC_TIM1CLKSOURCE_PLLQ => &.{&PLLQ},
+            };
+
             //======= APBTimFreq_Value ========
             const APBTimFreq_ValueValue = TimPrescOut1.get_as_ref();
             ignore_value(APBTimFreq_ValueValue);
@@ -5283,6 +5287,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             TIM1output.limit = .{
                 .min = null,
                 .max = 1.28e8,
+                .main_expr = "Else",
+                .main_dialog = "No additional information",
             };
 
             const TIM15CLockSelectionVirtualValue: TIM15CLockSelectionVirtualList = blk: {
@@ -5325,13 +5331,12 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             };
 
             // ======= NODE TIM15Mult ======
-            if (check_ref(@TypeOf(TIM15EnableValue), TIM15EnableValue, .true, .@"=")) {
-                TIM15Mult.nodetype = .multi;
-                TIM15Mult.parents = switch (TIM15CLockSelectionVirtualValue) {
-                    .RCC_TIM15CLKSOURCE_PCLK1 => &.{&TimPrescalerAPB},
-                    .RCC_TIM15CLKSOURCE_PLLQ => &.{&PLLQ},
-                };
-            }
+            TIM15Mult.nodetype = .multi;
+            TIM15Mult.parents = switch (TIM15CLockSelectionVirtualValue) {
+                .RCC_TIM15CLKSOURCE_PCLK1 => &.{&TimPrescalerAPB},
+                .RCC_TIM15CLKSOURCE_PLLQ => &.{&PLLQ},
+            };
+
             //======= TIM15Freq_Value ========
             const TIM15Freq_ValueValue = TIM15output.get_as_ref();
             ignore_value(TIM15Freq_ValueValue);
@@ -5343,16 +5348,22 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 ADCoutput.limit = .{
                     .min = null,
                     .max = 1.22e8,
+                    .main_expr = "scale1",
+                    .main_dialog = "",
                 };
             } else if (scale2) {
                 ADCoutput.limit = .{
                     .min = null,
                     .max = 4e7,
+                    .main_expr = "scale2",
+                    .main_dialog = "",
                 };
             } else {
                 ADCoutput.limit = .{
                     .min = null,
                     .max = 8e7,
+                    .main_expr = "Else",
+                    .main_dialog = "No additional information",
                 };
             }
 
@@ -5391,6 +5402,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             PWRCLKoutput.limit = .{
                 .min = null,
                 .max = 5.6e7,
+                .main_expr = "Else",
+                .main_dialog = "No additional information",
             };
 
             //======= AHBFreq_Value ========
@@ -5400,6 +5413,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             HCLKOutput.limit = .{
                 .min = null,
                 .max = 5.6e7,
+                .main_expr = "Else",
+                .main_dialog = "No additional information",
             };
 
             //======= CortexFreq_Value ========
@@ -5409,6 +5424,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             CortexSysOutput.limit = .{
                 .min = null,
                 .max = 5.6e7,
+                .main_expr = "Else",
+                .main_dialog = "No additional information",
             };
 
             //======= FCLKCortexFreq_Value ========
@@ -5418,6 +5435,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             FCLKCortexOutput.limit = .{
                 .min = null,
                 .max = 5.6e7,
+                .main_expr = "Else",
+                .main_dialog = "No additional information",
             };
 
             //======= APBFreq_Value ========
@@ -5427,6 +5446,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             APBOutput.limit = .{
                 .min = null,
                 .max = 6.4e7,
+                .main_expr = "Else",
+                .main_dialog = "No additional information",
             };
 
             //======= PLLPoutputFreq_Value ========
@@ -5436,31 +5457,39 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 PLLPoutput.limit = .{
                     .min = null,
                     .max = 1.22e8,
+                    .main_expr = " (ADC1_Used & ADCSourcePllp) & scale1",
+                    .main_dialog = " ",
                 };
             } else if ((config.flags.ADC1_Used and ADCSourcePllp) and scale2) {
                 PLLPoutput.limit = .{
                     .min = null,
                     .max = 4e7,
+                    .main_expr = " (ADC1_Used & ADCSourcePllp) & scale2",
+                    .main_dialog = " ",
                 };
             }
 
             //======= PLLQoutputFreq_Value ========
             const PLLQoutputFreq_ValueValue = PLLQoutput.get_as_ref();
             ignore_value(PLLQoutputFreq_ValueValue);
-            if (((TIM15SOURCEPll and true) or (TIM1SOURCEPll and true) or ((config.flags.USB_Used or config.flags.RNG_Used) and check_MCU("USBCLKSOURCE_PLL"))) and scale1) {
+            if (((TIM15SOURCEPll and config.flags.TIM15) or (TIM1SOURCEPll and config.flags.TIM1) or ((config.flags.USB_Used or config.flags.RNG_Used) and config.flags.USBCLKSOURCE_PLL)) and scale1) {
                 PLLQoutput.limit = .{
                     .min = null,
                     .max = 5.6e7,
+                    .main_expr = "((TIM15SOURCEPll & TIM15) | (TIM1SOURCEPll & TIM1) | ((USB_Used|RNG_Used) & USBCLKSOURCE_PLL)) & scale1",
+                    .main_dialog = " ",
                 };
-            } else if (((TIM15SOURCEPll and true) or (TIM1SOURCEPll and true) or ((config.flags.USB_Used or config.flags.RNG_Used) and check_MCU("USBCLKSOURCE_PLL"))) and scale2) {
+            } else if (((TIM15SOURCEPll and config.flags.TIM15) or (TIM1SOURCEPll and config.flags.TIM1) or ((config.flags.USB_Used or config.flags.RNG_Used) and config.flags.USBCLKSOURCE_PLL)) and scale2) {
                 PLLQoutput.limit = .{
                     .min = null,
                     .max = 1.9e7,
+                    .main_expr = "((TIM15SOURCEPll & TIM15) | (TIM1SOURCEPll & TIM1) | ((USB_Used|RNG_Used) & USBCLKSOURCE_PLL)) & scale2",
+                    .main_dialog = " ",
                 };
             }
 
             const PLLUsedValue: u1 = blk: {
-                if ((config.flags.ADC1_Used and ADCSourcePllp) or (true and TIM15SOURCEPll) or (true and TIM1SOURCEPll) or (SysSourcePLL) or (MCOSourcePLL and config.flags.MCOConfig) or (MCO2SourcePLL and config.flags.MCO2Config) or (USBCLKSOURCE_PLLQ and (config.flags.RNG_Used or config.flags.USB_Used))) {
+                if ((config.flags.ADC1_Used and ADCSourcePllp) or (config.flags.TIM15 and TIM15SOURCEPll) or (config.flags.TIM1 and TIM1SOURCEPll) or (SysSourcePLL) or (MCOSourcePLL and config.flags.MCOConfig) or (MCO2SourcePLL and config.flags.MCO2Config) or (USBCLKSOURCE_PLLQ and (config.flags.RNG_Used or config.flags.USB_Used))) {
                     break :blk 1;
                 }
                 break :blk 0;
@@ -5473,6 +5502,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 VCOInput.limit = .{
                     .min = 2.66e6,
                     .max = 1.6e7,
+                    .main_expr = "(PLLUsed=1) ",
+                    .main_dialog = " PLLUsed=1",
                 };
             }
 
@@ -5483,11 +5514,15 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 VCOOutput.limit = .{
                     .min = 9.6e7,
                     .max = 3.44e8,
+                    .main_expr = "PLLUsed=1 & scale1",
+                    .main_dialog = "PLLUsed=1 ",
                 };
             } else if (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"=") and scale2) {
                 VCOOutput.limit = .{
                     .min = 9.6e7,
                     .max = 1.28e8,
+                    .main_expr = "PLLUsed=1 & scale2",
+                    .main_dialog = "PLLUsed=1 ",
                 };
             }
 
@@ -5498,6 +5533,8 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
                 PLLCLK.limit = .{
                     .min = null,
                     .max = 5.6e7,
+                    .main_expr = "((PLLUsed=1 & SysSourcePLL) | (MCOSourcePLL & MCOConfig) | (MCO2SourcePLL & MCO2Config))",
+                    .main_dialog = " ",
                 };
             }
 
@@ -5697,11 +5734,152 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             };
 
             const HSIUsedValue: u1 = blk: {
-                if ((ADCSourceHsi and config.flags.ADC1_Used) or (USART1SourceHSI and config.flags.USART1_Used) or (USART2SourceHSI and config.flags.USART2_Used) or (LPUART1SourceHSI and config.flags.LPUART1_Used) or (LPUART2SourceHSI and config.flags.LPUART2_Used) or (LPUART3SourceHSI and config.flags.LPUART3_Used) or (LPTIM1SOURCEHSI and config.flags.LPTIM1_Used) or (LPTIM2SOURCEHSI and config.flags.LPTIM2_Used) or (LPTIM3SOURCEHSI and config.flags.LPTIM3_Used) or (I2C1SourceHSI and config.flags.I2C1_Used) or (I2C3SourceHSI and config.flags.I2C3_Used) or (PLLSourceHSI and (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"="))) or (SysSourceHSI) or (MCOSourceHSI and config.flags.MCOConfig) or (MCO2SourceHSI and check_MCU("MCOC2onfig"))) {
+                if ((ADCSourceHsi and config.flags.ADC1_Used) or (USART1SourceHSI and config.flags.USART1_Used) or (USART2SourceHSI and config.flags.USART2_Used) or (LPUART1SourceHSI and config.flags.LPUART1_Used) or (LPUART2SourceHSI and config.flags.LPUART2_Used) or (LPUART3SourceHSI and config.flags.LPUART3_Used) or (LPTIM1SOURCEHSI and config.flags.LPTIM1_Used) or (LPTIM2SOURCEHSI and config.flags.LPTIM2_Used) or (LPTIM3SOURCEHSI and config.flags.LPTIM3_Used) or (I2C1SourceHSI and config.flags.I2C1_Used) or (I2C3SourceHSI and config.flags.I2C3_Used) or (PLLSourceHSI and (check_ref(@TypeOf(PLLUsedValue), PLLUsedValue, 1, .@"="))) or (SysSourceHSI) or (MCOSourceHSI and config.flags.MCOConfig) or (MCO2SourceHSI and config.flags.MCOC2onfig)) {
                     break :blk 1;
                 }
                 break :blk 0;
             };
+            if (!(check_ref(@TypeOf(EnableHSERTCDevisorValue), EnableHSERTCDevisorValue, .true, .@"=") or check_ref(@TypeOf(EnableHSELCDDevisorValue), EnableHSELCDDevisorValue, .true, .@"="))) {
+                HSERTCDevisor.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(RTCEnableValue), RTCEnableValue, .true, .@"=") or check_ref(@TypeOf(LCDEnableValue), LCDEnableValue, .true, .@"="))) {
+                RTCClkSource.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(RTCEnableValue), RTCEnableValue, .true, .@"=") or check_ref(@TypeOf(LCDEnableValue), LCDEnableValue, .true, .@"="))) {
+                RTCOutput.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(EnableRTCWKUPValue), EnableRTCWKUPValue, .true, .@"="))) {
+                RTCWkupOutput.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(IWDGEnableValue), IWDGEnableValue, .true, .@"="))) {
+                IWDGOutput.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(USART1EnableValue), USART1EnableValue, .true, .@"="))) {
+                USART1Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(USART1EnableValue), USART1EnableValue, .true, .@"="))) {
+                USART1output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(USART2EnableValue), USART2EnableValue, .true, .@"="))) {
+                USART2Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(USART2EnableValue), USART2EnableValue, .true, .@"="))) {
+                USART2output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPUART1EnableValue), LPUART1EnableValue, .true, .@"="))) {
+                LPUART1Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPUART1EnableValue), LPUART1EnableValue, .true, .@"="))) {
+                LPUART1output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPTIM1EnableValue), LPTIM1EnableValue, .true, .@"="))) {
+                LPTIM1Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPTIM1EnableValue), LPTIM1EnableValue, .true, .@"="))) {
+                LPTIM1output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPTIM2EnableValue), LPTIM2EnableValue, .true, .@"="))) {
+                LPTIM2Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPTIM2EnableValue), LPTIM2EnableValue, .true, .@"="))) {
+                LPTIM2output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPTIM3EnableValue), LPTIM3EnableValue, .true, .@"="))) {
+                LPTIM3Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPTIM3EnableValue), LPTIM3EnableValue, .true, .@"="))) {
+                LPTIM3output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPUART2EnableValue), LPUART2EnableValue, .true, .@"="))) {
+                LPUART2Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPUART2EnableValue), LPUART2EnableValue, .true, .@"="))) {
+                LPUART2output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPUART3EnableValue), LPUART3EnableValue, .true, .@"="))) {
+                LPUART3Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LPUART3EnableValue), LPUART3EnableValue, .true, .@"="))) {
+                LPUART3output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(TIM1EnableValue), TIM1EnableValue, .true, .@"="))) {
+                TIM1Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(TIM1EnableValue), TIM1EnableValue, .true, .@"="))) {
+                TIM1output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(TIM15EnableValue), TIM15EnableValue, .true, .@"="))) {
+                TIM15Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(TIM15EnableValue), TIM15EnableValue, .true, .@"="))) {
+                TIM15output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"="))) {
+                ADCMult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"="))) {
+                ADCoutput.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(I2C1EnableValue), I2C1EnableValue, .true, .@"="))) {
+                I2C1Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(I2C1EnableValue), I2C1EnableValue, .true, .@"="))) {
+                I2C1output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(I2C3EnableValue), I2C3EnableValue, .true, .@"="))) {
+                I2C3Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(I2C3EnableValue), I2C3EnableValue, .true, .@"="))) {
+                I2C3output.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"="))) {
+                USBMult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"="))) {
+                USBoutput.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(RNGEnableValue), RNGEnableValue, .true, .@"="))) {
+                RNGMult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(RNGEnableValue), RNGEnableValue, .true, .@"="))) {
+                RNGoutput.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(MCOEnableValue), MCOEnableValue, .true, .@"="))) {
+                MCOMult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(MCOEnableValue), MCOEnableValue, .true, .@"="))) {
+                MCODiv.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(MCOEnableValue), MCOEnableValue, .true, .@"="))) {
+                MCOPin.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(MCO2EnableValue), MCO2EnableValue, .true, .@"="))) {
+                MCO2Mult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(MCO2EnableValue), MCO2EnableValue, .true, .@"="))) {
+                MCO2Div.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(MCO2EnableValue), MCO2EnableValue, .true, .@"="))) {
+                MCO2Pin.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LSCOEnableValue), LSCOEnableValue, .true, .@"="))) {
+                LSCOMult.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(LSCOEnableValue), LSCOEnableValue, .true, .@"="))) {
+                LSCOOutput.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"="))) {
+                PLLP.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(ADCEnableValue), ADCEnableValue, .true, .@"="))) {
+                PLLPoutput.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(RNGEnableValue), RNGEnableValue, .true, .@"=") or check_ref(@TypeOf(TIM1EnableValue), TIM1EnableValue, .true, .@"=") or check_ref(@TypeOf(TIM15EnableValue), TIM15EnableValue, .true, .@"=") or check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"="))) {
+                PLLQ.nodetype = .off;
+            }
+            if (!(check_ref(@TypeOf(RNGEnableValue), RNGEnableValue, .true, .@"=") or check_ref(@TypeOf(TIM1EnableValue), TIM1EnableValue, .true, .@"=") or check_ref(@TypeOf(TIM15EnableValue), TIM15EnableValue, .true, .@"=") or check_ref(@TypeOf(USBEnableValue), USBEnableValue, .true, .@"="))) {
+                PLLQoutput.nodetype = .off;
+            }
             out.HSIRC = try HSIRC.get_output();
             out.HSI48RC = try HSI48RC.get_output();
             out.HSEOSC = try HSEOSC.get_output();
@@ -5870,6 +6048,7 @@ pub fn ClockTree(comptime mcu_data: std.StaticStringMap(void)) type {
             ref_out.HSE_Timout = HSE_TimoutValue;
             ref_out.LSE_Timout = LSE_TimoutValue;
             ref_out.LSE_Drive_Capability = LSE_Drive_CapabilityValue;
+            ref_out.flags.CodegenConfigPeriph = CodegenConfigPeriphValue == .true;
             ignore_value(SYSCLKFreq_VALUE1Value);
             ignore_value(SYSCLKFreq_VALUE2Value);
             ref_out.flags.EnableHSERTCDevisor = EnableHSERTCDevisorValue == .true;

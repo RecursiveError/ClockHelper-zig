@@ -66,12 +66,19 @@ pub fn build(b: *std.Build) void {
         "python3",
         "src/embassy-patchs/multiplexor_fix.py",
     });
+
+    const run_unit_fix = b.addSystemCommand(&.{
+        "python3",
+        "src/embassy-patchs/unipatch.py",
+    });
+
     const run_match_patch = b.addSystemCommand(&.{
         "python3",
         "src/embassy-patchs/cubemx_to_embassy.py",
     });
     run_mplx_fix.step.dependOn(&run_virtual_marge.step);
-    run_match_patch.step.dependOn(&run_mplx_fix.step);
+    run_unit_fix.step.dependOn(&run_mplx_fix.step);
+    run_match_patch.step.dependOn(&run_unit_fix.step);
 
     const patch_step = b.step("patch", "Run patch scripts to fix CubeMX data");
     patch_step.dependOn(&run_match_patch.step);

@@ -5368,46 +5368,18 @@
     "gen_patches": {
         "enums": [
             {
-                "name": "RCC_HPRE",
+                "name": "RCC_CKDFSDMASEL",
                 "fields": [
                     {
-                        "name": "Div1",
+                        "name": "I2S1",
                         "value": 0
                     },
                     {
-                        "name": "Div2",
-                        "value": 8
-                    },
-                    {
-                        "name": "Div4",
-                        "value": 9
-                    },
-                    {
-                        "name": "Div8",
-                        "value": 10
-                    },
-                    {
-                        "name": "Div16",
-                        "value": 11
-                    },
-                    {
-                        "name": "Div64",
-                        "value": 12
-                    },
-                    {
-                        "name": "Div128",
-                        "value": 13
-                    },
-                    {
-                        "name": "Div256",
-                        "value": 14
-                    },
-                    {
-                        "name": "Div512",
-                        "value": 15
+                        "name": "I2S2",
+                        "value": 1
                     }
                 ],
-                "bit_size": 4
+                "bit_size": 1
             },
             {
                 "name": "RCC_PLLI2SSRC",
@@ -5418,212 +5390,6 @@
                     },
                     {
                         "name": "External",
-                        "value": 1
-                    }
-                ],
-                "bit_size": 1
-            },
-            {
-                "name": "RCC_PLLSRC",
-                "fields": [
-                    {
-                        "name": "HSI",
-                        "value": 0
-                    },
-                    {
-                        "name": "HSE",
-                        "value": 1
-                    }
-                ],
-                "bit_size": 1
-            },
-            {
-                "name": "RCC_SW",
-                "fields": [
-                    {
-                        "name": "HSI",
-                        "value": 0
-                    },
-                    {
-                        "name": "HSE",
-                        "value": 1
-                    },
-                    {
-                        "name": "PLL1_P",
-                        "value": 2
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_MCO1SEL",
-                "fields": [
-                    {
-                        "name": "HSI",
-                        "value": 0
-                    },
-                    {
-                        "name": "LSE",
-                        "value": 1
-                    },
-                    {
-                        "name": "HSE",
-                        "value": 2
-                    },
-                    {
-                        "name": "PLL",
-                        "value": 3
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_MCOPRE",
-                "fields": [
-                    {
-                        "name": "Div1",
-                        "value": 0
-                    },
-                    {
-                        "name": "Div2",
-                        "value": 4
-                    },
-                    {
-                        "name": "Div3",
-                        "value": 5
-                    },
-                    {
-                        "name": "Div4",
-                        "value": 6
-                    },
-                    {
-                        "name": "Div5",
-                        "value": 7
-                    }
-                ],
-                "bit_size": 3
-            },
-            {
-                "name": "RCC_FMPI2CSEL",
-                "fields": [
-                    {
-                        "name": "PCLK1",
-                        "value": 0
-                    },
-                    {
-                        "name": "SYS",
-                        "value": 1
-                    },
-                    {
-                        "name": "HSI",
-                        "value": 2
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_I2S1SRC",
-                "fields": [
-                    {
-                        "name": "PLLI2SR",
-                        "value": 0
-                    },
-                    {
-                        "name": "I2S_CKIN",
-                        "value": 1
-                    },
-                    {
-                        "name": "PLLR",
-                        "value": 2
-                    },
-                    {
-                        "name": "HSI_HSE",
-                        "value": 3
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_TIMPRE",
-                "fields": [
-                    {
-                        "name": "Mul2",
-                        "value": 0
-                    },
-                    {
-                        "name": "Mul4",
-                        "value": 1
-                    }
-                ],
-                "bit_size": 1
-            },
-            {
-                "name": "RCC_SAI1SRC",
-                "fields": [
-                    {
-                        "name": "PLLSAI",
-                        "value": 0
-                    },
-                    {
-                        "name": "PLLI2S",
-                        "value": 1
-                    },
-                    {
-                        "name": "PLLR",
-                        "value": 2
-                    },
-                    {
-                        "name": "I2S_CKIN",
-                        "value": 3
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_MCO2SEL",
-                "fields": [
-                    {
-                        "name": "SYS",
-                        "value": 0
-                    },
-                    {
-                        "name": "PLLI2S",
-                        "value": 1
-                    },
-                    {
-                        "name": "HSE",
-                        "value": 2
-                    },
-                    {
-                        "name": "PLL",
-                        "value": 3
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_CKDFSDMSEL",
-                "fields": [
-                    {
-                        "name": "PCLK2",
-                        "value": 0
-                    },
-                    {
-                        "name": "SYS",
-                        "value": 1
-                    }
-                ],
-                "bit_size": 1
-            },
-            {
-                "name": "RCC_CLK48SEL",
-                "fields": [
-                    {
-                        "name": "PLL1_Q",
-                        "value": 0
-                    },
-                    {
-                        "name": "PLLSAI1_Q",
                         "value": 1
                     }
                 ],
@@ -5656,68 +5422,22 @@
                 "bit_size": 3
             },
             {
-                "name": "RCC_SDIOSEL",
+                "name": "RCC_SAI1SRC",
                 "fields": [
                     {
-                        "name": "CLK48",
+                        "name": "PLLSAI",
                         "value": 0
                     },
                     {
-                        "name": "SYS",
-                        "value": 1
-                    }
-                ],
-                "bit_size": 1
-            },
-            {
-                "name": "RCC_CKDFSDMASEL",
-                "fields": [
-                    {
-                        "name": "I2S1",
-                        "value": 0
-                    },
-                    {
-                        "name": "I2S2",
-                        "value": 1
-                    }
-                ],
-                "bit_size": 1
-            },
-            {
-                "name": "PWR_VOS",
-                "fields": [
-                    {
-                        "name": "SCALE3",
+                        "name": "PLLI2S",
                         "value": 1
                     },
                     {
-                        "name": "SCALE2",
+                        "name": "PLLR",
                         "value": 2
                     },
                     {
-                        "name": "SCALE1",
-                        "value": 3
-                    }
-                ],
-                "bit_size": 2
-            },
-            {
-                "name": "RCC_PLLP",
-                "fields": [
-                    {
-                        "name": "Div2",
-                        "value": 0
-                    },
-                    {
-                        "name": "Div4",
-                        "value": 1
-                    },
-                    {
-                        "name": "Div6",
-                        "value": 2
-                    },
-                    {
-                        "name": "Div8",
+                        "name": "I2S_CKIN",
                         "value": 3
                     }
                 ],
@@ -5746,22 +5466,84 @@
                 "bit_size": 2
             },
             {
-                "name": "RCC_RTCSEL",
+                "name": "RCC_MCOPRE",
                 "fields": [
                     {
-                        "name": "LSE",
-                        "value": 1
+                        "name": "Div1",
+                        "value": 0
                     },
                     {
-                        "name": "LSI",
-                        "value": 2
+                        "name": "Div2",
+                        "value": 4
+                    },
+                    {
+                        "name": "Div3",
+                        "value": 5
+                    },
+                    {
+                        "name": "Div4",
+                        "value": 6
+                    },
+                    {
+                        "name": "Div5",
+                        "value": 7
+                    }
+                ],
+                "bit_size": 3
+            },
+            {
+                "name": "RCC_SW",
+                "fields": [
+                    {
+                        "name": "HSI",
+                        "value": 0
                     },
                     {
                         "name": "HSE",
+                        "value": 1
+                    },
+                    {
+                        "name": "PLL1_P",
+                        "value": 2
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "RCC_MCO2SEL",
+                "fields": [
+                    {
+                        "name": "SYS",
+                        "value": 0
+                    },
+                    {
+                        "name": "PLLI2S",
+                        "value": 1
+                    },
+                    {
+                        "name": "HSE",
+                        "value": 2
+                    },
+                    {
+                        "name": "PLL",
                         "value": 3
                     }
                 ],
                 "bit_size": 2
+            },
+            {
+                "name": "RCC_TIMPRE",
+                "fields": [
+                    {
+                        "name": "Mul2",
+                        "value": 0
+                    },
+                    {
+                        "name": "Mul4",
+                        "value": 1
+                    }
+                ],
+                "bit_size": 1
             },
             {
                 "name": "FLASH_LATENCY",
@@ -5832,6 +5614,224 @@
                     }
                 ],
                 "bit_size": 4
+            },
+            {
+                "name": "RCC_MCO1SEL",
+                "fields": [
+                    {
+                        "name": "HSI",
+                        "value": 0
+                    },
+                    {
+                        "name": "LSE",
+                        "value": 1
+                    },
+                    {
+                        "name": "HSE",
+                        "value": 2
+                    },
+                    {
+                        "name": "PLL",
+                        "value": 3
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "RCC_FMPI2CSEL",
+                "fields": [
+                    {
+                        "name": "PCLK1",
+                        "value": 0
+                    },
+                    {
+                        "name": "SYS",
+                        "value": 1
+                    },
+                    {
+                        "name": "HSI",
+                        "value": 2
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "RCC_PLLP",
+                "fields": [
+                    {
+                        "name": "Div2",
+                        "value": 0
+                    },
+                    {
+                        "name": "Div4",
+                        "value": 1
+                    },
+                    {
+                        "name": "Div6",
+                        "value": 2
+                    },
+                    {
+                        "name": "Div8",
+                        "value": 3
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "RCC_RTCSEL",
+                "fields": [
+                    {
+                        "name": "LSE",
+                        "value": 1
+                    },
+                    {
+                        "name": "LSI",
+                        "value": 2
+                    },
+                    {
+                        "name": "HSE",
+                        "value": 3
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "PWR_VOS",
+                "fields": [
+                    {
+                        "name": "SCALE3",
+                        "value": 1
+                    },
+                    {
+                        "name": "SCALE2",
+                        "value": 2
+                    },
+                    {
+                        "name": "SCALE1",
+                        "value": 3
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "RCC_HPRE",
+                "fields": [
+                    {
+                        "name": "Div1",
+                        "value": 0
+                    },
+                    {
+                        "name": "Div2",
+                        "value": 8
+                    },
+                    {
+                        "name": "Div4",
+                        "value": 9
+                    },
+                    {
+                        "name": "Div8",
+                        "value": 10
+                    },
+                    {
+                        "name": "Div16",
+                        "value": 11
+                    },
+                    {
+                        "name": "Div64",
+                        "value": 12
+                    },
+                    {
+                        "name": "Div128",
+                        "value": 13
+                    },
+                    {
+                        "name": "Div256",
+                        "value": 14
+                    },
+                    {
+                        "name": "Div512",
+                        "value": 15
+                    }
+                ],
+                "bit_size": 4
+            },
+            {
+                "name": "RCC_CLK48SEL",
+                "fields": [
+                    {
+                        "name": "PLL1_Q",
+                        "value": 0
+                    },
+                    {
+                        "name": "PLLSAI1_Q",
+                        "value": 1
+                    }
+                ],
+                "bit_size": 1
+            },
+            {
+                "name": "RCC_CKDFSDMSEL",
+                "fields": [
+                    {
+                        "name": "PCLK2",
+                        "value": 0
+                    },
+                    {
+                        "name": "SYS",
+                        "value": 1
+                    }
+                ],
+                "bit_size": 1
+            },
+            {
+                "name": "RCC_PLLSRC",
+                "fields": [
+                    {
+                        "name": "HSI",
+                        "value": 0
+                    },
+                    {
+                        "name": "HSE",
+                        "value": 1
+                    }
+                ],
+                "bit_size": 1
+            },
+            {
+                "name": "RCC_I2S1SRC",
+                "fields": [
+                    {
+                        "name": "PLLI2SR",
+                        "value": 0
+                    },
+                    {
+                        "name": "I2S_CKIN",
+                        "value": 1
+                    },
+                    {
+                        "name": "PLLR",
+                        "value": 2
+                    },
+                    {
+                        "name": "HSI_HSE",
+                        "value": 3
+                    }
+                ],
+                "bit_size": 2
+            },
+            {
+                "name": "RCC_SDIOSEL",
+                "fields": [
+                    {
+                        "name": "CLK48",
+                        "value": 0
+                    },
+                    {
+                        "name": "SYS",
+                        "value": 1
+                    }
+                ],
+                "bit_size": 1
             }
         ],
         "rename_nodes": [],
@@ -5841,16 +5841,16 @@
                 "enum": "RCC_RTCSEL",
                 "items": [
                     {
-                        "ref_item_name": "RCC_RTCCLKSOURCE_LSE",
-                        "enum_item_name": "LSE"
+                        "ref_item_name": "RCC_RTCCLKSOURCE_LSI",
+                        "enum_item_name": "LSI"
                     },
                     {
                         "ref_item_name": "HSERTCDevisor",
                         "enum_item_name": "HSE"
                     },
                     {
-                        "ref_item_name": "RCC_RTCCLKSOURCE_LSI",
-                        "enum_item_name": "LSI"
+                        "ref_item_name": "RCC_RTCCLKSOURCE_LSE",
+                        "enum_item_name": "LSE"
                     }
                 ],
                 "incomplete": false,
@@ -5861,12 +5861,12 @@
                 "enum": "RCC_PLLSRC",
                 "items": [
                     {
-                        "ref_item_name": "RCC_PLLSOURCE_HSE",
-                        "enum_item_name": "HSE"
-                    },
-                    {
                         "ref_item_name": "RCC_PLLSOURCE_HSI",
                         "enum_item_name": "HSI"
+                    },
+                    {
+                        "ref_item_name": "RCC_PLLSOURCE_HSE",
+                        "enum_item_name": "HSE"
                     }
                 ],
                 "incomplete": false,
@@ -5893,16 +5893,16 @@
                 "enum": "RCC_SW",
                 "items": [
                     {
+                        "ref_item_name": "RCC_SYSCLKSOURCE_HSE",
+                        "enum_item_name": "HSE"
+                    },
+                    {
                         "ref_item_name": "RCC_SYSCLKSOURCE_HSI",
                         "enum_item_name": "HSI"
                     },
                     {
                         "ref_item_name": "RCC_SYSCLKSOURCE_PLLCLK",
                         "enum_item_name": "PLL1_P"
-                    },
-                    {
-                        "ref_item_name": "RCC_SYSCLKSOURCE_HSE",
-                        "enum_item_name": "HSE"
                     }
                 ],
                 "incomplete": false,
@@ -5917,16 +5917,16 @@
                         "enum_item_name": "LSE"
                     },
                     {
+                        "ref_item_name": "RCC_MCO1SOURCE_HSI",
+                        "enum_item_name": "HSI"
+                    },
+                    {
                         "ref_item_name": "RCC_MCO1SOURCE_PLLCLK",
                         "enum_item_name": "PLL"
                     },
                     {
                         "ref_item_name": "RCC_MCO1SOURCE_HSE",
                         "enum_item_name": "HSE"
-                    },
-                    {
-                        "ref_item_name": "RCC_MCO1SOURCE_HSI",
-                        "enum_item_name": "HSI"
                     }
                 ],
                 "incomplete": false,
@@ -5937,24 +5937,24 @@
                 "enum": "RCC_MCOPRE",
                 "items": [
                     {
-                        "ref_item_name": "RCC_MCODIV_3",
-                        "enum_item_name": "Div3"
+                        "ref_item_name": "RCC_MCODIV_1",
+                        "enum_item_name": "Div1"
                     },
                     {
                         "ref_item_name": "RCC_MCODIV_4",
                         "enum_item_name": "Div4"
                     },
                     {
+                        "ref_item_name": "RCC_MCODIV_2",
+                        "enum_item_name": "Div2"
+                    },
+                    {
                         "ref_item_name": "RCC_MCODIV_5",
                         "enum_item_name": "Div5"
                     },
                     {
-                        "ref_item_name": "RCC_MCODIV_1",
-                        "enum_item_name": "Div1"
-                    },
-                    {
-                        "ref_item_name": "RCC_MCODIV_2",
-                        "enum_item_name": "Div2"
+                        "ref_item_name": "RCC_MCODIV_3",
+                        "enum_item_name": "Div3"
                     }
                 ],
                 "incomplete": false,
@@ -5965,8 +5965,8 @@
                 "enum": "RCC_MCO2SEL",
                 "items": [
                     {
-                        "ref_item_name": "RCC_MCO2SOURCE_PLLI2SCLK",
-                        "enum_item_name": "PLLI2S"
+                        "ref_item_name": "RCC_MCO2SOURCE_HSE",
+                        "enum_item_name": "HSE"
                     },
                     {
                         "ref_item_name": "RCC_MCO2SOURCE_SYSCLK",
@@ -5977,8 +5977,8 @@
                         "enum_item_name": "PLL"
                     },
                     {
-                        "ref_item_name": "RCC_MCO2SOURCE_HSE",
-                        "enum_item_name": "HSE"
+                        "ref_item_name": "RCC_MCO2SOURCE_PLLI2SCLK",
+                        "enum_item_name": "PLLI2S"
                     }
                 ],
                 "incomplete": false,
@@ -5989,24 +5989,24 @@
                 "enum": "RCC_MCOPRE",
                 "items": [
                     {
-                        "ref_item_name": "RCC_MCODIV_3",
-                        "enum_item_name": "Div3"
+                        "ref_item_name": "RCC_MCODIV_1",
+                        "enum_item_name": "Div1"
                     },
                     {
                         "ref_item_name": "RCC_MCODIV_4",
                         "enum_item_name": "Div4"
                     },
                     {
+                        "ref_item_name": "RCC_MCODIV_2",
+                        "enum_item_name": "Div2"
+                    },
+                    {
                         "ref_item_name": "RCC_MCODIV_5",
                         "enum_item_name": "Div5"
                     },
                     {
-                        "ref_item_name": "RCC_MCODIV_1",
-                        "enum_item_name": "Div1"
-                    },
-                    {
-                        "ref_item_name": "RCC_MCODIV_2",
-                        "enum_item_name": "Div2"
+                        "ref_item_name": "RCC_MCODIV_3",
+                        "enum_item_name": "Div3"
                     }
                 ],
                 "incomplete": false,
@@ -6017,40 +6017,40 @@
                 "enum": "RCC_HPRE",
                 "items": [
                     {
-                        "ref_item_name": "RCC_SYSCLK_DIV16",
-                        "enum_item_name": "Div16"
-                    },
-                    {
-                        "ref_item_name": "RCC_SYSCLK_DIV256",
-                        "enum_item_name": "Div256"
-                    },
-                    {
                         "ref_item_name": "RCC_SYSCLK_DIV4",
                         "enum_item_name": "Div4"
+                    },
+                    {
+                        "ref_item_name": "RCC_SYSCLK_DIV512",
+                        "enum_item_name": "Div512"
+                    },
+                    {
+                        "ref_item_name": "RCC_SYSCLK_DIV16",
+                        "enum_item_name": "Div16"
                     },
                     {
                         "ref_item_name": "RCC_SYSCLK_DIV2",
                         "enum_item_name": "Div2"
                     },
                     {
-                        "ref_item_name": "RCC_SYSCLK_DIV8",
-                        "enum_item_name": "Div8"
+                        "ref_item_name": "RCC_SYSCLK_DIV1",
+                        "enum_item_name": "Div1"
                     },
                     {
-                        "ref_item_name": "RCC_SYSCLK_DIV64",
-                        "enum_item_name": "Div64"
+                        "ref_item_name": "RCC_SYSCLK_DIV8",
+                        "enum_item_name": "Div8"
                     },
                     {
                         "ref_item_name": "RCC_SYSCLK_DIV128",
                         "enum_item_name": "Div128"
                     },
                     {
-                        "ref_item_name": "RCC_SYSCLK_DIV1",
-                        "enum_item_name": "Div1"
+                        "ref_item_name": "RCC_SYSCLK_DIV256",
+                        "enum_item_name": "Div256"
                     },
                     {
-                        "ref_item_name": "RCC_SYSCLK_DIV512",
-                        "enum_item_name": "Div512"
+                        "ref_item_name": "RCC_SYSCLK_DIV64",
+                        "enum_item_name": "Div64"
                     }
                 ],
                 "incomplete": false,
@@ -6061,10 +6061,6 @@
                 "enum": "RCC_PPRE",
                 "items": [
                     {
-                        "ref_item_name": "RCC_HCLK_DIV2",
-                        "enum_item_name": "Div2"
-                    },
-                    {
                         "ref_item_name": "RCC_HCLK_DIV4",
                         "enum_item_name": "Div4"
                     },
@@ -6073,12 +6069,16 @@
                         "enum_item_name": "Div16"
                     },
                     {
-                        "ref_item_name": "RCC_HCLK_DIV8",
-                        "enum_item_name": "Div8"
+                        "ref_item_name": "RCC_HCLK_DIV2",
+                        "enum_item_name": "Div2"
                     },
                     {
                         "ref_item_name": "RCC_HCLK_DIV1",
                         "enum_item_name": "Div1"
+                    },
+                    {
+                        "ref_item_name": "RCC_HCLK_DIV8",
+                        "enum_item_name": "Div8"
                     }
                 ],
                 "incomplete": false,
@@ -6089,10 +6089,6 @@
                 "enum": "RCC_PPRE",
                 "items": [
                     {
-                        "ref_item_name": "RCC_HCLK_DIV2",
-                        "enum_item_name": "Div2"
-                    },
-                    {
                         "ref_item_name": "RCC_HCLK_DIV4",
                         "enum_item_name": "Div4"
                     },
@@ -6101,12 +6097,16 @@
                         "enum_item_name": "Div16"
                     },
                     {
-                        "ref_item_name": "RCC_HCLK_DIV8",
-                        "enum_item_name": "Div8"
+                        "ref_item_name": "RCC_HCLK_DIV2",
+                        "enum_item_name": "Div2"
                     },
                     {
                         "ref_item_name": "RCC_HCLK_DIV1",
                         "enum_item_name": "Div1"
+                    },
+                    {
+                        "ref_item_name": "RCC_HCLK_DIV8",
+                        "enum_item_name": "Div8"
                     }
                 ],
                 "incomplete": false,
@@ -6121,16 +6121,16 @@
                         "enum_item_name": "PLLI2SR"
                     },
                     {
-                        "ref_item_name": "RCC_I2SAPB1CLKSOURCE_PLLSRC",
-                        "enum_item_name": "HSI_HSE"
-                    },
-                    {
                         "ref_item_name": "RCC_I2SAPB1CLKSOURCE_EXT",
                         "enum_item_name": "I2S_CKIN"
                     },
                     {
                         "ref_item_name": "RCC_I2SAPB1CLKSOURCE_PLLR",
                         "enum_item_name": "PLLR"
+                    },
+                    {
+                        "ref_item_name": "RCC_I2SAPB1CLKSOURCE_PLLSRC",
+                        "enum_item_name": "HSI_HSE"
                     }
                 ],
                 "incomplete": false,
@@ -6141,20 +6141,20 @@
                 "enum": "RCC_I2S1SRC",
                 "items": [
                     {
-                        "ref_item_name": "RCC_I2SAPB2CLKSOURCE_PLLR",
-                        "enum_item_name": "PLLR"
-                    },
-                    {
-                        "ref_item_name": "RCC_I2SAPB2CLKSOURCE_PLLI2S",
-                        "enum_item_name": "PLLI2SR"
-                    },
-                    {
                         "ref_item_name": "RCC_I2SAPB2CLKSOURCE_PLLSRC",
                         "enum_item_name": "HSI_HSE"
                     },
                     {
                         "ref_item_name": "RCC_I2SAPB2CLKSOURCE_EXT",
                         "enum_item_name": "I2S_CKIN"
+                    },
+                    {
+                        "ref_item_name": "RCC_I2SAPB2CLKSOURCE_PLLI2S",
+                        "enum_item_name": "PLLI2SR"
+                    },
+                    {
+                        "ref_item_name": "RCC_I2SAPB2CLKSOURCE_PLLR",
+                        "enum_item_name": "PLLR"
                     }
                 ],
                 "incomplete": false,
@@ -6169,12 +6169,12 @@
                         "enum_item_name": "SYS"
                     },
                     {
-                        "ref_item_name": "RCC_FMPI2C1CLKSOURCE_APB",
-                        "enum_item_name": "PCLK1"
-                    },
-                    {
                         "ref_item_name": "RCC_FMPI2C1CLKSOURCE_HSI",
                         "enum_item_name": "HSI"
+                    },
+                    {
+                        "ref_item_name": "RCC_FMPI2C1CLKSOURCE_APB",
+                        "enum_item_name": "PCLK1"
                     }
                 ],
                 "incomplete": false,
@@ -6217,12 +6217,12 @@
                 "enum": "RCC_SDIOSEL",
                 "items": [
                     {
-                        "ref_item_name": "RCC_SDIOCLKSOURCE_SYSCLK",
-                        "enum_item_name": "SYS"
-                    },
-                    {
                         "ref_item_name": "RCC_SDIOCLKSOURCE_CLK48",
                         "enum_item_name": "CLK48"
+                    },
+                    {
+                        "ref_item_name": "RCC_SDIOCLKSOURCE_SYSCLK",
+                        "enum_item_name": "SYS"
                     }
                 ],
                 "incomplete": false,
@@ -6265,12 +6265,12 @@
                 "enum": "RCC_SAI1SRC",
                 "items": [
                     {
-                        "ref_item_name": "RCC_SAIACLKSOURCE_PLLR",
-                        "enum_item_name": "PLLR"
-                    },
-                    {
                         "ref_item_name": "RCC_SAIACLKSOURCE_EXT",
                         "enum_item_name": "I2S_CKIN"
+                    },
+                    {
+                        "ref_item_name": "RCC_SAIACLKSOURCE_PLLR",
+                        "enum_item_name": "PLLR"
                     },
                     {
                         "ref_item_name": "RCC_SAIACLKSOURCE_PLLSRC",
@@ -6289,20 +6289,20 @@
                 "enum": "RCC_SAI1SRC",
                 "items": [
                     {
-                        "ref_item_name": "RCC_SAIBCLKSOURCE_PLLR",
-                        "enum_item_name": "PLLR"
-                    },
-                    {
                         "ref_item_name": "RCC_SAIBCLKSOURCE_PLLSRC",
                         "enum_item_name": "PLLSAI"
+                    },
+                    {
+                        "ref_item_name": "RCC_SAIBCLKSOURCE_EXT",
+                        "enum_item_name": "I2S_CKIN"
                     },
                     {
                         "ref_item_name": "RCC_SAIBCLKSOURCE_PLLI2SR",
                         "enum_item_name": "PLLI2S"
                     },
                     {
-                        "ref_item_name": "RCC_SAIBCLKSOURCE_EXT",
-                        "enum_item_name": "I2S_CKIN"
+                        "ref_item_name": "RCC_SAIBCLKSOURCE_PLLR",
+                        "enum_item_name": "PLLR"
                     }
                 ],
                 "incomplete": false,
@@ -6313,20 +6313,20 @@
                 "enum": "RCC_LPTIMSEL",
                 "items": [
                     {
-                        "ref_item_name": "RCC_LPTIM1CLKSOURCE_PCLK",
-                        "enum_item_name": "PCLK1"
+                        "ref_item_name": "RCC_LPTIM1CLKSOURCE_LSE",
+                        "enum_item_name": "LSE"
                     },
                     {
                         "ref_item_name": "RCC_LPTIM1CLKSOURCE_HSI",
                         "enum_item_name": "HSI"
                     },
                     {
-                        "ref_item_name": "RCC_LPTIM1CLKSOURCE_LSI",
-                        "enum_item_name": "LSI"
+                        "ref_item_name": "RCC_LPTIM1CLKSOURCE_PCLK",
+                        "enum_item_name": "PCLK1"
                     },
                     {
-                        "ref_item_name": "RCC_LPTIM1CLKSOURCE_LSE",
-                        "enum_item_name": "LSE"
+                        "ref_item_name": "RCC_LPTIM1CLKSOURCE_LSI",
+                        "enum_item_name": "LSI"
                     }
                 ],
                 "incomplete": false,
@@ -6337,20 +6337,20 @@
                 "enum": "RCC_PLLP",
                 "items": [
                     {
-                        "ref_item_name": "RCC_PLLP_DIV2",
-                        "enum_item_name": "Div2"
+                        "ref_item_name": "RCC_PLLP_DIV4",
+                        "enum_item_name": "Div4"
                     },
                     {
-                        "ref_item_name": "RCC_PLLP_DIV8",
-                        "enum_item_name": "Div8"
+                        "ref_item_name": "RCC_PLLP_DIV2",
+                        "enum_item_name": "Div2"
                     },
                     {
                         "ref_item_name": "RCC_PLLP_DIV6",
                         "enum_item_name": "Div6"
                     },
                     {
-                        "ref_item_name": "RCC_PLLP_DIV4",
-                        "enum_item_name": "Div4"
+                        "ref_item_name": "RCC_PLLP_DIV8",
+                        "enum_item_name": "Div8"
                     }
                 ],
                 "incomplete": false,
@@ -6361,40 +6361,40 @@
                 "enum": "FLASH_LATENCY",
                 "items": [
                     {
-                        "ref_item_name": "FLASH_LATENCY_2",
-                        "enum_item_name": "WS2"
+                        "ref_item_name": "FLASH_LATENCY_8",
+                        "enum_item_name": "WS8"
                     },
                     {
                         "ref_item_name": "FLASH_LATENCY_3",
                         "enum_item_name": "WS3"
                     },
                     {
-                        "ref_item_name": "FLASH_LATENCY_6",
-                        "enum_item_name": "WS6"
-                    },
-                    {
-                        "ref_item_name": "FLASH_LATENCY_8",
-                        "enum_item_name": "WS8"
-                    },
-                    {
-                        "ref_item_name": "FLASH_LATENCY_5",
-                        "enum_item_name": "WS5"
-                    },
-                    {
-                        "ref_item_name": "FLASH_LATENCY_0",
-                        "enum_item_name": "WS0"
-                    },
-                    {
                         "ref_item_name": "FLASH_LATENCY_1",
                         "enum_item_name": "WS1"
+                    },
+                    {
+                        "ref_item_name": "FLASH_LATENCY_7",
+                        "enum_item_name": "WS7"
                     },
                     {
                         "ref_item_name": "FLASH_LATENCY_4",
                         "enum_item_name": "WS4"
                     },
                     {
-                        "ref_item_name": "FLASH_LATENCY_7",
-                        "enum_item_name": "WS7"
+                        "ref_item_name": "FLASH_LATENCY_2",
+                        "enum_item_name": "WS2"
+                    },
+                    {
+                        "ref_item_name": "FLASH_LATENCY_0",
+                        "enum_item_name": "WS0"
+                    },
+                    {
+                        "ref_item_name": "FLASH_LATENCY_6",
+                        "enum_item_name": "WS6"
+                    },
+                    {
+                        "ref_item_name": "FLASH_LATENCY_5",
+                        "enum_item_name": "WS5"
                     }
                 ],
                 "incomplete": true,
@@ -6421,12 +6421,12 @@
                 "enum": "PWR_VOS",
                 "items": [
                     {
-                        "ref_item_name": "PWR_REGULATOR_VOLTAGE_SCALE1",
-                        "enum_item_name": "SCALE1"
-                    },
-                    {
                         "ref_item_name": "PWR_REGULATOR_VOLTAGE_SCALE2",
                         "enum_item_name": "SCALE2"
+                    },
+                    {
+                        "ref_item_name": "PWR_REGULATOR_VOLTAGE_SCALE1",
+                        "enum_item_name": "SCALE1"
                     },
                     {
                         "ref_item_name": "PWR_REGULATOR_VOLTAGE_SCALE3",

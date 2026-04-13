@@ -1,16 +1,5 @@
 //TODO:
-// - list clocknodes and extra clocknodes
-// - list the parents of a clocknode
 // - list the children of a clocknode
-// - list all the items in ref
-// - list parents of a ref
-// - list if a have have patches
-// - check if a ref is a clocknode ref
-// - check type of a clocknode ref
-// - check type of a ref
-// - check if a ref is static or dynamic
-// - check for recursive refs
-// - check if a ref need to be postproned
 
 const std = @import("std");
 const DataTypes = @import("data_types");
@@ -122,7 +111,7 @@ const BaseContext = struct {
     ///used to get the enum from a patch
     enum_patches: std.StringArrayHashMap(CreateEnum),
 
-    pub fn init(raw_tree: ClockTree, allocator: std.mem.Allocator) !BaseContext {
+    pub fn init(raw_tree: ClockTree, global_flags: *std.StringArrayHashMap(void), allocator: std.mem.Allocator) !BaseContext {
         var ctx = BaseContext{
             .semaphores = .init(allocator),
             .nodes = .init(allocator),
@@ -143,10 +132,6 @@ const BaseContext = struct {
 
         for (raw_tree.extra_flags) |flag| {
             try ctx.extra_flags.put(flag, {});
-        }
-
-        for (raw_tree.extra_reference) |config| {
-            try ctx.extra_references.put(config, {});
         }
 
         for (raw_tree.config_ref_names) |ref_name| {
@@ -200,6 +185,21 @@ const BaseContext = struct {
         if (raw_tree.fixed_multiplexors) |fix| {
             for (fix) |i| {
                 try ctx.multiplexor_fix.put(i.reference, i);
+            }
+        }
+
+        for (raw_tree.extra_reference) |config| {
+            if (config.len == 0) continue;
+            if (ctx.extra_flags.contains(config)) continue;
+            if (ctx.semaphores.contains(config)) continue;
+            if (ctx.multiplexor_fix.contains(config)) continue;
+            if (std.mem.eql(u8, config, "true")) continue;
+            if (std.mem.eql(u8, config, "false")) continue;
+            if (ctx.references.contains(config)) {
+                try ctx.extra_references.put(config, {});
+            } else if (!global_flags.contains(config)) {
+                logger.debug("add extra flag: {s}", .{config});
+                try ctx.extra_flags.put(config, {});
             }
         }
 
@@ -331,7 +331,7 @@ pub const PreProcessedRef = struct {
 
     pub fn is_list_based_ref(self: *const PreProcessedRef) bool {
         return switch (self.type_helper) {
-            .list, .list_flag, .tag_flag => true,
+            .list, .list_flag, .tag_flag, .numeric_list_flag => true,
             else => false,
         };
     }
@@ -457,14 +457,14 @@ pub const ClockTreeContext = struct {
     trees: []TreeContext,
     tree_map: std.StringHashMap(void),
 
-    pub fn init(clock_tree_dir: *std.fs.Dir, alloc: std.mem.Allocator) !ClockTreeContext {
+    pub fn init(clock_tree_dir: *std.fs.Dir, global_flags: *std.StringArrayHashMap(void), alloc: std.mem.Allocator) !ClockTreeContext {
         var arena = std.heap.ArenaAllocator.init(alloc);
         errdefer arena.deinit();
 
         var tree_map = std.StringHashMap(void).init(arena.allocator());
         errdefer tree_map.deinit();
 
-        const base_tree_contexts = try load_BaseContext(clock_tree_dir, arena.allocator());
+        const base_tree_contexts = try load_BaseContext(clock_tree_dir, global_flags, arena.allocator());
         for (base_tree_contexts) |ctx| {
             try tree_map.put(ctx.name, {});
         }
@@ -480,7 +480,7 @@ pub const ClockTreeContext = struct {
         self.arena.deinit();
     }
 
-    pub fn load_BaseContext(dir: *std.fs.Dir, alloc: std.mem.Allocator) ![]TreeContext {
+    pub fn load_BaseContext(dir: *std.fs.Dir, global_flags: *std.StringArrayHashMap(void), alloc: std.mem.Allocator) ![]TreeContext {
         var tree_contexts = try std.ArrayList(TreeContext).initCapacity(alloc, 64);
         var dir_iter = dir.iterate();
 
@@ -501,7 +501,7 @@ pub const ClockTreeContext = struct {
                 continue;
             };
             const real_name = try alloc.dupe(u8, name[0..(name.len - 5)]); //remove .json extension
-            const base_ctx = try BaseContext.init(tree_data.value, alloc);
+            const base_ctx = try BaseContext.init(tree_data.value, global_flags, alloc);
             const pre = try pre_process_tree(tree_data.value, &base_ctx, alloc);
             try tree_contexts.append(alloc, .{
                 .name = real_name,
@@ -549,6 +549,16 @@ pub const ClockTreeContext = struct {
                 .type_helper = .no_helper_needed,
             };
             proc.is_node_ref = blk: {
+                if (std.mem.endsWith(u8, ref.ref_name, "Virtual")) {
+                    if (base_ctx.node_ref.get(ref.ref_name[0..(ref.ref_name.len - 7)])) |node_name| {
+                        const node = base_ctx.nodes.get(node_name) orelse unreachable;
+                        break :blk ClockType.get(node.node_type) catch {
+                            logger.warn("invalid clock type {s} in node {s} for ref {s}", .{ node.node_type, node.name, ref.ref_name });
+                            break :blk null;
+                        };
+                    }
+                }
+
                 if (base_ctx.node_ref.get(ref.ref_name)) |node_name| {
                     const node = base_ctx.nodes.get(node_name) orelse unreachable;
                     break :blk ClockType.get(node.node_type) catch {
@@ -584,7 +594,7 @@ pub const ClockTreeContext = struct {
             var ref_v = PreProcessRefVariant{
                 .ref = variant.ref,
                 .raw_expr = if (variant.expr) |to_clear| try format_raw_expr(to_clear, alloc) else null,
-                .diagnostic = variant.diagnostic,
+                .diagnostic = if (variant.diagnostic) |to_clear| try format_raw_expr(to_clear, alloc) else null,
             };
             var have_default = false;
 
@@ -693,7 +703,7 @@ pub const ClockTreeContext = struct {
         } else if (multi_types.float and !multi_types.list) {
             pre.type_helper = .float;
         } else if (multi_types.list and !multi_types.int and !multi_types.float) {
-            if (is_list_flag(all_item.keys())) |flag_t| {
+            if (is_list_flag(&all_item)) |flag_t| {
                 if (flag_t) {
                     pre.type_helper = .{ .numeric_list_flag = all_item };
                 } else {
@@ -741,14 +751,14 @@ pub const ClockTreeContext = struct {
     //if null list is not a flag.
     //if false list is a boolean flag.
     //if true list is tag flag.
-    fn is_list_flag(items: []const []const u8) ?bool {
-        if (items.len == 0 or items.len > 3) return null;
-        if (items[0].len > 5) return null; //list flag can only be: true/false/auto
+    fn is_list_flag(items: *const std.StringArrayHashMap(?f64)) ?bool {
+        if (items.keys().len == 0 or items.keys().len > 3) return null;
+        if (items.keys()[0].len > 5) return null; //list flag can only be: true/false/auto
         var out: [6]u8 = undefined;
-        const lower_items = std.ascii.lowerString(&out, items[0]);
+        const lower_items = std.ascii.lowerString(&out, items.keys()[0]);
         if (std.mem.eql(u8, lower_items, "true") or std.mem.eql(u8, lower_items, "false")) {
             return false;
-        } else if (lower_items[0] == '1' or lower_items[0] == '0') {
+        } else if (items.contains("1") and items.contains("0")) {
             return true;
         }
         return null;
@@ -776,10 +786,10 @@ pub const ClockTreeContext = struct {
 
             for (node.variants) |variant| {
                 var new_variant: PreProcessedNodeVariant = .{
-                    .diagnostic = variant.diagnostic,
                     .inputs = variant.inputs,
                     .outputs = variant.outputs,
                     .raw_expr = if (variant.expr) |expr| try format_raw_expr(expr, alloc) else null,
+                    .diagnostic = if (variant.diagnostic) |expr| try format_raw_expr(expr, alloc) else null,
                 };
                 if (variant.expr) |expr| {
                     const data = try process_expr(expr, base_ctx, null, alloc);

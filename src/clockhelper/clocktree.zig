@@ -114211,6 +114211,8 @@ const STM32L412T8 = STM32L412T8Yx;
 
 const STM32U535JE = STM32U535JEYxQ;
 test "COMPILE CHECK" {
+    //TODO: Fix G0
+
     _ = comptime try STM32U073RBIx.get_clocks(.{});
 
     _ = comptime try STM32H743VGTx.get_clocks(.{});
